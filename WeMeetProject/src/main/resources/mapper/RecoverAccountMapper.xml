@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bsh.matzip.mappers.PlaceMapper">
+
+    <!-- 연락처 입력후 인증보낼때를 위한 것들-->
+    <select id="selectUserByContact"
+            resultType="com.bsh.wemeetproject.entities.UserEntity">
+        SELECT `email`             AS `email`,
+               `name`              AS `name`,
+               `nickname`          AS `nickname`,
+               `contact`           AS `contact`,
+               `contact_provider`  AS `contact_provider`,
+               `admin_flag`        AS `admin_flag`,
+               `birth`             AS `birth`,
+               `registered_at`     AS `registered_at`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `gender`            AS `gender`,
+               `password`          AS `password`
+        FROM `wemeet_project`.`users`
+        WHERE BINARY `contact` = #{contact}
+        LIMIT 1
+
+    </select>
+
+    <insert id="insertRecoverContactCode"
+            useGeneratedKeys="true"
+            keyProperty="index"
+            keyColumn="index"
+            parameterType="com.bsh.wemeetproject.entities.RecoverContactCodeEntity">
+        INSERT INTO `wemeet_project`.`recover_contact_codes`(`contact`, `code`, `salt`, `created_at`, `expires_at`, `expires_flag`)
+        VALUES (#{contact},
+                #{code},
+                #{salt},
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
+                #{expiresAt},
+                IFNULL(#{isExpired}, DEFAULT(`expires_flag`)))
+    </insert>
+
+    <!-- 인증번호 보낸후 -->
+    <select id="selectRecoverContactCodeByCodeByContactCodeSalt"
+            parameterType="com.bsh.matzip.entities.RecoverContactCodeEntity"
+            resultType="com.bsh.wemeetproject.entities.RecoverContactCodeEntity">
+        SELECT `index`        AS `index`,
+               `contact`      AS `contact`,
+               `code`         AS `code`,
+               `salt`         AS `salt`,
+               `created_at`   AS `createdAt`,
+               `expires_at`   AS `expresAt`,
+               `expires_flag` AS `isExpired`
+        FROM `wemeet_project`.`recover_contact_codes`
+        WHERE BINARY `contact` = #{contact}
+          AND BINARY `code` = #{code}
+          AND BINARY `salt` = #{salt}
+        LIMIT 1
+    </select>
+
+    <update id="updateRecoverContactCode"
+            parameterType="com.bsh.wemeetproject.entities.RecoverContactCodeEntity">
+        UPDATE `wemeet_project`.`recover_contact_codes`
+        SET `contact`      =#{contact},
+            `code`         =#{code},
+            `salt`         =#{salt},
+            `created_at`   =#{createdAt},
+            `expires_at`   =#{expiresAt},
+            `expires_flag` =#{isExpired}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+</mapper>
