@@ -1,0 +1,183 @@
+* {
+    /*border: 1px solid red;*/
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    color: #212121;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: unset;
+    background-color: #f4f3f1;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#recoverform {
+    width: 25rem;
+    height: 30rem;
+}
+#recoverform > h2{
+    width: 100%;
+    height: 8%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#recoverform > h2 > a{
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#recoverform > h2 > a>  img{
+    width: 40%;
+    height: 100%;
+}
+
+#recoverform > .option-container {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+#recoverform > .option-container > .label {
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+    height: 2.5rem;
+    border: 1px solid #9da3d6;
+    border-radius: 15px;
+    text-align: center;
+    background-color: white;
+    color: black;
+    font-size: 1rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#recoverform > .option-container > .label > .option {
+    display: none;
+}
+
+#recoverform > .option-container > .label:has(> .option:checked) {
+    background-color: #9da3d6;
+    border: 0.0625rem solid #9da3d6;
+    color: #ffffff;
+}
+
+
+#recoverform > .email-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+#recoverform > .email-container > .input-name {
+    height: 2rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid darkgray;
+}
+
+#recoverform > .email-container > .label {
+    display: grid;
+    grid-template-columns: 1.5fr 0.5fr;
+
+}
+
+#recoverform > .email-container > .label > input {
+    height: 2.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+}
+#recoverform > .email-container > .label > .eButton{
+    height: 2.75rem;
+}
+
+#recoverform > .button-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 20%;
+}
+
+#recoverform > .password-container {
+    width: 100%;
+    height: 2.5rem;
+    display: none;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#recoverform > .password-container > .label {
+    height: 100%;
+
+}
+
+#recoverform > .password-container > .label > input {
+    width: 98.5%;
+    height: 100%;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+}
+
+
+#recoverform > .button-container > .object-button {
+    width: 40%;
+    border: 1px solid #9da3d6;
+    border-radius: 10px;
+    height: 40%;
+    background-color: #9da3d6;
+    color: white;
+    cursor: pointer;
+}
+#recoverform > .button-container > .object-button + .emailSend{
+    display: none;
+}
+
+#recoverform > .warning {
+    max-height: 0;
+    color: #ef5350;
+    font-size: 0.9rem;
+    margin: unset;
+    overflow: hidden;
+    padding-top: 0;
+    transition-duration: 500ms;
+    transition-property: max-height, padding-top;
+    transition-timing-function: ease;
+}
+
+#recoverform > .warning.visible {
+    max-height: 3rem;
+    padding-top: 0.5rem;
+}
+#recoverform > .cNotification {
+    max-height: 0;
+    color: blue;
+    font-size: 0.9rem;
+    margin: unset;
+    overflow: hidden;
+    padding-top: 0;
+    transition-duration: 500ms;
+    transition-property: max-height, padding-top;
+    transition-timing-function: ease;
+}
+
+#recoverform > .cNotification.visible {
+    max-height: 3rem;
+    padding-top: 0.5rem;
+}

@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+*{
+    /*border: 1px solid red;*/
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    color: #212121;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: unset;
+    background-color: #f4f3f1;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+#loginform{
+    top: -50%;
+    width: 25rem;
+
+    height: 25rem;
+    background-color: #f4f3f1;
+    border-radius: 0.5rem;
+    border: 1px solid #9da3d6;
+    box-sizing: border-box;
+    padding: 2.5rem;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#loginform > .logo{
+    width: 100%;
+    height: 3.5rem;
+    margin-bottom: 1rem;
+    background-color: #f4f3f1;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#loginform > .logo > a{
+    width: 70%;
+    height: 100%;
+}
+#loginform > .logo > a > img{
+    width: 100%;
+    height: 100%;
+    background-color: #f4f3f1;
+    color: #f4f3f1;
+}
+
+#loginform > .item{
+    width: 100%;
+    height: 10%;
+    padding-bottom: 0.5rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+}
+#loginform > .item > i{
+    position: absolute;
+    padding-left: 0.5rem;
+
+}
+#loginform > .item > span{
+    font-size: 0.75rem;
+}
+
+#loginform > .item > .emailObject{
+    width: 87%;
+    height: 100%;
+    padding-left: 13%;
+}
+
+#loginform > .item > .emailObject:hover {
+    border: 0.0625rem solid #d0d0d0;
+    color: #515151;
+}
+
+#loginform > .item > .emailObject:active,
+#loginform > .item > .emailObject:focus {
+    border: 0.0625rem solid #c0c0c0;
+    color: #212121;
+}
+
+#loginform > .item > .emailObject ._invalid{
+    border: 0.0625rem solid;
+}
+
+#loginform >.passwordBox{
+    width: 100%;
+    height: 10%;
+    padding-bottom: 0.5rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+#loginform >.passwordBox >.item{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#loginform >.passwordBox > .item > .passwordObject{
+    width: 86%;
+    height: 100%;
+    padding-left: 13%;
+    align-items: center;
+    display: flex;
+}
+
+#loginform >.passwordBox > .item > .passwordObject:hover {
+    border: 0.0625rem solid #d0d0d0;
+    color: #515151;
+}
+
+#loginform >.passwordBox > .item > .passwordObject:active,
+#loginform >.passwordBox > .item > .passwordObject:focus {
+    border: 0.0625rem solid #c0c0c0;
+    color: #212121;
+}
+
+#loginform >.passwordBox > .item > .passwordObject ._invalid{
+    border: 0.0625rem solid;
+}
+
+
+#loginform >.passwordBox > i{
+    position: absolute;
+    padding-left: 0.2rem;
+}
+#loginform >.passwordBox > #showIcon{
+    display: none;
+}
+#loginform >.passwordBox > #hideIcon{
+    display: block;
+}
+
+#loginform > .login-button{
+    width: 100%;
+    height: 10%;
+}
+#loginform > .login-button > .login {
+    width: 100%;
+    height: 100%;
+    background-color: #9da3d6;
+    color: white;
+    border: 1px solid #9da3d6;
+    opacity: 0.8;
+}
+#loginform > .login-button > .login:hover{
+    opacity: 1;
+}
+#loginform > .warning{
+    max-height: 0;
+    color: #ef5350;
+    font-size: 0.9rem;
+    margin: unset;
+    overflow: hidden;
+    padding-top: 0;
+    transition-duration: 500ms;
+    transition-property: max-height, padding-top;
+    transition-timing-function: ease;
+}
+#loginform > .warning.visible{
+    max-height: 3rem;
+    padding-top: 0.5rem;
+}
+
+
+
+#loginform > ul > li{
+    list-style: none;
+}
+#loginform > ul > li > a{
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: #9da3d6;
+
+    display: inline-block;
+    transition: .3s;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+#loginform > ul > li > a:hover{
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+
+
+@media screen and (max-width: 420px){
+    #loginform{
+        width: 90%;
+    }
+}
