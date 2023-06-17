@@ -1,0 +1,124 @@
+._toggle {
+    display: none;
+}
+
+._toggle:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+#mainMenuToggle:checked ~ #cover {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#mainMenu {
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    background-color: #f4f3f1;
+    overflow: hidden auto;
+    position: fixed;
+    transition-duration: 250ms;
+    transition-property: width;
+    transition-timing-function: ease;
+    z-index: 101;
+}
+
+#mainMenuToggle:checked ~ #mainMenu {
+    width: 25rem;
+}
+
+#mainMenu > .menu {
+    list-style-type: none;
+    margin-block: unset;
+    margin-inline: unset;
+    padding-inline: unset;
+}
+
+#mainMenu > .menu.main {
+    padding: 4rem 5rem;
+}
+
+#mainMenu > .menu.main > .head {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-bottom: 1.5rem;
+}
+
+#mainMenu > .menu.main > .head > .close-wrapper {
+    margin-right: 1rem;
+}
+
+#mainMenu > .menu.main > .head > .title {
+    font-size: 2.125rem;
+    font-weight: 400;
+    margin-block: unset;
+    margin-inline: unset;
+}
+
+#mainMenu > .menu.main > .item {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.25rem;
+    justify-content: flex-start;
+    padding-bottom: 0.5rem;
+}
+
+#mainMenu > .menu.main > .item > .toggle {
+    display: none;
+}
+
+#mainMenu > .menu.main > .item > .label {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#mainMenu > .menu.main > .item > .label > .text {
+    flex: 1;
+}
+
+#mainMenu > .menu.main > .item > .label > .icon {
+    display: none;
+}
+
+#mainMenu > .menu.main > .item > .toggle:checked + .label > .icon.collapse {
+    display: block;
+}
+
+#mainMenu > .menu.main > .item > .toggle:not(:checked) + .label > .icon.expand {
+    display: block;
+}
+
+#mainMenu > .menu.main > .item > .submenu {
+    max-height: 0;
+    font-size: 0.9rem;
+    list-style-type: none;
+    margin-block: unset;
+    margin-inline: unset;
+    overflow: hidden;
+    padding-inline: unset;
+    padding: 0.5rem 0;
+    transition-duration: 375ms;
+    transition-property: max-height;
+    transition-timing-function: ease;
+}
+
+#mainMenu > .menu.main > .item > .toggle:checked ~ .submenu {
+    max-height: 50rem;
+}
+
+#mainMenu > .menu.main > .item > .submenu > .item {
+    padding: 0.625rem 0 0.625rem 0.5rem;
+}
+
+.main-menu-link {
+    color: black;
+    padding-bottom: 1rem;
+}
