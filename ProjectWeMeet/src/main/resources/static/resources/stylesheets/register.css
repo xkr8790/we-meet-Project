@@ -31,7 +31,7 @@ html{
     padding: 1rem;
 }
 /*로고*/
-.container > .inner > .logo_we_meet > .logo {
+.container > .inner > .logo_we_meet > .link>.logo {
     width: 95px;
     height: 18px;
 }
@@ -155,17 +155,16 @@ html{
 /*step-2 next button*/
 #registerForm > .inner > .step-2> .button-container > .complete{
     width: 500px;
+
+    margin-top: 1.3rem;
     padding: 14px 0;
     border-radius: 6px;
     font-size: 18px;
     font-weight: 700;
     line-height: 22px;
 
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
+    position: relative;
+
 }
 
 

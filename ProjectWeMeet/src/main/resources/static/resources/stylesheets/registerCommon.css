@@ -104,11 +104,16 @@ h1 {
 
 ._object-check > input[type=checkbox]:checked + ._checker {
     background-color: #3498db;
-    background-image: url("registerImages/_check.png");
+    background-image: url("../images/registerImags/_check.png");
     border: 0.0625rem solid #3498db;
 }
 
 /*warning*/
+.warningList{
+    list-style: none;
+    display: block;
+}
+
 .warning {
     max-height: 0;
     color: #ef5350;
