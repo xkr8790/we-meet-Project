@@ -74,22 +74,7 @@ public class RecoverAccountController {
 // 다음 버튼을 눌렀을때 일어날 일들에 대해서 적은 코드
 
 
-    @RequestMapping(value = "confrimEmail", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
-    @ResponseBody
-    public ModelAndView postConfrimEmail(RecoverContactCodeEntity recoverContactCode, UserEntity user) {
 
-        boolean result = this.recoverAccountService.sendRecoverEmailNameResult(recoverContactCode, user);
-
-        ModelAndView modelAndView = new ModelAndView("home/confirmEmail");
-//이 부분만 알면 끝
-        if (result) {
-            modelAndView.setViewName("home/confirmEmail");
-        } else {
-            modelAndView.setViewName("/recoverAccount/");
-            modelAndView.addObject("result", result);
-        }
-        return modelAndView;
-    }
 
 
 
