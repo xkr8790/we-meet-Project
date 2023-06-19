@@ -309,7 +309,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                     </div>
                     <div class="form_item">
                         <div class="input-wrapper">
-                            <input type="text" class="input" placeholder="별명(2글자 이상)" maxlength="10" name="nickname">
+                            <input type="text" class="input" placeholder="별명(2글자 이상 영어 대소문자,한글)" maxlength="10" name="nickname">
                             <img th:src="@{/resources/images/registerImags/nickname.png}" alt="x" class="img">
                         </div>
                     </div>
@@ -349,7 +349,10 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                                placeholder="상세 주소를 입력해 주세요. (건물 이름 및 동, 호 등)" type="text">
                     </div>
                 </div>
-                <span class="warning address" rel="addressWarning"></span>
+                <ul class="warningList">
+                    <li class="warning"><span class="warning address" rel="addressWarning"></span></li>
+                </ul>
+<!--                <span class="warning address" rel="addressWarning"></span>-->
 
                 <div class="form_list">
                     <div class="form_item contactOne">
@@ -363,7 +366,10 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                     <input hidden name="contactSalt" type="hidden">
 
                 </div>
-                <span class="warning" rel="contactWarning"></span>
+                <ul class="warningList">
+                    <li class="warning"><span class="warning" rel="contactWarning"></span></li>
+                </ul>
+<!--                <span class="warning" rel="contactWarning"></span>-->
             </section>
             <div class="button-container">
                 <input disabled class="_object-button  button complete" type="submit" value="완료">
@@ -372,7 +378,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
         <main class="main step-3">
             <section class="success">
                 <span class="text">완료</span>
-                <a href="#">로그인 하러가기</a>
+                <a href="http://localhost:6795/login">로그인 하러가기</a>
             </section>
         </main>
     </div>

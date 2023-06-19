@@ -175,12 +175,15 @@ nextButton.addEventListener('click', function() {
 registerForm.onsubmit = e =>{
     e.preventDefault();
 
+
     if (getComputedStyle(step2).display === "block") {
         if (registerForm['name'].value === '') {
             // 이름 미입력
             registerForm.nameWarning.show('이름을 입력해 주세요.');
             registerForm['name'].focus();
             return;
+        }else {
+            registerForm.nameWarning.hide(); // 이름이 입력되면 nameWarning 숨기기
         }
         if (registerForm['birth'].value === '') {
             // 생년월일 미입력
@@ -227,7 +230,7 @@ registerForm.onsubmit = e =>{
             return;
         }
         if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]};:\'",<.>/?]{8,50})$').test(registerForm['password'].value)) {
-            registerForm.passwordWarning.show('올바른 비밀번호를 입력해 주세요.');
+            registerForm.passwordWarning.show('올바른 비밀번호를 입력해 주세요. 특수문자 포함 영어대소문자 8글자~50글자');
             // 비밀번호 형식 특수문자 포함 영어대소문자 8글자~50글자
             registerForm['password'].focus();
             registerForm['password'].select();
@@ -241,15 +244,15 @@ registerForm.onsubmit = e =>{
             return;
         }
         if (registerForm['addressPostal'].value === '') {
-            registerForm.addressWarning.show('주소를 입력해 주세요');
+            registerForm.addressWarning.show('우편번호 찾기를 통해 주소를 찾아주세요.');
             //주소 미입력
             registerForm['addressPostal'].focus();
             return;
         }
-        if (registerForm['addressPrimary'].value === '') {
-            registerForm.addressWarning.show('상세주소를 입력해 주세요');
+        if (registerForm['addressSecondary'].value === '') {
+            registerForm.addressWarning.show('상세주소를 입력해 주세요.');
             //상세주소 미입력
-            registerForm['addressPrimary'].focus();
+            registerForm['addressSecondary'].focus();
             return;
         }
 
@@ -470,8 +473,6 @@ registerForm['contactVerify'].addEventListener('click', () => {
                         completeButton.removeAttribute('disabled');
                         completeButton.classList.add('_blue');
                         registerForm.contactWarning.show('인증이 완료되었습니다.');
-                        // registerForm.contactWarning.add('green'); 추가예정
-                        // 확인이 되었다면 warning의 색깔을 초록색으로 바꿀 예정
                         // 인증번호 확인 성공시 인증번호 입력칸+인증번호 확인 버튼 비활성화
                         // 비활성화 되어있는 완료버튼(completeButton)의 disabled를 제거하고 _blue 클래스를 추가하여 완료버튼 활성화
                         break;
