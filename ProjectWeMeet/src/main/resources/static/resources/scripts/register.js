@@ -182,8 +182,6 @@ registerForm.onsubmit = e =>{
             registerForm.nameWarning.show('이름을 입력해 주세요.');
             registerForm['name'].focus();
             return;
-        }else {
-            registerForm.nameWarning.hide(); // 이름이 입력되면 nameWarning 숨기기
         }
         if (registerForm['birth'].value === '') {
             // 생년월일 미입력
