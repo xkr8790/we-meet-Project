@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value="/")
-public class MainController {
+public class HomeController {
     @RequestMapping(value = "/",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -20,6 +20,12 @@ public class MainController {
     @RequestMapping(value="recoverAccount", method = RequestMethod.GET)
     public ModelAndView getRecoverAccount () {
         ModelAndView modelAndView = new ModelAndView("home/recoverAccount");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "Article",method = RequestMethod.GET)
+    public ModelAndView getArticle () {
+        ModelAndView modelAndView = new ModelAndView("home/article");
         return modelAndView;
     }
 

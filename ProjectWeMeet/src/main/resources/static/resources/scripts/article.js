@@ -53,7 +53,7 @@ boards.forEach(function (board) {
     let images = board.getElementsByClassName("Profile-Picture");
     if (images.length >= 4) {
         const cover = document.createElement("img");
-        cover.src = "resources/images/cover.png";
+        cover.src = "resources/images/mainImages/cover.png";
         cover.classList.add("cover");
         // images[3]의 자식으로 cover 추가
         images[3].appendChild(cover);
@@ -89,3 +89,4 @@ if (category) {
         }
     }
 }
+

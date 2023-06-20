@@ -26,6 +26,7 @@
     </select>
 
 
+
     <insert id="insertRecoverContactCode"
     useGeneratedKeys="true"
     keyColumn="index"
