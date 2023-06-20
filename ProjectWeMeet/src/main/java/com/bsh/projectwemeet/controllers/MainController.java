@@ -12,8 +12,15 @@ public class MainController {
     @RequestMapping(value = "/",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ModelAndView getmain(){
+    public ModelAndView getMain(){
         ModelAndView modelAndView = new ModelAndView("home/main");
         return modelAndView;
     }
+
+    @RequestMapping(value="recoverAccount", method = RequestMethod.GET)
+    public ModelAndView getRecoverAccount () {
+        ModelAndView modelAndView = new ModelAndView("home/recoverAccount");
+        return modelAndView;
+    }
+
 }

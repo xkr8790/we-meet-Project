@@ -1,10 +1,10 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.RecoverContactCodeEntity;
+import com.bsh.projectwemeet.entities.RecoverEmailCodeEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
-import com.bsh.projectwemeet.enums.SendRecoverContactCodeResult;
-import com.bsh.projectwemeet.enums.SendRecoverEmailNameResult;
-import com.bsh.projectwemeet.enums.VeryfiRecoverContactCodeResult;
+import com.bsh.projectwemeet.enums.*;
+import com.bsh.projectwemeet.services.CheckService;
 import com.bsh.projectwemeet.services.RecoverAccountService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,30 +12,24 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import javax.mail.MessagingException;
 
 @Controller
 @RequestMapping(value="/recoverAccount")
 public class RecoverAccountController {
 
     private final RecoverAccountService recoverAccountService;
+    private final CheckService checkService;
 
     @Autowired
-    public RecoverAccountController(RecoverAccountService recoverAccountService){
+    public RecoverAccountController(RecoverAccountService recoverAccountService, CheckService checkService){
         this.recoverAccountService = recoverAccountService;
+        this.checkService = checkService;
     }
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
-    public ModelAndView getRecoverAccount () {
-        ModelAndView modelAndView = new ModelAndView("home/recoverAccount");
-        return modelAndView;
-    }
 
     // 연락처를 이용해 이메일 찾기 관련된 코드
     @RequestMapping(value="contactCodeRec", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,31 +63,60 @@ public class RecoverAccountController {
         }
         return responseObject.toString();
     }
+    /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
-
-// 다음 버튼을 눌렀을때 일어날 일들에 대해서 적은 코드
-
-
-    @RequestMapping(value = "confrimEmail", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "recoverPassword",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ModelAndView postConfrimEmail(RecoverContactCodeEntity recoverContactCode, UserEntity user) {
-
-        boolean result = this.recoverAccountService.sendRecoverEmailNameResult(recoverContactCode, user);
-
-        ModelAndView modelAndView = new ModelAndView("home/confirmEmail");
-//이 부분만 알면 끝
-        if (result) {
-            modelAndView.setViewName("home/confirmEmail");
-        } else {
-            modelAndView.setViewName("/recoverAccount/");
-            modelAndView.addObject("result", result);
+    public String postRecoverPassword(RecoverEmailCodeEntity recoverEmailCode) throws MessagingException, MessagingException {
+        SendRecoverEmailCodeResult result = this.checkService.sendRecoverEmailCode(recoverEmailCode);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        if (result == SendRecoverEmailCodeResult.SUCCESS) {
+            responseObject.put("redirect", String.format("http://localhost:6795/recoverAccount/recoverPassword?email=%s&salt=%s",
+                    recoverEmailCode.getEmail(),
+                    recoverEmailCode.getSalt()));
         }
+        return responseObject.toString();
+    } //링크보내기
+
+    @RequestMapping(value = "recoverPassword",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRecoverPassword(RecoverEmailCodeEntity recoverEmailCode) {
+        VerifyRecoverEmailCodeResult result = this.checkService.verifyRecoverEmailCode(recoverEmailCode);
+        ModelAndView modelAndView = new ModelAndView("_recoverEmail");
+        modelAndView.addObject("result", result.name().toLowerCase());
+        modelAndView.addObject("recoverEmailCode", recoverEmailCode);
         return modelAndView;
+    } //링크타고 갈떄쓰는거
+
+
+    @RequestMapping(value = "emailCodeRec",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postEmailCodeRec(RecoverEmailCodeEntity recoverEmailCode) {
+        VerifyRecoverEmailCodeResult result = this.checkService.recoverEmailCodeResult(recoverEmailCode);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    } // 인증 판단
+
+    @RequestMapping(value = "recoverPassword",
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchRecoverPassword(RecoverEmailCodeEntity recoverEmailCode, UserEntity user) {
+        RecoverPasswordResult result = this.checkService.recoverPassword(recoverEmailCode, user);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
     }
-
-
-
-
 
 
 }
