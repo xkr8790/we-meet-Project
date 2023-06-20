@@ -91,7 +91,7 @@ public class RecoverAccountController {
         modelAndView.addObject("result", result.name().toLowerCase());
         modelAndView.addObject("recoverEmailCode", recoverEmailCode);
         return modelAndView;
-    } //링크타고 갈떄쓰는거
+    } //위의 링크에 대해서 읽은 다음 결과값에 따라 _recoverEmail을 반환한다.
 
 
     @RequestMapping(value = "emailCodeRec",
@@ -104,7 +104,7 @@ public class RecoverAccountController {
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
-    } // 인증 판단
+    } // 인증을 판단해서 결과 돌려주는 컨트롤러
 
     @RequestMapping(value = "recoverPassword",
             method = RequestMethod.PATCH,
@@ -116,7 +116,19 @@ public class RecoverAccountController {
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
-    }
+    } //PATCH(리소스의 일부를 수정한다) 비밀번호 변경 컨트롤러
 
+    //HTTP 프로토콜 종류
+    //GET: 리소스의 조회를 요청하는 메소드입니다. 서버로부터 정보를 요청하고 응답으로 해당 리소스를 받아옵니다.
+        // 데이터의 변경이나 부수적인 효과가 없는 "읽기 전용" 작업에 사용됩니다.
+
+    //POST: 리소스의 생성 또는 데이터의 제출을 요청하는 메소드입니다. 서버에 새로운 리소스를 생성하거나
+        // 데이터를 제출할 때 사용됩니다. 주로 폼 데이터나 파일 업로드 등에 사용됩니다. 서버는 이 요청에 대한 처리 결과를 응답으로 전송합니다.
+
+    //PUT: 리소스의 전체적인 수정을 요청하는 메소드입니다. 클라이언트가 요청한 리소스의 전체 내용을 요청 본문에 담아 서버에 보내고, 해당 리소스를 요청된 내용으로 교체합니다. 즉, 리소스의 대체(갱신) 작업을 수행합니다.
+
+    //PATCH: 리소스의 일부 수정을 요청하는 메소드입니다. PUT과 달리 리소스의 일부만 변경하고자 할 때 사용됩니다. 요청 본문에 변경할 필드와 값을 전송하고, 서버는 해당 필드만 수정합니다.
+
+    //DELETE: 리소스의 삭제를 요청하는 메소드입니다. 서버에 특정 리소스의 삭제를 요청하고, 해당 리소스를 삭제합니다.
 
 }

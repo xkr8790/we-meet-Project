@@ -10,26 +10,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginService {
 
-  private final LoginMapper loginMapper;
+    private final LoginMapper loginMapper;
 
-  @Autowired
-  public LoginService(LoginMapper loginMapper){
-      this.loginMapper = loginMapper;
-  }
+    @Autowired
+    public LoginService(LoginMapper loginMapper) {
+        this.loginMapper = loginMapper;
+    }
 
-    public LoginResult login(UserEntity user){
+    public LoginResult login(UserEntity user) {
 //  웹 페이지에서 로그인 입력값이 없거나 이메일,비밀번호 양식이 정규식과 다를때 '실패'를 return한다.
-        if(user.getEmail() == null ||
-                user.getPassword() == null||
+        if (user.getEmail() == null ||
+                user.getPassword() == null ||
                 !user.getEmail().matches("^(?=.{10,50}$)([\\da-zA-Z\\-_\\.]{5,25})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$") ||
-                !user.getPassword().matches("^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]};:'\",<.>/?]{8,50})$")){
+                !user.getPassword().matches("^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]};:'\",<.>/?]{8,50})$")) {
             return LoginResult.FAILURE;
         }
 
 //        existingUser의 변수로 데이터 베이스안의 email값을 반환한다.
         UserEntity existingUser = this.loginMapper.selectUserByEmail(user.getEmail());
 //        로그인 화면에서 입력한 email값이 데이터 베이스에 없는경우를 말한다.
-        if(existingUser == null){
+        if (existingUser == null) {
             return LoginResult.FAILURE;
         }
 
@@ -62,7 +62,6 @@ public class LoginService {
 //        if (user.getStatus().equals("SUSPENDED")) {
 //            return LoginResult.FAILURE_SUSPENDED;
 //        }
-
 
 
 //        위의 조건이 아닌 이상 나머지는 성공했다고 생각해서 return값을 반환한다.
