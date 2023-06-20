@@ -10,6 +10,27 @@ const completeButton = document.querySelector('.button-container input.complete'
 const step1 = document.querySelector('.main.step-1');
 const step2 = document.querySelector('.main.step-2');
 const step3 = document.querySelector('.main.step-3');
+const onIcon = document.getElementById('onIcon');
+const offIcon = document.getElementById('offIcon');
+const passwordInput = document.querySelector('input[name="password"]');
+const passwordCheckInput = document.querySelector('input[name="passwordCheck"]');
+
+
+
+// // 아이콘 클릭시 input태그의 타입이 password와 text로 바뀌는 코드
+onIcon.addEventListener('click', function() {
+    onIcon.style.display = 'none';
+    offIcon.style.display = 'block';
+    passwordInput.type = 'text';
+    passwordCheckInput.type='text';
+});
+
+offIcon.addEventListener('click', function() {
+    offIcon.style.display = 'none';
+    onIcon.style.display = 'block';
+    passwordInput.type = 'password';
+    passwordCheckInput.type='password';
+});
 
 
 
