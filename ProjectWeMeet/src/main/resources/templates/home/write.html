@@ -11,6 +11,8 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/write.css}">
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125"></script>
     <script defer th:src="@{/resources/scripts/map.js}"></script>
+    <script defer th:src="@{/resources/scripts/common.js}"></script>
+    <script defer th:src="@{/resources/scripts/write.js}"></script>
 </head>
 <body>
 <form id="writeForm" class="container">
@@ -19,7 +21,11 @@
     </h2>
     <div class="inner">
         <main class="box step-1">
-            <section id="content" class="content">content 자리</section>
+            <section id="content" class="content">
+                <input type="text" class="search" placeholder="검색">
+                <input type="text" class="addressPrimary" placeholder="기본주소">
+                <input type="text" class="addressSecondary" placeholder="상세주소">
+            </section>
             <section id="map" class="map"></section>
         </main>
         <input type="submit" value="다음" class="_button">
