@@ -24,6 +24,12 @@ public class RecoverAccountController {
     private final RecoverAccountService recoverAccountService;
     private final CheckService checkService;
 
+    @RequestMapping(value="recoverAccount", method = RequestMethod.GET)
+    public ModelAndView getRecoverAccount () {
+        ModelAndView modelAndView = new ModelAndView("home/recoverAccount");
+        return modelAndView;
+    } //이메일및 비밀번호 재설정
+
     @Autowired
     public RecoverAccountController(RecoverAccountService recoverAccountService, CheckService checkService){
         this.recoverAccountService = recoverAccountService;

@@ -20,6 +20,12 @@ public class LoginController {
 
     private final LoginService loginService;
 
+    @RequestMapping(value = "login",method = RequestMethod.GET)
+    public ModelAndView getLogin () {
+        ModelAndView modelAndView = new ModelAndView("home/login");
+        return modelAndView;
+    } // 로그인 주소
+
     @Autowired
     public LoginController(LoginService loginService){
         this.loginService = loginService;
