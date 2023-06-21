@@ -21,9 +21,6 @@ public interface RecoverAccountMapper {
     int updateRecoverContactCode(RecoverContactCodeEntity recoverContactCode);
 
 
-    RecoverContactCodeEntity selectRecoverContactCodeByNameContactCodeSalt(RecoverContactCodeEntity recoverContactCode);
-
-
 
 
 

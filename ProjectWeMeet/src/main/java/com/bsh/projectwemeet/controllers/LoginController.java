@@ -37,7 +37,8 @@ public class LoginController {
         LoginResult result = this.loginService.login(user);
         if(result == LoginResult.SUCCESS){
             session.setAttribute("user", user);
-        } //로그인 성공시 세션에 사용자 정보를 저장합니다.
+        }
+        //로그인 성공시 세션에 사용자 정보를 저장합니다.
           // 세션은 로그인된 사용자를 유지하기 위해 사용되는 데이터 저장 공간입니다.
 
         JSONObject responseObject = new JSONObject(){{

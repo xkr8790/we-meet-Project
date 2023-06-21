@@ -27,15 +27,16 @@ public class LoginService {
         }
 
 //        existingUser의 변수로 데이터 베이스안의 email값을 반환한다.
-        UserEntity existingUser = this.loginMapper.selectUserByEmail(user.getEmail());
 //        로그인 화면에서 입력한 email값이 데이터 베이스에 없는경우를 말한다.
+        UserEntity existingUser = this.loginMapper.selectUserByEmail(user.getEmail());
         if (existingUser == null) {
             return LoginResult.FAILURE;
         }
 
-//        로그인 화면에서 입력한 비밀번호와 데이터베이스 안 비밀번호가 같지 않다면
+//        로그인 화면에서 입력한 비밀번호와 데이터베이스 안 비밀번호가 같지 않는 경우를 뜻한다.
         user.setPassword(CryptoUtil.hashSha512(user.getPassword())); // 비밀번호에 hash됨
         if (!user.getPassword().equals(existingUser.getPassword())) {
+            System.out.println("asdkjl");
             return LoginResult.FAILURE;
         }
 
