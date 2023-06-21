@@ -1,0 +1,299 @@
+* {
+    /*border: 1px solid red;*/
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.allContainer {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f3f1;
+}
+
+.allContainer > .header {
+    width: 100%;
+    height: 3rem;
+    z-index: 99;
+    background-color: white;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.allContainer >.header >.login > a{
+    text-decoration: none;
+    color: black;
+}
+.allContainer >.header >.login > a:hover{
+    color: #9da3d6;
+}
+
+
+.allContainer > .main-template {
+    width: 100%;
+    height: auto;
+}
+
+.allContainer > .main-template > .img-profile-title {
+    width: 100%;
+    height: 20rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background-color: #f4f3f1;
+}
+
+
+.allContainer > .main-template > .img-profile-title > img {
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+
+}
+
+.allContainer > .main-template > .img-profile-title > .profile-title {
+    position: relative;
+    width: calc(100% - 28px);
+    height: auto;
+    top: -25px;
+    align-items: center;
+    z-index: 100;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 16px;
+    background-color: white;
+
+}
+
+.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img {
+    width: 60px;
+    height: 60px;
+    bottom: 31px;
+    position: relative;
+    background-color: white;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img >a > img{
+    border-radius: 50%;
+}
+
+.allContainer > .main-template > .img-profile-title > .profile-title > .bulletin-title {
+    width: 100%;
+    height: 2rem;
+    border-radius: 16px;
+    background-color: white;
+}
+
+.allContainer > .main-template >.content{
+    background-color: #f4f3f1;
+    padding-bottom: 2rem;
+    margin: 0 1rem;
+}
+
+
+.announcement {
+    width: 100%;
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.announcement > .introduction {
+    width: 100%;
+    margin: 0 1rem
+}
+
+.announcement > .introduction > .member{
+    color: red;
+    font-size: 0.7rem;
+}
+
+.announcement > .introduction > .subTitle{
+font-size: 1.2rem;
+}
+
+.announcement > .introduction > .my{
+    width: 100%;
+    height: 4rem;
+    align-items: start;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+
+.announcement > .introduction > .my > .myImages{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+.announcement > .introduction > .my > .myImages>img{
+    border-radius: 50%;
+}
+
+.announcement > .introduction > .my > .myIntroduction{
+    height: 4rem;
+    width: 100%;
+}
+
+.announcement > .introduction > .my > .myIntroduction > .nickname{
+height: 2rem;
+
+}
+
+.announcement > .introduction > .my > .myIntroduction > .text{
+ height: 2rem;
+    color: lightgray;
+}
+
+
+.announcement > .participant{
+    width: 100%;
+    height: 15rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.announcement > .participant > .participantContainer{
+    width: 90%;
+    height: 11rem;
+    background-color: #ef5350;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.announcement > .participant > .participantContainer > .human{
+    margin-bottom: 1rem;
+}
+
+
+.announcement > .participant > .participantContainer > .attend{
+    width: 8rem;
+    height: 2rem;
+    border-radius: 5px;
+}
+
+.announcement > .guide{
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin: 0 1rem
+}
+.announcement > .guide > .guideContainer{
+    margin-right: 0.5rem;
+    width: 35%;
+}
+.announcement > .guide > .guideContainer > .guidance{
+    font-size: 0.8rem;
+    color: red;
+}
+.announcement > .guide > .guideContainer > .map{
+    height: 9.8rem;
+    border:1px solid blue;
+}
+
+.announcement > .guide > .comments{
+    width: 58%;
+    border:1px solid blue;
+}
+
+
+
+.preview{
+    position: relative;
+    width: 100%;
+    height: 13rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    overflow: hidden;
+}
+
+.preview > .previewContainer{
+    width: 20rem;
+    height: 9rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin: 0 1rem;
+}
+
+.preview > .previewContainer > .img{
+    width: 7rem;
+    height: 7rem;
+    margin: 0 1rem;
+}
+.preview > .previewContainer > .img > img{
+
+    object-fit: cover;
+}
+.preview > .previewContainer > .text{
+    width: 10rem;
+    height: 7rem;
+}
+
+.preview > .previewContainer > .text > .category{
+    width: 4.5rem;
+    margin-bottom: 0.2rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid lightgray;
+    background-color: lightgray;
+    font-size: 0.8rem;
+}
+
+.preview > .previewContainer > .text > .title{
+ width: 10rem;
+    height: 1.5rem;
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+}
+
+.preview > .previewContainer > .text > .time {
+    width: 10rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.8rem;
+    overflow: hidden;
+}
+
+.preview > .previewContainer > .text > .participant{
+height: 2.27rem;
+align-items: center;
+display: flex;
+flex-direction: row;
+justify-content: start;
+}
+.preview > .previewContainer > .text > .participant > .human {
+    width: 2.27rem;
+    height: 2.27rem;
+    border-radius: 50%;
+}
