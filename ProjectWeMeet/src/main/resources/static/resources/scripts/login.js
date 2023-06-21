@@ -57,7 +57,7 @@ loginform.onsubmit = e => {
     }
     if (loginform['password'].value === '') {
         loginform['password'].focus();
-        loginform.passwordWarning.show();
+        loginform.passwordWarning.show('비밀번호를 입력해 주세요.');
         return false;
     }
     if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]};:\'",<.>/?]{8,50})$').test(loginform['password'].value)) {
@@ -78,26 +78,28 @@ loginform.onsubmit = e => {
         //  그중 XMLHttpRequest.DONE은 요청이 완료되었다는 뜻을 가진다.
         if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseObject = JSON.parse(xhr.responseText);
-                switch (responseObject.result) {
-                    case 'failure':
-                        loginform.loginWarning.show('이메일 혹은 비밀번호가 올바르지 않습니다.');
-                        loginform['email'].focus();
-                        loginform['email'].select();
-                        break;
-                    case 'success':
-                        //  어떻게 메인 페이지로 넘어가는 코드를 만들어야 하는지 조사하기
-                        // location.href += '/recoverAccount';
-                        break;
-                    default:
-                        loginform.loginWarning.show('서버가 알 수 없는 응답을 반환했습니다. 관리자에게 문의해 주세요.');
-                }
-            } else {
-                loginform.loginWarning.show('서버가 알 수 없는 응답을 반환했습니다. 관리자에게 문의해 주세요.');
-
-            }
         }
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const responseObject = JSON.parse(xhr.responseText);
+            switch (responseObject.result) {
+                case 'failure':
+                   console.log('dkssud');
+                    loginform.loginWarning.show('이메일 혹은 비밀번호가 올바르지 않습니다.');
+                    loginform['email'].focus();
+                    loginform['email'].select();
+                    break;
+                case 'success':
+                    //  어떻게 메인 페이지로 넘어가는 코드를 만들어야 하는지 조사하기
+                    location.href += '';
+                    break;
+                default:
+                    loginform.loginWarning.show('서버가 알 수 없는 응답을 반환했습니다. 관리자에게 문의해 주세요.');
+            }
+        } else {
+            loginform.loginWarning.show('서버가 알 수 없는 응답을 반환했습니다. 관리자에게 문의해 주세요.');
+
+        }
+
     };
     xhr.send(formData);
 };

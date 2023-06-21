@@ -16,9 +16,9 @@ import java.util.Date;
 
 public class NCloudUtil {
     //     문자로 인증 보내는것
-    private static final String URL_PREFIX = "";
-    private static final String ACCESS_KEY = "";
-    private static final String SECRET_KEY = "";
+    private static final String URL_PREFIX = "https://sens.apigw.ntruss.com";
+    private static final String ACCESS_KEY = "nGqTNmzseyN6C3pV8rpk";
+    private static final String SECRET_KEY = "VYD9FDeAfngP7Ps8NJadAvPzPmdmfb4tvSLCMeAD";
     // 인증키는 Ncloud 홈페이지 마이페이지 인증키에서 가져오기
 //    시크릿 키는 (보기) 해당란의 내용을 넣기
     private static final String SERVICE_ID = "ncp:sms:kr:307475261582:portfolio";
@@ -57,7 +57,7 @@ public class NCloudUtil {
             put("type", "SMS");
             put("contentType", "COMM");
 //            put("countryCode", "82");
-            put("from", "");
+            put("from", "01086825001");
             put("content", content);
             put("messages", new JSONArray() {{
                 put(new JSONObject(){{

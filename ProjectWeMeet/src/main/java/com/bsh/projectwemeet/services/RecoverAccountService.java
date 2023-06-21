@@ -35,8 +35,8 @@ public class RecoverAccountService {
         }
 
 
-        UserEntity existingUser = this.recoverAccountMapper.selectUserByContact(recoverContactCode.getContact(), recoverContactCode.getName());
-        if (existingUser == null ) {
+        UserEntity existingUser = this.recoverAccountMapper.selectUserByContactName(recoverContactCode.getContact(), recoverContactCode.getName());
+        if (existingUser == null) {
             return SendRecoverContactCodeResult.FAILURE;
         }
 
@@ -80,54 +80,19 @@ public class RecoverAccountService {
             return VeryfiRecoverContactCodeResult.FAILURE_EXPIRED;
         }
         recoverContactCode.setExpired(true);
+
         return this.recoverAccountMapper.updateRecoverContactCode(recoverContactCode) > 0
                 ? VeryfiRecoverContactCodeResult.SUCCESS
                 : VeryfiRecoverContactCodeResult.FAILURE;
     }
 
-    public UserEntity getUserByContact(String contact, String name) {
-        return this.recoverAccountMapper.selectUserByContact(contact, name);
+    public UserEntity getUserByContactName(String contact, String name) {
+        return this.recoverAccountMapper.selectUserByContactName(contact, name);
     }
 
-
-public SendRecoverEmailNameResult sendRecoverEmailNameResult(RecoverContactCodeEntity recoverContactCode, UserEntity user){
-// 요청 했는 값에 대한 이야기
-    if (recoverContactCode == null ||
-            recoverContactCode.getContact() == null ||
-            !recoverContactCode.getContact().matches("^(010)(\\d{8})$") ||
-            recoverContactCode.getName() == null ||
-     recoverContactCode.getCode() == null ||
-    recoverContactCode.getSalt() == null) {
-        return SendRecoverEmailNameResult.FAILURE;
+    public UserEntity getUserByContact(String contact){
+        return this.recoverAccountMapper.selectUserByContact(contact);
     }
-// recover 데이터 베이스에서 연락처 코드 솔트 이름까지 있는지 없는지 확인 코드 작성하기
- RecoverContactCodeEntity existingContact = this.recoverAccountMapper.selectRecoverContactCodeByNameContactCodeSalt(recoverContactCode);
-    if(existingContact ==null ||
-    existingContact.getSalt() ==null ||
-    existingContact.getName() == null ||
-    existingContact.getCode() == null ||
-    existingContact.getContact() ==null){
-        return SendRecoverEmailNameResult.FAILURE;
-    }
-//    시간 안에 완료가 되었는지 안되었는지 확인 코드 작성 이건 따로 필요가 없다
-//     왜냐하면 시간에 대한 인증 관련된것은 다른 버튼의 종류이기 때문이다.
-
-//   delete 확인하는 코드(중복 제거를 위해)
-
-//     유저에서 select로 연락처 해서 이메일 가져오기
-    user = this.recoverAccountMapper.selectUserByContact(user.getContact(), user.getName());
-    if(user == null){
-        return SendRecoverEmailNameResult.FAILURE;
-    }
-
-    return this.recoverAccountMapper.deleteRecoverContactCode(recoverContactCode) > 0
-            ? SendRecoverEmailNameResult.SUCCESS
-            : SendRecoverEmailNameResult.FAILURE;
-
-
-}
-
-
 
 
 }

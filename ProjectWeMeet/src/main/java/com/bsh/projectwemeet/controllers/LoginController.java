@@ -15,21 +15,21 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping(value="/login")
+@RequestMapping(value="/")
 public class LoginController {
 
     private final LoginService loginService;
+
+    @Autowired
+    public LoginController(LoginService loginService){
+        this.loginService = loginService;
+    }
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public ModelAndView getLogin () {
         ModelAndView modelAndView = new ModelAndView("home/login");
         return modelAndView;
     } // 로그인 주소
-
-    @Autowired
-    public LoginController(LoginService loginService){
-        this.loginService = loginService;
-    }
 
     @RequestMapping(value = "login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

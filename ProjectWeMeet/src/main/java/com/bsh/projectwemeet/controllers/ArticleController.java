@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping(value="/")
 public class ArticleController {
     @RequestMapping(value = "article",method = RequestMethod.GET)
     public ModelAndView getArticle () {

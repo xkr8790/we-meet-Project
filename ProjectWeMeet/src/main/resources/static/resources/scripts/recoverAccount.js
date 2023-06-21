@@ -37,6 +37,18 @@ passwordOption.addEventListener('change', function () {
     }
 });
 
+//
+// recoverform.warning = recoverform.querySelector('[rel="warning"]');
+// recoverform.warning.show = (text) => {
+//     recoverform.warning.innerText = text;
+//     recoverform.warning.classList.add('visible');
+// };
+// recoverform.warning.hide = () => recoverform.warning.classList.remove('visible');
+
+
+
+
+
 //  입력값들이(연락처, 인증번호, 이메일) 이상할때 나타내기 위한 코드작업
 recoverform.contactWarning = recoverform.querySelector('[rel="contactWarning"]');
 recoverform.contactWarning.show = (text) => {
@@ -128,18 +140,19 @@ recoverform['eContactSend'].onclick = () => {
 //  6자리 인증번호 누른후 
 recoverform['eContactVerify'].onclick = () => {
     if (recoverform['eContactCode'] === '') {
-        recoverform.eContactWarning.show('인증번호를 입력해주세요');
+        recoverform.warning.show('인증번호를 입력해주세요');
         recoverform['eContactCode'].focus();
-        return;
+        return false;
     }
     if (!new RegExp('^(\\d{6})$').test(recoverform['eContactCode'].value)) {
-        recoverform.eContactWarning.show('올바른 인증번호를 입력해 주세요.');
+        recoverform.warning.show('올바른 인증번호를 입력해 주세요.');
         recoverform['eContactCode'].focus();
-        return;
+        return false;
     }
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
+    formData.append('name', recoverform['eName'].value);
     formData.append('contact', recoverform['eContact'].value);
     formData.append('code', recoverform['eContactCode'].value);
     formData.append('salt', recoverform['eContactSalt'].value);
@@ -150,11 +163,11 @@ recoverform['eContactVerify'].onclick = () => {
                 const responseObject = JSON.parse(xhr.responseText);
                 switch (responseObject.result) {
                     case 'failure':
-                        recoverform.eContactWarning.show('인증번호가 올바르지 않습니다. 다시 한번 확인해 주세요.');
+                        recoverform.warning.show('인증번호가 올바르지 않습니다. 다시 한번 확인해 주세요.');
                         recoverform['eContactCode'].select();
                         break;
                     case 'failure_expired':
-                        recoverform.eContactWarning.show('해당 인증번호가 만료되었습니다.');
+                        recoverform.warning.show('해당 인증번호가 만료되었습니다.');
                         break;
                     case 'success':
                         recoverform.cNotification.show('인증이 완료되었습니다.');
@@ -162,10 +175,10 @@ recoverform['eContactVerify'].onclick = () => {
                         recoverform['eContactVerify'].setAttribute('disabled', 'disabled');
                         break;
                     default:
-                        recoverform.eContactWarning.show('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
+                        recoverform.warning.show('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
                 }
             } else {
-                recoverform.eContactWarning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.')
+                recoverform.warning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.')
             }
         }
     };
@@ -174,43 +187,44 @@ recoverform['eContactVerify'].onclick = () => {
 
 
 // 연락처 인증 혹은 이메일 입력 다한 후 최종적인 다음으로 넘어가는 버튼을 눌렀을때
-recoverform['contactSend'].onsubmit = e => {
+recoverform['contactSend'].onclick = e => {
     e.preventDefault();
     if (recoverform['eName'].value === '') {
-        recoverform.eNameWarning.show('이름을 입력해주세요')
-        recoverform.eNameWarning.focus();
-        return;
+        recoverform.warning.show('이름을 입력해주세요')
+        recoverform.warning.focus();
+        return false;
     }
     if (recoverform['eContact'].value === '') {
-        recoverform.contactWarning.show('연락처를 입력해주세요.');
+        recoverform.warning.show('연락처를 입력해주세요.');
         recoverform['eContact'].focus();
-        return;
+        return false;
     }
     if (recoverform['eContactCode'].value === '') {
-        recoverform.eContactWarning.show('인증번호를 입력해주세요');
+        recoverform.warning.show('인증번호를 입력해주세요');
         recoverform['eContactCode'].focus();
-        return;
+        return false;
     }
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    formData.append('name', recoverform['eName'].value);
+    formData.append('name', recoverform['eName'].value)
     formData.append('contact', recoverform['eContact'].value);
     formData.append('code', recoverform['eContactCode'].value);
     formData.append('salt', recoverform['eContactSalt'].value);
-    xhr.open('POST', `/recoverAccount`);
+    xhr.open('PATCH', `/recoverAccount/contactCodeRec`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseObject = JSON.parse(xhr.responseText);
                 switch (responseObject.result) {
                     case 'success':
-                        location.href += '';
+                        location.href = `/recoverAccount/confirmEmail?name=${recoverform['eName'].value}&contact=${recoverform['eContact'].value}&code=${recoverform['eContactCode'].value}&salt=${recoverform['eContactSalt'].value}`;
+                        // recoverform.cNotification.show(`회원님의 이메일 주소는 '${responseObject.email}'입니다.`);
                         break;
                     default:
-                        recoverform.eContactWarning.show('서버가 알수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
+                        recoverform.warning.show('서버가 알수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
                 }
             } else {
-                recoverform.eContactWarning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+                recoverform.warning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
             }
         }
     };
@@ -218,7 +232,13 @@ recoverform['contactSend'].onsubmit = e => {
 }
 
 
-recoverform.onsubmit = e =>{
+recoverform.onsubmit = function (e) {
+    e.preventDefault();
+
+}
+
+
+recoverform['emailSend'].onclick = e =>{
     e.preventDefault();
     let coverText = document.getElementsByClassName('cover-text');
     const link = document.querySelector('.cover-button');

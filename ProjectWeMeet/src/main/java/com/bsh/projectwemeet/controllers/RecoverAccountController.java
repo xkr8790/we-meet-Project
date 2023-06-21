@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 
@@ -24,11 +25,6 @@ public class RecoverAccountController {
     private final RecoverAccountService recoverAccountService;
     private final CheckService checkService;
 
-    @RequestMapping(value="recoverAccount", method = RequestMethod.GET)
-    public ModelAndView getRecoverAccount () {
-        ModelAndView modelAndView = new ModelAndView("home/recoverAccount");
-        return modelAndView;
-    } //이메일및 비밀번호 재설정
 
     @Autowired
     public RecoverAccountController(RecoverAccountService recoverAccountService, CheckService checkService){
@@ -36,39 +32,69 @@ public class RecoverAccountController {
         this.checkService = checkService;
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView getRecoverAccount() {
+        ModelAndView modelAndView = new ModelAndView("home/recoverAccount");
+        return modelAndView;
+    }
 
     // 연락처를 이용해 이메일 찾기 관련된 코드
-    @RequestMapping(value="contactCodeRec", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "contactCodeRec", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String getContactCodeRec(RecoverContactCodeEntity recoverContactCode){
+    public String getContactCodeRec(RecoverContactCodeEntity recoverContactCode) {
         SendRecoverContactCodeResult result = this.recoverAccountService.sendRecoverContactCode(recoverContactCode);
-        JSONObject responseObject = new JSONObject(){{
+        JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
 //        이거 주석달기
-        if(result == SendRecoverContactCodeResult.SUCCESS){
+        if (result == SendRecoverContactCodeResult.SUCCESS) {
             responseObject.put("salt", recoverContactCode.getSalt());
         }
         return responseObject.toString();
     }
 
     // patch는 데이터 베이스의 많은 값들중 전체 값이 아닌 몇개의 값만 바꿀려고 할때 사용한다고 생각하면 된다.
-    @RequestMapping(value="contactCodeRec", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "contactCodeRec", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String patchContactCodeRec(RecoverContactCodeEntity recoverContactCode){
+    public String patchContactCodeRec(RecoverContactCodeEntity recoverContactCode) {
 
         VeryfiRecoverContactCodeResult result = this.recoverAccountService.verifyRecoverContactCodeResult(recoverContactCode);
-        JSONObject responseObject = new JSONObject(){{
+        JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
+
 //        여기서 contact끼리의 값이 값으니 UserEntity안의 email값을 꺼낸다는 의미이다.
-        if(result == VeryfiRecoverContactCodeResult.SUCCESS){
-            UserEntity user = this.recoverAccountService.getUserByContact(recoverContactCode.getContact(), recoverContactCode.getName());
-//            responseObject.put("email", user.getEmail());
-//            responseObject.put("name", user.getName());
+        if (result == VeryfiRecoverContactCodeResult.SUCCESS) {
+            UserEntity user = this.recoverAccountService.getUserByContactName(recoverContactCode.getContact(), recoverContactCode.getName());
+            responseObject.put("email", user.getEmail());
+            responseObject.put("name", user.getName());
         }
         return responseObject.toString();
     }
+
+
+
+    @RequestMapping(value = "/confirmEmail", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView getConfirmEmail(RecoverContactCodeEntity recoverContactCode) {
+        ModelAndView modelAndView = new ModelAndView("home/confirmEmail");
+        VeryfiRecoverContactCodeResult result = this.recoverAccountService.verifyRecoverContactCodeResult(recoverContactCode);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+
+        Context context = new Context();
+
+        if (result == VeryfiRecoverContactCodeResult.SUCCESS) {
+            UserEntity user = this.recoverAccountService.getUserByContactName(recoverContactCode.getContact(), recoverContactCode.getName());
+            modelAndView.addObject("email", user.getEmail());
+            modelAndView.addObject("name", user.getName());
+        }
+        modelAndView.addObject("recoverContactCode", recoverContactCode);
+        return modelAndView;
+    }
+
+
     /*-----------------------------------------------------------------------------------------------------------------------------------*/
 
     @RequestMapping(value = "recoverPassword",
