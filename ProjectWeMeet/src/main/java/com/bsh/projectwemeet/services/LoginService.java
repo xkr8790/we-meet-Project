@@ -40,8 +40,8 @@ public class LoginService {
         }
 
 //        아래의 코드로 인해 로그인상태(쿠키)를 유지힌다.
-        user.setNickname(existingUser.getName())
-                .setContact(existingUser.getNickname())
+        user.setName(existingUser.getName())
+                .setNickname(existingUser.getNickname())
                 .setContact(existingUser.getContact())
                 .setAdmin(existingUser.isAdmin())
                 .setBirth(existingUser.getBirth())
@@ -50,19 +50,6 @@ public class LoginService {
                 .setAddressPrimary(existingUser.getAddressPrimary())
                 .setAddressSecondary(existingUser.getAddressSecondary())
                 .setGender(existingUser.getGender());
-
-
-//        이건 물어보기
-//        if (user.getStatus().equals("DELETED")) {
-//            return LoginResult.FAILURE;
-//        }
-//        if (user.getStatus().equals("EMAIL_PENDING")) {
-//            return LoginResult.FAILURE_EMAIL_NOT_VERIFIED;
-//        }
-//        if (user.getStatus().equals("SUSPENDED")) {
-//            return LoginResult.FAILURE_SUSPENDED;
-//        }
-
 
 //        위의 조건이 아닌 이상 나머지는 성공했다고 생각해서 return값을 반환한다.
 
