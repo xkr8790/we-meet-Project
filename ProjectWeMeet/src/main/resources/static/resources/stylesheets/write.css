@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+*{
+    /*border: red solid 1px;*/
+}
+/*전체적인 크기*/
+body,html{
+    margin: 0;
+    width: 100%;
+    height: 95%;
+    background-color: #f4f3f1;
+}
+
+.container{
+    height: 100%;
+}
+
+.inner{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    padding: 1rem;
+    width: 100rem;
+    margin: 5rem auto 0;
+}
+
+/*로고*/
+
+#writeForm > .logo_we_meet{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 1rem;
+    padding-left: 3rem;
+}
+#writeForm > .logo_we_meet > .link{
+    display: block;
+    width: 13rem;
+    height: 3rem;
+
+}
+
+#writeForm > .logo_we_meet > .link > .logo{
+    width: 100%;
+    height: 100%;
+}
+
+
+/*버튼*/
+
+.container >.inner > ._button {
+    width: 6rem;
+    height: 2rem;
+    margin-left: auto; /* 오른쪽 정렬 */
+    margin-top: 5rem;
+}
+
+/*box*/
+.box {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#content, #map {
+    flex: 1;
+    border: solid 1px black;
+}
+
+/*map*/
+#map{
+    position: relative;
+    width: 30rem;
+    height: 30rem;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="KO" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>We-Meet 게시글 작성</title>
+    <link crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/write.css}">
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125"></script>
+    <script defer th:src="@{/resources/scripts/map.js}"></script>
+</head>
+<body>
+<form id="writeForm" class="container">
+    <h2 class="logo_we_meet">
+        <a href="http://localhost:6795/" class="link"><img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/></a>
+    </h2>
+    <div class="inner">
+        <main class="box step-1">
+            <section id="content" class="content">content 자리</section>
+            <section id="map" class="map"></section>
+        </main>
+        <input type="submit" value="다음" class="_button">
+    </div>
+
+</form>
+</body>
+</html>
