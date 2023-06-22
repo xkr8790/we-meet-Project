@@ -46,11 +46,12 @@ section > #Article-Write > .title {
     height: 40rem;
 }
 
+
 /*CK-editor 크기 설정*/
 
 section > #Article-Write > .article-tag {
     background-color: white;
-    width: 50.1rem;
+    width: 50.2rem;
     height: 50px;
     padding-left: 1rem;
     border-radius: 0.15rem;
@@ -61,11 +62,14 @@ section > #Article-Write > .article-tag {
     white-space: nowrap;
     line-height: inherit;
     vertical-align: top;
+    align-items: center;
+    display: flex;
 }
 
 section > #Article-Write > .article-tag:focus {
-    outline: none;
+    outline: none; /* 포커스 시 기본 아웃라인 스타일 제거 */
 }
+
 
 
 section > #Article-Write > .submit {

@@ -13,9 +13,11 @@
 <section>
     <form id="Article-Write">
         <img class="logo" src="/resources/images/loginImages/lastLogo.jpg">
-        <input name="title" autofocus class="title" type="text" placeholder="제목을 입력하세요">
-        <textarea name="content" id="editor"></textarea>
-        <input name="tag" class="article-tag" type="text" placeholder="태그를 입력해주세요">
+        <input name="ArticleTitle" autofocus class="title" type="text" placeholder="제목을 입력하세요">
+        <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
+        <div class="article-tag" contenteditable="true">
+            <div class="tag"></div>
+        </div>
         <input class="submit" type="submit" value="등록">
     </form>
 </section>
