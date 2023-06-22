@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 작성</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/Article-Write.css}">
+    <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
+</head>
+<body>
+
+<section>
+    <form id="Article-Write">
+        <img class="logo" src="/resources/images/loginImages/lastLogo.jpg">
+        <input name="title" autofocus class="title" type="text" placeholder="제목을 입력하세요">
+        <textarea name="content" id="editor"></textarea>
+        <input name="tag" class="article-tag" type="text" placeholder="태그를 입력해주세요">
+        <input class="submit" type="submit" value="등록">
+    </form>
+</section>
+
+</body>
+</html>

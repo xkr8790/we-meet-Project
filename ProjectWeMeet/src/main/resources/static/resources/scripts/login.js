@@ -70,7 +70,7 @@ loginform.onsubmit = e => {
     const formData = new FormData();
     formData.append('email', loginform['email'].value);
     formData.append('password', loginform['password'].value);
-    xhr.open('POST', `/login`);
+    xhr.open('POST', `login/login`);
     xhr.onreadystatechange = () => {
         // readyState메서드는 XMLHttpRequest객체의 상태를나타낸다.
         // 아래의 코드는 readyState프로퍼티의 값이 변경될때마다 readystatechange이벤트가 실행되는데
@@ -89,7 +89,7 @@ loginform.onsubmit = e => {
                     loginform['email'].select();
                     break;
                 case 'success':
-                    //  어떻게 메인 페이지로 넘어가는 코드를 만들어야 하는지 조사하기
+                    alert('성공');
                     location.href += '';
                     break;
                 default:

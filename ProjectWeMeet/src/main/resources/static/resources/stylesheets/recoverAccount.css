@@ -203,13 +203,6 @@ body {
     justify-content: center;
 }
 
-/* 투명도 설정하고 포인터 이벤트 없앤다*/
-
-#linkCoverForm.visible {
-    opacity: 1;
-    pointer-events: all;
-}
-
 #linkCoverForm > .cover {
     width: 20rem;
     height: 20rem;
@@ -226,10 +219,15 @@ body {
     font-size: 1.2rem;
 }
 
+#linkCoverForm>.cover>.cover-text{
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
 #linkCoverForm > .cover > .cover-button {
+    background-color: gray;
     color: white;
-    background-color: black;
-    border: 0.0625rem solid black;
+    font-weight: 400;
     border-radius: 0.25rem;
     padding: 0.625rem 0.875rem;
     margin-top: 3rem;
@@ -238,6 +236,11 @@ body {
 }
 
 #linkCoverForm > .cover > .cover-button:hover {
-    filter: brightness(95%);
+    filter: brightness(90%);
     cursor: pointer;
+}
+
+#linkCoverForm.visible {
+    opacity: 1;
+    pointer-events: all;
 }
