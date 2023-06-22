@@ -50,26 +50,12 @@ passwordOption.addEventListener('change', function () {
 
 
 //  입력값들이(연락처, 인증번호, 이메일) 이상할때 나타내기 위한 코드작업
-recoverForm.contactWarning = recoverForm.querySelector('[rel="contactWarning"]');
-recoverForm.contactWarning.show = (text) => {
-    recoverForm.contactWarning.innerText = text;
-    recoverForm.contactWarning.classList.add('visible');
+recoverForm.warning = recoverForm.querySelector('[rel="contactWarning"]');
+recoverForm.warning.show = (text) => {
+    recoverForm.warning.innerText = text;
+    recoverForm.warning.classList.add('visible');
 };
-recoverForm.contactWarning.hide = () => recoverForm.contactWarning.classList.remove('visible');
-
-recoverForm.eContactWarning = recoverForm.querySelector('[rel="eContactWarning"]');
-recoverForm.eContactWarning.show = (text) => {
-    recoverForm.eContactWarning.innerText = text;
-    recoverForm.eContactWarning.classList.add('visible');
-};
-recoverForm.eContactWarning.hide = () => recoverForm.eContactWarning.classList.remove('visible');
-
-recoverForm.emailWarning = recoverForm.querySelector('[rel="emailWarning"]');
-recoverForm.emailWarning.show = (text) => {
-    recoverForm.emailWarning.innerText = text;
-    recoverForm.emailWarning.classList.add('visible');
-};
-recoverForm.emailWarning.hide = () => recoverForm.emailWarning.classList.remove('visible');
+recoverForm.warning.hide = () => recoverForm.warning.classList.remove('visible');
 
 recoverForm.cNotification = recoverForm.querySelector('[rel="cNotification"]');
 recoverForm.cNotification.show = (text) => {
@@ -78,12 +64,6 @@ recoverForm.cNotification.show = (text) => {
 };
 recoverForm.cNotification.hide = () => recoverForm.cNotification.classList.remove('visible');
 
-recoverForm.eNameWarning = recoverForm.querySelector('[rel="eNameWarning"]');
-recoverForm.eNameWarning.show = (text) => {
-    recoverForm.eNameWarning.innerText = text;
-    recoverForm.eNameWarning.classList.add('visible');
-};
-recoverForm.eNameWarning.hide = () => recoverForm.eNameWarning.classList.remove('visible');
 
 
 
@@ -91,17 +71,17 @@ recoverForm.eNameWarning.hide = () => recoverForm.eNameWarning.classList.remove(
 //  아이디 찾기 과정에서 연락처 인증버튼을 누르면 인증버튼은 더이상 클릭하지 못하고 클릭하지 못하는 인증번호 인증 버튼이 클릭할수 있게 되는코드
 recoverForm['eContactSend'].onclick = () => {
     if (recoverForm['eName'].value === '') {
-        recoverForm.eNameWarning.show('이름을 입력해 주세요.');
+        recoverForm.warning.show('이름을 입력해 주세요.');
         recoverForm['eName'].focus();
         return;
     }
     if (recoverForm['eContact'].value === '') {
-        recoverForm.contactWarning.show('연락처를 입력해 주세요.');
+        recoverForm.warning.show('연락처를 입력해 주세요.');
         recoverForm['eContact'].focus();
         return;
     }
     if (!new RegExp('^(010\\d{8})$').test(recoverForm['eContact'].value)) {
-        recoverForm.contactWarning.show('올바른 연락처를 입력해 주세요.');
+        recoverForm.warning.show('올바른 연락처를 입력해 주세요.');
         recoverForm['eContact'].focus();
         return;
     }
@@ -114,7 +94,7 @@ recoverForm['eContactSend'].onclick = () => {
                 const responseObject = JSON.parse(xhr.responseText);
                 switch (responseObject.result) {
                     case 'failure':
-                        recoverForm.contactWarning.show('일치하는 회원을 찾을 수 없습니다.');
+                        recoverForm.warning.show('일치하는 회원을 찾을 수 없습니다.');
                         recoverForm['eContact'].select();
                         break;
                     case 'success':
@@ -127,10 +107,10 @@ recoverForm['eContactSend'].onclick = () => {
                         recoverForm['eContactSalt'].value = responseObject.salt;
                         break;
                     default:
-                        recoverForm.contactWarning.show('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
+                        recoverForm.warning.show('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
                 }
             } else {
-                recoverForm.contactWarning.show('서버와 통신하지 못하였습니다. 잠시후 다시 시도해 주세요.')
+                recoverForm.warning.show('서버와 통신하지 못하였습니다. 잠시후 다시 시도해 주세요.')
             }
         }
     };
@@ -218,7 +198,6 @@ recoverForm['contactSend'].onclick = e => {
                 switch (responseObject.result) {
                     case 'success':
                         location.href = `/recoverAccount/confirmEmail?name=${recoverForm['eName'].value}&contact=${recoverForm['eContact'].value}&code=${recoverForm['eContactCode'].value}&salt=${recoverForm['eContactSalt'].value}`;
-                        // recoverform.cNotification.show(`회원님의 이메일 주소는 '${responseObject.email}'입니다.`);
                         break;
                     default:
                         recoverForm.warning.show('서버가 알수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');

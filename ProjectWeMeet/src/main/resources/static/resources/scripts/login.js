@@ -12,19 +12,6 @@ loginForm.warning.show = (text) => {
 };
 loginForm.warning.hide = () => loginForm.warning.classList.remove('visible');
 
-// loginForm.passwordWarning = loginForm.querySelector('[rel="passwordWarning"]');
-// loginForm.passwordWarning.show = (text) => {
-//     loginForm.passwordWarning.innerText = text;
-//     loginForm.passwordWarning.classList.add('visible');
-// };
-// loginForm.passwordWarning.hide = () => loginForm.passwordWarning.classList.remove('visible');
-//
-// loginForm.loginWarning = loginForm.querySelector('[rel="loginWarning"]');
-// loginForm.loginWarning.show = (text) => {
-//     loginForm.loginWarning.innerText = text;
-//     loginForm.loginWarning.classList.add('visible');
-// };
-// loginForm.loginWarning.hide = () => loginForm.loginWarning.classList.remove('visible');
 
 // 아이콘 클릭시 input태그의 타입이 password와 text로 바뀌는 코드
 showIcon.addEventListener('click', function () {
@@ -86,7 +73,8 @@ loginForm.onsubmit = e => {
                     loginForm['email'].select();
                     break;
                 case 'success':
-                    //  어떻게 메인 페이지로 넘어가는 코드를 만들어야 하는지 조사하기
+                    //  html의 remember의 버튼이 체크되어 있으면 localStorage를 사용해 데이터를 저장한다.
+                    //  키와 값으로 데이터를 저장한다.
                     if (loginForm['remember'].checked) {
                         localStorage.setItem('email', loginForm['email'].value);
                     }
@@ -104,6 +92,7 @@ loginForm.onsubmit = e => {
     xhr.send(formData);
 };
 
+// 로그인 화면을 불러올때 localStorage로 저장된 email값이 있으면 불러오겠다는 코드이다.
 window.onload = function() {
     if (localStorage.getItem('email')) {
         loginForm['email'].value = localStorage.getItem('email');
