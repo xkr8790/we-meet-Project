@@ -143,6 +143,12 @@ function getListItem(index, places) {
     el.innerHTML = itemStr;
     el.className = 'item';
 
+
+    //목록 클릭 이벤트
+    el.addEventListener('click', function() {
+        alert('검색 결과 목록을 클릭했습니다. 장소명: ' + places.place_name);
+    });
+
     return el;
 }
 
@@ -163,6 +169,12 @@ function addMarker(position, idx, title) {
 
     marker.setMap(map); // 지도 위에 마커를 표출합니다
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+
+
+    //마커 클릭 이벤트
+    kakao.maps.event.addListener(marker, 'click', function() {
+        alert('마커를 클릭했습니다. 장소명: ' + title);
+    });
 
     return marker;
 }
@@ -221,3 +233,5 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
+
+
