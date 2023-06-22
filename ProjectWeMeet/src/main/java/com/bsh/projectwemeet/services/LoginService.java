@@ -35,10 +35,8 @@ public class LoginService {
 
 //        로그인 화면에서 입력한 비밀번호와 데이터베이스 안 비밀번호가 같지 않는 경우를 뜻한다.
         user.setPassword(CryptoUtil.hashSha512(user.getPassword())); // 비밀번호에 hash됨
-        System.out.println(user.getPassword());
+
         if (!user.getPassword().equals(existingUser.getPassword())) {
-        System.out.println("asdkjl");
-            System.out.println(user.getPassword());
             return LoginResult.FAILURE;
         }
 

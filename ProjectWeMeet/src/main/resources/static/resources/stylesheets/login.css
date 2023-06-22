@@ -178,8 +178,9 @@ body {
     transition-timing-function: ease;
 }
 #loginForm > .warning.visible{
+    font-size: 0.7rem;
     max-height: 3rem;
-    padding-top: 0.5rem;
+    padding: 0.25rem;
 }
 
 

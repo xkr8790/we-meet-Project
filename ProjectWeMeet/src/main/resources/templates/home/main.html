@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/resources/stylesheets/mainMenu.css">
     <script defer src="/resources/scripts/slide.js"></script>
     <script defer src="/resources/scripts/article.js"></script>
+    <script defer th:src="@{/resources/scripts/logout.js}"></script>
 </head>
 
 <body>
@@ -111,7 +112,7 @@
 
             <li class="item main-menu">
                 <label class="icon-text-button" for="mainMenuToggle">
-                    <a class="icon-box" href="#">
+                    <a class="icon-box" href="/">
                         <img alt="" src="/resources/images/mainImages/logo.jpg" class="icon">
                     </a>
                 </label>
@@ -132,13 +133,18 @@
         </ul>
         <ul class="menu right" th:if="${session.user != null}">
             <li class="item">
-                <a href="/register/" class="icon-text-button">
+                <a href="/" class="icon-text-button">
                     <span class="text">프로필 만들기</span>
                 </a>
             </li>
             <li class="item">
-                <a class="icon-text-button" href="/login">
+                <a class="icon-text-button" href="/">
                     <span class="text">아무거나 만들기</span>
+                </a>
+            </li>
+            <li class="item" data-action="logout">
+                <a >
+                <p>로그아웃</p>
                 </a>
             </li>
         </ul>

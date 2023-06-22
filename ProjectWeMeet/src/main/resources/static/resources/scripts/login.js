@@ -5,26 +5,26 @@ const passwordObject = document.querySelector('.passwordObject');
 
 
 // 아이디와 비밀번호를 입력하지 않은체 로그인 버튼을 누른다면 화면에 아이디와 비밀번호를 입력하라는 숨겨진 문구가 보일수 있도록 하는 함수를 만든다.
-loginForm.emailWarning = loginForm.querySelector('[rel="emailWarning"]');
-loginForm.emailWarning.show = (text) => {
-    loginForm.emailWarning.innerText = text;
-    loginForm.emailWarning.classList.add('visible');
+loginForm.warning = loginForm.querySelector('[rel="emailWarning"]');
+loginForm.warning.show = (text) => {
+    loginForm.warning.innerText = text;
+    loginForm.warning.classList.add('visible');
 };
-loginForm.emailWarning.hide = () => loginForm.emailWarning.classList.remove('visible');
+loginForm.warning.hide = () => loginForm.warning.classList.remove('visible');
 
-loginForm.passwordWarning = loginForm.querySelector('[rel="passwordWarning"]');
-loginForm.passwordWarning.show = (text) => {
-    loginForm.passwordWarning.innerText = text;
-    loginForm.passwordWarning.classList.add('visible');
-};
-loginForm.passwordWarning.hide = () => loginForm.passwordWarning.classList.remove('visible');
-
-loginForm.loginWarning = loginForm.querySelector('[rel="loginWarning"]');
-loginForm.loginWarning.show = (text) => {
-    loginForm.loginWarning.innerText = text;
-    loginForm.loginWarning.classList.add('visible');
-};
-loginForm.loginWarning.hide = () => loginForm.loginWarning.classList.remove('visible');
+// loginForm.passwordWarning = loginForm.querySelector('[rel="passwordWarning"]');
+// loginForm.passwordWarning.show = (text) => {
+//     loginForm.passwordWarning.innerText = text;
+//     loginForm.passwordWarning.classList.add('visible');
+// };
+// loginForm.passwordWarning.hide = () => loginForm.passwordWarning.classList.remove('visible');
+//
+// loginForm.loginWarning = loginForm.querySelector('[rel="loginWarning"]');
+// loginForm.loginWarning.show = (text) => {
+//     loginForm.loginWarning.innerText = text;
+//     loginForm.loginWarning.classList.add('visible');
+// };
+// loginForm.loginWarning.hide = () => loginForm.loginWarning.classList.remove('visible');
 
 // 아이콘 클릭시 input태그의 타입이 password와 text로 바뀌는 코드
 showIcon.addEventListener('click', function () {
@@ -41,29 +41,27 @@ hideIcon.addEventListener('click', function () {
 
 loginForm.onsubmit = e => {
     e.preventDefault()
-    loginForm.emailWarning.hide();
-    loginForm.passwordWarning.hide();
-    loginForm.loginWarning.hide();
+    loginForm.warning.hide();
     if (loginForm['email'].value === '') {
         loginForm['email'].focus();
-        loginForm.emailWarning.show('이메일을 입력해 주세요.');
+        loginForm.warning.show('이메일을 입력해 주세요.');
         return false;
     }
     if (!new RegExp('^(?=.{10,50}$)([\\da-zA-Z\\-_\\.]{5,25})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$').test(loginForm['email'].value)) {
         loginForm['email'].focus();
         loginForm['email'].select();
-        loginForm.emailWarning.show('올바른 이메일을 입력해 주세요.');
+        loginForm.warning.show('올바른 이메일을 입력해 주세요.');
         return false;
     }
     if (loginForm['password'].value === '') {
         loginForm['password'].focus();
-        loginForm.passwordWarning.show('비밀번호를 입력해 주세요.');
+        loginForm.warning.show('비밀번호를 입력해 주세요.');
         return false;
     }
     if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]};:\'",<.>/?]{8,50})$').test(loginForm['password'].value)) {
         loginForm['password'].focus();
         loginForm['password'].select();
-        loginForm.passwordWarning.show('올바른 비밀번호를 입력해 주세요.');
+        loginForm.warning.show('올바른 비밀번호를 입력해 주세요.');
         return false;
     }
     const xhr = new XMLHttpRequest();
@@ -83,20 +81,22 @@ loginForm.onsubmit = e => {
             const responseObject = JSON.parse(xhr.responseText);
             switch (responseObject.result) {
                 case 'failure':
-                    console.log('dkssud');
-                    loginForm.loginWarning.show('이메일 혹은 비밀번호가 올바르지 않습니다.');
+                    loginForm.warning.show('이메일 혹은 비밀번호가 올바르지 않습니다.');
                     loginForm['email'].focus();
                     loginForm['email'].select();
                     break;
                 case 'success':
                     //  어떻게 메인 페이지로 넘어가는 코드를 만들어야 하는지 조사하기
-                    location.href += '';
+                    if (loginForm['remember'].checked) {
+                        localStorage.setItem('email', loginForm['email'].value);
+                    }
+                    location.href = '/';
                     break;
                 default:
-                    loginForm.loginWarning.show('서버가 알 수 없는 응답을 반환했습니다. 관리자에게 문의해 주세요.');
+                    loginForm.warning.show('서버가 알 수 없는 응답을 반환했습니다. 관리자에게 문의해 주세요.');
             }
         } else {
-            loginForm.loginWarning.show('서버가 알 수 없는 응답을 반환했습니다. 관리자에게 문의해 주세요.');
+            loginForm.warning.show('서버가 알 수 없는 응답을 반환했습니다. 관리자에게 문의해 주세요.');
 
         }
 
@@ -104,4 +104,9 @@ loginForm.onsubmit = e => {
     xhr.send(formData);
 };
 
-
+window.onload = function() {
+    if (localStorage.getItem('email')) {
+        loginForm['email'].value = localStorage.getItem('email');
+        loginForm['password'].focus();
+    }
+}
