@@ -165,7 +165,7 @@ public class CheckService {
         } // 조회된 사용자가 없는 경우 실패 반환
 
         user.setPassword(newPassword);
-        user.setPassword(CryptoUtil.hashSha512(user.getPassword()));
+//        user.setPassword(CryptoUtil.hashSha512(user.getPassword()));
         return this.checkMapper.updateUser(user) > 0 && this.checkMapper.deleteRecoverEmailCode(recoverEmailCode) > 0
                 ? RecoverPasswordResult.SUCCESS
                 : RecoverPasswordResult.FAILURE;

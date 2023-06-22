@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>소소한 일상의 변화. WeMeet!</title>
@@ -118,7 +118,7 @@
             </li>
         </ul>
         <div class="empty-box2"></div>
-        <ul class="menu right">
+        <ul class="menu right" th:if="${session.user == null}">
             <li class="item">
                 <a href="/register/" class="icon-text-button">
                     <span class="text">회원가입</span>
@@ -127,6 +127,18 @@
             <li class="item">
                 <a class="icon-text-button" href="/login">
                     <span class="text">로그인</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="menu right" th:if="${session.user != null}">
+            <li class="item">
+                <a href="/register/" class="icon-text-button">
+                    <span class="text">프로필 만들기</span>
+                </a>
+            </li>
+            <li class="item">
+                <a class="icon-text-button" href="/login">
+                    <span class="text">아무거나 만들기</span>
                 </a>
             </li>
         </ul>
