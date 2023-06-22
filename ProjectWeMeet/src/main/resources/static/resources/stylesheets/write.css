@@ -47,6 +47,27 @@ body,html{
     height: 100%;
 }
 
+/*content*/
+
+#writeForm> .inner> .box> .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#writeForm > .inner > .box > .content > .input-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#writeForm > .inner > .box > .content > .input-wrapper > .input {
+    width: 14rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
 
 /*버튼*/
 
@@ -68,6 +89,8 @@ body,html{
     width: 20rem;
     height: 40rem;
 }
+
+/*map*/
 .map {
 
     border: solid 1px black;
@@ -75,7 +98,7 @@ body,html{
     height: 40rem;
 }
 
-/*map*/
+
 .map{
     position: relative;
 
