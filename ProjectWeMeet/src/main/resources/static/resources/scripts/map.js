@@ -16,22 +16,29 @@ var ps = new kakao.maps.services.Places();
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
+const searchForm = document.getElementById('searchForm');
+
+searchForm.onsubmit = function(e) {
+    e.preventDefault();
+    ps.keywordSearch( searchForm['keyword'].value, placesSearchCB);
+    return false;
+}
+
 // 키워드로 장소를 검색합니다
-searchPlaces();
+
 
 // 키워드 검색을 요청하는 함수입니다
-function searchPlaces() {
-
-    var keyword = document.getElementById('keyword').value;
-
-    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
-        return false;
-    }
-
-    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-    ps.keywordSearch( keyword, placesSearchCB);
-}
+// function searchPlaces() {
+//     var k = document.getElementById('keyword').value;
+//     alert(k);
+//     if (!k.replace(/^\s+|\s+$/g, '')) {
+//         alert('키워드를 입력해주세요!');
+//         return false;
+//     }
+//
+//     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+//     ps.keywordSearch( k, placesSearchCB);
+// }
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
@@ -214,4 +221,3 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
-

@@ -9,31 +9,34 @@
     <link crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
           rel="stylesheet">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/write.css}">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
-    <script defer th:src="@{/resources/scripts/map.js}"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
     <script defer th:src="@{/resources/scripts/common.js}"></script>
     <script defer th:src="@{/resources/scripts/write.js}"></script>
+    <script defer th:src="@{/resources/scripts/map.js}"></script>
 </head>
 <body>
-<form id="writeForm" class="container">
+
+<div id="writeForm" class="container">
     <h2 class="logo_we_meet">
-        <a href="http://localhost:6795/" class="link"><img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/></a>
+        <a href="http://localhost:6795/" class="link">
+            <img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/>
+        </a>
     </h2>
     <div class="inner">
         <main class="box step-1">
             <div id="content" class="content">
-                <input type="text" class="addressPrimary" placeholder="기본주소">
-                <input type="text" class="addressSecondary" placeholder="상세주소">
+                <input disabled type="text" class="addressPrimary" placeholder="기본주소">
+                <input disabled type="text" class="addressSecondary" placeholder="상세주소">
             </div>
             <div class="map_wrap">
                 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-
                 <div id="menu_wrap" class="bg_white">
                     <div class="option">
                         <div>
-                            <form onsubmit="searchPlaces(); return false;">
-                                키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15">
-                                <button type="submit">검색하기</button>
+                            <form id="searchForm">
+                                키워드 : <input type="text" value="이태원 맛집" name="keyword" size="15">
+                                <input type="submit" value="검색하기">
                             </form>
                         </div>
                     </div>
@@ -46,6 +49,6 @@
         <input type="submit" value="다음" class="_button">
     </div>
 
-</form>
+</div>
 </body>
 </html>
