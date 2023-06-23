@@ -9,20 +9,26 @@
     <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
 </head>
 <body>
-
-<section>
-    <div class="thumbnail-place">
-        <img id="thumbnail-preview" class="thumbnail" src="/resources/images/articleImages/thumbnail.jpg">
-        <input class="thumbnail-change" type="file" id="photo-upload" accept="image/*">
+<form id="Article-Form">
+    <div class="write-title">
+        <img class="logo" src="/resources/images/loginImages/lastLogo.jpg">
     </div>
-
-    <form id="Article-Write">
-        <input name="ArticleTitle" autofocus class="title" type="text" placeholder="제목을 입력하세요">
-        <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
-        <div class="article-tag"></div>
-        <input class="submit" type="submit" value="등록">
-    </form>
-</section>
+    <section>
+        <div class="thumbnail-place">
+            <img id="thumbnail-preview" class="thumbnail" src="/resources/images/articleImages/thumbnail.jpg">
+            <label for="photo-upload" class="thumbnail-upload">썸네일 변경</label>
+            <input type="file" class="thumbnail-change" id="photo-upload" accept="image/*">
+        </div>
+        <div id="Article-Write">
+            <input autocomplete="off" name="ArticleTitle" autofocus class="title" type="text" placeholder="제목을 입력하세요">
+            <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
+            <div class="article-tag">
+                <div class="explainTag">태그를 입력해주세요 (최대 5개)</div>
+            </div>
+            <input class="submit" type="submit" value="등록">
+        </div>
+    </section>
+</form>
 
 </body>
 </html>
