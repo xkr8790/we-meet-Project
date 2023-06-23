@@ -151,12 +151,17 @@ function getListItem(index, places) {
 
     //목록 클릭 이벤트
     el.addEventListener('click', function() {
-        // alert('검색 결과 목록을 클릭했습니다. 장소명: ' + places.place_name);
-        // writeForm['addressPrimary'].value=places.place_name;
 
         addressPrimaryInput.value = places.place_name;
         addressSecondaryInput.value = places.address_name;
         addressPrimaryInput.disabled = true;
+
+        // Move and zoom to the corresponding marker
+        map.setLevel(3); // Adjust the zoom level as needed
+        map.setCenter(new kakao.maps.LatLng(places.y, places.x));
+
+
+
     });
 
     return el;
@@ -186,6 +191,7 @@ function addMarker(position, idx, title) {
     markers.push(marker); // 배열에 생성된 마커를 추가합니다
 
     //마커 클릭 이벤트
+    //마커를 클릭시 마커의 번호와 일치하는 목록을 클릭하는 이벤트
     (function (marker, idx, title) {
         kakao.maps.event.addListener(marker, "click", function () {
             var listItem = document.getElementById("placesList").childNodes[idx];
