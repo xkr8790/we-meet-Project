@@ -11,13 +11,15 @@
 <body>
 
 <section>
+    <div class="thumbnail-place">
+        <img id="thumbnail-preview" class="thumbnail" src="/resources/images/articleImages/thumbnail.jpg">
+        <input class="thumbnail-change" type="file" id="photo-upload" accept="image/*">
+    </div>
+
     <form id="Article-Write">
-        <img class="logo" src="/resources/images/loginImages/lastLogo.jpg">
         <input name="ArticleTitle" autofocus class="title" type="text" placeholder="제목을 입력하세요">
         <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
-        <div class="article-tag" contenteditable="true">
-            <div class="tag"></div>
-        </div>
+        <div class="article-tag"></div>
         <input class="submit" type="submit" value="등록">
     </form>
 </section>
