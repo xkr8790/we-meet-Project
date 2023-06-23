@@ -1,1 +1,2 @@
-const writeForm = document.getElementById('writeForm');
+
+
