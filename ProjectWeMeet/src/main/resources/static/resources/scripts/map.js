@@ -116,6 +116,8 @@ function displayPlaces(places) {
             };
         })(marker, places[i].place_name);
 
+
+
         fragment.appendChild(itemEl);
     }
 
