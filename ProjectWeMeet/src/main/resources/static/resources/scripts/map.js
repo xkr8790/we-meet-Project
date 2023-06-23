@@ -1,6 +1,10 @@
 const writeForm = document.getElementById('writeForm');
 const addressPrimaryInput = writeForm.querySelector('.addressPrimary')
 const addressSecondaryInput = writeForm.querySelector('.addressSecondary')
+const startDayInput = writeForm.querySelector('input[name="startDay"]');
+const endDayInput = writeForm.querySelector('input[name="endDay"]');
+const withinDayCheckbox = writeForm.querySelector('.within_a_day');
+const today = new Date().toISOString().split('T')[0];
 
 
 // 마커를 담을 배열입니다
@@ -259,4 +263,36 @@ function removeAllChildNods(el) {
     }
 }
 
+
+// input의 date타입에서 현재 시간보다 과거의 날짜를 설정하지 못하도록 한다
+
+startDayInput.setAttribute('min', today);
+endDayInput.setAttribute('min', today);
+
+
+// 체크박스가 변경되었을 때 이벤트 핸들러 추가
+// 당일치기가 체크된 상태라면 startDay와 endDay가 항상 같은 값을 유지한다
+
+withinDayCheckbox.addEventListener('change', function() {
+    if (withinDayCheckbox.checked) {
+        startDayInput.removeAttribute('disabled');
+        endDayInput.removeAttribute('disabled');
+        startDayInput.value = endDayInput.value;
+    } else {
+        startDayInput.removeAttribute('disabled');
+        endDayInput.removeAttribute('disabled');
+    }
+});
+
+startDayInput.addEventListener('input', function() {
+    if (withinDayCheckbox.checked) {
+        endDayInput.value = startDayInput.value;
+    }
+});
+
+endDayInput.addEventListener('input', function() {
+    if (withinDayCheckbox.checked) {
+        startDayInput.value = endDayInput.value;
+    }
+});
 

@@ -55,6 +55,12 @@ body,html{
     align-items: center;
 }
 
+#writeForm > .inner > .box > .content > .input-wrapper >.sub_title{
+    margin-top: 0.5rem;
+    font: inherit;
+}
+
+
 #writeForm > .inner > .box > .content > .input-wrapper{
     width: 100%;
     display: flex;
@@ -68,8 +74,49 @@ body,html{
     margin: 1.5rem;
 }
 
+#writeForm > .inner > .box > .content > .input-wrapper > .dayBox{
+    padding: 25px;
+    display: flex;
+    align-items: center;
+}
 
-/*버튼*/
+#writeForm > .inner > .box > .content > .input-wrapper > .dayBox > .day {
+    width: 7rem;
+    height: 2rem;
+
+}
+
+#writeForm > .inner > .box > .content > .input-wrapper > .dayBox > .tilde{
+    display: inline-block;
+    width: 0.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+#writeForm > .inner > .box > .content > .input-wrapper > .timeBox{
+    padding: 25px;
+    display: flex;
+    align-items: center;
+}
+
+#writeForm > .inner > .box > .content > .input-wrapper > .timeBox > .time {
+    width: 7rem;
+    height: 2rem;
+
+}
+
+#writeForm > .inner > .box > .content > .input-wrapper > .timeBox > .tilde{
+    display: inline-block;
+    width: 0.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+
+
+    /*버튼*/
 
 .container >.inner > ._button {
     width: 10rem;
