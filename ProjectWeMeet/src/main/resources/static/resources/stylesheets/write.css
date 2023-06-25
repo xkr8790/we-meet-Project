@@ -114,6 +114,28 @@ body,html{
     margin-left: 0.5rem;
 }
 
+    /*인원 및 카테고리*/
+
+#writeForm > .inner > .box > .content > .input-wrapper >.etc{
+    padding: 1rem;
+}
+
+#writeForm > .inner > .box > .content > .input-wrapper >.etc > .box_one{
+    padding: 1rem;
+}
+
+#writeForm > .inner > .box > .content > .input-wrapper >.etc > .box_one > .participants{
+    width: 4rem;
+}
+
+
+#writeForm > .inner > .box > .content > .input-wrapper >.etc > .box_two{
+    padding: 1rem;
+}
+
+/*#writeForm > .inner > .box > .content > .input-wrapper >.etc > .box_two > .category{*/
+/*    width: 7rem;*/
+/*}*/
 
 
     /*버튼*/
