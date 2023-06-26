@@ -30,6 +30,7 @@
                     <div class="sub_title">지도에서 장소를 검색해 주세요</div>
                     <input disabled type="text" class="addressPrimary input" placeholder="장소">
                     <input disabled type="text" class="addressSecondary input" placeholder="주소">
+                    <span class="warning" rel="addressWarning"></span>
                     <span class="sub_title">날짜와 시간을 선택해 주세요</span>
                     <span><input type="checkbox" class="within_a_day">당일치기</span>
                     <div class="dayBox">
@@ -37,31 +38,33 @@
                         <span class="tilde">~</span>
                         <input type="date" class="day" name="endDay">
                     </div>
+                    <span class="warning" rel="dayWarning"></span>
                     <div class="sub_title">시간을 설정해주세요</div>
                     <div class="timeBox">
                         <input type="time" class="time" name="startTime">
                         <span class="tilde">~</span>
                         <input type="time" class="time" name="endTime">
                     </div>
+                    <span class="warning" rel="timeWarning"></span>
                     <div class="sub_title">참여인원과 카테고리를 설정해주세요</div>
                     <div class="etc">
                         <div class="box_one">
                             <span class="text">참여인원</span>
-                            <input type="text" class="participants" name="participants">
+                            <input type="number" class="participants" name="participants" min="2">
+                            <div class="warning" rel="participantsWarning"></div>
                         </div>
                         <div class="box_two">
                             <span class="text">카테고리</span>
                             <select name="category" class="category">
                                 <option disabled hidden selected value="">카테고리</option>
-                                <option value="01">영화</option>
-                                <option value="02">게임</option>
-                                <option value="03">운동</option>
-                                <option value="04">ㅇㅇ</option>
-                                <option value="05">ㄱㄱ</option>
-                                <option value="06">ㄹㄹ</option>
-                                <option value="07">ㅁㅁ</option>
-                                <option value="08">ㅅㅅ</option>
+                                <option value="1">영화</option>
+                                <option value="2">게임</option>
+                                <option value="3">운동</option>
+                                <option value="4">ㅇㅇ</option>
+                                <option value="5">ㄱㄱ</option>
+                                <option value="6">ㄹㄹ</option>
                             </select>
+                            <div class="warning" rel="categoryWarning"></div>
                         </div>
                     </div>
                 </div>

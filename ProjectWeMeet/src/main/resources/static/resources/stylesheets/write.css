@@ -137,6 +137,23 @@ body,html{
 /*    width: 7rem;*/
 /*}*/
 
+    /*warning*/
+.warning {
+    max-height: 0;
+    color: #ef5350;
+    font-size: 0.9rem;
+    margin: unset;
+    overflow: hidden;
+    transition-duration: 500ms;
+    transition-property: max-height;
+    transition-timing-function: ease;
+}
+
+.warning.visible {
+    max-height: 3rem;
+}
+
+
 
     /*버튼*/
 
@@ -290,4 +307,5 @@ body,html{
 }
 
 
-/*참여인원,카테고리*/
+
+
