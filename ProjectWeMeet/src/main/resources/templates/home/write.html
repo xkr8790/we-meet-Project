@@ -34,6 +34,8 @@
                     <div class="sub_title">지도에서 장소를 검색해 주세요</div>
                     <input disabled type="text" class="addressPrimary input" placeholder="장소">
                     <input disabled type="text" class="addressSecondary input" placeholder="주소">
+                    <input hidden name="lat" type="hidden">
+                    <input hidden name="lng" type="hidden">
                     <span class="warning" rel="addressWarning"></span>
                     <span class="sub_title">날짜와 시간을 선택해 주세요</span>
                     <span><input type="checkbox" class="within_a_day">당일치기</span>
@@ -79,7 +81,7 @@
                     <div class="option">
                         <div>
                             <form id="searchForm">
-                                키워드 : <input type="text" value="키워드 검색" name="keyword" size="15">
+                                키워드 : <input type="text" placeholder="키워드 검색" name="keyword" size="15">
                                 <input type="submit" value="검색하기">
                             </form>
                         </div>
