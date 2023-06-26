@@ -7,6 +7,12 @@ html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
     system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    transition-duration: 850ms;
+    transition-property: opacity;
+    transition-timing-function: ease;
+}
+body{
+
 }
 
 
@@ -57,11 +63,22 @@ section > .thumbnail-place > .thumbnail-upload:hover {
 }  /* 파일업로드버튼을 참조하는 레이블*/
 
 
+
 section>.thumbnail-place>.thumbnail{
     opacity: 0.6;
-    width: 51.2rem;
-    height: 35rem;
-    object-fit: cover;
+    aspect-ratio: 1/1;
+    background-color: #fafafa;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0.0625rem solid #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border-radius: 0.5rem;
     position: absolute;
 }
@@ -119,6 +136,10 @@ section > #Article-Write > .article-tag {
 
 section > #Article-Write > .article-tag >.explainTag{
     margin-left: 0.8rem;
+    position: absolute;
+}
+section > #Article-Write > .article-tag >.explainTag:hover{
+    cursor: default;
 }
 
 section > #Article-Write > .article-tag > .tag {
