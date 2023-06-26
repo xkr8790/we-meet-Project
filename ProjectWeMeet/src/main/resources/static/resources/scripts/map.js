@@ -264,6 +264,44 @@ function removeAllChildNods(el) {
 }
 
 
+// warningList
+// addressWarning
+writeForm.addressWarning = writeForm.querySelector('[rel="addressWarning"]');
+writeForm.addressWarning.show = (text) => {
+    writeForm.addressWarning.innerText = text;
+    writeForm.addressWarning.classList.add('visible');
+};
+writeForm.addressWarning.hide = () => writeForm.addressWarning.classList.remove('visible');
+// dayWarning
+writeForm.dayWarning = writeForm.querySelector('[rel="dayWarning"]');
+writeForm.dayWarning.show = (text) => {
+    writeForm.dayWarning.innerText = text;
+    writeForm.dayWarning.classList.add('visible');
+};
+writeForm.dayWarning.hide = () => writeForm.dayWarning.classList.remove('visible');
+// timeWarning
+writeForm.timeWarning = writeForm.querySelector('[rel="timeWarning"]');
+writeForm.timeWarning.show = (text) => {
+    writeForm.timeWarning.innerText = text;
+    writeForm.timeWarning.classList.add('visible');
+};
+writeForm.timeWarning.hide = () => writeForm.timeWarning.classList.remove('visible');
+// participantsWarning
+writeForm.participantsWarning = writeForm.querySelector('[rel="participantsWarning"]');
+writeForm.participantsWarning.show = (text) => {
+    writeForm.participantsWarning.innerText = text;
+    writeForm.participantsWarning.classList.add('visible');
+};
+writeForm.participantsWarning.hide = () => writeForm.participantsWarning.classList.remove('visible');
+
+// categoryWarning
+writeForm.categoryWarning = writeForm.querySelector('[rel="categoryWarning"]');
+writeForm.categoryWarning.show = (text) => {
+    writeForm.categoryWarning.innerText = text;
+    writeForm.categoryWarning.classList.add('visible');
+};
+writeForm.categoryWarning.hide = () => writeForm.categoryWarning.classList.remove('visible');
+
 // input의 date타입에서 현재 시간보다 과거의 날짜를 설정하지 못하도록 한다
 
 startDayInput.setAttribute('min', today);
@@ -296,3 +334,11 @@ endDayInput.addEventListener('input', function() {
     }
 });
 
+
+const submitButton = document.querySelector("._button");
+
+submitButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    writeForm.style.display = "none";
+    ArticleForm.style.display='block';
+});

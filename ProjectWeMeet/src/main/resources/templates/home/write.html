@@ -9,21 +9,25 @@
     <link crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
           rel="stylesheet">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/write.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/Article-Write.css}">
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
     <script defer th:src="@{/resources/scripts/common.js}"></script>
-    <script defer th:src="@{/resources/scripts/write.js}"></script>
     <script defer th:src="@{/resources/scripts/map.js}"></script>
+    <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
 </head>
 <body>
 
 <div id="writeForm" class="container">
-    <h2 class="logo_we_meet">
-        <a href="http://localhost:6795/" class="link">
-            <img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/>
-        </a>
-    </h2>
+
     <div class="inner">
+        <h2 class="logo_we_meet">
+            <a href="http://localhost:6795/" class="link">
+                <img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/>
+            </a>
+        </h2>
         <main class="box step-1">
             <div id="content" class="content">
                 <div class="input-wrapper">
@@ -88,7 +92,26 @@
         </main>
         <input type="submit" value="다음" class="_button">
     </div>
-
 </div>
+<form id="Article-Form" style="display: none">
+    <div class="write-title">
+        <img class="logo" th:src="@{/resources/images/registerImags/logo.jpg}">
+    </div>
+    <section>
+        <div class="thumbnail-place">
+            <img id="thumbnail-preview" class="thumbnail" src="/resources/images/articleImages/thumbnail.jpg">
+            <label for="photo-upload" class="thumbnail-upload">썸네일 변경</label>
+            <input type="file" class="thumbnail-change" id="photo-upload" accept="image/*">
+        </div>
+        <div id="Article-Write">
+            <input autocomplete="off" name="ArticleTitle" autofocus class="title" type="text" placeholder="제목을 입력하세요">
+            <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
+            <div class="article-tag">
+                <div class="explainTag">태그를 입력해주세요 (최대 5개)</div>
+            </div>
+            <input class="submit" type="submit" value="등록">
+        </div>
+    </section>
+</form>
 </body>
 </html>
