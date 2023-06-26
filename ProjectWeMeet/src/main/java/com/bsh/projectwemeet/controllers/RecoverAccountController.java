@@ -49,7 +49,7 @@ public class RecoverAccountController {
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
-//        조건식에 부합하면 service에서 적용한 salt값을  slat의 키에 대한 값으로 가진다.
+//        조건식에 부합하면 service에서 적용한 salt값을  salt의 키에 대한 값으로 가진다.
         if (result == SendRecoverContactCodeResult.SUCCESS) {
             responseObject.put("salt", recoverContactCode.getSalt());
         }
