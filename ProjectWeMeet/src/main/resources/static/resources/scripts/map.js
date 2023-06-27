@@ -168,8 +168,13 @@ function getListItem(index, places) {
         addressPrimaryInput.disabled = true;
 
         // Move and zoom to the corresponding marker
-        map.setLevel(3); // Adjust the zoom level as needed
+        map.setLevel(3); // 지도확대
         map.setCenter(new kakao.maps.LatLng(places.y, places.x));
+
+
+        // 클릭시 마커의 좌표(위도,경도)를 가져온다(hidden으로 숨겨둠)
+        writeForm.querySelector('input[name="lat"]').value = places.y;
+        writeForm.querySelector('input[name="lng"]').value = places.x;
 
 
 
@@ -256,6 +261,7 @@ function displayPagination(pagination) {
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
     var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
@@ -344,9 +350,9 @@ endDayInput.addEventListener('input', function() {
 });
 
 
-const submitButton = document.querySelector("._button");
+const nextButton = document.querySelector(".next");
 
-submitButton.addEventListener("click", function(event) {
+nextButton.addEventListener("click", function(event) {
     event.preventDefault();
     writeForm.style.display = "none";
     ArticleForm.style.display='block';

@@ -160,11 +160,20 @@ body,html{
 
     /*버튼*/
 
-.container >.inner > ._button {
+.container >.inner >.buttonBox{
+    margin-left: auto;
+    padding: 0;
+}
+
+.container >.inner >.buttonBox >._button {
     width: 10rem;
     height: 3rem;
-    margin-left: auto;
-    margin-top: 5rem;
+
+    margin-top: 2.5rem;
+}
+
+.container >.inner >.buttonBox > .cancel{
+    margin-right: 1rem;
 }
 
 /*box*/
