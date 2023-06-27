@@ -12,22 +12,22 @@
 </head>
 
 <body>
-<div class="_container top-menu-container" id="topMenuContainer">
-    <ul class="_content top-menu">
-        <li class="item empty-space">
-            <a href="#" class="link"></a>
-        </li>
-        <li class="item">
-            <a href="#" class="link"></a>
-        </li>
-        <li class="item">
-            <a href="#" class="link">공지사항</a>
-        </li>
-        <li class="item">
-            <a href="#" class="link">고객센터</a>
-        </li>
-    </ul>
-</div>
+<!--<div class="_container top-menu-container" id="topMenuContainer">-->
+<!--    <ul class="_content top-menu">-->
+<!--        <li class="item empty-space">-->
+<!--            <a href="#" class="link"></a>-->
+<!--        </li>-->
+<!--        <li class="item">-->
+<!--            <a href="#" class="link"></a>-->
+<!--        </li>-->
+<!--        <li class="item">-->
+<!--            <a href="#" class="link">공지사항</a>-->
+<!--        </li>-->
+<!--        <li class="item">-->
+<!--            <a href="#" class="link">고객센터</a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
 <input class="_toggle _main-menu" id="mainMenuToggle" type="checkbox">
 <div id="cover"></div>
 <nav id="mainMenu">
@@ -59,8 +59,8 @@
             </ul>
         </li>
         <li class="item">
-            <input class="toggle" id="mainMenuToggleWoMen" name="mainMenuToggle" type="radio">
-            <label class="label" for="mainMenuToggleWoMen">
+            <input class="toggle" id="mainMenuToggleMen" name="mainMenuToggle" type="radio">
+            <label class="label" for="mainMenuToggleMen">
                 <span class="text">AI가 추천하는 모임</span>
                 <img alt="+" src="/resources/images/mainImages/expand.png" class="icon expand">
                 <img alt="-" src="/resources/images/mainImages/collapse.png" class="icon collapse">
@@ -108,16 +108,16 @@
             </li>
         </ul>
         <div class="empty-box1"></div>
-        <ul class="menu left">
+<!--        <ul class="menu left">-->
 
-            <li class="item main-menu">
-                <label class="icon-text-button" for="mainMenuToggle">
-                    <a class="icon-box" href="/">
-                        <img alt="" src="/resources/images/mainImages/logo.jpg" class="icon">
-                    </a>
-                </label>
-            </li>
-        </ul>
+<!--            <li class="item main-menu">-->
+<!--                <label class="icon-text-button" for="mainMenuToggle">-->
+<!--                    <a class="icon-box" href="/">-->
+<!--                        <img alt="" src="/resources/images/mainImages/logo.jpg" class="icon">-->
+<!--                    </a>-->
+<!--                </label>-->
+<!--            </li>-->
+<!--        </ul>-->
         <div class="empty-box2"></div>
         <ul class="menu right" th:if="${session.user == null}">
             <li class="item">
@@ -134,12 +134,7 @@
         <ul class="menu right" th:if="${session.user != null}">
             <li class="item">
                 <a href="/" class="icon-text-button">
-                    <span class="text">프로필 만들기</span>
-                </a>
-            </li>
-            <li class="item">
-                <a class="icon-text-button" href="/">
-                    <span class="text">아무거나 만들기</span>
+                    <span class="text">나의 프로필</span>
                 </a>
             </li>
             <li class="item" data-action="logout">
@@ -173,54 +168,54 @@
 
 <div class="_container category-container" id="categoryContainer">
     <div class="_content _small category">
-        <h2 class="title">Category(카테고리)</h2>
+
         <ul class="grid">
             <li class="item">
                 <a class="link" href="#">
-                    <img alt="산책" class="image" src="/resources/images/mainImages/walk.jpg">
-                    <span class="text">산책</span>
+                    <img alt="전체" class="image" src="../resources/images/testImages/전체.png">
+                    <span class="text">전체</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" href="#">
-                    <img alt="영화" class="image" src="/resources/images/mainImages/movie.jpg">
-                    <span class="text">영화</span>
+                    <img alt="운동·액티비티" class="image" src="../resources/images/testImages/운동.png">
+                    <span class="text">운동·액티비티</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" href="#">
-                    <img alt="게임" class="image" src="/resources/images/mainImages/game.webp">
-                    <span class="text">게임</span>
+                    <img alt="푸드·드링크" class="image" src="../resources/images/testImages/음식.png">
+                    <span class="text">푸드·드링크</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" href="#">
-                    <img alt="독서" class="image" src="/resources/images/mainImages/reading.jpg">
-                    <span class="text">독서</span>
+                    <img alt="문화·예술" class="image" src="../resources/images/testImages/문화예술.png">
+                    <span class="text">문화·예술</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" href="#">
-                    <img alt="식사" class="image" src="/resources/images/mainImages/eat.jpg">
-                    <span class="text">식사</span>
+                    <img alt="취미·자기개발" class="image" src="../resources/images/testImages/취미.png">
+                    <span class="text">취미·자기개발</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" href="#">
-                    <img alt="운동" class="image" src="/resources/images/mainImages/exercise.avif">
-                    <span class="text">운동</span>
+                    <img alt="온라인" class="image" src="../resources/images/testImages/온라인.png">
+                    <span class="text">온라인</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" href="#">
-                    <img alt="공연" class="image" src="/resources/images/mainImages/festival.jpg">
-                    <span class="text">공연</span>
-                </a>
-            </li>
-            <li class="item">
-                <a class="link" href="#">
-                    <img alt="여행" class="image" src="/resources/images/mainImages/travel.jpg">
+                    <img alt="여행" class="image" src="../resources/images/testImages/여행.png">
                     <span class="text">여행</span>
+                </a>
+            </li>
+            <li class="item">
+                <a class="link" href="#">
+                    <img alt="완료" class="image" src="../resources/images/testImages/완료.png">
+                    <span class="text">완료</span>
                 </a>
             </li>
         </ul>
@@ -229,7 +224,7 @@
 
 
 <section class="article-container">
-    <h2 class="article-list-header">최근에 올라온 모임</h2>
+    <h2 class="article-list-header">똑같은 일상의 소소한 변화</h2>
     <div class="slider">
         <div class="slide">
             <div class="article-box">
