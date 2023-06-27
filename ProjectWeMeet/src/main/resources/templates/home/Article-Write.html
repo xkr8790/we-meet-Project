@@ -16,6 +16,7 @@
 
 </head>
 <body>
+
 <div id="writeForm" class="container">
     <h2 class="logo_we_meet">
         <a href="http://localhost:6795/" class="link">
@@ -27,8 +28,8 @@
             <div id="content" class="content">
                 <div class="input-wrapper">
                     <div class="sub_title">지도에서 장소를 검색해 주세요</div>
-                    <input disabled type="text" class="addressPrimary input" placeholder="장소">
-                    <input disabled type="text" class="addressSecondary input" placeholder="주소">
+                    <input disabled type="text" class="addressPrimary input" placeholder="장소" name="addressPrimary">
+                    <input disabled type="text" class="addressSecondary input" placeholder="주소" name="addressSecondary">
                     <span class="warning" rel="addressWarning"></span>
                     <span class="sub_title">날짜와 시간을 선택해 주세요</span>
                     <span><input type="checkbox" class="within_a_day">당일치기</span>
@@ -66,6 +67,9 @@
                             <div class="warning" rel="categoryWarning"></div>
                         </div>
                     </div>
+                    <input hidden name="lat" type="hidden" maxlength="50" placeholder="경도">
+                    <input hidden name="lng" type="hidden" maxlength="50" placeholder="위도">
+
                 </div>
             </div>
             <div class="map_wrap">
@@ -85,27 +89,35 @@
                 </div>
             </div>
         </main>
-        <input type="submit" value="다음" class="_button">
+        <div class="buttonBox">
+            <input type="submit" value="취소" class="_button cancel" onclick="goBack()">
+            <input type="submit" value="다음" class="_button next">
+        </div>
+
     </div>
 </div>
 
 <form id="Article-Form" style="display: none">
-    <div class="write-title">
-        <img class="logo" src="/resources/images/loginImages/lastLogo.jpg">
-    </div>
+    <img class="logo" src="/resources/images/articleImages/logo2.png">
     <section>
         <div class="thumbnail-place">
-            <img id="thumbnail-preview" class="thumbnail" src="/resources/images/articleImages/thumbnail.jpg">
-            <label for="photo-upload" class="thumbnail-upload">썸네일 변경</label>
-            <input type="file" class="thumbnail-change" id="photo-upload" accept="image/*">
+            <img id="thumbnail-preview" class="thumbnail" src="/resources/images/articleImages/logo.png">
+            <label for="photo-upload" class="thumbnail-upload">썸네일 등록</label>
+            <input type="file" name="upload" class="thumbnail-change" id="photo-upload" accept="image/*">
         </div>
         <div id="Article-Write">
-            <input autocomplete="off" name="ArticleTitle" autofocus class="title" type="text" placeholder="제목을 입력하세요">
+            <input autocomplete="off" name="ArticleTitle" autofocus class="title" type="text"
+                   placeholder="제목을 입력하세요">
             <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
             <div class="article-tag">
-                <div class="explainTag">태그를 입력해주세요 (최대 5개)</div>
+                <div class="explainTag">태그를 입력해주세요</div>
+                <div class="tags">
+                </div>
             </div>
-            <input class="submit" type="submit" value="등록">
+            <div class="buttons">
+                <input class="submit" type="button" value="이전">
+                <input class="submit" type="submit" value="등록">
+            </div>
         </div>
     </section>
 </form>

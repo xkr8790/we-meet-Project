@@ -9,7 +9,7 @@
 
 * {
     text-decoration: none;
-    background-color: #f4f3f1;
+    background-color: white;
     /*border: 1px solid red;*/
 }
 
@@ -22,7 +22,7 @@ h2 {
 }
 
 :root {
-    --concept-color-light: #f4f3f1;
+    --concept-color-light: white;
 }
 
 html {
@@ -54,6 +54,7 @@ html {
 
 #topMenuContainer > .top-menu {
     align-items: center;
+    background-color: white;
     display: flex;
     flex-direction: row;
     font-size: 0.8rem;
@@ -82,7 +83,7 @@ html {
 
 #headerContainer {
     top: 0;
-    background-color: var(--concept-color-light);
+    background-color: #f4f3f1;
     overflow: hidden;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -91,6 +92,7 @@ html {
 }
 
 #headerContainer > .header {
+    background-color: #f4f3f1;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -349,7 +351,7 @@ html {
 }
 
 .article-container > .slider > .slide > .article-box {
-    background-color: #f4f3f1;
+    background-color: white;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
@@ -365,10 +367,11 @@ html {
     background-color: white;
     display: flex;
     flex-direction: row;
+    border: 0.125rem solid #aaaaaa;
     border-radius: 0.3rem;
     gap: 1rem;
-    margin-bottom: 5rem;
-    background-color: white;
+    margin-bottom: 2rem; /*게시글 목록 상하 간격 조절*/
+    /*background-color: white;*/
 }
 
 .article-container > .slider > .slide > .article-box > .article-list >
@@ -420,8 +423,7 @@ html {
 
 .article-tag > .tag {
     border-radius: 0.7rem;
-    margin: 0rem 0.8rem 0rem 0;
-    background-color: #eaeaea;
+    margin: 0 0.8rem 0 0;
     font-weight: bold;
     color: gray;
     padding: 0.6rem;

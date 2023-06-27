@@ -169,6 +169,10 @@ function getListItem(index, places) {
         map.setCenter(new kakao.maps.LatLng(places.y, places.x));
 
 
+        // 클릭시 마커의 좌표(위도,경도)를 가져온다(hidden으로 숨겨둠)
+        writeForm.querySelector('input[name="lat"]').value = places.y;
+        writeForm.querySelector('input[name="lng"]').value = places.x;
+
 
     });
 
@@ -308,10 +312,14 @@ endDayInput.addEventListener('input', function() {
     }
 });
 
-const submitButton = document.querySelector("._button");
+const nextButton = document.querySelector(".next");
 
-submitButton.addEventListener("click", function(event) {
+nextButton.addEventListener("click", function(event) {
     event.preventDefault();
     writeForm.style.display = "none";
     ArticleForm.style.display='block';
 });
+
+function goBack(){
+    window.history.back();
+}
