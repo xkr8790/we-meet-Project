@@ -38,5 +38,5 @@ document.addEventListener("DOMContentLoaded", function () {
             sliderIndex = 0;
         }
         slideTo(sliderIndex);
-    }, 6200);
+    }, 4400);
 });
