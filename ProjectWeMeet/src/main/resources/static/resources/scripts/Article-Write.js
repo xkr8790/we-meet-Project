@@ -1,4 +1,13 @@
 const ArticleForm = document.getElementById('Article-Form');
+let tagCounter = 0; //전역변수 태그카운터
+let tags = [];
+const photoUpload = document.getElementById('photo-upload');
+const thumbnailPreview = document.getElementById('thumbnail-preview');
+const thumbnailUpload = document.querySelector('.thumbnail-upload');
+const CoverForm = document.getElementById('CoverForm');
+let coverText = document.querySelector('.cover-text');
+const coverButton = document.querySelector('.cover-button');
+
 
 ClassicEditor
     .create(document.querySelector('#editor'), {
@@ -12,15 +21,13 @@ ClassicEditor
 const ArticleTag = document.querySelector('.article-tag'); //tag를 담을 부모
 const explainTag = document.querySelector('.explainTag'); //설명
 const Tags = document.querySelector('.tags'); //설명
-
-
-let tagCounter = 0; //전역변수 태그카운터
-let tags = [];
+let isTagsClicked = false; // Tags가 클릭된 여부를 저장하는 변수
 
 ArticleTag.addEventListener('click', function () {
     if (event.target.classList.contains('tag')) {
         return; // 이미 생성된 태그를 클릭한 경우 생성 코드 실행하지 않음
     }
+    isTagsClicked = true;
 
     explainTag.addEventListener('click', function () {
         explainTag.style.display = 'none';
@@ -104,11 +111,6 @@ ArticleTag.addEventListener('click', function () {
     Tag.focus();
 });
 
-
-const photoUpload = document.getElementById('photo-upload');
-const thumbnailPreview = document.getElementById('thumbnail-preview');
-const thumbnailUpload = document.querySelector('.thumbnail-upload');
-
 photoUpload.addEventListener('change', function() {
     const file = photoUpload.files[0];
     if (file) {
@@ -121,10 +123,38 @@ photoUpload.addEventListener('change', function() {
     }
 });
 
-
 const beForeButton = document.querySelector('input[type="button"][value="이전"]');
 beForeButton.onclick = function(e) {
     e.preventDefault();
     writeForm.style.display = "block";
     ArticleForm.style.display = 'none';
 };
+
+
+CoverForm.show = () =>{
+    CoverForm.classList.add('visible');
+} //커버생김
+
+coverButton.addEventListener('click', function() {
+    CoverForm.classList.remove('visible');
+});//커버 안생김
+
+
+ArticleForm.onsubmit = e => {
+    e.preventDefault();
+    if (ArticleForm['ArticleTitle'].value === '') {
+        CoverForm.show();
+        coverText.textContent = '제목을 입력해주세요';
+        return;
+    }
+    if (ArticleForm['content'].value === '') {
+        CoverForm.show();
+        coverText.textContent = '내용을 입력해주세요';
+        return;
+    }
+    if (isTagsClicked === false) {
+        CoverForm.show();
+        coverText.textContent = '태그를 입력해주세요';
+        return;
+    }
+}
