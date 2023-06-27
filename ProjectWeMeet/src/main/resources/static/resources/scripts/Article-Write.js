@@ -11,6 +11,7 @@ ClassicEditor
 
 const ArticleTag = document.querySelector('.article-tag'); //tag를 담을 부모
 const explainTag = document.querySelector('.explainTag'); //설명
+const Tags = document.querySelector('.tags'); //설명
 
 
 let tagCounter = 0; //전역변수 태그카운터
@@ -26,9 +27,9 @@ ArticleTag.addEventListener('click', function () {
     })
 
     explainTag.style.display = 'none'; // 처음에 태그 몇 개 적는지 설명하는 div
-    if (tagCounter >= 6) {
-        return; // 최대 태그 제한(6개) 그 이상 클릭해도 작동X
-    }
+    // if (tagCounter >= 6) {
+    //     return; // 최대 태그 제한(6개) 그 이상 클릭해도 작동X
+    // }
 
     const existingTags = ArticleTag.querySelectorAll('.tag');
     for (let i = 0; i < existingTags.length; i++) {
@@ -38,13 +39,24 @@ ArticleTag.addEventListener('click', function () {
         }
     }
 
+    const TagContainer = document.createElement('div');
+    const TagWarning = document.createElement('div');
     const Tag = document.createElement('input');
+
     Tag.setAttribute('type', 'text');
     Tag.value = '#'; // 처음 생성시 # 추가
+    TagContainer.classList.add('tag-container');
+    TagWarning.classList.add('tag-warning');
     Tag.classList.add('tag'); // 처음 생성시 tag 클래스 추가
-    Tag.maxLength = 20;
-
+    Tag.maxLength = 13;
     Tag.focus();
+
+    Tags.appendChild(TagContainer);
+    TagContainer.appendChild(TagWarning);
+    TagContainer.appendChild(Tag);
+
+    TagWarning.textContent = "태그는 10글자이상 쓰지못합니다";
+
 
     Tag.addEventListener('keydown', function (event) {
         const trimmedText = Tag.value.trim();
@@ -57,8 +69,8 @@ ArticleTag.addEventListener('click', function () {
 
     Tag.addEventListener('input', function (event) {
         const trimmedText = Tag.value.trim();
-        if (trimmedText.length > 19) {
-            Tag.value = trimmedText.slice(0, 20);
+        if (trimmedText.length > 12) {
+            Tag.value = trimmedText.slice(0, 12);
         }
     });
 

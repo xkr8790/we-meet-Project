@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ArticleController {
     @RequestMapping(value = "article",method = RequestMethod.GET)
     public ModelAndView getArticle () {
-        ModelAndView modelAndView = new ModelAndView("write");
+        ModelAndView modelAndView = new ModelAndView("home/write");
         return modelAndView;
     } //게시판 주소로 가기
 }
