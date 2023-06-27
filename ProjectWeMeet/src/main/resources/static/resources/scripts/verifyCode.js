@@ -7,6 +7,13 @@ const closeEye = document.querySelector('.closeEye');
 
 let code;
 
+window.onload = function() {
+    verifyCode.style.transitionDuration = '600ms'; // 애니메이션 지속 시간 설정
+    verifyCode.style.transitionTimingFunction = 'ease'; // 타이밍 함수 설정
+    verifyCode.style.transitionProperty = 'opacity'; // 타이밍 함수 설정
+    verifyCode.style.opacity = '1';
+}
+
 verifyCode.hide = () =>{
     verifyCode.classList.add('visible');
 }

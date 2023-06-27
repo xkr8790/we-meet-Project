@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 작성</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/Article-Write.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/write.css}">
+    <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
+    <script defer th:src="@{/resources/scripts/map.js}"></script>
+    <link crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
+          rel="stylesheet">
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
+
+</head>
+<body>
+<div id="writeForm" class="container">
+    <h2 class="logo_we_meet">
+        <a href="http://localhost:6795/" class="link">
+            <img th:src="@{/resources/images/articleImages/logo.png}" class="logo"/>
+        </a>
+    </h2>
+    <div class="inner">
+        <main class="box step-1">
+            <div id="content" class="content">
+                <div class="input-wrapper">
+                    <div class="sub_title">지도에서 장소를 검색해 주세요</div>
+                    <input disabled type="text" class="addressPrimary input" placeholder="장소">
+                    <input disabled type="text" class="addressSecondary input" placeholder="주소">
+                    <span class="warning" rel="addressWarning"></span>
+                    <span class="sub_title">날짜와 시간을 선택해 주세요</span>
+                    <span><input type="checkbox" class="within_a_day">당일치기</span>
+                    <div class="dayBox">
+                        <input type="date" class="day" name="startDay">
+                        <span class="tilde">~</span>
+                        <input type="date" class="day" name="endDay">
+                    </div>
+                    <span class="warning" rel="dayWarning"></span>
+                    <div class="sub_title">시간을 설정해주세요</div>
+                    <div class="timeBox">
+                        <input type="time" class="time" name="startTime">
+                        <span class="tilde">~</span>
+                        <input type="time" class="time" name="endTime">
+                    </div>
+                    <span class="warning" rel="timeWarning"></span>
+                    <div class="sub_title">참여인원과 카테고리를 설정해주세요</div>
+                    <div class="etc">
+                        <div class="box_one">
+                            <span class="text">참여인원</span>
+                            <input type="number" class="participants" name="participants" min="2">
+                            <div class="warning" rel="participantsWarning"></div>
+                        </div>
+                        <div class="box_two">
+                            <span class="text">카테고리</span>
+                            <select name="category" class="category">
+                                <option disabled hidden selected value="">카테고리</option>
+                                <option value="1">영화</option>
+                                <option value="2">게임</option>
+                                <option value="3">운동</option>
+                                <option value="4">ㅇㅇ</option>
+                                <option value="5">ㄱㄱ</option>
+                                <option value="6">ㄹㄹ</option>
+                            </select>
+                            <div class="warning" rel="categoryWarning"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="map_wrap">
+                <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+                <div id="menu_wrap" class="bg_white">
+                    <div class="option">
+                        <div>
+                            <form id="searchForm">
+                                키워드 : <input type="text" value="키워드 검색" name="keyword" size="15">
+                                <input type="submit" value="검색하기">
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                    <ul id="placesList"></ul>
+                    <div id="pagination"></div>
+                </div>
+            </div>
+        </main>
+        <input type="submit" value="다음" class="_button">
+    </div>
+</div>
+
+<form id="Article-Form" style="display: none">
+    <div class="write-title">
+        <img class="logo" src="/resources/images/loginImages/lastLogo.jpg">
+    </div>
+    <section>
+        <div class="thumbnail-place">
+            <img id="thumbnail-preview" class="thumbnail" src="/resources/images/articleImages/thumbnail.jpg">
+            <label for="photo-upload" class="thumbnail-upload">썸네일 변경</label>
+            <input type="file" class="thumbnail-change" id="photo-upload" accept="image/*">
+        </div>
+        <div id="Article-Write">
+            <input autocomplete="off" name="ArticleTitle" autofocus class="title" type="text" placeholder="제목을 입력하세요">
+            <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
+            <div class="article-tag">
+                <div class="explainTag">태그를 입력해주세요 (최대 5개)</div>
+            </div>
+            <input class="submit" type="submit" value="등록">
+        </div>
+    </section>
+</form>
+
+</body>
+</html>
