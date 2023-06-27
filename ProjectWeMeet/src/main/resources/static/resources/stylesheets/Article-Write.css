@@ -1,0 +1,216 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.7/dist/web/static/pretendard.css");
+
+html {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f3f1;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    transition-duration: 850ms;
+    transition-property: opacity;
+    transition-timing-function: ease;
+}
+
+body {
+
+
+}
+
+#Article-Form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#Article-Form > .logo {
+    align-self: flex-start;
+    width: 7rem;
+    padding: 1rem;
+}
+
+section {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section > .thumbnail-place {
+    z-index: 0;
+    position: relative;
+    width: 41.2rem;
+    height: 20rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 0.3rem;
+    background-color: gray;
+}
+
+section > .thumbnail-place > .thumbnail {
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.3rem;
+    object-fit: contain;
+    position: absolute;
+    background-repeat: no-repeat;
+}
+
+section > .thumbnail-place > .thumbnail-change {
+    visibility: hidden;
+}
+
+/* 파일 업로드 자체를 label로 참조해서 숨김*/
+
+
+section > .thumbnail-place > .thumbnail-upload {
+    z-index: 1;
+    background-color: gray;
+    color: white;
+    border-radius: 0.3rem;
+    padding: 0.8rem;
+}
+
+/* 파일업로드버튼을 참조하는 레이블*/
+
+section > .thumbnail-place > .thumbnail-upload:hover {
+    filter: brightness(90%);
+}
+
+/* 파일업로드버튼을 참조하는 레이블*/
+
+
+/* -------------------------------------- 썸네일 ---------------------------------------------- */
+
+
+section > #Article-Write {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+}
+
+
+section > #Article-Write > .title {
+    background-color: white;
+    width: 40rem;
+    height: 45px;
+    padding-left: 1rem;
+    border-radius: 0.15rem;
+    border: 1px solid #c4c4c4;
+    white-space: nowrap;
+    line-height: 1;
+    vertical-align: top;
+    margin: 1rem 0 1rem 0;
+    outline: none;
+}
+
+
+.ck-editor__editable {
+    width: 40rem;
+    height: 25rem;
+}
+
+
+/*CK-editor 크기 설정*/
+
+section > #Article-Write > .article-tag {
+    background-color: white;
+    width: 41.2rem;
+
+    border-radius: 0.15rem;
+    border-top: none;
+    border-bottom: 1px solid #c4c4c4;
+    border-left: 1px solid #c4c4c4;
+    border-right: 1px solid #c4c4c4;
+    outline: none;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #999;
+    height: auto; /* 초기 높이 */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    /*태그4개부터 hegiht90px*/
+}
+
+section > #Article-Write > .article-tag > .explainTag {
+    margin-left: 0.8rem;
+    position: absolute;
+    align-self: flex-start;
+}
+
+section > #Article-Write > .article-tag > .explainTag:hover {
+    cursor: default;
+}
+
+section > #Article-Write > .article-tag > .tags >.tag-container> .tag {
+    display: block;
+    height: 30px;
+    width: auto;
+    padding: 0px 10px 0px;
+    border-radius: 4px;
+    margin-left: 0.7rem;
+    margin-top: 0.5rem;
+    line-height: 32px;
+    box-sizing: border-box;
+    background-color: #eff0f2;
+    color: #000;
+    outline: none;
+    border: none;
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.tags {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    position: relative;
+    align-items: center;
+}
+
+.tag-container {
+    position: relative;
+}
+
+.tag-warning {
+    position: absolute;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 0.3rem;
+    left: 14px;
+    top: -27px;
+    color: black;
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px gray;
+    /*opacity: 0;*/
+    pointer-events: none;
+}
+
+section > #Article-Write > .buttons > .submit {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    border: none;
+    background-color: gray;
+    color: white;
+    margin-left: 1rem;
+}
+
+section > #Article-Write > .buttons > .submit:hover {
+    filter: brightness(90%);
+    cursor: pointer;
+}
+
+section > #Article-Write > .buttons {
+    align-self: flex-end;
+
+}
+
