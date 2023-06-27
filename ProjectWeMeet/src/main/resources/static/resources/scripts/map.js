@@ -357,3 +357,9 @@ nextButton.addEventListener("click", function(event) {
     writeForm.style.display = "none";
     ArticleForm.style.display='block';
 });
+
+// cancel 버튼의 함수 '뒤로가기'기능
+// 브라우저에 이전 기록이 있어야함
+function goBack() {
+    window.history.back();
+}
