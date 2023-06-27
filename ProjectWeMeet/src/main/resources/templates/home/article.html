@@ -21,7 +21,7 @@
       </li>
     </ul>
     <div class="empty-box"></div>
-    <ul class="menu right">
+    <ul class="menu right" th:if="${session.user == null}">
       <li class="item">
         <a href="#" class="icon-text-button">
           <span class="text">회원가입</span>
@@ -35,6 +35,13 @@
       <li class="item">
         <a class="icon-text-button" href="#">
           <span class="text">편의기능</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="menu right" th:if="${session.user != null}">
+      <li class="item">
+        <a href="#" class="icon-text-button">
+          <span class="text">로그인 후 상황</span>
         </a>
       </li>
     </ul>

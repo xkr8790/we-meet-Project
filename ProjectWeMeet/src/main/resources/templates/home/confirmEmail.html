@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/resources/stylesheets/confirmEmail.css">
 </head>
 
-<body>
+<body th:if="${session.user == null}">
 <main>
     <div class="container">
         <a th:href="@{/}">

@@ -33,6 +33,47 @@ html {
 
 }
 
+.navigation-bar{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 15rem;
+    left: 83rem;
+width: 5rem;
+    height: 15rem;
+background-color: black;
+    z-index: 9999999;
+}
+.navigation-bar > .navigation{
+    list-style: none;
+    border: 1px solid gray;
+    width: 5rem;
+    height: 15rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.navigation-bar > .navigation > a{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    border: 1.5px solid black;
+}
+.navigation-bar > .navigation > button{
+    width: 5rem;
+    height: 5rem;
+}
+
+
+
+
 ._container {
     width: 100%;
     position: relative;

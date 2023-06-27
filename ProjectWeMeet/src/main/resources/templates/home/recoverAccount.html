@@ -12,7 +12,7 @@
 
 
 </head>
-<body>
+<body th:if="${session.user == null}">
 <form id="recoverForm">
     <h2 class="title">
         <a th:href="@{/}">

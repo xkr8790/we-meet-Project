@@ -12,22 +12,15 @@
 </head>
 
 <body>
-<!--<div class="_container top-menu-container" id="topMenuContainer">-->
-<!--    <ul class="_content top-menu">-->
-<!--        <li class="item empty-space">-->
-<!--            <a href="#" class="link"></a>-->
-<!--        </li>-->
-<!--        <li class="item">-->
-<!--            <a href="#" class="link"></a>-->
-<!--        </li>-->
-<!--        <li class="item">-->
-<!--            <a href="#" class="link">공지사항</a>-->
-<!--        </li>-->
-<!--        <li class="item">-->
-<!--            <a href="#" class="link">고객센터</a>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</div>-->
+<div class="navigation-bar" th:if="${session.user != null}">
+    <ul class="navigation">
+        <a href="/write">
+            <li>글작성</li>
+        </a>
+        <button class="button1">N 정산</button>
+        <button class="button2" data-action="logout">로그아웃</button>
+    </ul>
+</div>
 <input class="_toggle _main-menu" id="mainMenuToggle" type="checkbox">
 <div id="cover"></div>
 <nav id="mainMenu">
@@ -137,11 +130,11 @@
                     <span class="text">나의 프로필</span>
                 </a>
             </li>
-            <li class="item" data-action="logout">
-                <a>
-                    <p>로그아웃</p>
-                </a>
-            </li>
+<!--            <li class="item" data-action="logout">-->
+<!--                <a>-->
+<!--                    <p>로그아웃</p>-->
+<!--                </a>-->
+<!--            </li>-->
         </ul>
     </header>
 </div>

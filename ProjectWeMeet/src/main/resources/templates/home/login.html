@@ -13,7 +13,7 @@
 
 
 </head>
-<body>
+<body th:if="${session.user == null}">
 <form id="loginForm">
     <div class="logo">
         <a th:href="@{/}">

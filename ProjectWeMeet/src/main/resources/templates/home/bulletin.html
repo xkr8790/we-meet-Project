@@ -16,7 +16,7 @@
         <a href="">
             <img src="" alt="로고">
         </a>
-        <div class="login">
+        <div class="login" th:if="${session.user == null}">
             <a href="/login">로그인</a>
             <a href="/register/">회원가입</a>
         </div>
@@ -64,10 +64,10 @@
         </div>
         <div class="participant">
             <div class="participantContainer">
-                <div class="login-after-human">
+                <div class="login-after-human" th:if="${session.user != null}">
                     여기는 로그인 후 나올 화면 입니다.
                 </div>
-                <div class="login-before-human">
+                <div class="login-before-human" th:if="${session.user == null}">
                     <p>참여하는 사람</p>
                     <p>여기는 로그인 전 나올 화면입니다.</p>
                     <a href="/login"><input class="attend" type="button" value="참여하기"></a>
