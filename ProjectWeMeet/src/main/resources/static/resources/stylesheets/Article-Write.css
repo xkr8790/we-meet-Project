@@ -190,8 +190,13 @@ section > #Article-Write > .article-tag > .tags >.tag-container> .tag {
     color: black;
     background-color: white;
     box-shadow: 1px 1px 1px 1px gray;
-    /*opacity: 0;*/
+    opacity: 0;
     pointer-events: none;
+}
+
+.tag-warning.show {
+    transition: opacity 1s ease;
+    opacity: 1;
 }
 
 section > #Article-Write > .buttons > .submit {

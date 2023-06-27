@@ -27,9 +27,6 @@ ArticleTag.addEventListener('click', function () {
     })
 
     explainTag.style.display = 'none'; // 처음에 태그 몇 개 적는지 설명하는 div
-    // if (tagCounter >= 6) {
-    //     return; // 최대 태그 제한(6개) 그 이상 클릭해도 작동X
-    // }
 
     const existingTags = ArticleTag.querySelectorAll('.tag');
     for (let i = 0; i < existingTags.length; i++) {
@@ -48,14 +45,22 @@ ArticleTag.addEventListener('click', function () {
     TagContainer.classList.add('tag-container');
     TagWarning.classList.add('tag-warning');
     Tag.classList.add('tag'); // 처음 생성시 tag 클래스 추가
-    Tag.maxLength = 13;
+    Tag.maxLength = 12;
     Tag.focus();
 
     Tags.appendChild(TagContainer);
     TagContainer.appendChild(TagWarning);
     TagContainer.appendChild(Tag);
 
-    TagWarning.textContent = "태그는 10글자이상 쓰지못합니다";
+    TagWarning.show = () =>{
+        TagWarning.classList.add('show');
+    }
+
+    TagWarning.hide = () =>{
+        TagWarning.classList.remove('show');
+    }
+
+    TagWarning.textContent = "태그는 12글자이상 쓰지못합니다";
 
 
     Tag.addEventListener('keydown', function (event) {
@@ -71,6 +76,10 @@ ArticleTag.addEventListener('click', function () {
         const trimmedText = Tag.value.trim();
         if (trimmedText.length > 12) {
             Tag.value = trimmedText.slice(0, 12);
+            TagWarning.show();
+            setTimeout(function() {
+                TagWarning.hide();
+            }, 2000);
         }
     });
 
