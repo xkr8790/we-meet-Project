@@ -46,7 +46,6 @@ ArticleTag.addEventListener('click', function () {
     TagWarning.classList.add('tag-warning');
     Tag.classList.add('tag'); // 처음 생성시 tag 클래스 추가
     Tag.maxLength = 12;
-    Tag.focus();
 
     Tags.appendChild(TagContainer);
     TagContainer.appendChild(TagWarning);
@@ -60,7 +59,7 @@ ArticleTag.addEventListener('click', function () {
         TagWarning.classList.remove('show');
     }
 
-    TagWarning.textContent = "태그는 12글자이상 쓰지못합니다";
+    TagWarning.textContent = "태그는 11글자이상 쓰지못합니다";
 
 
     Tag.addEventListener('keydown', function (event) {
@@ -79,7 +78,7 @@ ArticleTag.addEventListener('click', function () {
             TagWarning.show();
             setTimeout(function() {
                 TagWarning.hide();
-            }, 2000);
+            }, 600);
         }
     });
 
@@ -102,6 +101,7 @@ ArticleTag.addEventListener('click', function () {
     }
     tags.push(Tag);
     tagCounter++; // 태그 생성 횟수 증가
+    Tag.focus();
 });
 
 
@@ -122,3 +122,9 @@ photoUpload.addEventListener('change', function() {
 });
 
 
+const beForeButton = document.querySelector('input[type="button"][value="이전"]');
+beForeButton.onclick = function(e) {
+    e.preventDefault();
+    writeForm.style.display = "block";
+    ArticleForm.style.display = 'none';
+};

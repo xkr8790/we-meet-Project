@@ -14,20 +14,20 @@ html {
 
 body {
 
-
 }
 
 #Article-Form {
+    background-color: white;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-#Article-Form > .logo {
+#Article-Form > .ExclamationMark {
     align-self: flex-start;
     width: 7rem;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 section {
@@ -47,7 +47,7 @@ section > .thumbnail-place {
     flex-direction: column;
     justify-content: flex-end;
     border-radius: 0.3rem;
-    background-color: gray;
+    background-color: lightgray;
 }
 
 section > .thumbnail-place > .thumbnail {
@@ -98,7 +98,7 @@ section > #Article-Write {
 
 section > #Article-Write > .title {
     background-color: white;
-    width: 40rem;
+    width: 45rem;
     height: 45px;
     padding-left: 1rem;
     border-radius: 0.15rem;
@@ -112,7 +112,7 @@ section > #Article-Write > .title {
 
 
 .ck-editor__editable {
-    width: 40rem;
+    width: 45rem;
     height: 25rem;
 }
 
@@ -121,7 +121,7 @@ section > #Article-Write > .title {
 
 section > #Article-Write > .article-tag {
     background-color: white;
-    width: 41.2rem;
+    width: 46.2rem;
 
     border-radius: 0.15rem;
     border-top: none;
@@ -129,7 +129,7 @@ section > #Article-Write > .article-tag {
     border-left: 1px solid #c4c4c4;
     border-right: 1px solid #c4c4c4;
     outline: none;
-    align-items: center;
+    /*align-items: center;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -185,17 +185,19 @@ section > #Article-Write > .article-tag > .tags >.tag-container> .tag {
     font-size: 0.8rem;
     font-weight: 500;
     border-radius: 0.3rem;
-    left: 14px;
+    left: 20px;
     top: -27px;
     color: black;
     background-color: white;
     box-shadow: 1px 1px 1px 1px gray;
     opacity: 0;
     pointer-events: none;
+    transition-duration: 300ms;
+    transition-property: opacity;
+    transition-timing-function: ease;
 }
 
 .tag-warning.show {
-    transition: opacity 1s ease;
     opacity: 1;
 }
 
@@ -218,4 +220,6 @@ section > #Article-Write > .buttons {
     align-self: flex-end;
 
 }
+
+/*---------------------------------------------------------------------------------------------------------------------*/
 
