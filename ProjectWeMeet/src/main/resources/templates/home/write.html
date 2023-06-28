@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>게시판 작성</title>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/Article-Write.css}">
-    <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
-
     <link rel="stylesheet" th:href="@{/resources/stylesheets/write.css}">
+    <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
     <script defer th:src="@{/resources/scripts/map.js}"></script>
-
-    <script defer th:src="@{/resources/scripts/ArticleXml.js}"></script>
     <link crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
           rel="stylesheet">
     <script type="text/javascript"
@@ -19,8 +16,7 @@
 
 </head>
 <body>
-
-<div id="writeForm" class="container" style="display: none">
+<div id="writeForm" class="container" th:if="${session.user != null}">
     <h2 class="logo_we_meet">
         <a href="http://localhost:6795/" class="link">
             <img th:src="@{/resources/images/articleImages/logo.png}" class="logo"/>
@@ -93,41 +89,26 @@
     </div>
 </div>
 
-<form id="Article-Form">
-    <img class="logo" src="/resources/images/articleImages/logo2.png">
+<form id="Article-Form" style="display: none">
+    <div class="write-title">
+        <img class="logo" src="/resources/images/loginImages/lastLogo.jpg">
+    </div>
     <section>
-
         <div class="thumbnail-place">
-            <img class="thumbnail1" src="/resources/images/articleImages/thumbnail.png">
-            <label for="photo-upload" class="thumbnail-title">썸네일을 등록해주세요</label>
-            <label for="photo-upload" class="thumbnail-upload">썸네일 등록</label>
-            <input type="file" name="upload" class="thumbnail-change" id="photo-upload" accept="image/*">
+            <img id="thumbnail-preview" class="thumbnail" src="/resources/images/articleImages/thumbnail.jpg">
+            <label for="photo-upload" class="thumbnail-upload">썸네일 변경</label>
+            <input type="file" class="thumbnail-change" id="photo-upload" accept="image/*">
         </div>
-
         <div id="Article-Write">
-            <input autocomplete="off" name="ArticleTitle" autofocus class="title" type="text"
-                   placeholder="제목을 입력하세요">
+            <input autocomplete="off" name="ArticleTitle" autofocus class="title" type="text" placeholder="제목을 입력하세요">
             <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
             <div class="article-tag">
-                <div class="explainTag">태그를 입력해주세요</div>
-                <div class="tags">
-                </div>
+                <div class="explainTag">태그를 입력해주세요 (최대 5개)</div>
             </div>
-            <div class="buttons">
-                <input class="submit" type="button" value="이전">
-                <input class="submit" type="submit" value="등록">
-            </div>
+            <input class="submit" type="submit" value="등록">
         </div>
     </section>
 </form>
-
-<form id="CoverForm">
-    <div class="cover">
-        <div class="cover-text"></div>
-        <div class="cover-button">확인</div>
-    </div>
-</form>
-
 
 </body>
 </html>

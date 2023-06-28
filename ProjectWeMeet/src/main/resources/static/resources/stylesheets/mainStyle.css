@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 @font-face {
     font-family: 'Humanbumsuk';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2') format('woff2');
@@ -8,9 +6,9 @@
 }
 
 * {
-    text-decoration: none;
-    background-color: #f4f3f1;
     /*border: 1px solid red;*/
+    text-decoration: none;
+    background-color: white;
 }
 
 h2 {
@@ -22,21 +20,26 @@ h2 {
 }
 
 :root {
-    --concept-color-light: #f4f3f1;
+    --concept-color-light: white;
 }
 
 html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-#body{
-    background-color: white;
-    opacity: 0;
-
+body{
+    /*background-color: white;*/
+    /*opacity: 0;*/
+    padding: 0;
+    margin-top: 0;
 }
 
+
+
+
+
 ._container {
-    padding: 0 3rem;
+    width: 100%;
     position: relative;
 }
 
@@ -52,8 +55,59 @@ html {
     max-width: 77.5rem;
 }
 
+#logo-container{
+    /*padding-top: 1rem;*/
+    /*padding: 0;*/
+    width: 100%;
+    height: 5rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+}
+
+#logo-container > .container{
+
+    padding: 0;
+    margin: 0;
+    width: 68.75rem;
+    /*border: 1px solid red;*/
+    height: 5rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 999999;
+    /*box-shadow: 0 2px 8px 0px;*/
+}
+
+#logo-container > .container > .logo{
+    /*border: 1px solid red;*/
+    width: 14rem;
+    height: 5rem;
+
+}
+
+#logo-container > .container > ul{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+}
+#logo-container > .container > ul > li {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+#logo-container > .container > ul > li > a > span{
+    font-family: 'Humanbumsuk', sans-serif;
+    font-size: 1.5rem;
+}
+
 #topMenuContainer > .top-menu {
     align-items: center;
+    background-color: white;
     display: flex;
     flex-direction: row;
     font-size: 0.8rem;
@@ -82,20 +136,25 @@ html {
 
 #headerContainer {
     top: 0;
-    background-color: var(--concept-color-light);
+    height: 80px;
+    background-color: white;
     overflow: hidden;
-    padding-top: 0.5rem;
+    /*padding-top: 0.5rem;*/
     padding-bottom: 0.5rem;
     position: sticky;
     z-index: 100;
 }
 
 #headerContainer > .header {
+    width: 68.75rem;
+    height: 80px;
+    background-color: white;
     align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     position: relative;
+    border: 1px solid red;
 }
 
 #headerContainer > .header > .menu {
@@ -107,6 +166,7 @@ html {
     margin-block: unset;
     margin-inline: unset;
     padding-inline: unset;
+    border: 1px solid red;
 }
 
 #headerContainer > .header > .menu > .item + .item {
@@ -116,7 +176,7 @@ html {
 #headerContainer > .header > .menu > .item > .icon-text-button {
     align-items: center;
     display: flex;
-    color: #9da3d6;
+    color: black;
     flex-direction: row;
     justify-content: flex-start;
 }
@@ -199,22 +259,24 @@ html {
 }
 
 .slider-container {
-    width: 1200px;
-    height: 550px;
+    width: 68.75rem;
+    height: 480px;
     border-radius: 0.375rem;
     overflow: hidden;
     margin: 0 auto;
-    margin-top: 3rem;
+    margin-top: 1rem;
     margin-bottom: -1.5rem;
 }
 
 .slider {
+
     display: flex;
+    flex-direction: row;
     transition: transform 1s;
 }
 
 .slide {
-    width: 1200px;
+    width: 68.75rem;
     height: 550px;
     flex-shrink: 0;
 }
@@ -229,7 +291,14 @@ html {
 }
 
 .slide1 {
+    width : 68.75rem;
+    height: 34.375rem;
     background-color: crimson;
+}
+.slide1 > video{
+
+    width : 100%;
+    height: 34.375rem;
 }
 
 .slide2 {
@@ -245,7 +314,7 @@ html {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }
 
 .navigation-button {
@@ -266,7 +335,8 @@ html {
 }
 
 #categoryContainer {
-    margin-bottom: 6rem;
+    padding-top: 2rem;
+    margin-bottom: 4rem;
 }
 
 #categoryContainer > .category {
@@ -281,7 +351,7 @@ html {
 }
 
 #categoryContainer > .category > .title {
-    color: #9da3d6;
+    color: black;
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 3rem;
     font-weight: 300;
@@ -292,7 +362,11 @@ html {
 }
 
 #categoryContainer > .category > .grid {
-    align-self: stretch;
+    width: 68.75rem;
+    /*align-self: stretch;*/
+    align-items: center;
+    /*flex-direction: column;*/
+    justify-content: center;
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(4, 1fr);
@@ -301,24 +375,30 @@ html {
     margin-inline: unset;
     padding-inline: unset;
 }
-
+#categoryContainer > .category > .grid > .item > .link {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 #categoryContainer > .category > .grid > .item > .link > .image {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 80%;
     border-radius: 0.5rem;
     max-height: 17.375rem; /* 이미지의 최대 높이 */
     object-fit: cover; /* 이미지를 잘라내어 비율을 유지한 채로 채우도록 설정 */
+    margin-bottom: 0.8rem;
 }
 
 #categoryContainer > .category > .grid > .item > .link > .text {
-    color: #9da3d6;
+    color: black;
     font-family: 'Humanbumsuk', 'sans-serif';
     font-size: 1.5rem;
 }
 
 .article-list-header {
     max-width: 77.5rem;
-    color: #9da3d6;
+    color: black;
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 3rem;
 }
@@ -329,12 +409,12 @@ html {
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: auto;
     border-radius: 0.375rem;
     overflow: hidden;
-    margin: 0 auto;
-    margin-top: 3rem;
-    margin-bottom: -1.5rem;
+    /*margin: 3rem 0  -1.5rem 0;*/
+    /*margin-top: 3rem;*/
+    /*margin-bottom: -1.5rem;*/
 }
 
 .slider {
@@ -343,85 +423,98 @@ html {
 }
 
 .article-container > .slider > .slide {
-    width: 1200px;
-    height: 100%;
+    width: 68.75rem;
+    height: auto;
     flex-shrink: 0;
 }
 
 .article-container > .slider > .slide > .article-box {
-    background-color: #f4f3f1;
+    background-color: white;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
-    margin-top: 6rem;
+    margin-top: 2rem;
     margin-bottom: 5rem;
     align-items: center; /* 수직 정렬 */
-    justify-items: center;
+    justify-items: start;
 }
 
 .article-container > .slider > .slide > .article-box > .article-list {
-    width: 36rem;
+    width: 33rem;
     height: 15rem;
-    background-color: white;
+    background-color: rgb(244, 244, 244);
+    align-items: center;
     display: flex;
     flex-direction: row;
-    border-radius: 0.3rem;
+    justify-content: start;
+    border: 0.125rem solid rgb(244, 244, 244);
+    border-radius: 15px;
     gap: 1rem;
-    margin-bottom: 5rem;
-    background-color: white;
+
+    margin-bottom: 0.7rem; /*게시글 목록 상하 간격 조절*/
+
 }
 
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-thumbnail {
-    width: 17rem;
-    height: 15rem;
+    width: 12rem;
+    height: 13rem;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: white;
+    background-color: rgb(244, 244, 244);
     border-radius: 0.3rem;
+    padding-left: 0.3rem;
 }
 
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-thumbnail > .thumbnail {
-    border-radius: 0.3rem;
-    width: 12.5rem;
+    background-color: rgb(244, 244, 244);
+    border-radius: 15px;
+    width: 12rem;
     height: 13rem;
+    padding-left: 0.3rem;
     object-fit: cover;
 }
 
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-content-box {
-    width: 23rem;
+    width: 18rem;
     align-items: flex-start;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-right: 2rem;
     margin-top: 2rem;
-    background-color: white;
+    background-color: rgb(244, 244, 244);
     border-radius: 0.3rem;
 }
-
+.article-container > .slider > .slide > .article-box > .article-list >
+.article-content-box > .article-content{
+    width: 17rem;
+background-color: rgb(244, 244, 244);
+}
 
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-content-box > .article-content > .article-content-title {
-    background-color: white;
+    /*background-color: white;*/
+    width: 17rem;
+background-color: rgb(244, 244, 244);
 }
 
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-content-box > .article-tag {
     display: block;
-    width: 19rem;
+    width: 17rem;
     margin-bottom: 1.5rem;
-    background-color: white;
+background-color: rgb(244, 244, 244);
+    /*background-color: gray;*/
 }
 
 .article-tag > .tag {
     border-radius: 0.7rem;
-    margin: 0rem 0.8rem 0rem 0;
-    background-color: #eaeaea;
+    margin: 0 0.8rem 0 0;
     font-weight: bold;
     color: gray;
     padding: 0.6rem;
@@ -444,11 +537,14 @@ html {
 
 .article-map {
     font-weight: 800;
-    background-color: white;
+    background-color: rgb(244, 244, 244);
+
+
 }
 
 .map-item {
-    background-color: white;
+    background-color: rgb(244, 244, 244);
+
 }
 
 h2 {
@@ -463,7 +559,8 @@ h2 {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: white;
+    background-color: rgb(244, 244, 244);
+
 
 }
 
@@ -501,13 +598,16 @@ h2 {
     width: 2.5rem;
     margin-left: 1rem;
     margin-top: 0.5rem;
-    background-color: white;
+    background-color: rgb(244, 244, 244);
+
 }
 
 .number {
     margin-top: 1rem;
     white-space: nowrap;
-    background-color: white;
+    background-color: rgb(244, 244, 244);
+
+
 }
 
 .cover {
@@ -536,7 +636,7 @@ a {
 #footer > .wrap {
     border-top: 1px solid #666;
     padding-top: 8rem;
-    width: 77.5rem;
+    width: 68.75rem;
     height: 10rem; /* Adjust the height according to your needs */
     /*background-color: aqua;*/
     display: grid;

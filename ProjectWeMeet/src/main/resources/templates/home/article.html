@@ -9,19 +9,16 @@
 <body>
 <div class="_container" id="headerContainer">
   <header class="_content header">
-    <div class="empty-box"></div>
-    <div class="empty-box"></div>
     <ul class="menu left">
       <li class="item main-menu">
         <label class="icon-text-button">
           <a class="icon-box" href="index.html">
-            <img th:src="@{/resources/images/loginImages/lastLogo.jpg}" class="icon">
+            <img th:src="@{/resources/images/logoImages/logo-224x80.png}" class="icon">
           </a>
         </label>
       </li>
     </ul>
-    <div class="empty-box"></div>
-    <ul class="menu right">
+    <ul class="menu right" th:if="${session.user == null}">
       <li class="item">
         <a href="#" class="icon-text-button">
           <span class="text">회원가입</span>
@@ -35,6 +32,13 @@
       <li class="item">
         <a class="icon-text-button" href="#">
           <span class="text">편의기능</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="menu right" th:if="${session.user != null}">
+      <li class="item">
+        <a href="#" class="icon-text-button">
+          <span class="text">로그인 후 상황</span>
         </a>
       </li>
     </ul>
@@ -123,6 +127,90 @@
                  <img class="Profile" th:src="@{/resources/images/mainImages/조보아.jpg}">
               </span>
               <img class="limit-image" th:src="@{/resources/images/category/human.png}">
+              <span class="number">
+                <span>0</span>
+                <span>/</span>
+                <span>0</span>
+              </span>
+              </span>
+          </div>
+        </div>
+        <div class="article-list">
+          <div class="article-thumbnail">
+            <img class="thumbnail" th:src="@{/resources/images/mainImages/조보아.jpg}">
+          </div>
+          <div class="article-content-box">
+            <div class="article-tag">
+              <span class="tag">태그</span>
+              <span class="tag comment">추천!!</span>
+            </div>
+            <span class="article-content">
+            <h2>장문복이랑 놀러갈 사람?</h2>
+            </span>
+            <span class="article-map">
+              <span>카테고리</span>
+              <span>위치</span>
+              <span>날짜</span>
+              <span>시간</span>
+            </span>
+            <span class="article-human">
+
+              <span class="Profile-Picture">
+                 <img class="Profile" src="../resources/images/조보아.jpg">
+              </span>
+                  <span class="Profile-Picture">
+                 <img class="Profile" src="../resources/images/조보아.jpg">
+              </span>
+              <span class="Profile-Picture">
+                 <img class="Profile" src="../resources/images/조보아.jpg">
+              </span>
+              <span class="Profile-Picture">
+                 <img class="Profile" src="../resources/images/조보아.jpg">
+              </span>
+
+              <img class="limit-image" src="../resources/images/human.png">
+              <span class="number">
+                <span>0</span>
+                <span>/</span>
+                <span>0</span>
+              </span>
+              </span>
+          </div>
+        </div>
+        <div class="article-list">
+          <div class="article-thumbnail">
+            <img class="thumbnail" th:src="@{/resources/images/mainImages/조보아.jpg}">
+          </div>
+          <div class="article-content-box">
+            <div class="article-tag">
+              <span class="tag">태그</span>
+              <span class="tag comment">추천!!</span>
+            </div>
+            <span class="article-content">
+            <h2>장문복이랑 놀러갈 사람?</h2>
+            </span>
+            <span class="article-map">
+              <span>카테고리</span>
+              <span>위치</span>
+              <span>날짜</span>
+              <span>시간</span>
+            </span>
+            <span class="article-human">
+
+              <span class="Profile-Picture">
+                 <img class="Profile" src="../resources/images/조보아.jpg">
+              </span>
+                  <span class="Profile-Picture">
+                 <img class="Profile" src="../resources/images/조보아.jpg">
+              </span>
+              <span class="Profile-Picture">
+                 <img class="Profile" src="../resources/images/조보아.jpg">
+              </span>
+              <span class="Profile-Picture">
+                 <img class="Profile" src="../resources/images/조보아.jpg">
+              </span>
+
+              <img class="limit-image" src="../resources/images/human.png">
               <span class="number">
                 <span>0</span>
                 <span>/</span>
