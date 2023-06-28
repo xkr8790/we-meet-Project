@@ -1,10 +1,9 @@
 const writeForm = document.getElementById('writeForm');
 const addressPrimaryInput = writeForm.querySelector('.addressPrimary')
 const addressSecondaryInput = writeForm.querySelector('.addressSecondary')
-const startDayInput = writeForm.querySelector('input[name="startDay"]');
-const endDayInput = writeForm.querySelector('input[name="endDay"]');
-const withinDayCheckbox = writeForm.querySelector('.within_a_day');
+const dayInput = document.querySelector('.day');
 const today = new Date().toISOString().split('T')[0];
+const nextButton = document.querySelector(".next");
 
 
 // 마커를 담을 배열입니다
@@ -279,83 +278,57 @@ function removeAllChildNods(el) {
 }
 
 
-// warningList
-// addressWarning
-writeForm.addressWarning = writeForm.querySelector('[rel="addressWarning"]');
-writeForm.addressWarning.show = (text) => {
-    writeForm.addressWarning.innerText = text;
-    writeForm.addressWarning.classList.add('visible');
-};
-writeForm.addressWarning.hide = () => writeForm.addressWarning.classList.remove('visible');
-// dayWarning
-writeForm.dayWarning = writeForm.querySelector('[rel="dayWarning"]');
-writeForm.dayWarning.show = (text) => {
-    writeForm.dayWarning.innerText = text;
-    writeForm.dayWarning.classList.add('visible');
-};
-writeForm.dayWarning.hide = () => writeForm.dayWarning.classList.remove('visible');
-// timeWarning
-writeForm.timeWarning = writeForm.querySelector('[rel="timeWarning"]');
-writeForm.timeWarning.show = (text) => {
-    writeForm.timeWarning.innerText = text;
-    writeForm.timeWarning.classList.add('visible');
-};
-writeForm.timeWarning.hide = () => writeForm.timeWarning.classList.remove('visible');
-// participantsWarning
-writeForm.participantsWarning = writeForm.querySelector('[rel="participantsWarning"]');
-writeForm.participantsWarning.show = (text) => {
-    writeForm.participantsWarning.innerText = text;
-    writeForm.participantsWarning.classList.add('visible');
-};
-writeForm.participantsWarning.hide = () => writeForm.participantsWarning.classList.remove('visible');
-
-// categoryWarning
-writeForm.categoryWarning = writeForm.querySelector('[rel="categoryWarning"]');
-writeForm.categoryWarning.show = (text) => {
-    writeForm.categoryWarning.innerText = text;
-    writeForm.categoryWarning.classList.add('visible');
-};
-writeForm.categoryWarning.hide = () => writeForm.categoryWarning.classList.remove('visible');
-
-// input의 date타입에서 현재 시간보다 과거의 날짜를 설정하지 못하도록 한다
-
-startDayInput.setAttribute('min', today);
-endDayInput.setAttribute('min', today);
 
 
-// 체크박스가 변경되었을 때 이벤트 핸들러 추가
-// 당일치기가 체크된 상태라면 startDay와 endDay가 항상 같은 값을 유지한다
+// input의 date타입에서 현재 날짜보다 과거의 날짜를 설정하지 못하도록 한다
+dayInput.setAttribute('min', today);
 
-withinDayCheckbox.addEventListener('change', function() {
-    if (withinDayCheckbox.checked) {
-        startDayInput.removeAttribute('disabled');
-        endDayInput.removeAttribute('disabled');
-        startDayInput.value = endDayInput.value;
-    } else {
-        startDayInput.removeAttribute('disabled');
-        endDayInput.removeAttribute('disabled');
-    }
-});
+dayInput.addEventListener('change', function() {
+    const selectedDate = new Date(this.value);
+    const currentDate = new Date();
 
-startDayInput.addEventListener('input', function() {
-    if (withinDayCheckbox.checked) {
-        endDayInput.value = startDayInput.value;
-    }
-});
-
-endDayInput.addEventListener('input', function() {
-    if (withinDayCheckbox.checked) {
-        startDayInput.value = endDayInput.value;
+    if (selectedDate < currentDate) {
+        this.value = today;
     }
 });
 
 
-const nextButton = document.querySelector(".next");
+
+
 
 nextButton.addEventListener("click", function(event) {
     event.preventDefault();
-    writeForm.style.display = "none";
-    ArticleForm.style.display='block';
+
+        // if (writeForm['addressPrimary'].value === '') {
+        //     // 주소 미입력
+        //     alert('지도에서 장소를 검색해 주세요.');
+        //     return;
+        // }
+        // if (writeForm['day'].value === '') {
+        //     //날짜 미입력
+        //     alert('날짜를 설정해주세요');
+        //     return;
+        // }
+        // if (writeForm['time'].value === '') {
+        //     //약속시간 미입력
+        //     alert('약속시간을 설정해 주세요.');
+        //     return;
+        // }
+        // if (writeForm['participants'].value === '') {
+        //     //참여인원 미입력
+        //     alert('인원제한을 설정해주세요');
+        //     return;
+        // }
+        // if (writeForm['category'].value === '') {
+        //     //카테고리 미설정
+        //     alert('카테고리를 설정해주세요');
+        //     return;
+        // }
+
+        writeForm.style.display = "none";
+        ArticleForm.style.display='block';
+
+
 });
 
 // cancel 버튼의 함수 '뒤로가기'기능

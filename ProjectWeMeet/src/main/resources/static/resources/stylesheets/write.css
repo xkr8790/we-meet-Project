@@ -29,6 +29,10 @@ body,html{
 }
 
 
+#writeForm{
+    display: block;
+}
+
 
 /*로고*/
 
