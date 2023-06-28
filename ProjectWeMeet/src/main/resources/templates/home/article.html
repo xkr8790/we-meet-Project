@@ -9,18 +9,15 @@
 <body>
 <div class="_container" id="headerContainer">
   <header class="_content header">
-    <div class="empty-box"></div>
-    <div class="empty-box"></div>
     <ul class="menu left">
       <li class="item main-menu">
         <label class="icon-text-button">
           <a class="icon-box" href="index.html">
-            <img th:src="@{/resources/images/loginImages/lastLogo.jpg}" class="icon">
+            <img th:src="@{/resources/images/logoImages/logo-224x80.png}" class="icon">
           </a>
         </label>
       </li>
     </ul>
-    <div class="empty-box"></div>
     <ul class="menu right" th:if="${session.user == null}">
       <li class="item">
         <a href="#" class="icon-text-button">

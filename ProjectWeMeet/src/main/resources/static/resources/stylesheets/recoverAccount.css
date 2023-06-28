@@ -9,7 +9,7 @@ body {
     font-size: 1rem;
     font-weight: 400;
     margin: unset;
-    background-color: #f4f3f1;
+    background-color: white;
 
     align-items: center;
     display: flex;
@@ -54,7 +54,7 @@ body {
     width: 100%;
     display: inline-block;
     height: 2.5rem;
-    border: 1px solid #9da3d6;
+    border: 1px solid #FB6161;
     border-radius: 15px;
     text-align: center;
     background-color: white;
@@ -72,8 +72,8 @@ body {
 }
 
 #recoverForm > .option-container > .label:has(> .option:checked) {
-    background-color: #9da3d6;
-    border: 0.0625rem solid #9da3d6;
+    background-color: #FB6161;
+    border: 0.0625rem solid #FB6161;
     color: #ffffff;
 }
 
@@ -138,10 +138,10 @@ body {
 
 #recoverForm > .button-container > .object-button {
     width: 40%;
-    border: 1px solid #9da3d6;
+    border: 1px solid #FB6161;
     border-radius: 10px;
     height: 40%;
-    background-color: #9da3d6;
+    background-color: #FB6161;
     color: white;
     cursor: pointer;
 }

@@ -6,121 +6,28 @@
 
     <link rel="stylesheet" href="/resources/stylesheets/mainStyle.css">
     <link rel="stylesheet" href="/resources/stylesheets/mainMenu.css">
+    <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
+
     <script defer src="/resources/scripts/slide.js"></script>
     <script defer src="/resources/scripts/article.js"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
 </head>
 
 <body>
-<div class="navigation-bar" th:if="${session.user != null}">
-    <ul class="navigation">
-        <a href="/write">
-            <li>글작성</li>
-        </a>
-        <button class="button1">N 정산</button>
-        <button class="button2" data-action="logout">로그아웃</button>
-    </ul>
-</div>
-<input class="_toggle _main-menu" id="mainMenuToggle" type="checkbox">
-<div id="cover"></div>
-<nav id="mainMenu">
-    <ul class="menu main">
-        <li class="head">
-            <label for="mainMenuToggle" class="close-wrapper">
-                <img alt="X" src="/resources/images/mainImages/close.png">
-            </label>
-            <h2 class="title">메뉴</h2>
-        </li>
-        <li class="item">
-            <input class="toggle" id="mainMenuToggleWomen" name="mainMenuToggle" type="radio">
-            <label class="label" for="mainMenuToggleWomen">
-                <span class="text">근처에 있는 모임</span>
-                <img alt="+" src="/resources/images/mainImages/expand.png" class="icon expand">
-                <img alt="-" src="/resources/images/mainImages/collapse.png" class="icon collapse">
-            </label>
-            <ul class="submenu">
-                <li class="item">
-                    <a href="#" class="main-menu-link">내 근처에 있는 모임</a>
-                </li>
-                <li class="item">
-                    <a href="#" class="main-menu-link">특정 위치의 모임</a>
-                </li>
-                <li class="item">
-                    <a href="#" class="main-menu-link">나머진 여러분의 기발한 아이디어에 맡기겠습니다</a>
-                </li>
-
-            </ul>
-        </li>
-        <li class="item">
-            <input class="toggle" id="mainMenuToggleMen" name="mainMenuToggle" type="radio">
-            <label class="label" for="mainMenuToggleMen">
-                <span class="text">AI가 추천하는 모임</span>
-                <img alt="+" src="/resources/images/mainImages/expand.png" class="icon expand">
-                <img alt="-" src="/resources/images/mainImages/collapse.png" class="icon collapse">
-            </label>
-            <ul class="submenu">
-                <li class="item">
-                    <a href="#" class="main-menu-link">현재 핫한 모임</a>
-                </li>
-                <li class="item">
-                    <a href="#" class="main-menu-link">모임 마감이 얼마 남지 않은 모임</a>
-                </li>
-                <li class="item">
-                    <a href="#" class="main-menu-link">제휴 할인 쿠폰을 사용할 수 있는 모임</a>
-                </li>
-                <li class="item">
-                    <a href="#" class="main-menu-link">나머진 여러분의 기발한 아이디어에 맡기겠습니다.</a>
-                </li>
-            </ul>
-        </li>
-        <li class="item">
-            <a href="#" class="main-menu-link">편하게 돈계산을 해보세요!</a>
-        </li>
-        <li class="item">
-            <a href="#" class="main-menu-link">진행중인 이벤트</a>
-        </li>
-        <li class="item main-menu-link">
-            <a href="#" class="main-menu-link">관리자 공지사항</a>
-        </li>
-        <li class="item main-menu-link">
-            <a href="#" class="main-menu-link">제재 내역</a>
-        </li>
-    </ul>
-    <ul class="menu foot">
-
-    </ul>
-</nav>
-<div class="_container header-container" id="headerContainer">
-    <header class="_content header">
-        <ul class="menu left">
-            <li class="item main-menu">
-                <label class="icon-text-button" for="mainMenuToggle">
-                    <img alt="" src="/resources/images/mainImages/menu.png" class="icon">
-                    <span class="text">메뉴</span>
-                </label>
-            </li>
-        </ul>
-        <div class="empty-box1"></div>
-        <!--        <ul class="menu left">-->
-
-        <!--            <li class="item main-menu">-->
-        <!--                <label class="icon-text-button" for="mainMenuToggle">-->
-        <!--                    <a class="icon-box" href="/">-->
-        <!--                        <img alt="" src="/resources/images/mainImages/logo.jpg" class="icon">-->
-        <!--                    </a>-->
-        <!--                </label>-->
-        <!--            </li>-->
-        <!--        </ul>-->
-        <div class="empty-box2"></div>
+<div class="logo-container" id="logo-container">
+    <div class="container">
+        <div class="logo">
+            <img src="/resources/images/logoImages/logo-224x80.png" alt="logo">
+        </div>
         <ul class="menu right" th:if="${session.user == null}">
-            <li class="item">
-                <a href="/register/" class="icon-text-button">
-                    <span class="text">회원가입</span>
-                </a>
-            </li>
             <li class="item">
                 <a class="icon-text-button" href="/login">
                     <span class="text">로그인</span>
+                </a>
+            </li>
+            <li class="item">
+                <a href="/register/" class="icon-text-button">
+                    <span class="text">회원가입</span>
                 </a>
             </li>
         </ul>
@@ -130,14 +37,63 @@
                     <span class="text">나의 프로필</span>
                 </a>
             </li>
+            <li class="item" data-action="logout">
+                <a>
+                    <p>로그아웃</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--<div class="_container header-container" id="headerContainer">-->
+<!--    <header class="_content header">-->
+<!--        &lt;!&ndash;        <ul class="menu left">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li class="item main-menu">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <label class="icon-text-button" for="mainMenuToggle">&ndash;&gt;-->
+<!--        &lt;!&ndash;                    <img alt="" src="/resources/images/mainImages/menu.png" class="icon">&ndash;&gt;-->
+<!--        &lt;!&ndash;                    <span class="text">메뉴</span>&ndash;&gt;-->
+<!--        &lt;!&ndash;                </label>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </li>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </ul>&ndash;&gt;-->
+<!--        <div class="empty-box1"></div>-->
+<!--        <ul class="menu left">-->
+
+<!--            <li class="item main-menu">-->
+<!--                <label class="icon-text-button" for="mainMenuToggle">-->
+<!--                    <a class="icon-box" href="/">-->
+<!--                        <span style="width:25rem; height: 20rem; border:1px solid red; color:red;">alksjkasdfsadfasdfasdfadslasdf</span>-->
+<!--                    </a>-->
+<!--                </label>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <div class="empty-box2"></div>-->
+<!--        <ul class="menu right" th:if="${session.user == null}">-->
+<!--            <li class="item">-->
+<!--                <a href="/register/" class="icon-text-button">-->
+<!--                    <span class="text">로그인</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="item">-->
+<!--                <a class="icon-text-button" href="/login">-->
+<!--                    <span class="text">회원가입</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <ul class="menu right" th:if="${session.user != null}">-->
+<!--            <li class="item">-->
+<!--                <a href="/" class="icon-text-button">-->
+<!--                    <span class="text">나의 프로필</span>-->
+<!--                </a>-->
+<!--            </li>-->
 <!--            <li class="item" data-action="logout">-->
 <!--                <a>-->
 <!--                    <p>로그아웃</p>-->
 <!--                </a>-->
 <!--            </li>-->
-        </ul>
-    </header>
-</div>
+<!--        </ul>-->
+<!--    </header>-->
+<!--</div>-->
 
 <div class="slider-container">
     <div class="slider">
@@ -154,6 +110,7 @@
             <img src="/resources/images/mainImages/runTogether.jpg" alt="운동이벤트">
         </div>
     </div>
+
 </div>
 
 <div class="navigation-buttons">

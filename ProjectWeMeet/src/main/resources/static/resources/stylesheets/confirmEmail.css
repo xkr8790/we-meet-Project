@@ -16,7 +16,7 @@ main{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #f4f3f1;
+    background-color: white;
 
 }
 main > .container {
@@ -63,9 +63,9 @@ main > .notification{
 
 
 main >  .container > .linkBox{
-    border: 1px solid #9da3d6;
+    border: 1px solid #FB6161;
     border-radius: 15px;
-    background-color: #9da3d6;
+    background-color: #FB6161;
     width: 50%;
     height: 20%;
     align-items: center;

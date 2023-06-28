@@ -19,10 +19,11 @@ body {
 }
 
 .allContainer > .header {
+    /*border: 1px solid red;*/
     width: 100%;
     height: 3rem;
     z-index: 99;
-    background-color: rgb(255,228,196);
+    background-color: white;
 
     align-items: center;
     display: flex;
