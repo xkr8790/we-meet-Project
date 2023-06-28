@@ -13,4 +13,10 @@ public class ArticleController {
         ModelAndView modelAndView = new ModelAndView("home/article");
         return modelAndView;
     } //게시판 주소로 가기
+
+    @RequestMapping(value = "article",method = RequestMethod.GET)
+    public ModelAndView postArticle () {
+        ModelAndView modelAndView = new ModelAndView("home/article");
+        return modelAndView;
+    } //게시판 주소로 가기
 }
