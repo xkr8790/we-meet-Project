@@ -260,7 +260,7 @@ body{
 
 .slider-container {
     width: 68.75rem;
-    height: 480px;
+    height: 30rem;
     border-radius: 0.375rem;
     overflow: hidden;
     margin: 0 auto;
@@ -269,7 +269,8 @@ body{
 }
 
 .slider {
-
+    width: 68.75rem;
+    height: 30rem;
     display: flex;
     flex-direction: row;
     transition: transform 1s;
@@ -277,7 +278,7 @@ body{
 
 .slide {
     width: 68.75rem;
-    height: 550px;
+    height: 34.375rem;
     flex-shrink: 0;
 }
 .slide.last-child {
@@ -293,12 +294,12 @@ body{
 .slide1 {
     width : 68.75rem;
     height: 34.375rem;
-    background-color: crimson;
+    /*border: 1px solid red;*/
 }
 .slide1 > video{
-
+object-fit: cover;
     width : 100%;
-    height: 34.375rem;
+    height: 100%;
 }
 
 .slide2 {
