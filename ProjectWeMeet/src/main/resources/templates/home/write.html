@@ -90,25 +90,31 @@
 </div>
 
 <form id="Article-Form" style="display: none">
-    <div class="write-title">
-        <img class="logo" src="/resources/images/loginImages/lastLogo.jpg">
-    </div>
+    <img class="logo" src="/resources/images/articleImages/logo2.png">
     <section>
+
         <div class="thumbnail-place">
-            <img id="thumbnail-preview" class="thumbnail" src="/resources/images/articleImages/thumbnail.jpg">
-            <label for="photo-upload" class="thumbnail-upload">썸네일 변경</label>
-            <input type="file" class="thumbnail-change" id="photo-upload" accept="image/*">
+            <img class="thumbnail1" src="/resources/images/articleImages/thumbnail.png">
+            <label for="photo-upload" class="thumbnail-title">썸네일을 등록해주세요</label>
+            <label for="photo-upload" class="thumbnail-upload">썸네일 등록</label>
+            <input type="file" name="upload" class="thumbnail-change" id="photo-upload" accept="image/*">
         </div>
+
         <div id="Article-Write">
-            <input autocomplete="off" name="ArticleTitle" autofocus class="title" type="text" placeholder="제목을 입력하세요">
+            <input autocomplete="off" name="ArticleTitle" autofocus class="title" type="text"
+                   placeholder="제목을 입력하세요">
             <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
             <div class="article-tag">
-                <div class="explainTag">태그를 입력해주세요 (최대 5개)</div>
+                <div class="explainTag">태그를 입력해주세요</div>
+                <div class="tags">
+                </div>
             </div>
-            <input class="submit" type="submit" value="등록">
+            <div class="buttons">
+                <input class="submit" type="button" value="이전">
+                <input class="submit" type="submit" value="등록">
+            </div>
         </div>
     </section>
 </form>
-
 </body>
 </html>
