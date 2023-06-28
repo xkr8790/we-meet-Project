@@ -40,7 +40,7 @@
             <h2 class="title">메뉴</h2>
         </li>
         <li class="item">
-            <input class="toggle" id="mainMenuToggleWomen" name="mainMenuToggle" type="radio">
+            <input class="toggle" id="mainMenuToggleFemale" name="mainMenuToggle" type="radio">
             <label class="label" for="mainMenuToggleWomen">
                 <span class="text">근처에 있는 모임</span>
                 <img alt="+" src="/resources/images/mainImages/expand.png" class="icon expand">
@@ -134,8 +134,8 @@
         </ul>
         <ul class="menu right" th:if="${session.user != null}">
             <li class="item">
-                <a href="/" class="icon-text-button">
-                    <span class="text">프로필 만들기</span>
+                <a href="/profile/profile" class="icon-text-button">
+                    <span class="text">마이 프로필</span>
                 </a>
             </li>
             <li class="item">

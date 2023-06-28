@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value="/")
-public class profileController {
+@RequestMapping(value="/profile")
+public class ProfileController {
 
     @RequestMapping(value="profile", method = RequestMethod.GET)
     public ModelAndView getProfile(){
