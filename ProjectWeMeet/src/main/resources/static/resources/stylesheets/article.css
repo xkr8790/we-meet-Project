@@ -16,6 +16,7 @@
 
 
 html {
+
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 
 }
@@ -246,19 +247,21 @@ body{
     align-items: center; /* 수직 정렬 */
     justify-items: center;
     background-color: #f4f3f1;
+    padding: 2rem 0 0.5rem 0;
 }
 /* 2칸씩 반복*/
 
 .article-list{
     /*border: 1px solid red;*/
-    width: 37rem;
+    width: 35rem;
     height: 15rem;
     background-color: white;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border-radius: 0.3rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
     gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
 }
 
@@ -273,8 +276,8 @@ body{
 }
 .article-list>.article-thumbnail>.thumbnail{
     border-radius: 0.3rem;
-    width: 12.5rem;
-    height: 13rem;
+    width: 11rem;
+    height: 12rem;
     object-fit: cover;
 }
 
