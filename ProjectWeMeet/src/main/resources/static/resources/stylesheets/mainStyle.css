@@ -100,6 +100,10 @@ body{
     margin-left: 0.5rem;
     margin-right: 0.5rem;
 }
+#logo-container > .container > ul > li > a > span{
+    font-family: 'Humanbumsuk', sans-serif;
+    font-size: 1.5rem;
+}
 
 #topMenuContainer > .top-menu {
     align-items: center;
