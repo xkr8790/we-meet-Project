@@ -14,4 +14,8 @@ public class WriteController {
         ModelAndView modelAndView = new ModelAndView("home/write");
         return modelAndView;
     } //게시판 주소로 가기
+
+
+
+
 }

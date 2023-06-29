@@ -1,4 +1,4 @@
-const ArticleForm = document.getElementById('Article-Form');
+const articleForm = document.getElementById('Article-Form');
 let tagCounter = 0; //전역변수 태그카운터
 let tags = [];
 var thumbnailPlace = document.querySelector('.thumbnail-place');
@@ -146,5 +146,5 @@ const beForeButton = document.querySelector('input[type="button"][value="이전"
 beForeButton.onclick = function(e) {
     e.preventDefault();
     inner.style.display = "block";
-    ArticleForm.style.display = 'none';
+    articleForm.style.display = 'none';
 };

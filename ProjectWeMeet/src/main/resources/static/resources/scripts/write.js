@@ -1,6 +1,6 @@
 const thumnail = document.querySelector('.thumbnail');
 
-ArticleForm.onsubmit = e =>{
+articleForm.onsubmit = e =>{
     e.preventDefault();
     if(thumnail === null){
         alert('썸네일을 올려주세요');
@@ -18,13 +18,15 @@ ArticleForm.onsubmit = e =>{
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
+    formData.append('email', writeForm['place'].value);
+    formData.append('content',articleForm['content'].value);
     xhr.open('POST','/write');
     xhr.onreadystatechange = () => {
         if(xhr.readyState === XMLHttpRequest.DONE){
             if(xhr.status >= 200 && xhr.status<300) {
-                alert('아아아');
+                alert('성공');
             }else {
-                alert('실패패');
+                alert('실패');
             }
         }
     };
