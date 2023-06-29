@@ -305,7 +305,6 @@ nextButton.addEventListener("click", function(event) {
         return;
     }
 
-
     inner.style.display = "none";
     ArticleForm.style.display='block';
 });
