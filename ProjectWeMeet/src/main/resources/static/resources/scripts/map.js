@@ -3,7 +3,6 @@ const addressPrimaryInput = writeForm.querySelector('.addressPrimary');
 const addressSecondaryInput = writeForm.querySelector('.addressSecondary');
 const dayInput = document.querySelector('.day');
 const today = new Date().toISOString().split('T')[0];
-const button = writeForm.querySelector('._button');
 const nextButton = document.querySelector(".next");
 
 
@@ -270,8 +269,8 @@ function removeAllChildNods(el) {
 
 
 
-
-
+// 현재의 날짜보다 과거의 날짜 선택 불가능
+dayInput.setAttribute('min', today);
 
 
 nextButton.addEventListener("click", function(event) {
