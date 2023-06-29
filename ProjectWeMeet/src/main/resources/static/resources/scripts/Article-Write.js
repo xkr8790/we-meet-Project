@@ -1,4 +1,12 @@
 const ArticleForm = document.getElementById('Article-Form');
+let tagCounter = 0; //전역변수 태그카운터
+let tags = [];
+var thumbnailPlace = document.querySelector('.thumbnail-place');
+var thumbnailUpload = document.querySelector('.thumbnail-upload');
+var thumbnailChange = document.querySelector('.thumbnail-change');
+const thumbnailTitle = document.querySelector('.thumbnail-title');
+const thumbnail1 = document.querySelector('.thumbnail1');
+
 
 ClassicEditor
     .create(document.querySelector('#editor'), {
@@ -11,11 +19,7 @@ ClassicEditor
 
 const ArticleTag = document.querySelector('.article-tag'); //tag를 담을 부모
 const explainTag = document.querySelector('.explainTag'); //설명
-const Tags = document.querySelector('.tags'); //설명
-
-
-let tagCounter = 0; //전역변수 태그카운터
-let tags = [];
+const Tags = document.querySelector('.tags');
 
 ArticleTag.addEventListener('click', function () {
     if (event.target.classList.contains('tag')) {
@@ -73,8 +77,11 @@ ArticleTag.addEventListener('click', function () {
 
     Tag.addEventListener('input', function (event) {
         const trimmedText = Tag.value.trim();
-        if (trimmedText.length > 12) {
-            Tag.value = trimmedText.slice(0, 12);
+        const characterCount = trimmedText.length;
+
+        if (characterCount > 12) {
+            const slicedText = trimmedText.slice(0, 12);
+            Tag.value = slicedText;
             TagWarning.show();
             setTimeout(function() {
                 TagWarning.hide();
@@ -105,21 +112,34 @@ ArticleTag.addEventListener('click', function () {
 });
 
 
-const photoUpload = document.getElementById('photo-upload');
-const thumbnailPreview = document.getElementById('thumbnail-preview');
-const thumbnailUpload = document.querySelector('.thumbnail-upload');
 
-photoUpload.addEventListener('change', function() {
-    const file = photoUpload.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            thumbnailPreview.src = e.target.result;
-            thumbnailUpload.textContent = '썸네일 변경';
-        };
-        reader.readAsDataURL(file);
-    }
+// 파일 선택 시 이벤트 처리
+thumbnailChange.addEventListener('change', function(event) {
+    var file = event.target.files[0]; // 선택한 파일 가져오기
+
+    // FileReader 객체 사용하여 이미지 읽기
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        // 이미지를 표시할 img 요소 생성
+        var image = document.createElement('img');
+        image.src = e.target.result; // 읽은 이미지 데이터 설정
+        image.classList.add('thumbnail'); // 클래스 추가
+
+        // 기존 썸네일 이미지가 있는 경우 교체
+        var existingImage = thumbnailPlace.querySelector('.thumbnail');
+        if (existingImage) {
+            existingImage.src = image.src;
+        } else {
+            // 썸네일 영역에 이미지 추가
+            thumbnailPlace.appendChild(image);
+        }
+    };
+    reader.readAsDataURL(file); // 이미지 파일을 Data URL로 읽기
+    thumbnailTitle.style.display = 'none';
+    thumbnail1.style.display = 'none';
+    thumbnailUpload.textContent = '썸네일 변경';
 });
+
 
 
 const beForeButton = document.querySelector('input[type="button"][value="이전"]');

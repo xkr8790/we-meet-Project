@@ -11,7 +11,7 @@ public class WriteController {
 
     @RequestMapping(value = "write",method = RequestMethod.GET)
     public ModelAndView getWrite () {
-        ModelAndView modelAndView = new ModelAndView("write");
+        ModelAndView modelAndView = new ModelAndView("home/write");
         return modelAndView;
     } //게시판 주소로 가기
 }
