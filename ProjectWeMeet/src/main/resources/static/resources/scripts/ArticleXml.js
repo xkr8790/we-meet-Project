@@ -1,6 +1,3 @@
-const Tagg = document.querySelectorAll('.tag');
-const values = [];
-let hasValue = false; // 값이 있는지 여부를 나타내는 플래그
 
 ArticleForm.onsubmit = e => {
     e.preventDefault();

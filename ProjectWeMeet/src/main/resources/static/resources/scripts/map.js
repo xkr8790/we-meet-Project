@@ -1,11 +1,10 @@
 const writeForm = document.getElementById('writeForm');
-const addressPrimaryInput = writeForm.querySelector('.addressPrimary')
-const addressSecondaryInput = writeForm.querySelector('.addressSecondary')
-const startDayInput = writeForm.querySelector('input[name="startDay"]');
-const endDayInput = writeForm.querySelector('input[name="endDay"]');
-const withinDayCheckbox = writeForm.querySelector('.within_a_day');
+const addressPrimaryInput = writeForm.querySelector('.addressPrimary');
+const addressSecondaryInput = writeForm.querySelector('.addressSecondary');
+const dayInput = document.querySelector('.day');
 const today = new Date().toISOString().split('T')[0];
-const button = writeForm.querySelector('._button');
+const nextButton = document.querySelector(".next");
+
 
 
 // 마커를 담을 배열입니다
@@ -24,13 +23,13 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var ps = new kakao.maps.services.Places();
 
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 const searchForm = document.getElementById('searchForm');
 
-searchForm.onsubmit = function (e) {
+searchForm.onsubmit = function(e) {
     e.preventDefault();
-    ps.keywordSearch(searchForm['keyword'].value, placesSearchCB);
+    ps.keywordSearch( searchForm['keyword'].value, placesSearchCB);
     return false;
 }
 
@@ -89,7 +88,7 @@ function displayPlaces(places) {
     // 지도에 표시되고 있는 마커를 제거합니다
     removeMarker();
 
-    for (var i = 0; i < places.length; i++) {
+    for ( var i=0; i<places.length; i++ ) {
 
         // 마커를 생성하고 지도에 표시합니다
         var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
@@ -103,23 +102,24 @@ function displayPlaces(places) {
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
-        (function (marker, title) {
-            kakao.maps.event.addListener(marker, 'mouseover', function () {
+        (function(marker, title) {
+            kakao.maps.event.addListener(marker, 'mouseover', function() {
                 displayInfowindow(marker, title);
             });
 
-            kakao.maps.event.addListener(marker, 'mouseout', function () {
+            kakao.maps.event.addListener(marker, 'mouseout', function() {
                 infowindow.close();
             });
 
-            itemEl.onmouseover = function () {
+            itemEl.onmouseover =  function () {
                 displayInfowindow(marker, title);
             };
 
-            itemEl.onmouseout = function () {
+            itemEl.onmouseout =  function () {
                 infowindow.close();
             };
         })(marker, places[i].place_name);
+
 
 
         fragment.appendChild(itemEl);
@@ -137,18 +137,18 @@ function displayPlaces(places) {
 function getListItem(index, places) {
 
     var el = document.createElement('li'),
-        itemStr = '<span class="markerbg marker_' + (index + 1) + '"></span>' +
+        itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
             '<div class="info">' +
             '   <h5>' + places.place_name + '</h5>';
 
     if (places.road_address_name) {
         itemStr += '    <span>' + places.road_address_name + '</span>' +
-            '   <span class="jibun gray">' + places.address_name + '</span>';
+            '   <span class="jibun gray">' +  places.address_name  + '</span>';
     } else {
-        itemStr += '    <span>' + places.address_name + '</span>';
+        itemStr += '    <span>' +  places.address_name  + '</span>';
     }
 
-    itemStr += '  <span class="tel">' + places.phone + '</span>' +
+    itemStr += '  <span class="tel">' + places.phone  + '</span>' +
         '</div>';
 
     el.innerHTML = itemStr;
@@ -156,15 +156,20 @@ function getListItem(index, places) {
 
 
     //목록 클릭 이벤트
-    el.addEventListener('click', function () {
+    el.addEventListener('click', function() {
 
         addressPrimaryInput.value = places.place_name;
         addressSecondaryInput.value = places.address_name;
         addressPrimaryInput.disabled = true;
 
         // Move and zoom to the corresponding marker
-        map.setLevel(3); // Adjust the zoom level as needed
+        map.setLevel(2); // Adjust the zoom level as needed
         map.setCenter(new kakao.maps.LatLng(places.y, places.x));
+
+
+        // 클릭시 마커의 좌표(위도,경도)를 가져온다(hidden으로 숨겨둠)
+        writeForm.querySelector('input[name="lat"]').value = places.y;
+        writeForm.querySelector('input[name="lng"]').value = places.x;
 
 
     });
@@ -209,7 +214,7 @@ function addMarker(position, idx, title) {
     return marker;
 }// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 function removeMarker() {
-    for (var i = 0; i < markers.length; i++) {
+    for ( var i = 0; i < markers.length; i++ ) {
         markers[i].setMap(null);
     }
     markers = [];
@@ -223,19 +228,19 @@ function displayPagination(pagination) {
 
     // 기존에 추가된 페이지번호를 삭제합니다
     while (paginationEl.hasChildNodes()) {
-        paginationEl.removeChild(paginationEl.lastChild);
+        paginationEl.removeChild (paginationEl.lastChild);
     }
 
-    for (i = 1; i <= pagination.last; i++) {
+    for (i=1; i<=pagination.last; i++) {
         var el = document.createElement('a');
         el.href = "#";
         el.innerHTML = i;
 
-        if (i === pagination.current) {
+        if (i===pagination.current) {
             el.className = 'on';
         } else {
-            el.onclick = (function (i) {
-                return function () {
+            el.onclick = (function(i) {
+                return function() {
                     pagination.gotoPage(i);
                 }
             })(i);
@@ -258,59 +263,50 @@ function displayInfowindow(marker, title) {
 // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {
     while (el.hasChildNodes()) {
-        el.removeChild(el.lastChild);
+        el.removeChild (el.lastChild);
     }
 }
 
 
-// warningList
-// addressWarning
-writeForm.addressWarning = writeForm.querySelector('[rel="addressWarning"]');
-writeForm.addressWarning.show = (text) => {
-    writeForm.addressWarning.innerText = text;
-    writeForm.addressWarning.classList.add('visible');
-};
-writeForm.addressWarning.hide = () => writeForm.addressWarning.classList.remove('visible');
+
+// 현재의 날짜보다 과거의 날짜 선택 불가능
+dayInput.setAttribute('min', today);
 
 
-// input의 date타입에서 현재 시간보다 과거의 날짜를 설정하지 못하도록 한다
-
-startDayInput.setAttribute('min', today);
-endDayInput.setAttribute('min', today);
-
-
-// 체크박스가 변경되었을 때 이벤트 핸들러 추가
-// 당일치기가 체크된 상태라면 startDay와 endDay가 항상 같은 값을 유지한다
-
-withinDayCheckbox.addEventListener('change', function () {
-    if (withinDayCheckbox.checked) {
-        startDayInput.removeAttribute('disabled');
-        endDayInput.removeAttribute('disabled');
-        startDayInput.value = endDayInput.value;
-    } else {
-        startDayInput.removeAttribute('disabled');
-        endDayInput.removeAttribute('disabled');
-    }
-});
-
-startDayInput.addEventListener('input', function () {
-    if (withinDayCheckbox.checked) {
-        endDayInput.value = startDayInput.value;
-    }
-});
-
-endDayInput.addEventListener('input', function () {
-    if (withinDayCheckbox.checked) {
-        startDayInput.value = endDayInput.value;
-    }
-});
-
-const submitButton = document.querySelector("._button");
-
-
-submitButton.addEventListener("click", function (event) {
+nextButton.addEventListener("click", function(event) {
     event.preventDefault();
+
+    // if (writeForm['addressPrimary'].value === '') {
+    //     // 주소 미입력
+    //     alert('지도에서 장소를 검색해 주세요.');
+    //     return;
+    // }
+    // if (writeForm['day'].value === '') {
+    //     //날짜 미입력
+    //     alert('날짜를 설정해주세요');
+    //     return;
+    // }
+    // if (writeForm['time'].value === '') {
+    //     //약속시간 미입력
+    //     alert('약속시간을 설정해 주세요.');
+    //     return;
+    // }
+    // if (writeForm['participants'].value === '') {
+    //     //참여인원 미입력
+    //     alert('인원제한을 설정해주세요');
+    //     return;
+    // }
+    // if (writeForm['category'].value === '') {
+    //     //카테고리 미설정
+    //     alert('카테고리를 설정해주세요');
+    //     return;
+    // }
+
+
     writeForm.style.display = "none";
-    ArticleForm.style.display = 'block';
+    ArticleForm.style.display='block';
 });
 
+function goBack(){
+    window.history.back();
+}

@@ -1,8 +1,11 @@
 const ArticleForm = document.getElementById('Article-Form');
 let tagCounter = 0; //전역변수 태그카운터
 let tags = [];
-const CoverForm = document.getElementById('CoverForm');
-const coverButton = document.querySelector('.cover-button');
+var thumbnailPlace = document.querySelector('.thumbnail-place');
+var thumbnailUpload = document.querySelector('.thumbnail-upload');
+var thumbnailChange = document.querySelector('.thumbnail-change');
+const thumbnailTitle = document.querySelector('.thumbnail-title');
+const thumbnail1 = document.querySelector('.thumbnail1');
 
 
 ClassicEditor
@@ -108,11 +111,7 @@ ArticleTag.addEventListener('click', function () {
     Tag.focus();
 });
 
-var thumbnailPlace = document.querySelector('.thumbnail-place');
-var thumbnailUpload = document.querySelector('.thumbnail-upload');
-var thumbnailChange = document.querySelector('.thumbnail-change');
-const thumbnailTitle = document.querySelector('.thumbnail-title');
-const thumbnail1 = document.querySelector('.thumbnail1');
+
 
 // 파일 선택 시 이벤트 처리
 thumbnailChange.addEventListener('change', function(event) {
@@ -149,13 +148,4 @@ beForeButton.onclick = function(e) {
     writeForm.style.display = "block";
     ArticleForm.style.display = 'none';
 };
-
-CoverForm.show = () =>{
-    CoverForm.classList.add('visible');
-} //커버생김
-
-coverButton.addEventListener('click', function() {
-    CoverForm.classList.remove('visible');
-});//커버 안생김
-
 

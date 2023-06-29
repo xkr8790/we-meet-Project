@@ -23,16 +23,19 @@ public class ArticleService {
     }
 
     public InsertArticleResult putArticle(HttpServletRequest request, ArticleEntity article, MultipartFile[] files) throws IOException {
+
+
+
         article.setView(0)
                 .setCreateAt(new Date())
                 .setClientIp(request.getRemoteAddr())
                 .setClientUa(request.getHeader("User-Agent"))
                 .setDeleted(false);
 
-        if(article.getTitle() == null  || article.getCategory()<0 || article.getAddressPrimary() == null ||
-           article.getAddressSecondary() == null || article.getThumbnail() == null || article.getThumbnailMime() == null ||
-           article.getAppointmentStartDate() == null || article.getAppointmentStartTime() == null || article.getLimitPeople()<0
-           || article.getLatitude() == 0 || article.getLongitude() == 0 || article.getHashtag() == null) {
+        if (article.getTitle() == null || article.getCategory() < 0 || article.getAddressPrimary() == null ||
+                article.getAddressSecondary() == null || article.getThumbnail() == null || article.getThumbnailMime() == null ||
+                article.getAppointmentStartDate() == null || article.getAppointmentStartTime() == null || article.getLimitPeople() < 0
+                || article.getLatitude() == 0 || article.getLongitude() == 0 || article.getHashtag() == null) {
             return InsertArticleResult.FAILURE;
         }
 
@@ -40,7 +43,6 @@ public class ArticleService {
                 ? InsertArticleResult.SUCCESS
                 : InsertArticleResult.FAILURE;
     }
-
 
 
 }
