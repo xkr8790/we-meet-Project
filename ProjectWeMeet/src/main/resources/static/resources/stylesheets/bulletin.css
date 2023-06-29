@@ -32,12 +32,19 @@ body {
 
 }
 
-.allContainer >.header >.login > a{
+allContainer > .header > .login > a {
+
+}
+
+.allContainer > .header > .login > a {
+    font-family: 'Humanbumsuk', sans-serif;
+    font-size: 1rem;
     text-decoration: none;
     color: black;
 }
-.allContainer >.header >.login > a:hover{
-    color: #9da3d6;
+
+.allContainer > .header > .login > a:hover {
+    color: blue;
 }
 
 
@@ -91,7 +98,8 @@ body {
     border-radius: 50%;
     object-fit: cover;
 }
-.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img >a > img{
+
+.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img > a > img {
     border-radius: 50%;
 }
 
@@ -102,7 +110,7 @@ body {
     background-color: white;
 }
 
-.allContainer > .main-template >.content{
+.allContainer > .main-template > .content {
     background-color: #f4f3f1;
     padding-bottom: 2rem;
     margin: 0 1rem;
@@ -123,16 +131,16 @@ body {
     margin: 0 1rem
 }
 
-.announcement > .introduction > .member{
+.announcement > .introduction > .member {
     color: red;
     font-size: 0.7rem;
 }
 
-.announcement > .introduction > .subTitle{
-font-size: 1.2rem;
+.announcement > .introduction > .subTitle {
+    font-size: 1.2rem;
 }
 
-.announcement > .introduction > .my{
+.announcement > .introduction > .my {
     width: 100%;
     height: 4rem;
     align-items: start;
@@ -142,33 +150,34 @@ font-size: 1.2rem;
 }
 
 
-.announcement > .introduction > .my > .myImages{
+.announcement > .introduction > .my > .myImages {
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
     margin-right: 0.5rem;
 }
-.announcement > .introduction > .my > .myImages>img{
+
+.announcement > .introduction > .my > .myImages > img {
     border-radius: 50%;
 }
 
-.announcement > .introduction > .my > .myIntroduction{
+.announcement > .introduction > .my > .myIntroduction {
     height: 4rem;
     width: 100%;
 }
 
-.announcement > .introduction > .my > .myIntroduction > .nickname{
-height: 2rem;
+.announcement > .introduction > .my > .myIntroduction > .nickname {
+    height: 2rem;
 
 }
 
-.announcement > .introduction > .my > .myIntroduction > .text{
- height: 2rem;
+.announcement > .introduction > .my > .myIntroduction > .text {
+    height: 2rem;
     color: lightgray;
 }
 
 
-.announcement > .participant{
+.announcement > .participant {
     width: 100%;
     height: 15rem;
     align-items: center;
@@ -178,7 +187,7 @@ height: 2rem;
     position: relative;
 }
 
-.announcement > .participant > .participantContainer{
+.announcement > .participant > .participantContainer {
     position: relative;
     width: 90%;
     height: 11rem;
@@ -189,7 +198,7 @@ height: 2rem;
     justify-content: center;
 }
 
-.announcement > .participant > .participantContainer > .login-after-human{
+.announcement > .participant > .participantContainer > .login-after-human {
     width: 100%;
     height: 100%;
     color: blue;
@@ -200,13 +209,13 @@ height: 2rem;
 }
 
 
-.announcement > .participant > .participantContainer > .login-before-human{
+.announcement > .participant > .participantContainer > .login-before-human {
     position: absolute;
     width: 100%;
     height: 100%;
     margin-bottom: 1rem;
     border-radius: 15px;
-    background-color: rgb(255,228,196);
+    background-color: rgb(255, 228, 196);
     color: black;
     align-items: center;
     display: flex;
@@ -214,7 +223,7 @@ height: 2rem;
     justify-content: center;
 }
 
-.announcement > .participant > .participantContainer >.login-before-human > a> .attend{
+.announcement > .participant > .participantContainer > .login-before-human > a > .attend {
     width: 8rem;
     height: 2rem;
     border-radius: 5px;
@@ -222,7 +231,7 @@ height: 2rem;
     cursor: pointer;
 }
 
-.announcement > .guide{
+.announcement > .guide {
     width: 100%;
     height: 15rem;
     display: flex;
@@ -230,25 +239,26 @@ height: 2rem;
     justify-content: start;
     margin: 0 1rem
 }
-.announcement > .guide > .guideContainer{
+
+.announcement > .guide > .guideContainer {
     margin-right: 0.5rem;
     width: 35%;
 }
-.announcement > .guide > .guideContainer > .guidance{
+
+.announcement > .guide > .guideContainer > .guidance {
     font-size: 0.8rem;
     color: red;
 }
-.announcement > .guide > .guideContainer > .map{
+
+.announcement > .guide > .guideContainer > .map {
     height: 9.8rem;
-    border:1px solid blue;
+    border: 1px solid blue;
 }
 
-.announcement > .guide > .comments{
+.announcement > .guide > .comments {
     width: 58%;
-    border:1px solid blue;
+    border: 1px solid blue;
 }
-
-
 
 .preview{
     position: relative;
@@ -315,7 +325,7 @@ height: 2rem;
 }
 
 .preview > .container > .previewContainer > .text > .title{
- width: 10rem;
+    width: 10rem;
     height: 1.5rem;
     margin-bottom: 0.2rem;
     overflow: hidden;
@@ -329,11 +339,11 @@ height: 2rem;
 }
 
 .preview > .container > .previewContainer > .text > .participant{
-height: 2.27rem;
-align-items: center;
-display: flex;
-flex-direction: row;
-justify-content: start;
+    height: 2.27rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
 }
 .preview > .container > .previewContainer > .text > .participant > .human {
     width: 2.27rem;

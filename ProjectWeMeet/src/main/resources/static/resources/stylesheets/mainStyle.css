@@ -302,7 +302,14 @@ object-fit: cover;
 }
 
 .slide2 {
+    width : 68.75rem;
+    height: 34.375rem;
     background-color: aqua;
+}
+.slide2> img{
+    width : 68.75rem;
+    height: 34.375rem;
+    object-fit: cover;
 }
 
 .slide3 {

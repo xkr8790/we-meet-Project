@@ -8,12 +8,15 @@
     <title>게시글</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" href="/resources/stylesheets/bulletin.css">
+    <script defer src="/resources/scripts/bulletin.js"></script>
+
+
 </head>
 <body>
 
 <div class="allContainer">
     <div class="header">
-        <a href="">
+        <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
         </a>
         <div class="login" th:if="${session.user == null}">
@@ -94,8 +97,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="preview">
         <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
@@ -128,11 +129,40 @@
                     </div>
                 </div>
             </div>
+
+            <div class="previewContainer">
+                <a class="img">
+                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
+                </a>
+                <div class="text">
+                    <div class="category">카테고리</div>
+                    <div class="title">제목</div>
+                    <div class="time">시간</div>
+                    <div class="participant">
+                        <div class="human">프로필</div>
+                        <div class="number">인원</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="previewContainer">
+                <a class="img">
+                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
+                </a>
+                <div class="text">
+                    <div class="category">카테고리</div>
+                    <div class="title">제목</div>
+                    <div class="time">시간</div>
+                    <div class="participant">
+                        <div class="human">프로필</div>
+                        <div class="number">인원</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-
 </div>
+
 
 </body>
 </html>
