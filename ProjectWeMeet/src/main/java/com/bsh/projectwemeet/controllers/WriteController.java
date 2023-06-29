@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/")
-public class writeController {
+public class WriteController {
 
 
     @RequestMapping(value = "write",
