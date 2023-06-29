@@ -1,20 +1,21 @@
+const time = document.querySelector('.time');
+const participants = document.querySelector('.participants');
+const category = document.querySelector('.category');
+
 
 ArticleForm.onsubmit = e => {
     e.preventDefault();
-
-    if (ArticleForm['ArticleTitle'].value === '') {
-        alert('제목을 입력해주새요');
-        return;
-    }//게시판 제목이 없을 경우
-
-    if (ArticleForm['content'].value === '') {
-        alert('내용을 입력해주세요')
-        return;
-    }//게시판 내용이 없다면
-
-    if (Tags.childElementCount === 0) {
-        alert('태그를 생성해주세요');
-        return;
-    } //태그가 생성되지 않았을때
-
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    xhr.open('POST', 'write');
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                alert('성공');
+            } else {
+                alert('실패');
+            }
+        }
+    };
+    xhr.send();
 }
