@@ -4,7 +4,7 @@ const addressSecondaryInput = writeForm.querySelector('.addressSecondary');
 const dayInput = document.querySelector('.day');
 const today = new Date().toISOString().split('T')[0];
 const nextButton = document.querySelector(".next");
-
+const inner = document.querySelector('.inner');
 
 
 // 마커를 담을 배열입니다
@@ -158,8 +158,10 @@ function getListItem(index, places) {
     //목록 클릭 이벤트
     el.addEventListener('click', function() {
 
-        addressPrimaryInput.value = places.place_name;
-        addressSecondaryInput.value = places.address_name;
+        writeForm['addressPrimary'].value=places.place_name;
+        writeForm['addressSecondary'].value=places.address_name;
+        // addressPrimaryInput.value = places.place_name;
+        // addressSecondaryInput.value = places.address_name;
         addressPrimaryInput.disabled = true;
 
         // Move and zoom to the corresponding marker
@@ -168,9 +170,10 @@ function getListItem(index, places) {
 
 
         // 클릭시 마커의 좌표(위도,경도)를 가져온다(hidden으로 숨겨둠)
-        writeForm.querySelector('input[name="lat"]').value = places.y;
-        writeForm.querySelector('input[name="lng"]').value = places.x;
-
+        // writeForm.querySelector('input[name="lat"]').value = places.y;
+        // writeForm.querySelector('input[name="lng"]').value = places.x;
+        writeForm['lat'].value=places.y;
+        writeForm['lng'].value=places.x;
 
     });
 
@@ -276,34 +279,34 @@ dayInput.setAttribute('min', today);
 nextButton.addEventListener("click", function(event) {
     event.preventDefault();
 
-    // if (writeForm['addressPrimary'].value === '') {
-    //     // 주소 미입력
-    //     alert('지도에서 장소를 검색해 주세요.');
-    //     return;
-    // }
-    // if (writeForm['day'].value === '') {
-    //     //날짜 미입력
-    //     alert('날짜를 설정해주세요');
-    //     return;
-    // }
-    // if (writeForm['time'].value === '') {
-    //     //약속시간 미입력
-    //     alert('약속시간을 설정해 주세요.');
-    //     return;
-    // }
-    // if (writeForm['participants'].value === '') {
-    //     //참여인원 미입력
-    //     alert('인원제한을 설정해주세요');
-    //     return;
-    // }
-    // if (writeForm['category'].value === '') {
-    //     //카테고리 미설정
-    //     alert('카테고리를 설정해주세요');
-    //     return;
-    // }
+    if (writeForm['addressPrimary'].value === '') {
+        // 주소 미입력
+        alert('지도에서 장소를 검색해 주세요.');
+        return;
+    }
+    if (writeForm['day'].value === '') {
+        //날짜 미입력
+        alert('날짜를 설정해주세요');
+        return;
+    }
+    if (writeForm['time'].value === '') {
+        //약속시간 미입력
+        alert('약속시간을 설정해 주세요.');
+        return;
+    }
+    if (writeForm['participants'].value === '') {
+        //참여인원 미입력
+        alert('인원제한을 설정해주세요');
+        return;
+    }
+    if (writeForm['category'].value === '') {
+        //카테고리 미설정
+        alert('카테고리를 설정해주세요');
+        return;
+    }
 
 
-    writeForm.style.display = "none";
+    inner.style.display = "none";
     ArticleForm.style.display='block';
 });
 

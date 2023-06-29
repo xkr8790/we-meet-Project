@@ -16,52 +16,55 @@
 
 </head>
 <body>
-
-<div id="writeForm" class="container">
-    <div class="inner">
-        <h2 class="logo_we_meet">
-            <a href="http://localhost:6795/" class="link">
-                <img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/>
-            </a>
-        </h2>
-        <main class="box step-1">
-            <div id="content" class="content">
-                <div class="input-wrapper">
-                    <div class="sub_title">지도에서 장소를 검색해 주세요</div>
-                    <input disabled type="text" class="addressPrimary input" placeholder="장소" name="addressPrimary">
-                    <input disabled type="text" class="addressSecondary input" placeholder="주소" name="addressSecondary">
-                    <span class="sub_title">날짜와 시간을 선택해 주세요</span>
-                    <div class="dayBox">
-                        <input type="date" class="day" name="day">
-                    </div>
-                    <div class="sub_title">시간을 설정해주세요</div>
-                    <div class="timeBox">
-                        <input type="time" class="time" name="time">
-                    </div>
-                    <div class="sub_title">참여인원과 카테고리를 설정해주세요</div>
-                    <div class="etc">
-                        <div class="box_one">
-                            <span class="text">참여인원</span>
-                            <input type="number" class="participants" name="participants" min="2">
+<div class="inner">
+    <h2 class="logo_we_meet">
+        <a href="http://localhost:6795/" class="link">
+            <img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/>
+        </a>
+    </h2>
+    <div class="container">
+        <form id="writeForm">
+            <main class="box step-1">
+                <div id="content" class="content">
+                    <div class="input-wrapper">
+                        <div class="sub_title">지도에서 장소를 검색해 주세요</div>
+                        <input disabled type="text" class="addressPrimary input" placeholder="장소" name="addressPrimary">
+                        <input disabled type="text" class="addressSecondary input" placeholder="주소" name="addressSecondary">
+                        <span class="sub_title">날짜와 시간을 선택해 주세요</span>
+                        <div class="dayBox">
+                            <input type="date" class="day" name="day">
                         </div>
-                        <div class="box_two">
-                            <span class="text">카테고리</span>
-                            <select name="category" class="category">
-                                <option disabled hidden selected value="">카테고리</option>
-                                <option value="1">영화</option>
-                                <option value="2">게임</option>
-                                <option value="3">운동</option>
-                                <option value="4">ㅇㅇ</option>
-                                <option value="5">ㄱㄱ</option>
-                                <option value="6">ㄹㄹ</option>
-                            </select>
+                        <div class="sub_title">시간을 설정해주세요</div>
+                        <div class="timeBox">
+                            <input type="time" class="time" name="time">
                         </div>
-                    </div>
-                    <input hidden name="lat" type="hidden" maxlength="50" placeholder="경도">
-                    <input hidden name="lng" type="hidden" maxlength="50" placeholder="위도">
+                        <div class="sub_title">참여인원과 카테고리를 설정해주세요</div>
+                        <div class="etc">
+                            <div class="box_one">
+                                <span class="text">참여인원</span>
+                                <input type="number" class="participants" name="participants" min="2">
+                            </div>
+                            <div class="box_two">
+                                <span class="text">카테고리</span>
+                                <select name="category" class="category">
+                                    <option disabled hidden selected value="">카테고리</option>
+                                    <option value="1">영화</option>
+                                    <option value="2">게임</option>
+                                    <option value="3">운동</option>
+                                    <option value="4">ㅇㅇ</option>
+                                    <option value="5">ㄱㄱ</option>
+                                    <option value="6">ㄹㄹ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input hidden name="lat" type="hidden" maxlength="50" placeholder="경도">
+                        <input hidden name="lng" type="hidden" maxlength="50" placeholder="위도">
 
+                    </div>
                 </div>
-            </div>
+            </main>
+        </form>
+        <div class="mapBox">
             <div class="map_wrap">
                 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
                 <div id="menu_wrap" class="bg_white">
@@ -78,17 +81,17 @@
                     <div id="pagination"></div>
                 </div>
             </div>
-        </main>
-        <div class="buttonBox">
-            <input type="submit" value="취소" class="_button cancel" onclick="goBack()">
-            <input type="submit" value="다음" class="_button next">
         </div>
+    </div>
 
+    <div class="buttonBox">
+        <input type="submit" value="취소" class="_button cancel" onclick="goBack()">
+        <input type="submit" value="다음" class="_button next">
     </div>
 </div>
 
 <form id="Article-Form" style="display: none">
-    <img class="logo" th:src="@{/resources/images/registerImags/logo.jpg}" >
+    <img class="logo" th:src="@{/resources/images/registerImags/logo.jpg}">
     <section>
         <div class="thumbnail-place">
             <img id="thumbnail-preview" class="thumbnail" th:src="@{/resources/images/mainImages/soju.jpg}">
