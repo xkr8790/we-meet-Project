@@ -1,5 +1,5 @@
 const writeForm = document.getElementById('writeForm');
-const addressPrimaryInput = writeForm.querySelector('.addressPrimary');
+const placeInput = writeForm.querySelector('.place');
 const addressSecondaryInput = writeForm.querySelector('.addressSecondary');
 const dayInput = document.querySelector('.day');
 const today = new Date().toISOString().split('T')[0];
@@ -158,11 +158,11 @@ function getListItem(index, places) {
     //목록 클릭 이벤트
     el.addEventListener('click', function() {
 
-        writeForm['addressPrimary'].value=places.place_name;
-        writeForm['addressSecondary'].value=places.address_name;
+        writeForm['place'].value=places.place_name;
+        writeForm['address'].value=places.address_name;
         // addressPrimaryInput.value = places.place_name;
         // addressSecondaryInput.value = places.address_name;
-        addressPrimaryInput.disabled = true;
+        placeInput.disabled = true;
 
         // Move and zoom to the corresponding marker
         map.setLevel(2); // Adjust the zoom level as needed
@@ -279,7 +279,7 @@ dayInput.setAttribute('min', today);
 nextButton.addEventListener("click", function(event) {
     event.preventDefault();
 
-    if (writeForm['addressPrimary'].value === '') {
+    if (writeForm['place'].value === '') {
         // 주소 미입력
         alert('지도에서 장소를 검색해 주세요.');
         return;
@@ -294,7 +294,7 @@ nextButton.addEventListener("click", function(event) {
         alert('약속시간을 설정해 주세요.');
         return;
     }
-    if (writeForm['participants'].value === '') {
+    if (writeForm['limit'].value === '') {
         //참여인원 미입력
         alert('인원제한을 설정해주세요');
         return;
