@@ -1,0 +1,792 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Humanbumsuk';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    text-decoration: none;
+    background-color: #f4f3f1;
+    /*border: 1px solid red;*/
+}
+
+h2 {
+    display: unset;
+    margin-block-start: unset;
+    margin-block-end: unset;
+    margin-inline-start: unset;
+    margin-inline-end: unset;
+}
+
+:root {
+    --concept-color-light: #f4f3f1;
+}
+
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+
+._container {
+    padding: 0 3rem;
+    position: relative;
+}
+
+._container > ._content {
+    left: 50%;
+    width: 100%;
+    max-width: 77.5rem;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+._container > ._content._small {
+    max-width: 77.5rem;
+}
+
+#topMenuContainer > .top-menu {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    font-size: 0.8rem;
+    justify-content: flex-end;
+    list-style-type: none;
+    margin-block: unset;
+    margin-inline: unset;
+    margin-bottom: 1.5rem;
+    padding-inline: unset;
+    padding: 1rem 0 0 0;
+}
+
+#topMenuContainer > .top-menu > .item > .link {
+    color: #9da3d6;
+    font-family: 'Humanbumsuk', sans-serif;
+    font-size: 1.5rem;
+}
+
+#topMenuContainer > .top-menu > .alarm > .link > .alarm {
+    width: 1.75rem;
+    margin-right: 1.25rem;
+}
+
+#topMenuContainer > .top-menu > .item + .item {
+    margin-left: 1.75rem;
+}
+
+#mainContainer {
+    background-color: white;
+    border: 1px outset white;
+    margin: 5rem 8rem 0 8rem;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+}
+
+#mainContainer > .left-profile {
+    background-color: white;
+
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#mainContainer > .left-profile > .thumbnail {
+    background-color: white;
+}
+
+#mainContainer > .left-profile > .thumbnail > .default {
+    background-color: white;
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    margin: 2rem 0 2rem 3rem;
+}
+
+#mainContainer > .left-profile > .thumbnail > .default > .profile {
+    background-color: white;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-shadow: 1px 1px 2px 0 #888;
+    background-size: cover;
+    margin: 1rem 0 0 1rem;
+}
+
+#mainContainer > .left-profile > .thumbnail > .pencil {
+    background-color: white;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    position: relative;
+    transform: translate(410%, -160%);
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+#mainContainer > .left-profile > .thumbnail > .pencil > .change_button {
+    background-color: white;
+    top: 22.5%;
+    left: 22.5%;
+    width: 1.1rem;
+    height: 1.1rem;
+    position: absolute;
+    display: block;
+    margin: auto;
+}
+
+
+#mainContainer > .left-profile > .text-box {
+    background-color: white;
+    margin-top: 4rem;
+    margin-left: 2.5rem;
+    font-size: 1.125rem;
+    font-weight: bold;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+
+#mainContainer > .left-profile > .text-box > .user-name {
+    background-color: white;
+    margin-bottom: 1.125rem;
+    white-space: nowrap;
+}
+
+#mainContainer > .left-profile > .text-box > .information_change {
+    background-color: white;
+    color: black;
+    list-style-type: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#mainContainer > .left-profile > .text-box > .information_change:hover {
+    color: #3498db;
+}
+
+
+#mainContainer > .middle-profile {
+    background-color: white;
+    margin-left: 6rem;
+    border-left: 1px solid black;
+}
+
+
+#mainContainer > .middle-profile > .intro {
+    margin-top: 3rem;
+    margin-left: 7.5rem;
+    background-color: white;
+    font-size: 1rem;
+    font-weight: unset;
+    resize: none;
+}
+
+#mainContainer > .right-profileF {
+    background-color: white;
+    margin-left: 7.5rem;
+    border-left: 1px solid black;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+#mainContainer > .right-profileF > .posts {
+    background-color: white;
+    color: black;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-left: 1.5rem;
+    margin-top: 3rem;
+    white-space: nowrap;
+}
+
+#mainContainer > .right-profileF > .postH {
+    background-color: white;
+    font-size: 1.25rem;
+    font-weight: revert;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    white-space: nowrap;
+}
+
+#mainContainer > .right-profileS {
+    background-color: white;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#mainContainer > .right-profileS > .item {
+    background-color: white;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#mainContainer > .right-profileS > .item > .like {
+    background-color: white;
+    width: 3rem;
+    margin-left: 1rem;
+    margin-top: 2rem;
+    margin-right: 1rem;
+}
+
+#mainContainer > .right-profileS > .item > .likes {
+    background-color: white;
+    color: black;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    white-space: nowrap;
+}
+
+
+#mainContainer > .right-profileS > .item > .report {
+    background-color: white;
+    width: 3rem;
+    margin-left: 2rem;
+    margin-top: 1.5rem;
+    margin-right: 1rem;
+
+}
+
+
+#mainContainer > .right-profileS > .item > .reports {
+    background-color: white;
+    color: black;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    white-space: nowrap;
+}
+
+#postContainer {
+    background-color: white;
+    border: 1px outset white;
+    margin: 2rem 8rem 0 8rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#postContainer > .postF {
+    background-color: white;
+
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    position: relative;
+}
+
+
+#postContainer > .postF > .post1 {
+    background-color: white;
+    margin: 1rem;
+}
+
+#postContainer > .postF > .post2 {
+    background-color: white;
+    margin: 1rem;
+}
+
+#postContainer > .postF > .post3 {
+    background-color: white;
+    margin: 1rem;
+}
+
+
+#postContainer > .postF > .post1 > .link1 {
+    background-color: white;
+}
+
+
+#postContainer > .postF > .post2 > .link1 {
+    background-color: white;
+}
+
+#postContainer > .postF > .post3 > .link1 {
+    background-color: white;
+}
+
+#postContainer > .postF > .post1 > .link1 > .link {
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+#postContainer > .postF > .post2 > .link1 > .link {
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+#postContainer > .postF > .post3 > .link1 > .link {
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+#postContainer > .postS {
+    background-color: white;
+
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    position: relative;
+}
+
+
+#postContainer > .postS > .post1 {
+    background-color: white;
+    margin: 1rem;
+}
+
+#postContainer > .postS > .post2 {
+    background-color: white;
+    margin: 1rem;
+}
+
+#postContainer > .postS > .post3 {
+    background-color: white;
+    margin: 1rem;
+}
+
+
+#postContainer > .postS > .post1 > .link1 {
+    background-color: white;
+}
+
+
+#postContainer > .postS > .post2 > .link1 {
+    background-color: white;
+}
+
+#postContainer > .postS > .post3 > .link1 {
+    background-color: white;
+}
+
+#postContainer > .postS > .post1 > .link1 > .link {
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+#postContainer > .postS > .post2 > .link1 > .link {
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+#postContainer > .postS > .post3 > .link1 > .link {
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+#postContainer > .postT {
+    background-color: white;
+
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    position: relative;
+}
+
+
+#postContainer > .postT > .post1 {
+    background-color: white;
+    margin: 1rem;
+}
+
+#postContainer > .postT > .post2 {
+    background-color: white;
+    margin: 1rem;
+}
+
+#postContainer > .postT > .post3 {
+    background-color: white;
+    margin: 1rem;
+}
+
+
+#postContainer > .postT > .post1 > .link1 {
+    background-color: white;
+}
+
+
+#postContainer > .postT > .post2 > .link1 {
+    background-color: white;
+}
+
+#postContainer > .postT > .post3 > .link1 {
+    background-color: white;
+}
+
+#postContainer > .postT > .post1 > .link1 > .link {
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+#postContainer > .postT > .post2 > .link1 > .link {
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+#postContainer > .postT > .post3 > .link1 > .link {
+    background-color: white;
+    padding: 4rem;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 2px 0 #888;
+}
+
+
+/*#popup {*/
+/*    top: 0;*/
+/*    left: -2rem;*/
+/*    width: 24rem;*/
+/*    height: 100vh;*/
+/*    background-color: #f0f0f0;*/
+/*    box-shadow: 0 0 1rem 0.0625rem #00000010;*/
+/*    opacity: 0;*/
+/*    overflow: hidden auto;*/
+/*    pointer-events: none;*/
+/*    position: fixed;*/
+/*    transition-duration: 250ms;*/
+/*    transition-property: left, opacity;*/
+/*    transition-timing-function: ease;*/
+/*    z-index: 9;*/
+
+/*    align-items: stretch;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: flex-start;*/
+/*}*/
+
+/*#popup.visible {*/
+/*    left: 0;*/
+/*    opacity: 1;*/
+/*    pointer-events: all;*/
+/*}*/
+
+.popup {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 1;
+    transition-duration: 0.3s;
+    transition-property: opacity;
+    transition-timing-function: ease-in-out;
+}
+
+.popup-content.step-1 {
+    position: absolute;
+    display: block;
+    font-style: inherit;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 1rem;
+    width: 18.75rem;
+    height: 12.5rem;
+    text-align: center;
+    list-style-type: none;
+}
+
+#popup > .popup-content.step-1 > .title {
+    background-color: white;
+    font-style: inherit;
+}
+
+#popup > .popup-content.step-1 > .item {
+    background-color: white;
+
+    align-items: center;
+    display: flex;
+    flex-direction: revert;
+    justify-content: center;
+}
+
+#popup > .popup-content.step-1 > .item > ._object-input {
+    width: 80%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+
+    margin-top: 1rem;
+    font-style: inherit;
+}
+
+#popup > .popup-content.step-1 > .check {
+    background-color: white;
+
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#popup > .popup-content.step-1 > .check > .checkPassword {
+    background-color: #9da3d6;
+    color: black;
+    font-style: inherit;
+    margin-top: 2rem;
+    padding: 0.625rem;
+    border: 1px solid #9da3d6;
+    opacity: 0.8;
+}
+
+#popup > .popup-content.step-1 > .check > .checkPassword:hover {
+    opacity: 1;
+}
+
+#popup > .popup-content.step-1 > .check > .checkPassword:active {
+    background-color: #9da3d6;
+    color: #959595;
+}
+
+.popup-content.step-2 {
+    position: absolute;
+    display: block;
+    font-style: inherit;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 1rem 2rem 2rem 2rem;
+    width: 30rem;
+    height: 70%;
+    list-style-type: none;
+}
+
+#popup > .popup-content.step-2 > .title {
+    background-color: white;
+    font-style: inherit;
+    font-size: 2rem;
+
+    margin-top: 0.625rem;
+    margin-bottom: 1.25rem;
+}
+
+#popup > .popup-content.step-2 > .passwordReset {
+    background-color: white;
+
+    margin-bottom: 1rem;
+}
+
+#popup > .popup-content.step-2 > .passwordReset > .title {
+    background-color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.625rem;
+
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#popup > .popup-content.step-2 > .passwordReset > .password {
+    background-color: white;
+    color: #959595;
+    margin-bottom: 0.625rem;
+    font-size: 1rem;
+    width: 75%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+#popup > .popup-content.step-2 > .passwordReset > .passwordRe {
+    background-color: white;
+    color: #959595;
+    font-size: 1rem;
+    width: 75%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+#popup > .popup-content.step-2 > .passwordReset > .resetButton {
+    background-color: #9da3d6;
+    color: black;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    opacity: 0.8;
+}
+
+#popup > .popup-content.step-2 > .nicknameReset {
+    background-color: white;
+
+    margin-bottom: 1rem;
+}
+
+
+#popup > .popup-content.step-2 > .nicknameReset > .title {
+    background-color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.625rem;
+
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#popup > .popup-content.step-2 > .nicknameReset > .nickname {
+    background-color: white;
+    color: #959595;
+    font-size: 1rem;
+    width: 75%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+#popup > .popup-content.step-2 > .nicknameReset > .resetButton {
+    background-color: #9da3d6;
+    color: black;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    opacity: 0.8;
+}
+
+#popup > .popup-content.step-2 > .addressReset {
+    background-color: white;
+
+    margin-bottom: 1rem;
+}
+
+#popup > .popup-content.step-2 > .addressReset > .title {
+    background-color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.625rem;
+
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#popup > .popup-content.step-2 > .addressReset > .addressFirst {
+    background-color: white;
+    margin-bottom: 0.625rem;
+}
+
+#popup > .popup-content.step-2 > .addressReset > .addressFirst > .address {
+    background-color: white;
+    color: #959595;
+    font-size: 1rem;
+    width: 70%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+#popup > .popup-content.step-2 > .addressReset > .addressFirst > .findButton {
+    background-color: #9da3d6;
+    color: black;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    opacity: 0.8;
+}
+
+#popup > .popup-content.step-2 > .addressReset > .addressSecond {
+    background-color: white;
+    margin-bottom: 0.625rem;
+}
+
+#popup > .popup-content.step-2 > .addressReset > .addressSecond > .address {
+    background-color: white;
+    color: #959595;
+    font-size: 1rem;
+    width: 95%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+#popup > .popup-content.step-2 > .addressReset > .addressThird {
+    background-color: white;
+}
+
+#popup > .popup-content.step-2 > .addressReset > .addressThird > .address {
+    background-color: white;
+    color: #959595;
+    font-size: 1rem;
+    width: 95%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+#popup > .popup-content.step-2 > .die {
+    background-color: white;
+    margin-bottom: 0.625rem;
+}
+
+#popup > .popup-content.step-2 > .die > .link {
+    background-color: white;
+    font-size: 0.9rem;
+    font-style: inherit;
+    color: black;
+    text-decoration: black underline;
+}
+
+#popup > .popup-content.step-2 > .save {
+    background-color: white;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+#popup > .popup-content.step-2 > .save > .save {
+    background-color: #9da3d6;
+    color: black;
+    font-size: 1.25rem;
+    opacity: 0.8;
+    border-radius: 0.5rem;
+}

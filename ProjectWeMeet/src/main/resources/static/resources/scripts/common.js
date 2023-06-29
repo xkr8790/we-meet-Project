@@ -10,4 +10,3 @@ HTMLInputElement.prototype.focusAndSelect = function (){
     this.focus();
     this.select();
 };
-

@@ -30,7 +30,6 @@ public class RegisterService {
     }
 
 
-
     public SendRegisterContactCodeResult sendRegisterContactCodeResult(RegisterContactCodeEntity registerContactCode){
         if (registerContactCode == null
         || registerContactCode.getContact() == null

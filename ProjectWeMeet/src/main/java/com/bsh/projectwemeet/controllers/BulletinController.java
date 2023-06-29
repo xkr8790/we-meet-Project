@@ -7,11 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value="/")
-public class profileController {
+public class BulletinController {
 
-    @RequestMapping(value="profile", method = RequestMethod.GET)
-    public ModelAndView getProfile(){
-        ModelAndView modelAndView = new ModelAndView("home/profile");
+    @RequestMapping(value="bulletin", method = RequestMethod.GET)
+    public ModelAndView getBulletin(){
+        ModelAndView modelAndView = new ModelAndView("home/bulletin");
         return modelAndView;
     }
 }

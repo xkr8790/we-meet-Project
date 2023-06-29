@@ -14,7 +14,7 @@
     <script defer th:src="@{/resources/scripts/common.js}"></script>
     <script defer th:src="@{/resources/scripts/register.js}"></script>
 </head>
-<body>
+<body th:if="${session.user == null}">
 <div id="dialogCover"></div>
 <!--dialogCover 화면 어둡게하기 주소찾기 클릭시 어둡게 하기위해서-->
 <div id="addressLayer">

@@ -8,26 +8,26 @@
     <title>Email 확인</title>
     <link rel="stylesheet" href="/resources/stylesheets/confirmEmail.css">
 </head>
-<body>
-<form>
+
+<body th:if="${session.user == null}">
+<main>
     <div class="container">
-        <a th:href="@{/login}">
-        <img th:src="@{/resources/images/loginImags/lastLogo.jpg}" alt="wemeet">
+        <a th:href="@{/}">
+            <img th:src="@{/resources/images/logoImages/logo-224x80.png}" alt="wemeet">
         </a>
+
         <div class="content">
-            <span th:text="${responseObject.name}"></span>
-            <span>의 email은</span>
-            <b th:text="${responseObject.email}"></b>
+            <span class="name" th:text="${name}"></span>
+            <span>님의 email은</span>
+            <b class="email" th:text="${email}"></b>
             <span>입니다.</span>
         </div>
-<span>이거는 아무것도 나오지 않아서 당황해서 아무거나 적은 곳이다 </span>
         <div class="linkBox">
             <a th:href="@{/login}">
                 <p>로그인 화면으로 돌아가기</p>
             </a>
         </div>
     </div>
-</form>
-
+</main>
 </body>
 </html>

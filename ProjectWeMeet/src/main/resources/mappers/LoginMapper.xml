@@ -21,6 +21,7 @@ resultType="com.bsh.projectwemeet.entities.UserEntity">
            `password` AS `password`
     FROM `wemeet_project`.`users`
     WHERE BINARY `email` = #{email}
+
     LiMIT 1
 </select>
 

@@ -7,12 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value="/")
-public class confirmEmailController {
-
-    @RequestMapping(value="confirmEmail", method = RequestMethod.GET)
-    public ModelAndView getConfirmEmail(){
-        ModelAndView modelAndView = new ModelAndView("home/confirmEmail");
+public class ArticleController {
+    @RequestMapping(value = "article",method = RequestMethod.GET)
+    public ModelAndView getArticle () {
+        ModelAndView modelAndView = new ModelAndView("home/article");
         return modelAndView;
-    }
-
+    } //게시판 주소로 가기
 }

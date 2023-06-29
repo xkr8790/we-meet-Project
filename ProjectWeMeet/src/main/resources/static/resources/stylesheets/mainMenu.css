@@ -17,7 +17,7 @@
     left: 0;
     width: 0;
     height: 100vh;
-    background-color: #f4f3f1;
+    background-color: white;
     overflow: hidden auto;
     position: fixed;
     transition-duration: 250ms;

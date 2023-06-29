@@ -91,10 +91,11 @@
 </div>
 
 <form id="Article-Form" style="display: none">
-    <img class="logo" th:src="@{/resources/images/registerImags/logo.jpg}">
+    <img class="logo" src="/resources/images/logoImages/logo-224x48.png">
     <section>
         <div class="thumbnail-place">
-            <img id="thumbnail-preview" class="thumbnail" th:src="@{/resources/images/mainImages/soju.jpg}">
+            <img class="thumbnail1" src="/resources/images/articleImages/thumbnail.png">
+            <label for="photo-upload" class="thumbnail-title">썸네일을 등록해주세요</label>
             <label for="photo-upload" class="thumbnail-upload">썸네일 등록</label>
             <input type="file" name="upload" class="thumbnail-change" id="photo-upload" accept="image/*">
         </div>

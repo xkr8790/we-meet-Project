@@ -7,16 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>계정찾기</title>
 
-    <link rel="stylesheet" href="/resources/stylesheets/recoverAccount.css">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverAccount.css}">
     <script defer th:src="@{/resources/scripts/recoverAccount.js}"></script>
 
 
 </head>
-<body>
+<body th:if="${session.user == null}">
 <form id="recoverForm">
     <h2 class="title">
-        <a th:href="@{/login}">
-            <img th:src="@{/resources/images/loginImags/lastLogo.jpg}" alt="wemeet">
+        <a th:href="@{/}">
+            <img th:src="@{/resources/images/logoImages/logo-224x80.png}" alt="wemeet">
         </a>
     </h2>
     <div class="option-container">
@@ -49,10 +49,7 @@
             <input type="email" name="pEmail" placeholder="이메일을 입력해 주세요">
         </label>
     </div>
-    <span class="warning" rel="eNameWarning"></span>
     <span class="warning" rel="contactWarning"></span>
-    <span class="warning" rel="eContactWarning"></span>
-    <span class="warning" rel="emailWarning"></span>
     <span class="cNotification" rel="cNotification"></span>
     <div class="button-container">
         <input class="object-button" type="button" value="취소">
@@ -61,6 +58,13 @@
     </div>
 </form>
 
+<form id="linkCoverForm">
+    <div class="cover">
+        <div class="cover-text"></div>
+        <div class="cover-text"></div>
+        <div class="cover-button">확인</div>
+    </div>
+</form>
 
 </body>
 </html>

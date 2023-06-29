@@ -1,3 +1,13 @@
+const body = document.getElementById('body');
+
+window.onload = function() {
+    body.style.transitionDuration = '600ms'; // 애니메이션 지속 시간 설정
+    body.style.transitionTimingFunction = 'ease'; // 타이밍 함수 설정
+    body.style.transitionProperty = 'opacity'; // 타이밍 함수 설정
+    body.style.opacity = '1';
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     let sliderIndex = 0;
     const slideWidth = document.querySelector('.slide').clientWidth;
@@ -28,5 +38,5 @@ document.addEventListener("DOMContentLoaded", function () {
             sliderIndex = 0;
         }
         slideTo(sliderIndex);
-    }, 6200);
+    }, 4400);
 });
