@@ -3,16 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bsh.projectwemeet.mappers.ArticleMapper">
-    <insert id="insertArticle"
+    <insert id="insertArticleInformation"
             useGeneratedKeys="true"
             keyColumn="index"
             keyProperty="index"
-            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
-        INSERT INTO `wemeet_project`.`articles` (email, title, category, content, address_primary, address_secondary, thumbnail, thumbnail_mime, view, created_at, appointment_date,appointment_time, limit_people, participation, like_count, report, deleted_flag, finished_flag, latitude, longitude, hashtag)
+            parameterType="com.bsh.projectwemeet.entities.ArticlesEntity">
+        INSERT INTO `wemeet_project`.`articles` (email, title, category, content, address_primary, address_secondary, thumbnail, thumbnail_mime, view, created_at, appointment_start_date, appointment_end_date, appointment_start_time, appointment_end_time, limit_people, participation, like_count, report, deleted_flag, finished_flag, latitude, longitude, hashtag)
         VALUES (#{email},
                 #{title},
                 #{category},
-                #{content}
                 #{addressPrimary},
                 #{addressSecondary},
                 #{thumbnail},
@@ -21,12 +20,12 @@
                 IFNULL(#{createdAt}, DEFAULT(`created_at`)),
                 #{appointmentStartDate},
                 #{appointmentStartTime},
+                #{appointmentEndDate},
+                #{appointmentEndTime},
                 #{limitPeople},
                 #{participation},
-                IFNULL(#{likeCount}, DEFAULT(`like_count`)),
-                IFNULL(#{report}, DEFAULT(`report`)),
-                #{isDeleted},
-                #{isFinished},
+                #{likeCount},
+                #{report},
                 #{latitude},
                 #{longitude},
                 #{hashtag}

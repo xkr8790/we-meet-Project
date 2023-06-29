@@ -493,14 +493,14 @@ body{
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-content-box > .article-content{
     width: 17rem;
-background-color: rgb(244, 244, 244);
+    background-color: rgb(244, 244, 244);
 }
 
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-content-box > .article-content > .article-content-title {
     /*background-color: white;*/
     width: 17rem;
-background-color: rgb(244, 244, 244);
+    background-color: rgb(244, 244, 244);
 }
 
 .article-container > .slider > .slide > .article-box > .article-list >
@@ -508,7 +508,7 @@ background-color: rgb(244, 244, 244);
     display: block;
     width: 17rem;
     margin-bottom: 1.5rem;
-background-color: rgb(244, 244, 244);
+    background-color: rgb(244, 244, 244);
     /*background-color: gray;*/
 }
 

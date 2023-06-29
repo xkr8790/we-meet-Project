@@ -3,6 +3,7 @@
 html {
     margin: 0;
     padding: 0;
+    background-color: #f4f3f1;
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
     system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
@@ -39,7 +40,9 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: 8rem;
 }
+
 
 section > .thumbnail-place {
     z-index: 0;
@@ -84,7 +87,7 @@ section > .thumbnail-place > .thumbnail-upload {
 
 section > .thumbnail-place > .thumbnail-upload:hover {
     filter: brightness(90%);
-}
+}  /* 파일업로드버튼을 참조하는 레이블*/
 
 
 .thumbnail-place > .thumbnail-title {
@@ -95,11 +98,27 @@ section > .thumbnail-place > .thumbnail-upload:hover {
 }
 /* 파일업로드버튼을 참조하는 레이블*/
 
-.logo{
-    align-self: flex-start;
+section>.thumbnail-place>.thumbnail{
+    opacity: 0.6;
+    aspect-ratio: 1/1;
+    background-color: #fafafa;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0.0625rem solid #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0.5rem;
+    position: absolute;
 }
 
 /* -------------------------------------- 썸네일 ---------------------------------------------- */
+
 
 
 section > #Article-Write {

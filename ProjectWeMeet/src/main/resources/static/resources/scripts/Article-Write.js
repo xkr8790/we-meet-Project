@@ -148,4 +148,3 @@ beForeButton.onclick = function(e) {
     writeForm.style.display = "block";
     ArticleForm.style.display = 'none';
 };
-
