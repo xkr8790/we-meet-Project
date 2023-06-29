@@ -8,27 +8,6 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.ArticlesEntity">
-        INSERT INTO `wemeet_project`.`articles` (email, title, category, content, address_primary, address_secondary, thumbnail, thumbnail_mime, view, created_at, appointment_start_date, appointment_end_date, appointment_start_time, appointment_end_time, limit_people, participation, like_count, report, deleted_flag, finished_flag, latitude, longitude, hashtag)
-        VALUES (#{email},
-                #{title},
-                #{category},
-                #{addressPrimary},
-                #{addressSecondary},
-                #{thumbnail},
-                #{thumbnailMime},
-                #{view},
-                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
-                #{appointmentStartDate},
-                #{appointmentStartTime},
-                #{appointmentEndDate},
-                #{appointmentEndTime},
-                #{limitPeople},
-                #{participation},
-                #{likeCount},
-                #{report},
-                #{latitude},
-                #{longitude},
-                #{hashtag}
-               )
+
     </insert>
 </mapper>

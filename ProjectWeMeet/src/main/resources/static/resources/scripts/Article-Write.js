@@ -145,6 +145,6 @@ thumbnailChange.addEventListener('change', function(event) {
 const beForeButton = document.querySelector('input[type="button"][value="이전"]');
 beForeButton.onclick = function(e) {
     e.preventDefault();
-    writeForm.style.display = "block";
+    inner.style.display = "block";
     ArticleForm.style.display = 'none';
 };

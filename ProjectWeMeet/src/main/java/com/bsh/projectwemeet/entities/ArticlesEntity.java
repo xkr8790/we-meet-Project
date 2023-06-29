@@ -9,17 +9,15 @@ public class ArticlesEntity {
     private String title;
     private int category;
     private String content;
-    private String addressPrimary;
-    private String addressSecondary;
+    private String place;
+    private String address;
     private byte[] thumbnail;
     private String thumbnailMime;
     private int view;
     private Date createAt;
-    private Date appointmentStartDate;
-    private Date appointmentEndDate;
-    private Date appointmentStartTime;
-    private Date appointmentEndTime;
-    private int limitPeople;
+    private Date day;
+    private Date time;
+    private int limit;
     private int participation;
     private int likeCount;
     private int report;
@@ -28,20 +26,8 @@ public class ArticlesEntity {
     private int latitude;
     private int longitude;
     private String hashtag;
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ArticlesEntity that = (ArticlesEntity) o;
-        return index == that.index;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(index);
-    }
+    private String clientIp;
+    private String clientUa;
 
     public int getIndex() {
         return index;
@@ -88,21 +74,21 @@ public class ArticlesEntity {
         return this;
     }
 
-    public String getAddressPrimary() {
-        return addressPrimary;
+    public String getPlace() {
+        return place;
     }
 
-    public ArticlesEntity setAddressPrimary(String addressPrimary) {
-        this.addressPrimary = addressPrimary;
+    public ArticlesEntity setPlace(String place) {
+        this.place = place;
         return this;
     }
 
-    public String getAddressSecondary() {
-        return addressSecondary;
+    public String getAddress() {
+        return address;
     }
 
-    public ArticlesEntity setAddressSecondary(String addressSecondary) {
-        this.addressSecondary = addressSecondary;
+    public ArticlesEntity setAddress(String address) {
+        this.address = address;
         return this;
     }
 
@@ -142,48 +128,30 @@ public class ArticlesEntity {
         return this;
     }
 
-    public Date getAppointmentStartDate() {
-        return appointmentStartDate;
+    public Date getDay() {
+        return day;
     }
 
-    public ArticlesEntity setAppointmentStartDate(Date appointmentStartDate) {
-        this.appointmentStartDate = appointmentStartDate;
+    public ArticlesEntity setDay(Date day) {
+        this.day = day;
         return this;
     }
 
-    public Date getAppointmentEndDate() {
-        return appointmentEndDate;
+    public Date getTime() {
+        return time;
     }
 
-    public ArticlesEntity setAppointmentEndDate(Date appointmentEndDate) {
-        this.appointmentEndDate = appointmentEndDate;
+    public ArticlesEntity setTime(Date time) {
+        this.time = time;
         return this;
     }
 
-    public Date getAppointmentStartTime() {
-        return appointmentStartTime;
+    public int getLimit() {
+        return limit;
     }
 
-    public ArticlesEntity setAppointmentStartTime(Date appointmentStartTime) {
-        this.appointmentStartTime = appointmentStartTime;
-        return this;
-    }
-
-    public Date getAppointmentEndTime() {
-        return appointmentEndTime;
-    }
-
-    public ArticlesEntity setAppointmentEndTime(Date appointmentEndTime) {
-        this.appointmentEndTime = appointmentEndTime;
-        return this;
-    }
-
-    public int getLimitPeople() {
-        return limitPeople;
-    }
-
-    public ArticlesEntity setLimitPeople(int limitPeople) {
-        this.limitPeople = limitPeople;
+    public ArticlesEntity setLimit(int limit) {
+        this.limit = limit;
         return this;
     }
 
@@ -257,5 +225,36 @@ public class ArticlesEntity {
     public ArticlesEntity setHashtag(String hashtag) {
         this.hashtag = hashtag;
         return this;
+    }
+
+    public String getClientIp() {
+        return clientIp;
+    }
+
+    public ArticlesEntity setClientIp(String clientIp) {
+        this.clientIp = clientIp;
+        return this;
+    }
+
+    public String getClientUa() {
+        return clientUa;
+    }
+
+    public ArticlesEntity setClientUa(String clientUa) {
+        this.clientUa = clientUa;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArticlesEntity that = (ArticlesEntity) o;
+        return index == that.index;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index);
     }
 }

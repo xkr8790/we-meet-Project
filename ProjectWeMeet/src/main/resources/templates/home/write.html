@@ -29,7 +29,7 @@
                     <div class="input-wrapper">
                         <div class="sub_title">지도에서 장소를 검색해 주세요</div>
                         <input disabled type="text" class="input place" placeholder="장소" name="place">
-                        <input disabled type="text" class="address input" placeholder="주소" name="address">
+                        <input disabled type="text" class="input address" placeholder="주소" name="address">
                         <span class="sub_title">날짜와 시간을 선택해 주세요</span>
                         <div class="dayBox">
                             <input type="date" class="day" name="day">
@@ -94,7 +94,7 @@
     <img class="logo" src="/resources/images/logoImages/logo-224x48.png">
     <section>
         <div class="thumbnail-place">
-            <img class="thumbnail1" src="/resources/images/articleImages/thumbnail.png">
+            <img class="thumbnail1" th:src="@{/resources/images/registerImags/logo.jpg}">
             <label for="photo-upload" class="thumbnail-title">썸네일을 등록해주세요</label>
             <label for="photo-upload" class="thumbnail-upload">썸네일 등록</label>
             <input type="file" name="upload" class="thumbnail-change" id="photo-upload" accept="image/*">
