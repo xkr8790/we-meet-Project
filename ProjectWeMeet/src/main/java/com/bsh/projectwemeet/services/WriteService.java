@@ -1,6 +1,7 @@
 package com.bsh.projectwemeet.services;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.enums.RegisterResult;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,9 @@ public class WriteService {
                 .setClientUa(request.getHeader("User-Agent"))
                 .setDeleted(false)
                 .setFinished(false);
+
         return true;
+
     }
 
 

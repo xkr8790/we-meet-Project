@@ -48,6 +48,10 @@ public class WriteController {
         Date day = sdf.parse(dayStr);
         article.setDay(day);
 
+        SimpleDateFormat tsdf = new SimpleDateFormat("HH:mm");
+        Date time = tsdf.parse(timeStr);
+        article.setTime(time);
+
 
         return null;
     }
