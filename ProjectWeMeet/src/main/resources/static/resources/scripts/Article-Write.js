@@ -55,11 +55,11 @@ ArticleTag.addEventListener('click', function () {
     TagContainer.appendChild(TagWarning);
     TagContainer.appendChild(Tag);
 
-    TagWarning.show = () =>{
+    TagWarning.show = () => {
         TagWarning.classList.add('show');
     }
 
-    TagWarning.hide = () =>{
+    TagWarning.hide = () => {
         TagWarning.classList.remove('show');
     }
 
@@ -83,14 +83,14 @@ ArticleTag.addEventListener('click', function () {
             const slicedText = trimmedText.slice(0, 12);
             Tag.value = slicedText;
             TagWarning.show();
-            setTimeout(function() {
+            setTimeout(function () {
                 TagWarning.hide();
             }, 600);
         }
     });
 
 
-    Tag.addEventListener('mousedown', function(event) {
+    Tag.addEventListener('mousedown', function (event) {
         event.preventDefault();
         Tag.focus();
     }); //드래그를 막으면서 input 쓰기 가능하게함
@@ -112,14 +112,13 @@ ArticleTag.addEventListener('click', function () {
 });
 
 
-
 // 파일 선택 시 이벤트 처리
-thumbnailChange.addEventListener('change', function(event) {
+thumbnailChange.addEventListener('change', function (event) {
     var file = event.target.files[0]; // 선택한 파일 가져오기
 
     // FileReader 객체 사용하여 이미지 읽기
     var reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         // 이미지를 표시할 img 요소 생성
         var image = document.createElement('img');
         image.src = e.target.result; // 읽은 이미지 데이터 설정
@@ -141,54 +140,54 @@ thumbnailChange.addEventListener('change', function(event) {
 });
 
 
-
 const beForeButton = document.querySelector('input[type="button"][value="이전"]');
-beForeButton.onclick = function(e) {
+beForeButton.onclick = function (e) {
     e.preventDefault();
     inner.style.display = "block";
     articleForm.style.display = 'none';
 };
 
-articleForm['complete'].addEventListener('click', () => {
+articleForm['complete'].addEventListener('click', (e) => {
     // const thumnail = document.querySelector('.thumbnail');
 
-    articleForm.onsubmit = e =>{
-        e.preventDefault();
-        // if(thumnail === null){
-        //     alert('썸네일을 올려주세요');
-        //     return;
-        // }
+    e.preventDefault();
+    // if(thumnail === null){
+    //     alert('썸네일을 올려주세요');
+    //     return;
+    // }
 
-        if(articleForm['ArticleTitle'].value === ''){
-            alert('제목을 입력해주세요');
-            return;
-        }
-        if(articleForm['content'].value === ''){
-            alert('내용을 입력해주세요');
-            return;
-        }
-
-        const xhr = new XMLHttpRequest();
-        const formData = new FormData();
-        formData.append('place', writeForm['place'].value);
-        formData.append('address', writeForm['address'].value);
-        formData.append('dayStr', writeForm['day'].value);
-        formData.append('timeStr', writeForm['time'].value);
-        formData.append('limit', writeForm['limit'].value);
-        formData.append('category', writeForm['category'].value);
-
-
-        formData.append('content',articleForm['content'].value);
-        xhr.open('POST','/write');
-        xhr.onreadystatechange = () => {
-            if(xhr.readyState === XMLHttpRequest.DONE){
-                if(xhr.status >= 200 && xhr.status<300) {
-                    alert('성공');
-                }else {
-                    alert('실패');
-                }
-            }
-        };
-        xhr.send();
+    if (articleForm['title'].value === '') {
+        alert('제목을 입력해주세요');
+        return;
     }
+    // if(articleForm['content'].value === ''){
+    //     alert('내용을 입력해주세요');
+    //     return;
+    // }
+
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('place', writeForm['place'].value);
+    formData.append('address', writeForm['address'].value);
+    formData.append('dayStr', writeForm['day'].value);
+    formData.append('timeStr', writeForm['time'].value);
+    formData.append('limit', writeForm['limit'].value);
+    // formData.append('latitude', writeForm['lat'].value);
+    // formData.append('longitude', writeForm['lng'].value);
+    formData.append('category',writeForm['category'].value);
+
+    formData.append('title', articleForm['title'].value);
+    formData.append('content', articleForm['content'].value);
+    xhr.open('POST', '/write');
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                alert('성공');
+            } else {
+                alert('실패');
+            }
+        }
+    };
+    xhr.send(formData);
 });

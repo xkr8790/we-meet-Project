@@ -14,7 +14,7 @@ public class ArticleEntity {
     private byte[] thumbnail;
     private String thumbnailMime;
     private int view;
-    private Date createAt;
+    private Date createdAt;
     private Date day;
     private Date time;
     private int limit;
@@ -119,12 +119,12 @@ public class ArticleEntity {
         return this;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public ArticleEntity setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public ArticleEntity setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
         return this;
     }
 

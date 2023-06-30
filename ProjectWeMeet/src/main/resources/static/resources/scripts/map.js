@@ -162,7 +162,7 @@ function getListItem(index, places) {
         writeForm['address'].value=places.address_name;
         // addressPrimaryInput.value = places.place_name;
         // addressSecondaryInput.value = places.address_name;
-        placeInput.disabled = true;
+        // placeInput.disabled = true;
 
         // Move and zoom to the corresponding marker
         map.setLevel(2); // Adjust the zoom level as needed

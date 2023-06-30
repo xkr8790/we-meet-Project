@@ -1,6 +1,7 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.services.WriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,9 +42,11 @@ public class WriteController {
             method = RequestMethod.POST,
             produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public ModelAndView postWrite(HttpServletRequest request, ArticleEntity article,
+    public ModelAndView postWrite(HttpServletRequest request,
+                                  ArticleEntity article,
                                   @RequestParam(value = "dayStr")String dayStr,
-                                  @RequestParam(value = "timeStr")String timeStr)throws ParseException, NoSuchAlgorithmException {
+                                  @RequestParam(value = "timeStr")String timeStr,
+                                  HttpSession session)throws ParseException, NoSuchAlgorithmException {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date day = sdf.parse(dayStr);
@@ -53,7 +57,19 @@ public class WriteController {
         article.setTime(time);
 
 
-        return null;
+        boolean result = this.writeService.putArticle(request,article,session);
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (result){
+//            modelAndView.setViewName("redirect:/article/read?index="+article.getIndex());
+            modelAndView.setViewName("home/bulletin");
+        }else {
+            modelAndView.setViewName("home/bulletin");
+            modelAndView.addObject("result",result);
+        }
+
+
+        return modelAndView;
     }
 
 }
