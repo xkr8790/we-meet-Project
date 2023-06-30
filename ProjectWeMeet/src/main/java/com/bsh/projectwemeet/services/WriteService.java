@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @Service
 public class WriteService {
@@ -19,7 +20,12 @@ public class WriteService {
 
 
     public boolean putArticle(HttpServletRequest request, ArticleEntity article){
-
+        article.setView(0)
+                .setCreateAt(new Date())
+                .setClientIp(request.getRemoteAddr())
+                .setClientUa(request.getHeader("User-Agent"))
+                .setDeleted(false)
+                .setFinished(false);
         return true;
     }
 
