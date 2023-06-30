@@ -148,3 +148,47 @@ beForeButton.onclick = function(e) {
     inner.style.display = "block";
     articleForm.style.display = 'none';
 };
+
+articleForm['complete'].addEventListener('click', () => {
+    // const thumnail = document.querySelector('.thumbnail');
+
+    articleForm.onsubmit = e =>{
+        e.preventDefault();
+        // if(thumnail === null){
+        //     alert('썸네일을 올려주세요');
+        //     return;
+        // }
+
+        if(articleForm['ArticleTitle'].value === ''){
+            alert('제목을 입력해주세요');
+            return;
+        }
+        if(articleForm['content'].value === ''){
+            alert('내용을 입력해주세요');
+            return;
+        }
+
+        const xhr = new XMLHttpRequest();
+        const formData = new FormData();
+        formData.append('place', writeForm['place'].value);
+        formData.append('address', writeForm['address'].value);
+        formData.append('dayStr', writeForm['day'].value);
+        formData.append('timeStr', writeForm['time'].value);
+        formData.append('limit', writeForm['limit'].value);
+        formData.append('category', writeForm['category'].value);
+
+
+        formData.append('content',articleForm['content'].value);
+        xhr.open('POST','/write');
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState === XMLHttpRequest.DONE){
+                if(xhr.status >= 200 && xhr.status<300) {
+                    alert('성공');
+                }else {
+                    alert('실패');
+                }
+            }
+        };
+        xhr.send();
+    }
+});

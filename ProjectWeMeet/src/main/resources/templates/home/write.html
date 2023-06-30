@@ -11,9 +11,9 @@
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-    <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
     <script defer th:src="@{/resources/scripts/map.js}"></script>
     <script defer th:src="@{/resources/scripts/write.js}"></script>
+    <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
 
 </head>
 <body>
@@ -49,12 +49,12 @@
                                 <span class="text">카테고리</span>
                                 <select name="category" class="category">
                                     <option disabled hidden selected value="">카테고리</option>
-                                    <option value="1">영화</option>
-                                    <option value="2">게임</option>
-                                    <option value="3">운동</option>
-                                    <option value="4">ㅇㅇ</option>
-                                    <option value="5">ㄱㄱ</option>
-                                    <option value="6">ㄹㄹ</option>
+                                    <option value="영화">영화</option>
+                                    <option value="게임">게임</option>
+                                    <option value="운동">운동</option>
+                                    <option value="산책">산책</option>
+                                    <option value="식사">식사</option>
+                                    <option value="만남">만남</option>
                                 </select>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
     <img class="logo" src="/resources/images/logoImages/logo-224x48.png">
     <section>
         <div class="thumbnail-place">
-            <img class="thumbnail1" th:src="@{/resources/images/registerImags/logo.jpg}">
+            <img class="thumbnail1" th:src="@{/resources/images/registerImags/logo.jpg}" alt="x">
             <label for="photo-upload" class="thumbnail-title">썸네일을 등록해주세요</label>
             <label for="photo-upload" class="thumbnail-upload">썸네일 등록</label>
             <input type="file" name="upload" class="thumbnail-change" id="photo-upload" accept="image/*">
@@ -111,7 +111,7 @@
             </div>
             <div class="buttons">
                 <input class="submit" type="button" value="이전">
-                <input class="submit" type="submit" value="등록">
+                <input class="submit" type="submit" value="등록" name="complete">
             </div>
         </div>
     </section>

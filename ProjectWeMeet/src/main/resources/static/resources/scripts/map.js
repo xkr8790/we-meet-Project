@@ -306,7 +306,7 @@ nextButton.addEventListener("click", function(event) {
     }
 
     inner.style.display = "none";
-    ArticleForm.style.display='block';
+    articleForm.style.display='block';
 });
 
 function goBack(){

@@ -7,7 +7,7 @@
             useGeneratedKeys="true"
             keyColumn="index"
             keyProperty="index"
-            parameterType="com.bsh.projectwemeet.entities.ArticlesEntity">
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
 
     </insert>
 </mapper>

@@ -3,11 +3,11 @@ package com.bsh.projectwemeet.entities;
 import java.util.Date;
 import java.util.Objects;
 
-public class ArticlesEntity {
+public class ArticleEntity {
     private int index;
     private String email;
     private String title;
-    private int category;
+    private String category;
     private String content;
     private String place;
     private String address;
@@ -33,7 +33,7 @@ public class ArticlesEntity {
         return index;
     }
 
-    public ArticlesEntity setIndex(int index) {
+    public ArticleEntity setIndex(int index) {
         this.index = index;
         return this;
     }
@@ -42,7 +42,7 @@ public class ArticlesEntity {
         return email;
     }
 
-    public ArticlesEntity setEmail(String email) {
+    public ArticleEntity setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -51,16 +51,16 @@ public class ArticlesEntity {
         return title;
     }
 
-    public ArticlesEntity setTitle(String title) {
+    public ArticleEntity setTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public int getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public ArticlesEntity setCategory(int category) {
+    public ArticleEntity setCategory(String category) {
         this.category = category;
         return this;
     }
@@ -69,7 +69,7 @@ public class ArticlesEntity {
         return content;
     }
 
-    public ArticlesEntity setContent(String content) {
+    public ArticleEntity setContent(String content) {
         this.content = content;
         return this;
     }
@@ -78,7 +78,7 @@ public class ArticlesEntity {
         return place;
     }
 
-    public ArticlesEntity setPlace(String place) {
+    public ArticleEntity setPlace(String place) {
         this.place = place;
         return this;
     }
@@ -87,7 +87,7 @@ public class ArticlesEntity {
         return address;
     }
 
-    public ArticlesEntity setAddress(String address) {
+    public ArticleEntity setAddress(String address) {
         this.address = address;
         return this;
     }
@@ -96,7 +96,7 @@ public class ArticlesEntity {
         return thumbnail;
     }
 
-    public ArticlesEntity setThumbnail(byte[] thumbnail) {
+    public ArticleEntity setThumbnail(byte[] thumbnail) {
         this.thumbnail = thumbnail;
         return this;
     }
@@ -105,7 +105,7 @@ public class ArticlesEntity {
         return thumbnailMime;
     }
 
-    public ArticlesEntity setThumbnailMime(String thumbnailMime) {
+    public ArticleEntity setThumbnailMime(String thumbnailMime) {
         this.thumbnailMime = thumbnailMime;
         return this;
     }
@@ -114,7 +114,7 @@ public class ArticlesEntity {
         return view;
     }
 
-    public ArticlesEntity setView(int view) {
+    public ArticleEntity setView(int view) {
         this.view = view;
         return this;
     }
@@ -123,7 +123,7 @@ public class ArticlesEntity {
         return createAt;
     }
 
-    public ArticlesEntity setCreateAt(Date createAt) {
+    public ArticleEntity setCreateAt(Date createAt) {
         this.createAt = createAt;
         return this;
     }
@@ -132,7 +132,7 @@ public class ArticlesEntity {
         return day;
     }
 
-    public ArticlesEntity setDay(Date day) {
+    public ArticleEntity setDay(Date day) {
         this.day = day;
         return this;
     }
@@ -141,7 +141,7 @@ public class ArticlesEntity {
         return time;
     }
 
-    public ArticlesEntity setTime(Date time) {
+    public ArticleEntity setTime(Date time) {
         this.time = time;
         return this;
     }
@@ -150,7 +150,7 @@ public class ArticlesEntity {
         return limit;
     }
 
-    public ArticlesEntity setLimit(int limit) {
+    public ArticleEntity setLimit(int limit) {
         this.limit = limit;
         return this;
     }
@@ -159,7 +159,7 @@ public class ArticlesEntity {
         return participation;
     }
 
-    public ArticlesEntity setParticipation(int participation) {
+    public ArticleEntity setParticipation(int participation) {
         this.participation = participation;
         return this;
     }
@@ -168,7 +168,7 @@ public class ArticlesEntity {
         return likeCount;
     }
 
-    public ArticlesEntity setLikeCount(int likeCount) {
+    public ArticleEntity setLikeCount(int likeCount) {
         this.likeCount = likeCount;
         return this;
     }
@@ -177,7 +177,7 @@ public class ArticlesEntity {
         return report;
     }
 
-    public ArticlesEntity setReport(int report) {
+    public ArticleEntity setReport(int report) {
         this.report = report;
         return this;
     }
@@ -186,7 +186,7 @@ public class ArticlesEntity {
         return isDeleted;
     }
 
-    public ArticlesEntity setDeleted(boolean deleted) {
+    public ArticleEntity setDeleted(boolean deleted) {
         isDeleted = deleted;
         return this;
     }
@@ -195,7 +195,7 @@ public class ArticlesEntity {
         return isFinished;
     }
 
-    public ArticlesEntity setFinished(boolean finished) {
+    public ArticleEntity setFinished(boolean finished) {
         isFinished = finished;
         return this;
     }
@@ -204,7 +204,7 @@ public class ArticlesEntity {
         return latitude;
     }
 
-    public ArticlesEntity setLatitude(int latitude) {
+    public ArticleEntity setLatitude(int latitude) {
         this.latitude = latitude;
         return this;
     }
@@ -213,7 +213,7 @@ public class ArticlesEntity {
         return longitude;
     }
 
-    public ArticlesEntity setLongitude(int longitude) {
+    public ArticleEntity setLongitude(int longitude) {
         this.longitude = longitude;
         return this;
     }
@@ -222,7 +222,7 @@ public class ArticlesEntity {
         return hashtag;
     }
 
-    public ArticlesEntity setHashtag(String hashtag) {
+    public ArticleEntity setHashtag(String hashtag) {
         this.hashtag = hashtag;
         return this;
     }
@@ -231,7 +231,7 @@ public class ArticlesEntity {
         return clientIp;
     }
 
-    public ArticlesEntity setClientIp(String clientIp) {
+    public ArticleEntity setClientIp(String clientIp) {
         this.clientIp = clientIp;
         return this;
     }
@@ -240,7 +240,7 @@ public class ArticlesEntity {
         return clientUa;
     }
 
-    public ArticlesEntity setClientUa(String clientUa) {
+    public ArticleEntity setClientUa(String clientUa) {
         this.clientUa = clientUa;
         return this;
     }
@@ -249,7 +249,7 @@ public class ArticlesEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ArticlesEntity that = (ArticlesEntity) o;
+        ArticleEntity that = (ArticleEntity) o;
         return index == that.index;
     }
 
