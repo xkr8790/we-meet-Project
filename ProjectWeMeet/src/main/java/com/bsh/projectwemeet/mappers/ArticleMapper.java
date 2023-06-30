@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ArticleMapper {
-    int insert(ArticleEntity articles);
+    int insert(ArticleEntity article);
 
 
 

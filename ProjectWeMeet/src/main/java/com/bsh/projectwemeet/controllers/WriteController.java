@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/")
@@ -41,10 +43,10 @@ public class WriteController {
     public ModelAndView postWrite(HttpServletRequest request, ArticleEntity article,
                                   @RequestParam(value = "dayStr")String dayStr,
                                   @RequestParam(value = "timeStr")String timeStr)throws ParseException, NoSuchAlgorithmException {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        Date birth = sdf.parse(birthStr);
-//        user.setBirth(birth);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date day = sdf.parse(dayStr);
+        article.setDay(day);
 
 
         return null;
