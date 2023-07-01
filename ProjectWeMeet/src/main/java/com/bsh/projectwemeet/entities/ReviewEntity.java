@@ -14,6 +14,16 @@ public class ReviewEntity {
     private boolean isDeleted;
     private String  clientIp;
     private String clientUa;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public ReviewEntity setEmail(String email) {
+        this.email = email;
+        return this;
+    }
 
     public String getReviewStar() {
         return reviewStar;

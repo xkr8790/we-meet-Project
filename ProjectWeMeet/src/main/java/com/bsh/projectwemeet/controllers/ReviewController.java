@@ -1,6 +1,7 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ReviewEntity;
+import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.mappers.ReviewMapper;
 import com.bsh.projectwemeet.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value="/")
@@ -32,7 +36,8 @@ public class ReviewController {
 
     @RequestMapping(value="review", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postReview(HttpServletRequest request, ReviewEntity reviewEntity){
+    public String postReview(HttpServletRequest request, ReviewEntity reviewEntity, @SessionAttribute(value="user") UserEntity user){
+        reviewEntity.setEmail(user.getEmail());
         boolean result = this.reviewService.reviewWrite(request, reviewEntity);
         return  String.valueOf(result);
     }
