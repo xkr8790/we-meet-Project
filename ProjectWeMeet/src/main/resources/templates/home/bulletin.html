@@ -6,10 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>게시글</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" href="/resources/stylesheets/bulletin.css">
     <script defer src="/resources/scripts/bulletin.js"></script>
-
+    <script defer src="/resources/scripts/bulletinMap.js"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
 
 </head>
 <body>
@@ -90,10 +93,12 @@
                     <i class="fa-solid fa-location-dot"></i>
                     장소
                 </p>
-                <p class="map">지도</p>
+                <p class="map" id="map">지도</p>
             </div>
             <div class="comments">
-                <p>댓글</p>
+                <div class="title">위밋! 댓글</div>
+                <div class="content"></div>
+                <div class="text"></div>
             </div>
         </div>
     </div>

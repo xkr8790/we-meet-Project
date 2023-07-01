@@ -119,6 +119,7 @@ allContainer > .header > .login > a {
 
 .announcement {
     width: 100%;
+    height: auto;
     align-items: start;
     display: flex;
     flex-direction: column;
@@ -133,6 +134,7 @@ allContainer > .header > .login > a {
 
 .announcement > .introduction > .member {
     color: red;
+
     font-size: 0.7rem;
 }
 
@@ -231,124 +233,118 @@ allContainer > .header > .login > a {
     cursor: pointer;
 }
 
-.announcement > .guide {
+.announcement > .review {
     width: 100%;
-    height: 15rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    margin: 0 1rem
-}
-
-.announcement > .guide > .guideContainer {
-    margin-right: 0.5rem;
-    width: 35%;
-}
-
-.announcement > .guide > .guideContainer > .guidance {
-    font-size: 0.8rem;
-    color: red;
-}
-
-.announcement > .guide > .guideContainer > .map {
-    height: 9.8rem;
-    border: 1px solid blue;
-}
-
-.announcement > .guide > .comments {
-    width: 58%;
-    border: 1px solid blue;
+    height: auto;
+    align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
-.preview{
-    position: relative;
+.announcement > .review > .reviewContainer {
+    border: 1px solid red;
+    background-color: white;
     width: 100%;
-    height: 13rem;
-    background-color: #f4f3f1;
-
-
-    align-items: start;
+    height: auto;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: start;
-    overflow: hidden;
 }
 
-.preview > .subtitle{
-    margin-left: 16px;
-    margin-bottom: 0.7rem;
+.announcement > .review > .reviewContainer > .reviewTitle {
+    padding-bottom: 0.5rem;
+}
+
+.announcement > .review > .reviewContainer > .reviewContent {
+    width: 100%;
+    /*height: 7rem;*/
+    /*border: 1px solid blue;*/
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.announcement > .review > .reviewContainer > .reviewContent > .reviewBox {
+    width: 80%;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 15px;
+}
+
+.announcement > .review > .reviewContainer > .reviewContent > .reviewBox > .core {
     color: red;
+    margin: 0.4rem 0;
 }
 
-.preview > .container{
+.announcement > .review > .reviewContainer > .reviewContent > .reviewBox > .estimate {
+    margin-bottom: 0.5rem;
+}
+
+.announcement > .review > .reviewContainer > .reviewContent > .reviewBox > .writer {
+
+    width: 100%;
+    border: 1px solid black;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.preview > .container > .previewContainer{
-    width: 22rem;
-    height: 9rem;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    margin: 0 1rem;
-    border: 1px solid white;
-    background-color: white;
-    border-radius: 15px;
-}
-
-.preview > .container > .previewContainer > .img{
-    width: 7rem;
-    height: 7rem;
-    margin: 0 1rem;
-}
-.preview > .container > .previewContainer > .img > img{
-
-    object-fit: cover;
-}
-.preview > .container > .previewContainer > .text{
-    width: 10rem;
-    height: 7rem;
-}
-
-.preview > .container > .previewContainer > .text > .category{
-    width: 4.5rem;
-    margin-bottom: 0.2rem;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid lightgray;
-    background-color: lightgray;
-    font-size: 0.8rem;
-}
-
-.preview > .container > .previewContainer > .text > .title{
-    width: 10rem;
-    height: 1.5rem;
-    margin-bottom: 0.2rem;
-    overflow: hidden;
-}
-
-.preview > .container > .previewContainer > .text > .time {
-    width: 10rem;
-    margin-bottom: 0.2rem;
-    font-size: 0.8rem;
-    overflow: hidden;
-}
-
-.preview > .container > .previewContainer > .text > .participant{
-    height: 2.27rem;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-}
-.preview > .container > .previewContainer > .text > .participant > .human {
-    width: 2.27rem;
-    height: 2.27rem;
+.announcement > .review > .reviewContainer > .reviewContent > .reviewBox > .writer > .profile {
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
+    border: 1px solid black;
+
+}
+
+.announcement > .review > .reviewContainer > .reviewInput {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.announcement > .review > .reviewContainer > .reviewInput> .fieldset{
+    display: flex;
+    flex-direction: row-reverse;
+    border: 0;
+}
+
+.announcement > .review > .reviewContainer > .reviewInput> .fieldset > input[type=radio]{
+    display: none;
+}
+.announcement > .review > .reviewContainer > .reviewInput> .fieldset> label{
+    font-size: 2rem;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+.announcement > .review > .reviewContainer > .reviewInput> .fieldset> label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+.announcement > .review > .reviewContainer > .reviewInput> .fieldset> label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+.announcement > .review > .reviewContainer > .reviewInput> .fieldset> input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+
+
+
+
+
+
+.announcement > .review > .reviewContainer > .reviewInput > .text {
+    margin: 0.6rem 0.5rem;
+    width: 25rem;
+    height: 3rem;
+}
+
+.announcement > .review > .reviewContainer > .reviewInput > .button {
+    width: 4rem;
+    height: 2rem;
 }
