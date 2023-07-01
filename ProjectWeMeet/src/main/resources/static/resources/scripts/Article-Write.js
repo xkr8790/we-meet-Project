@@ -1,4 +1,6 @@
-const ArticleForm = document.getElementById('Article-Form');
+const articleForm = document.getElementById('Article-Form');
+
+
 let tagCounter = 0; //전역변수 태그카운터
 let tags = [];
 var thumbnailPlace = document.querySelector('.thumbnail-place');
@@ -45,6 +47,7 @@ ArticleTag.addEventListener('click', function () {
     const Tag = document.createElement('input');
 
     Tag.setAttribute('type', 'text');
+    Tag.name = "hashTag"
     Tag.value = '#'; // 처음 생성시 # 추가
     TagContainer.classList.add('tag-container');
     TagWarning.classList.add('tag-warning');
@@ -55,11 +58,11 @@ ArticleTag.addEventListener('click', function () {
     TagContainer.appendChild(TagWarning);
     TagContainer.appendChild(Tag);
 
-    TagWarning.show = () =>{
+    TagWarning.show = () => {
         TagWarning.classList.add('show');
     }
 
-    TagWarning.hide = () =>{
+    TagWarning.hide = () => {
         TagWarning.classList.remove('show');
     }
 
@@ -83,14 +86,14 @@ ArticleTag.addEventListener('click', function () {
             const slicedText = trimmedText.slice(0, 12);
             Tag.value = slicedText;
             TagWarning.show();
-            setTimeout(function() {
+            setTimeout(function () {
                 TagWarning.hide();
             }, 600);
         }
     });
 
 
-    Tag.addEventListener('mousedown', function(event) {
+    Tag.addEventListener('mousedown', function (event) {
         event.preventDefault();
         Tag.focus();
     }); //드래그를 막으면서 input 쓰기 가능하게함
@@ -114,37 +117,81 @@ ArticleTag.addEventListener('click', function () {
 
 
 // 파일 선택 시 이벤트 처리
-thumbnailChange.addEventListener('change', function(event) {
-    var file = event.target.files[0]; // 선택한 파일 가져오기
+thumbnailChange.addEventListener('change', function (e) {
+
+    articleForm['upload'].files[0].value =  e.target.files[0]; // 선택한 파일 가져오기
 
     // FileReader 객체 사용하여 이미지 읽기
     var reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         // 이미지를 표시할 img 요소 생성
+
         var image = document.createElement('img');
         image.src = e.target.result; // 읽은 이미지 데이터 설정
         image.classList.add('thumbnail'); // 클래스 추가
 
         // 기존 썸네일 이미지가 있는 경우 교체
         var existingImage = thumbnailPlace.querySelector('.thumbnail');
+
         if (existingImage) {
             existingImage.src = image.src;
         } else {
             // 썸네일 영역에 이미지 추가
             thumbnailPlace.appendChild(image);
         }
+
+        // 이미지 Data URL을 articleForm에 추가
+        articleForm['upload'] = e.target.result;
+
     };
-    reader.readAsDataURL(file); // 이미지 파일을 Data URL로 읽기
+    reader.readAsDataURL(articleForm['upload'].files[0]); // 이미지 파일을 Data URL로 읽기
     thumbnailTitle.style.display = 'none';
     thumbnail1.style.display = 'none';
     thumbnailUpload.textContent = '썸네일 변경';
 });
 
 
-
 const beForeButton = document.querySelector('input[type="button"][value="이전"]');
-beForeButton.onclick = function(e) {
+beForeButton.onclick = function (e) {
     e.preventDefault();
-    writeForm.style.display = "block";
-    ArticleForm.style.display = 'none';
+    inner.style.display = "block";
+    articleForm.style.display = 'none';
 };
+
+
+articleForm['complete'].addEventListener('click', (e) => {
+    e.preventDefault();
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+
+    const image = document.querySelector('.thumbnail');
+
+    formData.append('place', writeForm['place'].value); //첫번째 장소값
+    formData.append('address', writeForm['address'].value); //두번째 장소값
+    formData.append('dayStr',writeForm['day'].value);
+    formData.append('timeStr',writeForm['time'].value);
+    formData.append('limit', writeForm['limit'].value);
+    formData.append('latitude', writeForm['lat'].value); //위도
+    formData.append('longitude', writeForm['lng'].value); //경도
+    formData.append('category',writeForm['category'].value); //카테고리값
+
+    formData.append('title', articleForm['title'].value); //제목값
+    formData.append('content', articleForm['content'].value); //제목값
+    formData.append('thumbnail', articleForm['upload'].files[0]);
+
+    for (let i = 0; i < tags.length; i++) { //태그 반복해서 나타내기
+        formData.append('hashtag', tags[i].value);
+    }
+
+    xhr.open('POST', '/write');
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                alert('게시판 작성에 성공하였습니다');
+            } else {
+                alert('게시판 작성에 실패하였습니다');
+            }
+        }
+    };
+    xhr.send(formData);
+});

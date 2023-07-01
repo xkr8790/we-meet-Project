@@ -1,5 +1,7 @@
 package com.bsh.projectwemeet.entities;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -7,24 +9,24 @@ public class ArticleEntity {
     private int index;
     private String email;
     private String title;
-    private int category;
+    private String category;
     private String content;
-    private String addressPrimary;
-    private String addressSecondary;
+    private String place;
+    private String address;
     private byte[] thumbnail;
     private String thumbnailMime;
     private int view;
-    private Date createAt;
+    private Date createdAt;
     private Date appointmentStartDate;
     private Date appointmentStartTime;
-    private int limitPeople;
+    private int limit;
     private int participation;
     private int likeCount;
     private int report;
     private boolean isDeleted;
     private boolean isFinished;
-    private int latitude;
-    private int longitude;
+    private double latitude;
+    private double longitude;
     private String hashtag;
     private String clientIp;
     private String clientUa;
@@ -87,11 +89,11 @@ public class ArticleEntity {
         return this;
     }
 
-    public int getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public ArticleEntity setCategory(int category) {
+    public ArticleEntity setCategory(String category) {
         this.category = category;
         return this;
     }
@@ -105,21 +107,21 @@ public class ArticleEntity {
         return this;
     }
 
-    public String getAddressPrimary() {
-        return addressPrimary;
+    public String getPlace() {
+        return place;
     }
 
-    public ArticleEntity setAddressPrimary(String addressPrimary) {
-        this.addressPrimary = addressPrimary;
+    public ArticleEntity setPlace(String place) {
+        this.place = place;
         return this;
     }
 
-    public String getAddressSecondary() {
-        return addressSecondary;
+    public String getAddress() {
+        return address;
     }
 
-    public ArticleEntity setAddressSecondary(String addressSecondary) {
-        this.addressSecondary = addressSecondary;
+    public ArticleEntity setAddress(String address) {
+        this.address = address;
         return this;
     }
 
@@ -151,11 +153,11 @@ public class ArticleEntity {
     }
 
     public Date getCreateAt() {
-        return createAt;
+        return createdAt;
     }
 
     public ArticleEntity setCreateAt(Date createAt) {
-        this.createAt = createAt;
+        this.createdAt = createAt;
         return this;
     }
 
@@ -178,11 +180,11 @@ public class ArticleEntity {
     }
 
     public int getLimitPeople() {
-        return limitPeople;
+        return limit;
     }
 
     public ArticleEntity setLimitPeople(int limitPeople) {
-        this.limitPeople = limitPeople;
+        this.limit = limitPeople;
         return this;
     }
 
@@ -231,20 +233,20 @@ public class ArticleEntity {
         return this;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public ArticleEntity setLatitude(int latitude) {
+    public ArticleEntity setLatitude(double latitude) {
         this.latitude = latitude;
         return this;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public ArticleEntity setLongitude(int longitude) {
+    public ArticleEntity setLongitude(double longitude) {
         this.longitude = longitude;
         return this;
     }

@@ -1,42 +1,83 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.enums.InsertArticleResult;
-import com.bsh.projectwemeet.services.ArticleService;
-import org.json.JSONObject;
+import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.services.WriteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/")
 public class WriteController {
 
-    public final ArticleService articleService;
+    private final WriteService writeService;
 
-    public WriteController(ArticleService articleService) {
-        this.articleService = articleService;
+    @Autowired
+    public WriteController(WriteService writeService) {
+        this.writeService = writeService;
     }
 
-
-    @RequestMapping(value = "write",method = RequestMethod.GET)
-    public ModelAndView getWrite () {
+    @RequestMapping(value = "write", method = RequestMethod.GET)
+    public ModelAndView getWrite() {
         ModelAndView modelAndView = new ModelAndView("home/write");
         return modelAndView;
     } //게시판 주소로 가기
 
+
     @RequestMapping(value = "write",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public String postWrite(HttpServletRequest request, ArticleEntity entity) {
-        InsertArticleResult result = this.articleService.putArticle(request,entity);
-        JSONObject responseObject = new JSONObject() {{
-            put("result", result.name().toLowerCase());
-        }};
-        return responseObject.toString();
+    @ResponseBody
+    public ModelAndView postWrite(HttpServletRequest request,
+                                  ArticleEntity article,
+                                  @RequestParam(value = "dayStr")String dayStr,
+                                  @RequestParam(value = "timeStr")String timeStr,
+                                  @RequestParam(value = "limit")String limit,
+                                  @RequestParam(value = "thumbnail") MultipartFile thumbnail,
+                                  HttpSession session) throws ParseException, IOException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date day = sdf.parse(dayStr);
+        article.setAppointmentStartDate(day);
+
+        SimpleDateFormat tsdf = new SimpleDateFormat("HH:mm");
+        Date time = tsdf.parse(timeStr);
+        article.setAppointmentStartTime(time);
+
+        int limitPeople = Integer.parseInt(limit);
+        article.setLimitPeople(limitPeople);
+
+        article.setThumbnail(thumbnail.getBytes()); //사진값 받기
+        article.setThumbnailMime(thumbnail.getContentType()); //사진타입받기
+
+       //사진자체는 RGB로 이루어져있으므로 배열로 받아야됨
+
+        boolean result = this.writeService.putArticle(request,article,session);
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (result){
+            modelAndView.setViewName("home/bulletin");
+        }else {
+            modelAndView.setViewName("home/bulletin");
+            modelAndView.addObject("result",result);
+        }
+
+        return modelAndView;
     }
+
 }
