@@ -28,10 +28,14 @@
         </div>
         <div class="login" th:if="${session.user != null}">
             <button>
+                <a href="/write">
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                </a>
             </button>
             <button>
+                <a href="">
                 <i class="fa-solid fa-eraser fa-lg"></i>
+                </a>
             </button>
             <button>
                 <i class="fa-solid fa-trash fa-lg"></i>
