@@ -255,6 +255,50 @@ section > #Article-Write > .buttons {
 
 }
 
+/*---------------------------------------------------------------------------------------------------------*/
+
+#Article-Form > .box {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    padding: 1rem;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+#Article-Form > .box.thumbnail > .preview {
+    aspect-ratio: 1/1;
+    background-color: #fafafa;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0.0625rem solid #e0e0e0;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    user-select: none;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#Article-Form > .box.thumbnail > .preview > .empty {
+    display: none;
+}
+
+#Article-Form > .box.thumbnail > .preview > .empty.visible {
+    display: inline-block;
+}
+
+#Article-Form > .box.thumbnail > input[type="file"] {
+    display: none;
+}
+
 /*---------------------------------------------------------------------------------------------------------------------*/
 #CoverForm {
     top: 0;

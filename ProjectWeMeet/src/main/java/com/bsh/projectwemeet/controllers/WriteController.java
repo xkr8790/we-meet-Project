@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,11 +44,11 @@ public class WriteController {
     @ResponseBody
     public ModelAndView postWrite(HttpServletRequest request,
                                   ArticleEntity article,
-                                  @RequestParam(value = "dayStr")String dayStr,
-                                  @RequestParam(value = "timeStr")String timeStr,
-                                  @RequestParam(value = "limit")String limit,
-                                  @RequestParam(value = "thumbnail") MultipartFile thumbnail,
-                                  HttpSession session) throws ParseException, IOException {
+                                  @RequestParam(value = "dayStr") String dayStr,
+                                  @RequestParam(value = "timeStr") String timeStr,
+                                  @RequestParam(value = "limit") String limit,
+                                  @RequestParam(value = "thumbnailMultipart") MultipartFile thumbnailMultipart,
+                                  HttpSession session) throws IOException, ParseException {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date day = sdf.parse(dayStr);
@@ -62,19 +61,19 @@ public class WriteController {
         int limitPeople = Integer.parseInt(limit);
         article.setLimitPeople(limitPeople);
 
-        article.setThumbnail(thumbnail.getBytes()); //사진값 받기
-        article.setThumbnailMime(thumbnail.getContentType()); //사진타입받기
+        article.setThumbnail(thumbnailMultipart.getBytes());
+        article.setThumbnailMime(thumbnailMultipart.getContentType());
 
-       //사진자체는 RGB로 이루어져있으므로 배열로 받아야됨
+        //사진자체는 RGB로 이루어져있으므로 배열로 받아야됨
 
-        boolean result = this.writeService.putArticle(request,article,session);
+        boolean result = this.writeService.putArticle(request, article, session);
         ModelAndView modelAndView = new ModelAndView();
 
-        if (result){
+        if (result) {
             modelAndView.setViewName("home/bulletin");
-        }else {
+        } else {
             modelAndView.setViewName("home/bulletin");
-            modelAndView.addObject("result",result);
+            modelAndView.addObject("result", result);
         }
 
         return modelAndView;

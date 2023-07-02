@@ -19,7 +19,7 @@
 <div class="inner">
     <h2 class="logo_we_meet">
         <a href="http://localhost:6795/" class="link">
-            <img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/>
+            <img th:src="@{/resources/images/logoImages/logo-224x48.png}" class="logo"/>
         </a>
     </h2>
     <div class="container">
@@ -91,14 +91,25 @@
 </div>
 
 <form id="Article-Form" style="display: none">
-    <img class="logo" src="/resources/images/logoImages/logo-224x48.png">
+    <img class="logo" th:src="@{/resources/images/logoImages/logo-224x48.png}">
     <section>
+
         <div class="thumbnail-place">
             <img class="thumbnail1" th:src="@{/resources/images/registerImags/logo.jpg}" alt="x">
             <label for="photo-upload" class="thumbnail-title">썸네일을 등록해주세요</label>
             <label for="photo-upload" class="thumbnail-upload">썸네일 등록</label>
             <input type="file" name="upload" class="thumbnail-change" id="photo-upload" accept="image/*">
         </div>
+
+<!--        <div class="box thumbnail">-->
+<!--            <h3 class="title">대표 이미지</h3>-->
+<!--            <div class="preview" rel="thumbnailPreview">-->
+<!--                <span class="empty visible">대표 이미지를 선택해 주세요.</span>-->
+<!--            </div>-->
+<!--            <input accept="image/*" name="thumbnail" type="file">-->
+<!--        </div>-->
+
+
         <div id="Article-Write">
             <input autocomplete="off" name="title" autofocus class="title" type="text"
                    placeholder="제목을 입력하세요">
