@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>프로필</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile.css}">
+    <script defer th:src="@{/resources/scripts/profile.js}"></script>
+</head>
+<body>
+<div class="_container top-menu-container" id="topMenuContainer">
+    <ul class="_content top-menu">
+        <li class="alarm">
+            <a href="#" class="link">
+                <img class="alarm" src="/resources/images/profileImages/icons8-alarm-60.png" alt="">
+            </a>
+        </li>
+<!--        <li class="item">-->
+<!--            <a href="#" class="link">공지사항</a>-->
+<!--        </li>-->
+<!--        <li class="item">-->
+<!--            <a href="#" class="link">고객센터</a>-->
+<!--        </li>-->
+    </ul>
+</div>
+<form id="popup" class="popup">
+<!--    <div class="popup-content step-1">-->
+<!--        <h3 class="title">비밀번호 재확인</h3>-->
+<!--        <label class="item">-->
+<!--            <input class="_object-input input" maxlength="50" name="password" placeholder="**********" type="password">-->
+<!--        </label>-->
+<!--        <div class="check">-->
+<!--            <input class="checkPassword" type="submit" value="확인">-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <div class="popup-content step-2">
+        <h3 class="title">개인 정보 수정</h3>
+        <div class="passwordReset">
+            <span class="title">비밀번호 변경</span>
+            <input name="password" placeholder="비밀번호 재설정" class="password" type="password">
+            <input name="password" placeholder="비밀번호 재입력" class="passwordRe" type="password">
+            <input type="button" name="nicknameReset" class="resetButton" value="변경">
+        </div>
+        <div class="nicknameReset">
+            <span class="title">닉네임 변경</span>
+            <input name="nickname" placeholder="user" class="nickname" maxlength="10" type="text">
+            <input type="button" name="nicknameReset" class="resetButton" value="변경">
+        </div>
+        <div class="addressReset">
+            <span class="title">주소 변경</span>
+            <div class="addressFirst">
+                <input readonly type="text" class="address" name="addressPostal" placeholder="우편번호">
+                <input type="button" class="findButton" name="addressFind" value="우편번호 찾기">
+            </div>
+            <div class="addressSecond">
+                <input readonly type="text" class="address" maxlength="100" name="addressPrimary"
+                placeholder="'우편번호 찾기' 버튼을 클릭하여 주소를 지정해 주세요.">
+            </div>
+            <div class="addressThird">
+                <input type="text" class="address" maxlength="100" name="addressSecondary"
+                       placeholder="상세 주소를 입력해 주세요. (건물 이름 및 동, 호등)">
+            </div>
+        </div>
+        <div class="die">
+            <a class="link" href="#">회원 탈퇴</a>
+        </div>
+        <div class="save">
+            <input type="button" name="save" class="save" value="저장">
+        </div>
+    </div>
+</form>
+<div class="main-container" id="mainContainer">
+    <div class="left-profile">
+        <div class="thumbnail">
+            <div class="default" rel="thumbnailDefault">
+                <img class="profile" src="/resources/images/profileImages/icons8-male-user-96.png" alt="">
+            </div>
+            <div class="pencil">
+                <img class="change_button" src="/resources/images/profileImages/icons8-pencil-50.png" alt="">
+            </div>
+        </div>
+        <div class="text-box">
+            <span class="user-name">user name님</span>
+            <li id="setting" class="information_change">설정 변경</li>
+        </div>
+    </div>
+    <div class="middle-profile">
+        <textarea class="intro" cols="25" rows="5"></textarea>
+    </div>
+    <div class="right-profileF">
+        <a href="#" class="posts">참여한 게시물</a>
+        <span class="postH">9</span>
+    </div>
+    <div class="right-profileS">
+        <div class="item">
+            <img class="like" src="/resources/images/profileImages/icons8-like-100.png" alt="">
+            <a href="#" class="likes">좋아요</a>
+        </div>
+        <div class="item">
+            <img class="report" src="/resources/images/profileImages/icons8-warning-100.png" alt="">
+            <a href="#" class="reports">신고누적</a>
+        </div>
+    </div>
+</div>
+
+<div class="post-container" id="postContainer">
+    <div class="postF">
+        <div class="post1">
+            <a class="link1" href="#">
+                <img class="link" src="/resources/images/profileImages/다운로드.png" alt="">
+            </a>
+        </div>
+        <div class="post2">
+            <a class="link1" href="#">
+                <img class="link" src="/resources/images/profileImages/다운로드.png" alt="">
+            </a>
+        </div>
+        <div class="post3">
+            <a class="link1" href="#">
+                <img class="link" src="/resources/images/profileImages/다운로드.png" alt="">
+            </a>
+        </div>
+    </div>
+    <div class="postS">
+        <div class="post1">
+            <a class="link1" href="#">
+                <img class="link" src="/resources/images/profileImages/다운로드.png" alt="">
+            </a>
+        </div>
+        <div class="post2">
+            <a class="link1" href="#">
+                <img class="link" src="/resources/images/profileImages/다운로드.png" alt="">
+            </a>
+        </div>
+        <div class="post3">
+            <a class="link1" href="#">
+                <img class="link" src="/resources/images/profileImages/다운로드.png" alt="">
+            </a>
+        </div>
+    </div>
+    <div class="postT">
+        <div class="post1">
+            <a class="link1" href="#">
+                <img class="link" src="/resources/images/profileImages/다운로드.png" alt="">
+            </a>
+        </div>
+        <div class="post2">
+            <a class="link1" href="#">
+                <img class="link" src="/resources/images/profileImages/다운로드.png" alt="">
+            </a>
+        </div>
+        <div class="post3">
+            <a class="link1" href="#">
+                <img class="link" src="/resources/images/profileImages/다운로드.png" alt="">
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

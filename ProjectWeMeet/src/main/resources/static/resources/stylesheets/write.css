@@ -9,36 +9,50 @@
 body,html{
     margin: 0;
     width: 100%;
-    height: 95%;
-    background-color: #f4f3f1;
+    height: 100%;
+
 }
 
-.container{
-    height: 100%;
-}
 
 .inner{
     display: flex;
     flex-direction: column;
     position: relative;
-
+    background-color: #f4f3f1;
     padding: 1rem;
     width: 75rem;
+
     margin: 5rem auto 0;
 }
+
+
+#writeForm{
+    display: block;
+    width: 18rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
 
 /*로고*/
 
 #writeForm > .logo_we_meet{
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 2rem;
-    padding-left: 5rem;
+    /*margin-top: 0;*/
+    /*margin-bottom: 0;*/
+    /*padding-top: 2rem;*/
+    /*padding-left: 5rem;*/
+    width: 100%;
+    height: 100%;
 }
-#writeForm > .logo_we_meet > .link{
-    display: block;
-    width: 13rem;
-    height: 3rem;
+#writeForm  > .logo_we_meet > .link{
+    /*display: block;*/
+    /*width: 13rem;*/
+    /*height: 3rem;*/
+    width: 100%;
+    height: 100%;
 
 }
 
@@ -49,44 +63,44 @@ body,html{
 
 /*content*/
 
-#writeForm> .inner> .box> .content {
+#writeForm> .box> .content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper >.sub_title{
+#writeForm  > .box > .content > .input-wrapper >.sub_title{
     margin-top: 0.5rem;
     font: inherit;
 }
 
 
-#writeForm > .inner > .box > .content > .input-wrapper{
+#writeForm  > .box > .content > .input-wrapper{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper > .input {
+#writeForm  > .box > .content > .input-wrapper > .input {
     width: 14rem;
     padding: 0.5rem;
     margin: 1rem;
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper > .dayBox{
+#writeForm  > .box > .content > .input-wrapper > .dayBox{
     padding: 25px;
     display: flex;
     align-items: center;
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper > .dayBox > .day {
+#writeForm  > .box > .content > .input-wrapper > .dayBox > .day {
     width: 7rem;
     height: 2rem;
 
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper > .dayBox > .tilde{
+#writeForm  > .box > .content > .input-wrapper > .dayBox > .tilde{
     display: inline-block;
     width: 0.5rem;
     height: 1.5rem;
@@ -94,19 +108,19 @@ body,html{
     margin-left: 0.5rem;
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper > .timeBox{
+#writeForm  > .box > .content > .input-wrapper > .timeBox{
     padding: 25px;
     display: flex;
     align-items: center;
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper > .timeBox > .time {
+#writeForm  > .box > .content > .input-wrapper > .timeBox > .time {
     width: 7rem;
     height: 2rem;
 
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper > .timeBox > .tilde{
+#writeForm  > .box > .content > .input-wrapper > .timeBox > .tilde{
     display: inline-block;
     width: 0.5rem;
     height: 1.5rem;
@@ -116,53 +130,41 @@ body,html{
 
 /*인원 및 카테고리*/
 
-#writeForm > .inner > .box > .content > .input-wrapper >.etc{
+#writeForm  > .box > .content > .input-wrapper >.etc{
     padding: 1rem;
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper >.etc > .box_one{
+#writeForm > .box > .content > .input-wrapper >.etc > .box_one{
     padding: 1rem;
 }
 
-#writeForm > .inner > .box > .content > .input-wrapper >.etc > .box_one > .participants{
+#writeForm  > .box > .content > .input-wrapper >.etc > .box_one > .limit{
     width: 4rem;
 }
 
 
-#writeForm > .inner > .box > .content > .input-wrapper >.etc > .box_two{
+#writeForm  > .box > .content > .input-wrapper >.etc > .box_two{
     padding: 1rem;
 }
 
-/*#writeForm > .inner > .box > .content > .input-wrapper >.etc > .box_two > .category{*/
-/*    width: 7rem;*/
-/*}*/
 
-/*warning*/
-.warning {
-    max-height: 0;
-    color: #ef5350;
-    font-size: 0.9rem;
-    margin: unset;
-    overflow: hidden;
-    transition-duration: 500ms;
-    transition-property: max-height;
-    transition-timing-function: ease;
+/*mapBox*/
+.container > .mapBox{
+    width: 100%;
+    height: 40rem;
+}
+/*buttonBox*/
+.inner > .buttonBox{
+    margin-top: 1rem;
+    text-align: right;
 }
 
-.warning.visible {
-    max-height: 3rem;
-}
-
-
-
-/*버튼*/
-
-.container >.inner > ._button {
-    width: 10rem;
+.inner > .buttonBox > ._button{
+    width: 5rem;
     height: 3rem;
-    margin-left: auto;
-    margin-top: 5rem;
+    padding: 0;
 }
+
 
 /*box*/
 .box {
@@ -305,4 +307,6 @@ body,html{
     cursor: default;
     color:#777;
 }
+
+
 

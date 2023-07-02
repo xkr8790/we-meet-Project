@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/")
-public class WriteController {
+@RequestMapping(value="/profile")
+public class ProfileController {
 
-    @RequestMapping(value = "write",method = RequestMethod.GET)
-    public ModelAndView getWrite () {
-        ModelAndView modelAndView = new ModelAndView("home/write");
+    @RequestMapping(value="profile", method = RequestMethod.GET)
+    public ModelAndView getProfile(){
+        ModelAndView modelAndView = new ModelAndView("home/profile");
         return modelAndView;
-    } //게시판 주소로 가기
+    }
 }
