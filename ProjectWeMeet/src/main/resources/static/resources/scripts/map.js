@@ -162,7 +162,7 @@ function getListItem(index, places) {
         writeForm['address'].value=places.address_name;
         // addressPrimaryInput.value = places.place_name;
         // addressSecondaryInput.value = places.address_name;
-        placeInput.disabled = true;
+        // placeInput.disabled = true;
 
         // Move and zoom to the corresponding marker
         map.setLevel(2); // Adjust the zoom level as needed
@@ -275,7 +275,6 @@ function removeAllChildNods(el) {
 // 현재의 날짜보다 과거의 날짜 선택 불가능
 dayInput.setAttribute('min', today);
 
-
 nextButton.addEventListener("click", function(event) {
     event.preventDefault();
 
@@ -306,7 +305,7 @@ nextButton.addEventListener("click", function(event) {
     }
 
     inner.style.display = "none";
-    ArticleForm.style.display='block';
+    articleForm.style.display='block';
 });
 
 function goBack(){

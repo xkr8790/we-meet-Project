@@ -35,7 +35,10 @@ body,html{
     display: flex;
     flex-direction: row;
 }
-
+.latitude,.longitude{
+    opacity: 0;
+    pointer-events: none;
+}
 
 /*로고*/
 
