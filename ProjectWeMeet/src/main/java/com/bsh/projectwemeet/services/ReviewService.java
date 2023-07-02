@@ -21,7 +21,6 @@ public class ReviewService {
 
     public boolean reviewWrite(HttpServletRequest request, ReviewEntity reviewEntity) {
 
-
         reviewEntity.setDeleted(false)
                 .setCreatedAt(new Date())
                 .setReviewStar(reviewEntity.getReviewStar())

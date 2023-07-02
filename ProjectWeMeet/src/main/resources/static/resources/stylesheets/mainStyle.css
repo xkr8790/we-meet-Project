@@ -100,6 +100,7 @@ body{
     margin-left: 0.5rem;
     margin-right: 0.5rem;
 }
+
 #logo-container > .container > ul > li > a > span{
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 1.5rem;
@@ -642,7 +643,7 @@ a {
 
 #footer > .wrap {
     border-top: 1px solid #666;
-    padding-top: 8rem;
+    padding-top: 2rem;
     width: 68.75rem;
     height: 10rem; /* Adjust the height according to your needs */
     /*background-color: aqua;*/

@@ -43,10 +43,20 @@ allContainer > .header > .login > a {
     color: black;
 }
 
+
 .allContainer > .header > .login > a:hover {
     color: blue;
 }
 
+.allContainer > .header > .login > button {
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+    margin-left: 0.2rem;
+}
+.allContainer > .header > .login > button > i:hover{
+    color: #FB6161;
+}
 
 .allContainer > .main-template {
     width: 100%;
@@ -178,8 +188,9 @@ allContainer > .header > .login > a {
 
 
 .announcement > .participant {
+    border: 1px solid blue;
     width: 100%;
-    height: 15rem;
+    height: auto;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -190,12 +201,12 @@ allContainer > .header > .login > a {
 .announcement > .participant > .participantContainer {
     position: relative;
     width: 90%;
-    height: 11rem;
+    height: auto;
     border-radius: 5px;
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
 }
 
 .announcement > .participant > .participantContainer > .login-after-human {
@@ -205,22 +216,63 @@ allContainer > .header > .login > a {
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
 }
+
+.announcement > .participant > .participantContainer > .login-after-human > p{
+    margin: 1rem 0;
+}
+.announcement > .participant > .participantContainer > .login-after-human > .profile{
+    width: 32rem;
+    height: auto;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px solid red;
+    flex-wrap: wrap;
+}
+.announcement > .participant > .participantContainer > .login-after-human > .profile > span{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin-right: 0.2rem;
+    border: 1px solid blue;
+}
+
+.announcement > .participant > .participantContainer > .login-after-human > .participating-button{
+    margin: 0.5rem;
+    width: 4rem;
+    height: 2rem;
+}
+.announcement > .participant > .participantContainer > .login-after-human > .participating-button > button{
+    width: 4rem;
+    height: 2rem;
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+.announcement > .participant > .participantContainer > .login-after-human > .participating-button > button:hover{
+    opacity: 1;
+}
+
 
 
 .announcement > .participant > .participantContainer > .login-before-human {
     position: absolute;
     width: 100%;
-    height: 100%;
-    margin-bottom: 1rem;
+    height: 8rem;
+    margin: 3rem 0 0 0;
     border-radius: 15px;
-    background-color: rgb(255, 228, 196);
+    background-color: gray;
     color: black;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    opacity: 1;
 }
 
 .announcement > .participant > .participantContainer > .login-before-human > a > .attend {
@@ -252,15 +304,54 @@ allContainer > .header > .login > a {
 
 .announcement > .guide > .guideContainer > .map {
     height: 9.8rem;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
 }
 
 .announcement > .guide > .comments {
     width: 58%;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     display: flex;
     flex-direction: column;
+    position: relative;
 }
+
+.announcement > .guide > .comments > .title{
+    width: 100%;
+    text-align: center;
+}
+.announcement > .guide > .comments > .contentBox{
+    width: 100%;
+    height: 100%;
+    /*border: 1px solid red;*/
+    margin-top: 0.4rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.announcement > .guide > .comments > .contentBox > .answer{
+    width: 97%;
+    height: 11.5rem;
+    margin-bottom: 0.2rem;
+/*position: absolute;*/
+    background-color: white;
+    border-radius: 5px;
+    overflow-y: scroll;
+}
+
+.announcement > .guide > .comments > .contentBox > .content-write{
+    width: 100%;
+    text-align: center;
+}
+
+.announcement > .guide > .comments > .contentBox > .content-write > label > input{
+    width: 19rem;
+}
+.announcement > .guide > .comments > .contentBox > .content-write > input{
+    width: 3rem;
+}
+
+
 
 .preview{
     position: relative;

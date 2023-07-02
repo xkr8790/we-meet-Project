@@ -26,6 +26,17 @@
             <a href="/login">로그인</a>
             <a href="/register/">회원가입</a>
         </div>
+        <div class="login" th:if="${session.user != null}">
+            <button>
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            </button>
+            <button>
+                <i class="fa-solid fa-eraser fa-lg"></i>
+            </button>
+            <button>
+                <i class="fa-solid fa-trash fa-lg"></i>
+            </button>
+        </div>
     </div>
 
     <div class="main-template">
@@ -70,13 +81,27 @@
         </div>
         <div class="participant">
             <div class="participantContainer">
-                <div class="login-after-human" th:if="${session.user != null}">
-                    여기는 로그인 후 나올 화면 입니다.
+                <div class="login-after-human">
+                    <p>함께 할 멤버!</p>
+                    <div class="profile">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+
+                    </div>
+                    <div class="participating-button">
+                        <button>
+                            참여하기
+                        </button>
+                    </div>
                 </div>
                 <div class="login-before-human" th:if="${session.user == null}">
-                    <p>참여하는 사람</p>
-                    <p>여기는 로그인 전 나올 화면입니다.</p>
-                    <a href="/login"><input class="attend" type="button" value="참여하기"></a>
+                    <p>로그인 후 확인해 주세요</p>
+<!--                    <p>여기는 로그인 전 나올 화면입니다.</p>-->
+<!--                    <a href="/login"><input class="attend" type="button" value="참여하기"></a>-->
                 </div>
             </div>
         </div>
@@ -95,27 +120,33 @@
                 </p>
                 <p class="map" id="map">지도</p>
             </div>
-            <div class="comments">
+
+
+            <form class="comments" id="bulletinForm">
                 <div class="title">위밋! 댓글</div>
-                <div class="content"></div>
-                <div class="text"></div>
-            </div>
+                <div class="contentBox">
+                    <div class="answer" id="commentContainer">
+
+                    </div>
+                    <div class="content-write">
+                        <input type="hidden" name="articleIndex">
+                        <label>
+                            <input type="text" name="content" placeholder="댓글" maxlength="100" x>
+                        </label>
+                        <input type="submit" value="작성">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
-
-
-
-
-
 
 
     <div class="preview">
         <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
-<!--            여기서 부터 list-->
+            <!--            여기서 부터 list-->
             <div class="previewContainer">
-<!--                이게 item-->
+                <!--                이게 item-->
                 <a class="img">
                     <img src="/resources/images/bulletinImags/다운로드.png" alt="">
                 </a>
