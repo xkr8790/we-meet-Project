@@ -1,40 +1,59 @@
 package com.bsh.projectwemeet.entities;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Objects;
 
-public class ArticlesEntity {
+public class ArticleEntity {
     private int index;
     private String email;
     private String title;
-    private int category;
+    private String category;
     private String content;
-    private String addressPrimary;
-    private String addressSecondary;
+    private String place;
+    private String address;
     private byte[] thumbnail;
     private String thumbnailMime;
     private int view;
-    private Date createAt;
+    private Date createdAt;
     private Date appointmentStartDate;
-    private Date appointmentEndDate;
     private Date appointmentStartTime;
-    private Date appointmentEndTime;
-    private int limitPeople;
+    private int limit;
     private int participation;
     private int likeCount;
     private int report;
     private boolean isDeleted;
     private boolean isFinished;
-    private int latitude;
-    private int longitude;
+    private double latitude;
+    private double longitude;
     private String hashtag;
+    private String clientIp;
+    private String clientUa;
 
+    public String getClientIp() {
+        return clientIp;
+    }
+
+    public ArticleEntity setClientIp(String clientIp) {
+        this.clientIp = clientIp;
+        return this;
+    }
+
+    public String getClientUa() {
+        return clientUa;
+    }
+
+    public ArticleEntity setClientUa(String clientUa) {
+        this.clientUa = clientUa;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ArticlesEntity that = (ArticlesEntity) o;
+        ArticleEntity that = (ArticleEntity) o;
         return index == that.index;
     }
 
@@ -47,7 +66,7 @@ public class ArticlesEntity {
         return index;
     }
 
-    public ArticlesEntity setIndex(int index) {
+    public ArticleEntity setIndex(int index) {
         this.index = index;
         return this;
     }
@@ -56,7 +75,7 @@ public class ArticlesEntity {
         return email;
     }
 
-    public ArticlesEntity setEmail(String email) {
+    public ArticleEntity setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -65,16 +84,16 @@ public class ArticlesEntity {
         return title;
     }
 
-    public ArticlesEntity setTitle(String title) {
+    public ArticleEntity setTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public int getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public ArticlesEntity setCategory(int category) {
+    public ArticleEntity setCategory(String category) {
         this.category = category;
         return this;
     }
@@ -83,26 +102,26 @@ public class ArticlesEntity {
         return content;
     }
 
-    public ArticlesEntity setContent(String content) {
+    public ArticleEntity setContent(String content) {
         this.content = content;
         return this;
     }
 
-    public String getAddressPrimary() {
-        return addressPrimary;
+    public String getPlace() {
+        return place;
     }
 
-    public ArticlesEntity setAddressPrimary(String addressPrimary) {
-        this.addressPrimary = addressPrimary;
+    public ArticleEntity setPlace(String place) {
+        this.place = place;
         return this;
     }
 
-    public String getAddressSecondary() {
-        return addressSecondary;
+    public String getAddress() {
+        return address;
     }
 
-    public ArticlesEntity setAddressSecondary(String addressSecondary) {
-        this.addressSecondary = addressSecondary;
+    public ArticleEntity setAddress(String address) {
+        this.address = address;
         return this;
     }
 
@@ -110,7 +129,7 @@ public class ArticlesEntity {
         return thumbnail;
     }
 
-    public ArticlesEntity setThumbnail(byte[] thumbnail) {
+    public ArticleEntity setThumbnail(byte[] thumbnail) {
         this.thumbnail = thumbnail;
         return this;
     }
@@ -119,7 +138,7 @@ public class ArticlesEntity {
         return thumbnailMime;
     }
 
-    public ArticlesEntity setThumbnailMime(String thumbnailMime) {
+    public ArticleEntity setThumbnailMime(String thumbnailMime) {
         this.thumbnailMime = thumbnailMime;
         return this;
     }
@@ -128,17 +147,17 @@ public class ArticlesEntity {
         return view;
     }
 
-    public ArticlesEntity setView(int view) {
+    public ArticleEntity setView(int view) {
         this.view = view;
         return this;
     }
 
     public Date getCreateAt() {
-        return createAt;
+        return createdAt;
     }
 
-    public ArticlesEntity setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public ArticleEntity setCreateAt(Date createAt) {
+        this.createdAt = createAt;
         return this;
     }
 
@@ -146,17 +165,8 @@ public class ArticlesEntity {
         return appointmentStartDate;
     }
 
-    public ArticlesEntity setAppointmentStartDate(Date appointmentStartDate) {
+    public ArticleEntity setAppointmentStartDate(Date appointmentStartDate) {
         this.appointmentStartDate = appointmentStartDate;
-        return this;
-    }
-
-    public Date getAppointmentEndDate() {
-        return appointmentEndDate;
-    }
-
-    public ArticlesEntity setAppointmentEndDate(Date appointmentEndDate) {
-        this.appointmentEndDate = appointmentEndDate;
         return this;
     }
 
@@ -164,26 +174,17 @@ public class ArticlesEntity {
         return appointmentStartTime;
     }
 
-    public ArticlesEntity setAppointmentStartTime(Date appointmentStartTime) {
+    public ArticleEntity setAppointmentStartTime(Date appointmentStartTime) {
         this.appointmentStartTime = appointmentStartTime;
         return this;
     }
 
-    public Date getAppointmentEndTime() {
-        return appointmentEndTime;
-    }
-
-    public ArticlesEntity setAppointmentEndTime(Date appointmentEndTime) {
-        this.appointmentEndTime = appointmentEndTime;
-        return this;
-    }
-
     public int getLimitPeople() {
-        return limitPeople;
+        return limit;
     }
 
-    public ArticlesEntity setLimitPeople(int limitPeople) {
-        this.limitPeople = limitPeople;
+    public ArticleEntity setLimitPeople(int limitPeople) {
+        this.limit = limitPeople;
         return this;
     }
 
@@ -191,7 +192,7 @@ public class ArticlesEntity {
         return participation;
     }
 
-    public ArticlesEntity setParticipation(int participation) {
+    public ArticleEntity setParticipation(int participation) {
         this.participation = participation;
         return this;
     }
@@ -200,7 +201,7 @@ public class ArticlesEntity {
         return likeCount;
     }
 
-    public ArticlesEntity setLikeCount(int likeCount) {
+    public ArticleEntity setLikeCount(int likeCount) {
         this.likeCount = likeCount;
         return this;
     }
@@ -209,7 +210,7 @@ public class ArticlesEntity {
         return report;
     }
 
-    public ArticlesEntity setReport(int report) {
+    public ArticleEntity setReport(int report) {
         this.report = report;
         return this;
     }
@@ -218,7 +219,7 @@ public class ArticlesEntity {
         return isDeleted;
     }
 
-    public ArticlesEntity setDeleted(boolean deleted) {
+    public ArticleEntity setDeleted(boolean deleted) {
         isDeleted = deleted;
         return this;
     }
@@ -227,25 +228,25 @@ public class ArticlesEntity {
         return isFinished;
     }
 
-    public ArticlesEntity setFinished(boolean finished) {
+    public ArticleEntity setFinished(boolean finished) {
         isFinished = finished;
         return this;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public ArticlesEntity setLatitude(int latitude) {
+    public ArticleEntity setLatitude(double latitude) {
         this.latitude = latitude;
         return this;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public ArticlesEntity setLongitude(int longitude) {
+    public ArticleEntity setLongitude(double longitude) {
         this.longitude = longitude;
         return this;
     }
@@ -254,7 +255,7 @@ public class ArticlesEntity {
         return hashtag;
     }
 
-    public ArticlesEntity setHashtag(String hashtag) {
+    public ArticleEntity setHashtag(String hashtag) {
         this.hashtag = hashtag;
         return this;
     }

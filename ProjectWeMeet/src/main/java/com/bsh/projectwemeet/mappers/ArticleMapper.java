@@ -1,13 +1,11 @@
 package com.bsh.projectwemeet.mappers;
 
-import com.bsh.projectwemeet.entities.ArticlesEntity;
-import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.entities.ArticleEntity;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ArticleMapper {
-    int insert(ArticlesEntity articles);
+    int insertArticle(ArticleEntity articles);
 
 
 
