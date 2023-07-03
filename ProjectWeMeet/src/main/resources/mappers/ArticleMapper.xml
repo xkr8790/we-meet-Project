@@ -8,7 +8,10 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
-        INSERT INTO `wemeet_project`.`articles` (email, title, category, content, place, address, thumbnail, thumbnail_mime, view, created_at, day, time, `limit`, participation, like_count, report, deleted_flag, finished_flag, latitude, longitude, hashtag, client_ip, client_ua)
+        INSERT INTO `wemeet_project`.`articles` (email, title, category, content, place, address, thumbnail,
+                                                 thumbnail_mime, view, created_at, day, time, `limit`, participation,
+                                                 like_count, report, deleted_flag, finished_flag, latitude, longitude,
+                                                 hashtag, client_ip, client_ua)
         VALUES (#{email},
                 #{title},
                 #{category},
@@ -33,4 +36,44 @@
                 #{clientIp},
                 #{clientUa})
     </insert>
+
+    <select id="selectArticleByIndex"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `title`          AS `title`,
+               `content`        AS `content`,
+               `category`       AS `category`,
+               `view`           AS `view`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+    </select>
+
+
+    <!--게시물 전체 조회-->
+    <select id="selectAll"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `title`          AS `title`,
+               `content`        AS `content`,
+               `category`       AS `category`,
+               `address`        AS `address`,
+               `limit`          AS `limit`,
+               `day`            AS `appointmentStartDate`,
+               `time`           AS `appointmentStartTime`
+        FROM `wemeet_project`.`articles`
+        ORDER BY `index` DESC
+    </select>
+    <!--게시물 전체 조회-->
+
+    <update id="updateArticle"
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
+        UPDATE `wemeet_project`.`articles`
+        SET `view` = #{view}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+
 </mapper>
