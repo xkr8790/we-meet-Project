@@ -2,7 +2,6 @@ package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.services.ArticleService;
-import com.bsh.projectwemeet.services.WriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

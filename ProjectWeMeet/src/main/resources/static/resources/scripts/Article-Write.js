@@ -244,11 +244,11 @@ articleForm['complete'].addEventListener('click', (e) => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                const newIndex = xhr.responseText; // Retrieve the index from the response
+                // const newIndex = xhr.responseText; // Retrieve the index from the response
 
                 alert('게시판 작성에 성공하였습니다.');
                 // Redirect to the new page with the retrieved index
-                window.location.href = '/article/read?index=' + newIndex;
+                // window.location.href = '/article/read?index=' + newIndex;
 
 
             } else {
