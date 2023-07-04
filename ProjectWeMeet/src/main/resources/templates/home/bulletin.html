@@ -32,11 +32,11 @@
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
             </button>
 
-            <button>
+            <button name="patch" th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
             </button>
 
-            <button name="delete">
+            <button name="delete"  th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
             </button>
 
@@ -45,7 +45,7 @@
 
     <div class="main-template">
         <div class="img-profile-title">
-            <img class="image"  th:src="@{/article/image(index=${article.getIndex()})}" alt="Thumbnail">
+            <img class="image" th:src="@{/article/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">

@@ -276,8 +276,22 @@ body{
     margin-bottom: 2rem;
     gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
 }
+.article-list>.article-link{
+    /*border: 1px solid red;*/
+    width: 35rem;
+    height: 18rem;
+    background-color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
+}
 
-.article-list>.article-thumbnail{
+
+.article-list > .article-link > .article-thumbnail {
     width: 17rem;
     height: 15rem;
     align-items: center;
@@ -286,7 +300,7 @@ body{
     justify-content: center;
 
 }
-.article-list>.article-thumbnail>.thumbnail{
+.article-list>.article-link >.article-thumbnail>.thumbnail{
     border-radius: 0.3rem;
     width: 11rem;
     height: 12rem;

@@ -13,9 +13,13 @@ public interface ArticleMapper {
 
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
 
+    ArticleEntity selectArticleByPatchIndex(@Param(value = "index")int index);
+
     int deleteByArticle(@Param(value = "index")int index); //Param 사용시 SQL문에 파라미터 타입을 안사용해도된다
 
     int updateArticle(ArticleEntity article);
+
+    int patchArticle(ArticleEntity article);
 
 
 

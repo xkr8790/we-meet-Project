@@ -1,9 +1,12 @@
 package com.bsh.projectwemeet.services;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
 
 @Service
 public class ArticleService {
@@ -37,4 +40,24 @@ public class ArticleService {
         //결과적으로 삭제되지않거나
         //결과적으로 삭제되지않거나
     }
+
+    public boolean deleteByIndex(int index){
+
+        return this.articleMapper.deleteByArticle(index) > 0;
+    }
+
+    public ArticleEntity getPatchIndexArticle(int index, HttpSession session,ArticleEntity article){
+
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+
+        boolean result = article.getEmail() != loginUser.getEmail();
+
+        return this.articleMapper.selectArticleByPatchIndex(index);
+    }
+
+    public ArticleEntity patchArticle(int index){
+        return null;
+    }
+
+
 }

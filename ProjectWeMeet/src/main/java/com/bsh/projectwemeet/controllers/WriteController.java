@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,14 @@ public class WriteController {
     public WriteController(WriteService writeService) {
         this.writeService = writeService;
     }
+
+    @RequestMapping(value = "write", method = RequestMethod.GET)
+    public ModelAndView getWrite() {
+        ModelAndView modelAndView = new ModelAndView("home/write");
+        return modelAndView;
+    } //게시판 주소로 가기
+    //@ResponseBody -> 반환된 데이터 JSON이나 기타형식으로 처리됨 이경우 redirect 제대로 안먹힐수도 있음
+
 
 
     @RequestMapping(value = "write",
@@ -83,21 +92,6 @@ public class WriteController {
     }//POST 방식으로 글쓰기
 
 
-
-    @RequestMapping(value = "write", method = RequestMethod.GET)
-    public ModelAndView getWrite() {
-        ModelAndView modelAndView = new ModelAndView("home/write");
-        return modelAndView;
-    } //게시판 주소로 가기
-   //@ResponseBody -> 반환된 데이터 JSON이나 기타형식으로 처리됨 이경우 redirect 제대로 안먹힐수도 있음
-
-
-    @RequestMapping(value ="delete",method = RequestMethod.DELETE) //주소도 같고 메서드도 같으면 충돌이 일어난다.
-    @ResponseBody
-    public String deleteIndex(@RequestParam(value = "index")int index){
-        boolean result = this.writeService.deleteByIndex(index);
-        return String.valueOf(result);
-    }
 
 
 

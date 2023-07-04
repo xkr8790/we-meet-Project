@@ -50,6 +50,25 @@
         WHERE `index` = #{index}
     </select>
 
+    <select id="selectArticleByPatchIndex"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `title`          AS `title`,
+               `category`       AS `category`,
+               `content`        AS `content`,
+               `place`          AS `place`,
+               `address`        AS `address`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`,
+               `day`            AS `appointmentStartDate`,
+               `time`           AS `appointmentStartTime`,
+               `limit`          AS `limit`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+    </select>
+
 
     <!--게시물 전체 조회-->
     <select id="selectAll"
@@ -78,7 +97,7 @@
 
     <delete id="deleteByArticle">
         DELETE FROM `wemeet_project`.`articles`
-        WHERE `index` LIKE #{index}
+        WHERE `index` = #{index}
         LIMIT 1
     </delete>
 
