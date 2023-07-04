@@ -12,7 +12,6 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
     <script defer th:src="@{/resources/scripts/map.js}"></script>
-    <script defer th:src="@{/resources/scripts/write.js}"></script>
     <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
 
 </head>
@@ -20,7 +19,7 @@
 <div class="inner">
     <h2 class="logo_we_meet">
         <a href="http://localhost:6795/" class="link">
-            <img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/>
+            <img th:src="@{/resources/images/logoImages/logo-224x48.png}" class="logo"/>
         </a>
     </h2>
     <div class="container">
@@ -33,7 +32,7 @@
                         <input readonly type="text" class="input address" placeholder="주소" name="address">
                         <span class="sub_title">날짜와 시간을 선택해 주세요</span>
                         <div class="dayBox">
-                            <input type="date" class="day" name="day">
+                            <input id="dateInput" type="date" class="day" name="day">
                         </div>
                         <div class="sub_title">시간을 설정해주세요</div>
                         <div class="timeBox">
@@ -58,8 +57,8 @@
                                 </select>
                             </div>
                         </div>
-                        <input hidden name="lat" type="hidden" maxlength="50" placeholder="경도">
-                        <input hidden name="lng" type="hidden" maxlength="50" placeholder="위도">
+                        <input readonly name="lat"  maxlength="50" placeholder="경도" class="latitude">
+                        <input readonly name="lng"  maxlength="50" placeholder="위도" class="longitude" >
 
                     </div>
                 </div>
@@ -92,8 +91,9 @@
 </div>
 
 <form id="Article-Form" style="display: none">
-    <img class="logo" src="/resources/images/logoImages/logo-224x48.png">
+    <img class="logo" th:src="@{/resources/images/logoImages/logo-224x48.png}">
     <section>
+
         <div class="thumbnail-place">
             <img class="thumbnail1" th:src="@{/resources/images/registerImags/logo.jpg}" alt="x">
             <label for="photo-upload" class="thumbnail-title">썸네일을 등록해주세요</label>
@@ -103,7 +103,7 @@
         <div id="Article-Write">
             <input autocomplete="off" name="title" autofocus class="title" type="text"
                    placeholder="제목을 입력하세요">
-            <textarea name="content" id="editor" placeholder="내용을 입력해주세요"></textarea>
+            <textarea name="content" placeholder="내용을 입력해주세요"></textarea>
             <div class="article-tag">
                 <div class="explainTag">태그를 입력해주세요</div>
                 <div class="tags">

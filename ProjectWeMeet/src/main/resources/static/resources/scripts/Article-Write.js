@@ -1,4 +1,6 @@
 const articleForm = document.getElementById('Article-Form');
+
+
 let tagCounter = 0; //전역변수 태그카운터
 let tags = [];
 var thumbnailPlace = document.querySelector('.thumbnail-place');
@@ -6,16 +8,20 @@ var thumbnailUpload = document.querySelector('.thumbnail-upload');
 var thumbnailChange = document.querySelector('.thumbnail-change');
 const thumbnailTitle = document.querySelector('.thumbnail-title');
 const thumbnail1 = document.querySelector('.thumbnail1');
-
-
-ClassicEditor
-    .create(document.querySelector('#editor'), {
+ClassicEditor.create(articleForm['content'], {
         language: 'ko', //언어설정
         toolbar: ['heading', '|', 'Bold', 'Italic', '|', 'link', 'bulletedList', 'numberedList', '|', 'Undo', 'Redo'] //내가 넣고싶은 툴바 설정
     })
+    .then( editor => {
+        window.editor = editor;})
     .catch(error => {
         console.error(error);
     });
+
+
+// var contents = CKEDITOR.instances.editor.getData();
+
+
 
 const ArticleTag = document.querySelector('.article-tag'); //tag를 담을 부모
 const explainTag = document.querySelector('.explainTag'); //설명
@@ -45,6 +51,7 @@ ArticleTag.addEventListener('click', function () {
     const Tag = document.createElement('input');
 
     Tag.setAttribute('type', 'text');
+    Tag.name = "hashTag"
     Tag.value = '#'; // 처음 생성시 # 추가
     TagContainer.classList.add('tag-container');
     TagWarning.classList.add('tag-warning');
@@ -112,13 +119,14 @@ ArticleTag.addEventListener('click', function () {
 });
 
 
-// 파일 선택 시 이벤트 처리
 thumbnailChange.addEventListener('change', function (event) {
-    var file = event.target.files[0]; // 선택한 파일 가져오기
+
+    articleForm['upload'].files[0] = event.target.files[0]; // 선택한 파일 가져오기
 
     // FileReader 객체 사용하여 이미지 읽기
     var reader = new FileReader();
     reader.onload = function (e) {
+
         // 이미지를 표시할 img 요소 생성
         var image = document.createElement('img');
         image.src = e.target.result; // 읽은 이미지 데이터 설정
@@ -126,6 +134,7 @@ thumbnailChange.addEventListener('change', function (event) {
 
         // 기존 썸네일 이미지가 있는 경우 교체
         var existingImage = thumbnailPlace.querySelector('.thumbnail');
+
         if (existingImage) {
             existingImage.src = image.src;
         } else {
@@ -133,11 +142,52 @@ thumbnailChange.addEventListener('change', function (event) {
             thumbnailPlace.appendChild(image);
         }
     };
-    reader.readAsDataURL(file); // 이미지 파일을 Data URL로 읽기
+    reader.readAsDataURL(articleForm['upload'].files[0]); // 이미지 파일을 Data URL로 읽기
     thumbnailTitle.style.display = 'none';
     thumbnail1.style.display = 'none';
     thumbnailUpload.textContent = '썸네일 변경';
 });
+
+
+
+
+// articleForm.thumbnailPreview.onclick = function () {
+//     articleForm['thumbnail'].click();
+// }
+//
+// articleForm.hide = function() {
+//     articleForm.classList.remove('visible');
+// };
+//
+// articleForm.emptyThumbnail.hide = () =>{
+//     articleForm.emptyThumbnail.classList.add('visible');
+// }
+//
+// articleForm.thumbnailPreview = articleForm.querySelector('[rel="thumbnailPreview"]');
+// articleForm.emptyThumbnail = articleForm.querySelector('[rel="emptyThumbnail"]');
+//
+// articleForm.thumbnailPreview.onclick = function () {
+//     articleForm['thumbnail'].click();
+// }
+//
+
+// articleForm['thumbnail'].onchange = function (e) {
+//     if (articleForm['thumbnail'].files.length === 0) {
+//         articleForm.thumbnailPreview.style.backgroundImage = 'none';
+//         articleForm.emptyThumbnail.classList.remove('visible');
+//         return;
+//     }
+//     const fileReader = new FileReader();
+//     fileReader.onload = function (data) {
+//         articleForm.thumbnailPreview.style.backgroundImage = `url("${data.target.result}")`;
+//         articleForm.emptyThumbnail.classList.add('visible');
+//
+//     }
+//     fileReader.readAsDataURL(articleForm['thumbnail'].files[0]);
+// } //이미지 업로드시 발생
+//
+
+
 
 
 const beForeButton = document.querySelector('input[type="button"][value="이전"]');
@@ -147,47 +197,45 @@ beForeButton.onclick = function (e) {
     articleForm.style.display = 'none';
 };
 
+
 articleForm['complete'].addEventListener('click', (e) => {
-    // const thumnail = document.querySelector('.thumbnail');
-
     e.preventDefault();
-    // if(thumnail === null){
-    //     alert('썸네일을 올려주세요');
-    //     return;
-    // }
-
-    if (articleForm['title'].value === '') {
-        alert('제목을 입력해주세요');
-        return;
-    }
-    // if(articleForm['content'].value === ''){
-    //     alert('내용을 입력해주세요');
-    //     return;
-    // }
-
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    formData.append('place', writeForm['place'].value);
-    formData.append('address', writeForm['address'].value);
+
+    //폼데이터 추가될떄 무조건 문자열로 처리해주기 떄문에 requestParam으로 처리해줘야됨
+
+    formData.append('place', writeForm['place'].value); //첫번째 장소값
+    formData.append('address', writeForm['address'].value); //두번째 장소값
     formData.append('dayStr', writeForm['day'].value);
     formData.append('timeStr', writeForm['time'].value);
     formData.append('limit', writeForm['limit'].value);
-    // formData.append('latitude', writeForm['lat'].value);
-    // formData.append('longitude', writeForm['lng'].value);
-    formData.append('category',writeForm['category'].value);
+    formData.append('latitude', writeForm['lat'].value); //위도
+    formData.append('longitude', writeForm['lng'].value); //경도
+    formData.append('category', writeForm['category'].value); //카테고리값
+    formData.append('title', articleForm['title'].value); //제목값
+    formData.append('content', articleForm['content'].value); //ck에디터 내용 가져오기
+    formData.append('thumbnailMultipart', articleForm['upload'].files[0]);
 
-    formData.append('title', articleForm['title'].value);
-    formData.append('content', articleForm['content'].value);
+    for (let i = 0; i < tags.length; i++) { //태그 반복해서 나타내기
+        formData.append('hashtag', tags[i].value);
+    }
+
     xhr.open('POST', '/write');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('성공');
+                alert('게시판 작성 성공');
+
             } else {
-                alert('실패');
+                alert('게시판 작성에 실패하였습니다');
             }
         }
     };
     xhr.send(formData);
 });
+
+
+
+

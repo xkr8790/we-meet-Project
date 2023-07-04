@@ -6,7 +6,7 @@
 
 
 html{
-    font-size: 15px;
+    font-size: 12px;
 }
 
 
@@ -31,7 +31,7 @@ html{
     padding: 1rem;
 }
 /*로고*/
-.container > .inner > .logo_we_meet > .link>.logo {
+.container > .inner > .logo_we_meet > .ExclamationMark {
     width: 95px;
     height: 18px;
 }
@@ -130,13 +130,12 @@ html{
     width: 470px;
 }
 
-
 #registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .input,
 #registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .button {
     flex: 1;
     width: 100%;
     height: 100%;
-    padding: 0 0 0 7px;
+    padding: 0;
     border: none;
     outline: none;
 }
@@ -156,16 +155,17 @@ html{
 /*step-2 next button*/
 #registerForm > .inner > .step-2> .button-container > .complete{
     width: 500px;
-
-    margin-top: 1.3rem;
     padding: 14px 0;
     border-radius: 6px;
     font-size: 18px;
     font-weight: 700;
     line-height: 22px;
 
-    position: relative;
-
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
 }
 
 
@@ -202,32 +202,6 @@ html{
     height: 20px;
 
     pointer-events: none;
-}
-
-.input-wrapper .img.on {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translate(2300%,-50%);
-    width: 20px; /* 이미지의 크기를 조절하세요 */
-    height: 20px;
-
-    display: block;
-    cursor: pointer;
-    pointer-events: all;
-}
-
-.input-wrapper .img.off {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translate(2300%,-50%);
-    width: 20px; /* 이미지의 크기를 조절하세요 */
-    height: 20px;
-
-    cursor: pointer;
-    display: none;
-    pointer-events: all;
 }
 
 

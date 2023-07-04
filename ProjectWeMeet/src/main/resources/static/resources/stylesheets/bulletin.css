@@ -32,14 +32,31 @@ body {
 
 }
 
-.allContainer >.header >.login > a{
+allContainer > .header > .login > a {
+
+}
+
+.allContainer > .header > .login > a {
+    font-family: 'Humanbumsuk', sans-serif;
+    font-size: 1rem;
     text-decoration: none;
     color: black;
 }
-.allContainer >.header >.login > a:hover{
-    color: #9da3d6;
+
+
+.allContainer > .header > .login > a:hover {
+    color: blue;
 }
 
+.allContainer > .header > .login > button {
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+    margin-left: 0.2rem;
+}
+.allContainer > .header > .login > button > i:hover{
+    color: #FB6161;
+}
 
 .allContainer > .main-template {
     width: 100%;
@@ -91,7 +108,8 @@ body {
     border-radius: 50%;
     object-fit: cover;
 }
-.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img >a > img{
+
+.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img > a > img {
     border-radius: 50%;
 }
 
@@ -102,7 +120,7 @@ body {
     background-color: white;
 }
 
-.allContainer > .main-template >.content{
+.allContainer > .main-template > .content {
     background-color: #f4f3f1;
     padding-bottom: 2rem;
     margin: 0 1rem;
@@ -123,16 +141,16 @@ body {
     margin: 0 1rem
 }
 
-.announcement > .introduction > .member{
+.announcement > .introduction > .member {
     color: red;
     font-size: 0.7rem;
 }
 
-.announcement > .introduction > .subTitle{
-font-size: 1.2rem;
+.announcement > .introduction > .subTitle {
+    font-size: 1.2rem;
 }
 
-.announcement > .introduction > .my{
+.announcement > .introduction > .my {
     width: 100%;
     height: 4rem;
     align-items: start;
@@ -142,35 +160,37 @@ font-size: 1.2rem;
 }
 
 
-.announcement > .introduction > .my > .myImages{
+.announcement > .introduction > .my > .myImages {
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
     margin-right: 0.5rem;
 }
-.announcement > .introduction > .my > .myImages>img{
+
+.announcement > .introduction > .my > .myImages > img {
     border-radius: 50%;
 }
 
-.announcement > .introduction > .my > .myIntroduction{
+.announcement > .introduction > .my > .myIntroduction {
     height: 4rem;
     width: 100%;
 }
 
-.announcement > .introduction > .my > .myIntroduction > .nickname{
-height: 2rem;
+.announcement > .introduction > .my > .myIntroduction > .nickname {
+    height: 2rem;
 
 }
 
-.announcement > .introduction > .my > .myIntroduction > .text{
- height: 2rem;
+.announcement > .introduction > .my > .myIntroduction > .text {
+    height: 2rem;
     color: lightgray;
 }
 
 
-.announcement > .participant{
+.announcement > .participant {
+    border: 1px solid blue;
     width: 100%;
-    height: 15rem;
+    height: auto;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -178,43 +198,84 @@ height: 2rem;
     position: relative;
 }
 
-.announcement > .participant > .participantContainer{
+.announcement > .participant > .participantContainer {
     position: relative;
     width: 90%;
-    height: 11rem;
+    height: auto;
     border-radius: 5px;
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
 }
 
-.announcement > .participant > .participantContainer > .login-after-human{
+.announcement > .participant > .participantContainer > .login-after-human {
     width: 100%;
     height: 100%;
     color: blue;
     align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: start;
+}
+
+.announcement > .participant > .participantContainer > .login-after-human > p{
+    margin: 1rem 0;
+}
+.announcement > .participant > .participantContainer > .login-after-human > .profile{
+    width: 32rem;
+    height: auto;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
+    border: 1px solid red;
+    flex-wrap: wrap;
+}
+.announcement > .participant > .participantContainer > .login-after-human > .profile > span{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin-right: 0.2rem;
+    border: 1px solid blue;
+}
+
+.announcement > .participant > .participantContainer > .login-after-human > .participating-button{
+    margin: 0.5rem;
+    width: 4rem;
+    height: 2rem;
+}
+.announcement > .participant > .participantContainer > .login-after-human > .participating-button > button{
+    width: 4rem;
+    height: 2rem;
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+.announcement > .participant > .participantContainer > .login-after-human > .participating-button > button:hover{
+    opacity: 1;
 }
 
 
-.announcement > .participant > .participantContainer > .login-before-human{
+
+.announcement > .participant > .participantContainer > .login-before-human {
     position: absolute;
     width: 100%;
-    height: 100%;
-    margin-bottom: 1rem;
+    height: 8rem;
+    margin: 3rem 0 0 0;
     border-radius: 15px;
-    background-color: rgb(255,228,196);
+    background-color: gray;
     color: black;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    opacity: 1;
 }
 
-.announcement > .participant > .participantContainer >.login-before-human > a> .attend{
+.announcement > .participant > .participantContainer > .login-before-human > a > .attend {
     width: 8rem;
     height: 2rem;
     border-radius: 5px;
@@ -222,7 +283,7 @@ height: 2rem;
     cursor: pointer;
 }
 
-.announcement > .guide{
+.announcement > .guide {
     width: 100%;
     height: 15rem;
     display: flex;
@@ -230,22 +291,64 @@ height: 2rem;
     justify-content: start;
     margin: 0 1rem
 }
-.announcement > .guide > .guideContainer{
+
+.announcement > .guide > .guideContainer {
     margin-right: 0.5rem;
     width: 35%;
 }
-.announcement > .guide > .guideContainer > .guidance{
+
+.announcement > .guide > .guideContainer > .guidance {
     font-size: 0.8rem;
     color: red;
 }
-.announcement > .guide > .guideContainer > .map{
+
+.announcement > .guide > .guideContainer > .map {
     height: 9.8rem;
-    border:1px solid blue;
+    /*border: 1px solid blue;*/
 }
 
-.announcement > .guide > .comments{
+.announcement > .guide > .comments {
     width: 58%;
-    border:1px solid blue;
+    /*border: 1px solid blue;*/
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.announcement > .guide > .comments > .title{
+    width: 100%;
+    text-align: center;
+}
+.announcement > .guide > .comments > .contentBox{
+    width: 100%;
+    height: 100%;
+    /*border: 1px solid red;*/
+    margin-top: 0.4rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.announcement > .guide > .comments > .contentBox > .answer{
+    width: 97%;
+    height: 11.5rem;
+    margin-bottom: 0.2rem;
+    /*position: absolute;*/
+    background-color: white;
+    border-radius: 5px;
+    overflow-y: scroll;
+}
+
+.announcement > .guide > .comments > .contentBox > .content-write{
+    width: 100%;
+    text-align: center;
+}
+
+.announcement > .guide > .comments > .contentBox > .content-write > label > input{
+    width: 19rem;
+}
+.announcement > .guide > .comments > .contentBox > .content-write > input{
+    width: 3rem;
 }
 
 
@@ -315,7 +418,7 @@ height: 2rem;
 }
 
 .preview > .container > .previewContainer > .text > .title{
- width: 10rem;
+    width: 10rem;
     height: 1.5rem;
     margin-bottom: 0.2rem;
     overflow: hidden;
@@ -329,11 +432,11 @@ height: 2rem;
 }
 
 .preview > .container > .previewContainer > .text > .participant{
-height: 2.27rem;
-align-items: center;
-display: flex;
-flex-direction: row;
-justify-content: start;
+    height: 2.27rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
 }
 .preview > .container > .previewContainer > .text > .participant > .human {
     width: 2.27rem;

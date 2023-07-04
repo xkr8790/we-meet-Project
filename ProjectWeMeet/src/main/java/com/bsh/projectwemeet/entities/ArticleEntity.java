@@ -1,5 +1,7 @@
 package com.bsh.projectwemeet.entities;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,19 +17,50 @@ public class ArticleEntity {
     private String thumbnailMime;
     private int view;
     private Date createdAt;
-    private Date day;
-    private Date time;
+    private Date appointmentStartDate;
+    private Date appointmentStartTime;
     private int limit;
     private int participation;
     private int likeCount;
     private int report;
     private boolean isDeleted;
     private boolean isFinished;
-    private int latitude;
-    private int longitude;
+    private double latitude;
+    private double longitude;
     private String hashtag;
     private String clientIp;
     private String clientUa;
+
+    public String getClientIp() {
+        return clientIp;
+    }
+
+    public ArticleEntity setClientIp(String clientIp) {
+        this.clientIp = clientIp;
+        return this;
+    }
+
+    public String getClientUa() {
+        return clientUa;
+    }
+
+    public ArticleEntity setClientUa(String clientUa) {
+        this.clientUa = clientUa;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArticleEntity that = (ArticleEntity) o;
+        return index == that.index;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index);
+    }
 
     public int getIndex() {
         return index;
@@ -119,39 +152,39 @@ public class ArticleEntity {
         return this;
     }
 
-    public Date getCreatedAt() {
+    public Date getCreateAt() {
         return createdAt;
     }
 
-    public ArticleEntity setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public ArticleEntity setCreateAt(Date createAt) {
+        this.createdAt = createAt;
         return this;
     }
 
-    public Date getDay() {
-        return day;
+    public Date getAppointmentStartDate() {
+        return appointmentStartDate;
     }
 
-    public ArticleEntity setDay(Date day) {
-        this.day = day;
+    public ArticleEntity setAppointmentStartDate(Date appointmentStartDate) {
+        this.appointmentStartDate = appointmentStartDate;
         return this;
     }
 
-    public Date getTime() {
-        return time;
+    public Date getAppointmentStartTime() {
+        return appointmentStartTime;
     }
 
-    public ArticleEntity setTime(Date time) {
-        this.time = time;
+    public ArticleEntity setAppointmentStartTime(Date appointmentStartTime) {
+        this.appointmentStartTime = appointmentStartTime;
         return this;
     }
 
-    public int getLimit() {
+    public int getLimitPeople() {
         return limit;
     }
 
-    public ArticleEntity setLimit(int limit) {
-        this.limit = limit;
+    public ArticleEntity setLimitPeople(int limitPeople) {
+        this.limit = limitPeople;
         return this;
     }
 
@@ -200,20 +233,20 @@ public class ArticleEntity {
         return this;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public ArticleEntity setLatitude(int latitude) {
+    public ArticleEntity setLatitude(double latitude) {
         this.latitude = latitude;
         return this;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public ArticleEntity setLongitude(int longitude) {
+    public ArticleEntity setLongitude(double longitude) {
         this.longitude = longitude;
         return this;
     }
@@ -225,36 +258,5 @@ public class ArticleEntity {
     public ArticleEntity setHashtag(String hashtag) {
         this.hashtag = hashtag;
         return this;
-    }
-
-    public String getClientIp() {
-        return clientIp;
-    }
-
-    public ArticleEntity setClientIp(String clientIp) {
-        this.clientIp = clientIp;
-        return this;
-    }
-
-    public String getClientUa() {
-        return clientUa;
-    }
-
-    public ArticleEntity setClientUa(String clientUa) {
-        this.clientUa = clientUa;
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ArticleEntity that = (ArticleEntity) o;
-        return index == that.index;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(index);
     }
 }
