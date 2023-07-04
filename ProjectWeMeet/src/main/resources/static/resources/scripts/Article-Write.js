@@ -1,4 +1,5 @@
 const articleForm = document.getElementById('Article-Form');
+const BulletinForm = document.getElementById('bulletinForm');
 
 
 let tagCounter = 0; //전역변수 태그카운터
@@ -8,16 +9,11 @@ var thumbnailUpload = document.querySelector('.thumbnail-upload');
 var thumbnailChange = document.querySelector('.thumbnail-change');
 const thumbnailTitle = document.querySelector('.thumbnail-title');
 const thumbnail1 = document.querySelector('.thumbnail1');
-ClassicEditor.create(articleForm['content'], {
-        language: 'ko', //언어설정
-        toolbar: ['heading', '|', 'Bold', 'Italic', '|', 'link', 'bulletedList', 'numberedList', '|', 'Undo', 'Redo'] //내가 넣고싶은 툴바 설정
-    })
-    .then( editor => {
-        window.editor = editor;})
-    .catch(error => {
-        console.error(error);
-    });
 
+
+ClassicEditor.create(articleForm['content'],{
+
+}); //파일 업로드
 
 // var contents = CKEDITOR.instances.editor.getData();
 
@@ -149,47 +145,6 @@ thumbnailChange.addEventListener('change', function (event) {
 });
 
 
-
-
-// articleForm.thumbnailPreview.onclick = function () {
-//     articleForm['thumbnail'].click();
-// }
-//
-// articleForm.hide = function() {
-//     articleForm.classList.remove('visible');
-// };
-//
-// articleForm.emptyThumbnail.hide = () =>{
-//     articleForm.emptyThumbnail.classList.add('visible');
-// }
-//
-// articleForm.thumbnailPreview = articleForm.querySelector('[rel="thumbnailPreview"]');
-// articleForm.emptyThumbnail = articleForm.querySelector('[rel="emptyThumbnail"]');
-//
-// articleForm.thumbnailPreview.onclick = function () {
-//     articleForm['thumbnail'].click();
-// }
-//
-
-// articleForm['thumbnail'].onchange = function (e) {
-//     if (articleForm['thumbnail'].files.length === 0) {
-//         articleForm.thumbnailPreview.style.backgroundImage = 'none';
-//         articleForm.emptyThumbnail.classList.remove('visible');
-//         return;
-//     }
-//     const fileReader = new FileReader();
-//     fileReader.onload = function (data) {
-//         articleForm.thumbnailPreview.style.backgroundImage = `url("${data.target.result}")`;
-//         articleForm.emptyThumbnail.classList.add('visible');
-//
-//     }
-//     fileReader.readAsDataURL(articleForm['thumbnail'].files[0]);
-// } //이미지 업로드시 발생
-//
-
-
-
-
 const beForeButton = document.querySelector('input[type="button"][value="이전"]');
 beForeButton.onclick = function (e) {
     e.preventDefault();
@@ -198,25 +153,8 @@ beForeButton.onclick = function (e) {
 };
 
 
-articleForm['complete'].addEventListener('click', (e) => {
+articleForm.onsubmit = e => {
     e.preventDefault();
-
-    if (articleForm['title'].value===''){
-        alert('제목을 입력해 주세요.');
-        return;
-    }
-    // if (articleForm['content'].value===''){
-    //     alert('내용을 입력해 주세요.');
-    //     return;
-    // }
-    // if (articleForm['upload'].files[0] ===''){
-    //     alert('썸네일을 설정해 주세요.');
-    //     return;
-    // }
-    // if (tags[i].value.files[0] ===''){
-    //     alert('썸네일을 설정해 주세요.');
-    //     return;
-    // }
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
@@ -231,11 +169,9 @@ articleForm['complete'].addEventListener('click', (e) => {
     formData.append('latitude', writeForm['lat'].value); //위도
     formData.append('longitude', writeForm['lng'].value); //경도
     formData.append('category', writeForm['category'].value); //카테고리값
-
     formData.append('title', articleForm['title'].value); //제목값
     formData.append('content', articleForm['content'].value); //ck에디터 내용 가져오기
     formData.append('thumbnailMultipart', articleForm['upload'].files[0]);
-
     for (let i = 0; i < tags.length; i++) { //태그 반복해서 나타내기
         formData.append('hashtag', tags[i].value);
     }
@@ -244,20 +180,16 @@ articleForm['complete'].addEventListener('click', (e) => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                // const newIndex = xhr.responseText; // Retrieve the index from the response
-
-                alert('게시판 작성에 성공하였습니다.');
-                // Redirect to the new page with the retrieved index
-                // window.location.href = '/article/read?index=' + newIndex;
-
-
+                window.location.href = `/article/read?index=${BulletinForm['index'].value}`;
             } else {
                 alert('게시판 작성에 실패하였습니다');
             }
         }
     };
     xhr.send(formData);
-});
+};
+
+
 
 
 
