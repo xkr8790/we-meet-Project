@@ -71,12 +71,16 @@ public class WriteController {
 
         ModelAndView modelAndView = new ModelAndView();
 
+        System.out.println(result);
+        System.out.println(article.getIndex());
+
+
         if (result) {
             // 게시글이 성공적으로 처리된 경우, redirect로 계시글 이동
-            modelAndView.setViewName("redirect:/");
+            modelAndView.setViewName("redirect:/article/read?index="+article.getIndex());
         } else {
             // 처리에 실패한 경우
-            modelAndView.setViewName("redirect:/");
+            modelAndView.setViewName("home/main");
             modelAndView.addObject("result", result);
         }
         return modelAndView;

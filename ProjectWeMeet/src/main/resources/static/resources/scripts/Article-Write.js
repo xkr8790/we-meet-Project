@@ -201,6 +201,23 @@ beForeButton.onclick = function (e) {
 articleForm['complete'].addEventListener('click', (e) => {
     e.preventDefault();
 
+    if (articleForm['title'].value===''){
+        alert('제목을 입력해 주세요.');
+        return;
+    }
+    // if (articleForm['content'].value===''){
+    //     alert('내용을 입력해 주세요.');
+    //     return;
+    // }
+    // if (articleForm['upload'].files[0] ===''){
+    //     alert('썸네일을 설정해 주세요.');
+    //     return;
+    // }
+    // if (tags[i].value.files[0] ===''){
+    //     alert('썸네일을 설정해 주세요.');
+    //     return;
+    // }
+
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
@@ -214,6 +231,7 @@ articleForm['complete'].addEventListener('click', (e) => {
     formData.append('latitude', writeForm['lat'].value); //위도
     formData.append('longitude', writeForm['lng'].value); //경도
     formData.append('category', writeForm['category'].value); //카테고리값
+
     formData.append('title', articleForm['title'].value); //제목값
     formData.append('content', articleForm['content'].value); //ck에디터 내용 가져오기
     formData.append('thumbnailMultipart', articleForm['upload'].files[0]);
@@ -226,7 +244,12 @@ articleForm['complete'].addEventListener('click', (e) => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('게시판 작성 성공');
+                const newIndex = xhr.responseText; // Retrieve the index from the response
+
+                alert('게시판 작성에 성공하였습니다.');
+                // Redirect to the new page with the retrieved index
+                window.location.href = '/article/read?index=' + newIndex;
+
 
             } else {
                 alert('게시판 작성에 실패하였습니다');
