@@ -110,69 +110,24 @@
     <div class="slider">
         <div class="slide">
             <div class="article-box">
-                <div class="article-list">
+                <div class="article-list" th:each="article : ${article}">
+                    <a th:href="@{article/read(index=${article.getIndex()})}">링크</a>
                     <div class="article-thumbnail">
-                        <img class="thumbnail" th:src="@{/resources/images/mainImages/조보아.jpg}">
+                        <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="Thumbnail">
                     </div>
                     <div class="article-content-box">
                         <div class="article-tag">
                             <span class="tag">태그</span>
                             <span class="tag comment">추천!!</span>
                         </div>
-                        <span class="article-content">
-            <h2>장문복이랑 놀러갈 사람?</h2>
-            </span>
+                        <span class="article-content" th:text="${article.getTitle()}"></span>
                         <span class="article-map">
-              <span>카테고리</span>
-              <span>위치</span>
-              <span>날짜</span>
-              <span>시간</span>
+              <span th:text="${article.getCategory()}">카테고리</span>
+              <span th:text="${article.getAddress()}">위치</span>
+              <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
+              <span th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}"></span>
             </span>
                         <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" th:src="@{/resources/images/mainImages/조보아.jpg}">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" th:src="@{/resources/images/mainImages/조보아.jpg}">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" th:src="@{/resources/images/mainImages/조보아.jpg}">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" th:src="@{/resources/images/mainImages/조보아.jpg}">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" th:src="@{/resources/images/mainImages/조보아.jpg}">
-              </span>
-              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
-              <span class="number">
-                <span>0</span>
-                <span>/</span>
-                <span>0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" th:src="@{/resources/images/mainImages/조보아.jpg}">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">추천!!</span>
-                        </div>
-                        <span class="article-content">
-            <h2>장문복이랑 놀러갈 사람?</h2>
-            </span>
-                        <span class="article-map">
-              <span>카테고리</span>
-              <span>위치</span>
-              <span>날짜</span>
-              <span>시간</span>
-            </span>
-                        <span class="article-human">
-
               <span class="Profile-Picture">
                  <img class="Profile" src="../resources/images/조보아.jpg">
               </span>
@@ -190,7 +145,8 @@
               <span class="number">
                 <span>0</span>
                 <span>/</span>
-                <span>0</span>
+                <span th:text="${article.getLimitPeople()}"></span>
+                <!-- 제한인원 제한 걸때 value??  -->
               </span>
               </span>
                     </div>

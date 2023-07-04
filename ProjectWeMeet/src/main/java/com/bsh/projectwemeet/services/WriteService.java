@@ -2,10 +2,13 @@ package com.bsh.projectwemeet.services;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.InsertArticleResult;
 import com.bsh.projectwemeet.enums.RegisterResult;
+import com.bsh.projectwemeet.enums.SelectArticleResult;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,6 +28,7 @@ public class WriteService {
     @Autowired
     public WriteService(ArticleMapper articleMapper) { this.articleMapper = articleMapper; }
 
+    @Transactional
     public boolean putArticle(HttpServletRequest request, ArticleEntity article, HttpSession session){
 
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
@@ -39,4 +43,6 @@ public class WriteService {
 
         return this.articleMapper.insertArticle(article)>0;
     }
+
+
 }
