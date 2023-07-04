@@ -30,7 +30,6 @@ public class ArticleEntity {
     private String hashtag;
     private String clientIp;
     private String clientUa;
-
     public String getClientIp() {
         return clientIp;
     }

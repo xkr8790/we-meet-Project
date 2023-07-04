@@ -266,6 +266,7 @@ allContainer > .header > .login > a {
     display: flex;
     flex-direction: column;
     justify-content: start;
+    list-style: none;
 }
 
 .announcement > .review > .reviewContainer > .reviewContent > .reviewBox {

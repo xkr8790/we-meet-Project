@@ -9,6 +9,9 @@ public interface ReviewMapper {
 
     int insertReview(ReviewEntity reviewEntity);
 
+
+    ReviewEntity[] selectReviewByIndex(@Param(value="articleIndex") int articleIndex);
+
     int deleteByReview(@Param(value = "index") int index);
 
     int updateByText(ReviewEntity reviewEntity);

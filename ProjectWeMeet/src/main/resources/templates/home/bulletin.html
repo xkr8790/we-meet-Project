@@ -17,7 +17,7 @@
 </head>
 <body>
 <input type="hidden" th:value="${article.getIndex()}")>
-<div class="allContainer">
+<form class="allContainer">
     <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
@@ -114,7 +114,7 @@
             </div>
 
 
-            <form class="comments" id="bulletinForm">
+            <div class="comments" id="bulletinForm">
                 <div class="title">위밋! 댓글</div>
                 <div class="contentBox">
                     <div class="answer" id="commentContainer">
@@ -128,7 +128,7 @@
                         <input type="submit" value="작성">
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -202,7 +202,7 @@
     </div>
 
 
-</div>
+</form>
 
 
 </body>

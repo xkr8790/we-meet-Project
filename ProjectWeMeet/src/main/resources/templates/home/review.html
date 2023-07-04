@@ -8,20 +8,20 @@
     <title>게시글</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <link rel="stylesheet" href="/resources/stylesheets/review.css">
-<!--    <script >-->
-<!--        alert('리뷰를 작성하지 못하였습니다.');-->
-<!--    </script>-->
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/review.css}">
+    <!--    <script >-->
+    <!--        alert('리뷰를 작성하지 못하였습니다.');-->
+    <!--    </script>-->
     <script defer th:src="@{/resources/scripts/review.js}"></script>
 
 </head>
 <body>
-<div class="allContainer">
-    <div class="header" >
+<form class="allContainer" id="reviewForm" method="post">
+    <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
         </a>
-        <div class="login" th:if="${session != null}">
+        <div class="login" th:if="${session.user == null}">
             <a href="/login">로그인</a>
             <a href="/register/">회원가입</a>
         </div>
@@ -78,17 +78,16 @@
         <div class="review">
             <div class="reviewContainer">
                 <div class="reviewTitle">당신의 추억을 남겨주세요</div>
-                <div class="reviewContent">
-                    <div class="reviewBox" th:each="reviews : ${reviews}">
-<!--                        <div class="core">-->
-
-<!--                        </div>-->
-                        <div hidden th:text="${reviews.getIndex()}"></div>
-                        <div class="estimate" th:text="${reviews.getContent()}">소환자 협곡에서의 만남의 최고였습니다. 듀오를 하지못해 아쉽습니다. 그리고 탑티모 개못함</div>
+                <div class="reviewContent" id="reviewContent">
+                    <div class="reviewBox" th:each="review : ${reviews}">
+                        <div class="core" th:text="${review.getReviewStar()}"></div>
+                        <div hidden th:text="${review.getReviewIndex()}"></div>
+                        <div class="estimate" th:text="${review.getContent()}"></div>
                         <div class="writer">
                             <span class="profile">
                                 <img src="" alt="이미지">
                             </span>
+                            <span th:text="${review.getCreatedAt()}"></span>
                         </div>
                         <div>
                             <a href="#">수정</a>
@@ -96,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <form class="reviewInput" method="post" id="reviewForm">
+                <div class="reviewInput">
                     <input type="hidden" name="articleIndex" value="131">
                     <div class="fieldset">
                         <input type="radio" name="reviewStar" value="5" id="rate1"><label
@@ -110,15 +109,15 @@
                         <input type="radio" name="reviewStar" value="1" id="rate5"><label
                             for="rate5">★</label>
                     </div>
-                        <input class="text" type="text" name="content">
-                        <input class="button" type="submit" value="등록">
-                </form>
+                    <input class="text" type="text" name="content">
+                    <input class="button" type="submit" value="등록">
+                </div>
             </div>
         </div>
     </div>
 
 
-</div>
+</form>
 
 
 </body>

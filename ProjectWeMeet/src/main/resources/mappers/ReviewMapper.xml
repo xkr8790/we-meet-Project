@@ -22,6 +22,26 @@
             #{email})
 </insert>
 
+
+
+    <select id="selectReviewByIndex"
+    resultType="com.bsh.projectwemeet.entities.ReviewEntity">
+        SELECT `index`,
+               `content`,
+               `created_at`,
+               `reviewStar`,
+               `article_index`,
+               `review_index`,
+               `client_ip`,
+               `client_ua`,
+               `email`
+        FROM `wemeet_project`.`reviews`
+        WHERE `article_index` = #{articleIndex}
+        ORDER BY `index` ASC
+
+    </select>
+
+
     <delete id="deleteByReview">
         DELETE
         FROM `wemeet_project`.`reviews`
