@@ -180,7 +180,13 @@ articleForm.onsubmit = e => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                window.location.href = `/article/read?index=${BulletinForm['index'].value}`;
+                const newIndex = xhr.responseText; // Retrieve the index from the response;
+                window.location.href = '/article/read?index='+newIndex;
+                console.log(newIndex);
+                alert('게시판 작성에 성공하였습니다.');
+
+
+
             } else {
                 alert('게시판 작성에 실패하였습니다');
             }
