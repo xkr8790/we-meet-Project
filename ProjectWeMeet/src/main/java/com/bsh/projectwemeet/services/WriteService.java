@@ -44,5 +44,10 @@ public class WriteService {
         return this.articleMapper.insertArticle(article)>0;
     }
 
+    public boolean deleteByIndex(int index){
+        return this.articleMapper.deleteByArticle(index) > 0;
+    }
+
+
 
 }

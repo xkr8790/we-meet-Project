@@ -16,8 +16,9 @@
 
 </head>
 <body>
-<input type="hidden" th:value="${article.getIndex()}")>
-<div class="allContainer">
+
+<form id="bulletinForm" class="allContainer">
+    <input type="hidden" name="index" th:value="${article.getIndex()}")>
     <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
@@ -30,18 +31,21 @@
             <button>
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
             </button>
+
             <button>
                 <i class="fa-solid fa-eraser fa-lg"></i>
             </button>
-            <button>
+
+            <button name="delete">
                 <i class="fa-solid fa-trash fa-lg"></i>
             </button>
+
         </div>
     </div>
 
     <div class="main-template">
         <div class="img-profile-title">
-            <img th:src="@{/article/image(index=${article.getIndex()})}" alt="Thumbnail">
+            <img class="image"  th:src="@{/article/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">
@@ -53,7 +57,7 @@
             </div>
         </div>
         <div class="content">
-            <div th:text="${article.getContent()}"></div>
+            <div th:utext="${article.getContent()}"></div>
             <div th:text="${article.getCategory()}"></div>
         </div>
     </div>
@@ -114,7 +118,7 @@
             </div>
 
 
-            <form class="comments" id="bulletinForm">
+            <div class="comments">
                 <div class="title">위밋! 댓글</div>
                 <div class="contentBox">
                     <div class="answer" id="commentContainer">
@@ -128,7 +132,7 @@
                         <input type="submit" value="작성">
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -202,7 +206,7 @@
     </div>
 
 
-</div>
+</form>
 
 
 </body>

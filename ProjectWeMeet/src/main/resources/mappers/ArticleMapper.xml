@@ -76,4 +76,12 @@
     </update>
 
 
+    <delete id="deleteByArticle">
+        DELETE FROM `wemeet_project`.`articles`
+        WHERE `index` LIKE #{index}
+        LIMIT 1
+    </delete>
+
+
+
 </mapper>
