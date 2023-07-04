@@ -8,8 +8,7 @@ var thumbnailUpload = document.querySelector('.thumbnail-upload');
 var thumbnailChange = document.querySelector('.thumbnail-change');
 const thumbnailTitle = document.querySelector('.thumbnail-title');
 const thumbnail1 = document.querySelector('.thumbnail1');
-ClassicEditor
-    .create(document.querySelector('#editor'), {
+ClassicEditor.create(articleForm['content'], {
         language: 'ko', //언어설정
         toolbar: ['heading', '|', 'Bold', 'Italic', '|', 'link', 'bulletedList', 'numberedList', '|', 'Undo', 'Redo'] //내가 넣고싶은 툴바 설정
     })
@@ -199,28 +198,25 @@ beForeButton.onclick = function (e) {
 };
 
 
-
 articleForm['complete'].addEventListener('click', (e) => {
     e.preventDefault();
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
-
     //폼데이터 추가될떄 무조건 문자열로 처리해주기 떄문에 requestParam으로 처리해줘야됨
 
     formData.append('place', writeForm['place'].value); //첫번째 장소값
     formData.append('address', writeForm['address'].value); //두번째 장소값
-    formData.append('dayStr',writeForm['day'].value);
-    formData.append('timeStr',writeForm['time'].value);
+    formData.append('dayStr', writeForm['day'].value);
+    formData.append('timeStr', writeForm['time'].value);
     formData.append('limit', writeForm['limit'].value);
     formData.append('latitude', writeForm['lat'].value); //위도
     formData.append('longitude', writeForm['lng'].value); //경도
-    formData.append('category',writeForm['category'].value); //카테고리값
-
+    formData.append('category', writeForm['category'].value); //카테고리값
     formData.append('title', articleForm['title'].value); //제목값
-    formData.append('content',window.editor.getData()); //ck에디터 내용 가져오기
-        formData.append('thumbnailMultipart',articleForm['upload'].files[0]);
+    formData.append('content', articleForm['content'].value); //ck에디터 내용 가져오기
+    formData.append('thumbnailMultipart', articleForm['upload'].files[0]);
 
     for (let i = 0; i < tags.length; i++) { //태그 반복해서 나타내기
         formData.append('hashtag', tags[i].value);
@@ -230,7 +226,8 @@ articleForm['complete'].addEventListener('click', (e) => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('게시판 작성에 성공하였습니다');
+                alert('게시판 작성 성공');
+
             } else {
                 alert('게시판 작성에 실패하였습니다');
             }
@@ -238,3 +235,7 @@ articleForm['complete'].addEventListener('click', (e) => {
     };
     xhr.send(formData);
 });
+
+
+
+
