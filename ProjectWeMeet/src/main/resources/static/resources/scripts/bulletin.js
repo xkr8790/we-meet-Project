@@ -1,6 +1,7 @@
+//  preview 이동 자바스크립트
 const list = document.querySelector('.container');
-const listScrollWidth = list.scrollWidth;
-const listClientWidth = list.clientWidth;
+// const listScrollWidth = list.scrollWidth;
+// const listClientWidth = list.clientWidth;
 
 let startX = 0;
 let nowX = 0;
@@ -59,5 +60,74 @@ const onScrollEnd = (e) => {
 };
 
 bindEvents();
+
+//  댓글 insert
+
+const bulletinForm = document.getElementById('bulletinForm');
+
+function postComment(content, commentIndex, toFocus, refreshCommentAfter){
+
+    refreshCommentAfter ??= true; // 댓글을 달고난후 새로고침에 대한 코드
+
+    const articleIndex = bulletinForm['articleIndex'].value;
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    // 어느 게시글에 어느 게시글내용을을 사용하겠다.
+    //  뒤의 코드는 7번라인, 6번라인의 매개변수를 의미한다.
+    formData.append('articleIndex', articleIndex);
+    formData.append('content', content);
+    if (commentIndex !== null && commentIndex !== undefined) {
+        formData.append('commentIndex', commentIndex)
+    }
+    xhr.open('POST', `/bulletin`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                if (xhr.responseText === 'true') {
+                    if (toFocus) {
+                        toFocus.value = '';
+                        toFocus.focus();
+                    }
+                    if (refreshCommentAfter === true) {
+                        location.href='';
+                    }
+                } else {
+                    alert('댓글을 작성하지 못하였습니다. 잠시후 다시 시도해 주세요');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시후 다시 시도해 주세요.')
+            }
+        }
+    };
+    xhr.send(formData);
+
+}
+
+bulletinForm.onsubmit = (e) => {
+    e.preventDefault();
+
+    if (bulletinForm['content'].value === '') {
+        alert('댓글을 입력해 주세요');
+        bulletinForm['content'].focus();
+        return;
+    }
+    postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
+
+};
+
+const commentContainer = document.getElementById('commentContainer');
+
+function refreshComment(){
+
+}
+
+
+
+
+
+
+
+
+
 
 

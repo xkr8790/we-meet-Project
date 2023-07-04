@@ -30,7 +30,7 @@ public class ReviewController {
     @RequestMapping(value="review", method = RequestMethod.GET)
     public ModelAndView getReview(ReviewEntity reviewEntity){
         ModelAndView modelAndView = new ModelAndView("home/review");
-//        modelAndView.addObject("reviews",reviewEntity);
+        modelAndView.addObject("reviews",reviewEntity);
         return modelAndView;
     }
 

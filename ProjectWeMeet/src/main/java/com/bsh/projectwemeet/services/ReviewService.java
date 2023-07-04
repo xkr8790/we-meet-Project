@@ -21,9 +21,7 @@ public class ReviewService {
 
     public boolean reviewWrite(HttpServletRequest request, ReviewEntity reviewEntity) {
 
-        reviewEntity.setDeleted(false)
-                .setCreatedAt(new Date())
-                .setReviewStar(reviewEntity.getReviewStar())
+        reviewEntity.setCreatedAt(new Date())
                 .setClientIp(request.getRemoteAddr())
                 .setClientUa(request.getHeader("User-Agent"));
 
@@ -31,6 +29,7 @@ public class ReviewService {
     }
 
     public boolean deleteByIndex(int index){
+
         return this.reviewMapper.deleteByReview(index) >0 ;
     }
 
