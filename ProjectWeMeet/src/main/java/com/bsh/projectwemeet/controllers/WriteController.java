@@ -1,9 +1,13 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.services.ArticleService;
 import com.bsh.projectwemeet.services.WriteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,16 +29,18 @@ public class WriteController {
 
     private final WriteService writeService;
 
+
+
     @Autowired
-    public WriteController(WriteService writeService) {
+    public WriteController(WriteService writeService, ArticleService articleService) {
         this.writeService = writeService;
     }
 
 
     @RequestMapping(value = "write",
             method = RequestMethod.POST,
-            produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView postWrite(HttpServletRequest request,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> postWrite(HttpServletRequest request,
                                   ArticleEntity article,
                                   @RequestParam(value = "dayStr") String dayStr,
                                   @RequestParam(value = "timeStr") String timeStr,
@@ -63,28 +69,23 @@ public class WriteController {
 
         boolean result = this.writeService.putArticle(request, article, session);
 
-        ModelAndView modelAndView = new ModelAndView();
 
-        System.out.println(result);
-        System.out.println(article.getIndex());
 
 
         if (result) {
-            // 게시글이 성공적으로 처리된 경우, redirect로 계시글 이동
-            modelAndView.setViewName("redirect:/article/read?index="+article.getIndex());
+            return ResponseEntity.ok().body("{\"index\": " + article.getIndex() + "}");
         } else {
-            // 처리에 실패한 경우
-            modelAndView.setViewName("home/main");
-            modelAndView.addObject("result", result);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"게시판 작성에 실패하였습니다.\"}");
         }
-        return modelAndView;
+
+
     }//POST 방식으로 글쓰기
 
 
 
     @RequestMapping(value = "write", method = RequestMethod.GET)
     public ModelAndView getWrite() {
-        ModelAndView modelAndView = new ModelAndView("home/write");
+        ModelAndView modelAndView = new ModelAndView("article/write");
         return modelAndView;
     } //게시판 주소로 가기
    //@ResponseBody -> 반환된 데이터 JSON이나 기타형식으로 처리됨 이경우 redirect 제대로 안먹힐수도 있음
@@ -96,6 +97,8 @@ public class WriteController {
         boolean result = this.writeService.deleteByIndex(index);
         return String.valueOf(result);
     }
+
+
 
 
 

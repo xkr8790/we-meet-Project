@@ -176,14 +176,28 @@ articleForm.onsubmit = e => {
         formData.append('hashtag', tags[i].value);
     }
 
-    xhr.open('POST', '/write');
+    xhr.open('POST', '/article/write');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                const newIndex = xhr.responseText; // Retrieve the index from the response;
-                window.location.href = '/article/read?index='+newIndex;
-                console.log(newIndex);
                 alert('게시판 작성에 성공하였습니다.');
+                console.log(xhr.responseText); //
+                // const index = xhr.getResponseHeader('index'); // Retrieve the index value from the response header
+                // window.location.href = '/article/read?index=' + index; // Perform the redirect
+            // 구분선
+
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    const index = response.index;
+                    if (index) {
+                        window.location.href = '/article/read?index=' + index;
+                    } else {
+                        alert('게시판 작성에 실패하였습니다. 인덱스 값을 받아오지 못했습니다.');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('서버 응답을 처리하는 중 오류가 발생했습니다.');
+                }
 
 
 
