@@ -1,31 +1,51 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>게시글</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" href="/resources/stylesheets/bulletin.css">
+    <script defer src="/resources/scripts/bulletin.js"></script>
+    <script defer src="/resources/scripts/bulletinMap.js"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
+
 </head>
 <body>
 
-<div class="allContainer">
+<form id="bulletinForm" class="allContainer">
+    <input type="hidden" name="index" th:value="${article.getIndex()}")>
     <div class="header">
-        <a href="">
+        <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
         </a>
         <div class="login" th:if="${session.user == null}">
             <a href="/login">로그인</a>
             <a href="/register/">회원가입</a>
         </div>
+        <div class="login" th:if="${session.user != null}">
+            <button>
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            </button>
+
+            <button>
+                <i class="fa-solid fa-eraser fa-lg"></i>
+            </button>
+
+            <button name="delete">
+                <i class="fa-solid fa-trash fa-lg"></i>
+            </button>
+
+        </div>
     </div>
 
     <div class="main-template">
         <div class="img-profile-title">
-            <img src="https://post-phinf.pstatic.net/MjAxNzA0MTBfMTkg/MDAxNDkxNzk2OTY5MzEw.LIjCVhA5yvrWDEtF3oTyPOutbMxbzhm-Xg4V0rzxD5Qg.lW4lqBV3sHwHqqNAt11ruVyPcoj5H1mOw67nrc4Fqggg.JPEG/%EC%84%9C%EC%9A%B8-%EC%98%88%EC%81%9C-%EC%B9%B4%ED%8E%98-4.jpg?type=w1200"
-                 alt="">
+            <img class="image"  th:src="@{/article/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">
@@ -33,17 +53,12 @@
                     </a>
                     <p>쵸단</p>
                 </div>
-                <div class="bulletin-title">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
+                <div class="bulletin-title" th:value="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
             </div>
         </div>
         <div class="content">
-            <div>소환자의 협곡에 여러분을 초대합니다.
-                저는 현재 골드1~플4를 왔다갔다 하는 서폿,탑 유저입니다.
-                혼자서 아무리 발악해바야 못올라가는걸 알고있습니다.
-                이럴수록 뭉쳐서 맞서 싸워야합니다.
-                데마시안의 이름으로 적들을 처단합시다.
-                참고로 탑 티모
-            </div>
+            <div th:utext="${article.getContent()}"></div>
+            <div th:text="${article.getCategory()}"></div>
         </div>
     </div>
 
@@ -64,17 +79,30 @@
         </div>
         <div class="participant">
             <div class="participantContainer">
-                <div class="login-after-human" th:if="${session.user != null}">
-                    여기는 로그인 후 나올 화면 입니다.
+                <div class="login-after-human">
+                    <p>함께 할 멤버!</p>
+                    <div class="profile">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+
+                    </div>
+                    <div class="participating-button">
+                        <button>
+                            참여하기
+                        </button>
+                    </div>
                 </div>
                 <div class="login-before-human" th:if="${session.user == null}">
-                    <p>참여하는 사람</p>
-                    <p>여기는 로그인 전 나올 화면입니다.</p>
-                    <a href="/login"><input class="attend" type="button" value="참여하기"></a>
+                    <p>로그인 후 확인해 주세요</p>
+                    <!--                    <p>여기는 로그인 전 나올 화면입니다.</p>-->
+                    <!--                    <a href="/login"><input class="attend" type="button" value="참여하기"></a>-->
                 </div>
             </div>
         </div>
-
         <div class="guide">
             <div class="guideContainer">
                 <p class="guidance">안내사항</p>
@@ -85,12 +113,25 @@
                 </p>
                 <p class="place">
                     <i class="fa-solid fa-location-dot"></i>
-                    장소
                 </p>
-                <p class="map">지도</p>
+                <p class="map" id="map">지도</p>
             </div>
+
+
             <div class="comments">
-                <p>댓글</p>
+                <div class="title">위밋! 댓글</div>
+                <div class="contentBox">
+                    <div class="answer" id="commentContainer">
+
+                    </div>
+                    <div class="content-write">
+                        <input type="hidden" name="articleIndex">
+                        <label>
+                            <input type="text" name="content" placeholder="댓글" maxlength="100" x>
+                        </label>
+                        <input type="submit" value="작성">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -99,7 +140,9 @@
     <div class="preview">
         <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
+            <!--            여기서 부터 list-->
             <div class="previewContainer">
+                <!--                이게 item-->
                 <a class="img">
                     <img src="/resources/images/bulletinImags/다운로드.png" alt="">
                 </a>
@@ -127,11 +170,43 @@
                     </div>
                 </div>
             </div>
+
+            <div class="previewContainer">
+                <a class="img">
+                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
+                </a>
+                <div class="text">
+                    <div class="category">카테고리</div>
+                    <div class="title">제목</div>
+                    <div class="time">시간</div>
+                    <div class="participant">
+                        <div class="human">프로필</div>
+                        <div class="number">인원</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="previewContainer">
+                <a class="img">
+                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
+                </a>
+                <div class="text">
+                    <div class="category">카테고리</div>
+                    <div class="title">제목</div>
+                    <div class="time">시간</div>
+                    <div class="participant">
+                        <div class="human">프로필</div>
+                        <div class="number">인원</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
 
-</div>
+</form>
+
 
 </body>
 </html>

@@ -31,7 +31,7 @@ html{
     padding: 1rem;
 }
 /*로고*/
-.container > .inner > .logo_we_meet > .logo {
+.container > .inner > .logo_we_meet > .ExclamationMark {
     width: 95px;
     height: 18px;
 }
