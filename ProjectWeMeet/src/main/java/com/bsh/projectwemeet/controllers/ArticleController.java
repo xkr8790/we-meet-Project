@@ -25,7 +25,6 @@ public class ArticleController {
 
     private final ArticleService articleService;
 
-
     @Autowired
     public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
@@ -73,27 +72,33 @@ public class ArticleController {
             response = new ResponseEntity<>(article.getThumbnail(),headers,HttpStatus.OK);
         }
         return response;
-    }
+    } //인덱스 번호로 사진가져와서 인덱스에 해당하는 게시판에 사진 나타내기
+
+//    @RequestMapping(value ="article/Participate",
+//            method = RequestMethod.DELETE)
+//    @ResponseBody //주소도 같고 메서드도 같으면 충돌이 일어난다.
+//    public String Participate(@RequestParam(value = "index")int index){
+//        boolean result = this.articleService.Participate(index);
+//        return String.valueOf(result);
+//    } //게시판 삭제
+
+
 
     @RequestMapping(value ="article/read",
             method = RequestMethod.DELETE)
     @ResponseBody //주소도 같고 메서드도 같으면 충돌이 일어난다.
     public String deleteIndex(@RequestParam(value = "index")int index,HttpSession session,ArticleEntity article){
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-        if(!Objects.equals(loginUser.getEmail(), article.getEmail())){
-            return null;
-        }
         boolean result = this.articleService.deleteByIndex(index);
         return String.valueOf(result);
-    }
+    } //게시판 삭제
 
     @RequestMapping(value = "article/patch",
             method = RequestMethod.GET)
     public ModelAndView getWrite(@RequestParam(value = "index")int index, HttpSession session,ArticleEntity article) {
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-        if(loginUser.getEmail()!= article.getEmail()){
-            return null;
-        }
+//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+//        if(loginUser.getEmail()!= article.getEmail()){
+//            return null;
+//        }
         article = articleService.getPatchIndexArticle(index);
         ModelAndView modelAndView = new ModelAndView("home/patchWrite");
         modelAndView.addObject("article",article);

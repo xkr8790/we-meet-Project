@@ -63,9 +63,29 @@ const onScrollEnd = (e) => {
 bindEvents();
 
 
-
+const ParticipateButton = bulletinForm.querySelector('[name="Participate"]');
 const deleteButton = bulletinForm.querySelector('[name="delete"]');
 const patchButton = bulletinForm.querySelector('[name="patch"]');
+
+ParticipateButton.addEventListener('click', e => {
+    e.preventDefault();
+
+    const index = ParticipateButton.dataset.index;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('PATCH', `./Participate?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                alert('참여되었습니다');
+            } else {
+                alert('작성한 사용자가 아니므로 삭제하지 못합니다');
+            }
+        }
+    };
+    xhr.send();
+}); //인원 참여
+
 
 deleteButton.addEventListener('click', e => {
     e.preventDefault();

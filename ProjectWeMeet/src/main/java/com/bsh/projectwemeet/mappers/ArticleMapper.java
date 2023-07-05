@@ -10,6 +10,7 @@ public interface ArticleMapper {
     int insertArticle(ArticleEntity articles);
 
     ArticleEntity[] selectAll();
+    ArticleEntity[] selectArticleMain();
 
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
 
@@ -19,7 +20,7 @@ public interface ArticleMapper {
 
     int updateArticle(ArticleEntity article);
 
-    int patchArticle(ArticleEntity article);
+    int updateParticipate(ArticleEntity article);
 
 
 

@@ -178,7 +178,20 @@ articleForm.onsubmit = e => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 alert('게시판 작성에 성공했습니다');
-                location.href = '/';
+
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    const index = response.index;
+                    if (index) {
+                        window.location.href = '/article/read?index=' + index;
+                    } else {
+                        alert('게시판 작성에 실패하였습니다. 인덱스 값을 받아오지 못했습니다.');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('서버 응답을 처리하는 중 오류가 발생했습니다.');
+                }
+
             } else {
                 alert('게시판 작성에 실패하였습니다');
             }

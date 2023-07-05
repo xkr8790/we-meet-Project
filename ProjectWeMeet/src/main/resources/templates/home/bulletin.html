@@ -88,10 +88,9 @@
                         <span>4</span>
                         <span>5</span>
                         <span>6</span>
-
                     </div>
                     <div class="participating-button">
-                        <button>
+                        <button name="Participate" th:data-index="${article.getIndex()}">
                             참여하기
                         </button>
                     </div>
@@ -109,7 +108,10 @@
                 <p class="guideText">자세한 정보를 알려 드릴게요</p>
                 <p class="total">
                     <i class="fa-solid fa-user-group"></i>
-                    총 인원
+                    <span th:text="${article.getParticipation()}"></span>
+                    <span> / </span>
+                    <span th:text="${article.getLimitPeople()}"></span>
+                    <input type="number" class="limit" name="limit" min="2" th:value="${article.getLimitPeople()}">
                 </p>
                 <p class="place">
                     <i class="fa-solid fa-location-dot"></i>
@@ -127,7 +129,7 @@
                     <div class="content-write">
                         <input type="hidden" name="articleIndex">
                         <label>
-                            <input type="text" name="content" placeholder="댓글" maxlength="100" x>
+                            <input type="text" name="content" placeholder="댓글" maxlength="100">
                         </label>
                         <input type="submit" value="작성">
                     </div>
