@@ -50,6 +50,25 @@
         WHERE `index` = #{index}
     </select>
 
+    <select id="selectArticleByPatchIndex"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `title`          AS `title`,
+               `category`       AS `category`,
+               `content`        AS `content`,
+               `place`          AS `place`,
+               `address`        AS `address`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`,
+               `day`            AS `appointmentStartDate`,
+               `time`           AS `appointmentStartTime`,
+               `limit`          AS `limit`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+    </select>
+
 
     <!--게시물 전체 조회-->
     <select id="selectAll"
@@ -67,6 +86,25 @@
     </select>
     <!--게시물 전체 조회-->
 
+    <!--메인에 나타낼 게시물 6개-->
+    <select id="selectArticleMain"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `title`          AS `title`,
+               `content`        AS `content`,
+               `category`       AS `category`,
+               `address`        AS `address`,
+               `limit`          AS `limit`,
+               `day`            AS `appointmentStartDate`,
+               `time`           AS `appointmentStartTime`
+        FROM `wemeet_project`.`articles`
+        ORDER BY `index` DESC
+        LIMIT 7
+    </select>
+    <!--메인에 나타낼 게시물 6개-->
+
+
+    <!-- 조회수 업데이트 -->
     <update id="updateArticle"
             parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
         UPDATE `wemeet_project`.`articles`
@@ -74,14 +112,26 @@
         WHERE `index` = #{index}
         LIMIT 1
     </update>
+    <!-- 조회수 업데이트 -->
+
+    <!-- 조회수 업데이트 -->
+<!--    <update id="updateParticipate"-->
+<!--            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">-->
+<!--        UPDATE `wemeet_project`.`articles`-->
+<!--        SET `participation`-->
+<!--        WHERE `index` = #{index}-->
+<!--        LIMIT 1-->
+<!--    </update>-->
+    <!-- 조회수 업데이트 -->
 
 
+   <!-- 게시판 삭제 -->
     <delete id="deleteByArticle">
         DELETE FROM `wemeet_project`.`articles`
-        WHERE `index` LIKE #{index}
+        WHERE `index` = #{index}
         LIMIT 1
     </delete>
-
+    <!-- 게시판 삭제 -->
 
 
 </mapper>
