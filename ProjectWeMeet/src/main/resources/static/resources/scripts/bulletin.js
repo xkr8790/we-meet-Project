@@ -84,10 +84,10 @@ deleteButton.addEventListener('click', e => {
                         alert('삭제되었습니다');
                         location.href = '/article';
                     } else {
-                        // 사용자가 "취소"를 누른 경우에 대한 처리 (선택사항)
+                        alert('삭제를 취소합니다');
                     }
                 } else {
-                    alert('알 수 없는 이유로 삭제하지 못하였습니다.\n\n이미 삭제된 메모일 수도 있습니다.');
+                    alert('작성한 사용자가 아니므로 삭제하지 못합니다');
                 }
             } else {
                 alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
@@ -107,7 +107,6 @@ patchButton.addEventListener('click', e => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('이동되었습니다');
                 location.href = `/article/patch?index=${index}`
             } else {
                 alert('작성한 사용자가 아니라 수정이 불가능합니다.');

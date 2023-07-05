@@ -44,8 +44,4 @@ public class WriteService {
         return this.articleMapper.insertArticle(article)>0;
     }
 
-
-
-
-
 }

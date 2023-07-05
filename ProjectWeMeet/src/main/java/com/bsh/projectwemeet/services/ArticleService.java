@@ -46,12 +46,7 @@ public class ArticleService {
         return this.articleMapper.deleteByArticle(index) > 0;
     }
 
-    public ArticleEntity getPatchIndexArticle(int index, HttpSession session,ArticleEntity article){
-
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-
-        boolean result = article.getEmail() != loginUser.getEmail();
-
+    public ArticleEntity getPatchIndexArticle(int index){
         return this.articleMapper.selectArticleByPatchIndex(index);
     }
 

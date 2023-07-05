@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 @Controller
 @RequestMapping(value = "/")
@@ -77,7 +78,11 @@ public class ArticleController {
     @RequestMapping(value ="article/read",
             method = RequestMethod.DELETE)
     @ResponseBody //주소도 같고 메서드도 같으면 충돌이 일어난다.
-    public String deleteIndex(@RequestParam(value = "index")int index){
+    public String deleteIndex(@RequestParam(value = "index")int index,HttpSession session,ArticleEntity article){
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        if(!Objects.equals(loginUser.getEmail(), article.getEmail())){
+            return null;
+        }
         boolean result = this.articleService.deleteByIndex(index);
         return String.valueOf(result);
     }
@@ -86,7 +91,10 @@ public class ArticleController {
             method = RequestMethod.GET)
     public ModelAndView getWrite(@RequestParam(value = "index")int index, HttpSession session,ArticleEntity article) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
-        article = articleService.getPatchIndexArticle(index, (HttpSession) loginUser,article);
+        if(loginUser.getEmail()!= article.getEmail()){
+            return null;
+        }
+        article = articleService.getPatchIndexArticle(index);
         ModelAndView modelAndView = new ModelAndView("home/patchWrite");
         modelAndView.addObject("article",article);
         return modelAndView;

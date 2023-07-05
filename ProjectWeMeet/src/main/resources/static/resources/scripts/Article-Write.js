@@ -11,12 +11,9 @@ const thumbnailTitle = document.querySelector('.thumbnail-title');
 const thumbnail1 = document.querySelector('.thumbnail1');
 
 
-ClassicEditor.create(articleForm['content'],{
-
-}); //파일 업로드
+ClassicEditor.create(articleForm['content'], {}); //파일 업로드
 
 // var contents = CKEDITOR.instances.editor.getData();
-
 
 
 const ArticleTag = document.querySelector('.article-tag'); //tag를 담을 부모
@@ -172,15 +169,16 @@ articleForm.onsubmit = e => {
     formData.append('title', articleForm['title'].value); //제목값
     formData.append('content', articleForm['content'].value); //ck에디터 내용 가져오기
     formData.append('thumbnailMultipart', articleForm['upload'].files[0]);
-    // for (let i = 0; i < tags.length; i++) { //태그 반복해서 나타내기
-    //     formData.append('hashtag', tags[i].value);
-    // }
+    for (let i = 0; i < tags.length; i++) { //태그 반복해서 나타내기
+        formData.append('hashtag', tags[i].value);
+    }
 
-    xhr.open('PATCH', '/write');
+    xhr.open('POST', '/write');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('게시판이 수정되었습니다')
+                alert('게시판 작성에 성공했습니다');
+                location.href = '/';
             } else {
                 alert('게시판 작성에 실패하였습니다');
             }
