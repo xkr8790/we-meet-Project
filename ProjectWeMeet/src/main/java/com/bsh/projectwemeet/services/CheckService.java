@@ -26,6 +26,7 @@ public class CheckService {
     private final SpringTemplateEngine springTemplateEngine;
     private final CheckMapper checkMapper;
 
+
     @Autowired
     public CheckService(JavaMailSender javaMailSender, SpringTemplateEngine springTemplateEngine, CheckMapper checkMapper) {
         this.javaMailSender = javaMailSender;
