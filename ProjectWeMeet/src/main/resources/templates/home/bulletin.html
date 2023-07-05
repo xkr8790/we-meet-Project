@@ -18,7 +18,7 @@
 <body>
 
 <form id="bulletinForm" class="allContainer">
-    <input type="hidden" name="index" th:value="${article.getIndex()}")>
+    <input type="hidden" name="index" th:value="${article.getIndex()}" )>
     <div class="header">
         <a href="/static">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
@@ -36,7 +36,7 @@
                 <i class="fa-solid fa-eraser fa-lg"></i>
             </button>
 
-            <button name="delete"  th:data-index="${article.getIndex()}">
+            <button name="delete" th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
             </button>
 
@@ -53,7 +53,9 @@
                     </a>
                     <p>쵸단</p>
                 </div>
-                <div class="bulletin-title" th:value="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
+                <div class="bulletin-title" th:value="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하
+                    오지마세요!
+                </div>
             </div>
         </div>
         <div class="content">
@@ -111,12 +113,13 @@
                     <span th:text="${article.getParticipation()}"></span>
                     <span> / </span>
                     <span th:text="${article.getLimitPeople()}"></span>
-                    <input type="number" class="limit" name="limit" min="2" th:value="${article.getLimitPeople()}">
+                <input type="number" class="limit" name="limit" min="2" th:value="${article.getLimitPeople()}">
                 </p>
                 <p class="place">
                     <i class="fa-solid fa-location-dot"></i>
                 </p>
                 <p class="map" id="map">지도</p>
+
             </div>
 
 
