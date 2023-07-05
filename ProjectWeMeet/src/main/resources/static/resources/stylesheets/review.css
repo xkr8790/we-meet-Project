@@ -358,7 +358,7 @@ allContainer > .header > .login > a {
 }
 
 
-.announcement > .review > .reviewContainer > .reviewInput > .text {
+.announcement > .review > .reviewContainer > .reviewInput > .content {
     margin: 0.6rem 0.5rem;
     width: 25rem;
     height: 3rem;
