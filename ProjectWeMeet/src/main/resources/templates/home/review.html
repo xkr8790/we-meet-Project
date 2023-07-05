@@ -9,9 +9,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/review.css}">
-    <!--    <script >-->
-    <!--        alert('리뷰를 작성하지 못하였습니다.');-->
-    <!--    </script>-->
+
     <script defer th:src="@{/resources/scripts/review.js}"></script>
 
 </head>
@@ -80,38 +78,44 @@
                 <div class="reviewTitle">당신의 추억을 남겨주세요</div>
                 <div class="reviewContent" id="reviewContent">
                     <div class="reviewBox" th:each="review : ${reviews}">
-                        <div class="core" th:text="${review.getReviewStar()}"></div>
+                        <div class="core">
+                             <span th:each="star : ${#numbers.sequence(1, review.getReviewStar())}">
+                             <span>★</span>
+                             </span>
+                        </div>
                         <div hidden th:text="${review.getReviewIndex()}"></div>
                         <div class="estimate" th:text="${review.getContent()}"></div>
                         <div class="writer">
                             <span class="profile">
                                 <img src="" alt="이미지">
                             </span>
-                            <span th:text="${review.getCreatedAt()}"></span>
+                            <span class="text" th:text="${#dates.format(review.getCreatedAt(), 'yyyy-MM-dd')}"></span>
                         </div>
                         <div>
-                            <a href="#">수정</a>
-                            <a href="#">삭제</a>
+                            <a href="#" class="delete" rel="delete" th:data-index="${review.getIndex()}">삭제</a>
                         </div>
                     </div>
                 </div>
                 <div class="reviewInput">
                     <input type="hidden" name="articleIndex" value="131">
-                    <div class="fieldset">
-                        <input type="radio" name="reviewStar" value="5" id="rate1"><label
-                            for="rate1">★</label>
-                        <input type="radio" name="reviewStar" value="4" id="rate2"><label
-                            for="rate2">★</label>
-                        <input type="radio" name="reviewStar" value="3" id="rate3"><label
-                            for="rate3">★</label>
-                        <input type="radio" name="reviewStar" value="2" id="rate4"><label
-                            for="rate4">★</label>
-                        <input type="radio" name="reviewStar" value="1" id="rate5"><label
-                            for="rate5">★</label>
-                    </div>
                     <input class="text" type="text" name="content">
-                    <input class="button" type="submit" value="등록">
+                    <div class="starBox">
+                        <div class="fieldset">
+                            <input type="radio" name="reviewStar" value="5" id="rate1"><label
+                                for="rate1">★</label>
+                            <input type="radio" name="reviewStar" value="4" id="rate2"><label
+                                for="rate2">★</label>
+                            <input type="radio" name="reviewStar" value="3" id="rate3"><label
+                                for="rate3">★</label>
+                            <input type="radio" name="reviewStar" value="2" id="rate4"><label
+                                for="rate4">★</label>
+                            <input type="radio" name="reviewStar" value="1" id="rate5"><label
+                                for="rate5">★</label>
+                        </div>
+                        <input class="button" id="reviewButton" type="submit" value="등록">
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -123,5 +127,4 @@
 </body>
 
 
-</body>
 </html>

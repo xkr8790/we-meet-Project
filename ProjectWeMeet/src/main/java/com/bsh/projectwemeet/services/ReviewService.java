@@ -1,6 +1,5 @@
 package com.bsh.projectwemeet.services;
 
-import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ReviewEntity;
 import com.bsh.projectwemeet.mappers.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +28,21 @@ public class ReviewService {
         return this.reviewMapper.insertReview(reviewEntity) > 0;
     }
 
-
-    public ReviewEntity[] getReviewWrite(int articleIndex){
-//        ReviewEntity[] reviewEntities = this.reviewMapper.selectReviewByIndex(articleIndex);
-        return this.reviewMapper.selectReviewByIndex(articleIndex);
+    public ReviewEntity[] getAll() {
+        return this.reviewMapper.selectAll();
     }
 
 
+    public ReviewEntity readReview(int index) {
+        ReviewEntity reviewEntity = this.reviewMapper.selectReviewByIndex(index);
+        System.out.println("이건 서비스");
+        return reviewEntity;
+    }
 
-//    public boolean deleteByIndex(int index){
-//
-//        return this.reviewMapper.deleteByReview(index) >0 ;
-//    }
+
+    public boolean deleteByIndex(int index) {
+        return this.reviewMapper.deleteByReview(index) > 0;
+    }
 
 
 }

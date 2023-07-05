@@ -1,15 +1,33 @@
 const reviewForm = document.getElementById('reviewForm');
+const deleteButtons = reviewForm.querySelectorAll('[rel="delete"]');
 
-reviewForm.onsubmit = function (e) {
-    e.preventDefault();
+deleteButtons.forEach(deleteButton => {
+    deleteButton.addEventListener('click', e => {
+        e.preventDefault();
 
-    if (reviewForm['content'].value === '') {
-        alert('댓글을 입력해 주세요');
-        reviewForm['content'].focus();
-        return;
-    }
-    postReview(reviewForm['content'].value);
-};
+        const index = deleteButton.dataset.index;
+        const xhr = new XMLHttpRequest();
+        xhr.open('DELETE', `review/read/?index=${index}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseText = xhr.responseText; // 'true' | 'false'
+                    if (responseText === 'true') {
+                        location.href += '';
+                    } else {
+                        alert('알 수 없는 이유로 삭제하지 못하였습니다.\n\n이미 삭제된 메모일 수도 있습니다.');
+                    }
+                } else {
+                    alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
+                }
+            }
+        };
+        xhr.send();
+    });
+});
+
+
+
 
 
 function postReview(content, toFocus, refreshCommentAfter) {
@@ -33,22 +51,38 @@ function postReview(content, toFocus, refreshCommentAfter) {
                 if (toFocus) {
                     toFocus.value = '';
                     toFocus.focus();
-                    console.log("안녕");
+
 
                 }
                 if (refreshCommentAfter === true) {
                     location.href += '';
-                    console.log("하세요");
                 } else {
                     alert('댓글을 작성하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-                    console.log("저는");
+
                 }
             } else {
                 alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-                console.log("백성현입니다");
+
             }
         }
     };
     xhr.send(formData);
 }
+
+reviewForm.onsubmit = e => {
+    e.preventDefault();
+
+    if (reviewForm['content'].value === '') {
+        alert('댓글을 입력해 주세요');
+        reviewForm['content'].focus();
+        return;
+    }
+    postReview(reviewForm['content'].value);
+};
+
+
+
+
+
+
 
