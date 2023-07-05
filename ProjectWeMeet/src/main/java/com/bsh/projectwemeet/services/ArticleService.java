@@ -45,22 +45,22 @@ public class ArticleService {
         //결과적으로 삭제되지않거나
     }
 
-    public boolean Participate(int index) {
-
-        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
-
-        if (article != null && !article.isDeleted()) {
-            // 게시글이 존재하고 삭제되지 않은 경우에만 처리합니다.
-            if (article.getParticipation() <= article.getLimitPeople()) {
-                article.setParticipation(article.getParticipation() + 1);
-                // 게시글의 조회수(view)를 1 증가시킵니다.
-                this.articleMapper.updateArticle(article);
-            }
-        } else {
-            return false;
-        }
-        return this.articleMapper.patchArticle(article)>0;
-    }
+//    public boolean Participate(int index) {
+//
+//        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
+//
+//        if (article != null && !article.isDeleted()) {
+//            // 게시글이 존재하고 삭제되지 않은 경우에만 처리합니다.
+//            if (article.getParticipation() <= article.getLimitPeople()) {
+//                article.setParticipation(article.getParticipation() + 1);
+//                // 게시글의 조회수(view)를 1 증가시킵니다.
+//                this.articleMapper.updateArticle(article);
+//            }
+//        } else {
+//            return false;
+//        }
+//        return this.articleMapper.patchArticle(article)>0;
+//    }
 
     public boolean deleteByIndex(int index){
 

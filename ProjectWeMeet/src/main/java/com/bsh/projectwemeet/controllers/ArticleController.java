@@ -92,18 +92,18 @@ public class ArticleController {
         return String.valueOf(result);
     } //게시판 삭제
 
-    @RequestMapping(value = "article/patch",
-            method = RequestMethod.GET)
-    public ModelAndView getWrite(@RequestParam(value = "index")int index, HttpSession session,ArticleEntity article) {
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-//        if(loginUser.getEmail()!= article.getEmail()){
-//            return null;
-//        }
-        article = articleService.getPatchIndexArticle(index);
-        ModelAndView modelAndView = new ModelAndView("home/patchWrite");
-        modelAndView.addObject("article",article);
-        return modelAndView;
-    } //게시판 수정하는 폼 받아오기
+//    @RequestMapping(value = "article/patch",
+//            method = RequestMethod.GET)
+//    public ModelAndView getWrite(@RequestParam(value = "index")int index, HttpSession session,ArticleEntity article) {
+////        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+////        if(loginUser.getEmail()!= article.getEmail()){
+////            return null;
+////        }
+//        article = articleService.getPatchIndexArticle(index);
+//        ModelAndView modelAndView = new ModelAndView("home/patchWrite");
+//        modelAndView.addObject("article",article);
+//        return modelAndView;
+//    } //게시판 수정하는 폼 받아오기
 
 
     //    @RequestMapping(value = "article/patch",
