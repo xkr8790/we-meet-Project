@@ -111,7 +111,7 @@
         <div class="slide">
             <div class="article-box">
                 <div class="article-list" th:each="article : ${article}">
-                    <a th:href="@{article/read(index=${article.getIndex()})}">링크</a>
+                    <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
                     <div class="article-thumbnail">
                         <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="Thumbnail">
                     </div>
@@ -127,7 +127,7 @@
               <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
               <span th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}"></span>
             </span>
-                        <span class="article-human">
+             <span class="article-human">
               <span class="Profile-Picture">
                  <img class="Profile" src="../resources/images/조보아.jpg">
               </span>
@@ -143,13 +143,14 @@
 
               <img class="limit-image" src="../resources/images/human.png">
               <span class="number">
-                <span>0</span>
+                <span >0</span>
                 <span>/</span>
                 <span th:text="${article.getLimitPeople()}"></span>
                   <!-- 제한인원 제한 걸때 value??  -->
               </span>
               </span>
                     </div>
+                    </a>
                 </div>
             </div>
         </div>

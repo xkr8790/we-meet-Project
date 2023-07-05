@@ -1,18 +1,23 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.services.ArticleService;
+import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.InsertArticleResult;
+import com.bsh.projectwemeet.enums.SendRecoverContactCodeResult;
 import com.bsh.projectwemeet.services.WriteService;
+import com.sun.net.httpserver.Authenticator;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,24 +34,30 @@ public class WriteController {
 
     private final WriteService writeService;
 
-
-
     @Autowired
-    public WriteController(WriteService writeService, ArticleService articleService) {
+    public WriteController(WriteService writeService) {
         this.writeService = writeService;
     }
+
+    @RequestMapping(value = "write", method = RequestMethod.GET)
+    public ModelAndView getWrite() {
+        ModelAndView modelAndView = new ModelAndView("home/write");
+        return modelAndView;
+    } //게시판 주소로 가기
+    //@ResponseBody -> 반환된 데이터 JSON이나 기타형식으로 처리됨 이경우 redirect 제대로 안먹힐수도 있음
+
 
 
     @RequestMapping(value = "write",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> postWrite(HttpServletRequest request,
-                                  ArticleEntity article,
-                                  @RequestParam(value = "dayStr") String dayStr,
-                                  @RequestParam(value = "timeStr") String timeStr,
-                                  @RequestParam(value = "limit") String limit,
-                                  @RequestParam(value = "thumbnailMultipart") MultipartFile thumbnailMultipart,
-                                  HttpSession session) throws IOException, ParseException {
+                                    ArticleEntity article,
+                                    @RequestParam(value = "dayStr") String dayStr,
+                                    @RequestParam(value = "timeStr") String timeStr,
+                                    @RequestParam(value = "limit") String limit,
+                                    @RequestParam(value = "thumbnailMultipart") MultipartFile thumbnailMultipart,
+                                    HttpSession session) throws IOException, ParseException {
 
         //TEXT_HTML_VALUE
         //해당 컨트롤러 메서드가 클라이언트에게 HTML 형식의 응답을 제공한다는 것을 나타냅니다.
@@ -69,37 +80,12 @@ public class WriteController {
 
         boolean result = this.writeService.putArticle(request, article, session);
 
-
-
-
         if (result) {
             return ResponseEntity.ok().body("{\"index\": " + article.getIndex() + "}");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"게시판 작성에 실패하였습니다.\"}");
         }
-
-
-    }//POST 방식으로 글쓰기
-
-
-
-    @RequestMapping(value = "write", method = RequestMethod.GET)
-    public ModelAndView getWrite() {
-        ModelAndView modelAndView = new ModelAndView("article/write");
-        return modelAndView;
-    } //게시판 주소로 가기
-   //@ResponseBody -> 반환된 데이터 JSON이나 기타형식으로 처리됨 이경우 redirect 제대로 안먹힐수도 있음
-
-
-    @RequestMapping(value ="delete",method = RequestMethod.DELETE) //주소도 같고 메서드도 같으면 충돌이 일어난다.
-    @ResponseBody
-    public String deleteIndex(@RequestParam(value = "index")int index){
-        boolean result = this.writeService.deleteByIndex(index);
-        return String.valueOf(result);
     }
-
-
-
 
 
 }

@@ -63,46 +63,76 @@ const onScrollEnd = (e) => {
 bindEvents();
 
 
+const ParticipateButton = bulletinForm.querySelector('[name="Participate"]');
+const deleteButton = bulletinForm.querySelector('[name="delete"]');
+const patchButton = bulletinForm.querySelector('[name="patch"]');
 
-bulletinForm['delete'].addEventListener('click', function(e) {
+ParticipateButton.addEventListener('click', e => {
     e.preventDefault();
 
+    const index = ParticipateButton.dataset.index;
+
     const xhr = new XMLHttpRequest();
-    const formData = new FormData();
-    xhr.open('DELETE',`delete/?index=${bulletinForm['index'].value}`);
+    xhr.open('PATCH', `./Participate?index=${index}`);
     xhr.onreadystatechange = () => {
-     if(xhr.readyState === XMLHttpRequest.DONE){
-        if(xhr.status >= 200 && xhr.status<300) {
-            alert('삭제 성공');
-            location.href = '/';
-        }else {
-            alert('삭제 실패');
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                alert('참여되었습니다');
+            } else {
+                alert('작성한 사용자가 아니므로 삭제하지 못합니다');
+            }
         }
-       }
+    };
+    xhr.send();
+}); //인원 참여
+
+
+deleteButton.addEventListener('click', e => {
+    e.preventDefault();
+
+    const index = deleteButton.dataset.index;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('DELETE', `./read?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseText = xhr.responseText; // 'true' | 'false'
+                if (responseText === 'true') {
+                    const confirmResult = confirm('삭제하시겠습니까?');
+                    if (confirmResult === true) {
+                        alert('삭제되었습니다');
+                        location.href = '/article';
+                    } else {
+                        alert('삭제를 취소합니다');
+                    }
+                } else {
+                    alert('작성한 사용자가 아니므로 삭제하지 못합니다');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
+            }
+        }
     };
     xhr.send();
 });
 
+patchButton.addEventListener('click', e => {
+    e.preventDefault();
 
-//         e.preventDefault();
-//
-//         xhr.open('DELETE', `./?index=${index}`);
-//         xhr.onreadystatechange = () => {
-//             if (xhr.readyState === XMLHttpRequest.DONE) {
-//                 if (xhr.status >= 200 && xhr.status < 300) {
-//                     const responseText = xhr.responseText; // 'true' | 'false'
-//                     if (responseText === 'true') {
-//                         location.href += '';
-//                     } else {
-//                         alert('알 수 없는 이유로 삭제하지 못하였습니다.\n\n이미 삭제된 메모일 수도 있습니다.');
-//                     }
-//                 } else {
-//                     alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
-//                 }
-//             }
-//         };
-//         xhr.send();
-//     });
-// });
-//
-//
+    const index = patchButton.dataset.index;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `./patch?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                location.href = `/article/patch?index=${index}`
+            } else {
+                alert('작성한 사용자가 아니라 수정이 불가능합니다.');
+            }
+        }
+    };
+    xhr.send();
+});
+

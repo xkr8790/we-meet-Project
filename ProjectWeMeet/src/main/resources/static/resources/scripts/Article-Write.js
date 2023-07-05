@@ -11,12 +11,9 @@ const thumbnailTitle = document.querySelector('.thumbnail-title');
 const thumbnail1 = document.querySelector('.thumbnail1');
 
 
-ClassicEditor.create(articleForm['content'],{
-
-}); //파일 업로드
+ClassicEditor.create(articleForm['content'], {}); //파일 업로드
 
 // var contents = CKEDITOR.instances.editor.getData();
-
 
 
 const ArticleTag = document.querySelector('.article-tag'); //tag를 담을 부모
@@ -176,15 +173,11 @@ articleForm.onsubmit = e => {
         formData.append('hashtag', tags[i].value);
     }
 
-    xhr.open('POST', '/article/write');
+    xhr.open('POST', '/write');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('게시판 작성에 성공하였습니다.');
-                console.log(xhr.responseText); //
-                // const index = xhr.getResponseHeader('index'); // Retrieve the index value from the response header
-                // window.location.href = '/article/read?index=' + index; // Perform the redirect
-            // 구분선
+                alert('게시판 작성에 성공했습니다');
 
                 try {
                     const response = JSON.parse(xhr.responseText);
@@ -199,8 +192,6 @@ articleForm.onsubmit = e => {
                     alert('서버 응답을 처리하는 중 오류가 발생했습니다.');
                 }
 
-
-
             } else {
                 alert('게시판 작성에 실패하였습니다');
             }
@@ -208,6 +199,8 @@ articleForm.onsubmit = e => {
     };
     xhr.send(formData);
 };
+
+
 
 
 
