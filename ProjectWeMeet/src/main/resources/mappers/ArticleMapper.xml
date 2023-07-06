@@ -64,6 +64,7 @@
     <select id="selectArticleByIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
+               `email`          AS `email`,
                `title`          AS `title`,
                `content`        AS `content`,
                `category`       AS `category`,

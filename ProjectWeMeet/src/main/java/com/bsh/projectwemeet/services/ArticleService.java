@@ -88,8 +88,12 @@ public class ArticleService {
 
     public boolean deleteByIndex(int index,ArticleEntity article,HttpSession session){
 
+        article = this.articleMapper.selectArticleByIndex(index);
         UserEntity user = (UserEntity) session.getAttribute("user");
 
+        if(!Objects.equals(article.getEmail(), user.getEmail())){
+            return false;
+        }
 
         return this.articleMapper.deleteByArticle(index) > 0;
     }
