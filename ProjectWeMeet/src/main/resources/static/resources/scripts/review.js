@@ -7,7 +7,7 @@ deleteButtons.forEach(deleteButton => {
 
         const index = deleteButton.dataset.index;
         const xhr = new XMLHttpRequest();
-        xhr.open('DELETE', `review/read/?index=${index}`);
+        xhr.open('DELETE', `review/delete/?index=${index}`);
         xhr.onreadystatechange = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status >= 200 && xhr.status < 300) {
@@ -28,8 +28,6 @@ deleteButtons.forEach(deleteButton => {
 
 
 
-
-
 function postReview(content, toFocus, refreshCommentAfter) {
 
     refreshCommentAfter ??= true;
@@ -44,15 +42,13 @@ function postReview(content, toFocus, refreshCommentAfter) {
     // if (reviewIndex !== null && reviewIndex !== undefined) {
     //     formData.append('reviewIndex', reviewIndex)
     // }
-    xhr.open('POST', `/review`);
+    xhr.open('POST', `review`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 if (toFocus) {
                     toFocus.value = '';
                     toFocus.focus();
-
-
                 }
                 if (refreshCommentAfter === true) {
                     location.href += '';
@@ -69,6 +65,8 @@ function postReview(content, toFocus, refreshCommentAfter) {
     xhr.send(formData);
 }
 
+
+
 reviewForm.onsubmit = e => {
     e.preventDefault();
 
@@ -79,7 +77,6 @@ reviewForm.onsubmit = e => {
     }
     postReview(reviewForm['content'].value);
 };
-
 
 
 

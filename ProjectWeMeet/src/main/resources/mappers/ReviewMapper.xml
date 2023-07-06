@@ -63,7 +63,8 @@ resultType="com.bsh.projectwemeet.entities.ReviewEntity">
 
 
 
-    <delete id="deleteByReview">
+    <delete id="deleteByReview"
+            parameterType="com.bsh.projectwemeet.entities.ReviewEntity">
         DELETE
         FROM `wemeet_project`.`reviews`
         WHERE `index` = #{index}

@@ -39,7 +39,6 @@ public class ReviewController {
     }
 
     @RequestMapping(value = "review/read", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    @ResponseBody
     public ModelAndView getReviewWrite(@RequestParam(value = "index") int index) {
         ModelAndView modelAndView = new ModelAndView("home/review");
         ReviewEntity reviews = this.reviewService.readReview(index);
@@ -48,7 +47,7 @@ public class ReviewController {
     }
 
 
-    @RequestMapping(value = "review/read", method = RequestMethod.DELETE)
+    @RequestMapping(value = "review/delete", method = RequestMethod.DELETE)
     @ResponseBody
     public String deleteReview(@RequestParam(value = "index") int index) {
         boolean result = this.reviewService.deleteByIndex(index);

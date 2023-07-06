@@ -35,7 +35,6 @@ public class ReviewService {
 
     public ReviewEntity readReview(int index) {
         ReviewEntity reviewEntity = this.reviewMapper.selectReviewByIndex(index);
-        System.out.println("이건 서비스");
         return reviewEntity;
     }
 

@@ -7,14 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>게시글</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"/>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/review.css}">
 
     <script defer th:src="@{/resources/scripts/review.js}"></script>
 
 </head>
 <body>
-<form class="allContainer" id="reviewForm" method="post">
+<form class="allContainer" id="reviewForm" >
     <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
@@ -27,12 +27,12 @@
 
     <div class="main-template">
         <div class="img-profile-title">
-            <img src="https://post-phinf.pstatic.net/MjAxNzA0MTBfMTkg/MDAxNDkxNzk2OTY5MzEw.LIjCVhA5yvrWDEtF3oTyPOutbMxbzhm-Xg4V0rzxD5Qg.lW4lqBV3sHwHqqNAt11ruVyPcoj5H1mOw67nrc4Fqggg.JPEG/%EC%84%9C%EC%9A%B8-%EC%98%88%EC%81%9C-%EC%B9%B4%ED%8E%98-4.jpg?type=w1200"
+            <img th:src="@{/resources/images/bulletinImags/images.jpeg}"
                  alt="">
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">
-                        <img>
+                        <img th:src="@{/resources/images/bulletinImags/쵸단.png}" alt="몰루">
                     </a>
                     <p>쵸단</p>
                 </div>
@@ -79,15 +79,13 @@
                 <div class="reviewContent" id="reviewContent">
                     <div class="reviewBox" th:each="review : ${reviews}">
                         <div class="core">
-                             <span th:each="star : ${#numbers.sequence(1, review.getReviewStar())}">
-                             <span>★</span>
-                             </span>
+                            <span th:each="star : ${#numbers.sequence(1, review.getReviewStar())}">★</span>
                         </div>
                         <div hidden th:text="${review.getReviewIndex()}"></div>
                         <div class="estimate" th:text="${review.getContent()}"></div>
                         <div class="writer">
                             <span class="profile">
-                                <img src="" alt="이미지">
+                                <img src="/resources/images/bulletinImags/쵸단.png" alt="이미지">
                             </span>
                             <span class="text" th:text="${#dates.format(review.getCreatedAt(), 'yyyy-MM-dd')}"></span>
                         </div>
@@ -115,7 +113,6 @@
                         <input class="button" id="reviewButton" type="submit" value="등록">
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

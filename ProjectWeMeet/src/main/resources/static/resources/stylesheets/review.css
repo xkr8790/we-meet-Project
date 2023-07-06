@@ -301,16 +301,22 @@ allContainer > .header > .login > a {
     height: 3rem;
     border-radius: 50%;
     border: 1px solid black;
-
+}
+.announcement > .review > .reviewContainer > .reviewContent > .reviewBox > .writer > .profile > img{
+    object-fit: cover;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
 }
 
 .announcement > .review > .reviewContainer > .reviewContent > .reviewBox > .writer > .text {
+   margin-left: 0.3rem;
     font-size: 0.5rem;
 }
 
 .announcement > .review > .reviewContainer > .reviewInput {
     width: 100%;
-
+height: 10rem;
     align-items: center;
     display: flex;
     flex-direction: row;
