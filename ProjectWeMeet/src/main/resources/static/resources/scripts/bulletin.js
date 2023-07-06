@@ -179,3 +179,5 @@ patchButton.addEventListener('click', e => {
     xhr.send();
 }); //게시판 수정
 
+
+
