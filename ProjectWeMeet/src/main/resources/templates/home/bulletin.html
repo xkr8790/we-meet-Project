@@ -61,8 +61,7 @@
         <div class="content">
             <div th:utext="${article.getContent()}"></div>
             <div th:text="${article.getCategory()}"></div>
-            <input name="lat" th:value="${article.getLatitude()}" readonly style="display: none">
-            <input name="lng" th:value="${article.getLongitude()}" readonly style="display: none">
+
         </div>
     </div>
 
@@ -121,10 +120,8 @@
                     <i class="fa-solid fa-location-dot"></i>
                 </p>
                 <div class="map" id="map">지도</div>
-<!--                <div name="lat" th:value="${article.getLatitude()}"></div>-->
-<!--&lt;!&ndash;                35.8657172904548&ndash;&gt;-->
-<!--                <div name="lng" th:value="${article.getLongitude()}"></div>-->
-<!--&lt;!&ndash;                128.593419368164&ndash;&gt;-->
+                <input name="lat" th:value="${article.getLatitude()}" readonly style="display: none">
+                <input name="lng" th:value="${article.getLongitude()}" readonly style="display: none">
             </div>
 
 
