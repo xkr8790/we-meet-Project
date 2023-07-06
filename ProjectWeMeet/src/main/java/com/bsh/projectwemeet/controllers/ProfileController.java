@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 @Controller
-@RequestMapping(value="/profile")
+@RequestMapping(value="profile")
 public class ProfileController {
     private final ProfileService profileService;
 
@@ -25,15 +25,19 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @RequestMapping(value="profile", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getProfile(){
+    @RequestMapping(value="profile",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getProfile(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("home/profile");
-
-
+        UserEntity userEntities = this.profileService.getNickname(session);
+        modelAndView.addObject("profile", userEntities);
         return modelAndView;
     }
 
-    @RequestMapping(value = "checkPassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "checkPassword",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postCheckPassword(HttpSession session, UserEntity user) {
         LoginResult result = this.profileService.checkPassword(user);
@@ -46,7 +50,7 @@ public class ProfileController {
         return responseObject.toString();
     }
 
-    @RequestMapping(value = "profileImage",
+    @RequestMapping(value = "index",
     method = RequestMethod.POST,
     produces = MediaType.TEXT_XML_VALUE)
     @ResponseBody

@@ -35,12 +35,39 @@
         FROM `wemeet_project`.`mypages`
         WHERE `index` = #{index}
     </select>
+    <select id="selectAll"
+    resultType="com.bsh.projectwemeet.entities.UserEntity">
+        SELECT `email` AS  `email`,
+               `name` AS `name`,
+               `nickname` AS `nickname`,
+               `contact` AS `contact`,
+               `admin_flag` AS `isAdmin`,
+               `birth` AS `birth`,
+               `registered_at` AS `registeredAt`,
+               `address_postal` AS `addressPostal`,
+               `address_primary` AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `gender` AS `gender`,
+               `password` AS `password`
+        FROM `wemeet_project`.`users`
+        WHERE `email` = #{email}
+        ORDER BY `email` DESC
+    </select>
+
+    <select id="selectNickname"
+    resultType="com.bsh.projectwemeet.entities.UserEntity">
+        SELECT `nickname` AS `nickname`
+        FROM `wemeet_project`.`users`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
+
     <select id="selectUserByPassword"
     resultType="com.bsh.projectwemeet.entities.UserEntity">
         SELECT `email` AS `email`,
                `password` AS `password`
         FROM `wemeet_project`.`users`
-        WHERE BINARY `email` = #{email}
+        WHERE `email` = #{email}
         LIMIT 1
     </select>
 </mapper>

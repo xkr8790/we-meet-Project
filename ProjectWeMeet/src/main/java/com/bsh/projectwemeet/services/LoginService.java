@@ -17,6 +17,7 @@ public class LoginService {
         this.loginMapper = loginMapper;
     }
 
+
     public LoginResult login(UserEntity user) {
 //  웹 페이지에서 로그인 입력값이 없거나 이메일,비밀번호 양식이 정규식과   다를때 '실패'를 return한다.
         if (user.getEmail() == null ||

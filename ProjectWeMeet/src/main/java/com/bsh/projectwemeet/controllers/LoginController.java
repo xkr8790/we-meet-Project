@@ -25,7 +25,9 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    @RequestMapping(value = "login",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getLogin() {
         ModelAndView modelAndView = new ModelAndView("home/login");
         return modelAndView;

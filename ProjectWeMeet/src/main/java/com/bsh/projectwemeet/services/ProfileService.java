@@ -25,8 +25,16 @@ public class ProfileService {
         this.loginMapper = loginMapper;
     }
 
+    public UserEntity getNickname(HttpSession session) {
+
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+
+        return this.profileMapper.selectNickname(loginUser.getEmail());
+    }
+
     public LoginResult checkPassword(UserEntity user) {
-        if (user.getPassword() == null) {
+        if (user.getEmail() == null ||
+                user.getPassword() == null) {
             return LoginResult.FAILURE;
         }
         UserEntity existingUser = this.loginMapper.selectUserByEmail(user.getEmail());
@@ -34,6 +42,7 @@ public class ProfileService {
         if (!user.getPassword().equals(existingUser.getPassword())) {
             return LoginResult.FAILURE;
         }
+
         return LoginResult.SUCCESS;
     }
 

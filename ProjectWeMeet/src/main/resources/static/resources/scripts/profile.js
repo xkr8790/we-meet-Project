@@ -36,7 +36,7 @@ popup.onsubmit = e => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('checkPassword', popup['checkPassword'].value);
-    xhr.open('POST', `/profile/checkPassword`);
+    xhr.open('POST', `/checkPassword`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {

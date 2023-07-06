@@ -2,9 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>프로필</title>
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"/>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/profile.css}">
@@ -80,9 +77,8 @@
                 </label>
             </div>
         </div>
-        <div class="text-box">
-            <span class="user-name">님</span>
-<!--            <li id="setting" class="information_change">설정 변경</li>-->
+        <div class="text-box" th:if="${session.user != null}">
+            <span class="user-name" th:text="${profile?.getNickname()+'님'}"></span>
         </div>
     </div>
     <!--    <div class="middle-profile">-->

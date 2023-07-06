@@ -148,7 +148,7 @@ html {
 
 #mainContainer > .left-profile > .text-box {
     background-color: white;
-    margin-top: 4rem;
+    margin-top: 5rem;
     margin-left: 2.5rem;
     font-size: 1.125rem;
     font-weight: bold;
@@ -162,7 +162,7 @@ html {
 
 #mainContainer > .left-profile > .text-box > .user-name {
     background-color: white;
-    margin-bottom: 1.125rem;
+    /*margin-bottom: 1.125rem;*/
     white-space: nowrap;
 }
 
