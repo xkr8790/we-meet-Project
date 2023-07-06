@@ -136,7 +136,7 @@ deleteButton.addEventListener('click', e => {
     const index = deleteButton.dataset.index;
 
     const xhr = new XMLHttpRequest();
-    xhr.open('DELETE', `./Delete?index=${index}`);
+    xhr.open('DELETE', `./read?index=${index}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {

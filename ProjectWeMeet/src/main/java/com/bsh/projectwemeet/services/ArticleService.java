@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.Objects;
 
 @Service
 public class ArticleService {
@@ -85,7 +86,10 @@ public class ArticleService {
         return articleMapper.selectParticipants(article.getIndex()) > 0;
     }
 
-    public boolean deleteByIndex(int index){
+    public boolean deleteByIndex(int index,ArticleEntity article,HttpSession session){
+
+        UserEntity user = (UserEntity) session.getAttribute("user");
+
 
         return this.articleMapper.deleteByArticle(index) > 0;
     }
