@@ -37,6 +37,30 @@
                 #{clientUa})
     </insert>
 
+
+    <insert id="insertParticipants"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        INSERT INTO `wemeet_project`.`Participants`(email, ArticleIndex, created_at, check_participation_status)
+        VALUES (#{email},
+                #{ArticleIndex},
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
+                #{checkParticipationStatus})
+    </insert>
+
+    <select id="selectParticipants"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`                      AS `index`,
+               `email`                      AS `email`,
+               `ArticleIndex`               AS `ArticleIndex`,
+               `check_participation_status` AS `checkParticipationStatus`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{index}
+        LIMIT 1
+    </select>
+
     <select id="selectArticleByIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
@@ -44,10 +68,15 @@
                `content`        AS `content`,
                `category`       AS `category`,
                `view`           AS `view`,
+               `limit`          AS `limit`,
+               `participation`  AS `participation`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`,
                `thumbnail`      AS `thumbnail`,
                `thumbnail_mime` AS `thumbnailMime`
         FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
+        LIMIT 1
     </select>
 
     <select id="selectArticleByPatchIndex"
@@ -73,14 +102,15 @@
     <!--게시물 전체 조회-->
     <select id="selectAll"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`          AS `index`,
-               `title`          AS `title`,
-               `content`        AS `content`,
-               `category`       AS `category`,
-               `address`        AS `address`,
-               `limit`          AS `limit`,
-               `day`            AS `appointmentStartDate`,
-               `time`           AS `appointmentStartTime`
+        SELECT `index`                AS `index`,
+               `title`                AS `title`,
+               `content`              AS `content`,
+               `category`             AS `category`,
+               `address`              AS `address`,
+               `limit`                AS `limit`,
+               SUBSTRING(hashtag,1, 11) AS `hashtag`,
+               `day`                  AS `appointmentStartDate`,
+               `time`                 AS `appointmentStartTime`
         FROM `wemeet_project`.`articles`
         ORDER BY `index` DESC
     </select>
@@ -114,21 +144,29 @@
     </update>
     <!-- 조회수 업데이트 -->
 
-    <!-- 조회수 업데이트 -->
-<!--    <update id="updateParticipate"-->
-<!--            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">-->
-<!--        UPDATE `wemeet_project`.`articles`-->
-<!--        SET `participation`-->
-<!--        WHERE `index` = #{index}-->
-<!--        LIMIT 1-->
-<!--    </update>-->
-    <!-- 조회수 업데이트 -->
+    <!-- 참여인원 업데이트 -->
+    <update id="updateParticipate"
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
+        UPDATE `wemeet_project`.`articles`
+        SET `participation` = #{participation}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+    <!-- 참여인원 업데이트 -->
 
 
    <!-- 게시판 삭제 -->
     <delete id="deleteByArticle">
         DELETE FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
+        LIMIT 1
+    </delete>
+    <!-- 게시판 삭제 -->
+
+    <!-- 게시판 삭제 -->
+    <delete id="deleteByParticipants">
+        DELETE FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{index}
         LIMIT 1
     </delete>
     <!-- 게시판 삭제 -->

@@ -89,11 +89,24 @@
                         <span>5</span>
                         <span>6</span>
                     </div>
+
+                    <div th:if="${result == null}">
                     <div class="participating-button">
-                        <button name="Participate" th:data-index="${article.getIndex()}">
-                            참여하기
-                        </button>
+                            <button name="Participate" th:data-index="${article.getIndex()}">
+                                참여하기
+                            </button>
                     </div>
+                    </div>
+
+                    <div th:if="${result == true}">
+                        <div class="participating-button">
+                            <button name="Participate" th:data-index="${article.getIndex()}">
+                                참여취소
+                            </button>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="login-before-human" th:if="${session.user == null}">
                     <p>로그인 후 확인해 주세요</p>
@@ -111,7 +124,6 @@
                     <span th:text="${article.getParticipation()}"></span>
                     <span> / </span>
                     <span th:text="${article.getLimitPeople()}"></span>
-                    <input type="number" class="limit" name="limit" min="2" th:value="${article.getLimitPeople()}">
                 </p>
                 <p class="place">
                     <i class="fa-solid fa-location-dot"></i>
