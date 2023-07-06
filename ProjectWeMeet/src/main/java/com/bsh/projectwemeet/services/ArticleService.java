@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 @Service
 public class ArticleService {
@@ -62,9 +63,18 @@ public class ArticleService {
 //        return this.articleMapper.patchArticle(article)>0;
 //    }
 
-    public boolean deleteByIndex(int index){
+    public boolean deleteByIndex(int index,ArticleEntity article,HttpSession session){
 
-        return this.articleMapper.deleteByArticle(index) > 0;
+        article = this.articleMapper.selectArticleByIndex(index);
+        UserEntity user = (UserEntity) session.getAttribute("user");
+
+        boolean isAdmin = user.isAdmin(); // isAdmin()은 관리자 여부를 판단하는 메서드로 가정하였습니다
+
+        if (isAdmin || Objects.equals(article.getEmail(), user.getEmail())) {
+            return this.articleMapper.deleteByArticle(index) > 0;
+        } else {
+            return false;
+        }
     }
 
     public ArticleEntity getPatchIndexArticle(int index){

@@ -88,7 +88,7 @@ public class ArticleController {
             method = RequestMethod.DELETE)
     @ResponseBody //주소도 같고 메서드도 같으면 충돌이 일어난다.
     public String deleteIndex(@RequestParam(value = "index")int index,HttpSession session,ArticleEntity article){
-        boolean result = this.articleService.deleteByIndex(index);
+        boolean result = this.articleService.deleteByIndex(index,article,session);
         return String.valueOf(result);
     } //게시판 삭제
 
