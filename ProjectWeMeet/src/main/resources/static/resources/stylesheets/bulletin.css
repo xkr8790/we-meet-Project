@@ -2,6 +2,7 @@
     /*border: 1px solid red;*/
     margin: 0;
     padding: 0;
+
 }
 
 body {
@@ -303,6 +304,7 @@ allContainer > .header > .login > a {
 }
 
 .announcement > .guide > .guideContainer > .map {
+
     height: 9.8rem;
     /*border: 1px solid blue;*/
 }
