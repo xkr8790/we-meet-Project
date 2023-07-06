@@ -16,8 +16,9 @@
 
 </head>
 <body>
-<input type="hidden" th:value="${article.getIndex()}")>
-<div class="allContainer">
+
+<form id="bulletinForm" class="allContainer">
+    <input type="hidden" name="index" th:value="${article.getIndex()}")>
     <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
@@ -30,18 +31,21 @@
             <button>
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
             </button>
-            <button>
+
+            <button name="patch" th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
             </button>
-            <button>
+
+            <button name="delete"  th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
             </button>
+
         </div>
     </div>
 
     <div class="main-template">
         <div class="img-profile-title">
-            <img th:src="@{/article/image(index=${article.getIndex()})}" alt="Thumbnail">
+            <img class="image" th:src="@{/article/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">
@@ -53,7 +57,7 @@
             </div>
         </div>
         <div class="content">
-            <div th:text="${article.getContent()}"></div>
+            <div th:utext="${article.getContent()}"></div>
             <div th:text="${article.getCategory()}"></div>
         </div>
     </div>
@@ -84,13 +88,25 @@
                         <span>4</span>
                         <span>5</span>
                         <span>6</span>
+                    </div>
 
-                    </div>
+                    <div th:if="${result == null}">
                     <div class="participating-button">
-                        <button>
-                            참여하기
-                        </button>
+                            <button name="Participate" th:data-index="${article.getIndex()}">
+                                참여하기
+                            </button>
                     </div>
+                    </div>
+
+                    <div th:if="${result == true}">
+                        <div class="participating-button">
+                            <button name="Participate" th:data-index="${article.getIndex()}">
+                                참여취소
+                            </button>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="login-before-human" th:if="${session.user == null}">
                     <p>로그인 후 확인해 주세요</p>
@@ -105,16 +121,20 @@
                 <p class="guideText">자세한 정보를 알려 드릴게요</p>
                 <p class="total">
                     <i class="fa-solid fa-user-group"></i>
-                    총 인원
+                    <span th:text="${article.getParticipation()}"></span>
+                    <span> / </span>
+                    <span th:text="${article.getLimitPeople()}"></span>
                 </p>
                 <p class="place">
                     <i class="fa-solid fa-location-dot"></i>
                 </p>
-                <p class="map" id="map">지도</p>
+                <div class="map" id="map">지도</div>
+                <input name="lat" th:value="${article.getLatitude()}" readonly style="display: none">
+                <input name="lng" th:value="${article.getLongitude()}" readonly style="display: none">
             </div>
 
 
-            <form class="comments" id="bulletinForm">
+            <div class="comments">
                 <div class="title">위밋! 댓글</div>
                 <div class="contentBox">
                     <div class="answer" id="commentContainer">
@@ -123,12 +143,12 @@
                     <div class="content-write">
                         <input type="hidden" name="articleIndex">
                         <label>
-                            <input type="text" name="content" placeholder="댓글" maxlength="100" x>
+                            <input type="text" name="content" placeholder="댓글" maxlength="100">
                         </label>
                         <input type="submit" value="작성">
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -202,7 +222,7 @@
     </div>
 
 
-</div>
+</form>
 
 
 </body>
