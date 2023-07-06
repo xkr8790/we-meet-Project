@@ -3,6 +3,8 @@ const list = document.querySelector('.container');
 // const listScrollWidth = list.scrollWidth;
 // const listClientWidth = list.clientWidth;
 
+const bulletinForm = document.getElementById('bulletinForm');
+
 let startX = 0;
 let nowX = 0;
 let endX = 0;
@@ -130,4 +132,120 @@ function refreshComment(){
 
 
 
+
+const ParticipateButton = bulletinForm.querySelector('[name="Participate"]');
+const deleteButton = bulletinForm.querySelector('[name="delete"]');
+const patchButton = bulletinForm.querySelector('[name="patch"]');
+
+
+ParticipateButton.addEventListener('click', e => {
+e.preventDefault();
+    const index = ParticipateButton.dataset.index;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `./Participate?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'success':
+                       alert('참여되었습니다');
+                       location.href = `/article/read?index=`+index;
+                        break;
+                    case 'failure':
+                        alert('제한인원을 초과할수 없습니다');
+                        break;
+                    default:
+                      alert('무슨오류일까?');
+                }
+            } else {
+                alert('서버오류입니다');
+            }
+        }
+    };
+    xhr.send();
+});
+
+
+// ParticipateButton.addEventListener('click', e => {
+//     e.preventDefault();
+//
+//     const index = ParticipateButton.dataset.index;
+//
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('DELETE', `./Delete?index=${index}`);
+//     xhr.onreadystatechange = () => {
+//         if (xhr.readyState === XMLHttpRequest.DONE) {
+//             if (xhr.status >= 200 && xhr.status < 300) {
+//                 const responseText = xhr.responseText; // 'true' | 'false'
+//                 if (responseText === 'true') {
+//                     const confirmResult = confirm('참여를 취소하시겠습니까?');
+//                     if (confirmResult === true) {
+//                         alert('취소되었습니다');
+//                     } else {
+//                         alert('삭제를 취소합니다');
+//                     }
+//                 } else {
+//                     alert('작성한 사용자가 아니므로 삭제하지 못합니다');
+//                 }
+//             } else {
+//                 alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
+//             }
+//         }
+//     };
+//     xhr.send();
+// });
+
+
+
+
+deleteButton.addEventListener('click', e => {
+    e.preventDefault();
+
+    const index = deleteButton.dataset.index;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('DELETE', `./read?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseText = xhr.responseText; // 'true' | 'false'
+                if (responseText === 'true') {
+                    const confirmResult = confirm('삭제하시겠습니까?');
+                    if (confirmResult === true) {
+                        alert('삭제되었습니다');
+                        location.href = '/article';
+                    } else {
+                        alert('삭제를 취소합니다');
+                    }
+                } else {
+                    alert('작성한 사용자가 아니므로 삭제하지 못합니다');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send();
+}); //게시판 삭제
+
+patchButton.addEventListener('click', e => {
+    e.preventDefault();
+
+    const index = patchButton.dataset.index;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `./patch?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                location.href = `/article/patch?index=${index}`
+            } else {
+                alert('작성한 사용자가 아니라 수정이 불가능합니다.');
+            }
+        }
+    };
+    xhr.send();
+}); //게시판 수정
 

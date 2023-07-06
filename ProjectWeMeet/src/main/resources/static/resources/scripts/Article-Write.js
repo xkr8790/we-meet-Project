@@ -1,4 +1,5 @@
 const articleForm = document.getElementById('Article-Form');
+const BulletinForm = document.getElementById('bulletinForm');
 
 
 let tagCounter = 0; //전역변수 태그카운터
@@ -8,19 +9,11 @@ var thumbnailUpload = document.querySelector('.thumbnail-upload');
 var thumbnailChange = document.querySelector('.thumbnail-change');
 const thumbnailTitle = document.querySelector('.thumbnail-title');
 const thumbnail1 = document.querySelector('.thumbnail1');
-ClassicEditor.create(articleForm['content'], {
-        language: 'ko', //언어설정
-        toolbar: ['heading', '|', 'Bold', 'Italic', '|', 'link', 'bulletedList', 'numberedList', '|', 'Undo', 'Redo'] //내가 넣고싶은 툴바 설정
-    })
-    .then( editor => {
-        window.editor = editor;})
-    .catch(error => {
-        console.error(error);
-    });
 
+
+ClassicEditor.create(articleForm['content'], {}); //파일 업로드
 
 // var contents = CKEDITOR.instances.editor.getData();
-
 
 
 const ArticleTag = document.querySelector('.article-tag'); //tag를 담을 부모
@@ -149,47 +142,6 @@ thumbnailChange.addEventListener('change', function (event) {
 });
 
 
-
-
-// articleForm.thumbnailPreview.onclick = function () {
-//     articleForm['thumbnail'].click();
-// }
-//
-// articleForm.hide = function() {
-//     articleForm.classList.remove('visible');
-// };
-//
-// articleForm.emptyThumbnail.hide = () =>{
-//     articleForm.emptyThumbnail.classList.add('visible');
-// }
-//
-// articleForm.thumbnailPreview = articleForm.querySelector('[rel="thumbnailPreview"]');
-// articleForm.emptyThumbnail = articleForm.querySelector('[rel="emptyThumbnail"]');
-//
-// articleForm.thumbnailPreview.onclick = function () {
-//     articleForm['thumbnail'].click();
-// }
-//
-
-// articleForm['thumbnail'].onchange = function (e) {
-//     if (articleForm['thumbnail'].files.length === 0) {
-//         articleForm.thumbnailPreview.style.backgroundImage = 'none';
-//         articleForm.emptyThumbnail.classList.remove('visible');
-//         return;
-//     }
-//     const fileReader = new FileReader();
-//     fileReader.onload = function (data) {
-//         articleForm.thumbnailPreview.style.backgroundImage = `url("${data.target.result}")`;
-//         articleForm.emptyThumbnail.classList.add('visible');
-//
-//     }
-//     fileReader.readAsDataURL(articleForm['thumbnail'].files[0]);
-// } //이미지 업로드시 발생
-//
-
-
-
-
 const beForeButton = document.querySelector('input[type="button"][value="이전"]');
 beForeButton.onclick = function (e) {
     e.preventDefault();
@@ -198,7 +150,7 @@ beForeButton.onclick = function (e) {
 };
 
 
-articleForm['complete'].addEventListener('click', (e) => {
+articleForm.onsubmit = e => {
     e.preventDefault();
 
     const xhr = new XMLHttpRequest();
@@ -217,7 +169,6 @@ articleForm['complete'].addEventListener('click', (e) => {
     formData.append('title', articleForm['title'].value); //제목값
     formData.append('content', articleForm['content'].value); //ck에디터 내용 가져오기
     formData.append('thumbnailMultipart', articleForm['upload'].files[0]);
-
     for (let i = 0; i < tags.length; i++) { //태그 반복해서 나타내기
         formData.append('hashtag', tags[i].value);
     }
@@ -226,7 +177,20 @@ articleForm['complete'].addEventListener('click', (e) => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('게시판 작성 성공');
+                alert('게시판 작성에 성공했습니다');
+
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    const index = response.index;
+                    if (index) {
+                        window.location.href = '/article/read?index=' + index;
+                    } else {
+                        alert('게시판 작성에 실패하였습니다. 인덱스 값을 받아오지 못했습니다.');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('서버 응답을 처리하는 중 오류가 발생했습니다.');
+                }
 
             } else {
                 alert('게시판 작성에 실패하였습니다');
@@ -234,7 +198,11 @@ articleForm['complete'].addEventListener('click', (e) => {
         }
     };
     xhr.send(formData);
-});
+};
+
+
+
+
 
 
 

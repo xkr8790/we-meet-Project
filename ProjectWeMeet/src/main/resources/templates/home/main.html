@@ -76,49 +76,49 @@
         <ul class="grid">
             <li class="item">
                 <a class="link" th:href="@{/article}">
-                    <img alt="전체" class="image" src="../resources/images/testImages/전체.png">
+                    <img alt="전체" class="image" th:src="@{/resources/images/testImages/전체.png}">
                     <span class="text">전체</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" th:href="@{/article}">
-                    <img alt="운동·액티비티" class="image" src="../resources/images/testImages/운동.png">
+                    <img alt="운동·액티비티" class="image" th:src="@{/resources/images/testImages/운동.png}">
                     <span class="text">운동·액티비티</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" th:href="@{/article}">
-                    <img alt="푸드·드링크" class="image" src="../resources/images/testImages/음식.png">
+                    <img alt="푸드·드링크" class="image" th:src="@{/resources/images/testImages/음식.png}">
                     <span class="text">푸드·드링크</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" th:href="@{/article}">
-                    <img alt="문화·예술" class="image" src="../resources/images/testImages/문화예술.png">
+                    <img alt="문화·예술" class="image" th:src="@{/resources/images/testImages/문화예술.png}">
                     <span class="text">문화·예술</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" th:href="@{/article}">
-                    <img alt="취미·자기개발" class="image" src="../resources/images/testImages/취미.png">
+                    <img alt="취미·자기개발" class="image" th:src="@{/resources/images/testImages/취미.png}">
                     <span class="text">취미·자기개발</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" th:href="@{/article}">
-                    <img alt="온라인" class="image" src="../resources/images/testImages/온라인.png">
+                    <img alt="온라인" class="image" th:src="@{/resources/images/testImages/온라인.png}">
                     <span class="text">온라인</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" th:href="@{/article}">
-                    <img alt="여행" class="image" src="../resources/images/testImages/여행.png">
+                    <img alt="여행" class="image" th:src="@{/resources/images/testImages/여행.png}">
                     <span class="text">여행</span>
                 </a>
             </li>
             <li class="item">
                 <a class="link" th:href="@{/article}">
-                    <img alt="완료" class="image" src="../resources/images/testImages/완료.png">
+                    <img alt="완료" class="image" th:src="@{/resources/images/testImages/완료.png}">
                     <span class="text">완료</span>
                 </a>
             </li>
@@ -132,21 +132,23 @@
     <div class="slider">
         <div class="slide">
             <div class="article-box">
-                <a th:href="@{/bulletin}" class="article-list">
+                <a th:href="@{./read(index=${article.getIndex()})}" class="article-list" th:each="article : ${article}">
                     <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
+                        <img class="thumbnail" th:src="@{./image(index=${article.getIndex()})}">
                     </div>
                     <div class="article-content-box">
                         <div class="article-tag">
                             <span class="tag">태그</span>
                             <span class="tag comment">추천!!</span>
                         </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
+                        <span class="article-content">
+                            <h2 class="article-content-title" th:text="${article.getTitle()}">장문복이랑 놀러갈 사람?</h2>
+                        </span>
                         <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
+                            <span class="map-item" th:text="${article.getCategory()}">카테고리</span>
+                            <span class="map-item" th:text="${article.getAddress()}">위치</span>
+                            <span class="map-item" th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">날짜</span>
+                            <span class="map-item" th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}">시간</span>
                         </div>
                         <span class="article-human">
               <span class="Profile-Picture">
@@ -168,378 +170,11 @@
               <span class="number">
                 <span class="map-item">0</span>
                 <span class="map-item">/</span>
-                <span class="map-item">0</span>
+                <span class="map-item" th:text="${article.getLimitPeople()}">0</span>
               </span>
               </span>
                     </div>
                 </a>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">그런거없다</span>
-                        </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
-                        <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
-                        </div>
-                        <span class="article-human">
-
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item">0</span>
-                <span class="map-item">/</span>
-                <span class="map-item">0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">추천!!</span>
-                        </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
-                        <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
-                        </div>
-                        <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item">0</span>
-                <span class="map-item">/</span>
-                <span class="map-item">0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">추천!!</span>
-                        </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
-                        <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
-                        </div>
-                        <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item">0</span>
-                <span class="map-item">/</span>
-                <span class="map-item">0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">추천!!</span>
-                        </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
-                        <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
-                        </div>
-                        <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item">0</span>
-                <span class="map-item">/</span>
-                <span class="map-item">0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">추천!!</span>
-                        </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
-                        <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
-                        </div>
-                        <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item">0</span>
-                <span class="map-item">/</span>
-                <span class="map-item">0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">추천!!</span>
-                        </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
-                        <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
-                        </div>
-                        <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item">0</span>
-                <span class="map-item">/</span>
-                <span class="map-item">0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">추천!!</span>
-                        </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
-                        <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
-                        </div>
-                        <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item">0</span>
-                <span class="map-item">/</span>
-                <span class="map-item">0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">추천!!</span>
-                        </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
-                        <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
-                        </div>
-                        <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item">0</span>
-                <span class="map-item">/</span>
-                <span class="map-item">0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
-                <div class="article-list">
-                    <div class="article-thumbnail">
-                        <img class="thumbnail" src="/resources/images/mainImages/조보아.jpg">
-                    </div>
-                    <div class="article-content-box">
-                        <div class="article-tag">
-                            <span class="tag">태그</span>
-                            <span class="tag comment">추천!!</span>
-                        </div>
-                        <span class="article-content"><h2 class="article-content-title">장문복이랑 놀러갈 사람?</h2></span>
-                        <div class="article-map">
-                            <span class="map-item">카테고리</span>
-                            <span class="map-item">위치</span>
-                            <span class="map-item">날짜</span>
-                            <span class="map-item">시간</span>
-                        </div>
-                        <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item">0</span>
-                <span class="map-item">/</span>
-                <span class="map-item">0</span>
-              </span>
-              </span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

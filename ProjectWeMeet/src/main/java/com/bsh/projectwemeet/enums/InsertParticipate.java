@@ -1,8 +1,6 @@
 package com.bsh.projectwemeet.enums;
 
-public enum InsertArticleResult {
-
+public enum InsertParticipate {
     FAILURE,
     SUCCESS
-
 }

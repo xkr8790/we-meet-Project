@@ -1,6 +1,5 @@
 
 //페이지 로드시 시작되는 함수
-// 슬라이드 이벤트
 document.addEventListener("DOMContentLoaded", function () {
     let sliderIndex = 0;
     const slideWidth = document.querySelector('.article-container').clientWidth;
@@ -46,35 +45,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-let boardList = document.getElementsByClassName("article-list");
-//article-list라는 클래스를 전부 불러와서 변수 boardList에 할당
+const boardList = document.getElementsByClassName("article-list");
 
-let boards = Array.from(boardList);
-//boardList를 배열로 변환해 boards라는 새로운 배열을 생성하는 역할을 합니다.
+const boards = Array.from(boardList);
 
 boards.forEach(function (board) {
     let images = board.getElementsByClassName("Profile-Picture");
-    //참여하는 유저에 따라 사람수가 달라질수 있으므로 let으로 선언한다.
-
-    //images(즉, 프로필)이 4개 이상이 되면
     if (images.length >= 4) {
-        const cover = document.createElement("img"); //가상의 img 클래스 생성
-        cover.src = "resources/images/mainImages/cover.png"; //cover 이미지 가지고 온다
+        const cover = document.createElement("img");
+        cover.src = "resources/images/cover.png";
         cover.classList.add("cover");
-
-        images[3].appendChild(cover);
         // images[3]의 자식으로 cover 추가
-
+        images[3].appendChild(cover);
         for (let i = 4; i < images.length; i++) {
             images[i].style.display = "none";
         }
     }
 });
-//images 배열은 인덱스 4부터 끝까지의 이미지 요소를 화면에서 숨기는 역할을 수행합니다.
-//즉 나타내는 프로필은 4명으로 정하고 4명째는 커버라는 img를 씌운다
-
-
-
+//
 // const categoryItems = document.querySelectorAll('.category-item');
 // const slider = document.querySelector('.slider');
 // const slide = document.querySelector('.slide');
@@ -83,7 +71,6 @@ boards.forEach(function (board) {
 //     const Slide = slide.cloneNode(true); //복제한다
 //     slider.appendChild(Slide);
 // });
-
 
 // 현재 페이지의 URL에서 쿼리 매개변수 값 읽기
 const queryParams = new URLSearchParams(window.location.search);
@@ -102,4 +89,3 @@ if (category) {
         }
     }
 }
-
