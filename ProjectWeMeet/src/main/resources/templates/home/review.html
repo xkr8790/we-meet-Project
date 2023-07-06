@@ -89,7 +89,7 @@
                             </span>
                             <span class="text" th:text="${#dates.format(review.getCreatedAt(), 'yyyy-MM-dd')}"></span>
                         </div>
-                        <div>
+                        <div class="deleteButton">
                             <a href="#" class="delete" rel="delete" th:data-index="${review.getIndex()}">삭제</a>
                         </div>
                     </div>
