@@ -65,7 +65,7 @@ bindEvents();
 
 //  댓글 insert
 
-const bulletinForm = document.getElementById('bulletinForm');
+// const bulletinForm = document.getElementById('bulletinForm');
 
 function postComment(content, commentIndex, toFocus, refreshCommentAfter){
 
@@ -91,6 +91,7 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter){
                         toFocus.focus();
                     }
                     if (refreshCommentAfter === true) {
+
                         location.href='';
                     }
                 } else {
@@ -136,7 +137,7 @@ function refreshComment(){
 const ParticipateButton = bulletinForm.querySelector('[name="Participate"]');
 const deleteButton = bulletinForm.querySelector('[name="delete"]');
 const patchButton = bulletinForm.querySelector('[name="patch"]');
-
+const finishButton = bulletinForm.querySelector('[name="finish"]');
 
 ParticipateButton.addEventListener('click', e => {
 e.preventDefault();
@@ -166,36 +167,6 @@ e.preventDefault();
     };
     xhr.send();
 });
-
-
-// ParticipateButton.addEventListener('click', e => {
-//     e.preventDefault();
-//
-//     const index = ParticipateButton.dataset.index;
-//
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('DELETE', `./Delete?index=${index}`);
-//     xhr.onreadystatechange = () => {
-//         if (xhr.readyState === XMLHttpRequest.DONE) {
-//             if (xhr.status >= 200 && xhr.status < 300) {
-//                 const responseText = xhr.responseText; // 'true' | 'false'
-//                 if (responseText === 'true') {
-//                     const confirmResult = confirm('참여를 취소하시겠습니까?');
-//                     if (confirmResult === true) {
-//                         alert('취소되었습니다');
-//                     } else {
-//                         alert('삭제를 취소합니다');
-//                     }
-//                 } else {
-//                     alert('작성한 사용자가 아니므로 삭제하지 못합니다');
-//                 }
-//             } else {
-//                 alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
-//             }
-//         }
-//     };
-//     xhr.send();
-// });
 
 
 
@@ -249,3 +220,24 @@ patchButton.addEventListener('click', e => {
     xhr.send();
 }); //게시판 수정
 
+
+
+
+
+
+finishButton.addEventListener('click', e => {
+    e.preventDefault();
+    const index = finishButton.dataset.index;
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET',`/article/review?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE){
+        if(xhr.status >=200 && xhr.status<300){
+            location.href = `/article/review?index=${index}`
+        }else{
+            alert('작성한 사용자가 아니라 수정이 불가능합니다.');
+        }
+     }
+    };
+    xhr.send();
+})

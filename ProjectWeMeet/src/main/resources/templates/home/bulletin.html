@@ -30,16 +30,20 @@
         <div class="login" th:if="${session.user != null}">
             <button>
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                <div class="tooltip" >글작성</div>
             </button>
-
             <button name="patch" th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
+                <div class="tooltip">글수정</div>
             </button>
-
             <button name="delete"  th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
+                <div class="tooltip">글삭제</div>
             </button>
-
+            <button name="finish" th:data-index="${article.getIndex()}">
+                <i class="fa-solid fa-circle-check fa-lg"></i>
+                <div class="tooltip">완료</div>
+            </button>
         </div>
     </div>
 

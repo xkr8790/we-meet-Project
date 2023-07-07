@@ -2,6 +2,8 @@ package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
+import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.FinishResult;
 import com.bsh.projectwemeet.enums.InsertParticipate;
 import com.bsh.projectwemeet.services.ArticleService;
 import org.json.JSONObject;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -108,10 +112,41 @@ public class ArticleController {
     @RequestMapping(value = "article/Participate",
             method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView patchArticle(@RequestParam(value = "index") int index, ParticipantsEntity participants, HttpSession session){
+    public ModelAndView patchArticle(@RequestParam(value = "index") int index, ParticipantsEntity participants, HttpSession session) {
         boolean result = this.articleService.SelectParticipants(index, participants, session);
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
         modelAndView.addObject("result", result);
         return modelAndView;
     } //참가한 인원이 클릭시 Select
+
+
+
+
+       @RequestMapping(value="article/review", method = RequestMethod.GET)
+    public ModelAndView getFinish(int index, HttpSession session){
+        boolean result = this.articleService.patchFinish(index ,session);
+        ModelAndView modelAndView = new ModelAndView("home/review");
+        modelAndView.addObject("result", result);
+        return modelAndView;
+   }
+//   게시물 작성자와 로그인된 아이디가 같은지 다른지에 대한 여부를 통해 페이지 넘어가게 하기
+
+//    @RequestMapping(value="article/review", method = RequestMethod.PATCH)
+//    @ResponseBody
+//    public String patchFinished(ArticleEntity article, HttpSession session){
+//        FinishResult result = this.articleService.patchFinished(article, session);
+//        JSONObject responseObject = new JSONObject() {{
+//            put("result", result.name().toLowerCase());
+//        }};
+//        return responseObject.toString();
+//    }
+
+
+
+
+
+
+
 }
+
+
