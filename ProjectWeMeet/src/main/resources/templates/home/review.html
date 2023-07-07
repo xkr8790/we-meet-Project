@@ -7,23 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>게시글</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <link rel="stylesheet" href="/resources/stylesheets/review.css">
-<!--    <script >-->
-<!--        alert('리뷰를 작성하지 못하였습니다.');-->
-<!--    </script>-->
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"/>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/review.css}">
+
     <script defer th:src="@{/resources/scripts/review.js}"></script>
 
 </head>
 <body>
-
-
-<div class="allContainer" th:if="${session.user != null}">
+<form class="allContainer" id="reviewForm" >
     <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
         </a>
-        <div class="login">
+        <div class="login" th:if="${session.user == null}">
             <a href="/login">로그인</a>
             <a href="/register/">회원가입</a>
         </div>
@@ -31,12 +27,12 @@
 
     <div class="main-template">
         <div class="img-profile-title">
-            <img src="https://post-phinf.pstatic.net/MjAxNzA0MTBfMTkg/MDAxNDkxNzk2OTY5MzEw.LIjCVhA5yvrWDEtF3oTyPOutbMxbzhm-Xg4V0rzxD5Qg.lW4lqBV3sHwHqqNAt11ruVyPcoj5H1mOw67nrc4Fqggg.JPEG/%EC%84%9C%EC%9A%B8-%EC%98%88%EC%81%9C-%EC%B9%B4%ED%8E%98-4.jpg?type=w1200"
+            <img th:src="@{/resources/images/bulletinImags/images.jpeg}"
                  alt="">
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">
-                        <img>
+                        <img th:src="@{/resources/images/bulletinImags/쵸단.png}" alt="몰루">
                     </a>
                     <p>쵸단</p>
                 </div>
@@ -80,69 +76,52 @@
         <div class="review">
             <div class="reviewContainer">
                 <div class="reviewTitle">당신의 추억을 남겨주세요</div>
-                <div class="reviewContent">
-                    <div class="reviewBox"  >
+                <div class="reviewContent" id="reviewContent">
+                    <div class="reviewBox" th:each="review : ${reviews}">
                         <div class="core">
-<!--                            <label>-->
-<!--                                <input type="radio" name="rating" id="star10" value="5">-->
-<!--                                <i class="fa-solid fa-star fa-xs"></i>-->
-<!--                            </label>-->
-<!--                            <label>-->
-<!--                                <input type="radio" name="rating" id="star9" value="4">-->
-<!--                                <i class="fa-solid fa-star fa-xs"></i>-->
-<!--                            </label>-->
-<!--                            <label>-->
-<!--                                <input type="radio" name="rating" id="star8" value="3">-->
-<!--                                <i class="fa-solid fa-star fa-xs"></i>-->
-<!--                            </label>-->
-<!--                            <label>-->
-<!--                                <input type="radio" name="rating" id="star7" value="2">-->
-<!--                                <i class="fa-solid fa-star fa-xs"></i>-->
-<!--                            </label>-->
-<!--                            <label>-->
-<!--                                <input type="radio" name="rating" id="star6" value="1">-->
-<!--                                <i class="fa-solid fa-star fa-xs"></i>-->
-<!--                            </label>-->
+                            <span th:each="star : ${#numbers.sequence(1, review.getReviewStar())}">★</span>
                         </div>
-                        <div class="estimate">소환자 협곡에서의 만남의 최고였습니다. 듀오를 하지못해 아쉽습니다. 그리고 탑티모 개못함</div>
+                        <div hidden th:text="${review.getReviewIndex()}"></div>
+                        <div class="estimate" th:text="${review.getContent()}"></div>
                         <div class="writer">
                             <span class="profile">
-                                <img src="" alt="이미지">
+                                <img src="/resources/images/bulletinImags/쵸단.png" alt="이미지">
                             </span>
+                            <span class="text" th:text="${#dates.format(review.getCreatedAt(), 'yyyy-MM-dd')}"></span>
                         </div>
-                        <div>
-                            <a href="#">수정</a>
-                            <a href="#">삭제</a>
+                        <div class="deleteButton">
+                            <a href="#" class="delete" rel="delete" th:data-index="${review.getIndex()}">삭제</a>
                         </div>
                     </div>
                 </div>
-                <form class="reviewInput" method="post" id="reviewForm">
-                    <input type="hidden" name="articleIndex" value="2">
-                    <div class="fieldset">
-                        <input type="radio" name="reviewStar" value="5" id="rate1"><label
-                            for="rate1">★</label>
-                        <input type="radio" name="reviewStar" value="4" id="rate2"><label
-                            for="rate2">★</label>
-                        <input type="radio" name="reviewStar" value="3" id="rate3"><label
-                            for="rate3">★</label>
-                        <input type="radio" name="reviewStar" value="2" id="rate4"><label
-                            for="rate4">★</label>
-                        <input type="radio" name="reviewStar" value="1" id="rate5"><label
-                            for="rate5">★</label>
+                <div class="reviewInput">
+                    <input type="hidden" name="articleIndex" value="290">
+                    <input class="content" type="text" name="content">
+                    <div class="starBox">
+                        <div class="fieldset">
+                            <input type="radio" name="reviewStar" value="5" id="rate1"><label
+                                for="rate1">★</label>
+                            <input type="radio" name="reviewStar" value="4" id="rate2"><label
+                                for="rate2">★</label>
+                            <input type="radio" name="reviewStar" value="3" id="rate3"><label
+                                for="rate3">★</label>
+                            <input type="radio" name="reviewStar" value="2" id="rate4"><label
+                                for="rate4">★</label>
+                            <input type="radio" name="reviewStar" value="1" id="rate5"><label
+                                for="rate5">★</label>
+                        </div>
+                        <input class="button" id="reviewButton" type="submit" value="등록">
                     </div>
-                        <input class="text" type="text" name="content">
-                        <input class="button" type="submit" value="등록">
-                </form>
+                </div>
             </div>
         </div>
     </div>
 
 
-</div>
+</form>
 
 
 </body>
 
 
-</body>
 </html>

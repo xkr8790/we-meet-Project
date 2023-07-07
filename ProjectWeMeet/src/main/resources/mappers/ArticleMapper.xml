@@ -50,6 +50,9 @@
                 #{checkParticipationStatus})
     </insert>
 
+
+
+
     <select id="selectParticipants"
             resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
         SELECT `index`                      AS `index`,
@@ -170,6 +173,42 @@
         LIMIT 1
     </delete>
     <!-- 게시판 삭제 -->
+
+
+
+
+
+    <select id="selectArticleByIndexEmail"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `email`          AS `email`,
+               `title`          AS `title`,
+               `content`        AS `content`,
+               `category`       AS `category`,
+               `view`           AS `view`,
+               `limit`          AS `limit`,
+               `participation`  AS `participation`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`,
+               `finished_flag` AS `isFinished`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+
+    <update id="updateFinished"
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
+        UPDATE `wemeet_project`.`articles`
+        SET `finished_flag` = #{isFinished}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+
+
+
 
 
 </mapper>

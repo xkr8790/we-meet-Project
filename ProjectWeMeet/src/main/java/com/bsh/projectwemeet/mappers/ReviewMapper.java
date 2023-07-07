@@ -9,7 +9,12 @@ public interface ReviewMapper {
 
     int insertReview(ReviewEntity reviewEntity);
 
-    int deleteByReview(@Param(value = "index") int index);
+    ReviewEntity[] selectAll();
 
-    int updateByText(ReviewEntity reviewEntity);
+    ReviewEntity selectReviewByIndex(@Param(value="index") int index);
+
+
+    int deleteByReview(@Param(value="index") int index);
+
+//    int updateByText(ReviewEntity reviewEntity);
 }

@@ -8,7 +8,7 @@ public class ReviewEntity {
     private int index;
     private String content;
     private Date CreatedAt;
-    private String reviewStar;
+    private int reviewStar;
     private int articleIndex;
     private int reviewIndex;
     private boolean isDeleted;
@@ -25,14 +25,17 @@ public class ReviewEntity {
         return this;
     }
 
-    public String getReviewStar() {
+
+    public int getReviewStar() {
         return reviewStar;
     }
 
-    public ReviewEntity setReviewStar(String reviewStart) {
-        this.reviewStar = reviewStart;
+    public ReviewEntity setReviewStar(int reviewStar) {
+        this.reviewStar = reviewStar;
         return this;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

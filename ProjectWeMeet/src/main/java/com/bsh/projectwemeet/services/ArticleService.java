@@ -3,6 +3,7 @@ package com.bsh.projectwemeet.services;
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.FinishResult;
 import com.bsh.projectwemeet.enums.InsertParticipate;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.Objects;
 
 @Service
 public class ArticleService {
@@ -54,15 +54,15 @@ public class ArticleService {
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-        if(loginUser.getEmail() == null || article == null){
+        if (loginUser.getEmail() == null || article == null) {
             return InsertParticipate.FAILURE;
         } //로그인한유저가 없을시 실패
 
-        if(article.getParticipation() >= article.getLimitPeople()){
+        if (article.getParticipation() >= article.getLimitPeople()) {
             return InsertParticipate.FAILURE;
         } //제한인원을 초과해서 입력시 실패
 
-        if(participants.isCheckParticipationStatus()){
+        if (participants.isCheckParticipationStatus()) {
             return InsertParticipate.FAILURE;
         }
 
@@ -86,7 +86,7 @@ public class ArticleService {
         return articleMapper.selectParticipants(article.getIndex()) > 0;
     }
 
-    public boolean deleteByIndex(int index,ArticleEntity article,HttpSession session){
+    public boolean deleteByIndex(int index, ArticleEntity article, HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
 
@@ -94,10 +94,34 @@ public class ArticleService {
         return this.articleMapper.deleteByArticle(index) > 0;
     }
 
-    public ArticleEntity getPatchIndexArticle(int index){
+    public ArticleEntity getPatchIndexArticle(int index) {
         return this.articleMapper.selectArticleByPatchIndex(index);
     }
 
 
+    public boolean patchFinish(int index, HttpSession session) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(index);
+
+        if (articles == null || loginUser == null || !loginUser.getEmail().equals(articles.getEmail())) {
+            return false;
+        }
+
+        articles.setFinished(true);
+        return this.articleMapper.updateFinished(articles) > 0;
+    }
+
+//    public FinishResult patchFinished(ArticleEntity article, HttpSession session){
+//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+//        ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(article);
+//
+//        if (articles == null || loginUser == null || !loginUser.getEmail().equals(articles.getEmail())) {
+//            return FinishResult.FAILURE;
+//        }
+//        articles.setFinished(true);
+//        return this.articleMapper.updateFinished(articles) > 0
+//                ? FinishResult.SUCCESS
+//                : FinishResult.SUCCESS;
+//    }
 
 }
