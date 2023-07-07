@@ -10,14 +10,14 @@
         keyProperty="index"
         keyColumn="index"
         parameterType="com.bsh.projectwemeet.entities.ReviewEntity">
-    INSERT INTO `wemeet_project`.`reviews`(`content`, `created_at`, `reviewStar`, `article_index`, `review_index`, `deleted_flag`, `client_ip`, `client_ua` , `email`)
+    INSERT INTO `wemeet_project`.`reviews`(`content`, `created_at`, `reviewStar`, `article_index`, `review_index`, `client_ip`, `client_ua` , `email`)
     VALUES (
             #{content},
             IFNULL(#{createdAt}, DEFAULT(`created_at`)),
             #{reviewStar},
             #{articleIndex},
             #{reviewIndex},
-            #{isDeleted},
+
             #{clientIp},
             #{clientUa},
             #{email})
