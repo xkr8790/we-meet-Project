@@ -41,7 +41,12 @@ public class ArticleController {
     public ModelAndView getArticle() {
         ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
         ArticleEntity[] articles = this.articleService.getAll();
+
+//        ArticleEntity[] articleCategory = this.articleService.getCategory(category);
+
         modelAndView.addObject("article", articles);
+
+
         return modelAndView;
     } //게시판 전부 가져오기
 

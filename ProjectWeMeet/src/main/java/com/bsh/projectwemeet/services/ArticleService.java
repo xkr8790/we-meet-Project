@@ -37,7 +37,7 @@ public class ArticleService {
     }
 
 
-    public ArticleEntity getCategory(String category){
+    public ArticleEntity[] getCategory(String category){
         return this.articleMapper.selectCategory(category);
     } //카테고리 관련인데 모르겠다
 

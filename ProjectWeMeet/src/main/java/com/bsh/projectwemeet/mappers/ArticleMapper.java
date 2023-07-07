@@ -21,9 +21,7 @@ public interface ArticleMapper {
 
     ArticleEntity[] selectDifferentArticle();
 
-    ArticleEntity selectCategory(@Param(value = "category")String category);
-
-
+    ArticleEntity[] selectCategory(@Param(value = "category")String category);
 
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
 

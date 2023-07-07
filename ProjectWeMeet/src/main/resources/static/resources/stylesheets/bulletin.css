@@ -407,7 +407,8 @@ allContainer > .header > .login > a {
     margin: 0 1rem;
 }
 .preview > .container > .previewContainer > .img > img{
-
+    width: 7rem;
+    height: 7rem;
     object-fit: cover;
 }
 .preview > .container > .previewContainer > .text{

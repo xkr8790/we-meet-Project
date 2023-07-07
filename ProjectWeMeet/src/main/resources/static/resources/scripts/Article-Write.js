@@ -49,7 +49,7 @@ ArticleTag.addEventListener('click', function () {
     TagContainer.classList.add('tag-container');
     TagWarning.classList.add('tag-warning');
     Tag.classList.add('tag'); // 처음 생성시 tag 클래스 추가
-    Tag.maxLength = 12;
+    Tag.maxLength = 5;
 
     Tags.appendChild(TagContainer);
     TagContainer.appendChild(TagWarning);

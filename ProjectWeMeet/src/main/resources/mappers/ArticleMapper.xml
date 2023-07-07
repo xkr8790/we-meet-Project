@@ -99,6 +99,8 @@
                `category` AS `category`,
                `address`  AS `address`,
                `day`      AS `appointmentStartDate`,
+               `participation`  AS `participation`,
+               `limit`          AS `limit`,
                `time`     AS `appointmentStartTime`,
                `thumbnail`      AS `thumbnail`,
                `thumbnail_mime` AS `thumbnailMime`
@@ -140,6 +142,7 @@
     </select>
 
 
+     <!-- 게시물 수정 찾기 -->
     <select id="selectArticleByPatchIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
@@ -160,6 +163,7 @@
         WHERE `index` = #{index}
         LIMIT 1
     </select>
+    <!-- 게시물 수정 찾기 -->
 
 
     <select id="selectCategory"
@@ -169,7 +173,6 @@
         FROM `wemeet_project`.`articles`
         WHERE `category` = #{category}
         ORDER BY `index` DESC
-        LIMIT 5
     </select>
 
 
