@@ -50,58 +50,6 @@
                 #{checkParticipationStatus})
     </insert>
 
-
-
-
-    <select id="selectParticipants"
-            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
-        SELECT `index`                      AS `index`,
-               `email`                      AS `email`,
-               `ArticleIndex`               AS `ArticleIndex`,
-               `check_participation_status` AS `checkParticipationStatus`
-        FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` = #{index}
-        LIMIT 1
-    </select>
-
-    <select id="selectArticleByIndex"
-            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`          AS `index`,
-               `title`          AS `title`,
-               `content`        AS `content`,
-               `category`       AS `category`,
-               `view`           AS `view`,
-               `limit`          AS `limit`,
-               `participation`  AS `participation`,
-               `latitude`       AS `latitude`,
-               `longitude`      AS `longitude`,
-               `thumbnail`      AS `thumbnail`,
-               `thumbnail_mime` AS `thumbnailMime`
-        FROM `wemeet_project`.`articles`
-        WHERE `index` = #{index}
-        LIMIT 1
-    </select>
-
-    <select id="selectArticleByPatchIndex"
-            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`          AS `index`,
-               `title`          AS `title`,
-               `category`       AS `category`,
-               `content`        AS `content`,
-               `place`          AS `place`,
-               `address`        AS `address`,
-               `thumbnail`      AS `thumbnail`,
-               `thumbnail_mime` AS `thumbnailMime`,
-               `day`            AS `appointmentStartDate`,
-               `time`           AS `appointmentStartTime`,
-               `limit`          AS `limit`,
-               `latitude`       AS `latitude`,
-               `longitude`      AS `longitude`
-        FROM `wemeet_project`.`articles`
-        WHERE `index` = #{index}
-    </select>
-
-
     <!--게시물 전체 조회-->
     <select id="selectAll"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -119,23 +67,111 @@
     </select>
     <!--게시물 전체 조회-->
 
-    <!--메인에 나타낼 게시물 6개-->
-    <select id="selectArticleMain"
+    <!-- 필요한 게시물 조회  -->
+    <select id="selectArticleByIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
+               `email`          AS `email`,
                `title`          AS `title`,
                `content`        AS `content`,
                `category`       AS `category`,
-               `address`        AS `address`,
+               `view`           AS `view`,
                `limit`          AS `limit`,
-               `day`            AS `appointmentStartDate`,
-               `time`           AS `appointmentStartTime`
+               `place`          AS `place`,
+               `address`        AS `address`,
+               `participation`  AS `participation`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+    <!-- 필요한 게시물 조회  -->
+
+    <!-- 이런 모임은 어때요 조회-->
+    <select id="selectDifferentArticle"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`    AS `index`,
+               `title`    AS `title`,
+               `content`  AS `content`,
+               `category` AS `category`,
+               `address`  AS `address`,
+               `day`      AS `appointmentStartDate`,
+               `participation`  AS `participation`,
+               `limit`          AS `limit`,
+               `time`     AS `appointmentStartTime`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`
         FROM `wemeet_project`.`articles`
         ORDER BY `index` DESC
         LIMIT 7
     </select>
+    <!-- 이런 모임은 어때요 조회-->
+
+    <!--메인에 나타낼 게시물 6개-->
+    <select id="selectArticleMain"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`                   AS `index`,
+               `title`                   AS `title`,
+               `content`                 AS `content`,
+               `category`                AS `category`,
+               `address`                 AS `address`,
+               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+               `limit`                   AS `limit`,
+               `participation`           AS `participation`,
+               `day`                     AS `appointmentStartDate`,
+               `time`                    AS `appointmentStartTime`
+        FROM `wemeet_project`.`articles`
+        ORDER BY `index` DESC
+        LIMIT 6
+    </select>
     <!--메인에 나타낼 게시물 6개-->
 
+
+    <select id="selectParticipants"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`                      AS `index`,
+               `email`                      AS `email`,
+               `ArticleIndex`               AS `ArticleIndex`,
+               `check_participation_status` AS `checkParticipationStatus`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{index}
+        LIMIT 1
+    </select>
+
+    <!-- 게시물 수정 찾기 -->
+    <select id="selectArticleByPatchIndex"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `title`          AS `title`,
+               `category`       AS `category`,
+               `content`        AS `content`,
+               `place`          AS `place`,
+               `address`        AS `address`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`,
+               `day`            AS `appointmentStartDate`,
+               `time`           AS `appointmentStartTime`,
+               `limit`          AS `limit`,
+               `hashtag`        AS `hashtag`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+    <!-- 게시물 수정 찾기 -->
+
+    <select id="selectCategory"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`                   AS `index`,
+               `title`                   AS `title`
+        FROM `wemeet_project`.`articles`
+        WHERE `category` = #{category}
+        ORDER BY `index` DESC
+    </select>
 
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
@@ -157,8 +193,28 @@
     </update>
     <!-- 참여인원 업데이트 -->
 
+    <!-- 게시판 수정 -->
+    <update id="updateArticleContent"
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
+        UPDATE `wemeet_project`.`articles`
+        SET `title`          = #{title},
+            `category`       = #{category},
+            `content`        = #{content},
+            `place`          = #{place},
+            `address`        = #{address},
+            `day`            = #{appointmentStartDate},
+            `time`           = #{appointmentStartTime},
+            `latitude`       = #{latitude},
+            `longitude`      = #{longitude},
+            `thumbnail`      = #{thumbnailMultipart},
+            `thumbnail_mime` = #{thumbnailMime}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+    <!-- 게시판 수정 -->
 
-   <!-- 게시판 삭제 -->
+
+    <!-- 게시판 삭제 -->
     <delete id="deleteByArticle">
         DELETE FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
@@ -166,16 +222,13 @@
     </delete>
     <!-- 게시판 삭제 -->
 
-    <!-- 게시판 삭제 -->
+    <!-- 참여 여부 삭제 -->
     <delete id="deleteByParticipants">
         DELETE FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` = #{index}
+        WHERE `index` = #{index}
         LIMIT 1
     </delete>
-    <!-- 게시판 삭제 -->
-
-
-
+    <!-- 참여 여부 삭제 -->
 
 
     <select id="selectArticleByIndexEmail"

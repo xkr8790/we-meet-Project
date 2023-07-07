@@ -132,7 +132,7 @@
     <div class="slider">
         <div class="slide">
             <div class="article-box">
-                <a th:href="@{./read(index=${article.getIndex()})}" class="article-list" th:each="article : ${article}">
+                <a th:href="@{article/read(index=${article.getIndex()})}" class="article-list" th:each="article : ${article}">
                     <div class="article-thumbnail">
                         <img class="thumbnail" th:src="@{./image(index=${article.getIndex()})}">
                     </div>

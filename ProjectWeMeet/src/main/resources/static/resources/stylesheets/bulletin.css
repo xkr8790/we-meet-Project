@@ -257,8 +257,12 @@ allContainer > .header > .login > a {
 
 .announcement > .participant > .participantContainer > .login-after-human > .participating-button{
     margin: 0.5rem;
-    width: 4rem;
+    width: 10rem;
     height: 2rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 .announcement > .participant > .participantContainer > .login-after-human > .participating-button > button{
     width: 4rem;
@@ -413,7 +417,8 @@ allContainer > .header > .login > a {
     margin: 0 1rem;
 }
 .preview > .container > .previewContainer > .img > img{
-
+    width: 7rem;
+    height: 7rem;
     object-fit: cover;
 }
 .preview > .container > .previewContainer > .text{

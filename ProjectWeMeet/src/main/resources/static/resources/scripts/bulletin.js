@@ -127,78 +127,42 @@ function refreshComment(){
 
 
 
-
-
-
-
-
-
-
-const ParticipateButton = bulletinForm.querySelector('[name="Participate"]');
-const deleteButton = bulletinForm.querySelector('[name="delete"]');
-const patchButton = bulletinForm.querySelector('[name="patch"]');
 const finishButton = bulletinForm.querySelector('[name="finish"]');
 
-ParticipateButton.addEventListener('click', e => {
-e.preventDefault();
-    const index = ParticipateButton.dataset.index;
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', `./Participate?index=${index}`);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseObject = JSON.parse(xhr.responseText);
-                switch (responseObject.result) {
-                    case 'success':
-                       alert('참여되었습니다');
-                       location.href = `/article/read?index=`+index;
-                        break;
-                    case 'failure':
-                        alert('제한인원을 초과할수 없습니다');
-                        break;
-                    default:
-                      alert('무슨오류일까?');
-                }
-            } else {
-                alert('서버오류입니다');
-            }
-        }
-    };
-    xhr.send();
-});
-
-
-
+const deleteButton = bulletinForm.querySelector('[name="delete"]');
+const patchButton = bulletinForm.querySelector('[name="patch"]');
 
 deleteButton.addEventListener('click', e => {
     e.preventDefault();
-
     const index = deleteButton.dataset.index;
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('DELETE', `./read?index=${index}`);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseText = xhr.responseText; // 'true' | 'false'
-                if (responseText === 'true') {
-                    const confirmResult = confirm('삭제하시겠습니까?');
-                    if (confirmResult === true) {
+    const confirmResult = confirm('삭제하시겠습니까?');
+    if (confirmResult === true) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('DELETE', `./read?index=${index}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseText = xhr.responseText;
+                    if (responseText === 'true') {
                         alert('삭제되었습니다');
                         location.href = '/article';
+                        return;
                     } else {
-                        alert('삭제를 취소합니다');
+                        alert('작성한 사용자가 아니므로 삭제하지 못합니다');
+                        return;
                     }
                 } else {
-                    alert('작성한 사용자가 아니므로 삭제하지 못합니다');
+                    alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
+                    return;
                 }
-            } else {
-                alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
             }
-        }
-    };
-    xhr.send();
+        };
+        xhr.send();
+    } else if (confirmResult === false) {
+        alert('삭제를 취소합니다');
+        return;
+    }
 }); //게시판 삭제
 
 patchButton.addEventListener('click', e => {
@@ -211,7 +175,13 @@ patchButton.addEventListener('click', e => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                location.href = `/article/patch?index=${index}`
+                const confirmResult = confirm('수정을 하시겠습니까?');
+                if (confirmResult === true) {
+                    location.href = `/article/patch?index=${index}`
+                } else if (confirmResult === false) {
+                    alert('수정을 취소합니다');
+                    return;
+                }
             } else {
                 alert('작성한 사용자가 아니라 수정이 불가능합니다.');
             }
@@ -219,6 +189,89 @@ patchButton.addEventListener('click', e => {
     };
     xhr.send();
 }); //게시판 수정
+
+const ParticipateButton = bulletinForm.querySelector('[name="Participate"]');
+const ParticipateDeleteButton = bulletinForm.querySelector('[name="ParticipateDelete"]');
+
+ParticipateButton.addEventListener('click', e => {
+    e.preventDefault();
+    const index = ParticipateButton.dataset.index;
+
+    const confirmResult = confirm('참여하시겠습니까?');
+    if (confirmResult === true) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `./Participate?index=${index}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseText = xhr.responseText;
+                    if (responseText === 'true') {
+                        alert('참여되었습니다');
+                        location.href = `/article/read?index=` + index;
+                        return;
+                    } else {
+                        alert('제한인원을 초과했습니다');
+                        return;
+                    }
+                } else {
+                    alert('이미 참여한 사용자입니다');
+                    return;
+                }
+            }
+        };
+        xhr.send();
+    }else if (confirmResult === false) {
+        alert('참여를 취소합니다');
+        return;
+    }
+});
+
+ParticipateDeleteButton.addEventListener('click', e => {
+    e.preventDefault();
+    const index = ParticipateDeleteButton.dataset.index;
+
+    const confirmResult = confirm('참여를 취소하시겠습니까?');
+    if (confirmResult === true) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PATCH', `./Participate?index=${index}`)
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseObject = JSON.parse(xhr.responseText);
+                    switch (responseObject.result) {
+                        case 'success':
+                            alert('참여가 취소되었습니다');
+                            location.href = `/article/read?index=` + index;
+                            break;
+                        case 'failure':
+                            alert('먼저 참여를 해주세요');
+                            break;
+                        default:
+                            alert('무슨오류일까?');
+                    }
+                } else {
+                    alert('먼저 참여를 해주세요');
+                }
+            }
+        };
+        xhr.send();
+    }else if (confirmResult === false) {
+        alert('참여를 취소합니다');
+        return;
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

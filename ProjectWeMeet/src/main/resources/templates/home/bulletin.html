@@ -94,21 +94,17 @@
                         <span>6</span>
                     </div>
 
-                    <div th:if="${result == null}">
+                    <!-- 참가 기능  -->
                     <div class="participating-button">
-                            <button name="Participate" th:data-index="${article.getIndex()}">
-                                참여하기
-                            </button>
-                    </div>
-                    </div>
+                        <button  name="Participate" th:data-index="${article.getIndex()}">
+                            참여하기
+                        </button>
 
-                    <div th:if="${result == true}">
-                        <div class="participating-button">
-                            <button name="Participate" th:data-index="${article.getIndex()}">
-                                참여취소
-                            </button>
-                        </div>
+                        <button name="ParticipateDelete" th:data-index="${article.getIndex()}">
+                            참여취소
+                        </button>
                     </div>
+                    <!--  참가안했을때    -->
 
 
                 </div>
@@ -161,67 +157,23 @@
         <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
             <!--            여기서 부터 list-->
-            <div class="previewContainer">
+            <div class="previewContainer" th:each="articles : ${articles}">
                 <!--                이게 item-->
-                <a class="img">
-                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
+                <a class="img" th:href="@{./read(index=${articles.getIndex()})}">
+                    <img th:src="@{./image(index=${articles.getIndex()})}" alt="">
                 </a>
                 <div class="text">
-                    <div class="category">온라인</div>
-                    <div class="title">모여라~~ 영웅을 기다린다</div>
-                    <div class="time">온라인 6.20(화) 오후 8시</div>
+                    <div class="category"  th:text="${articles.getCategory()}">온라인</div>
+                    <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
+                    <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
                     <div class="participant">
                         <div class="human">프로필</div>
-                        <div class="number">인원</div>
+                        <div class="number" th:text="${articles.getParticipation()}">인원</div>
+                        <div class="number">/</div>
+                        <div class="number" th:text="${articles.getLimitPeople()}">인원</div>
                     </div>
                 </div>
             </div>
-
-            <div class="previewContainer">
-                <a class="img">
-                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
-                </a>
-                <div class="text">
-                    <div class="category">카테고리</div>
-                    <div class="title">제목</div>
-                    <div class="time">시간</div>
-                    <div class="participant">
-                        <div class="human">프로필</div>
-                        <div class="number">인원</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="previewContainer">
-                <a class="img">
-                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
-                </a>
-                <div class="text">
-                    <div class="category">카테고리</div>
-                    <div class="title">제목</div>
-                    <div class="time">시간</div>
-                    <div class="participant">
-                        <div class="human">프로필</div>
-                        <div class="number">인원</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="previewContainer">
-                <a class="img">
-                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
-                </a>
-                <div class="text">
-                    <div class="category">카테고리</div>
-                    <div class="title">제목</div>
-                    <div class="time">시간</div>
-                    <div class="participant">
-                        <div class="human">프로필</div>
-                        <div class="number">인원</div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
