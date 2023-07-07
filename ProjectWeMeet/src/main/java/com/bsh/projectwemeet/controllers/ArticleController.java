@@ -1,6 +1,7 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.CommentEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.services.ArticleService;
 import org.apache.ibatis.annotations.Param;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
@@ -114,6 +116,42 @@ public class ArticleController {
     //        boolean result = this.patchArticle(null);
     //        return String.valueOf(result); //참이면 결과 반환
     //    } //게시판 수정
+
+
+//    댓글
+
+    @RequestMapping(value = "comment",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public CommentEntity[] getComment(@RequestParam(value = "articleIndex")int articleIndex){
+        return this.articleService.getCommentsOf(articleIndex);
+    }
+
+    @RequestMapping(value = "comment",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postComment(HttpServletRequest request,
+                              CommentEntity comment,
+                              HttpSession session){
+        boolean result = this.articleService.putComment(request, comment,session);
+
+
+        return String.valueOf(result);
+    }
+
+
+    @RequestMapping(value = "comment",
+            method = RequestMethod.DELETE,
+            produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
+    public String deleteComment(CommentEntity comment) {
+        boolean result = this.articleService.deleteComment(comment);
+        return String.valueOf(result);
+    }
+
+
 
 
 }

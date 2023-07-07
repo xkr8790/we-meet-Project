@@ -1,6 +1,7 @@
 package com.bsh.projectwemeet.mappers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.CommentEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,6 +22,15 @@ public interface ArticleMapper {
     int updateArticle(ArticleEntity article);
 
     int updateParticipate(ArticleEntity article);
+
+
+//    댓글
+    CommentEntity[] selectCommentByArticleIndex(@Param(value = "articleIndex")int articleIndex);
+    CommentEntity selectComment(@Param(value = "index") int index);
+    ArticleEntity selectArticleByEmail(ArticleEntity article);
+    int insertComment(CommentEntity comment);
+
+    int updateComment(CommentEntity comment);
 
 
 

@@ -36,6 +36,22 @@
                 #{clientIp},
                 #{clientUa})
     </insert>
+    <insert id="insertComment"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.bsh.projectwemeet.entities.CommentEntity">
+        INSERT INTO `wemeet_project`.`comments`(`article_index`, `comment_index`, `email`, `content`, `deleted_flag`,
+                                                `created_at`, `client_ip`, `client_ua`)
+        VALUES (#{articleIndex},
+                #{commentIndex},
+                #{email},
+                #{content},
+                #{isDeleted},
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
+                #{clientIp},
+                #{clientUa})
+    </insert>
 
     <select id="selectArticleByIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -120,6 +136,69 @@
     </select>
     <!--메인에 나타낼 게시물 6개-->
 
+    <!--댓글-->
+    <select id="selectCommentByArticleIndex"
+            resultType="com.bsh.projectwemeet.entities.CommentEntity">
+        SELECT `index`         AS `index`,
+               `article_index` AS `articleIndex`,
+               `comment_index` AS `commentIndex`,
+               `email`         AS `email`,
+               `content`       AS `content`,
+               `deleted_flag`  AS `isDeleted`,
+               `created_at`    AS `createdAt`,
+               `client_ip`     AS `clientIp`,
+               `client_ua`     AS `clientUa`
+        FROM `wemeet_project`.`comments`
+        WHERE `article_index` = #{articleIndex}
+        ORDER BY `index` ASC
+    </select>
+
+    <select id="selectComment"
+            resultType="com.bsh.projectwemeet.entities.CommentEntity">
+        SELECT `index`         AS `index`,
+               `article_index` AS `articleIndex`,
+               `comment_index` AS `commentIndex`,
+               `email`         AS `email`,
+               `content`       AS `content`,
+               `deleted_flag`  AS `isDeleted`,
+               `created_at`    AS `createdAt`,
+               `client_ip`     AS `clientIp`,
+               `client_ua`     AS `clientUa`
+        FROM `wemeet_project`.`comments`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+<select id="selectArticleByEmail"
+        resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+    SELECT `index` AS `index`,
+           `email` AS `email`,
+           `title` AS `email`,
+           `category` AS `category`,
+           `content` AS `content`,
+           `place` AS `place`,
+           `address` AS `address`,
+           `thumbnail` AS `thumbnail`,
+           `thumbnail_mime` AS `thumbnailMime`,
+           `view` AS `view`,
+           `created_at` AS `createdAt`,
+           `day` AS `day`,
+           `time` AS `time`,
+           `limit` AS `limit`,
+           `participation` AS `participation`,
+           `like_count` AS `likeCount`,
+           `report` AS `report`,
+           `deleted_flag` AS `isDeleted`,
+           `finished_flag` AS `isFinished`,
+           `latitude` AS `latitude`,
+           `longitude` AS `longitude`,
+           `hashtag` AS `hashtag`,
+           `client_ip` AS `clientIp`,
+           `client_ua` AS `clientUa`
+    FROM `wemeet_project`.`articles`
+    WHERE email = #{email}
+    LIMIT 1
+</select>
+
 
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
@@ -140,6 +219,22 @@
     <!--        LIMIT 1-->
     <!--    </update>-->
     <!-- 조회수 업데이트 -->
+
+<update id="updateComment"
+        parameterType="com.bsh.projectwemeet.entities.CommentEntity">
+    UPDATE `wemeet_project`.`comments`
+    SET `article_index` =#{articleIndex},
+        `comment_index` = #{commentIndex},
+        `email` = #{email},
+        `content` =#{content},
+        `deleted_flag` = #{isDeleted},
+        `created_at` =#{createdAt},
+        `client_ip` = #{clientIp},
+        `client_ua` = #{clientUa}
+    WHERE `index` = #{index}
+    LIMIT 1
+</update>
+
 
 
     <!-- 게시판 삭제 -->

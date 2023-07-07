@@ -1,12 +1,15 @@
 package com.bsh.projectwemeet.services;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.CommentEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.Objects;
 
 @Service
@@ -63,7 +66,7 @@ public class ArticleService {
 //        return this.articleMapper.patchArticle(article)>0;
 //    }
 
-    public boolean deleteByIndex(int index,ArticleEntity article,HttpSession session){
+    public boolean deleteByIndex(int index, ArticleEntity article, HttpSession session) {
 
         article = this.articleMapper.selectArticleByIndex(index);
         UserEntity user = (UserEntity) session.getAttribute("user");
@@ -77,12 +80,46 @@ public class ArticleService {
         }
     }
 
-    public ArticleEntity getPatchIndexArticle(int index){
+
+
+
+
+    public ArticleEntity getPatchIndexArticle(int index) {
         return this.articleMapper.selectArticleByPatchIndex(index);
     }
 
-    public ArticleEntity patchArticle(int index){
+    public ArticleEntity patchArticle(int index) {
         return null;
+    }
+
+
+    //    댓글
+    public CommentEntity[] getCommentsOf(int articleIndex) {
+
+        return this.articleMapper.selectCommentByArticleIndex(articleIndex);
+    }
+
+    public boolean putComment(HttpServletRequest request, CommentEntity comment,HttpSession session){
+
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+
+
+        comment.setEmail(loginUser.getEmail())
+                .setDeleted(false)
+                .setCreatedAt(new Date())
+                .setClientIp(request.getRemoteAddr())
+                .setClientUa(request.getHeader("User-Agent"));
+        return this.articleMapper.insertComment(comment)>0;
+    }
+
+
+    public boolean deleteComment(CommentEntity comment) {
+        comment = this.articleMapper.selectComment(comment.getIndex());
+        if (comment == null) {
+            return false;
+        }
+        comment.setDeleted(true);
+        return this.articleMapper.updateComment(comment) > 0;
     }
 
 
