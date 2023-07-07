@@ -19,7 +19,7 @@ public interface ArticleMapper {
 
     ArticleEntity[] selectArticleMain();
 
-    ArticleEntity selectDifferentArticle(@Param(value = "insert")int insert);
+    ArticleEntity[] selectDifferentArticle();
 
     ArticleEntity selectCategory(@Param(value = "category")String category);
 

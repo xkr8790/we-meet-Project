@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
@@ -46,47 +45,6 @@ public class ArticleController {
         return modelAndView;
     } //게시판 전부 가져오기
 
-    @RequestMapping(value = "article/category",
-            method = RequestMethod.GET,
-            produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getArticleCategory(@RequestParam(value = "category")String category) {
-        ArticleEntity article = articleService.getCategory(category);
-
-        ModelAndView modelAndView = new ModelAndView("home/article");
-        modelAndView.addObject("articles",article);
-
-       return modelAndView;
-    } //카테고리 관련인데 진짜 모르겠다 이게 무슨일인가? OMG
-
-
-    @RequestMapping(value = "article/read",
-            method = RequestMethod.GET,
-            produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRead(@RequestParam(value = "index") int index) {
-        ModelAndView modelAndView = new ModelAndView("home/bulletin");
-
-        // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
-        ArticleEntity article = this.articleService.readArticle(index);
-
-        // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
-        modelAndView.addObject("article", article);
-
-        return modelAndView;
-    }//인덱스번호로 각 게시판 값 나타내기
-
-    @RequestMapping(value = "article/read/different",
-            method = RequestMethod.GET)
-    public ModelAndView getDifferentArticle(@RequestParam(value = "insert") int insert) {
-        ModelAndView modelAndView = new ModelAndView("home/bulletin");
-        // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
-        ArticleEntity article = this.articleService.getMiniArticle(insert);
-
-        modelAndView.addObject("articles", article);
-
-        return modelAndView;
-    }//인덱스번호로 각 게시판 값 나타내기
-
-
     @RequestMapping(value = "article/image",
             method = RequestMethod.GET)
     public ResponseEntity<byte[]> getThumbnail(@RequestParam(value = "index") int index) {
@@ -104,6 +62,25 @@ public class ArticleController {
         }
         return response;
     }
+
+
+    @RequestMapping(value = "article/read",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRead(@RequestParam(value = "index") int index) {
+        ModelAndView modelAndView = new ModelAndView("home/bulletin");
+
+        // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
+        ArticleEntity article = this.articleService.readArticle(index);
+
+        ArticleEntity[] articles = this.articleService.getMiniArticle();
+
+        // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
+        modelAndView.addObject("article", article);
+        modelAndView.addObject("articles", articles);
+
+        return modelAndView;
+    }//인덱스번호로 각 게시판 값 나타내기
 
     //인덱스 번호로 사진가져와서 인덱스에 해당하는 게시판에 사진 나타내기
 

@@ -153,24 +153,27 @@
 
 
     <div class="preview">
-        <div class="subtitle" >이런 만남은 어때요?</div>
+        <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
-            <input  name="index" th:value="${articles.getIndex()}")>
             <!--            여기서 부터 list-->
-            <div class="previewContainer">
-                <!--                이게 item-->
-                <a class="img">
-                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
-                </a>
-                <div class="text">
-                    <div class="category">온라인</div>
-                    <div class="title">모여라~~ 영웅을 기다린다</div>
-                    <div class="time">온라인 6.20(화) 오후 8시</div>
-                    <div class="participant">
-                        <div class="human">프로필</div>
-                        <div class="number">인원</div>
-                    </div>
-                </div>
+            <div class="previewContainer" th:each="articles : ${articles}">
+                    <a class="img">
+                        <img class="title-image" th:src="@{./image(index=${articles.getIndex()})}" alt="">
+                    </a>
+                    <div class="text">
+                        <div class="category" th:text="${articles.getCategory()}"></div>
+                        <div class="title" th:text="${articles.getTitle()}"></div>
+                        <div class="time"
+                             th:text="${#dates.format(articles.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">온라인 6.20(화)
+                            오후 8시
+                        </div>
+                        <a th:href="@{./read(index=${articles.getIndex()})}">
+                        <div class="participant">
+                            <div class="human">프로필</div>
+                            <div class="number">인원</div>
+                        </div>
+                        </a>
+
             </div>
 
         </div>

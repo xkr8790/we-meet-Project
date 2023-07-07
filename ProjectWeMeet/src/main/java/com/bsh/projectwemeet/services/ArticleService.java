@@ -32,8 +32,8 @@ public class ArticleService {
         return this.articleMapper.selectArticleMain();
     }//메인에 나타낼 게시판 개수는 XML에서 LIMIT 6으로 제한
 
-    public ArticleEntity getMiniArticle(int insert){
-        return this.articleMapper.selectDifferentArticle(insert);
+    public ArticleEntity[] getMiniArticle(){
+        return this.articleMapper.selectDifferentArticle();
     }
 
 

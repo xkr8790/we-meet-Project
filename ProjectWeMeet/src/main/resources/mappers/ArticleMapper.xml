@@ -93,13 +93,16 @@
     <!-- 이런 모임은 어때요 조회-->
     <select id="selectDifferentArticle"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`                AS `index`,
-               `title`                AS `title`,
-               `content`              AS `content`,
-               `category`             AS `category`,
-               `address`              AS `address`
+        SELECT `index`    AS `index`,
+               `title`    AS `title`,
+               `content`  AS `content`,
+               `category` AS `category`,
+               `address`  AS `address`,
+               `day`      AS `appointmentStartDate`,
+               `time`     AS `appointmentStartTime`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`
         FROM `wemeet_project`.`articles`
-        WHERE `index` = #{insert}
         ORDER BY `index` DESC
         LIMIT 7
     </select>
