@@ -2,16 +2,16 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>게시판 작성</title>
+    <title>게시판 수정</title>
     <link crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
           rel="stylesheet">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/Article-Write.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/write.css}">
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
+    <script defer th:src="@{/resources/scripts/Patch-Article-Write.js}"></script>
     <script th:src="@{/resources/libraries/ckeditor/ckeditor.js}"></script>
     <script defer th:src="@{/resources/scripts/map.js}"></script>
-    <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
 
 </head>
 <body>
@@ -94,8 +94,7 @@
 
         <div class="thumbnail-place">
             <img class="thumbnail" th:src="@{/article/image(index=${article.getIndex()})}">
-            <label for="photo-upload" class="thumbnail-title">썸네일을 등록해주세요</label>
-            <label for="photo-upload" class="thumbnail-upload">썸네일 등록</label>
+            <label for="photo-upload" class="thumbnail-upload">썸네일 변경</label>
             <input type="file" name="upload" class="thumbnail-change" id="photo-upload" accept="image/*">
         </div>
         <div id="Article-Write">
@@ -104,12 +103,12 @@
             <textarea name="content" placeholder="내용을 입력해주세요" th:utext="${article.getContent()}"></textarea>
             <div class="article-tag">
                 <div class="explainTag">태그를 입력해주세요</div>
-                <div class="tags">
+                <div class="tags" th:text="${article.getHashtag()}">
                 </div>
             </div>
             <div class="buttons">
                 <input class="submit" type="button" value="이전">
-                <input class="submit" type="submit" value="등록" name="complete">
+                <input class="submit" type="submit" value="수정" rel="modify" th:data-index="${article.getIndex()}">
             </div>
         </div>
     </section>

@@ -1,3 +1,5 @@
+const Article = document.getElementById('Article');
+const category = Article.querySelectorAll('.category-item');
 
 //페이지 로드시 시작되는 함수
 document.addEventListener("DOMContentLoaded", function () {
@@ -45,6 +47,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// category.forEach(function (category) {
+//     category.addEventListener('click', function () {
+//         const xhr = new XMLHttpRequest();
+//         xhr.open('GET', `./category?category=${Article['category'].value}`);
+//         xhr.onreadystatechange = () => {
+//             if (xhr.readyState === XMLHttpRequest.DONE) {
+//                 if (xhr.status >= 200 && xhr.status < 300) {
+//                 } else {
+//                 }
+//             }
+//         };
+//         xhr.send();
+//     });
+// })
+
+
 const boardList = document.getElementsByClassName("article-list");
 
 const boards = Array.from(boardList);
@@ -71,21 +89,3 @@ boards.forEach(function (board) {
 //     const Slide = slide.cloneNode(true); //복제한다
 //     slider.appendChild(Slide);
 // });
-
-// 현재 페이지의 URL에서 쿼리 매개변수 값 읽기
-const queryParams = new URLSearchParams(window.location.search);
-const category = queryParams.get('category');
-
-// 값이 선택되면 해당 요소에 클래스 추가
-if (category) {
-    const categoryItems = document.getElementsByClassName('category-item');
-
-    for (let i = 0; i < categoryItems.length; i++) {
-        const item = categoryItems[i];
-
-        // 선택된 카테고리와 일치하는 경우 클래스 추가
-        if (item.textContent.trim() === category) {
-            item.classList.add('underline');
-        }
-    }
-}

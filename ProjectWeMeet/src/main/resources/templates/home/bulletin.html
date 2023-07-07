@@ -18,9 +18,9 @@
 <body>
 
 <form id="bulletinForm" class="allContainer">
-    <input type="hidden" name="index" th:value="${article.getIndex()}" )>
+    <input type="hidden" name="index" th:value="${article.getIndex()}")>
     <div class="header">
-        <a href="/static">
+        <a href="/article">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
         </a>
         <div class="login" th:if="${session.user == null}">
@@ -29,16 +29,21 @@
         </div>
         <div class="login" th:if="${session.user != null}">
             <button>
-                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                <a th:href="@{/write}">
+                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                </a>
             </button>
 
             <button name="patch" th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
             </button>
 
+
             <button name="delete" th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
             </button>
+
+
 
         </div>
     </div>
@@ -53,15 +58,11 @@
                     </a>
                     <p>쵸단</p>
                 </div>
-                <div class="bulletin-title" th:value="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하
-                    오지마세요!
-                </div>
+                <h2 class="bulletin-title" th:text="${article.getTitle()}"></h2>
             </div>
         </div>
         <div class="content">
             <div th:utext="${article.getContent()}"></div>
-            <div th:text="${article.getCategory()}"></div>
-
         </div>
     </div>
 
@@ -92,11 +93,19 @@
                         <span>5</span>
                         <span>6</span>
                     </div>
+
+                    <!-- 참가 기능  -->
                     <div class="participating-button">
-                        <button name="Participate" th:data-index="${article.getIndex()}">
+                        <button  name="Participate" th:data-index="${article.getIndex()}">
                             참여하기
                         </button>
+
+                        <button name="ParticipateDelete" th:data-index="${article.getIndex()}">
+                            참여취소
+                        </button>
                     </div>
+                    <!--  참가안했을때    -->
+
                 </div>
                 <div class="login-before-human" th:if="${session.user == null}">
                     <p>로그인 후 확인해 주세요</p>
@@ -113,8 +122,7 @@
                     <i class="fa-solid fa-user-group"></i>
                     <span th:text="${article.getParticipation()}"></span>
                     <span> / </span>
-                    <span th:value="${article.getLimitPeople()}"></span>
-
+                    <span th:text="${article.getLimitPeople()}"></span>
                 </p>
                 <p class="place">
                     <i class="fa-solid fa-location-dot"></i>
@@ -145,8 +153,9 @@
 
 
     <div class="preview">
-        <div class="subtitle">이런 만남은 어때요?</div>
+        <div class="subtitle" >이런 만남은 어때요?</div>
         <div class="container">
+            <input  name="index" th:value="${articles.getIndex()}")>
             <!--            여기서 부터 list-->
             <div class="previewContainer">
                 <!--                이게 item-->
@@ -157,51 +166,6 @@
                     <div class="category">온라인</div>
                     <div class="title">모여라~~ 영웅을 기다린다</div>
                     <div class="time">온라인 6.20(화) 오후 8시</div>
-                    <div class="participant">
-                        <div class="human">프로필</div>
-                        <div class="number">인원</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="previewContainer">
-                <a class="img">
-                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
-                </a>
-                <div class="text">
-                    <div class="category">카테고리</div>
-                    <div class="title">제목</div>
-                    <div class="time">시간</div>
-                    <div class="participant">
-                        <div class="human">프로필</div>
-                        <div class="number">인원</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="previewContainer">
-                <a class="img">
-                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
-                </a>
-                <div class="text">
-                    <div class="category">카테고리</div>
-                    <div class="title">제목</div>
-                    <div class="time">시간</div>
-                    <div class="participant">
-                        <div class="human">프로필</div>
-                        <div class="number">인원</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="previewContainer">
-                <a class="img">
-                    <img src="/resources/images/bulletinImags/다운로드.png" alt="">
-                </a>
-                <div class="text">
-                    <div class="category">카테고리</div>
-                    <div class="title">제목</div>
-                    <div class="time">시간</div>
                     <div class="participant">
                         <div class="human">프로필</div>
                         <div class="number">인원</div>

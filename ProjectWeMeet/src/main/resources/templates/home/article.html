@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>소소한 일상의 변화. WeMeet!</title>
@@ -12,6 +12,7 @@
 
 </head>
 <body>
+<form id="Article">
 <div class="_container" id="headerContainer">
     <header class="_content header">
         <ul class="menu left">
@@ -71,37 +72,46 @@
         <div class="notice-miniText margin">누구나 즐겨요</div>
         <div class="notice-miniText margin">We-Meet</div>
         <ul class="category">
+
             <li class="category-item">
                 전체
             </li>
+
             <li class="category-item">
                 <img class="category-img" th:src="@{/resources/images/category/activity.png}">
-                액티비티
+                영화
             </li>
+
             <li class="category-item">
-                <img class="category-img" th:src="@{/resources/images/category/art.png}">
-                문화예술
+                    <img class="category-img" th:src="@{/resources/images/category/art.png}">
+                    운동
             </li>
+
             <li class="category-item">
                 <img class="category-img" th:src="@{/resources/images/category/trip.png}">
                 여행
             </li>
+
             <li class="category-item">
                 <img class="category-img" th:src="@{/resources/images/category/study.png}">
                 스터디
             </li>
+
             <li class="category-item">
                 <img class="category-img" th:src="@{/resources/images/category/eat.png}">
                 식사
             </li>
+
             <li class="category-item">
                 <img class="category-img" th:src="@{/resources/images/category/hobby.png}">
                 취미
             </li>
+
             <li class="category-item">
                 <img class="category-img" th:src="@{/resources/images/category/all.png}">
                 완료
             </li>
+
         </ul>
     </div>
 </section>
@@ -141,7 +151,7 @@
                  <img class="Profile" src="../resources/images/조보아.jpg">
               </span>
 
-              <img class="limit-image" src="../resources/images/human.png">
+              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
               <span class="number">
                 <span th:text="${article.getParticipation()}"></span>
                 <span>/</span>
@@ -157,6 +167,7 @@
     </div>
     </div>
 </section>
+</form>
 
 
 </body>

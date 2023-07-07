@@ -156,6 +156,26 @@ articleForm.onsubmit = e => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
+    if(articleForm['upload'].value === ''){
+        alert('썸네일을 업로드 해주세요');
+        return;
+    }
+
+    if(articleForm['title'].value === ''){
+        alert('제목을 입력해주세요');
+        return;
+    }
+
+    if(articleForm['content'].value === ''){
+        alert('게시판을 입력해주세요');
+        return;
+    }
+
+    if(tags.value === ''){
+        alert('해쉬태그를 입력해주세요');
+        return;
+    }
+
     //폼데이터 추가될떄 무조건 문자열로 처리해주기 떄문에 requestParam으로 처리해줘야됨
 
     formData.append('place', writeForm['place'].value); //첫번째 장소값
