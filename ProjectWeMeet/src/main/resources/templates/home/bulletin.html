@@ -8,9 +8,9 @@
     <title>게시글</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
-    <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
-    <script defer th:src="@{/resources/scripts/bulletinMap.js}"></script>
+    <link rel="stylesheet" href="/resources/stylesheets/bulletin.css">
+    <script defer src="/resources/scripts/bulletin.js"></script>
+    <script defer src="/resources/scripts/bulletinMap.js"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
 
@@ -20,7 +20,7 @@
 <form id="bulletinForm" class="allContainer">
     <input type="hidden" name="index" th:value="${article.getIndex()}")>
     <div class="header">
-        <a href="/article">
+        <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
         </a>
         <div class="login" th:if="${session.user == null}">
@@ -29,22 +29,21 @@
         </div>
         <div class="login" th:if="${session.user != null}">
             <button>
-                <a th:href="@{/write}">
-                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                </a>
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                <div class="tooltip" >글작성</div>
             </button>
-
             <button name="patch" th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
+                <div class="tooltip">글수정</div>
             </button>
-
-
-            <button name="delete" th:data-index="${article.getIndex()}">
+            <button name="delete"  th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
+                <div class="tooltip">글삭제</div>
             </button>
-
-
-
+            <button name="finish" th:data-index="${article.getIndex()}">
+                <i class="fa-solid fa-circle-check fa-lg"></i>
+                <div class="tooltip">완료</div>
+            </button>
         </div>
     </div>
 
@@ -58,11 +57,12 @@
                     </a>
                     <p>쵸단</p>
                 </div>
-                <h2 class="bulletin-title" th:text="${article.getTitle()}"></h2>
+                <div class="bulletin-title" th:value="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
             </div>
         </div>
         <div class="content">
             <div th:utext="${article.getContent()}"></div>
+            <div th:text="${article.getCategory()}"></div>
         </div>
     </div>
 
@@ -105,6 +105,7 @@
                         </button>
                     </div>
                     <!--  참가안했을때    -->
+
 
                 </div>
                 <div class="login-before-human" th:if="${session.user == null}">
@@ -151,6 +152,7 @@
         </div>
     </div>
 
+
     <div class="preview">
         <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
@@ -174,7 +176,10 @@
             </div>
         </div>
     </div>
+
+
 </form>
+
 
 </body>
 </html>

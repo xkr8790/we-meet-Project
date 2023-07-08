@@ -15,6 +15,7 @@ public interface ArticleMapper {
 
     int insertParticipants(ParticipantsEntity participants);
 
+
     ArticleEntity[] selectAll();
 
     ArticleEntity[] selectArticleMain();
@@ -25,7 +26,7 @@ public interface ArticleMapper {
 
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
 
-    ArticleEntity selectArticleByPatchIndex(@Param(value = "index")int index);
+    ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
 
     ParticipantsEntity selectParticipants(@Param(value = "index") int index);
 
@@ -52,6 +53,15 @@ public interface ArticleMapper {
 
 
     int updateParticipate(ArticleEntity article);
+
+
+
+
+
+
+    ArticleEntity selectArticleByIndexEmail(@Param(value="index") int index);
+
+    int updateFinished(ArticleEntity article);
 
 
 }

@@ -53,22 +53,21 @@
     <!--게시물 전체 조회-->
     <select id="selectAll"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`                   AS `index`,
-               `title`                   AS `title`,
-               `content`                 AS `content`,
-               `category`                AS `category`,
-               `address`                 AS `address`,
-               `limit`                   AS `limit`,
-               `participation`           AS `participation`,
-               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
-               `day`                     AS `appointmentStartDate`,
-               `time`                    AS `appointmentStartTime`
+        SELECT `index`                AS `index`,
+               `title`                AS `title`,
+               `content`              AS `content`,
+               `category`             AS `category`,
+               `address`              AS `address`,
+               `limit`                AS `limit`,
+               SUBSTRING(hashtag,1, 11) AS `hashtag`,
+               `day`                  AS `appointmentStartDate`,
+               `time`                 AS `appointmentStartTime`
         FROM `wemeet_project`.`articles`
         ORDER BY `index` DESC
     </select>
     <!--게시물 전체 조회-->
 
-    <!-- 필요한 게시물 조회 -->
+    <!-- 필요한 게시물 조회  -->
     <select id="selectArticleByIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
@@ -78,8 +77,9 @@
                `category`       AS `category`,
                `view`           AS `view`,
                `limit`          AS `limit`,
+               `place`          AS `place`,
+               `address`        AS `address`,
                `participation`  AS `participation`,
-               `limit`          AS `limit`,
                `latitude`       AS `latitude`,
                `longitude`      AS `longitude`,
                `thumbnail`      AS `thumbnail`,
@@ -88,7 +88,7 @@
         WHERE `index` = #{index}
         LIMIT 1
     </select>
-    <!-- 필요한 게시물 조회 -->
+    <!-- 필요한 게시물 조회  -->
 
     <!-- 이런 모임은 어때요 조회-->
     <select id="selectDifferentArticle"
@@ -141,8 +141,7 @@
         LIMIT 1
     </select>
 
-
-     <!-- 게시물 수정 찾기 -->
+    <!-- 게시물 수정 찾기 -->
     <select id="selectArticleByPatchIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
@@ -165,7 +164,6 @@
     </select>
     <!-- 게시물 수정 찾기 -->
 
-
     <select id="selectCategory"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`                   AS `index`,
@@ -174,7 +172,6 @@
         WHERE `category` = #{category}
         ORDER BY `index` DESC
     </select>
-
 
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
@@ -195,7 +192,6 @@
         LIMIT 1
     </update>
     <!-- 참여인원 업데이트 -->
-
 
     <!-- 게시판 수정 -->
     <update id="updateArticleContent"
@@ -233,6 +229,39 @@
         LIMIT 1
     </delete>
     <!-- 참여 여부 삭제 -->
+
+
+    <select id="selectArticleByIndexEmail"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `email`          AS `email`,
+               `title`          AS `title`,
+               `content`        AS `content`,
+               `category`       AS `category`,
+               `view`           AS `view`,
+               `limit`          AS `limit`,
+               `participation`  AS `participation`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`,
+               `finished_flag` AS `isFinished`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+
+    <update id="updateFinished"
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
+        UPDATE `wemeet_project`.`articles`
+        SET `finished_flag` = #{isFinished}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+
+
+
 
 
 </mapper>

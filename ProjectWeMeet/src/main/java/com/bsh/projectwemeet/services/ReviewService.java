@@ -21,17 +21,26 @@ public class ReviewService {
 
     public boolean reviewWrite(HttpServletRequest request, ReviewEntity reviewEntity) {
 
-        reviewEntity.setDeleted(false)
-                .setCreatedAt(new Date())
-                .setReviewStar(reviewEntity.getReviewStar())
+        reviewEntity.setCreatedAt(new Date())
                 .setClientIp(request.getRemoteAddr())
                 .setClientUa(request.getHeader("User-Agent"));
 
         return this.reviewMapper.insertReview(reviewEntity) > 0;
     }
 
-    public boolean deleteByIndex(int index){
-        return this.reviewMapper.deleteByReview(index) >0 ;
+    public ReviewEntity[] getAll() {
+        return this.reviewMapper.selectAll();
+    }
+
+
+    public ReviewEntity readReview(int index) {
+        ReviewEntity reviewEntity = this.reviewMapper.selectReviewByIndex(index);
+        return reviewEntity;
+    }
+
+
+    public boolean deleteByIndex(int index) {
+        return this.reviewMapper.deleteByReview(index) > 0;
     }
 
 

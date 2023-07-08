@@ -3,6 +3,7 @@ package com.bsh.projectwemeet.services;
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.FinishResult;
 import com.bsh.projectwemeet.enums.InsertParticipate;
 import com.bsh.projectwemeet.enums.SelectParticipantsResult;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
@@ -168,5 +169,30 @@ public class ArticleService {
     }
 
 
+
+    public boolean patchFinish(int index, HttpSession session) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(index);
+
+        if (articles == null || loginUser == null || !loginUser.getEmail().equals(articles.getEmail())) {
+            return false;
+        }
+
+        articles.setFinished(true);
+        return this.articleMapper.updateFinished(articles) > 0;
+    }
+
+//    public FinishResult patchFinished(ArticleEntity article, HttpSession session){
+//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+//        ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(article);
+//
+//        if (articles == null || loginUser == null || !loginUser.getEmail().equals(articles.getEmail())) {
+//            return FinishResult.FAILURE;
+//        }
+//        articles.setFinished(true);
+//        return this.articleMapper.updateFinished(articles) > 0
+//                ? FinishResult.SUCCESS
+//                : FinishResult.SUCCESS;
+//    }
 
 }

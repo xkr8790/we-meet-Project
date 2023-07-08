@@ -10,20 +10,61 @@
         keyProperty="index"
         keyColumn="index"
         parameterType="com.bsh.projectwemeet.entities.ReviewEntity">
-    INSERT INTO `wemeet_project`.`reviews`(`content`, `created_at`, `reviewStar`, `article_index`, `review_index`, `deleted_flag`, `client_ip`, `client_ua` , `email`)
+    INSERT INTO `wemeet_project`.`reviews`(`content`, `created_at`, `reviewStar`, `article_index`, `review_index`, `client_ip`, `client_ua` , `email`)
     VALUES (
             #{content},
             IFNULL(#{createdAt}, DEFAULT(`created_at`)),
             #{reviewStar},
             #{articleIndex},
             #{reviewIndex},
-            #{isDeleted},
             #{clientIp},
             #{clientUa},
             #{email})
 </insert>
 
-    <delete id="deleteByReview">
+<select id="selectAll"
+resultType="com.bsh.projectwemeet.entities.ReviewEntity">
+    SELECT `index` AS `index`,
+           `content` AS `content`,
+           `created_at` AS `createdAt`,
+           `reviewStar` AS `reviewStar`,
+           `article_index` AS `articleIndex`,
+           `review_index` AS `reviewIndex`,
+           `client_ip` AS `clientIp`,
+           `client_ua` AS `clientUa`,
+           `email` AS `email`
+    FROM `wemeet_project`.`reviews`
+    ORDER BY `index` ASC
+
+</select>
+
+
+
+
+
+    <select id="selectReviewByIndex"
+    resultType="com.bsh.projectwemeet.entities.ReviewEntity">
+        SELECT `index` AS `index`,
+               `content` AS `content`,
+               `created_at` AS `createdAt`,
+               `reviewStar` AS `reviewStar`,
+               `article_index` AS `articleIndex`,
+               `review_index` AS `reviewIndex`,
+               `client_ip` AS `clientIp`,
+               `client_ua` AS `clientUa`,
+               `email` AS `email`
+        FROM `wemeet_project`.`reviews`
+        WHERE `index` = #{index}
+
+    </select>
+
+
+
+
+
+
+    <delete id="deleteByReview"
+            parameterType="com.bsh.projectwemeet.entities.ReviewEntity">
         DELETE
         FROM `wemeet_project`.`reviews`
         WHERE `index` = #{index}

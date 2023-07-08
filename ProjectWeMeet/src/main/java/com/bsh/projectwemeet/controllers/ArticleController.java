@@ -2,6 +2,9 @@ package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
+import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.FinishResult;
+import com.bsh.projectwemeet.enums.InsertParticipate;
 import com.bsh.projectwemeet.enums.SelectParticipantsResult;
 import com.bsh.projectwemeet.services.ArticleService;
 import org.json.JSONObject;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
@@ -94,7 +99,6 @@ public class ArticleController {
     @ResponseBody //주소도 같고 메서드도 같으면 충돌이 일어난다.
     public String deleteIndex(@RequestParam(value = "index") int index, ArticleEntity article, HttpSession session) {
         boolean result = this.articleService.deleteByIndex(index, article, session);
-        System.out.println(String.valueOf(result));
         return String.valueOf(result);
     }
     //게시판 삭제
@@ -125,8 +129,8 @@ public class ArticleController {
                              @RequestParam(value = "longitude") String longitude,
                              @RequestParam(value = "thumbnailMultipart") MultipartFile thumbnailMultipart,
                              @RequestParam(value = "thumbnailMime") String thumbnailMime
-                             ) throws ParseException, IOException {
-        
+    ) throws ParseException, IOException {
+
         ArticleEntity article = new ArticleEntity();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -141,7 +145,7 @@ public class ArticleController {
 
 
         boolean result = this.articleService.UpdateArticle(index, title, category, content, place, address,
-                                                            daystr,timestr,lat,lng,thumbnailMultipart,thumbnailMime);
+                daystr,timestr,lat,lng,thumbnailMultipart,thumbnailMime);
         return String.valueOf(result);
     }
 
@@ -175,4 +179,34 @@ public class ArticleController {
         }};
         return responseObject.toString();
     } //인원이 참가 했을시 취소 가능하게
+
+
+
+       @RequestMapping(value="article/review", method = RequestMethod.GET)
+    public ModelAndView getFinish(int index, HttpSession session){
+        boolean result = this.articleService.patchFinish(index ,session);
+        ModelAndView modelAndView = new ModelAndView("home/review");
+        modelAndView.addObject("result", result);
+        return modelAndView;
+   }
+//   게시물 작성자와 로그인된 아이디가 같은지 다른지에 대한 여부를 통해 페이지 넘어가게 하기
+
+//    @RequestMapping(value="article/review", method = RequestMethod.PATCH)
+//    @ResponseBody
+//    public String patchFinished(ArticleEntity article, HttpSession session){
+//        FinishResult result = this.articleService.patchFinished(article, session);
+//        JSONObject responseObject = new JSONObject() {{
+//            put("result", result.name().toLowerCase());
+//        }};
+//        return responseObject.toString();
+//    }
+
+
+
+
+
+
+
 }
+
+

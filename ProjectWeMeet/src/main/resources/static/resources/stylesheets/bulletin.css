@@ -59,8 +59,22 @@ allContainer > .header > .login > a {
     cursor: pointer;
     margin-left: 0.2rem;
 }
-.allContainer > .header > .login > button > i:hover{
+.allContainer > .header > .login > button:hover .tooltip{
+    opacity: 1;
+    visibility: visible;
+}
+.allContainer > .header > .login > button > .tooltip{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition:opacity 0.3s ease-in-out;
+}
+.allContainer > .header > .login > button > i{
+    font-size: 1.2rem;
+}
+.allContainer > .header > .login > button > i:hover {
     color: #FB6161;
+
 }
 
 .allContainer > .main-template {
@@ -340,7 +354,7 @@ allContainer > .header > .login > a {
     justify-content: start;
 }
 .announcement > .guide > .comments > .contentBox > .answer{
-    width: 97%;
+    width: 100%;
     height: 11.5rem;
     margin-bottom: 0.2rem;
     /*position: absolute;*/
