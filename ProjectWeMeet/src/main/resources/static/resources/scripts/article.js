@@ -47,20 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// category.forEach(function (category) {
-//     category.addEventListener('click', function () {
-//         const xhr = new XMLHttpRequest();
-//         xhr.open('GET', `./category?category=${Article['category'].value}`);
-//         xhr.onreadystatechange = () => {
-//             if (xhr.readyState === XMLHttpRequest.DONE) {
-//                 if (xhr.status >= 200 && xhr.status < 300) {
-//                 } else {
-//                 }
-//             }
-//         };
-//         xhr.send();
-//     });
-// })
 
 
 const boardList = document.getElementsByClassName("article-list");

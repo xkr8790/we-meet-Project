@@ -100,6 +100,7 @@ allContainer > .header > .login > a {
     background-position: center;
     object-fit: cover;
 
+
 }
 
 .allContainer > .main-template > .img-profile-title > .profile-title {
@@ -185,6 +186,7 @@ allContainer > .header > .login > a {
     border-radius: 50%;
     margin-right: 0.5rem;
 }
+
 
 .announcement > .introduction > .my > .myImages > img {
     border-radius: 50%;

@@ -25,8 +25,8 @@ public class ArticleService {
         this.articleMapper = articleMapper;
     }
 
-    public ArticleEntity[] getAll() {
-        return this.articleMapper.selectAll();
+    public ArticleEntity[] getAll(String category) {
+        return this.articleMapper.selectAll(category);
     }//게시판은 전부 나타내기
 
     public ArticleEntity[] getMainArticle() {
@@ -37,10 +37,6 @@ public class ArticleService {
         return this.articleMapper.selectDifferentArticle();
     }
 
-
-    public ArticleEntity[] getCategory(String category){
-        return this.articleMapper.selectCategory(category);
-    } //카테고리 관련인데 모르겠다
 
 
     public ArticleEntity readArticle(int index) {

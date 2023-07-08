@@ -14,10 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,14 +40,11 @@ public class ArticleController {
     @RequestMapping(value = "article",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getArticle() {
+    public ModelAndView getArticle(@RequestParam(value = "category",defaultValue = "",required = false)String category) {
         ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
-        ArticleEntity[] articles = this.articleService.getAll();
-
-//        ArticleEntity[] articleCategory = this.articleService.getCategory(category);
+        ArticleEntity[] articles = this.articleService.getAll(category);
 
         modelAndView.addObject("article", articles);
-
 
         return modelAndView;
     } //게시판 전부 가져오기
@@ -72,6 +66,27 @@ public class ArticleController {
         }
         return response;
     }
+
+
+    @RequestMapping(value = "article/category/image",
+            method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getCategoryThumbnail(@RequestParam(value = "index") int index) {
+
+        ArticleEntity article = this.articleService.readArticle(index);
+
+        ResponseEntity<byte[]> response;
+        if (article == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
+        }
+        return response;
+    }
+
+
 
 
     @RequestMapping(value = "article/read",
@@ -127,7 +142,7 @@ public class ArticleController {
                              @RequestParam(value = "timeStr") String time,
                              @RequestParam(value = "latitude")String latitude,
                              @RequestParam(value = "longitude") String longitude,
-                             @RequestParam(value = "thumbnailMultipart") MultipartFile thumbnailMultipart,
+                             @RequestParam(value = "thumbnail") MultipartFile thumbnailMultipart,
                              @RequestParam(value = "thumbnailMime") String thumbnailMime
     ) throws ParseException, IOException {
 

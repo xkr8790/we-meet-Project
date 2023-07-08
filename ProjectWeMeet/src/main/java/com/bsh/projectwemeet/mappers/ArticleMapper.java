@@ -16,13 +16,12 @@ public interface ArticleMapper {
     int insertParticipants(ParticipantsEntity participants);
 
 
-    ArticleEntity[] selectAll();
+    ArticleEntity[] selectAll(@Param(value = "category")String category);
 
     ArticleEntity[] selectArticleMain();
 
     ArticleEntity[] selectDifferentArticle();
 
-    ArticleEntity[] selectCategory(@Param(value = "category")String category);
 
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
 

@@ -64,59 +64,72 @@
     </header>
 </div>
 
-<section class="article-category">
-    <div class="introduce_article">
-        <div class="notice-title margin">게시판</div>
-        <div class="notice-text margin">새로운 변화로 바뀌는</div>
-        <div class="notice-text margin">새로운 일상을</div>
-        <div class="notice-miniText margin">누구나 즐겨요</div>
-        <div class="notice-miniText margin">We-Meet</div>
-        <ul class="category">
+    <section class="article-category">
+        <div class="introduce_article">
+            <div class="notice-title margin">게시판</div>
+            <div class="notice-text margin">새로운 변화로 바뀌는</div>
+            <div class="notice-text margin">새로운 일상을</div>
+            <div class="notice-miniText margin">누구나 즐겨요</div>
+            <div class="notice-miniText margin">We-Meet</div>
+            <ul class="category">
 
-            <li class="category-item">
-                전체
-            </li>
+                <li class="category-item">
+                    <a th:href="@{/article}">
+                        전체
+                    </a>
+                </li>
 
-            <li class="category-item" >
-                <img class="category-img" th:src="@{/resources/images/category/activity.png}">
-                영화
-            </li>
+                <li class="category-item">
+                    <img class="category-img" th:src="@{/resources/images/category/activity.png}">
+                    <a th:href="@{'/article' (category='영화')}">
+                        영화
+                    </a>
+                </li>
 
-            <li class="category-item">
+                <li class="category-item">
                     <img class="category-img" th:src="@{/resources/images/category/art.png}">
-                    운동
-            </li>
+                    <a th:href="@{'/article' (category='게임')}">
+                        게임
+                    </a>
+                </li>
 
-            <li class="category-item">
-                <img class="category-img" th:src="@{/resources/images/category/trip.png}">
-                여행
-            </li>
+                <li class="category-item">
+                    <a th:href="@{'/article' (category='운동')}">
+                    <img class="category-img" th:src="@{/resources/images/category/trip.png}">
+                        운동
+                    </a>
+                </li>
 
-            <li class="category-item">
-                <img class="category-img" th:src="@{/resources/images/category/study.png}">
-                스터디
-            </li>
+                <li class="category-item">
+                    <img class="category-img" th:src="@{/resources/images/category/study.png}">
+                    <a th:href="@{'/article' (category='산책')}">
+                        산책
+                    </a>
+                </li>
 
-            <li class="category-item">
-                <img class="category-img" th:src="@{/resources/images/category/eat.png}">
-                식사
-            </li>
+                <li class="category-item">
+                    <a th:href="@{'/article' (category='식사')}">
+                    <img class="category-img" th:src="@{/resources/images/category/eat.png}">
+                        식사
+                    </a>
+                </li>
 
-            <li class="category-item">
-                <img class="category-img" th:src="@{/resources/images/category/hobby.png}">
-                취미
-            </li>
+                <li class="category-item">
+                    <a th:href="@{'/article' (category='만남')}">
+                    <img class="category-img" th:src="@{/resources/images/category/hobby.png}">
+                        만남
+                    </a>
+                </li>
 
-            <li class="category-item">
-                <img class="category-img" th:src="@{/resources/images/category/all.png}">
-                완료
-            </li>
+                <li class="category-item">
+                    <img class="category-img" th:src="@{/resources/images/category/all.png}">
+                    완료
+                </li>
+            </ul>
+        </div>
+    </section>
 
-        </ul>
-    </div>
-</section>
-
-<section class="article-container">
+    <section class="article-container">
     <div class="slider">
         <div class="slide">
             <div class="article-box">
