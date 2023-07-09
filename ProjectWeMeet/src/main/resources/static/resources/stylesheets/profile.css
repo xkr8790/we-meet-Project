@@ -30,7 +30,6 @@ html {
 }
 
 
-
 ._container {
     padding: 0 3rem;
     position: relative;
@@ -643,10 +642,65 @@ html {
 #popup.step-2 > .popup-content.step-2 > .title {
     background-color: white;
     font-style: inherit;
-    font-size: 2rem;
+    font-size: 1.75rem;
+    font-weight: 1;
 
     margin-top: 0.625rem;
     margin-bottom: 1.25rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profileImage {
+    background-color: white;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profileImage > .profile {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    background-color: white;
+    border-radius: 50%;
+    width: 20%;
+    height: 20%;
+    position: relative;
+    box-shadow: 1px 1px 2px 0 #888;
+    background-size: cover;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profile_file {
+    background-color: white;
+    margin-top: 0.625rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profile_file > .change {
+    background-color: white;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .profile_file input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profile_file > .delete {
+    background-color: white;
+    cursor: pointer;
 }
 
 #popup.step-2 > .popup-content.step-2 > .passwordReset {

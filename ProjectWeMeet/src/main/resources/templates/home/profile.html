@@ -28,34 +28,43 @@
             <input id="checkPassword" name="checkPassword" class="checkPassword" type="submit" value="확인">
         </div>
     </div>
-    <div class="popup-content step-2">
+    <div class="popup-content step-2" id="popup-content_step-2">
         <h3 class="title">개인 정보 수정</h3>
-        <div class="passwordReset">
-            <span class="title">비밀번호 변경</span>
-            <input name="password" placeholder="비밀번호 재설정" class="password" type="password">
-            <input name="password" placeholder="비밀번호 재입력" class="passwordRe" type="password">
-            <input type="button" name="nicknameReset" class="resetButton" value="변경">
+<!--        <div class="passwordReset">-->
+<!--            <span class="title">비밀번호 변경</span>-->
+<!--            <input name="password" placeholder="비밀번호 재설정" class="password" type="password">-->
+<!--            <input name="password" placeholder="비밀번호 재입력" class="passwordRe" type="password">-->
+<!--            <input type="button" name="nicknameReset" class="resetButton" value="변경">-->
+<!--        </div>-->
+<!--        <div class="nicknameReset">-->
+<!--            <span class="title">닉네임 변경</span>-->
+<!--            <input name="nickname" placeholder="user" class="nickname" maxlength="10" type="text">-->
+<!--            <input type="button" name="nicknameReset" class="resetButton" value="변경">-->
+<!--        </div>-->
+<!--        <div class="addressReset">-->
+<!--            <span class="title">주소 변경</span>-->
+<!--            <div class="addressFirst">-->
+<!--                <input readonly type="text" class="address" name="addressPostal" placeholder="우편번호">-->
+<!--                <input type="button" class="findButton" name="addressFind" value="우편번호 찾기">-->
+<!--            </div>-->
+<!--            <div class="addressSecond">-->
+<!--                <input readonly type="text" class="address" maxlength="100" name="addressPrimary"-->
+<!--                       placeholder="'우편번호 찾기' 버튼을 클릭하여 주소를 지정해 주세요.">-->
+<!--            </div>-->
+<!--            <div class="addressThird">-->
+<!--                <input type="text" class="address" maxlength="100" name="addressSecondary"-->
+<!--                       placeholder="상세 주소를 입력해 주세요. (건물 이름 및 동, 호등)">-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="profileImage">
+            <img class="profile" rel="profileF" th:name="profile" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
         </div>
-        <div class="nicknameReset">
-            <span class="title">닉네임 변경</span>
-            <input name="nickname" placeholder="user" class="nickname" maxlength="10" type="text">
-            <input type="button" name="nicknameReset" class="resetButton" value="변경">
-        </div>
-        <div class="addressReset">
-            <span class="title">주소 변경</span>
-            <div class="addressFirst">
-                <input readonly type="text" class="address" name="addressPostal" placeholder="우편번호">
-                <input type="button" class="findButton" name="addressFind" value="우편번호 찾기">
-            </div>
-            <div class="addressSecond">
-                <input readonly type="text" class="address" maxlength="100" name="addressPrimary"
-                       placeholder="'우편번호 찾기' 버튼을 클릭하여 주소를 지정해 주세요.">
-            </div>
-            <div class="addressThird">
-                <input type="text" class="address" maxlength="100" name="addressSecondary"
-                       placeholder="상세 주소를 입력해 주세요. (건물 이름 및 동, 호등)">
-            </div>
-        </div>
+        <label class="profile_file" rel="profilePreview">
+            <label for="change_profile" class="change">프로필 바꾸기</label>
+<!--                    <input hidden="hidden" type="file" id="profile" accept="image/*" name="profile">-->
+            <input type="file" id="change_profile" class="change_profile" accept="image/*" name="change_profile">
+            <label class="delete" rel="profileDelete">삭제</label>
+        </label>
         <div class="die">
             <a class="link" href="#">회원 탈퇴</a>
         </div>
@@ -71,9 +80,8 @@
                 <img class="profile" rel="profile1" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
             </div>
             <div class="pencil">
-                <label class="pencil" rel="profilePreview">
+                <label class="pencil">
                     <img id="setting" class="change_button" th:src="@{/resources/images/profileImages/icons8-pencil-50.png}" alt="">
-<!--                    <input hidden="hidden" type="file" id="profile" accept="image/*" name="profile">-->
                 </label>
             </div>
         </div>
