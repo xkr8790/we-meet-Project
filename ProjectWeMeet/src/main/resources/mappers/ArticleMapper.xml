@@ -53,20 +53,22 @@
     <!--게시물 전체 조회-->
     <select id="selectAll"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`                AS `index`,
-               `title`                AS `title`,
-               `content`              AS `content`,
-               `category`             AS `category`,
-               `address`              AS `address`,
-               `limit`                AS `limit`,
-               SUBSTRING(hashtag,1, 11) AS `hashtag`,
-               `day`                  AS `appointmentStartDate`,
-               `time`                 AS `appointmentStartTime`
+        SELECT `index`                   AS `index`,
+               `title`                   AS `title`,
+               `content`                 AS `content`,
+               `category`                AS `category`,
+               `address`                 AS `address`,
+               `limit`                   AS `limit`,
+               `participation`           AS `participation`,
+               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+               `day`                     AS `appointmentStartDate`,
+               `time`                    AS `appointmentStartTime`
         FROM `wemeet_project`.`articles`
-        WHERE BINARY `category` LIKE CONCAT('%',#{category},'%')
+        WHERE BINARY `category` LIKE CONCAT('%', #{category}, '%')
         ORDER BY `index` DESC
     </select>
     <!--게시물 전체 조회-->
+
 
     <!-- 필요한 게시물 조회  -->
     <select id="selectArticleByIndex"
@@ -165,6 +167,16 @@
     </select>
     <!-- 게시물 수정 찾기 -->
 
+    <!-- 게시물 수정 찾기 -->
+    <select id="selectArticleByPatchHashTag"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `hashtag`        AS `hashtag`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+    </select>
+    <!-- 게시물 수정 찾기 -->
+
 
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
@@ -199,10 +211,9 @@
             `time`           = #{appointmentStartTime},
             `latitude`       = #{latitude},
             `longitude`      = #{longitude},
-            `thumbnail`      = #{thumbnailMultipart},
-            `thumbnail_mime` = #{thumbnailMime}
+            `thumbnail`      = IFNULL(#{thumbnail}, `thumbnail`),
+            `thumbnail_mime` = IFNULL(#{thumbnailMime}, `thumbnail_mime`)
         WHERE `index` = #{index}
-        LIMIT 1
     </update>
     <!-- 게시판 수정 -->
 

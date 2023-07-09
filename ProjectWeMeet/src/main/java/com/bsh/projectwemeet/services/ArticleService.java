@@ -5,6 +5,7 @@ import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.enums.FinishResult;
 import com.bsh.projectwemeet.enums.InsertParticipate;
+import com.bsh.projectwemeet.enums.PatchArticleResult;
 import com.bsh.projectwemeet.enums.SelectParticipantsResult;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,17 +153,38 @@ public class ArticleService {
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
 
         if(!Objects.equals(loginUser.getEmail(), article.getEmail())){
-            return null;
+            return null; //사용자의 이메일과 작성자의 이메일이 같지 않다면 수정못함
         }
 
         return this.articleMapper.selectArticleByPatchIndex(index);
     }
 
-
-    public boolean UpdateArticle(int index, String title, String category, String content, String address, String place,
-                                 Date day, Date time, double latitude, double longitude, MultipartFile thumbnailMultipart, String thumbnailMime) {
-        return this.articleMapper.updateArticleContent(index, title, category, content, address, place,day,time,latitude,longitude,thumbnailMultipart,thumbnailMime) > 0;
+    public ArticleEntity getPatchIndexArticle(int index){
+        return this.articleMapper.selectArticleByPatchHashTag(index);
     }
+
+
+
+    public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
+
+        UserEntity user = (UserEntity) session.getAttribute("user");
+
+        if(user == null){
+            return PatchArticleResult.FAILURE;
+        }
+
+        if (article.getThumbnail() == null || article.getThumbnailMime() == null) {
+            article.setThumbnail(article.getThumbnail())
+                    .setThumbnailMime(article.getThumbnailMime());
+        }
+
+        return this.articleMapper.updateArticleContent(article) > 0
+                ? PatchArticleResult.SUCCESS
+                : PatchArticleResult.FAILURE;
+    }
+
+
+
 
 
 

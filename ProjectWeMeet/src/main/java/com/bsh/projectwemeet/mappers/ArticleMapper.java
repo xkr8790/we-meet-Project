@@ -27,6 +27,8 @@ public interface ArticleMapper {
 
     ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
 
+    ArticleEntity selectArticleByPatchHashTag(@Param(value = "index") int index);
+
     ParticipantsEntity selectParticipants(@Param(value = "index") int index);
 
     int deleteByArticle(@Param(value = "index")int index); //Param 사용시 SQL문에 파라미터 타입을 안사용해도된다
@@ -37,18 +39,7 @@ public interface ArticleMapper {
     int updateArticle(ArticleEntity article);
     //게시글 수정
 
-    int updateArticleContent(@Param(value = "index") int index,
-                             String title,
-                             String category,
-                             String content,
-                             String place,
-                             String address,
-                             Date appointmentStartDate,
-                             Date appointmentStartTime,
-                             double latitude,
-                             double longitude,
-                             MultipartFile thumbnailMultipart,
-                             @Param(value = "thumbnailMime") String thumbnailMime); //게시판 수정
+    int updateArticleContent(ArticleEntity article); //게시판 수정
 
 
     int updateParticipate(ArticleEntity article);

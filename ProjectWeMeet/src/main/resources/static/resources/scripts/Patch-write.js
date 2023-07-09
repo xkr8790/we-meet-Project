@@ -1,5 +1,4 @@
 const articleForm = document.getElementById('Article-Form');
-const BulletinForm = document.getElementById('bulletinForm');
 
 
 let tagCounter = 0; //전역변수 태그카운터
@@ -49,7 +48,8 @@ ArticleTag.addEventListener('click', function () {
     TagContainer.classList.add('tag-container');
     TagWarning.classList.add('tag-warning');
     Tag.classList.add('tag'); // 처음 생성시 tag 클래스 추가
-    Tag.maxLength = 5;
+    Tag.maxLength = 7;
+    Tag.style.width = '150px';
 
     Tags.appendChild(TagContainer);
     TagContainer.appendChild(TagWarning);
@@ -63,7 +63,7 @@ ArticleTag.addEventListener('click', function () {
         TagWarning.classList.remove('show');
     }
 
-    TagWarning.textContent = "태그는 11글자이상 쓰지못합니다";
+    TagWarning.textContent = "태그는 7글자이상 쓰지못합니다";
 
 
     Tag.addEventListener('keydown', function (event) {
@@ -79,8 +79,8 @@ ArticleTag.addEventListener('click', function () {
         const trimmedText = Tag.value.trim();
         const characterCount = trimmedText.length;
 
-        if (characterCount > 12) {
-            const slicedText = trimmedText.slice(0, 12);
+        if (characterCount > 7) {
+            const slicedText = trimmedText.slice(0, 7);
             Tag.value = slicedText;
             TagWarning.show();
             setTimeout(function () {
@@ -149,6 +149,8 @@ beForeButton.onclick = function (e) {
     articleForm.style.display = 'none';
 };
 
+const articlePatch = articleForm.querySelector('[name="patch"]');
+
 
 articleForm.onsubmit = e => {
     e.preventDefault();
@@ -156,22 +158,17 @@ articleForm.onsubmit = e => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
-    if(articleForm['upload'].value === ''){
-        alert('썸네일을 업로드 해주세요');
-        return;
-    }
-
-    if(articleForm['title'].value === ''){
+    if (articleForm['title'].value === '') {
         alert('제목을 입력해주세요');
         return;
     }
 
-    if(articleForm['content'].value === ''){
+    if (articleForm['content'].value === '') {
         alert('게시판을 입력해주세요');
         return;
     }
 
-    if(tags.value === ''){
+    if (tags.value === '') {
         alert('해쉬태그를 입력해주세요');
         return;
     }
@@ -188,37 +185,38 @@ articleForm.onsubmit = e => {
     formData.append('category', writeForm['category'].value); //카테고리값
     formData.append('title', articleForm['title'].value); //제목값
     formData.append('content', articleForm['content'].value); //ck에디터 내용 가져오기
-    formData.append('thumbnail', articleForm['upload'].files[0]);
+    formData.append('thumbnailMultipart', articleForm['upload'].files[0]);
+
     for (let i = 0; i < tags.length; i++) { //태그 반복해서 나타내기
         formData.append('hashtag', tags[i].value);
     }
 
-    xhr.open('POST', `./patch`);
+    const index = articlePatch.dataset.index;
+
+    xhr.open('PATCH', `./patch?index=${index}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('게시판 수정에 성공했습니다');
-
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    const index = response.index;
-                    if (index) {
-                        window.location.href = '/article/read?index=' + index;
-                    } else {
-                        alert('게시판 작성에 실패하였습니다. 인덱스 값을 받아오지 못했습니다.');
-                    }
-                } catch (error) {
-                    console.error(error);
-                    alert('서버 응답을 처리하는 중 오류가 발생했습니다.');
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'success':
+                        alert('수정에 성공했습니다');
+                        window.location.href = '/article/read?index=' + index; //수정되면 게시판 바로 이동
+                        break;
+                    case 'failure':
+                       alert('수정에 실패했습니다');
+                        break;
+                    default:
+                       alert('서버 실패');
                 }
-
             } else {
-                alert('게시판 작성에 실패하였습니다');
+                alert('서버 실패');
             }
         }
     };
     xhr.send(formData);
-};
+}
+
 
 
 

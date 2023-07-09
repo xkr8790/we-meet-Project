@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/write.css}">
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
-<!--    <script defer th:src="@{/resources/scripts/Patch-Article-Write.js}"></script>-->
+    <script defer th:src="@{/resources/scripts/Patch-write.js}"></script>
     <script th:src="@{/resources/libraries/ckeditor/ckeditor.js}"></script>
     <script defer th:src="@{/resources/scripts/map.js}"></script>
 
@@ -103,12 +103,16 @@
             <textarea name="content" placeholder="내용을 입력해주세요" th:utext="${article.getContent()}"></textarea>
             <div class="article-tag">
                 <div class="explainTag">태그를 입력해주세요</div>
-                <div class="tags" th:text="${article.getHashtag()}">
+                <div class="tags">
+                    <div class="tag-container">
+                        <div class="tag-warning">태그는 7글자이상 쓰지못합니다</div>
+                        <input type="text" name="hashTag" class="tag" maxlength="7" style="width:150px" th:value="${article.getHashtag()}">
+                    </div>
                 </div>
             </div>
             <div class="buttons">
                 <input class="submit" type="button" value="이전">
-                <input class="submit" type="submit" value="수정" rel="modify" th:data-index="${article.getIndex()}">
+                <input class="submit" name="patch" type="submit" value="수정" th:data-index="${article.getIndex()}">
             </div>
         </div>
     </section>

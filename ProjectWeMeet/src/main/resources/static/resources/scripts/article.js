@@ -37,12 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
             // 모든 링크에서 밑줄 스타일 제거
             links.forEach(function (link) {
                 link.classList.remove('underline');
+                const categoryLink = this.querySelector('a');
+                const categoryHref = categoryLink.getAttribute('href');
+
+                window.location.href = categoryHref;
             }); //link갯수만큼 for문 반복
 
             // 클릭된 링크에만 밑줄 스타일 적용
             this.classList.add('underline');
-
-            //link를 가리킨다 즉, 선택된 링크에만 밑줄을 추가한다.
         });
     }
 });
@@ -66,6 +68,7 @@ boards.forEach(function (board) {
         }
     }
 });
+
 //
 // const categoryItems = document.querySelectorAll('.category-item');
 // const slider = document.querySelector('.slider');

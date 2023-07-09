@@ -5,6 +5,7 @@ import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.enums.FinishResult;
 import com.bsh.projectwemeet.enums.InsertParticipate;
+import com.bsh.projectwemeet.enums.PatchArticleResult;
 import com.bsh.projectwemeet.enums.SelectParticipantsResult;
 import com.bsh.projectwemeet.services.ArticleService;
 import org.json.JSONObject;
@@ -132,36 +133,37 @@ public class ArticleController {
             method = RequestMethod.PATCH,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String PatchWrite(@RequestParam(value = "index") int index,
-                             @RequestParam(value = "title") String title,
-                             @RequestParam(value = "category") String category,
-                             @RequestParam(value = "content") String content,
-                             @RequestParam(value = "place") String place,
-                             @RequestParam(value = "address") String address,
-                             @RequestParam(value = "dayStr") String day,
-                             @RequestParam(value = "timeStr") String time,
-                             @RequestParam(value = "latitude")String latitude,
-                             @RequestParam(value = "longitude") String longitude,
-                             @RequestParam(value = "thumbnail") MultipartFile thumbnailMultipart,
-                             @RequestParam(value = "thumbnailMime") String thumbnailMime
-    ) throws ParseException, IOException {
-
-        ArticleEntity article = new ArticleEntity();
+    public String PatchWrite(@RequestParam(value = "dayStr") String dayStr,
+                             @RequestParam(value = "timeStr") String timeStr,
+                             @RequestParam(value = "limit") String limit,
+                             @RequestParam(value = "thumbnailMultipart", required = false) MultipartFile thumbnailMultipart,
+                             ArticleEntity article,
+                             HttpSession session) throws IOException, ParseException {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date daystr = sdf.parse(day); //날짜
-
+        Date day = sdf.parse(dayStr);
+        article.setAppointmentStartDate(day);
 
         SimpleDateFormat tsdf = new SimpleDateFormat("HH:mm");
-        Date timestr = tsdf.parse(time); //시간
+        Date time = tsdf.parse(timeStr);
+        article.setAppointmentStartTime(time);
 
-        double lat = Double.parseDouble(latitude); //위도
-        double lng = Double.parseDouble(longitude); //경도
+        int limitPeople = Integer.parseInt(limit);
+        article.setLimitPeople(limitPeople);
 
+        article.setThumbnail(thumbnailMultipart.getBytes());
+        article.setThumbnailMime(thumbnailMultipart.getContentType());
 
-        boolean result = this.articleService.UpdateArticle(index, title, category, content, place, address,
-                daystr,timestr,lat,lng,thumbnailMultipart,thumbnailMime);
-        return String.valueOf(result);
+        if (thumbnailMultipart != null && !thumbnailMultipart.isEmpty()) {
+            article.setThumbnail(thumbnailMultipart.getBytes())
+                    .setThumbnailMime(thumbnailMultipart.getContentType());
+        }
+
+        PatchArticleResult result = this.articleService.UpdateArticle(article, session);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+        return responseObject.toString();
+
     }
 
 

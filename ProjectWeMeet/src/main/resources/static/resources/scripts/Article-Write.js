@@ -49,7 +49,7 @@ ArticleTag.addEventListener('click', function () {
     TagContainer.classList.add('tag-container');
     TagWarning.classList.add('tag-warning');
     Tag.classList.add('tag'); // 처음 생성시 tag 클래스 추가
-    Tag.maxLength = 5;
+    Tag.maxLength = 7;
 
     Tags.appendChild(TagContainer);
     TagContainer.appendChild(TagWarning);
@@ -63,7 +63,7 @@ ArticleTag.addEventListener('click', function () {
         TagWarning.classList.remove('show');
     }
 
-    TagWarning.textContent = "태그는 11글자이상 쓰지못합니다";
+    TagWarning.textContent = "태그는 7글자이상 쓰지못합니다";
 
 
     Tag.addEventListener('keydown', function (event) {
