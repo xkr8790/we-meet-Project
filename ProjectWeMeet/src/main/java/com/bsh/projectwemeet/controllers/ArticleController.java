@@ -176,13 +176,12 @@ public class ArticleController {
         int limitPeople = Integer.parseInt(limit);
         article.setLimitPeople(limitPeople);
 
-        article.setThumbnail(thumbnailMultipart.getBytes());
-        article.setThumbnailMime(thumbnailMultipart.getContentType());
 
         if (thumbnailMultipart != null && !thumbnailMultipart.isEmpty()) {
             article.setThumbnail(thumbnailMultipart.getBytes())
                     .setThumbnailMime(thumbnailMultipart.getContentType());
         }
+
 
         PatchArticleResult result = this.articleService.UpdateArticle(article, session);
         JSONObject responseObject = new JSONObject();

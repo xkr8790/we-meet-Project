@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="/resources/stylesheets/mainStyle.css">
     <link rel="stylesheet" href="/resources/stylesheets/mainMenu.css">
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
-
     <script defer src="/resources/scripts/slide.js"></script>
-    <script defer src="/resources/scripts/article.js"></script>
+    <script defer th:src="@{/resources/scripts/article.js}"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
 </head>
 
 <body>
+
 <div class="logo-container" id="logo-container">
     <div class="container">
         <div class="logo">
@@ -74,54 +74,63 @@
     <div class="_content _small category">
 
         <ul class="grid">
+
             <li class="item">
                 <a class="link" th:href="@{/article}">
                     <img alt="전체" class="image" th:src="@{/resources/images/testImages/전체.png}">
                     <span class="text">전체</span>
                 </a>
             </li>
+
             <li class="item">
-                <a class="link" th:href="@{'/article' (category='영화')}">
+                <a class="link" href="/article?category=운동">
                     <img alt="운동·액티비티" class="image" th:src="@{/resources/images/testImages/운동.png}">
                     <span class="text">운동·액티비티</span>
                 </a>
             </li>
+
             <li class="item">
-                <a class="link" th:href="@{'/article' (category='게임')}">
+                <a class="link" th:href="@{/article}">
                     <img alt="푸드·드링크" class="image" th:src="@{/resources/images/testImages/음식.png}">
                     <span class="text">푸드·드링크</span>
                 </a>
             </li>
+
             <li class="item">
-                <a class="link" th:href="@{'/article' (category='운동')}">
+                <a class="link" th:href="@{/article}">
                     <img alt="문화·예술" class="image" th:src="@{/resources/images/testImages/문화예술.png}">
                     <span class="text">문화·예술</span>
                 </a>
             </li>
+
             <li class="item">
-                <a class="link" th:href="@{'/article' (category='산책')}">
+                <a class="link" th:href="@{/article}">
                     <img alt="취미·자기개발" class="image" th:src="@{/resources/images/testImages/취미.png}">
                     <span class="text">취미·자기개발</span>
                 </a>
             </li>
+
             <li class="item">
-                <a class="link" th:href="@{'/article' (category='식사')}">
+                <a class="link" th:href="@{/article}">
                     <img alt="온라인" class="image" th:src="@{/resources/images/testImages/온라인.png}">
                     <span class="text">온라인</span>
                 </a>
             </li>
+
             <li class="item">
-                <a class="link" th:href="@{'/article' (category='만남')}">
+                <a class="link" th:href="@{/article}">
                     <img alt="여행" class="image" th:src="@{/resources/images/testImages/여행.png}">
                     <span class="text">여행</span>
                 </a>
             </li>
+
             <li class="item">
                 <a class="link" th:href="@{/article}">
                     <img alt="완료" class="image" th:src="@{/resources/images/testImages/완료.png}">
                     <span class="text">완료</span>
                 </a>
             </li>
+
         </ul>
     </div>
 </div>

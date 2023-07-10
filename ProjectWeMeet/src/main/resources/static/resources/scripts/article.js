@@ -1,6 +1,8 @@
 const Article = document.getElementById('Article');
 const category = Article.querySelectorAll('.category-item');
 
+
+
 //페이지 로드시 시작되는 함수
 document.addEventListener("DOMContentLoaded", function () {
     let sliderIndex = 0;
@@ -28,12 +30,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+var currentUrl = window.location.href;
+
+// URL에 category 매개변수가 있는지 확인합니다.
 
 document.addEventListener('DOMContentLoaded', function () {
     const links = document.querySelectorAll('.category-item');
+    if (currentUrl === 'http://localhost:6795/article?category=%EC%9A%B4%EB%8F%99') {
+        links[1].click();
+        links[1].classList.add('underline');
+    } else (links[2].click());
+
+
+
+
+
+
 
     for (let i = 0; i < links.length; i++) {
         links[i].addEventListener('click', function (e) {
+
             e.preventDefault();
             links.forEach(function (link) {
                 link.classList.remove('underline');
@@ -74,3 +90,5 @@ boards.forEach(function (board) {
 //     const Slide = slide.cloneNode(true); //복제한다
 //     slider.appendChild(Slide);
 // });
+
+
