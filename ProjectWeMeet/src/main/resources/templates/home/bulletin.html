@@ -57,7 +57,7 @@
                     </a>
                     <p>쵸단</p>
                 </div>
-                <div class="bulletin-title" th:value="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
+                <div class="bulletin-title" th:text="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
             </div>
         </div>
         <div class="content">
@@ -128,7 +128,7 @@
                 <p class="place">
                     <i class="fa-solid fa-location-dot"></i>
                 </p>
-                <div class="map" id="map">지도</div>
+                <div class="map" id="map" ></div>
                 <input name="lat" th:value="${article.getLatitude()}" readonly style="display: none">
                 <input name="lng" th:value="${article.getLongitude()}" readonly style="display: none">
             </div>

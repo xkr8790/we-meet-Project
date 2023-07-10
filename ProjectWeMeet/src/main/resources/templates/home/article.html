@@ -84,37 +84,27 @@
 
                 <li class="category-item">
                     <img class="category-img" th:src="@{/resources/images/category/art.png}">
-                    <a th:href="@{'/article' (category='게임')}">
                         게임
-                    </a>
                 </li>
 
                 <li class="category-item">
-                    <a th:href="@{'/article' (category='운동')}">
                     <img class="category-img" th:src="@{/resources/images/category/trip.png}">
                         운동
-                    </a>
                 </li>
 
                 <li class="category-item">
                     <img class="category-img" th:src="@{/resources/images/category/study.png}">
-                    <a th:href="@{'/article' (category='산책')}">
                         산책
-                    </a>
                 </li>
 
                 <li class="category-item">
-                    <a th:href="@{'/article' (category='식사')}">
                     <img class="category-img" th:src="@{/resources/images/category/eat.png}">
                         식사
-                    </a>
                 </li>
 
                 <li class="category-item">
-                    <a th:href="@{'/article' (category='만남')}">
                     <img class="category-img" th:src="@{/resources/images/category/hobby.png}">
                         만남
-                    </a>
                 </li>
 
                 <li class="category-item">
@@ -148,16 +138,16 @@
             </span>
              <span class="article-human">
               <span class="Profile-Picture">
-                 <img class="Profile" src="../resources/images/조보아.jpg">
+                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
               </span>
                   <span class="Profile-Picture">
-                 <img class="Profile" src="../resources/images/조보아.jpg">
+              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
               </span>
               <span class="Profile-Picture">
-                 <img class="Profile" src="../resources/images/조보아.jpg">
+                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
               </span>
               <span class="Profile-Picture">
-                 <img class="Profile" src="../resources/images/조보아.jpg">
+                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
               </span>
 
               <img class="limit-image" th:src="@{/resources/images/category/human.png}">
@@ -172,7 +162,290 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> <!--전체-->
+
+        <div class="slide">
+            <div class="article-box">
+                <div class="article-list"  th:each="article : ${articleMovie}">
+                    <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
+                        <div class="article-thumbnail">
+                            <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="Thumbnail">
+                        </div>
+                        <div class="article-content-box">
+                            <div class="article-tag">
+                                <span class="tag" th:text="${article.getHashtag()}">태그</span>
+                                <span class="tag comment">추천!!</span>
+                            </div>
+                            <span class="article-content" th:text="${article.getTitle()}"></span>
+                            <span class="article-map">
+              <span th:text="${article.getCategory()}">카테고리</span>
+              <span th:text="${article.getAddress()}">위치</span>
+              <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
+              <span th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}"></span>
+            </span>
+                            <span class="article-human">
+              <span class="Profile-Picture">
+                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+                  <span class="Profile-Picture">
+              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+
+              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
+              <span class="number">
+                <span th:text="${article.getParticipation()}"></span>
+                <span>/</span>
+                <span th:text="${article.getLimitPeople()}"></span>
+                  <!-- 제한인원 제한 걸때 value??  -->
+              </span>
+              </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div> <!--영화-->
+
+        <div class="slide">
+            <div class="article-box">
+                <div class="article-list"  th:each="article : ${articleGame}">
+                    <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
+                        <div class="article-thumbnail">
+                            <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="Thumbnail">
+                        </div>
+                        <div class="article-content-box">
+                            <div class="article-tag">
+                                <span class="tag" th:text="${article.getHashtag()}">태그</span>
+                                <span class="tag comment">추천!!</span>
+                            </div>
+                            <span class="article-content" th:text="${article.getTitle()}"></span>
+                            <span class="article-map">
+              <span th:text="${article.getCategory()}">카테고리</span>
+              <span th:text="${article.getAddress()}">위치</span>
+              <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
+              <span th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}"></span>
+            </span>
+                            <span class="article-human">
+              <span class="Profile-Picture">
+                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+                  <span class="Profile-Picture">
+              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+
+              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
+              <span class="number">
+                <span th:text="${article.getParticipation()}"></span>
+                <span>/</span>
+                <span th:text="${article.getLimitPeople()}"></span>
+                  <!-- 제한인원 제한 걸때 value??  -->
+              </span>
+              </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div> <!--게임-->
+
+        <div class="slide">
+            <div class="article-box">
+                <div class="article-list"  th:each="article : ${articleSports}">
+                    <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
+                        <div class="article-thumbnail">
+                            <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="Thumbnail">
+                        </div>
+                        <div class="article-content-box">
+                            <div class="article-tag">
+                                <span class="tag" th:text="${article.getHashtag()}">태그</span>
+                                <span class="tag comment">추천!!</span>
+                            </div>
+                            <span class="article-content" th:text="${article.getTitle()}"></span>
+                            <span class="article-map">
+              <span th:text="${article.getCategory()}">카테고리</span>
+              <span th:text="${article.getAddress()}">위치</span>
+              <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
+              <span th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}"></span>
+            </span>
+                            <span class="article-human">
+              <span class="Profile-Picture">
+                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+                  <span class="Profile-Picture">
+              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+
+              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
+              <span class="number">
+                <span th:text="${article.getParticipation()}"></span>
+                <span>/</span>
+                <span th:text="${article.getLimitPeople()}"></span>
+                  <!-- 제한인원 제한 걸때 value??  -->
+              </span>
+              </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div> <!-- 운동 -->
+
+        <div class="slide">
+            <div class="article-box">
+                <div class="article-list"  th:each="article : ${articleWalk}">
+                    <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
+                        <div class="article-thumbnail">
+                            <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="Thumbnail">
+                        </div>
+                        <div class="article-content-box">
+                            <div class="article-tag">
+                                <span class="tag" th:text="${article.getHashtag()}">태그</span>
+                                <span class="tag comment">추천!!</span>
+                            </div>
+                            <span class="article-content" th:text="${article.getTitle()}"></span>
+                            <span class="article-map">
+              <span th:text="${article.getCategory()}">카테고리</span>
+              <span th:text="${article.getAddress()}">위치</span>
+              <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
+              <span th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}"></span>
+            </span>
+                            <span class="article-human">
+              <span class="Profile-Picture">
+                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+                  <span class="Profile-Picture">
+              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+
+              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
+              <span class="number">
+                <span th:text="${article.getParticipation()}"></span>
+                <span>/</span>
+                <span th:text="${article.getLimitPeople()}"></span>
+                  <!-- 제한인원 제한 걸때 value??  -->
+              </span>
+              </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div> <!-- 산책 -->
+
+        <div class="slide">
+            <div class="article-box">
+                <div class="article-list"  th:each="article : ${articleEat}">
+                    <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
+                        <div class="article-thumbnail">
+                            <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="Thumbnail">
+                        </div>
+                        <div class="article-content-box">
+                            <div class="article-tag">
+                                <span class="tag" th:text="${article.getHashtag()}">태그</span>
+                                <span class="tag comment">추천!!</span>
+                            </div>
+                            <span class="article-content" th:text="${article.getTitle()}"></span>
+                            <span class="article-map">
+              <span th:text="${article.getCategory()}">카테고리</span>
+              <span th:text="${article.getAddress()}">위치</span>
+              <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
+              <span th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}"></span>
+            </span>
+                            <span class="article-human">
+              <span class="Profile-Picture">
+                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+                  <span class="Profile-Picture">
+              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+
+              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
+              <span class="number">
+                <span th:text="${article.getParticipation()}"></span>
+                <span>/</span>
+                <span th:text="${article.getLimitPeople()}"></span>
+                  <!-- 제한인원 제한 걸때 value??  -->
+              </span>
+              </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div> <!-- 식사 -->
+
+        <div class="slide">
+            <div class="article-box">
+                <div class="article-list"  th:each="article : ${articleMeet}">
+                    <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
+                        <div class="article-thumbnail">
+                            <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="Thumbnail">
+                        </div>
+                        <div class="article-content-box">
+                            <div class="article-tag">
+                                <span class="tag" th:text="${article.getHashtag()}">태그</span>
+                                <span class="tag comment">추천!!</span>
+                            </div>
+                            <span class="article-content" th:text="${article.getTitle()}"></span>
+                            <span class="article-map">
+              <span th:text="${article.getCategory()}">카테고리</span>
+              <span th:text="${article.getAddress()}">위치</span>
+              <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
+              <span th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}"></span>
+            </span>
+                            <span class="article-human">
+              <span class="Profile-Picture">
+                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+                  <span class="Profile-Picture">
+              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+              <span class="Profile-Picture">
+                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+              </span>
+
+              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
+              <span class="number">
+                <span th:text="${article.getParticipation()}"></span>
+                <span>/</span>
+                <span th:text="${article.getLimitPeople()}"></span>
+                  <!-- 제한인원 제한 걸때 value??  -->
+              </span>
+              </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div> <!-- 만남 -->
+
     </div>
     </div>
 </section>

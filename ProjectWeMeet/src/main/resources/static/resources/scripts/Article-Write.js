@@ -50,6 +50,7 @@ ArticleTag.addEventListener('click', function () {
     TagWarning.classList.add('tag-warning');
     Tag.classList.add('tag'); // 처음 생성시 tag 클래스 추가
     Tag.maxLength = 7;
+    Tag.style.width = "120px";
 
     Tags.appendChild(TagContainer);
     TagContainer.appendChild(TagWarning);
@@ -79,8 +80,8 @@ ArticleTag.addEventListener('click', function () {
         const trimmedText = Tag.value.trim();
         const characterCount = trimmedText.length;
 
-        if (characterCount > 12) {
-            const slicedText = trimmedText.slice(0, 12);
+        if (characterCount > 7) {
+            const slicedText = trimmedText.slice(0, 7);
             Tag.value = slicedText;
             TagWarning.show();
             setTimeout(function () {

@@ -41,14 +41,37 @@ public class ArticleController {
     @RequestMapping(value = "article",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getArticle(@RequestParam(value = "category",defaultValue = "",required = false)String category) {
+    @ResponseBody
+    public ModelAndView getArticle() {
         ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
-        ArticleEntity[] articles = this.articleService.getAll(category);
+
+        String movie = "영화";
+        String game = "게임";
+        String sports   = "운동";
+        String walk = "산책";
+        String eat = "식사";
+        String meet = "만남";
+
+        ArticleEntity[] articles = this.articleService.getAll();
+
+        ArticleEntity[] articleMovie = this.articleService.getCategory(movie);
+        ArticleEntity[] articleGame = this.articleService.getCategory(game);
+        ArticleEntity[] articleSports = this.articleService.getCategory(sports);
+        ArticleEntity[] articleWalk = this.articleService.getCategory(walk);
+        ArticleEntity[] articleEat = this.articleService.getCategory(eat);
+        ArticleEntity[] articleMeet = this.articleService.getCategory(meet);
 
         modelAndView.addObject("article", articles);
+        modelAndView.addObject("articleMovie", articleMovie);
+        modelAndView.addObject("articleGame", articleGame);
+        modelAndView.addObject("articleSports", articleSports);
+        modelAndView.addObject("articleWalk", articleWalk);
+        modelAndView.addObject("articleEat", articleEat);
+        modelAndView.addObject("articleMeet", articleMeet);
 
         return modelAndView;
     } //게시판 전부 가져오기
+
 
     @RequestMapping(value = "article/image",
             method = RequestMethod.GET)
@@ -123,8 +146,10 @@ public class ArticleController {
             method = RequestMethod.GET)
     public ModelAndView getWrite(@RequestParam(value = "index") int index, HttpSession session) {
         ArticleEntity article = articleService.getPatchIndexArticle(index,session);
+        ArticleEntity[] articleTag = articleService.getPatchIndexArticleHashTag(index);
         ModelAndView modelAndView = new ModelAndView("home/patchWrite");
         modelAndView.addObject("article", article);
+        modelAndView.addObject("articleTag",articleTag);
         return modelAndView;
     }
     //게시판 수정 폼 받아오기

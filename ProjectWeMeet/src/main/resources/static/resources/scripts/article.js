@@ -28,22 +28,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// 페이지 로드시 시작되는 함수
+
 document.addEventListener('DOMContentLoaded', function () {
     const links = document.querySelectorAll('.category-item');
 
     for (let i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', function () {
-            // 모든 링크에서 밑줄 스타일 제거
+        links[i].addEventListener('click', function (e) {
+            e.preventDefault();
             links.forEach(function (link) {
                 link.classList.remove('underline');
-                const categoryLink = this.querySelector('a');
-                const categoryHref = categoryLink.getAttribute('href');
+            });
 
-                window.location.href = categoryHref;
-            }); //link갯수만큼 for문 반복
-
-            // 클릭된 링크에만 밑줄 스타일 적용
+            // 클릭된 링크에만 밑줄 출력
             this.classList.add('underline');
         });
     }
@@ -59,7 +55,7 @@ boards.forEach(function (board) {
     let images = board.getElementsByClassName("Profile-Picture");
     if (images.length >= 4) {
         const cover = document.createElement("img");
-        cover.src = "resources/images/cover.png";
+        cover.src = "resources/images/mainImages/cover.png";
         cover.classList.add("cover");
         // images[3]의 자식으로 cover 추가
         images[3].appendChild(cover);

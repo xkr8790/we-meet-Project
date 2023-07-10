@@ -8,6 +8,7 @@ import com.bsh.projectwemeet.enums.InsertParticipate;
 import com.bsh.projectwemeet.enums.PatchArticleResult;
 import com.bsh.projectwemeet.enums.SelectParticipantsResult;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,8 +27,12 @@ public class ArticleService {
         this.articleMapper = articleMapper;
     }
 
-    public ArticleEntity[] getAll(String category) {
-        return this.articleMapper.selectAll(category);
+    public ArticleEntity[] getAll() {
+        return this.articleMapper.selectAll();
+    }//게시판은 전부 나타내기
+
+    public ArticleEntity[] getCategory(String category) {
+        return this.articleMapper.selectCategory(category);
     }//게시판은 전부 나타내기
 
     public ArticleEntity[] getMainArticle() {
@@ -159,7 +164,7 @@ public class ArticleService {
         return this.articleMapper.selectArticleByPatchIndex(index);
     }
 
-    public ArticleEntity getPatchIndexArticle(int index){
+    public ArticleEntity[] getPatchIndexArticleHashTag(int index){
         return this.articleMapper.selectArticleByPatchHashTag(index);
     }
 
@@ -168,6 +173,7 @@ public class ArticleService {
     public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
+
 
         if(user == null){
             return PatchArticleResult.FAILURE;

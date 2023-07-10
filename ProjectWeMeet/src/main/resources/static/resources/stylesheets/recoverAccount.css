@@ -227,6 +227,7 @@ body {
 #linkCoverForm > .cover > .cover-button {
     background-color: gray;
     color: white;
+    border: none;
     font-weight: 400;
     border-radius: 0.25rem;
     padding: 0.625rem 0.875rem;

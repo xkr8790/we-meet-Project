@@ -16,7 +16,8 @@ public interface ArticleMapper {
     int insertParticipants(ParticipantsEntity participants);
 
 
-    ArticleEntity[] selectAll(@Param(value = "category")String category);
+    ArticleEntity[] selectAll();
+    ArticleEntity[] selectCategory(@Param(value = "category")String category);
 
     ArticleEntity[] selectArticleMain();
 
@@ -27,7 +28,7 @@ public interface ArticleMapper {
 
     ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
 
-    ArticleEntity selectArticleByPatchHashTag(@Param(value = "index") int index);
+    ArticleEntity[] selectArticleByPatchHashTag(@Param(value = "index") int index);
 
     ParticipantsEntity selectParticipants(@Param(value = "index") int index);
 
