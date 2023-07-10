@@ -53,6 +53,7 @@ public class ArticleController {
         // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
         ArticleEntity article = this.articleService.readArticle(index);
 
+
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
 
         modelAndView.addObject("article", article);

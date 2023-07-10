@@ -237,7 +237,7 @@ function refreshComment() {
                 for (const comment of comments) {
                     if (comment['deleted'] === false) {
                         const div = document.createElement('div');
-                        div.classList.add('comment');
+                        div.classList.add('comment-left');
 
                         const headDiv = document.createElement('div');
                         headDiv.classList.add('comment-head');
@@ -285,3 +285,7 @@ bulletinForm.onsubmit = function (e) {
     }
     postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    refreshComment();
+});
