@@ -3,6 +3,7 @@ package com.bsh.projectwemeet.services;
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.CommentEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.CreateCommentResult;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,17 +100,41 @@ public class ArticleService {
         return this.articleMapper.selectCommentByArticleIndex(articleIndex);
     }
 
-    public boolean putComment(HttpServletRequest request, CommentEntity comment,HttpSession session){
+//    public boolean putComment(HttpServletRequest request, CommentEntity comment,HttpSession session){
+//
+//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+//
+//
+//        comment.setEmail(loginUser.getEmail())
+//                .setDeleted(false)
+//                .setCreatedAt(new Date())
+//                .setClientIp(request.getRemoteAddr())
+//                .setClientUa(request.getHeader("User-Agent"));
+//        return this.articleMapper.insertComment(comment)>0;
+//    }
+
+
+    public CreateCommentResult putComment(HttpServletRequest request, CommentEntity comment, HttpSession session,ArticleEntity article){
 
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-
+        if (loginUser == null){
+            return CreateCommentResult.FAILURE_NOT_LOGIN;
+        }
         comment.setEmail(loginUser.getEmail())
                 .setDeleted(false)
                 .setCreatedAt(new Date())
                 .setClientIp(request.getRemoteAddr())
                 .setClientUa(request.getHeader("User-Agent"));
-        return this.articleMapper.insertComment(comment)>0;
+
+        ArticleEntity articleByEmail = this.articleMapper.selectArticleByEmail(article);
+        if (articleByEmail != null && Objects.equals(loginUser.getEmail(), articleByEmail.getEmail())) {
+            return CreateCommentResult.SUCCESS_SAME;
+        }
+
+        return this.articleMapper.insertComment(comment)>0
+                ? CreateCommentResult.SUCCESS
+                : CreateCommentResult.FAILURE;
     }
 
 

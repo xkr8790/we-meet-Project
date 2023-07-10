@@ -3,8 +3,10 @@ package com.bsh.projectwemeet.controllers;
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.CommentEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.CreateCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
 import org.apache.ibatis.annotations.Param;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -92,7 +94,10 @@ public class ArticleController {
     public String deleteIndex(@RequestParam(value = "index")int index,HttpSession session,ArticleEntity article){
         boolean result = this.articleService.deleteByIndex(index,article,session);
         return String.valueOf(result);
-    } //게시판 삭제
+    }
+
+
+    //게시판 삭제
 
 //    @RequestMapping(value = "article/patch",
 //            method = RequestMethod.GET)
@@ -128,19 +133,33 @@ public class ArticleController {
         return this.articleService.getCommentsOf(articleIndex);
     }
 
+//    @RequestMapping(value = "comment",
+//            method = RequestMethod.POST,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public String postComment(HttpServletRequest request,
+//                              CommentEntity comment,
+//                              HttpSession session){
+//        boolean result = this.articleService.putComment(request, comment,session);
+//
+//
+//        return String.valueOf(result);
+//    }
+
     @RequestMapping(value = "comment",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postComment(HttpServletRequest request,
                               CommentEntity comment,
-                              HttpSession session){
-        boolean result = this.articleService.putComment(request, comment,session);
-
-
-        return String.valueOf(result);
+                              HttpSession session,
+                              ArticleEntity article){
+        CreateCommentResult result = this.articleService.putComment(request, comment, session, article);
+        JSONObject responseObject = new JSONObject(){{
+            put("result",result.name().toLowerCase());
+        }};
+        return responseObject.toString();
     }
-
 
     @RequestMapping(value = "comment",
             method = RequestMethod.DELETE,
