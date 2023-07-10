@@ -673,6 +673,7 @@ html {
 #popup.step-2 > .popup-content.step-2 > .profile_file {
     background-color: white;
     margin-top: 0.625rem;
+    margin-right: 0.625rem;
 
     align-items: center;
     display: flex;
@@ -682,6 +683,8 @@ html {
 
 #popup.step-2 > .popup-content.step-2 > .profile_file > .change {
     background-color: white;
+    font-size: 1rem;
+    text-decoration: underline;
     cursor: pointer;
     margin-right: 1rem;
 }
@@ -700,6 +703,8 @@ html {
 
 #popup.step-2 > .popup-content.step-2 > .profile_file > .delete {
     background-color: white;
+    font-size: 1rem;
+    text-decoration: underline;
     cursor: pointer;
 }
 
@@ -864,14 +869,23 @@ html {
     text-decoration: black underline;
 }
 
-#popup.step-2 > .popup-content.step-2 > .save {
+#popup.step-2 > .popup-content.step-2 > .finish {
     background-color: white;
     position: absolute;
     bottom: 2rem;
     right: 2rem;
 }
 
-#popup.step-2 > .popup-content.step-2 > .save > .save {
+#popup.step-2 > .popup-content.step-2 > .finish > .close {
+    background-color: #9da3d6;
+    color: black;
+    font-size: 1.25rem;
+    opacity: 0.8;
+    border-radius: 0.5rem;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .finish > .save {
     background-color: #9da3d6;
     color: black;
     font-size: 1.25rem;

@@ -23,6 +23,26 @@ HTMLInputElement.prototype.focusAndSelect = function () {
     this.select();
 };
 
+// const Dialog = {
+//     createButton: function (text, onclick) {
+//         return {
+//             text: text,
+//             onclick: onclick
+//         }
+//     },
+//     Stack: [],
+//     Type: {
+//         Error: '_error',
+//         Default: '_default',
+//         Information: '_information',
+//         Warning: '_warning'
+//     },
+//     create: function (params) {
+//         params.type ??= Dialog.Type.Default;
+//         params.buttons ??= [];
+//     }
+// };
+
 
 
 popup.onsubmit = e => {
@@ -71,11 +91,28 @@ popup.onsubmit = e => {
     }
 };
 
+popup['close'].addEventListener('click', () => {
+    var r = confirm("취소하시겠습니까?\n저장되지 않은 모든 내용은 유실됩니다.");
+    if (r == true) {
+        alert("취소되었습니다!");
+        popup.classList.remove('step-2');
+        popup.style.display = 'none';
+    } else {
+        alert("수정 페이지로 돌아갑니다!");
+    }
+})
+
 popup['save'].addEventListener('click', () => {
-    popup.classList.remove('step-2');
-    popup.style.display = 'none';
-    alert('변경된 사항이 저장되었습니다.');
-});
+    var r = confirm("저장하시겠습니까?");
+    if (r == true) {
+        alert("저장되었습니다!");
+        popup.classList.remove('step-2');
+    } else {
+        alert("취소하였습니다!");
+        popup.style.display = 'block';
+    }
+})
+
 
 var changeProfile =document.querySelector('.change_profile');
 const profileF = popup.querySelector('[rel="profileF"]');
