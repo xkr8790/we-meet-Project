@@ -162,7 +162,7 @@ public class ArticleService {
         if (loginUser == null){
             return DeleteCommentResult.FAILURE_NOT_LOGIN; // 로그인 상태가 아닐 경우
         }
-        if (!loginUser.equals(articleByEmail)) {
+        if (!loginUser.equals(articleByEmail) || !loginUser.isAdmin()) {
             return DeleteCommentResult.FAILURE_NO_AUTHORITY; // 삭제 권한이 없을 경우
         }
 
