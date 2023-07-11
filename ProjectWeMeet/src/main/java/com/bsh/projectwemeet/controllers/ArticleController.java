@@ -4,6 +4,7 @@ import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.CommentEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
+import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
 import org.apache.ibatis.annotations.Param;
 import org.json.JSONObject;
@@ -166,9 +167,13 @@ public class ArticleController {
             method = RequestMethod.DELETE,
             produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
-    public String deleteComment(CommentEntity comment) {
-        boolean result = this.articleService.deleteComment(comment);
-        return String.valueOf(result);
+    public String deleteComment(CommentEntity comment,ArticleEntity article,HttpSession session) {
+
+        DeleteCommentResult result = this.articleService.deleteComment(comment,article,session);
+        JSONObject responseObject = new JSONObject(){{
+            put("result",result.name().toLowerCase());
+        }};
+        return responseObject.toString();
     }
 
 

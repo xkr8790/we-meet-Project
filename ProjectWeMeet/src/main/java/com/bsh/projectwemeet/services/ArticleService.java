@@ -4,6 +4,7 @@ import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.CommentEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
+import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -138,13 +139,37 @@ public class ArticleService {
     }
 
 
-    public boolean deleteComment(CommentEntity comment) {
+    public DeleteCommentResult deleteComment(CommentEntity comment, ArticleEntity article, HttpSession session) {
         comment = this.articleMapper.selectComment(comment.getIndex());
-        if (comment == null) {
-            return false;
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        ArticleEntity articleByEmail = this.articleMapper.selectArticleByEmail(article);
+//        if (comment == null) {
+//            return false;
+//        }
+//
+//        if (loginUser != null && articleByEmail != null &&
+//                loginUser.equals(articleByEmail) || loginUser.isAdmin()) {
+//            comment.setDeleted(true);
+//            return this.articleMapper.updateComment(comment) > 0;
+//        }
+//
+//        return false;
+
+
+        if (comment == null){
+            return DeleteCommentResult.FAILURE_DELETED; //이미 삭제된 댓글
         }
+        if (loginUser == null){
+            return DeleteCommentResult.FAILURE_NOT_LOGIN; // 로그인 상태가 아닐 경우
+        }
+        if (!loginUser.equals(articleByEmail)) {
+            return DeleteCommentResult.FAILURE_NO_AUTHORITY; // 삭제 권한이 없을 경우
+        }
+
         comment.setDeleted(true);
-        return this.articleMapper.updateComment(comment) > 0;
+        return this.articleMapper.updateComment(comment) > 0
+                ? DeleteCommentResult.SUCCESS
+                : DeleteCommentResult.FAILURE;
     }
 
 
