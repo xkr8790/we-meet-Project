@@ -146,6 +146,27 @@ allContainer > .header > .login > a {
     margin: 0 1rem;
 }
 
+.allContainer > .main-template > .likeAndReport>.like{
+    width: 1.3rem;
+}
+.allContainer > .main-template > .likeAndReport>.report{
+    width: 1.4rem;
+}
+
+
+.likeAndReport .like,
+.likeAndReport .report {
+    margin-right: 5px;
+}
+
+.likeAndReport{
+    margin-right: 0rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
 
 .announcement {
     width: 100%;

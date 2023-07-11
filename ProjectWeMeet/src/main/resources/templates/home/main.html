@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/resources/stylesheets/mainMenu.css">
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
     <script defer src="/resources/scripts/slide.js"></script>
-    <script defer th:src="@{/resources/scripts/article.js}"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
 </head>
 
@@ -83,7 +82,7 @@
             </li>
 
             <li class="item">
-                <a class="link" href="/article?category=운동">
+                <a class="link" th:href="@{/article}">
                     <img alt="운동·액티비티" class="image" th:src="@{/resources/images/testImages/운동.png}">
                     <span class="text">운동·액티비티</span>
                 </a>
@@ -147,14 +146,13 @@
                     </div>
                     <div class="article-content-box">
                         <div class="article-tag">
-                            <span class="tag" th:text="${article.getHashtag()}">태그</span>
+                            <span class="tag" th:text="${article.getCategory()}"></span>
                             <span class="tag comment">추천!!</span>
                         </div>
                         <span class="article-content">
                             <h2 class="article-content-title" th:text="${article.getTitle()}">장문복이랑 놀러갈 사람?</h2>
                         </span>
                         <div class="article-map">
-                            <span class="map-item" th:text="${article.getCategory()}">카테고리</span>
                             <span class="map-item" th:text="${article.getAddress()}">위치</span>
                             <span class="map-item" th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">날짜</span>
                             <span class="map-item" th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}">시간</span>

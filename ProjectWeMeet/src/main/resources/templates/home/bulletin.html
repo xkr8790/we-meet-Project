@@ -60,6 +60,14 @@
                 <div class="bulletin-title" th:text="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
             </div>
         </div>
+
+        <div class="likeAndReport">
+            <img class="like" th:data-index="${article.getIndex()}" th:src="@{/resources/images/bulletinImags/like.png}">
+            <span class="like" th:text="${article.getLikeCount()}"></span>
+            <img class="report" th:data-index="${article.getIndex()}" th:src="@{/resources/images/bulletinImags/_report.png}">
+            <span class="report" th:text="${article.getReport()}"></span>
+        </div>
+
         <div class="content">
             <div th:utext="${article.getContent()}"></div>
             <div th:text="${article.getCategory()}"></div>

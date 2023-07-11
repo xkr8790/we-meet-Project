@@ -261,6 +261,70 @@ ParticipateDeleteButton.addEventListener('click', e => {
     }
 });
 
+const like = bulletinForm.querySelector('.like');
+const Report = bulletinForm.querySelector('.report');
+
+like.addEventListener('click', e => {
+    e.preventDefault();
+    const index = like.dataset.index;
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    xhr.open('PATCH', `./like?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'success':
+                        alert('좋아요');
+                        location.href = `/article/read?index=` + index;
+                        break;
+                    case 'failure':
+                        alert('좋아요 실패');
+                        break;
+                    default:
+                        alert('좋아요 실패?');
+                }
+            } else {
+                alert('좋아요 실패');
+            }
+        }
+    };
+    xhr.send();
+})
+
+
+Report.addEventListener('click', e => {
+    e.preventDefault();
+    const index = Report.dataset.index;
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    xhr.open('PATCH', `./Report?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'success':
+                        alert('신고 누적');
+                        location.href = `/article/read?index=` + index;
+                        break;
+                    case 'failure':
+                        alert('좋아요 실패');
+                        break;
+                    default:
+                        alert('좋아요 실패?');
+                }
+            } else {
+                alert('좋아요 실패');
+            }
+        }
+    };
+    xhr.send();
+})
+
+
+
 
 
 

@@ -60,6 +60,7 @@
                `address`                 AS `address`,
                `limit`                   AS `limit`,
                `participation`           AS `participation`,
+               `like_count`              AS `likeCount`,
                SUBSTRING(hashtag, 1, 11) AS `hashtag`,
                `day`                     AS `appointmentStartDate`,
                `time`                    AS `appointmentStartTime`
@@ -67,6 +68,49 @@
         ORDER BY `index` DESC
     </select>
     <!--게시물 전체 조회-->
+
+    <select id="selectCount"
+            resultType="int">#결과값 int형으로 변환해서 돌려준다
+        SELECT COUNT(0) AS `count`
+        FROM `wemeet_project`.`articles`
+    </select>
+
+    <select id="selectByPage"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">#결과값 메모엔터티 값으로 돌려준다
+        SELECT `index` AS `index`,
+               `title` AS `title`,
+               `content` AS `content`,
+               `category` AS `category`,
+               `address` AS `address`,
+               `limit` AS `limit`,
+               `like_count` AS `likeCount`,
+               `participation` AS `participation`,
+               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+               `day` AS `appointmentStartDate`,
+               `time` AS `appointmentStartTime`
+        FROM `wemeet_project`.`articles`
+        ORDER BY `index` DESC
+        LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
+    </select>
+
+    <select id="selectByPageCategory"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">#결과값 메모엔터티 값으로 돌려준다
+        SELECT `index` AS `index`,
+        `title` AS `title`,
+        `content` AS `content`,
+        `category` AS `category`,
+        `address` AS `address`,
+        `limit` AS `limit`,
+        `like_count` AS `likeCount`,
+        `participation` AS `participation`,
+        SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+        `day` AS `appointmentStartDate`,
+        `time` AS `appointmentStartTime`
+        FROM `wemeet_project`.`articles`
+        WHERE `category` = #{category}
+        ORDER BY `index` DESC
+        LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
+    </select>
 
     <!--게시물 전체 조회-->
     <select id="selectCategory"
@@ -100,6 +144,8 @@
                `limit`          AS `limit`,
                `place`          AS `place`,
                `address`        AS `address`,
+               `like_count`     AS `likeCount`,
+               `report`         AS `report`,
                `participation`  AS `participation`,
                `latitude`       AS `latitude`,
                `longitude`      AS `longitude`,
@@ -195,7 +241,6 @@
     </select>
     <!-- 게시물 수정 찾기 -->
 
-
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
             parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -205,6 +250,27 @@
         LIMIT 1
     </update>
     <!-- 조회수 업데이트 -->
+
+
+    <!-- 좋아요 업데이트 -->
+    <update id="updateLike"
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
+        UPDATE `wemeet_project`.`articles`
+        SET `like_count` = #{likeCount}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+    <!-- 좋아요 업데이트 -->
+
+    <!-- 싫어요 업데이트 -->
+    <update id="updateReport"
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
+        UPDATE `wemeet_project`.`articles`
+        SET `report` = #{report}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+    <!-- 싫어요 업데이트 -->
 
     <!-- 참여인원 업데이트 -->
     <update id="updateParticipate"

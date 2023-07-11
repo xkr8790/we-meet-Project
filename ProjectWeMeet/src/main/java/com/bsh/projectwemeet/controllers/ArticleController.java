@@ -3,10 +3,8 @@ package com.bsh.projectwemeet.controllers;
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
-import com.bsh.projectwemeet.enums.FinishResult;
-import com.bsh.projectwemeet.enums.InsertParticipate;
-import com.bsh.projectwemeet.enums.PatchArticleResult;
-import com.bsh.projectwemeet.enums.SelectParticipantsResult;
+import com.bsh.projectwemeet.enums.*;
+import com.bsh.projectwemeet.models.PagingModel;
 import com.bsh.projectwemeet.services.ArticleService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,24 +40,38 @@ public class ArticleController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public ModelAndView getArticle() {
+    public ModelAndView getArticle(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
+                                   @RequestParam(value = "c", defaultValue = "content", required = false)String searchCriterion,
+                                   @RequestParam(value = "q", defaultValue = "", required = false)String searchQuery) {
         ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
+
+
+        PagingModel pagingModel = new PagingModel(
+                ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
+                this.articleService.getCount(searchCriterion, searchQuery),
+                requestPage); //객체화
+
+        ArticleEntity[] articles = this.articleService.getByPage(pagingModel);
+
+        modelAndView.addObject("article", articles);
+        modelAndView.addObject("pagingModel",pagingModel);
+
+
 
         String movie = "영화";
         String game = "게임";
-        String sports   = "운동";
+        String sports = "운동";
         String walk = "산책";
         String eat = "식사";
         String meet = "만남";
 
-        ArticleEntity[] articles = this.articleService.getAll();
 
-        ArticleEntity[] articleMovie = this.articleService.getCategory(movie);
-        ArticleEntity[] articleGame = this.articleService.getCategory(game);
-        ArticleEntity[] articleSports = this.articleService.getCategory(sports);
-        ArticleEntity[] articleWalk = this.articleService.getCategory(walk);
-        ArticleEntity[] articleEat = this.articleService.getCategory(eat);
-        ArticleEntity[] articleMeet = this.articleService.getCategory(meet);
+        ArticleEntity[] articleMovie = this.articleService.getCategory(movie,pagingModel);
+        ArticleEntity[] articleGame = this.articleService.getCategory(game,pagingModel);
+        ArticleEntity[] articleSports = this.articleService.getCategory(sports,pagingModel);
+        ArticleEntity[] articleWalk = this.articleService.getCategory(walk,pagingModel);
+        ArticleEntity[] articleEat = this.articleService.getCategory(eat,pagingModel);
+        ArticleEntity[] articleMeet = this.articleService.getCategory(meet,pagingModel);
 
         modelAndView.addObject("article", articles);
         modelAndView.addObject("articleMovie", articleMovie);
@@ -70,6 +82,7 @@ public class ArticleController {
         modelAndView.addObject("articleMeet", articleMeet);
 
         return modelAndView;
+
     } //게시판 전부 가져오기
 
 
@@ -221,9 +234,31 @@ public class ArticleController {
         return responseObject.toString();
     } //인원이 참가 했을시 취소 가능하게
 
+    @RequestMapping(value = "article/like",
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody //있어야지 JSON 사용가능
+    public String patchLike(@RequestParam(value = "index") int index, HttpSession session) {
+        LIkeAndReportResult result = this.articleService.UpdateLikeResult(index, session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
 
+    @RequestMapping(value = "article/Report",
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody //있어야지 JSON 사용가능
+    public String patchReport(@RequestParam(value = "index") int index, HttpSession session) {
+        LIkeAndReportResult result = this.articleService.UpdateReportResult(index, session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
 
-       @RequestMapping(value="article/review", method = RequestMethod.GET)
+    @RequestMapping(value="article/review", method = RequestMethod.GET)
     public ModelAndView getFinish(int index, HttpSession session){
         boolean result = this.articleService.patchFinish(index ,session);
         ModelAndView modelAndView = new ModelAndView("home/review");

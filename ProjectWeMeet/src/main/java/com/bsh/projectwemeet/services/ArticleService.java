@@ -3,11 +3,9 @@ package com.bsh.projectwemeet.services;
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
-import com.bsh.projectwemeet.enums.FinishResult;
-import com.bsh.projectwemeet.enums.InsertParticipate;
-import com.bsh.projectwemeet.enums.PatchArticleResult;
-import com.bsh.projectwemeet.enums.SelectParticipantsResult;
+import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
+import com.bsh.projectwemeet.models.PagingModel;
 import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +20,8 @@ public class ArticleService {
 
     public final ArticleMapper articleMapper;
 
+    public static final int PAGE_COUNT=4; //페이지에 나타낼 게시물 갯수
+
     @Autowired
     public ArticleService(ArticleMapper articleMapper) {
         this.articleMapper = articleMapper;
@@ -31,9 +31,19 @@ public class ArticleService {
         return this.articleMapper.selectAll();
     }//게시판은 전부 나타내기
 
-    public ArticleEntity[] getCategory(String category) {
-        return this.articleMapper.selectCategory(category);
-    }//게시판은 전부 나타내기
+    public int getCount(String searchCriterion, String searchQuery){
+        return this.articleMapper.selectCount(searchCriterion, searchQuery);
+    } // 게시글 전부의 갯수 나타내는 메서드
+
+    public ArticleEntity[] getByPage(PagingModel pagingModel) {
+        ArticleEntity[] memoEntities = this.articleMapper.selectByPage(pagingModel);
+        return memoEntities;
+    } //페이지얻게하는 메서드
+
+
+    public ArticleEntity[] getCategory(String category,PagingModel pagingModel) {
+        return this.articleMapper.selectByPageCategory(category,pagingModel);
+    }// 카테고리 관련 게시판은 전부 나타내기
 
     public ArticleEntity[] getMainArticle() {
         return this.articleMapper.selectArticleMain();
@@ -174,7 +184,6 @@ public class ArticleService {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
 
-
         if(user == null){
             return PatchArticleResult.FAILURE;
         }
@@ -187,6 +196,38 @@ public class ArticleService {
         return this.articleMapper.updateArticleContent(article) > 0
                 ? PatchArticleResult.SUCCESS
                 : PatchArticleResult.FAILURE;
+    }
+
+    public LIkeAndReportResult UpdateLikeResult(int index, HttpSession session) {
+
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
+
+        if(Objects.equals(user.getEmail(), article.getEmail())){
+            return null; //사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
+        }
+
+        article.setLikeCount(article.getLikeCount() + 1);
+
+        return this.articleMapper.updateLike(article) > 0
+                ? LIkeAndReportResult.SUCCESS
+                : LIkeAndReportResult.FAILURE;
+    }
+
+    public LIkeAndReportResult UpdateReportResult(int index, HttpSession session) {
+
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
+
+        if(Objects.equals(user.getEmail(), article.getEmail())){
+            return null; //사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
+        }
+
+        article.setReport(article.getReport() + 1);
+
+        return this.articleMapper.updateReport(article) > 0
+                ? LIkeAndReportResult.SUCCESS
+                : LIkeAndReportResult.FAILURE;
     }
 
 

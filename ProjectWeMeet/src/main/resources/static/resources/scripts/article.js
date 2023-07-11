@@ -30,31 +30,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-var currentUrl = window.location.href;
 
 // URL에 category 매개변수가 있는지 확인합니다.
 
 document.addEventListener('DOMContentLoaded', function () {
     const links = document.querySelectorAll('.category-item');
-    if (currentUrl === 'http://localhost:6795/article?category=%EC%9A%B4%EB%8F%99') {
-        links[1].click();
-        links[1].classList.add('underline');
-    } else (links[2].click());
-
-
-
-
-
-
-
     for (let i = 0; i < links.length; i++) {
+        links[0].classList.add('underline');
         links[i].addEventListener('click', function (e) {
-
-            e.preventDefault();
             links.forEach(function (link) {
                 link.classList.remove('underline');
             });
-
             // 클릭된 링크에만 밑줄 출력
             this.classList.add('underline');
         });
