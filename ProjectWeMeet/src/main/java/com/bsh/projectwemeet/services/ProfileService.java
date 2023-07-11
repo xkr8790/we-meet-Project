@@ -25,11 +25,11 @@ public class ProfileService {
         this.loginMapper = loginMapper;
     }
 
-    public UserEntity getNickname(HttpSession session) {
+    public UserEntity getAll(HttpSession session) {
 
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-        return this.profileMapper.selectNickname(loginUser.getEmail());
+        return this.profileMapper.selectAll(loginUser.getEmail());
     }
 
     public LoginResult checkPassword(UserEntity user) {

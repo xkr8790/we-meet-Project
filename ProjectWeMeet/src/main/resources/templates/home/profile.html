@@ -65,12 +65,76 @@
             <input type="file" id="change_profile" class="change_profile" accept="image/*" name="change_profile">
             <label class="delete" rel="profileDelete">삭제</label>
         </label>
-        <div class="die">
-            <a class="link" href="#">회원 탈퇴</a>
-        </div>
-        <div class="finish">
-            <input class="close" name="close" type="button" value="취소" data-mz-close>
-            <input type="button" name="save" class="save" value="저장">
+        <div class="__body" data-mz-step="info">
+            <label class="_object-box">
+                <input disabled readonly class="_object-input" type="email" spellcheck="false" th:value="${profile?.getEmail()}">
+            </label>
+            <span class="massage-box">이메일 주소는 변경할 수 없습니다.</span>
+            <div class="new-password-container">
+                <label class="_object-box">
+                    <input class="_object-input" maxlength="50" name="infoPassword" placeholder="새로운 비밀번호를 입력해주세요." type="password">
+                </label>
+                <span class="_object-warning"></span>
+                <label class="_object-box">
+                    <input type="password" class="_object-input" maxlength="50" name="infoPasswordCheck" placeholder="새로운 비밀번호를 한 번 더 입력해주세요.">
+                </label>
+                <span class="_object-warning"></span>
+            </div>
+            <label class="_object-box">
+                <input disabled readonly class="_object-input" spellcheck="false" type="text" th:value="${profile?.getNickname()}">
+            </label>
+            <span class="message-box">닉네임은 변경할 수 없습니다.</span>
+            <label class="_object-box">
+                <input type="tel" disabled readonly class="_object-input" name="infoCurrentContact" spellcheck="false" th:value="${profile?.getContact()}">
+            </label>
+            <label class="_object-check-container">
+                <input type="checkbox" class="_check-input" name="infoChangeContact">
+                <span class="_checkbox"></span>
+                <span class="_text">연락처 변경하기</span>
+            </label>
+            <div class="new-contact-container">
+                <div class="multi-container">
+                    <label class="_object-box">
+                        <input type="tel" class="_object-input" maxlength="12" name="infoContact" placeholder="연락처 ('-' 없이)" spellcheck="false">
+                    </label>
+                    <input type="button" class="_object-button" name="infoContactSend" value="인증번호 전송">
+                </div>
+                <div class="multi-container">
+                    <label class="_object-box">
+                        <input type="text" disabled class="_object-input" maxlength="6" name="infoContactCode" placeholder="인증번호" spellcheck="false">
+                    </label>
+                    <input type="button" disabled class="_object-button" name="infoContactVerify" value="인증번호 확인">
+                </div>
+                <div class="__contact-counter-container">
+                    <span class="__message">인증 문자가 오지 않나요?</span>
+                    <a href="#" class="__retry">다시 시도</a>
+                </div>
+                <span class="_object-warning"></span>
+            </div>
+            <div class="multi-container">
+                <label class="_object-label _with-icon big">
+                    <input readonly class="_object-input" maxlength="5" name="infoAddressPostal" placeholder="우편번호"
+                           spellcheck="false" type="text" th:value="${session.user.getAddressPostal()}">
+                </label>
+                <input type="button" class="_object-button" name="infoAddressFind" value="우편번호 찾기">
+            </div>
+            <label class="_object-box">
+                <input readonly class="_object-input" maxlength="100" name="infoAddressPrimary"
+                       placeholder="기본 주소('우편번호 찾기' 버튼을 클릭해 주세요.)" spellcheck="false" type="text" th:value="${profile?.getAddressPrimary()}">
+            </label>
+            <label class="_object-box">
+                <input type="text" class="_object-input" maxlength="100" name="infoAddressSecondary" placeholder="상세 주소(건물명, 동, 호수 등을 입력해 주세요.)" spellcheck="false"
+                       th:value="${profile?.getAddressSecondary()}">
+            </label>
+            <span class="_object-warning"></span>
+            <input hidden name="infoContactSalt" type="hidden">
+            <div class="die">
+                <a class="link" href="#">회원 탈퇴</a>
+            </div>
+            <div class="finish">
+                <input class="close" name="close" type="button" value="취소" data-mz-close>
+                <input type="button" name="save" class="save" value="저장">
+            </div>
         </div>
     </div>
 </form>

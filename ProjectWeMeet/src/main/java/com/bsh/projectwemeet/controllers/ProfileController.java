@@ -30,7 +30,7 @@ public class ProfileController {
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getProfile(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("home/profile");
-        UserEntity userEntities = this.profileService.getNickname(session);
+        UserEntity userEntities = this.profileService.getAll(session);
         modelAndView.addObject("profile", userEntities);
         return modelAndView;
     }
