@@ -120,7 +120,7 @@ public class ArticleService {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
         if (loginUser == null){
-            return CreateCommentResult.FAILURE_NOT_LOGIN;
+            return CreateCommentResult.FAILURE_NOT_LOGIN; //로그인 상태가 아닐 때
         }
         comment.setEmail(loginUser.getEmail())
                 .setDeleted(false)
@@ -130,7 +130,7 @@ public class ArticleService {
 
         ArticleEntity articleByEmail = this.articleMapper.selectArticleByEmail(article);
         if (articleByEmail != null && Objects.equals(loginUser.getEmail(), articleByEmail.getEmail())) {
-            return CreateCommentResult.SUCCESS_SAME;
+            return CreateCommentResult.SUCCESS_SAME; //로그인한 유저와 게시글을 작성한 유저가 동일할 때
         }
 
         return this.articleMapper.insertComment(comment)>0
@@ -139,32 +139,32 @@ public class ArticleService {
     }
 
 
-    public DeleteCommentResult deleteComment(CommentEntity comment, ArticleEntity article, HttpSession session) {
+    public DeleteCommentResult deleteComment(CommentEntity comment, HttpSession session) {
         comment = this.articleMapper.selectComment(comment.getIndex());
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
-        ArticleEntity articleByEmail = this.articleMapper.selectArticleByEmail(article);
-//        if (comment == null) {
-//            return false;
-//        }
-//
-//        if (loginUser != null && articleByEmail != null &&
-//                loginUser.equals(articleByEmail) || loginUser.isAdmin()) {
-//            comment.setDeleted(true);
-//            return this.articleMapper.updateComment(comment) > 0;
-//        }
-//
-//        return false;
-
-
-        if (comment == null){
-            return DeleteCommentResult.FAILURE_DELETED; //이미 삭제된 댓글
-        }
+        CommentEntity commentByEmail = this.articleMapper.selectCommentByEmail(comment);
         if (loginUser == null){
             return DeleteCommentResult.FAILURE_NOT_LOGIN; // 로그인 상태가 아닐 경우
         }
-        if (!loginUser.equals(articleByEmail) || !loginUser.isAdmin()) {
-            return DeleteCommentResult.FAILURE_NO_AUTHORITY; // 삭제 권한이 없을 경우
+        if (comment != null && comment.isDeleted()) {
+            return DeleteCommentResult.FAILURE_DELETED; // 이미 삭제된 댓글
         }
+//        if (!loginUser.isAdmin()){
+//            System.out.println("aaa");
+//            return DeleteCommentResult.FAILURE_NO_AUTHORITY;
+//        }
+//        if (!loginUser.equals(commentByEmail)) {
+//            System.out.println("BB");
+//            return DeleteCommentResult.FAILURE_NO_AUTHORITY; // 권한이 없는 경우
+//        }
+
+
+        if (!loginUser.isAdmin()) {
+            if (!loginUser.equals(commentByEmail)) {
+                return DeleteCommentResult.FAILURE_NO_AUTHORITY; // 권한이 없는 경우
+            }
+        }
+
 
         comment.setDeleted(true);
         return this.articleMapper.updateComment(comment) > 0

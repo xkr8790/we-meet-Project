@@ -167,9 +167,9 @@ public class ArticleController {
             method = RequestMethod.DELETE,
             produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
-    public String deleteComment(CommentEntity comment,ArticleEntity article,HttpSession session) {
+    public String deleteComment(CommentEntity comment,HttpSession session) {
 
-        DeleteCommentResult result = this.articleService.deleteComment(comment,article,session);
+        DeleteCommentResult result = this.articleService.deleteComment(comment,session);
         JSONObject responseObject = new JSONObject(){{
             put("result",result.name().toLowerCase());
         }};

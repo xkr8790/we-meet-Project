@@ -27,6 +27,9 @@ public interface ArticleMapper {
 //    댓글
     CommentEntity[] selectCommentByArticleIndex(@Param(value = "articleIndex")int articleIndex);
     CommentEntity selectComment(@Param(value = "index") int index);
+
+    CommentEntity selectCommentByEmail(CommentEntity comment);
+
     ArticleEntity selectArticleByEmail(ArticleEntity article);
     int insertComment(CommentEntity comment);
 

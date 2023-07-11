@@ -198,7 +198,21 @@
     WHERE email = #{email}
     LIMIT 1
 </select>
-
+<select id="selectCommentByEmail"
+        resultType="com.bsh.projectwemeet.entities.CommentEntity">
+    SELECT `index` AS `index`,
+           `article_index` AS `articleIndex`,
+           `comment_index` AS `commentIndex`,
+           `email` AS `email`,
+           `content` AS `content`,
+           `deleted_flag` AS `isDeleted`,
+           `created_at` AS `createdAt`,
+           `client_ip` AS `clientIp`,
+           `client_ua` AS `clientUa`
+    FROM `wemeet_project`.`comments`
+    WHERE `email` =#{email}
+    LIMIT 1
+</select>
 
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
