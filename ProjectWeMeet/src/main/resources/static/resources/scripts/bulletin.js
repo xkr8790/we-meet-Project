@@ -248,12 +248,12 @@ function refreshComment() {
                         const dtTime = comment['createdAt'].split('T')[1].split('.')[0];
                         headDiv.innerText = `${dtDate} ${dtTime}`;
 
-                        const editButton = document.createElement('button');
-                        editButton.classList.add('edit-button');
-                        editButton.innerText = '수정';
-                        editButton.addEventListener('click', () => { //수정버튼 클릭 시
-                            editComment(comment);
-                        });
+                        // const editButton = document.createElement('button');
+                        // editButton.classList.add('edit-button');
+                        // editButton.innerText = '수정';
+                        // editButton.addEventListener('click', () => { //수정버튼 클릭 시
+                        //     editComment(comment);
+                        // });
 
                         const deleteButton = document.createElement('button');
                         deleteButton.classList.add('delete-button');
@@ -291,7 +291,6 @@ function refreshComment() {
                                                 bodyDiv.style.color = '#a0a0a0';
                                                 bodyDiv.style.fontStyle = 'italic';
                                                 // Remove the edit and delete buttons
-                                                div.removeChild(editButton);
                                                 div.removeChild(deleteButton);
                                                 break;
                                             default:
@@ -307,7 +306,7 @@ function refreshComment() {
 
                         bodyDiv.innerText = comment['content'];
 
-                        div.append(headDiv, editButton, deleteButton, bodyDiv);
+                        div.append(headDiv, deleteButton, bodyDiv);
                         commentContainer.appendChild(div);
                     }
                 }

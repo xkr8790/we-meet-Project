@@ -6,7 +6,6 @@ import java.util.Objects;
 public class CommentEntity {
     private int index;
     private int articleIndex;
-    private int commentIndex;
     private String email;
     private String content;
     private boolean isDeleted;
@@ -29,15 +28,6 @@ public class CommentEntity {
 
     public CommentEntity setArticleIndex(int articleIndex) {
         this.articleIndex = articleIndex;
-        return this;
-    }
-
-    public int getCommentIndex() {
-        return commentIndex;
-    }
-
-    public CommentEntity setCommentIndex(int commentIndex) {
-        this.commentIndex = commentIndex;
         return this;
     }
 

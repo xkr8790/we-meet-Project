@@ -41,10 +41,9 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.CommentEntity">
-        INSERT INTO `wemeet_project`.`comments`(`article_index`, `comment_index`, `email`, `content`, `deleted_flag`,
+        INSERT INTO `wemeet_project`.`comments`(`article_index`,`email`, `content`, `deleted_flag`,
                                                 `created_at`, `client_ip`, `client_ua`)
         VALUES (#{articleIndex},
-                #{commentIndex},
                 #{email},
                 #{content},
                 #{isDeleted},
@@ -141,7 +140,6 @@
             resultType="com.bsh.projectwemeet.entities.CommentEntity">
         SELECT `index`         AS `index`,
                `article_index` AS `articleIndex`,
-               `comment_index` AS `commentIndex`,
                `email`         AS `email`,
                `content`       AS `content`,
                `deleted_flag`  AS `isDeleted`,
@@ -157,7 +155,6 @@
             resultType="com.bsh.projectwemeet.entities.CommentEntity">
         SELECT `index`         AS `index`,
                `article_index` AS `articleIndex`,
-               `comment_index` AS `commentIndex`,
                `email`         AS `email`,
                `content`       AS `content`,
                `deleted_flag`  AS `isDeleted`,
@@ -202,7 +199,6 @@
         resultType="com.bsh.projectwemeet.entities.CommentEntity">
     SELECT `index` AS `index`,
            `article_index` AS `articleIndex`,
-           `comment_index` AS `commentIndex`,
            `email` AS `email`,
            `content` AS `content`,
            `deleted_flag` AS `isDeleted`,
@@ -238,7 +234,6 @@
         parameterType="com.bsh.projectwemeet.entities.CommentEntity">
     UPDATE `wemeet_project`.`comments`
     SET `article_index` =#{articleIndex},
-        `comment_index` = #{commentIndex},
         `email` = #{email},
         `content` =#{content},
         `deleted_flag` = #{isDeleted},
