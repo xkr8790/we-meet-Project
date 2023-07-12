@@ -26,6 +26,9 @@ body{
     background-color: white;
     height: 100%;
     scroll-behavior: smooth;
+    transition-duration: 550ms;
+    transition-property: opacity;
+    transition-timing-function: ease;
 }
 
 .up-button{
@@ -213,7 +216,6 @@ body{
     transition: transform 0.3s;
 }
 
-
 .category-img{
     width: 30px;
     height: 30px;
@@ -226,7 +228,7 @@ body{
     border-bottom-color: rgba(0, 0, 0, 1); /* 밑줄 색상 설정 */
     border-bottom-width: 3px; /* 밑줄 두께 설정 */
     border-bottom-style: solid; /* 밑줄 스타일 설정 */
-    transition: border-bottom-color 0.3s, border-bottom-width 0.3s, margin-top 0.3s;
+    transition: border-bottom-color 0.3s, border-bottom-width 0.3s, margin-top 0.3s ease;
 }
 
 .introduce_article > .category > .menu:hover {

@@ -280,7 +280,7 @@ like.addEventListener('click', e => {
                         location.href = `/article/read?index=` + index;
                         break;
                     case 'failure':
-                        alert('좋아요 실패');
+                        alert('자신의 게시물에 좋아요를 할수 없습니다');
                         break;
                     default:
                         alert('좋아요 실패?');
@@ -306,11 +306,11 @@ Report.addEventListener('click', e => {
                 const responseObject = JSON.parse(xhr.responseText);
                 switch (responseObject.result) {
                     case 'success':
-                        alert('신고 누적');
+                        alert('신고가 되었습니다');
                         location.href = `/article/read?index=` + index;
                         break;
                     case 'failure':
-                        alert('좋아요 실패');
+                        alert('자신의 게시물에 신고를 할수 없습니다');
                         break;
                     default:
                         alert('좋아요 실패?');

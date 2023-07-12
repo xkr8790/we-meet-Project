@@ -17,46 +17,54 @@ public interface ArticleMapper {
     int insertParticipants(ParticipantsEntity participants);
 
 
-    ArticleEntity[] selectAll();
+    int selectCountCategory(@Param(value = "category")String category);
+    //param을 이용해 관련 카테고리만 조회해서 가져온다
 
-    int selectCount( @Param(value = "searchCriterion")String searchCriterion,
-                     @Param(value = "searchQuery")String searchQuery);
-    //select문의 id와 같기때문에 셀렉트된 데이터의 개수 모두 가져오기
 
-    ArticleEntity[] selectByPage(@Param(value = "pagingModel") PagingModel pagingModel);
+    ArticleEntity[] selectCountCategoryByPage(@Param(value = "pagingModel") PagingModel pagingModel,
+                                              @Param(value = "category") String category);
+    //카테고리 관련 페이징을 위한 매퍼
 
-    ArticleEntity[] selectByPageCategory(@Param(value = "category") String category,
-                                         @Param(value = "pagingModel") PagingModel pagingModel);
 
     ArticleEntity[] selectArticleMain();
+    //메인에 게시물 6개 나타내기 위한 매퍼
 
     ArticleEntity[] selectDifferentArticle();
+    //이런만남은 어때요?를 나타내기 위한 매퍼
 
 
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
+    //클릭시 해당게시물을 가기위해 index값으로 찾기위해 사용되는 매퍼
 
     ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
+    //게시물 수정 인덱스 찾기
 
     ArticleEntity[] selectArticleByPatchHashTag(@Param(value = "index") int index);
+    //게시물 해쉬태그 select
 
     ParticipantsEntity selectParticipants(@Param(value = "index") int index);
-
-    int deleteByArticle(@Param(value = "index")int index); //Param 사용시 SQL문에 파라미터 타입을 안사용해도된다
-
-    int deleteByParticipants(@Param(value = "index")int index); //Param 사용시 SQL문에 파라미터 타입을 안사용해도된다
+    // 참여인원 중복되있는지 select
 
     int updateLike(ArticleEntity article);
+    //좋아요를 업데이트 하기위한 매퍼
 
     int updateReport(ArticleEntity article);
-
+    //신고를 업데이트 하기위한 매퍼
 
     int updateArticle(ArticleEntity article);
-    //게시글 수정
+    //조회수 수정
 
-    int updateArticleContent(ArticleEntity article); //게시판 수정
-
+    int updateArticleContent(ArticleEntity article);
+    //게시판 수정
 
     int updateParticipate(ArticleEntity article);
+    //참여자의 업데이트를 위한 매퍼
+
+    int deleteByArticle(@Param(value = "index")int index);
+    //게시물의 인덱스로 삭제하기 위해 사용되는 매퍼
+
+    int deleteByParticipants(@Param(value = "index")int index);
+    //참여취소를 위해 Delete하기 위한 매퍼
 
 
 

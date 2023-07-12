@@ -1,51 +1,72 @@
 const Article = document.getElementById('Article');
 const category = Article.querySelectorAll('.category-item');
+let url = window.location.href;
+
+if (url.includes("%EC%98%81%ED%99%94")) {
+    category[1].classList.add('underline');
+    //영화일때 밑줄 추가
+} else if (url.includes("%EA%B2%8C%EC%9E%84")) {
+    category[2].classList.add('underline');
+    //게임일때 밑줄 추가
+} else if (url.includes("%EC%9A%B4%EB%8F%99")) {
+    category[3].classList.add('underline');
+    //운동일때 밑줄 추가
+} else if (url.includes("%EC%82%B0%EC%B1%85")) {
+    category[4].classList.add('underline');
+    //산책일때 밑줄 추가
+} else if (url.includes("%EC%8B%9D%EC%82%AC")) {
+    category[5].classList.add('underline');
+    //식사일때 밑줄 추가
+} else if (url.includes("%EB%A7%8C%EB%82%A8")) {
+    category[6].classList.add('underline');
+    //만남일때 밑줄 추가
+} else if (url.includes("%EC%99%84%EB%A3%8C")) {
+    category[7].classList.add('underline');
+    //완료일때 밑줄 추가
+}
 
 
 
-//페이지 로드시 시작되는 함수
-document.addEventListener("DOMContentLoaded", function () {
-    let sliderIndex = 0;
-    const slideWidth = document.querySelector('.article-container').clientWidth;
-    const slider = document.querySelector('.slider');
-    const navigationButtons = document.querySelectorAll('.category-item');
-
-    // 슬라이드를 옆으로 이동하는 함수
-    function slideTo(index) {
-        sliderIndex = index;
-        slider.style.transform = `translateX(${-sliderIndex * slideWidth}px)`;
-
-        // 활성화된 버튼 표시
-        navigationButtons.forEach((button, buttonIndex) => {
-            button.classList.toggle('active', buttonIndex === sliderIndex);
-        });
-    }
-
-    // 네비게이션 버튼 클릭 시 해당 페이지로 이동
-    navigationButtons.forEach((button, index) => {
-        button.addEventListener('click', () => {
-            slideTo(index);
-        });
-    });
-
-});
 
 
-// URL에 category 매개변수가 있는지 확인합니다.
+// 페이지 로드시 시작되는 함수
+// document.addEventListener("DOMContentLoaded", function () {
+//     let sliderIndex = 0;
+//     const slideWidth = document.querySelector('.article-container').clientWidth;
+//     const slider = document.querySelector('.slider');
+//     const navigationButtons = document.querySelectorAll('.category-item');
+//
+//     // 슬라이드를 옆으로 이동하는 함수
+//     function slideTo(index) {
+//         sliderIndex = index;
+//         slider.style.transform = `translateX(${-sliderIndex * slideWidth}px)`;
+//
+//         // 활성화된 버튼 표시
+//         navigationButtons.forEach((button, buttonIndex) => {
+//             button.classList.toggle('active', buttonIndex === sliderIndex);
+//         });
+//     }
+//
+//     // 네비게이션 버튼 클릭 시 해당 페이지로 이동
+//     navigationButtons.forEach((button, index) => {
+//         button.addEventListener('click', () => {
+//             slideTo(index);
+//         });
+//     });
+//
+// });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const links = document.querySelectorAll('.category-item');
-    for (let i = 0; i < links.length; i++) {
-        links[0].classList.add('underline');
-        links[i].addEventListener('click', function (e) {
-            links.forEach(function (link) {
-                link.classList.remove('underline');
-            });
-            // 클릭된 링크에만 밑줄 출력
-            this.classList.add('underline');
-        });
-    }
-});
+
+// document.addEventListener('DOMContentLoaded', function () {
+//
+//     const links = document.querySelectorAll('.category-item');
+//     if(url === 'http://localhost:6796/article?p=1&category=%EC%98%81%ED%99%94'){
+//         links[1].classList.add('underline');
+//     }else if(url=== 'http://localhost:6796/article?p=1&category=%EA%B2%8C%EC%9E%84'){
+//         links[2].classList.add('underline');
+//     }
+//
+// });
 
 
 

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>소소한 일상의 변화. WeMeet!</title>
 
-    <link rel="stylesheet" href="/resources/stylesheets/mainStyle.css">
-    <link rel="stylesheet" href="/resources/stylesheets/mainMenu.css">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/mainStyle.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/mainMenu.css}">
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
     <script defer src="/resources/scripts/slide.js"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
@@ -75,56 +75,56 @@
         <ul class="grid">
 
             <li class="item">
-                <a class="link" th:href="@{/article}">
+                <a class="link" th:href="@{'/article' (p=1,category='')}">
                     <img alt="전체" class="image" th:src="@{/resources/images/testImages/전체.png}">
                     <span class="text">전체</span>
                 </a>
             </li>
 
             <li class="item">
-                <a class="link" th:href="@{/article}">
+                <a class="link" th:href="@{'/article' (p=1,category='영화')}">
                     <img alt="운동·액티비티" class="image" th:src="@{/resources/images/testImages/운동.png}">
                     <span class="text">운동·액티비티</span>
                 </a>
             </li>
 
             <li class="item">
-                <a class="link" th:href="@{/article}">
+                <a class="link" th:href="@{'/article' (p=1,category='게임')}">
                     <img alt="푸드·드링크" class="image" th:src="@{/resources/images/testImages/음식.png}">
                     <span class="text">푸드·드링크</span>
                 </a>
             </li>
 
             <li class="item">
-                <a class="link" th:href="@{/article}">
+                <a class="link" th:href="@{'/article' (p=1,category='운동')}">
                     <img alt="문화·예술" class="image" th:src="@{/resources/images/testImages/문화예술.png}">
                     <span class="text">문화·예술</span>
                 </a>
             </li>
 
             <li class="item">
-                <a class="link" th:href="@{/article}">
+                <a class="link" th:href="@{'/article' (p=1,category='산책')}">
                     <img alt="취미·자기개발" class="image" th:src="@{/resources/images/testImages/취미.png}">
                     <span class="text">취미·자기개발</span>
                 </a>
             </li>
 
             <li class="item">
-                <a class="link" th:href="@{/article}">
+                <a class="link" th:href="@{'/article' (p=1,category='식사')}">
                     <img alt="온라인" class="image" th:src="@{/resources/images/testImages/온라인.png}">
                     <span class="text">온라인</span>
                 </a>
             </li>
 
             <li class="item">
-                <a class="link" th:href="@{/article}">
+                <a class="link" th:href="@{'/article' (p=1,category='만남')}">
                     <img alt="여행" class="image" th:src="@{/resources/images/testImages/여행.png}">
                     <span class="text">여행</span>
                 </a>
             </li>
 
             <li class="item">
-                <a class="link" th:href="@{/article}">
+                <a class="link" th:href="@{'/article' (p=1, category='완료')}">
                     <img alt="완료" class="image" th:src="@{/resources/images/testImages/완료.png}">
                     <span class="text">완료</span>
                 </a>

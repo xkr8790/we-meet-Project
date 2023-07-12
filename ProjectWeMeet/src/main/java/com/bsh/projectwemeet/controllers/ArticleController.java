@@ -39,51 +39,25 @@ public class ArticleController {
     @RequestMapping(value = "article",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    @ResponseBody
     public ModelAndView getArticle(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
-                                   @RequestParam(value = "c", defaultValue = "content", required = false)String searchCriterion,
-                                   @RequestParam(value = "q", defaultValue = "", required = false)String searchQuery) {
+                                   @RequestParam(value = "category", required = false) String category) {
         ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
 
-
-        PagingModel pagingModel = new PagingModel(
+        PagingModel pagingCategory = new PagingModel(
                 ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
-                this.articleService.getCount(searchCriterion, searchQuery),
+                this.articleService.getCountCategory(category),
                 requestPage); //객체화
 
-        ArticleEntity[] articles = this.articleService.getByPage(pagingModel);
+        ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage(pagingCategory, category);
+        //페이징하면서 카테고리 관련 게시물 나타내기
 
-        modelAndView.addObject("article", articles);
-        modelAndView.addObject("pagingModel",pagingModel);
-
-
-
-        String movie = "영화";
-        String game = "게임";
-        String sports = "운동";
-        String walk = "산책";
-        String eat = "식사";
-        String meet = "만남";
-
-
-        ArticleEntity[] articleMovie = this.articleService.getCategory(movie,pagingModel);
-        ArticleEntity[] articleGame = this.articleService.getCategory(game,pagingModel);
-        ArticleEntity[] articleSports = this.articleService.getCategory(sports,pagingModel);
-        ArticleEntity[] articleWalk = this.articleService.getCategory(walk,pagingModel);
-        ArticleEntity[] articleEat = this.articleService.getCategory(eat,pagingModel);
-        ArticleEntity[] articleMeet = this.articleService.getCategory(meet,pagingModel);
-
-        modelAndView.addObject("article", articles);
-        modelAndView.addObject("articleMovie", articleMovie);
-        modelAndView.addObject("articleGame", articleGame);
-        modelAndView.addObject("articleSports", articleSports);
-        modelAndView.addObject("articleWalk", articleWalk);
-        modelAndView.addObject("articleEat", articleEat);
-        modelAndView.addObject("articleMeet", articleMeet);
+        modelAndView.addObject("articleCategory", articleCategory);
+        modelAndView.addObject("pagingCategory", pagingCategory);
+        modelAndView.addObject("category", category);
 
         return modelAndView;
 
-    } //게시판 전부 가져오기
+    } //게시판 카테고리별//
 
 
     @RequestMapping(value = "article/image",

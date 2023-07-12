@@ -50,50 +50,17 @@
                 #{checkParticipationStatus})
     </insert>
 
-    <!--게시물 전체 조회-->
-    <select id="selectAll"
-            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`                   AS `index`,
-               `title`                   AS `title`,
-               `content`                 AS `content`,
-               `category`                AS `category`,
-               `address`                 AS `address`,
-               `limit`                   AS `limit`,
-               `participation`           AS `participation`,
-               `like_count`              AS `likeCount`,
-               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
-               `day`                     AS `appointmentStartDate`,
-               `time`                    AS `appointmentStartTime`
-        FROM `wemeet_project`.`articles`
-        ORDER BY `index` DESC
-    </select>
-    <!--게시물 전체 조회-->
-
-    <select id="selectCount"
-            resultType="int">#결과값 int형으로 변환해서 돌려준다
+    <!-- 카테고리 관련 레코드 조회-->
+    <select id="selectCountCategory"
+            resultType="int">
         SELECT COUNT(0) AS `count`
         FROM `wemeet_project`.`articles`
+        WHERE  `category` LIKE CONCAT('%', #{category}, '%')
     </select>
+    <!-- 카테고리 관련 레코드 조회-->
 
-    <select id="selectByPage"
-            resultType="com.bsh.projectwemeet.entities.ArticleEntity">#결과값 메모엔터티 값으로 돌려준다
-        SELECT `index` AS `index`,
-               `title` AS `title`,
-               `content` AS `content`,
-               `category` AS `category`,
-               `address` AS `address`,
-               `limit` AS `limit`,
-               `like_count` AS `likeCount`,
-               `participation` AS `participation`,
-               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
-               `day` AS `appointmentStartDate`,
-               `time` AS `appointmentStartTime`
-        FROM `wemeet_project`.`articles`
-        ORDER BY `index` DESC
-        LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
-    </select>
-
-    <select id="selectByPageCategory"
+    <!-- 카테고리별 페이징 -->
+    <select id="selectCountCategoryByPage"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">#결과값 메모엔터티 값으로 돌려준다
         SELECT `index` AS `index`,
         `title` AS `title`,
@@ -107,30 +74,50 @@
         `day` AS `appointmentStartDate`,
         `time` AS `appointmentStartTime`
         FROM `wemeet_project`.`articles`
-        WHERE `category` = #{category}
+        WHERE  `category` LIKE CONCAT('%', #{category}, '%')
         ORDER BY `index` DESC
         LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
     </select>
+    <!-- 카테고리별 페이징 -->
 
-    <!--게시물 전체 조회-->
-    <select id="selectCategory"
+    <!--메인에 나타낼 게시물 6개-->
+    <select id="selectArticleMain"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`                   AS `index`,
                `title`                   AS `title`,
                `content`                 AS `content`,
                `category`                AS `category`,
                `address`                 AS `address`,
+               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
                `limit`                   AS `limit`,
                `participation`           AS `participation`,
-               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
                `day`                     AS `appointmentStartDate`,
                `time`                    AS `appointmentStartTime`
         FROM `wemeet_project`.`articles`
-        WHERE `category` = #{category}
         ORDER BY `index` DESC
+        LIMIT 6
     </select>
-    <!--게시물 전체 조회-->
+    <!--메인에 나타낼 게시물 6개-->
 
+    <!-- 이런 모임은 어때요 조회-->
+    <select id="selectDifferentArticle"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`    AS `index`,
+               `title`    AS `title`,
+               `content`  AS `content`,
+               `category` AS `category`,
+               `address`  AS `address`,
+               `day`      AS `appointmentStartDate`,
+               `participation`  AS `participation`,
+               `limit`          AS `limit`,
+               `time`     AS `appointmentStartTime`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`
+        FROM `wemeet_project`.`articles`
+        ORDER BY `index` DESC
+        LIMIT 7
+    </select>
+    <!-- 이런 모임은 어때요 조회-->
 
     <!-- 필요한 게시물 조회  -->
     <select id="selectArticleByIndex"
@@ -157,57 +144,6 @@
     </select>
     <!-- 필요한 게시물 조회  -->
 
-    <!-- 이런 모임은 어때요 조회-->
-    <select id="selectDifferentArticle"
-            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`    AS `index`,
-               `title`    AS `title`,
-               `content`  AS `content`,
-               `category` AS `category`,
-               `address`  AS `address`,
-               `day`      AS `appointmentStartDate`,
-               `participation`  AS `participation`,
-               `limit`          AS `limit`,
-               `time`     AS `appointmentStartTime`,
-               `thumbnail`      AS `thumbnail`,
-               `thumbnail_mime` AS `thumbnailMime`
-        FROM `wemeet_project`.`articles`
-        ORDER BY `index` DESC
-        LIMIT 7
-    </select>
-    <!-- 이런 모임은 어때요 조회-->
-
-    <!--메인에 나타낼 게시물 6개-->
-    <select id="selectArticleMain"
-            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`                   AS `index`,
-               `title`                   AS `title`,
-               `content`                 AS `content`,
-               `category`                AS `category`,
-               `address`                 AS `address`,
-               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
-               `limit`                   AS `limit`,
-               `participation`           AS `participation`,
-               `day`                     AS `appointmentStartDate`,
-               `time`                    AS `appointmentStartTime`
-        FROM `wemeet_project`.`articles`
-        ORDER BY `index` DESC
-        LIMIT 6
-    </select>
-    <!--메인에 나타낼 게시물 6개-->
-
-
-    <select id="selectParticipants"
-            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
-        SELECT `index`                      AS `index`,
-               `email`                      AS `email`,
-               `ArticleIndex`               AS `ArticleIndex`,
-               `check_participation_status` AS `checkParticipationStatus`
-        FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` = #{index}
-        LIMIT 1
-    </select>
-
     <!-- 게시물 수정 찾기 -->
     <select id="selectArticleByPatchIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -231,7 +167,7 @@
     </select>
     <!-- 게시물 수정 찾기 -->
 
-    <!-- 게시물 수정 찾기 -->
+    <!-- 게시물 해쉬태그 select -->
     <select id="selectArticleByPatchHashTag"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
@@ -239,7 +175,20 @@
         FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
     </select>
-    <!-- 게시물 수정 찾기 -->
+    <!-- 게시물 해쉬태그 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipants"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`                      AS `index`,
+               `email`                      AS `email`,
+               `ArticleIndex`               AS `ArticleIndex`,
+               `check_participation_status` AS `checkParticipationStatus`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{index}
+        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
 
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
@@ -319,6 +268,8 @@
     <!-- 참여 여부 삭제 -->
 
 
+
+
     <select id="selectArticleByIndexEmail"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
@@ -346,10 +297,6 @@
         WHERE `index` = #{index}
         LIMIT 1
     </update>
-
-
-
-
 
 
 </mapper>

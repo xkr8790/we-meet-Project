@@ -6,10 +6,8 @@ import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import com.bsh.projectwemeet.models.PagingModel;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -27,23 +25,15 @@ public class ArticleService {
         this.articleMapper = articleMapper;
     }
 
-    public ArticleEntity[] getAll() {
-        return this.articleMapper.selectAll();
-    }//게시판은 전부 나타내기
 
-    public int getCount(String searchCriterion, String searchQuery){
-        return this.articleMapper.selectCount(searchCriterion, searchQuery);
-    } // 게시글 전부의 갯수 나타내는 메서드
+    public int getCountCategory(String category){
+        return this.articleMapper.selectCountCategory(category);
+    }
 
-    public ArticleEntity[] getByPage(PagingModel pagingModel) {
-        ArticleEntity[] memoEntities = this.articleMapper.selectByPage(pagingModel);
-        return memoEntities;
-    } //페이지얻게하는 메서드
+    public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String category){
+        return this.articleMapper.selectCountCategoryByPage(pagingModel,category);
+    }
 
-
-    public ArticleEntity[] getCategory(String category,PagingModel pagingModel) {
-        return this.articleMapper.selectByPageCategory(category,pagingModel);
-    }// 카테고리 관련 게시판은 전부 나타내기
 
     public ArticleEntity[] getMainArticle() {
         return this.articleMapper.selectArticleMain();
@@ -204,7 +194,7 @@ public class ArticleService {
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
 
         if(Objects.equals(user.getEmail(), article.getEmail())){
-            return null; //사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
+            return LIkeAndReportResult.FAILURE; //7사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
         }
 
         article.setLikeCount(article.getLikeCount() + 1);
@@ -220,7 +210,7 @@ public class ArticleService {
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
 
         if(Objects.equals(user.getEmail(), article.getEmail())){
-            return null; //사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
+            return LIkeAndReportResult.FAILURE; //사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
         }
 
         article.setReport(article.getReport() + 1);
@@ -229,8 +219,6 @@ public class ArticleService {
                 ? LIkeAndReportResult.SUCCESS
                 : LIkeAndReportResult.FAILURE;
     }
-
-
 
 
 

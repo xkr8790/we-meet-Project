@@ -501,6 +501,7 @@ object-fit: cover;
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-content-box > .article-content{
     width: 17rem;
+    text-overflow: ellipsis;
     background-color: rgb(244, 244, 244);
 }
 
@@ -509,6 +510,7 @@ object-fit: cover;
     /*background-color: white;*/
     width: 17rem;
     background-color: rgb(244, 244, 244);
+
 }
 
 .article-container > .slider > .slide > .article-box > .article-list >
