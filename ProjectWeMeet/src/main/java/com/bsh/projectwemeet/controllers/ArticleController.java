@@ -167,14 +167,17 @@ public class ArticleController {
             method = RequestMethod.DELETE,
             produces = MediaType.TEXT_PLAIN_VALUE)
     @ResponseBody
-    public String deleteComment(CommentEntity comment,HttpSession session) {
+    public String deleteComment(@RequestParam(value = "index") int commentIndex, HttpSession session) {
+        CommentEntity comment = new CommentEntity();
+        comment.setIndex(commentIndex);
 
-        DeleteCommentResult result = this.articleService.deleteComment(comment,session);
-        JSONObject responseObject = new JSONObject(){{
-            put("result",result.name().toLowerCase());
+        DeleteCommentResult result = this.articleService.deleteComment(comment, session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+
 
 
 

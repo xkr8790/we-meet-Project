@@ -258,6 +258,7 @@ function refreshComment() {
                         const deleteButton = document.createElement('button');
                         deleteButton.classList.add('delete-button');
                         deleteButton.innerText = '삭제';
+                        deleteButton.dataset.commentIndex = comment.index;
                         deleteButton.addEventListener('click', (e) => { //삭제버튼 클릭 시
                             e.preventDefault();
                             if (!confirm('정말로 해당 댓글을 삭제할까요?')){
@@ -265,7 +266,7 @@ function refreshComment() {
                             }
                             const xhr = new XMLHttpRequest();
                             const formData = new FormData();
-                            xhr.open('DELETE', '/comment');
+                            xhr.open('DELETE', '/comment?index=' + e.target.dataset.commentIndex);
                             xhr.onreadystatechange = () => {
                                 if (xhr.readyState === XMLHttpRequest.DONE) {
                                     if (xhr.status >= 200 && xhr.status < 300) {

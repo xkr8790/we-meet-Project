@@ -140,53 +140,41 @@ public class ArticleService {
 
 
     public DeleteCommentResult deleteComment(CommentEntity comment, HttpSession session) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-//        comment = this.articleMapper.selectComment(comment.getIndex());
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-//
-//        if (comment != null && comment.isDeleted()) {
-//            return DeleteCommentResult.FAILURE_DELETED; // The comment has already been deleted
-//        }
-//
-//        CommentEntity articleByEmail = this.articleMapper.selectCommentByEmail(comment);
-//        if (loginUser == null) {
-//            return DeleteCommentResult.FAILURE_NOT_LOGIN;
-//        }
-//
-//        if (!loginUser.equals(articleByEmail) && !loginUser.isAdmin()) {
-//            return DeleteCommentResult.FAILURE_NO_AUTHORITY;
-//        }
-//
-//        comment.setDeleted(true);
-//        return this.articleMapper.updateComment(comment) > 0
-//                ? DeleteCommentResult.SUCCESS
-//                : DeleteCommentResult.FAILURE;
-        // Check if the user is logged in
-        UserEntity loggedInUser = (UserEntity) session.getAttribute("loggedInUser");
-        if (loggedInUser == null) {
-            return DeleteCommentResult.FAILURE_NOT_LOGIN;
+        if (loginUser == null) {
+            return DeleteCommentResult.FAILURE_NOT_LOGIN; // 로그인하지 않았을 때
         }
 
-        // Check if the comment is already deleted
-        if (comment.isDeleted()) {
-            return DeleteCommentResult.FAILURE_DELETED;
+        CommentEntity existingComment = articleMapper.selectComment(comment.getIndex());
+        if (existingComment == null) {
+            System.out.println(comment.getIndex());
+            return DeleteCommentResult.FAILURE; // 존재하지 않는 댓글
         }
 
-        // Check if the logged-in user has the authority to delete the comment
-        if (!loggedInUser.getEmail().equals(comment.getEmail())) {
-            // Check if the logged-in user is an admin
-            if (!loggedInUser.isAdmin()) {
-                return DeleteCommentResult.FAILURE_NO_AUTHORITY;
-            }
+        boolean isAdmin = loginUser.isAdmin(); // 로그인한 유저가 관리자 인지 확인
+        boolean isCommentOwner = existingComment.getEmail().equals(loginUser.getEmail());
+
+        if (!isCommentOwner && !isAdmin) {
+            return DeleteCommentResult.FAILURE_NO_AUTHORITY; // 삭제 권한이 없는 경우
         }
 
-        // Perform the actual deletion logic here
-        comment.setDeleted(true);
+        if (existingComment.isDeleted()) {
+            return DeleteCommentResult.FAILURE_DELETED; // 이미 삭제된 댓글 일 경우
+        }
 
-        // Return success if the deletion is successful
-        return DeleteCommentResult.SUCCESS;
+        existingComment.setDeleted(true);
 
 
+        int updateCount = articleMapper.updateComment(existingComment);
+        if (updateCount > 0) {
+            return DeleteCommentResult.SUCCESS; // 성공
+        } else {
+            return DeleteCommentResult.FAILURE; // 실패
+        }
     }
+
+
+
 
 }
