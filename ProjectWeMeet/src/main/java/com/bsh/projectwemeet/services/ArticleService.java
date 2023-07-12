@@ -133,6 +133,10 @@ public class ArticleService {
             return CreateCommentResult.SUCCESS_SAME; //로그인한 유저와 게시글을 작성한 유저가 동일할 때
         }
 
+//        System.out.println(loginUser.getEmail());
+//        System.out.println(articleByEmail.getEmail());
+
+
         return this.articleMapper.insertComment(comment)>0
                 ? CreateCommentResult.SUCCESS
                 : CreateCommentResult.FAILURE;
