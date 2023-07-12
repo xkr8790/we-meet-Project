@@ -1,27 +1,28 @@
 const Article = document.getElementById('Article');
 const category = Article.querySelectorAll('.category-item');
+const articleLink = Article.querySelectorAll('.articleLink');
 let url = window.location.href;
 
 if (url.includes("%EC%98%81%ED%99%94")) {
-    category[1].classList.add('underline');
+    articleLink[1].classList.add('underline');
     //영화일때 밑줄 추가
 } else if (url.includes("%EA%B2%8C%EC%9E%84")) {
-    category[2].classList.add('underline');
+    articleLink[2].classList.add('underline');
     //게임일때 밑줄 추가
 } else if (url.includes("%EC%9A%B4%EB%8F%99")) {
-    category[3].classList.add('underline');
+    articleLink[3].classList.add('underline');
     //운동일때 밑줄 추가
 } else if (url.includes("%EC%82%B0%EC%B1%85")) {
-    category[4].classList.add('underline');
+    articleLink[4].classList.add('underline');
     //산책일때 밑줄 추가
 } else if (url.includes("%EC%8B%9D%EC%82%AC")) {
-    category[5].classList.add('underline');
+    articleLink[5].classList.add('underline');
     //식사일때 밑줄 추가
 } else if (url.includes("%EB%A7%8C%EB%82%A8")) {
-    category[6].classList.add('underline');
+    articleLink[6].classList.add('underline');
     //만남일때 밑줄 추가
 } else if (url.includes("%EC%99%84%EB%A3%8C")) {
-    category[7].classList.add('underline');
+    articleLink[7].classList.add('underline');
     //완료일때 밑줄 추가
 }
 

@@ -18,7 +18,7 @@ public class ArticleService {
 
     public final ArticleMapper articleMapper;
 
-    public static final int PAGE_COUNT=4; //페이지에 나타낼 게시물 갯수
+    public static final int PAGE_COUNT=6; //페이지에 나타낼 게시물 갯수
 
     @Autowired
     public ArticleService(ArticleMapper articleMapper) {

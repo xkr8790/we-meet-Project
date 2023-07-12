@@ -153,8 +153,8 @@
                                     <span class="article-map">
                                 <span th:text="${article.getAddress()}">위치</span>
                                 <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
-                                <span th:text="${#dates.format(article.getAppointmentStartTime(), 'HH시 mm분')}"></span>
-                                </span>
+                                <span th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
+                                + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
                                     <span class="article-human">
               <span class="Profile-Picture">
                  <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
