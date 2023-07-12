@@ -235,26 +235,19 @@ function refreshComment() {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const comments = JSON.parse(xhr.responseText);
                 for (const comment of comments) {
+                    const div = document.createElement('div');
+                    div.classList.add('comment-left');
+
+                    const headDiv = document.createElement('div');
+                    headDiv.classList.add('comment-head');
+                    const bodyDiv = document.createElement('div');
+                    bodyDiv.classList.add('comment-body');
+
+                    const dtDate = comment['createdAt'].split('T')[0];
+                    const dtTime = comment['createdAt'].split('T')[1].split('.')[0];
+                    headDiv.innerText = `${dtDate} ${dtTime}`;
+
                     if (comment['deleted'] === false) {
-                        const div = document.createElement('div');
-                        div.classList.add('comment-left');
-
-                        const headDiv = document.createElement('div');
-                        headDiv.classList.add('comment-head');
-                        const bodyDiv = document.createElement('div');
-                        bodyDiv.classList.add('comment-body');
-
-                        const dtDate = comment['createdAt'].split('T')[0];
-                        const dtTime = comment['createdAt'].split('T')[1].split('.')[0];
-                        headDiv.innerText = `${dtDate} ${dtTime}`;
-
-                        // const editButton = document.createElement('button');
-                        // editButton.classList.add('edit-button');
-                        // editButton.innerText = '수정';
-                        // editButton.addEventListener('click', () => { //수정버튼 클릭 시
-                        //     editComment(comment);
-                        // });
-
                         const deleteButton = document.createElement('button');
                         deleteButton.classList.add('delete-button');
                         deleteButton.innerText = '삭제';
@@ -286,13 +279,6 @@ function refreshComment() {
                                                 break;
                                             case 'success':
                                                 refreshComment();
-                                                // Update the comment's content to indicate deletion
-                                                bodyDiv.innerText = '삭제된 댓글입니다.';
-                                                // Apply custom styling to the deleted comment message
-                                                bodyDiv.style.color = '#a0a0a0';
-                                                bodyDiv.style.fontStyle = 'italic';
-                                                // Remove the edit and delete buttons
-                                                div.removeChild(deleteButton);
                                                 break;
                                             default:
                                                 alert('서버가 알 수 없는 응답을 반환 했습니다.');
@@ -306,10 +292,14 @@ function refreshComment() {
                         });
 
                         bodyDiv.innerText = comment['content'];
-
                         div.append(headDiv, deleteButton, bodyDiv);
-                        commentContainer.appendChild(div);
+                    } else {
+                        bodyDiv.innerText = '삭제된 댓글입니다.';
+                        bodyDiv.style.color = '#a0a0a0';
+                        bodyDiv.style.fontStyle = 'italic';
                     }
+
+                    commentContainer.appendChild(div);
                 }
             } else {
                 alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
