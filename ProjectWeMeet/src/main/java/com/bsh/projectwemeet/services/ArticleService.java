@@ -146,21 +146,21 @@ public class ArticleService {
             return DeleteCommentResult.FAILURE_NOT_LOGIN; // 로그인하지 않았을 때
         }
 
-        CommentEntity existingComment = articleMapper.selectComment(comment.getIndex());
+        CommentEntity existingComment = articleMapper.selectComment(comment.getIndex()); //댓글의 주인
         if (existingComment == null) {
             System.out.println(comment.getIndex());
             return DeleteCommentResult.FAILURE; // 존재하지 않는 댓글
         }
 
         boolean isAdmin = loginUser.isAdmin(); // 로그인한 유저가 관리자 인지 확인
-        boolean isCommentOwner = existingComment.getEmail().equals(loginUser.getEmail());
+        boolean isCommentOwner = existingComment.getEmail().equals(loginUser.getEmail()); // 댓글의 주인과 로그인한 유저가 동일
 
         if (!isCommentOwner && !isAdmin) {
             return DeleteCommentResult.FAILURE_NO_AUTHORITY; // 삭제 권한이 없는 경우
         }
 
         if (existingComment.isDeleted()) {
-            return DeleteCommentResult.FAILURE_DELETED; // 이미 삭제된 댓글 일 경우
+            return DeleteCommentResult.FAILURE_DELETED; // 이미 삭제된 댓글 일 경우,현재는 삭제 삭제버튼이 없기 때문에 작동할 경우는 없음
         }
 
         existingComment.setDeleted(true);
