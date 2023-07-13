@@ -80,6 +80,7 @@ loginForm.onsubmit = e => {
                     }
                     if(document.referrer&&document.referrer.indexOf("localhost:6795/") !== -1){
                         history.back();
+                        location.href=document.referrer;
                     }else{
                         location.href = '/';
                     }

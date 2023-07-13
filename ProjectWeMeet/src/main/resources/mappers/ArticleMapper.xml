@@ -95,6 +95,15 @@
     </select>
     <!-- 카테고리별 페이징 -->
 
+
+
+
+
+
+
+
+
+
     <!--메인에 나타낼 게시물 6개-->
     <select id="selectArticleMain"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">

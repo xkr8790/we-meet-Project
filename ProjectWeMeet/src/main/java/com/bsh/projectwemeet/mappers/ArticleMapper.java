@@ -24,6 +24,8 @@ public interface ArticleMapper {
     //카테고리 관련 페이징을 위한 매퍼
 
 
+
+
     ArticleEntity[] selectArticleMain();
     //메인에 게시물 6개 나타내기 위한 매퍼
 

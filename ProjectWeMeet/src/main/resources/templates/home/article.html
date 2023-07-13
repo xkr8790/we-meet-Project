@@ -137,7 +137,7 @@
             <div class="slide">
                 <div class="article-box">
                     <div class="article-box-grid">
-                        <div class="article-list" th:each="article : ${articleCategory}">
+                        <div class="article-list" th:if="${articleCategory != '완료'}" th:each="article : ${articleCategory}">
                             <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
                                 <div class="article-thumbnail">
                                     <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}"
@@ -181,6 +181,11 @@
                                 </div>
                             </a>
                         </div>
+
+
+
+
+
                     </div>
                     <ul class="pageContainer">
                         <li class="page"
