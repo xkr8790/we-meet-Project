@@ -132,6 +132,7 @@ public class ArticleService {
         if (article != null && Objects.equals(loginUser.getEmail(), article.getEmail())) {
             return CreateCommentResult.SUCCESS_SAME; // 로그인한 유저와 게시글을 작성한 유저가 동일할 때
         }
+        System.out.println(article.getEmail());
 
         // CommentEntity를 DB에 저장하고 결과에 따라 CreateCommentResult 반환
         return this.articleMapper.insertComment(comment) > 0
