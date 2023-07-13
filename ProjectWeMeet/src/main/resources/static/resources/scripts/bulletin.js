@@ -316,7 +316,7 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     const formData = new FormData();
     formData.append('articleIndex', articleIndex);
     formData.append('content', content);
-    formData.append('articleEmail',articleEmail);
+    formData.append('articleEmail', articleEmail);
     if (commentIndex) {
         formData.append('commentIndex', commentIndex);
     }
@@ -347,6 +347,7 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
                             toFocus.focus();
                         }
                         if (refreshCommentAfter === true) {
+                            // Since 'success_same' doesn't insert a new comment, we only need to refresh the comments.
                             refreshComment();
                         }
                         break;
@@ -361,7 +362,6 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     xhr.send(formData);
 }
 
-
 function refreshComment() {
     const articleIndex = bulletinForm['articleIndex'].value;
     const xhr = new XMLHttpRequest();
@@ -374,7 +374,8 @@ function refreshComment() {
 
                 for (const comment of comments) {
                     const div = document.createElement('div');
-                    div.classList.add('comment-left');
+                    const commentClass = (comment['result'] === 'success_same') ? 'comment-right' : 'comment-left';
+                    div.classList.add(commentClass);
 
                     const headDiv = document.createElement('div');
                     headDiv.classList.add('comment-head');
@@ -448,7 +449,6 @@ function refreshComment() {
     xhr.send();
 }
 
-
 bulletinForm.onsubmit = function (e) {
     e.preventDefault();
     if (bulletinForm['content'].value == '') {
@@ -457,7 +457,7 @@ bulletinForm.onsubmit = function (e) {
         return;
     }
     postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
-}
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     refreshComment();
