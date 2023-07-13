@@ -1,29 +1,25 @@
 const Article = document.getElementById('Article');
 const category = Article.querySelectorAll('.category-item');
 const articleLink = Article.querySelectorAll('.articleLink');
-let url = window.location.href;
 
-if (url.includes("%EC%98%81%ED%99%94")) {
+let url = window.location.href; //현재 컴퓨터가 실행되고있는 URL을 가져온다.
+
+var categoryParam = new URL(url).searchParams.get("category"); //url에서 category라는 매개변수의 값을 가져온다
+
+if(!categoryParam){ //전체
+    articleLink[0].classList.add('underline');
+}else if(categoryParam === '영화'){
     articleLink[1].classList.add('underline');
-    //영화일때 밑줄 추가
-} else if (url.includes("%EA%B2%8C%EC%9E%84")) {
+}else if(categoryParam === '게임'){
     articleLink[2].classList.add('underline');
-    //게임일때 밑줄 추가
-} else if (url.includes("%EC%9A%B4%EB%8F%99")) {
+}else if(categoryParam === '운동'){
     articleLink[3].classList.add('underline');
-    //운동일때 밑줄 추가
-} else if (url.includes("%EC%82%B0%EC%B1%85")) {
+}else if(categoryParam === '산책'){
     articleLink[4].classList.add('underline');
-    //산책일때 밑줄 추가
-} else if (url.includes("%EC%8B%9D%EC%82%AC")) {
+}else if(categoryParam === '식사'){
     articleLink[5].classList.add('underline');
-    //식사일때 밑줄 추가
-} else if (url.includes("%EB%A7%8C%EB%82%A8")) {
+}else if(categoryParam === '만남'){
     articleLink[6].classList.add('underline');
-    //만남일때 밑줄 추가
-} else if (url.includes("%EC%99%84%EB%A3%8C")) {
-    articleLink[7].classList.add('underline');
-    //완료일때 밑줄 추가
 }
 
 
@@ -69,6 +65,16 @@ if (url.includes("%EC%98%81%ED%99%94")) {
 //
 // });
 
+// const categoryItems = document.querySelectorAll('.category-item');
+// const slider = document.querySelector('.slider');
+// const slide = document.querySelector('.slide');
+//
+// categoryItems.forEach(() => {
+//     const Slide = slide.cloneNode(true); //복제한다
+//     slider.appendChild(Slide);
+// });
+
+
 
 
 const boardList = document.getElementsByClassName("article-list");
@@ -88,15 +94,5 @@ boards.forEach(function (board) {
         }
     }
 });
-
-//
-// const categoryItems = document.querySelectorAll('.category-item');
-// const slider = document.querySelector('.slider');
-// const slide = document.querySelector('.slide');
-//
-// categoryItems.forEach(() => {
-//     const Slide = slide.cloneNode(true); //복제한다
-//     slider.appendChild(Slide);
-// });
 
 
