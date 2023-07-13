@@ -210,6 +210,37 @@
     LIMIT 1
 </select>
 
+<select id="selectArticleByArticleIndex"
+        resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+    SELECT `index` AS `index`,
+           `email` AS `email`,
+           `title` AS `title`,
+           `category` AS `category`,
+           `content` AS `content`,
+           `place` AS `place`,
+           `address` AS `address`,
+           `thumbnail` AS `thumbnail`,
+           `thumbnail_mime` AS `thumbnailMime`,
+           `view` AS `view`,
+           `created_at` AS `createdAt`,
+           `day` AS `day`,
+           `time` AS `time`,
+           `limit` AS `limit`,
+           `participation` AS `participation`,
+           `like_count` AS `likeCount`,
+           `report` AS `report`,
+           `deleted_flag` AS `isDeleted`,
+           `finished_flag` AS `isFinished`,
+           `latitude` AS `latitude`,
+           `longitude` AS `longitude`,
+           `hashtag` AS `hashtag`,
+           `client_ip` AS `clientIp`,
+           `client_ua` AS `clientUa`
+    FROM `wemeet_project`.`articles`
+    WHERE `email` =#{email}
+    LIMIT 1
+</select>
+
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
             parameterType="com.bsh.projectwemeet.entities.ArticleEntity">

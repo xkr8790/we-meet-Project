@@ -31,6 +31,9 @@ public interface ArticleMapper {
     CommentEntity selectCommentByEmail(CommentEntity comment);
 
     ArticleEntity selectArticleByEmail(ArticleEntity article);
+
+    ArticleEntity selectArticleByArticleIndex(@Param("articleIndex") int articleIndex);
+
     int insertComment(CommentEntity comment);
 
     int updateComment(CommentEntity comment);
