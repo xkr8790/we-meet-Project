@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "article")
 public class ReviewController {
 
     private final ReviewService reviewService;
@@ -22,28 +22,23 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @RequestMapping(value = "review", method = RequestMethod.GET)
-    public ModelAndView getReview() {
+    @RequestMapping(value = "/review/record", method = RequestMethod.GET)
+    public ModelAndView getReview(int articleIndex) {
         ModelAndView modelAndView = new ModelAndView("home/review");
-        ReviewEntity[] reviewEntities = this.reviewService.getAll();
+        ReviewEntity[] reviewEntities = this.reviewService.selectAll(articleIndex);
+//        ArticleEntity[] articles = this.reviewService.articleAll();
         modelAndView.addObject("reviews", reviewEntities);
+//        modelAndView.addObject("article", articles);
         return modelAndView;
     }
 
-    @RequestMapping(value = "review", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/review/record", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postReview(HttpServletRequest request, ReviewEntity reviewEntity, @SessionAttribute(value = "user") UserEntity user) {
+        reviewEntity.setNickname(user.getNickname());
         reviewEntity.setEmail(user.getEmail());
         boolean result = this.reviewService.reviewWrite(request, reviewEntity);
         return String.valueOf(result);
-    }
-
-    @RequestMapping(value = "review/read", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getReviewWrite(@RequestParam(value = "index") int index) {
-        ModelAndView modelAndView = new ModelAndView("home/review");
-        ReviewEntity reviews = this.reviewService.readReview(index);
-        modelAndView.addObject("reviews", reviews);
-        return modelAndView;
     }
 
 

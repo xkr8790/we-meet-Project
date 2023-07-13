@@ -407,33 +407,60 @@
 
 
 
-    <select id="selectArticleByIndexEmail"
+    <update id="updateCategory"
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
+        UPDATE `wemeet_project`.`articles`
+        SET `category` = #{category}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+    <select id="selectArticleByCompleteIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`          AS `index`,
-               `email`          AS `email`,
-               `title`          AS `title`,
-               `content`        AS `content`,
-               `category`       AS `category`,
-               `view`           AS `view`,
-               `limit`          AS `limit`,
-               `participation`  AS `participation`,
-               `latitude`       AS `latitude`,
-               `longitude`      AS `longitude`,
-               `thumbnail`      AS `thumbnail`,
-               `thumbnail_mime` AS `thumbnailMime`,
-               `finished_flag` AS `isFinished`
+        SELECT *
         FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
         LIMIT 1
     </select>
 
-    <update id="updateFinished"
-            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
-        UPDATE `wemeet_project`.`articles`
-        SET `finished_flag` = #{isFinished}
+    <!--완료된 게시물 전체 조회-->
+    <select id="selectCategory"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`                   AS `index`,
+               `title`                   AS `title`,
+               `content`                 AS `content`,
+               `category`                AS `category`,
+               `address`                 AS `address`,
+               `limit`                   AS `limit`,
+               `participation`           AS `participation`,
+               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+               `day`                     AS `appointmentStartDate`,
+               `time`                    AS `appointmentStartTime`,
+               `finished_flag`           AS `isFinished`
+        FROM `wemeet_project`.`articles`
+        WHERE `category` LIKE CONCAT('%', #{category}, '%')
+        ORDER BY `index` DESC
+    </select>
+    <!--완료된 게시물 전체 조회-->
+
+    <select id="selectUpdateCategoryByIndex"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `title`          AS `title`,
+               `category`       AS `category`,
+               `content`        AS `content`,
+               `place`          AS `place`,
+               `address`        AS `address`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`,
+               `time`           AS `appointmentStartTime`,
+               `limit`          AS `limit`,
+               `hashtag`        AS `hashtag`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`
+        FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
         LIMIT 1
-    </update>
-
+    </select>
 
 </mapper>

@@ -1,14 +1,12 @@
 package com.bsh.projectwemeet.controllers;
 
-import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.entities.CommentEntity;
-import com.bsh.projectwemeet.entities.ParticipantsEntity;
-import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.models.PagingModel;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
 import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
+import com.bsh.projectwemeet.services.ReviewService;
 import org.json.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.json.JSONObject;
@@ -36,10 +34,12 @@ import java.util.Date;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final ReviewService reviewService;
 
     @Autowired
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(ArticleService articleService, ReviewService reviewService) {
         this.articleService = articleService;
+        this.reviewService = reviewService;
     }
 
     @RequestMapping(value = "article",
@@ -238,30 +238,6 @@ public class ArticleController {
         return responseObject.toString();
     }
 
-    @RequestMapping(value="article/review", method = RequestMethod.GET)
-    public ModelAndView getFinish(int index, HttpSession session){
-        boolean result = this.articleService.patchFinish(index ,session);
-        ModelAndView modelAndView = new ModelAndView("home/review");
-        modelAndView.addObject("result", result);
-        return modelAndView;
-   }
-//   게시물 작성자와 로그인된 아이디가 같은지 다른지에 대한 여부를 통해 페이지 넘어가게 하기
-
-//    @RequestMapping(value="article/review", method = RequestMethod.PATCH)
-//    @ResponseBody
-//    public String patchFinished(ArticleEntity article, HttpSession session){
-//        FinishResult result = this.articleService.patchFinished(article, session);
-//        JSONObject responseObject = new JSONObject() {{
-//            put("result", result.name().toLowerCase());
-//        }};
-//        return responseObject.toString();
-//    }
-
-
-
-
-
-
 
 //    댓글
 
@@ -272,19 +248,6 @@ public class ArticleController {
     public CommentEntity[] getComment(@RequestParam(value = "articleIndex")int articleIndex){
         return this.articleService.getCommentsOf(articleIndex);
     }
-
-//    @RequestMapping(value = "comment",
-//            method = RequestMethod.POST,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public String postComment(HttpServletRequest request,
-//                              CommentEntity comment,
-//                              HttpSession session){
-//        boolean result = this.articleService.putComment(request, comment,session);
-//
-//
-//        return String.valueOf(result);
-//    }
 
     @RequestMapping(value = "comment",
             method = RequestMethod.POST,
@@ -315,6 +278,32 @@ public class ArticleController {
         }};
         return responseObject.toString();
     }
+
+
+//    완료 후 다음으로 보내기
+
+    @RequestMapping(value="article/review", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getUpdateCategory(@RequestParam(value="index")int index, String category){
+        ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
+        ModelAndView modelAndView = new ModelAndView("home/review");
+        ReviewEntity[] reviewEntities = this.reviewService.getAll();
+        modelAndView.addObject("article", article);
+        modelAndView.addObject("reviews", reviewEntities);
+        return modelAndView;
+    }
+
+
+
+    @RequestMapping(value="article/review", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updateCategory(int index, HttpSession session){
+        UpdateCategoryResult result = this.articleService.updateCategory(index, session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+
 
 
 

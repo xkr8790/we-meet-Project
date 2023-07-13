@@ -1,14 +1,11 @@
 package com.bsh.projectwemeet.mappers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.CommentEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.models.PagingModel;
-import com.bsh.projectwemeet.entities.CommentEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Date;
 
 @Mapper
 public interface ArticleMapper {
@@ -18,7 +15,7 @@ public interface ArticleMapper {
     int insertParticipants(ParticipantsEntity participants);
 
 
-    int selectCountCategory(@Param(value = "category")String category);
+    int selectCountCategory(@Param(value = "category") String category);
     //param을 이용해 관련 카테고리만 조회해서 가져온다
 
 
@@ -61,22 +58,16 @@ public interface ArticleMapper {
     int updateParticipate(ArticleEntity article);
     //참여자의 업데이트를 위한 매퍼
 
-    int deleteByArticle(@Param(value = "index")int index);
+    int deleteByArticle(@Param(value = "index") int index);
     //게시물의 인덱스로 삭제하기 위해 사용되는 매퍼
 
-    int deleteByParticipants(@Param(value = "index")int index);
+    int deleteByParticipants(@Param(value = "index") int index);
     //참여취소를 위해 Delete하기 위한 매퍼
 
 
+    //    댓글
+    CommentEntity[] selectCommentByArticleIndex(@Param(value = "articleIndex") int articleIndex);
 
-
-
-
-    ArticleEntity selectArticleByIndexEmail(@Param(value="index") int index);
-
-    int updateFinished(ArticleEntity article);
-//    댓글
-    CommentEntity[] selectCommentByArticleIndex(@Param(value = "articleIndex")int articleIndex);
     CommentEntity selectComment(@Param(value = "index") int index);
 
     CommentEntity selectCommentByEmail(CommentEntity comment);
@@ -90,6 +81,10 @@ public interface ArticleMapper {
     int updateComment(CommentEntity comment);
 
 
-
+    //    완료 페이지로 넘기기
+    ArticleEntity selectArticleByCompleteIndex(@Param(value = "index") int index);
+    int updateCategory(ArticleEntity article);
+    ArticleEntity[] selectCategory(@Param(value = "category") String category);
+    ArticleEntity selectUpdateCategoryByIndex(@Param(value="index")int index);
 
 }

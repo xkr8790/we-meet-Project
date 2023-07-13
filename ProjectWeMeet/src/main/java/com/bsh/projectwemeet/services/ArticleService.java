@@ -226,50 +226,12 @@ public class ArticleService {
 
 
 
-
-    public boolean patchFinish(int index, HttpSession session) {
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-        ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(index);
-
-        if (articles == null || loginUser == null || !loginUser.getEmail().equals(articles.getEmail())) {
-            return false;
-        }
-
-        articles.setFinished(true);
-        return this.articleMapper.updateFinished(articles) > 0;
-    }
-
-//    public FinishResult patchFinished(ArticleEntity article, HttpSession session){
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-//        ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(article);
-//
-//        if (articles == null || loginUser == null || !loginUser.getEmail().equals(articles.getEmail())) {
-//            return FinishResult.FAILURE;
-//        }
-//        articles.setFinished(true);
-//        return this.articleMapper.updateFinished(articles) > 0
-//                ? FinishResult.SUCCESS
-//                : FinishResult.SUCCESS;
-//    }
-
     //    댓글
     public CommentEntity[] getCommentsOf(int articleIndex) {
 
         return this.articleMapper.selectCommentByArticleIndex(articleIndex);
     }
 
-//    public boolean putComment(HttpServletRequest request, CommentEntity comment,HttpSession session){
-//
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-//
-//
-//        comment.setEmail(loginUser.getEmail())
-//                .setDeleted(false)
-//                .setCreatedAt(new Date())
-//                .setClientIp(request.getRemoteAddr())
-//                .setClientUa(request.getHeader("User-Agent"));
-//        return this.articleMapper.insertComment(comment)>0;
-//    }
 
 
     public CreateCommentResult putComment(HttpServletRequest request, CommentEntity comment, HttpSession session, ArticleEntity article) {
@@ -335,6 +297,41 @@ public class ArticleService {
         }
     }
 
+
+// 완료페이지로 넘기기
+    public UpdateCategoryResult updateCategory(int index, HttpSession session){
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        ArticleEntity articles = this.articleMapper.selectArticleByCompleteIndex(index);
+        if(loginUser == null){
+            System.out.println("서비스1");
+            return  UpdateCategoryResult.FAILURE;
+        }
+        if(articles ==null){
+            System.out.println("서비스2");
+            return UpdateCategoryResult.FAILURE;
+        }
+        if(loginUser.getEmail().equals(articles.getEmail())){
+            System.out.println("서비스3");
+            articles.setCategory("완료");
+        }else{
+            System.out.println("서비스4");
+            return UpdateCategoryResult.FAILURE;
+        }
+        System.out.println("서비스5");
+        return this.articleMapper.updateCategory(articles) > 0
+                ? UpdateCategoryResult.SUCCESS
+                : UpdateCategoryResult.FAILURE;
+
+    }
+
+    public ArticleEntity[] selectCategory(String category) {
+
+        return this.articleMapper.selectCategory(category);
+    }// 완료된 게시판은 전부 나타내기
+
+    public ArticleEntity getUpdateCategoryByIndex(int index){
+        return this.articleMapper.selectUpdateCategoryByIndex(index);
+    }
 
 
 
