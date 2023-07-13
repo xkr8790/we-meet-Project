@@ -323,7 +323,7 @@ public class ArticleService {
         }
 
         if (existingComment.isDeleted()) {
-            return DeleteCommentResult.FAILURE_DELETED; // 이미 삭제된 댓글 일 경우,현재는 삭제 삭제버튼이 없기 때문에 작동할 경우는 없음
+            return DeleteCommentResult.FAILURE_DELETED; // 이미 삭제된 댓글 일 경우
         }
 
         existingComment.setDeleted(true);
