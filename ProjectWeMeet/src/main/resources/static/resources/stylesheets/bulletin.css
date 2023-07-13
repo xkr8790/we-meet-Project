@@ -489,3 +489,9 @@ allContainer > .header > .login > a {
     height: 2.27rem;
     border-radius: 50%;
 }
+
+
+/*댓글*/
+.comment-left{
+    margin-bottom: 1rem;
+}

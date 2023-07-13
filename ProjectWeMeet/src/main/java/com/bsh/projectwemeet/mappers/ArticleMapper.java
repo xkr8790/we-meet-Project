@@ -3,6 +3,7 @@ package com.bsh.projectwemeet.mappers;
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.models.PagingModel;
+import com.bsh.projectwemeet.entities.CommentEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
@@ -74,6 +75,21 @@ public interface ArticleMapper {
     ArticleEntity selectArticleByIndexEmail(@Param(value="index") int index);
 
     int updateFinished(ArticleEntity article);
+//    댓글
+    CommentEntity[] selectCommentByArticleIndex(@Param(value = "articleIndex")int articleIndex);
+    CommentEntity selectComment(@Param(value = "index") int index);
+
+    CommentEntity selectCommentByEmail(CommentEntity comment);
+
+    ArticleEntity selectArticleByEmail(ArticleEntity article);
+
+    ArticleEntity selectArticleByArticleIndex(@Param("articleIndex") int articleIndex);
+
+    int insertComment(CommentEntity comment);
+
+    int updateComment(CommentEntity comment);
+
+
 
 
 }

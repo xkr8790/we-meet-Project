@@ -8,9 +8,9 @@
     <title>게시글</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <link rel="stylesheet" href="/resources/stylesheets/bulletin.css">
-    <script defer src="/resources/scripts/bulletin.js"></script>
-    <script defer src="/resources/scripts/bulletinMap.js"></script>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
+    <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
+    <script defer th:src="@{/resources/scripts/bulletinMap.js}"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
 </head>
@@ -55,6 +55,10 @@
                     </a>
                     <p>쵸단</p>
                 </div>
+                <div class="bulletin-title" th:text="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하
+                    오지마세요!
+                </div>
+            </div>
                 <div class="bulletin-title" th:text="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
             </div>
         </div>
@@ -137,6 +141,7 @@
                 <div class="map" id="map"></div>
                 <input name="lat" th:value="${article.getLatitude()}" readonly style="display: none">
                 <input name="lng" th:value="${article.getLongitude()}" readonly style="display: none">
+                <input name="mapPlace" th:value="${article.getPlace()}"readonly style="display: none">
             </div>
 
 
@@ -147,7 +152,8 @@
 
                     </div>
                     <div class="content-write">
-                        <input type="hidden" name="articleIndex">
+                        <input name="articleIndex" type="hidden" th:value="${article.getIndex()}">
+
                         <label>
                             <input type="text" name="content" placeholder="댓글" maxlength="100">
                         </label>
