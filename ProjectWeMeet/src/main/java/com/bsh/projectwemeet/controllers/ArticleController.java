@@ -1,6 +1,7 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.CommentEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.enums.*;
