@@ -311,10 +311,12 @@ finishButton.addEventListener('click', e => {
 function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     refreshCommentAfter ??= true;
     const articleIndex = bulletinForm['articleIndex'].value;
+    const articleEmail = bulletinForm['articleEmail'].value;
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('articleIndex', articleIndex);
     formData.append('content', content);
+    formData.append('articleEmail',articleEmail);
     if (commentIndex) {
         formData.append('commentIndex', commentIndex);
     }

@@ -272,7 +272,7 @@ public class ArticleService {
 //    }
 
 
-    public CreateCommentResult putComment(HttpServletRequest request, CommentEntity comment, HttpSession session, ArticleEntity article) {
+    public CreateCommentResult putComment(HttpServletRequest request, CommentEntity comment, HttpSession session, String articleEmail) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
         if (loginUser == null) {
@@ -286,16 +286,18 @@ public class ArticleService {
                 .setClientUa(request.getHeader("User-Agent"));
 
         // 게시글 작성자와 댓글 작성자가 동일한지 확인
-        if (article != null && Objects.equals(loginUser.getEmail(), article.getEmail())) {
+        if (articleEmail != null && loginUser.getEmail().equals(articleEmail)) {
             return CreateCommentResult.SUCCESS_SAME; // 로그인한 유저와 게시글을 작성한 유저가 동일할 때
         }
-        System.out.println(article.getEmail());
+        System.out.println(articleEmail);
 
         // CommentEntity를 DB에 저장하고 결과에 따라 CreateCommentResult 반환
-        return this.articleMapper.insertComment(comment) > 0
-                ? CreateCommentResult.SUCCESS
-                : CreateCommentResult.FAILURE;
-
+        int rowsAffected = articleMapper.insertComment(comment);
+        if (rowsAffected > 0) {
+            return CreateCommentResult.SUCCESS;
+        } else {
+            return CreateCommentResult.FAILURE;
+        }
     }
 
 

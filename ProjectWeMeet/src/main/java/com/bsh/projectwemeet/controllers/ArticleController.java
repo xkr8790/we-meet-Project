@@ -286,20 +286,16 @@ public class ArticleController {
 //        return String.valueOf(result);
 //    }
 
-    @RequestMapping(value = "comment",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "comment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postComment(HttpServletRequest request,
-                              CommentEntity comment,
-                              HttpSession session,
-                              ArticleEntity article){
-        CreateCommentResult result = this.articleService.putComment(request, comment, session, article);
-        JSONObject responseObject = new JSONObject(){{
-            put("result",result.name().toLowerCase());
+    public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail) {
+        CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+
 
     @RequestMapping(value = "comment",
             method = RequestMethod.DELETE,

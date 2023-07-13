@@ -274,7 +274,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #f4f3f1;
+    background-color: lightgray;
     padding: 2rem 0 0.5rem 0;
 }
 .article-box > .article-box-grid{
@@ -283,7 +283,7 @@ body{
     align-items: center; /* 수직 정렬 */
     justify-items: center;
     grid-gap: 1rem;
-    background-color: #f4f3f1;
+    background-color: lightgray;
     padding: 1rem 0 0.5rem 0;
 }
 
