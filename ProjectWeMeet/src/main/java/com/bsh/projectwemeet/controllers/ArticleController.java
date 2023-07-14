@@ -47,21 +47,21 @@ public class ArticleController {
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getArticle(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
                                    @RequestParam(value = "category", required = false) String category) {
-        ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
 
-        PagingModel pagingCategory = new PagingModel(
-                ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
-                this.articleService.getCountCategory(category),
-                requestPage); //객체화
+            ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
+            PagingModel pagingCategory = new PagingModel(
+                    ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
+                    this.articleService.getCountCategory(category),
+                    requestPage); //객체화
 
-        ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage(pagingCategory, category);
-        //페이징하면서 카테고리 관련 게시물 나타내기
+            ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage(pagingCategory, category);
+            //페이징하면서 카테고리 관련 게시물 나타내기
 
-        modelAndView.addObject("articleCategory", articleCategory);
-        modelAndView.addObject("pagingCategory", pagingCategory);
-        modelAndView.addObject("category", category);
 
-        return modelAndView;
+            modelAndView.addObject("articleCategory", articleCategory);
+            modelAndView.addObject("pagingCategory", pagingCategory);
+            modelAndView.addObject("category", category);
+            return modelAndView;
 
     } //게시판 카테고리별//
 
@@ -284,8 +284,8 @@ public class ArticleController {
 
     @RequestMapping(value="article/review", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getUpdateCategory(@RequestParam(value="index")int index, String category){
-        ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
         ModelAndView modelAndView = new ModelAndView("home/review");
+        ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
         ReviewEntity[] reviewEntities = this.reviewService.getAll();
         modelAndView.addObject("article", article);
         modelAndView.addObject("reviews", reviewEntities);

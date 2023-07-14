@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li class="item">
-                    <a class="icon-text-button" href="#">
+                    <a class="icon-text-button" href="/login">
                         <span class="text">로그인</span>
                     </a>
                 </li>
@@ -137,8 +137,10 @@
             <div class="slide">
                 <div class="article-box">
                     <div class="article-box-grid">
-                        <div class="article-list" th:if="${articleCategory != '완료'}" th:each="article : ${articleCategory}">
-                            <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
+                        <div class="article-list" th:each="article : ${articleCategory}">
+<!--                           ${article.equals('완료')} ? 'article/read(index=' + article.getIndex() + ')' : 'article/review(index=' + article.getIndex() + ')' -->
+                            <a class="article-link" th:href="@{${article.getCategory().equals('완료') ? 'article/review' : 'article/read'} (index = ${article.getIndex()})}">
+<!--                               th:if="!article.equauls('완료')" ? th:href="@{article/read(index=${article.getIndex()})}" : th:href="@{article/review(index=${article.getIndex()})}" >-->
                                 <div class="article-thumbnail">
                                     <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}"
                                          alt="Thumbnail">
@@ -181,9 +183,6 @@
                                 </div>
                             </a>
                         </div>
-
-
-
 
 
                     </div>
