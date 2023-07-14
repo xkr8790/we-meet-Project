@@ -4,7 +4,11 @@ const step1 = document.querySelector('.step-1');
 const saveButton = document.querySelector('.save');
 const passwordInputStep1 = step1.querySelector('._object-input');
 const checkPasswordButton = step1.querySelector('.checkPassword');
+const addressLayer = document.getElementById('addressLayerP');
+const dialogCover = document.getElementById('dialogCoverP');
 
+
+//설정변경 눌렀을때 창띄우는 코드
 settingButton.addEventListener('click', () => {
     popup.classList.add('step-1');
     popup['_object-input'].value = '';
@@ -14,10 +18,12 @@ settingButton.addEventListener('click', () => {
 });
 
 
+//??
 saveButton.addEventListener('click', () => {
     popup.style.display = 'none';
 });
 
+//??
 HTMLInputElement.prototype.focusAndSelect = function () {
     this.focus();
     this.select();
@@ -44,7 +50,7 @@ HTMLInputElement.prototype.focusAndSelect = function () {
 // };
 
 
-
+//step-1 인증
 popup.onsubmit = e => {
     e.preventDefault();
 
@@ -91,6 +97,7 @@ popup.onsubmit = e => {
     }
 };
 
+//취소 버튼
 popup['close'].addEventListener('click', () => {
     var r = confirm("취소하시겠습니까?\n저장되지 않은 모든 내용은 유실됩니다.");
     if (r == true) {
@@ -100,21 +107,11 @@ popup['close'].addEventListener('click', () => {
     } else {
         alert("수정 페이지로 돌아갑니다!");
     }
-})
-
-popup['save'].addEventListener('click', () => {
-    var r = confirm("저장하시겠습니까?");
-    if (r == true) {
-        alert("저장되었습니다!");
-        popup.classList.remove('step-2');
-    } else {
-        alert("취소하였습니다!");
-        popup.style.display = 'block';
-    }
-})
+});
 
 
-var changeProfile =document.querySelector('.change_profile');
+//프로필 사진 변경
+var changeProfile = document.querySelector('.change_profile');
 const profileF = popup.querySelector('[rel="profileF"]');
 
 changeProfile.addEventListener('change', function (event) {
@@ -135,6 +132,7 @@ changeProfile.addEventListener('change', function (event) {
 
 const profileDelete = popup.querySelector('[rel="profileDelete"]');
 
+//프로필 사진 삭제
 profileDelete.addEventListener('click', function (event) {
     event.preventDefault();
 
@@ -143,3 +141,142 @@ profileDelete.addEventListener('click', function (event) {
 
     alert('프로필 사진이 삭제되었습니다.');
 });
+
+//인증번호 전송
+popup.cNotification = popup.querySelector('[rel="cNotification"]');
+popup.cNotification.show = (text) => {
+    popup.cNotification.innerText = text;
+    popup.cNotification.classList.add('visible');
+};
+popup.cNotification.hide = () => popup.cNotification.classList.remove('visible');
+popup['infoContactSend'].addEventListener('click', () => {
+    if (popup['infoContact'].value === '') {
+        alert('연락처를 입력해주세요.');
+        popup['infoContact'].focus();
+        return;
+    }
+    if (!new RegExp('^(010)(\\d{8})$').test(popup['infoContact'].value)) {
+        alert('올바른 연락처를 입력해 주세요.');
+        popup['infoContact'].focus();
+        popup['infoContact'].select();
+        return;
+    }
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `/profile/contactCodeRec?contact=${popup['infoContact'].value}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure':
+                        alert('해당 연락처는 이미 사용중입니다.');
+                        popup['infoContact'].focus();
+                        break;
+                    case 'success' :
+                        popup.cNotification.show('입력하신 연락처로 인증번호를 전송하였습니다. 5분 이내로 인증을 완료해 주세요.');
+                        popup['infoContact'].setAttribute('disabled', 'disabled');
+                        popup['infoContactSend'].setAttribute('disabled', 'disabled');
+                        popup['infoContactCode'].removeAttribute('disabled');
+                        popup['infoContactVerify'].removeAttribute('disabled');
+                        popup['infoContactCode'].focus();
+                        popup['infoContactSalt'].value = responseObject.salt;
+                        break;
+                    default:
+                        alert('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send();
+})
+
+//인증번호 인증
+popup['infoContactVerify'].onclick = () => {
+    if (popup['infoContactCode'].value === '') {
+        alert('인증번호를 입력해 주세요.');
+        popup['infoContactCode'].focus();
+        return false;
+    }
+    if (!new RegExp('^(\\d{6})$').test(popup['infoContactCode'].value)) {
+        alert('올바른 인증번호를 입력해 주세요.');
+        popup['infoContactCode'].focus();
+        return false;
+    }
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('contact', popup['infoContact'].value);
+    formData.append('code', popup['infoContactCode'].value);
+    formData.append('salt', popup['infoContactSalt'].value);
+    xhr.open('PATCH', `/profile/contactCodeRec`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure_expired' :
+                        alert('해당 인증번호는 만료되었습니다. 처음부터 다시 진행해 주세요.');
+                        break;
+                    case 'success' :
+                        alert('인증이 완료되었습니다.');
+                        popup['infoContactCode'].setAttribute('disabled', 'disabled');
+                        popup['infoContactVerify'].setAttribute('disabled', 'disabled');
+                        break;
+                    default:
+                        alert('서버가 알 수 없는 응답을 반환하였습니다.');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
+}
+
+
+//주소 변경 코드
+// popup['ingoAddressFind'].onclick = function () {
+//     new daum.Postcode({
+//         width: '100%',
+//         height: '100%',
+//         oncomplete: function (data) {
+//             popup.setAttribute('data-mz-step', 'info');
+//             popup['infoAddressPostal'].value = data['zonecode'];
+//             popup['infoAddressPrimary'].value = data['address'];
+//             popup['infoAddressSecondary'].focusAndSelect();
+//         }
+//     }).embed(popup.querySelector('[data-mz-step="address"]'));
+//     popup.setAttribute('data-mz-step', 'address');
+// }
+addressLayer.show = () => {
+    new daum.Postcode({
+        oncomplete: (data) => {
+            popup['infoAddressPostal'].value = data.zonecode;
+            popup['infoAddressPrimary'].value = data.address;
+            popup['infoAddressSecondary'].value = '';
+            popup['infoAddressSecondary'].focus();
+            dialogCover.hide();
+            addressLayer.hide();
+        }
+    }).embed(addressLayer);
+    addressLayer.classList.add('visible');
+};
+addressLayer.hide = () => addressLayer.classList.remove('visible');
+//우편찾기
+popup['infoAddressFind'].onclick = () => {
+    dialogCover.show();
+    addressLayer.show();
+};
+
+popup['save'].addEventListener('click', () => {
+    var r = confirm("저장하시겠습니까?");
+    if (r == true) {
+        alert("저장되었습니다!");
+        popup.classList.remove('step-2');
+    } else {
+        alert("취소하였습니다!");
+        popup.style.display = 'block';
+    }
+})

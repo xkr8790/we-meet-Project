@@ -39,7 +39,9 @@ public class RecoverAccountController {
     }
 
     // 연락처를 이용해 인증번호를 보내기 위한 코드
-    @RequestMapping(value = "contactCodeRec", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "contactCodeRec",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getContactCodeRec(RecoverContactCodeEntity recoverContactCode) {
 //        JS객체문법으로 구조화된 데이터를 표현하기 위한 문자 기반 표준 포맷이다.

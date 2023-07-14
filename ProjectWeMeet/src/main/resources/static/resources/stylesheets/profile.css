@@ -47,7 +47,7 @@ html {
     max-width: 77.5rem;
 }
 
-#topMenuContainer > .top-menu {
+#topMenuContainer1 > .top-menu {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -59,20 +59,21 @@ html {
     margin-bottom: 1.5rem;
     padding-inline: unset;
     padding: 1rem 0 0 0;
+    background-color: white;
 }
 
-#topMenuContainer > .top-menu > .item > .link {
+#topMenuContainer1 > .top-menu > .item > .link {
     color: #9da3d6;
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 1.5rem;
 }
 
-#topMenuContainer > .top-menu > .alarm > .link > .alarm {
+#topMenuContainer1 > .top-menu > .alarm > .link > .alarm {
     width: 1.75rem;
     margin-right: 1.25rem;
 }
 
-#topMenuContainer > .top-menu > .item + .item {
+#topMenuContainer1 > .top-menu > .item + .item {
     margin-left: 1.75rem;
 }
 
@@ -946,4 +947,63 @@ html {
 
 #popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-contact-container > ._object-box > ._object-input {
     background-color: white;
+}
+
+/*dialog 배경화면 어둡게-주소찾기 클릭시 사용*/
+#dialogCoverP {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000060;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    transition-duration: 250ms;
+    transition-property: opacity;
+    transition-timing-function: linear;
+    z-index: 8;
+}
+
+#dialogCoverP.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#addressLayerP {
+    top: 50%;
+    left: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 0 1rem 0.0625rem #00000060;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    transform: scale(90%) translate(-50%, -50%);
+    transition-duration: 250ms;
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+    z-index: 9;
+}
+
+#addressLayerP.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(100%) translate(-50%, -50%);
+}
+
+#popup > .cNotification {
+    max-height: 0;
+    color: blue;
+    font-size: 0.9rem;
+    margin: unset;
+    overflow: hidden;
+    padding-top: 0;
+    transition-duration: 500ms;
+    transition-property: max-height, padding-top;
+    transition-timing-function: ease;
+}
+
+#popup > .cNotification.visible {
+    max-height: 3rem;
+    padding-top: 0.5rem;
 }

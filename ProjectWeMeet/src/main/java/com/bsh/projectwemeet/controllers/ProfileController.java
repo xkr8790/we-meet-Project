@@ -1,8 +1,10 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ProfileEntity;
+import com.bsh.projectwemeet.entities.RecoverContactCodeEntity;
+import com.bsh.projectwemeet.entities.RegisterContactCodeEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
-import com.bsh.projectwemeet.enums.LoginResult;
+import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.services.ProfileService;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
@@ -66,5 +68,35 @@ public class ProfileController {
             modelAndView.setViewName("redirect:/profile");
         }
         return modelAndView;
+    }
+
+    //인증번호 전송 코드
+    @RequestMapping(value = "contactCodeRec",
+    method = RequestMethod.GET,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getContactCodeRec(RegisterContactCodeEntity registerContactCode) {
+        SendRegisterContactCodeResult result = this.profileService.sendContactCodeResult(registerContactCode);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        if (result == SendRegisterContactCodeResult.SUCCESS) {
+            responseObject.put("salt", registerContactCode.getSalt());
+        }
+        return responseObject.toString();
+    }
+
+    //인증번호 6자리 확인 코드
+    @RequestMapping(value = "contactCodeRec",
+    method = RequestMethod.PATCH,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchContactCodeRec(RegisterContactCodeEntity registerContactCode) {
+        VerifyRegisterContactCodeResult result = this.profileService.verifyRegisterContactCodeResult(registerContactCode);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+
+        return responseObject.toString();
     }
 }
