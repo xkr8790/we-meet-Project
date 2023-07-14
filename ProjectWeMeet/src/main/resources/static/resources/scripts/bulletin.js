@@ -361,7 +361,7 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     xhr.send(formData);
 }
 
-function refreshComment() {
+function refreshComment(position) {
     const articleIndex = bulletinForm['articleIndex'].value;
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `/comment?articleIndex=${articleIndex}`);
@@ -373,7 +373,7 @@ function refreshComment() {
 
                 for (const comment of comments) {
                     const div = document.createElement('div');
-                    const commentClass = 'comment-left';
+                    const commentClass = position === 'right' ? 'comment-right' : 'comment-left';
 
                     div.classList.add(commentClass);
                     const headDiv = document.createElement('div');
@@ -448,8 +448,6 @@ function refreshComment() {
     xhr.send();
 }
 
-
-// success_same일 때
 function refreshCommentSuccessSame() {
     const articleIndex = bulletinForm['articleIndex'].value;
     const xhr = new XMLHttpRequest();
@@ -537,8 +535,6 @@ function refreshCommentSuccessSame() {
     xhr.send();
 }
 
-
-
 bulletinForm.onsubmit = function (e) {
     e.preventDefault();
     if (bulletinForm['content'].value == '') {
@@ -550,5 +546,5 @@ bulletinForm.onsubmit = function (e) {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    refreshComment();
+    refreshComment('left');
 });
