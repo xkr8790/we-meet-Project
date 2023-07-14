@@ -1,5 +1,6 @@
 package com.bsh.projectwemeet.services;
 
+import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ReviewEntity;
 import com.bsh.projectwemeet.mappers.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import java.util.Date;
 
 @Service
 public class ReviewService {
-
     private final ReviewMapper reviewMapper;
 
     @Autowired
@@ -19,7 +19,13 @@ public class ReviewService {
     }
 
 
+    public ArticleEntity[] articleAll() {
+        return this.reviewMapper.articleAll();
+    }
+
+
     public boolean reviewWrite(HttpServletRequest request, ReviewEntity reviewEntity) {
+
 
         reviewEntity.setCreatedAt(new Date())
                 .setClientIp(request.getRemoteAddr())
@@ -28,10 +34,15 @@ public class ReviewService {
         return this.reviewMapper.insertReview(reviewEntity) > 0;
     }
 
+
+
     public ReviewEntity[] getAll() {
         return this.reviewMapper.selectAll();
     }
 
+    public ReviewEntity[] selectAll(int articleIndex){
+        return this.reviewMapper.selectArticleIndex(articleIndex);
+    }
 
     public ReviewEntity readReview(int index) {
         ReviewEntity reviewEntity = this.reviewMapper.selectReviewByIndex(index);

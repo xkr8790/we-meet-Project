@@ -42,7 +42,7 @@ function postReview(content, toFocus, refreshCommentAfter) {
     // if (reviewIndex !== null && reviewIndex !== undefined) {
     //     formData.append('reviewIndex', reviewIndex)
     // }
-    xhr.open('POST', `review/read`);
+    xhr.open('POST', `review/record`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -67,17 +67,37 @@ function postReview(content, toFocus, refreshCommentAfter) {
 
 
 
-reviewForm.onsubmit = e => {
-    e.preventDefault();
+// reviewForm.onsubmit = e => {
+//     e.preventDefault();
+//
+//     if (reviewForm['content'].value === '') {
+//         alert('댓글을 입력해 주세요');
+//         reviewForm['content'].focus();
+//         return;
+//     }
+//     postReview(reviewForm['content'].value);
+// };
 
+
+submitForm = reviewForm.querySelector('[name="submit"]')
+
+submitForm.addEventListener('click', e=>{
+    e.preventDefault();
     if (reviewForm['content'].value === '') {
         alert('댓글을 입력해 주세요');
         reviewForm['content'].focus();
         return;
     }
-    postReview(reviewForm['content'].value);
-};
 
+    postReview(reviewForm['content'].value);
+})
+
+const writeButton = reviewForm.querySelector('[name="write"]');
+
+writeButton.addEventListener('click', e => {
+    e.preventDefault();
+    window.location.href ="/write";
+})
 
 
 

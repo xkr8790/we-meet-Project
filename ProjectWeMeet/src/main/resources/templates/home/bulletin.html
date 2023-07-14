@@ -26,7 +26,7 @@
             <a href="/register/">회원가입</a>
         </div>
         <div class="login" th:if="${session.user != null}">
-            <button>
+            <button name="write">
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
                 <div class="tooltip" >글작성</div>
             </button>

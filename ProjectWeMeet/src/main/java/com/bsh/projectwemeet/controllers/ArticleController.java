@@ -6,6 +6,7 @@ import com.bsh.projectwemeet.models.PagingModel;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
 import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
+import com.bsh.projectwemeet.services.ReviewService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -29,10 +30,12 @@ import java.util.Date;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final ReviewService reviewService;
 
     @Autowired
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(ArticleService articleService, ReviewService reviewService) {
         this.articleService = articleService;
+        this.reviewService = reviewService;
     }
 
     @RequestMapping(value = "article",
@@ -208,35 +211,28 @@ public class ArticleController {
     } //인원이 참가 했을시 취소 가능하게
 
     @RequestMapping(value = "article/like",
-            method = RequestMethod.POST,
+            method = RequestMethod.PATCH,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody //있어야지 JSON 사용가능
-    public String patchLike(@RequestParam(value = "index") int index, LikeEntity likeAndReport, HttpSession session) {
-        InsertLikeResult result = this.articleService.InsertLike(index,likeAndReport, session);
-        JSONObject responseObject = new JSONObject() {{
-            put("result", result.name().toLowerCase());
-        }};
-        return responseObject.toString();
-    } //좋아요 insert하고 업데이트
-
-
-    @RequestMapping(value = "article/Report",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody //있어야지 JSON 사용가능
-    public String patchReport(@RequestParam(value = "index") int index,ReportEntity reportEntity,HttpSession session) {
-        InsertReportResult result = this.articleService.InsertReport(index,reportEntity, session);
+    public String patchLike(@RequestParam(value = "index") int index, HttpSession session) {
+        LIkeAndReportResult result = this.articleService.UpdateLikeResult(index, session);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
 
-
-
-
-
-
+    @RequestMapping(value = "article/Report",
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody //있어야지 JSON 사용가능
+    public String patchReport(@RequestParam(value = "index") int index, HttpSession session) {
+        LIkeAndReportResult result = this.articleService.UpdateReportResult(index, session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
 
     @RequestMapping(value="article/review", method = RequestMethod.GET)
     public ModelAndView getFinish(int index, HttpSession session){
@@ -315,6 +311,32 @@ public class ArticleController {
         }};
         return responseObject.toString();
     }
+
+
+//    완료 후 다음으로 보내기
+
+    @RequestMapping(value="article/review", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getUpdateCategory(@RequestParam(value="index")int index, String category){
+        ModelAndView modelAndView = new ModelAndView("home/review");
+        ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
+        ReviewEntity[] reviewEntities = this.reviewService.getAll();
+        modelAndView.addObject("article", article);
+        modelAndView.addObject("reviews", reviewEntities);
+        return modelAndView;
+    }
+
+
+
+    @RequestMapping(value="article/review", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updateCategory(int index, HttpSession session){
+        UpdateCategoryResult result = this.articleService.updateCategory(index, session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+
 
 
 

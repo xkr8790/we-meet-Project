@@ -78,7 +78,12 @@ loginForm.onsubmit = e => {
                     if (loginForm['remember'].checked) {
                         localStorage.setItem('email', loginForm['email'].value);
                     }
-                    location.href = '/';
+                    if(document.referrer&&document.referrer.indexOf("localhost:6795/") !== -1){
+                        history.back();
+                        location.href=document.referrer;
+                    }else{
+                        location.href = '/';
+                    }
                     break;
                 default:
                     loginForm.warning.show('서버가 알 수 없는 응답을 반환했습니다. 관리자에게 문의해 주세요.');

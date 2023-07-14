@@ -32,6 +32,7 @@ public class ArticleService {
     }
 
     public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String category){
+
         return this.articleMapper.selectCountCategoryByPage(pagingModel,category);
     }
 
@@ -170,6 +171,7 @@ public class ArticleService {
     }
 
 
+
     public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
@@ -281,6 +283,7 @@ public class ArticleService {
 
 //-------------------------------------- 댓글 리뷰 --------------------------------------------------------------
 
+    //    댓글
     public CommentEntity[] getCommentsOf(int articleIndex) {
 
         return this.articleMapper.selectCommentByArticleIndex(articleIndex);
@@ -363,6 +366,42 @@ public class ArticleService {
         }
     }
 
+
+// 완료페이지로 넘기기
+    public UpdateCategoryResult updateCategory(int index, HttpSession session){
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        ArticleEntity articles = this.articleMapper.selectArticleByCompleteIndex(index);
+        if(loginUser == null){
+            System.out.println("서비스1");
+            return  UpdateCategoryResult.FAILURE;
+        }
+        if(articles ==null){
+            System.out.println("서비스2");
+            return UpdateCategoryResult.FAILURE;
+        }
+        if(loginUser.getEmail().equals(articles.getEmail())){
+            System.out.println("서비스3");
+            articles.setFinished(true);
+            articles.setCategory("완료");
+        }else{
+            System.out.println("서비스4");
+            return UpdateCategoryResult.FAILURE;
+        }
+        System.out.println("서비스5");
+        return this.articleMapper.updateCategory(articles) > 0
+                ? UpdateCategoryResult.SUCCESS
+                : UpdateCategoryResult.FAILURE;
+
+    }
+
+    public ArticleEntity[] selectCategory(String category) {
+
+        return this.articleMapper.selectCategory(category);
+    }// 완료된 게시판은 전부 나타내기
+
+    public ArticleEntity getUpdateCategoryByIndex(int index){
+        return this.articleMapper.selectUpdateCategoryByIndex(index);
+    }
 
 
 

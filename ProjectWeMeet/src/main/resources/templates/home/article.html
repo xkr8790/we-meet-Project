@@ -13,56 +13,56 @@
 </head>
 <body>
 <form id="Article">
-<div class="_container" id="headerContainer">
-    <header class="_content header">
-        <ul class="menu left">
-            <li class="item main-menu">
-                <label class="icon-text-button">
-                    <a class="icon-box" href="/">
-                        <img th:src="@{/resources/images/logoImages/logo-224x80.png}" class="icon">
+    <div class="_container" id="headerContainer">
+        <header class="_content header">
+            <ul class="menu left">
+                <li class="item main-menu">
+                    <label class="icon-text-button">
+                        <a class="icon-box" href="/">
+                            <img th:src="@{/resources/images/logoImages/logo-224x80.png}" class="icon">
+                        </a>
+                    </label>
+                </li>
+            </ul>
+            <ul class="menu right" th:if="${session.user == null}">
+                <li class="item">
+                    <a href="#" class="icon-text-button">
+                        <span class="text">회원가입</span>
                     </a>
-                </label>
-            </li>
-        </ul>
-        <ul class="menu right" th:if="${session.user == null}">
-            <li class="item">
-                <a href="#" class="icon-text-button">
-                    <span class="text">회원가입</span>
-                </a>
-            </li>
-            <li class="item">
-                <a class="icon-text-button" href="#">
-                    <span class="text">로그인</span>
-                </a>
-            </li>
+                </li>
+                <li class="item">
+                    <a class="icon-text-button" href="/login">
+                        <span class="text">로그인</span>
+                    </a>
+                </li>
 
-        </ul>
-        <ul class="menu right" th:if="${session.user != null}">
-            <li class="item">
-                <a href="#" class="icon-text-button">
-                    <div class="profile">
-                        프로필
-                    </div>
-                </a>
-            </li>
-            <li class="item">
-                <button>
-                    <a href="/write">
-                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            </ul>
+            <ul class="menu right" th:if="${session.user != null}">
+                <li class="item">
+                    <a href="#" class="icon-text-button">
+                        <div class="profile">
+                            프로필
+                        </div>
                     </a>
-                </button>
-            </li>
-            <li class="item">
-                <button data-action="logout">
-                    <a href="">
-                        <i class="fa-solid fa-right-from-bracket fa-lg"></i>
-                    </a>
-                </button>
-            </li>
+                </li>
+                <li class="item">
+                    <button>
+                        <a href="/write">
+                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        </a>
+                    </button>
+                </li>
+                <li class="item">
+                    <button data-action="logout">
+                        <a href="">
+                            <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                        </a>
+                    </button>
+                </li>
 
-        </ul>
-    </header>
-</div>
+            </ul>
+        </header>
+    </div>
 
     <section class="article-category">
         <div class="introduce_article">
@@ -134,12 +134,13 @@
 
     <section class="article-container">
         <div class="slider">
-
             <div class="slide">
                 <div class="article-box">
                     <div class="article-box-grid">
                         <div class="article-list" th:each="article : ${articleCategory}">
-                            <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
+<!--                           ${article.equals('완료')} ? 'article/read(index=' + article.getIndex() + ')' : 'article/review(index=' + article.getIndex() + ')' -->
+                            <a class="article-link" th:href="@{${article.getCategory().equals('완료') ? 'article/review' : 'article/read'} (index = ${article.getIndex()})}">
+<!--                               th:if="!article.equauls('완료')" ? th:href="@{article/read(index=${article.getIndex()})}" : th:href="@{article/review(index=${article.getIndex()})}" >-->
                                 <div class="article-thumbnail">
                                     <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}"
                                          alt="Thumbnail">
@@ -177,13 +178,19 @@
                   <!-- 제한인원 제한 걸때 value??  -->
               </span>
               </span>
+
+                                    </span>
                                 </div>
                             </a>
                         </div>
+
+
                     </div>
                     <ul class="pageContainer">
-                        <li class="page" th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
-                            <a class="link" th:href="@{'/article' (p = ${page},category=${category})}" th:text="${page}"></a>
+                        <li class="page"
+                            th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
+                            <a class="link" th:href="@{'/article' (p = ${page},category=${category})}"
+                               th:text="${page}"></a>
                         </li>
                     </ul>
 
