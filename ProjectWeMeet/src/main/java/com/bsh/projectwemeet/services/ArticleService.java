@@ -287,18 +287,24 @@ public class ArticleService {
 
         // 게시글 작성자와 댓글 작성자가 동일한지 확인
         if (articleEmail != null && loginUser.getEmail().equals(articleEmail)) {
-            return CreateCommentResult.SUCCESS_SAME; // 로그인한 유저와 게시글을 작성한 유저가 동일할 때
-        }
-        System.out.println(articleEmail);
-
-        // CommentEntity를 DB에 저장하고 결과에 따라 CreateCommentResult 반환
-        int rowsAffected = articleMapper.insertComment(comment);
-        if (rowsAffected > 0) {
-            return CreateCommentResult.SUCCESS;
+            // Insert the comment for the 'SUCCESS_SAME' case
+            int rowsAffected = articleMapper.insertComment(comment);
+            if (rowsAffected > 0) {
+                return CreateCommentResult.SUCCESS_SAME;
+            } else {
+                return CreateCommentResult.FAILURE;
+            }
         } else {
-            return CreateCommentResult.FAILURE;
+            // Insert the comment for the 'SUCCESS' case
+            int rowsAffected = articleMapper.insertComment(comment);
+            if (rowsAffected > 0) {
+                return CreateCommentResult.SUCCESS;
+            } else {
+                return CreateCommentResult.FAILURE;
+            }
         }
     }
+
 
 
 
