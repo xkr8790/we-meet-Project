@@ -8,8 +8,6 @@ import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
 import com.bsh.projectwemeet.services.ReviewService;
 import org.json.JSONObject;
-import org.apache.ibatis.annotations.Param;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,8 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;

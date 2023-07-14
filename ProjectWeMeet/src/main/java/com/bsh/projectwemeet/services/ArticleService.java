@@ -35,6 +35,7 @@ public class ArticleService {
     }
 
     public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String category){
+
         return this.articleMapper.selectCountCategoryByPage(pagingModel,category);
     }
 
@@ -312,6 +313,7 @@ public class ArticleService {
         }
         if(loginUser.getEmail().equals(articles.getEmail())){
             System.out.println("서비스3");
+            articles.setFinished(true);
             articles.setCategory("완료");
         }else{
             System.out.println("서비스4");

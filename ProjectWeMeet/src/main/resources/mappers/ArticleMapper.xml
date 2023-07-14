@@ -419,7 +419,8 @@
     <update id="updateCategory"
             parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
         UPDATE `wemeet_project`.`articles`
-        SET `category` = #{category}
+        SET `category` = #{category},
+           `finished_flag` = #{isFinished}
         WHERE `index` = #{index}
         LIMIT 1
     </update>
