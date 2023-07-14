@@ -147,7 +147,7 @@
                     <div class="article-content-box">
                         <div class="article-tag">
                             <span class="tag" th:text="${article.getCategory()}"></span>
-                            <span class="tag comment">추천!!</span>
+                            <span class="tag comment" th:if="${article.getLikeCount()>10}">추천!!</span>
                         </div>
                         <span class="article-content">
                             <h2 class="article-content-title" th:text="${article.getTitle()}">장문복이랑 놀러갈 사람?</h2>

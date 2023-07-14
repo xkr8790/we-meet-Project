@@ -1,6 +1,6 @@
 package com.bsh.projectwemeet.enums;
 
-public enum LIkeAndReportResult {
+public enum SelectLikeResult {
     SUCCESS,
     FAILURE
 }

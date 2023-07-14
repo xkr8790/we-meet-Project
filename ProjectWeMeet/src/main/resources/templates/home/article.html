@@ -122,7 +122,7 @@
                 </li>
 
                 <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='')}">
+                    <a class="articleLink" th:href="@{'/article' (p=1, category='완료')}">
                         <img class="category-img" th:src="@{/resources/images/category/all.png}">
                         완료
                     </a>
@@ -152,7 +152,7 @@
                                     <h2 class="article-content" th:text="${article.getTitle()}"></h2>
                                     <span class="article-map">
                                 <span th:text="${article.getAddress()}">위치</span>
-                                <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
+                                <div th:text="${#dates.format(article.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                                 <span th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
                                 + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
                                     <span class="article-human">

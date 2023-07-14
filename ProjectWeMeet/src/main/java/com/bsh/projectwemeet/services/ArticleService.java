@@ -1,9 +1,6 @@
 package com.bsh.projectwemeet.services;
 
-import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.entities.CommentEntity;
-import com.bsh.projectwemeet.entities.ParticipantsEntity;
-import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
 import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.enums.*;
@@ -173,7 +170,6 @@ public class ArticleService {
     }
 
 
-
     public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
@@ -192,41 +188,70 @@ public class ArticleService {
                 : PatchArticleResult.FAILURE;
     }
 
-    public LIkeAndReportResult UpdateLikeResult(int index, HttpSession session) {
+
+    public InsertLikeResult InsertLike(int index, LikeEntity likeEntity, HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
-        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index); //인덱스로 게시판찾기
 
-        if(Objects.equals(user.getEmail(), article.getEmail())){
-            return LIkeAndReportResult.FAILURE; //7사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
-        }
+        if (Objects.equals(user.getEmail(), article.getEmail())) {
+            return InsertLikeResult.FAILURE;
+        } //자기가 작성한 이메일에 좋아요를 못하게하는 if문
+
+        if (articleMapper.selectLike(index) > 0) {
+            return InsertLikeResult.FAILURE_DUPLICATE;
+        } //만약에 좋아요를 이미 했다면 select해서 중복실패가 나오게한다.
 
         article.setLikeCount(article.getLikeCount() + 1);
+        likeEntity.setArticleIndex(index)
+                .setEmail(user.getEmail())
+                .setCreatedAt(new Date())
+                .setLikeFlag(true);
 
-        return this.articleMapper.updateLike(article) > 0
-                ? LIkeAndReportResult.SUCCESS
-                : LIkeAndReportResult.FAILURE;
+        articleMapper.updateLike(article);
+
+        // 위의 if문 전부 통과시 aritcle의 index에 해당하는 게시판에
+        // 좋아요를 1개 올리고
+        // like 테이블에 insert 한다.
+
+        return articleMapper.insertLike(likeEntity) > 0
+                ? InsertLikeResult.SUCCESS
+                : InsertLikeResult.FAILURE;
     }
 
-    public LIkeAndReportResult UpdateReportResult(int index, HttpSession session) {
+
+    public InsertReportResult InsertReport(int index, ReportEntity reportEntity, HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
 
-        if(Objects.equals(user.getEmail(), article.getEmail())){
-            return LIkeAndReportResult.FAILURE; //사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
+        if (Objects.equals(user.getEmail(), article.getEmail())) {
+            return InsertReportResult.FAILURE; //사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
         }
 
         article.setReport(article.getReport() + 1);
+        reportEntity.setArticleIndex(index)
+                .setEmail(user.getEmail())
+                .setCreatedAt(new Date())
+                .setReportFlag(true);
 
-        return this.articleMapper.updateReport(article) > 0
-                ? LIkeAndReportResult.SUCCESS
-                : LIkeAndReportResult.FAILURE;
+        articleMapper.updateReport(article);
+
+        return this.articleMapper.insertReport(reportEntity) > 0
+                ? InsertReportResult.SUCCESS
+                : InsertReportResult.FAILURE;
     }
 
 
 
 
+
+
+
+
+
+
+//-----------------------------------------------게시판 리뷰-------------------------------------------------------------
     public boolean patchFinish(int index, HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(index);
@@ -238,6 +263,7 @@ public class ArticleService {
         articles.setFinished(true);
         return this.articleMapper.updateFinished(articles) > 0;
     }
+
 
 //    public FinishResult patchFinished(ArticleEntity article, HttpSession session){
 //        UserEntity loginUser = (UserEntity) session.getAttribute("user");
@@ -252,7 +278,9 @@ public class ArticleService {
 //                : FinishResult.SUCCESS;
 //    }
 
-    //    댓글
+
+//-------------------------------------- 댓글 리뷰 --------------------------------------------------------------
+
     public CommentEntity[] getCommentsOf(int articleIndex) {
 
         return this.articleMapper.selectCommentByArticleIndex(articleIndex);

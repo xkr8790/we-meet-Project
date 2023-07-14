@@ -146,17 +146,11 @@ allContainer > .header > .login > a {
     margin: 0 1rem;
 }
 
-.allContainer > .main-template > .likeAndReport>.like{
-    width: 1.3rem;
-}
-.allContainer > .main-template > .likeAndReport>.report{
-    width: 1.4rem;
-}
-
 
 .likeAndReport .like,
 .likeAndReport .report {
     margin-right: 5px;
+    width: 1.5rem;
 }
 
 .likeAndReport{

@@ -1,14 +1,10 @@
 package com.bsh.projectwemeet.mappers;
 
-import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.entities.ParticipantsEntity;
+import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.models.PagingModel;
-import com.bsh.projectwemeet.entities.CommentEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Date;
+import org.attoparser.dom.INestableNode;
 
 @Mapper
 public interface ArticleMapper {
@@ -16,6 +12,10 @@ public interface ArticleMapper {
     int insertArticle(ArticleEntity articles);
 
     int insertParticipants(ParticipantsEntity participants);
+
+    int insertLike(LikeEntity likeEntity);
+
+    int insertReport(ReportEntity reportEntity);
 
 
     int selectCountCategory(@Param(value = "category")String category);
@@ -45,6 +45,8 @@ public interface ArticleMapper {
 
     ParticipantsEntity selectParticipants(@Param(value = "index") int index);
     // 참여인원 중복되있는지 select
+
+    Integer selectLike(@Param(value = "articleIndex") int articleIndex);
 
     int updateLike(ArticleEntity article);
     //좋아요를 업데이트 하기위한 매퍼

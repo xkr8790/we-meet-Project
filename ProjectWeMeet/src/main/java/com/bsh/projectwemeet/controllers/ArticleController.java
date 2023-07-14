@@ -1,16 +1,11 @@
 package com.bsh.projectwemeet.controllers;
 
-import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.entities.CommentEntity;
-import com.bsh.projectwemeet.entities.ParticipantsEntity;
-import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.models.PagingModel;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
 import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
-import org.json.JSONObject;
-import org.apache.ibatis.annotations.Param;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -215,28 +208,35 @@ public class ArticleController {
     } //인원이 참가 했을시 취소 가능하게
 
     @RequestMapping(value = "article/like",
-            method = RequestMethod.PATCH,
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody //있어야지 JSON 사용가능
-    public String patchLike(@RequestParam(value = "index") int index, HttpSession session) {
-        LIkeAndReportResult result = this.articleService.UpdateLikeResult(index, session);
+    public String patchLike(@RequestParam(value = "index") int index, LikeEntity likeAndReport, HttpSession session) {
+        InsertLikeResult result = this.articleService.InsertLike(index,likeAndReport, session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    } //좋아요 insert하고 업데이트
+
+
+    @RequestMapping(value = "article/Report",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody //있어야지 JSON 사용가능
+    public String patchReport(@RequestParam(value = "index") int index,ReportEntity reportEntity,HttpSession session) {
+        InsertReportResult result = this.articleService.InsertReport(index,reportEntity, session);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
 
-    @RequestMapping(value = "article/Report",
-            method = RequestMethod.PATCH,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody //있어야지 JSON 사용가능
-    public String patchReport(@RequestParam(value = "index") int index, HttpSession session) {
-        LIkeAndReportResult result = this.articleService.UpdateReportResult(index, session);
-        JSONObject responseObject = new JSONObject() {{
-            put("result", result.name().toLowerCase());
-        }};
-        return responseObject.toString();
-    }
+
+
+
+
+
 
     @RequestMapping(value="article/review", method = RequestMethod.GET)
     public ModelAndView getFinish(int index, HttpSession session){

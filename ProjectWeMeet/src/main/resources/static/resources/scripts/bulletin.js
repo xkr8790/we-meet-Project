@@ -210,7 +210,7 @@ like.addEventListener('click', e => {
     const index = like.dataset.index;
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    xhr.open('PATCH', `./like?index=${index}`);
+    xhr.open('POST', `./like?index=${index}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -223,11 +223,15 @@ like.addEventListener('click', e => {
                     case 'failure':
                         alert('자신의 게시물에 좋아요를 할수 없습니다');
                         break;
+                    case 'failure_duplicate':
+                        alert('중복으로 좋아요를 할수 없습니다');
+                        break;
                     default:
-                        alert('좋아요 실패?');
+                        alert('걍 실패');
+                        break;
                 }
             } else {
-                alert('좋아요 실패');
+                alert('걍 실패');
             }
         }
     };
@@ -240,7 +244,7 @@ Report.addEventListener('click', e => {
     const index = Report.dataset.index;
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    xhr.open('PATCH', `./Report?index=${index}`);
+    xhr.open('POST', `./Report?index=${index}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -254,10 +258,10 @@ Report.addEventListener('click', e => {
                         alert('자신의 게시물에 신고를 할수 없습니다');
                         break;
                     default:
-                        alert('좋아요 실패?');
+                        alert('중복으로 게시물에 신고를 할수 없습니다');
                 }
             } else {
-                alert('좋아요 실패');
+                alert('중복으로 게시물에 신고를 할수 없습니다');
             }
         }
     };
