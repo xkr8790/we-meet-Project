@@ -9,32 +9,40 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
-    <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
+    <script defer th:src="@{/resources/scripts/bulltinScript/bulletin.js}"></script>
+    <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
+    <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
+    <script defer th:if="${session.user != null && LikeResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteLike.js}"></script>
+    <script defer th:if="${session.user != null && ReportResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteReport.js}"></script>
+    <script defer th:if="${ParticipantsResult == null}" th:src="@{/resources/scripts/bulltinScript/InsertParticipate.js}"></script>
+    <script defer th:if="${ParticipantsResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteParticipate.js}"></script>
     <script defer th:src="@{/resources/scripts/bulletinMap.js}"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
 </head>
 <body>
 <form id="bulletinForm" class="allContainer">
-    <input type="hidden" name="index" th:value="${article.getIndex()}")>
+    <input type="hidden" name="index" th:value="${article.getIndex()}" )>
     <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
         </a>
+
         <div class="login" th:if="${session.user == null}">
             <a href="/login">로그인</a>
             <a href="/register/">회원가입</a>
         </div>
+
         <div class="login" th:if="${session.user != null}">
             <button name="write">
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                <div class="tooltip" >글작성</div>
+                <div class="tooltip">글작성</div>
             </button>
             <button name="patch" th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
                 <div class="tooltip">글수정</div>
             </button>
-            <button name="delete"  th:data-index="${article.getIndex()}">
+            <button name="delete" th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
                 <div class="tooltip">글삭제</div>
             </button>
@@ -63,23 +71,44 @@
         </div>
     </div>
 
-    <div class="likeAndReport">
-        <img class="like" th:data-index="${article.getIndex()}"
-             th:src="@{/resources/images/bulletinImags/like.png}">
-        <span class="like" th:text="${article.getLikeCount()}"></span>
-        <img class="report" th:data-index="${article.getIndex()}"
-             th:src="@{/resources/images/bulletinImags/_report.png}">
-        <span class="report" th:text="${article.getReport()}"></span>
+    <div class="likeAndReport" th:if="${session.user == null}">
+        <div class="likeAndReport" th:if="${session.user == null}">
+            <img class="like" th:data-index="${article.getIndex()}"
+                 th:src="@{/resources/images/bulletinImags/like.png}">
+            <span class="like" th:text="${article.getLikeCount()}"></span>
+        </div>
+
+        <div class="likeAndReport" th:if="${session.user == null}">
+            <img class="report" th:data-index="${article.getIndex()}"
+                 th:src="@{/resources/images/bulletinImags/_report.png}">
+            <span class="report" th:text="${article.getReport()}"></span>
+        </div>
     </div>
 
-<!--    <div class="likeAndReport" th:if="${result.equals('failure')}">-->
-<!--        <img class="like" th:data-index="${article.getIndex()}"-->
-<!--             th:src="@{/resources/images/bulletinImags/like.png}">-->
-<!--        <span class="like" th:text="${article.getLikeCount()}"></span>-->
-<!--        <img class="report" th:data-index="${article.getIndex()}"-->
-<!--             th:src="@{/resources/images/bulletinImags/_report.png}">-->
-<!--        <span class="report" th:text="${article.getReport()}"></span>-->
-<!--    </div>-->
+    <div class="likeAndReport" th:if="${session.user != null}">
+        <div class="likeAndReport" th:if="${session.user != null && LikeResult == null}">
+            <img class="like" th:data-index="${article.getIndex()}"
+                 th:src="@{/resources/images/bulletinImags/like.png}">
+            <span class="like" th:text="${article.getLikeCount()}"></span>
+        </div>
+        <div class="likeAndReport" th:if="${session.user != null && LikeResult != null}">
+            <img class="deleteLike" th:data-index="${article.getIndex()}"
+                 th:src="@{/resources/images/bulletinImags/likeAfter.png}">
+            <span class="deleteLike" th:text="${article.getLikeCount()}"></span>
+        </div>
+        <div class="likeAndReport" th:if="${session.user != null && ReportResult == null}">
+            <img class="report" th:data-index="${article.getIndex()}"
+                 th:src="@{/resources/images/bulletinImags/_report.png}">
+            <span class="report" th:text="${article.getReport()}"></span>
+        </div>
+
+        <div class="likeAndReport" th:if="${session.user != null && ReportResult != null}">
+            <img class="deleteReport" th:data-index="${article.getIndex()}"
+                 th:src="@{/resources/images/bulletinImags/_report.png}">
+            <span class="deleteReport" th:text="${article.getReport()}"></span>
+        </div>
+    </div>
+
 
     <div class="content">
         <div th:utext="${article.getContent()}"></div>
@@ -115,12 +144,14 @@
                         <span>6</span>
                     </div>
 
-                    <!-- 참가 기능  -->
-                    <div class="participating-button">
+
+                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult == null}">
                         <button  name="Participate" th:data-index="${article.getIndex()}">
                             참여하기
                         </button>
+                    </div>
 
+                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult != null}">
                         <button name="ParticipateDelete" th:data-index="${article.getIndex()}">
                             참여취소
                         </button>
@@ -134,6 +165,7 @@
                     <!--                    <p>여기는 로그인 전 나올 화면입니다.</p>-->
                     <!--                    <a href="/login"><input class="attend" type="button" value="참여하기"></a>-->
                 </div>
+
             </div>
         </div>
         <div class="guide">

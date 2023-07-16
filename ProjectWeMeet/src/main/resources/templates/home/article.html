@@ -74,7 +74,7 @@
             <ul class="category">
 
                 <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='')}">
+                    <a class="articleLink"th:href="@{'/article' (p=1, category='')}">
                         전체
                     </a>
                 </li>
@@ -137,7 +137,7 @@
             <div class="slide">
                 <div class="article-box">
                     <div class="article-box-grid">
-                        <div class="article-list" th:each="article : ${articleCategory}">
+                        <div class="article-list"  th:each="article : ${articleCategory}">
 <!--                           ${article.equals('완료')} ? 'article/read(index=' + article.getIndex() + ')' : 'article/review(index=' + article.getIndex() + ')' -->
                             <a class="article-link" th:href="@{${article.getCategory().equals('완료') ? 'article/review' : 'article/read'} (index = ${article.getIndex()})}">
 <!--                               th:if="!article.equauls('완료')" ? th:href="@{article/read(index=${article.getIndex()})}" : th:href="@{article/review(index=${article.getIndex()})}" >-->

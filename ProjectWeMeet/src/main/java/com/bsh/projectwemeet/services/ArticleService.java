@@ -32,13 +32,12 @@ public class ArticleService {
     }
 
     public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String category){
-
         return this.articleMapper.selectCountCategoryByPage(pagingModel,category);
     }
 
 
-    public ArticleEntity[] getMainArticle() {
-        return this.articleMapper.selectArticleMain();
+    public ArticleEntity[] getMainArticle(boolean isFinished) {
+        return this.articleMapper.selectArticleMain(isFinished);
     }//메인에 나타낼 게시판 개수는 XML에서 LIMIT 6으로 제한
 
     public ArticleEntity[] getMiniArticle(){
@@ -64,15 +63,19 @@ public class ArticleService {
         return article;
         //결과적으로 삭제되지않거나
         //결과적으로 삭제되지않거나
+
     } //게시판 나타내기
 
 
 
-    public boolean Participate(int index, ParticipantsEntity participants, HttpSession session) {
+    public boolean InsertParticipate(int index, ParticipantsEntity participants, HttpSession session) {
 
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
+        if(loginUser.getEmail() == article.getEmail()){
+            return false;
+        }
 
         if (loginUser.getEmail() == null) {
             return false;
@@ -83,12 +86,10 @@ public class ArticleService {
         } //제한인원을 초과해서 입력시 실패
 
 
-
         participants.setArticleIndex(article.getIndex())
                 .setCreatedAt(new Date())
                 .setEmail(loginUser.getEmail())
                 .setCheckParticipationStatus(true);
-
 
         if (this.articleMapper.insertParticipants(participants) > 0) {
             article.setParticipation(article.getParticipation() + 1);
@@ -110,6 +111,27 @@ public class ArticleService {
         }
 
         return false; // 기본값은 참여하지 않은 것으로 설정
+    }
+
+    public ParticipantsEntity selectParticipants(int index,HttpSession session){
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
+
+        if(user == null){
+            return null;
+        }
+
+        if(user.getEmail() == article.getEmail()){
+            System.out.println(article.getEmail());
+            return null;
+        }
+
+        ParticipantsEntity result = articleMapper.selectCheckParticipants(index, user.getEmail());
+
+        if(result!= null){
+            return result;
+        }
+        return null;
     }
 
 
@@ -171,7 +193,6 @@ public class ArticleService {
     }
 
 
-
     public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
@@ -191,57 +212,127 @@ public class ArticleService {
     }
 
 
-    public InsertLikeResult InsertLike(int index, LikeEntity likeEntity, HttpSession session) {
+    public InsertLikeAndReportResult InsertLike(int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index); //인덱스로 게시판찾기
+        flag = true;
 
         if (Objects.equals(user.getEmail(), article.getEmail())) {
-            return InsertLikeResult.FAILURE;
+            return InsertLikeAndReportResult.FAILURE;
         } //자기가 작성한 이메일에 좋아요를 못하게하는 if문
 
-        if (articleMapper.selectLike(index) > 0) {
-            return InsertLikeResult.FAILURE_DUPLICATE;
-        } //만약에 좋아요를 이미 했다면 select해서 중복실패가 나오게한다.
 
-        article.setLikeCount(article.getLikeCount() + 1);
-        likeEntity.setArticleIndex(index)
-                .setEmail(user.getEmail())
-                .setCreatedAt(new Date())
-                .setLikeFlag(true);
+        if (articleMapper.selectLike(index, user.getEmail(),flag) != null) {
+            return InsertLikeAndReportResult.FAILURE_LIKE;
+        } //만약에 아이디와 게시판 인덱스를 검색해서 이미 좋아요를 했다면 select해서 중복실패가 나오게한다.
 
-        articleMapper.updateLike(article);
 
-        // 위의 if문 전부 통과시 aritcle의 index에 해당하는 게시판에
-        // 좋아요를 1개 올리고
-        // like 테이블에 insert 한다.
+        if (articleMapper.selectLike(index, user.getEmail(),flag) == null) {
+            article.setLikeCount(article.getLikeCount() + 1);
+            likeEntity.setArticleIndex(index)
+                    .setEmail(user.getEmail())
+                    .setCreatedAt(new Date())
+                    .setLikeFlag(true);
+            articleMapper.updateLike(article);
+            return articleMapper.insertLike(likeEntity) > 0
+                    ? InsertLikeAndReportResult.SUCCESS_LIKE
+                    : InsertLikeAndReportResult.FAILURE_LIKE;
+        } //좋아요 인서트
 
-        return articleMapper.insertLike(likeEntity) > 0
-                ? InsertLikeResult.SUCCESS
-                : InsertLikeResult.FAILURE;
+
+      return InsertLikeAndReportResult.FAILURE;
     }
 
-
-    public InsertReportResult InsertReport(int index, ReportEntity reportEntity, HttpSession session) {
+    public InsertLikeAndReportResult InsertReport(int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
-        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index); //인덱스로 게시판찾기
+        flag = true;
 
         if (Objects.equals(user.getEmail(), article.getEmail())) {
-            return InsertReportResult.FAILURE; //사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
+            return InsertLikeAndReportResult.FAILURE;
+        } //자기가 작성한 이메일에 좋아요를 못하게하는 if문
+
+        if (articleMapper.selectReport(index, user.getEmail(),flag) != null) {
+            return InsertLikeAndReportResult.FAILURE_REPORT;
+        } //만약에 아이디와 게시판 인덱스를 검색해서 이미 좋아요를 했다면 select해서 중복실패가 나오게한다.
+
+        if (articleMapper.selectReport(index, user.getEmail(),flag) == null) {
+            article.setReport(article.getReport() + 1);
+            likeEntity.setArticleIndex(index)
+                    .setEmail(user.getEmail())
+                    .setCreatedAt(new Date())
+                    .setReportFlag(true);
+            articleMapper.updateReport(article);
+            return articleMapper.insertReport(likeEntity) > 0
+                    ? InsertLikeAndReportResult.SUCCESS_REPORT
+                    : InsertLikeAndReportResult.FAILURE_REPORT;
+        } //싫어요 인서트
+
+        return InsertLikeAndReportResult.FAILURE;
+    }
+
+    public LikeReportEntity selectLike(int index,HttpSession session,boolean flag){
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        flag = true;
+
+        if (user == null) {
+            // 예외 처리: user가 null인 경우에 대한 처리 로직 추가
+            return null; // 또는 예외 처리에 맞는 반환값 설정
         }
 
-        article.setReport(article.getReport() + 1);
-        reportEntity.setArticleIndex(index)
-                .setEmail(user.getEmail())
-                .setCreatedAt(new Date())
-                .setReportFlag(true);
+        LikeReportEntity result = articleMapper.selectLike(index, user.getEmail(), flag);
 
-        articleMapper.updateReport(article);
+        if(result != null){
+            return result;
+        }
 
-        return this.articleMapper.insertReport(reportEntity) > 0
-                ? InsertReportResult.SUCCESS
-                : InsertReportResult.FAILURE;
+       return null;
+    }
+
+    public LikeReportEntity selectReport(int index,HttpSession session,boolean flag){
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        flag = true;
+
+        if (user == null) {
+            // 예외 처리: user가 null인 경우에 대한 처리 로직 추가
+            return null; // 또는 예외 처리에 맞는 반환값 설정
+        }
+
+        LikeReportEntity result = articleMapper.selectReport(index, user.getEmail(), flag);
+
+        if(result != null){
+            return result;
+        }
+
+        return null;
+    }
+
+    public DeleteLikeReportResult deleteLike(int index,HttpSession session, boolean flag){
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index); //인덱스로 게시판찾기
+        flag = true;
+
+        article.setLikeCount(article.getLikeCount() - 1);
+        articleMapper.updateLike(article);
+
+        return this.articleMapper.deleteByLike(index, user.getEmail(),flag) > 0
+                ? DeleteLikeReportResult.SUCCESS_LIKE
+                : DeleteLikeReportResult.FAILURE_LIKE;
+    }
+
+    public DeleteLikeReportResult deleteReport(int index,HttpSession session, boolean flag){
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index); //인덱스로 게시판찾기
+        flag = true;
+
+        article.setReport(article.getReport() - 1); //신고 취소할경우 줄어들기
+        articleMapper.updateReport(article);  //업데이트
+
+        return this.articleMapper.deleteByReport(index, user.getEmail(),flag) > 0
+                ? DeleteLikeReportResult.SUCCESS_REPORT
+                : DeleteLikeReportResult.FAILURE_REPORT;
     }
 
 
@@ -250,10 +341,7 @@ public class ArticleService {
 
 
 
-
-
-
-//-----------------------------------------------게시판 리뷰-------------------------------------------------------------
+    //-----------------------------------------------게시판 리뷰-------------------------------------------------------------
     public boolean patchFinish(int index, HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(index);

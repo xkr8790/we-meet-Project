@@ -3,18 +3,19 @@ package com.bsh.projectwemeet.entities;
 import java.util.Date;
 import java.util.Objects;
 
-public class ReportEntity {
+public class LikeReportEntity {
     private int index;
     private int ArticleIndex;
     private String email;
     private Date createdAt;
+    private boolean likeFlag;
     private boolean reportFlag;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ReportEntity that = (ReportEntity) o;
+        LikeReportEntity that = (LikeReportEntity) o;
         return index == that.index;
     }
 
@@ -27,7 +28,7 @@ public class ReportEntity {
         return index;
     }
 
-    public ReportEntity setIndex(int index) {
+    public LikeReportEntity setIndex(int index) {
         this.index = index;
         return this;
     }
@@ -36,7 +37,7 @@ public class ReportEntity {
         return ArticleIndex;
     }
 
-    public ReportEntity setArticleIndex(int articleIndex) {
+    public LikeReportEntity setArticleIndex(int articleIndex) {
         ArticleIndex = articleIndex;
         return this;
     }
@@ -45,7 +46,7 @@ public class ReportEntity {
         return email;
     }
 
-    public ReportEntity setEmail(String email) {
+    public LikeReportEntity setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -54,8 +55,17 @@ public class ReportEntity {
         return createdAt;
     }
 
-    public ReportEntity setCreatedAt(Date createdAt) {
+    public LikeReportEntity setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+        return this;
+    }
+
+    public boolean isLikeFlag() {
+        return likeFlag;
+    }
+
+    public LikeReportEntity setLikeFlag(boolean likeFlag) {
+        this.likeFlag = likeFlag;
         return this;
     }
 
@@ -63,7 +73,7 @@ public class ReportEntity {
         return reportFlag;
     }
 
-    public ReportEntity setReportFlag(boolean reportFlag) {
+    public LikeReportEntity setReportFlag(boolean reportFlag) {
         this.reportFlag = reportFlag;
         return this;
     }
