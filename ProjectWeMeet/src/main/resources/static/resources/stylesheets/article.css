@@ -324,12 +324,13 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    object-fit: cover;
 
 }
 .article-list>.article-link >.article-thumbnail>.thumbnail{
     border-radius: 0.3rem;
-    width: 11rem;
-    height: 12rem;
+    width: 12rem;
+    height: 13rem;
     object-fit: cover;
 }
 
@@ -369,15 +370,33 @@ body{
     margin-bottom: 1rem;
 }
 
+
 .article-map{
     font-weight: 800;
 }
+
+
+.article-map >.article-location{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+
+.article-map > .article-location > .location,.day-img,.time-img{
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-right: 0.3rem;
+}
+
 
 h2 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .article-human{
     align-items: center;
     display: flex;
@@ -405,6 +424,7 @@ h2 {
     width: 100%;
     height: 100%;
 }
+
 .Profile{
     object-fit: cover;
     border-radius: 100%;
@@ -420,6 +440,7 @@ h2 {
     margin-left: 1rem;
     margin-top: 0.5rem;
 }
+
 .number{
     margin-top: 1rem;
     white-space: nowrap;
@@ -450,22 +471,26 @@ a {
 }
 
 .pageContainer:hover {
-    box-shadow: 0 0 1rem 0.0625rem #00000010;
 }
 
 .pageContainer > .page {
     background-color: #eaecee;
     user-select: none;
-}
-
-.pageContainer > .page.selected {
-    background-color: #d5d8dc;
-    pointer-events: none;
+    border-radius: 1rem;
+    margin: 0.5rem;
 }
 
 .pageContainer > .page:hover {
     background-color: #d5d8dc;
 }
+
+
+.pageContainer > .page.selected {
+    background-color: #d5d8dc;
+    color: black;
+    pointer-events: none;
+}
+
 
 .pageContainer > .page > .link {
     height: 2.25rem;

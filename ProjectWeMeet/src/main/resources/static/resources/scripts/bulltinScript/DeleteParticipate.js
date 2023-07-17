@@ -28,7 +28,7 @@ ParticipateDeleteButton.addEventListener('click', e => {
             }
         };
         xhr.send();
-    }else if (confirmResult === false) {
+    } else if (confirmResult === false) {
         alert('참여를 취소합니다');
         return;
     }

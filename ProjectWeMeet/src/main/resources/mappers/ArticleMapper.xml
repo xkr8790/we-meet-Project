@@ -139,8 +139,7 @@
         `time` AS `appointmentStartTime`,
         `finished_flag` AS `isFinished`
         FROM `wemeet_project`.`articles`
-        WHERE `category` LIKE CONCAT('%', #{category}, '%') AND `finished_flag` = false
-        OR `finished_flag` = true
+        WHERE `category` LIKE CONCAT('%', #{category}, '%')
         ORDER BY `index` DESC
         LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
     </select>

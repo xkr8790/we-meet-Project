@@ -364,15 +364,15 @@ writeButton.addEventListener('click', e => {
 })
 
 
-bulletinForm.onsubmit = function (e) {
-    e.preventDefault();
-    if (bulletinForm['content'].value == '') {
-        alert('댓글을 입력해 주세요.');
-        bulletinForm['content'].focus();
-        return;
-    }
-    postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
-}
+// bulletinForm.onsubmit = function (e) {
+//     e.preventDefault();
+//     if (bulletinForm['content'].value == '') {
+//         alert('댓글을 입력해 주세요.');
+//         bulletinForm['content'].focus();
+//         return;
+//     }
+//     postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
     refreshComment();

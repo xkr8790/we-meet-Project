@@ -44,7 +44,7 @@ public interface ArticleMapper {
     // 참여인원 중복되있는지 select
 
     ParticipantsEntity selectCheckParticipants(@Param(value = "ArticleIndex") int ArticleIndex,
-                                          @Param(value = "email")String email);
+                                               @Param(value = "email") String email);
 
 
     LikeReportEntity selectLike(@Param(value = "ArticleIndex") int ArticleIndex,

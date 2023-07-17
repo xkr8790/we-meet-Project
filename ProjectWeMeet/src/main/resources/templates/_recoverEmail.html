@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverPassword.css}">
+    <link rel="stylesheet" href="/resources/stylesheets/recoverPassword.css">
     <script defer th:src="@{/resources/scripts/verifyCode.js}"></script>
 </head>
 <body>
@@ -29,7 +29,7 @@
 
 
 <form id="passwordReset">
-    <img class="Logo password" th:src="@{/resources/images/recoverPassword/logo.jpg}">
+    <img class="Logo password" th:src="@{/resources/images/logoImages/logo-224x80.png}" alt="logo">
     <div class="passwordReset-form">
         <h2 class="title">비밀번호 변경</h2>
         <input disabled name="email" type="email" class="input" th:value="${recoverEmailCode.getEmail()}">
@@ -39,8 +39,13 @@
         <!-- 비밀번호 재입력  -->
         <div class="password-container">
             <input class="input" maxlength="50" name="password" placeholder="변경 비밀번호" type="password">
-            <img class="openEye" th:src="@{/resources/images/recoverPassword/eye.png}" alt="눈 아이콘">
-            <img class="closeEye" th:src="@{/resources/images/recoverPassword/closeEye.png}" alt="눈 아이콘">
+            <span class="openEye-icon">
+                 <img class="openEye" th:src="@{/resources/images/recoverPassword/eye.png}" alt="눈 아이콘">
+            </span>
+            <span class="closeEye-icon">
+                 <img class="closeEye" th:src="@{/resources/images/recoverPassword/closeEye.png}" alt="눈 아이콘">
+            </span>
+
         </div>
 
         <span class="warning password" rel="passwordWarning"></span>
@@ -50,7 +55,7 @@
         <div class="button-container">
             <input class="submit _color-concept" name="send" type="submit" value="재설정">
         </div>
-        <img class="mini" th:src="@{/resources/images/recoverPassword/logo.jpg}">
+        <img class="mini" th:src="@{/resources/images/logoImages/logo-224x80.png}">
     </div>
 </form>
 

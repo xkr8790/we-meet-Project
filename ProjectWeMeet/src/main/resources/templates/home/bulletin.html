@@ -14,8 +14,8 @@
     <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
     <script defer th:if="${session.user != null && LikeResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteLike.js}"></script>
     <script defer th:if="${session.user != null && ReportResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteReport.js}"></script>
-    <script defer th:if="${ParticipantsResult == null}" th:src="@{/resources/scripts/bulltinScript/InsertParticipate.js}"></script>
-    <script defer th:if="${ParticipantsResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteParticipate.js}"></script>
+    <script defer th:if="${session.user!=null && ParticipantsResult.equals('failure')}" th:src="@{/resources/scripts/bulltinScript/InsertParticipate.js}"></script>
+    <script defer th:if="${session.user!=null && ParticipantsResult.equals('success')}" th:src="@{/resources/scripts/bulltinScript/DeleteParticipate.js}"></script>
     <script defer th:src="@{/resources/scripts/bulletinMap.js}"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
@@ -140,23 +140,32 @@
                         <span>2</span>
                         <span>3</span>
                         <span>4</span>
-                        <span>5</span>
+                        <span>5</span>  
                         <span>6</span>
                     </div>
 
 
-                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult == null}">
+                    <!--  자신의 게시판일때   -->
+                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure_mine')}">
+                    </div>
+                    <!--  참여하기 클릭시 인원 1명증가하고 참여취소 버튼으로 바뀜    -->
+
+                    <!--  참가안했을때    -->
+                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure')}">
                         <button  name="Participate" th:data-index="${article.getIndex()}">
                             참여하기
                         </button>
                     </div>
+                    <!--  참여하기 클릭시 인원 1명증가하고 참여취소 버튼으로 바뀜    -->
 
-                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult != null}">
+                    <!-- 참여되었을때 -->
+                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('success')}">
                         <button name="ParticipateDelete" th:data-index="${article.getIndex()}">
                             참여취소
                         </button>
                     </div>
-                    <!--  참가안했을때    -->
+                    <!-- 참여취소 클릭시 참여하기로 변경 -->
+
 
 
                 </div>

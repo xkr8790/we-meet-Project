@@ -113,25 +113,21 @@ public class ArticleService {
         return false; // 기본값은 참여하지 않은 것으로 설정
     }
 
-    public ParticipantsEntity selectParticipants(int index,HttpSession session){
+    public SelectParticipantsResult selectParticipants(int index,HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("user");
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
 
         if(user == null){
-            return null;
+            return SelectParticipantsResult.FAILURE_LOGIN;
         }
 
-        if(user.getEmail() == article.getEmail()){
-            System.out.println(article.getEmail());
-            return null;
+        if(Objects.equals(user.getEmail(), article.getEmail())){
+            return SelectParticipantsResult.FAILURE_MINE;
         }
 
-        ParticipantsEntity result = articleMapper.selectCheckParticipants(index, user.getEmail());
-
-        if(result!= null){
-            return result;
-        }
-        return null;
+        return this.articleMapper.selectCheckParticipants(index,user.getEmail()) != null
+                ? SelectParticipantsResult.SUCCESS
+                : SelectParticipantsResult.FAILURE;
     }
 
 

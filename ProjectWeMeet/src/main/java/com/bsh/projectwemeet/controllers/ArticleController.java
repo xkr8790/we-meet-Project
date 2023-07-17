@@ -112,7 +112,7 @@ public class ArticleController {
         ArticleEntity[] articles = this.articleService.getMiniArticle();
         LikeReportEntity LikeResult = this.articleService.selectLike(index,session,flag);
         LikeReportEntity ReportResult = this.articleService.selectReport(index,session,flag);
-        ParticipantsEntity ParticipantsResult = this.articleService.selectParticipants(index,session);
+        SelectParticipantsResult ParticipantsResult = this.articleService.selectParticipants(index,session);
         // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
 
 
@@ -121,7 +121,7 @@ public class ArticleController {
         modelAndView.addObject("articles", articles);
         modelAndView.addObject("LikeResult",LikeResult);
         modelAndView.addObject("ReportResult",ReportResult);
-        modelAndView.addObject("ParticipantsResult",ParticipantsResult);
+        modelAndView.addObject("ParticipantsResult",ParticipantsResult.name().toLowerCase());
 
         return modelAndView;
     }//인덱스번호로 각 게시판 값 나타내기
