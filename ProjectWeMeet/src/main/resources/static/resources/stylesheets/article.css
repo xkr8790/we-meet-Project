@@ -276,61 +276,70 @@ body{
     justify-content: center;
     background-color: #f4f3f1;
     padding: 2rem 0 0.5rem 0;
+
 }
+
 .article-box > .article-box-grid{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center; /* 수직 정렬 */
     justify-items: center;
-    grid-gap: 1rem;
+    grid-gap: 2rem;
     background-color: #f4f3f1;
     padding: 1rem 0 0.5rem 0;
 }
 
 
-.article-list{
-    /*border: 1px solid red;*/
-    width: 35rem;
-    height: 14rem;
-    background-color: white;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
-    gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
-}
+/*.article-list{*/
+/*    !*border: 1px solid red;*!*/
+/*    width: 35rem;*/
+/*    height: 16rem;*/
+/*    background-color: white;*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*    border-radius: 0.5rem;*/
+/*    margin-bottom: 2rem;*/
+/*    margin-top: 2rem;*/
+/*    padding: 1rem 1rem 1rem 0;*/
+
+/*    gap: 1rem; !* 이미지와 텍스트 사이의 간격 *!*/
+/*}*/
+
 .article-list>.article-link{
     /*border: 1px solid red;*/
     width: 35rem;
-    height: 18rem;
+    height: 16rem;
     background-color: white;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
     border-radius: 0.5rem;
-    margin-bottom: 2rem;
+    padding: 1rem 0rem 1rem 1.5rem;
+
     gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
 }
 
 
 .article-list > .article-link > .article-thumbnail {
-    width: 17rem;
-    height: 15rem;
+    width: 14rem;
+    height: 14rem;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    object-fit: cover;
-
-}
-.article-list>.article-link >.article-thumbnail>.thumbnail{
     border-radius: 0.3rem;
-    width: 12rem;
-    height: 13rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
+
+.article-list>.article-link >.article-thumbnail>.thumbnail{
+    border-radius: 15px;
+    width: 14rem;
+    height: 14rem;
+    padding-left: 0.3rem;
     object-fit: cover;
 }
 
@@ -349,6 +358,7 @@ body{
     width: 19rem;
     margin-bottom: 1.5rem;
 }
+
 .tag{
     border-radius: 0.7rem;
     margin: 0rem 0.8rem 0rem 0;
@@ -358,6 +368,7 @@ body{
     padding: 0.6rem;
     font-size: 1.1rem;
 }
+
 .tag.comment{
     color: white;
     background-color: #ff7257;
@@ -385,8 +396,8 @@ body{
 
 
 .article-map > .article-location > .location,.day-img,.time-img{
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1.35rem;
+    height: 1.35rem;
     margin-right: 0.3rem;
 }
 
@@ -403,10 +414,11 @@ h2 {
     flex-direction: row;
     justify-content: center;
     flex-shrink: 0;
+    margin-left: -0.5rem;
 }
 
 .Profile-Picture {
-    margin-top: 1rem;
+    margin-bottom:0.3rem;
     margin-right: -0.4rem;
     width: 2.5rem;
     height: 2.5rem;
@@ -438,12 +450,12 @@ h2 {
 .limit-image{
     width: 2.5rem;
     margin-left: 1rem;
-    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .number{
-    margin-top: 1rem;
     white-space: nowrap;
+    margin-top: 0.3rem;
 }
 
 .cover{

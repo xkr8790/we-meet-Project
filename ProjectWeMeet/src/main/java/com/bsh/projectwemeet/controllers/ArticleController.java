@@ -42,8 +42,7 @@ public class ArticleController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getArticle(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
-                                   @RequestParam(value = "category", required = false) String category,
-                                   boolean isFinished) {
+                                   @RequestParam(value = "category", required = false) String category) {
         ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
 
         PagingModel pagingCategory = new PagingModel(
