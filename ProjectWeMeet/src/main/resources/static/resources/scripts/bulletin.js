@@ -372,9 +372,25 @@ function refreshComment() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const comments = JSON.parse(xhr.responseText);
+
+                // Store existing comment indices
+                const existingCommentIndices = [];
+
+                // Collect existing comment indices
+                const existingComments = document.querySelectorAll('.comment-left, .comment-right');
+                for (const comment of existingComments) {
+                    const commentIndex = comment.querySelector('.delete-button').dataset.commentIndex;
+                    existingCommentIndices.push(commentIndex);
+                }
+
                 commentContainer.innerHTML = ''; // Clear existing comments
 
                 for (const comment of comments) {
+                    // Skip if the comment already exists
+                    if (existingCommentIndices.includes(comment.index)) {
+                        continue;
+                    }
+
                     const div = document.createElement('div');
                     const commentClass = 'comment-left';
 
