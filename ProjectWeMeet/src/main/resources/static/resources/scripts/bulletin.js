@@ -392,7 +392,7 @@ function refreshComment() {
                     }
 
                     const div = document.createElement('div');
-                    const commentClass = 'comment-left';
+                    const commentClass = comment['deleted'] ? 'comment-left' : 'comment-right';
 
                     div.classList.add(commentClass);
                     const headDiv = document.createElement('div');
@@ -466,7 +466,6 @@ function refreshComment() {
     };
     xhr.send();
 }
-
 
 // success_same일 때
 function refreshCommentSuccessSame() {
@@ -477,17 +476,15 @@ function refreshCommentSuccessSame() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const comments = JSON.parse(xhr.responseText);
-                // commentContainer.innerHTML = ''; // Commented out to preserve existing comments
 
                 for (const comment of comments) {
-                    // Check if the comment already exists
                     const existingComment = document.querySelector(`[data-comment-index="${comment.index}"]`);
                     if (existingComment) {
                         continue; // Skip if the comment already exists
                     }
 
                     const div = document.createElement('div');
-                    const commentClass = 'comment-right';
+                    const commentClass = comment['deleted'] ? 'comment-left' : 'comment-right';
 
                     div.classList.add(commentClass);
                     const headDiv = document.createElement('div');
@@ -561,7 +558,6 @@ function refreshCommentSuccessSame() {
     };
     xhr.send();
 }
-
 
 bulletinForm.onsubmit = function (e) {
     e.preventDefault();
