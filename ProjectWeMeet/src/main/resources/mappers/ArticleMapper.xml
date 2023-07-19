@@ -234,15 +234,6 @@
     </select>
     <!-- 게시물 수정 찾기 -->
 
-    <!-- 게시물 해쉬태그 select -->
-    <select id="selectArticleByPatchHashTag"
-            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`                   AS `index`,
-               SUBSTRING(hashtag, 1, 11) AS `hashtag`
-        FROM `wemeet_project`.`articles`
-        WHERE `index` = #{index}
-    </select>
-    <!-- 게시물 해쉬태그 select -->
 
     <!-- 참여인원 중복되있는지 select -->
     <select id="selectParticipants"
@@ -432,7 +423,8 @@
             `latitude`       = #{latitude},
             `longitude`      = #{longitude},
             `thumbnail`      = IFNULL(#{thumbnail}, `thumbnail`),
-            `thumbnail_mime` = IFNULL(#{thumbnailMime}, `thumbnail_mime`)
+            `thumbnail_mime` = IFNULL(#{thumbnailMime}, `thumbnail_mime`),
+            `hashtag` = #{hashtag}
         WHERE `index` = #{index}
     </update>
     <!-- 게시판 수정 -->

@@ -184,11 +184,6 @@ public class ArticleService {
         return this.articleMapper.selectArticleByPatchIndex(index);
     }
 
-    public ArticleEntity[] getPatchIndexArticleHashTag(int index){
-        return this.articleMapper.selectArticleByPatchHashTag(index);
-    }
-
-
     public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");

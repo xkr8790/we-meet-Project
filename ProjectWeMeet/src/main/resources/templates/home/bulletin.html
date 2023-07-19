@@ -93,7 +93,7 @@
         </div>
         <div class="likeAndReport" th:if="${session.user != null && LikeResult != null}">
             <img class="deleteLike" th:data-index="${article.getIndex()}"
-                 th:src="@{/resources/images/bulletinImags/likeAfter.png}">
+                 th:src="@{/resources/images/bulletinImags/like.png}">
             <span class="deleteLike" th:text="${article.getLikeCount()}"></span>
         </div>
         <div class="likeAndReport" th:if="${session.user != null && ReportResult == null}">

@@ -154,19 +154,29 @@ allContainer > .header > .login > a {
     justify-content: flex-end;
 }
 
-.likeAndReport .like{
+.likeAndReport .like {
     margin-right: 5px;
     width: 1.5rem;
-} /*좋아요랑 좋아요 한후 */
+    filter: brightness(30%);
+}
 
-.likeAndReport .like:hover{
-    filter: brightness(50%);
-} /*좋아요랑 좋아요 한후 */
+/*좋아요랑 좋아요 한후 */
+
+.likeAndReport .like:hover {
+    filter: brightness(90%);
+}
+
+/*좋아요랑 좋아요 한후 */
 
 .likeAndReport .deleteLike {
     margin-right: 5px;
     width: 1.5rem;
 } /*좋아요랑 좋아요 한후 */
+
+.likeAndReport .deleteLike:hover {
+    filter: brightness(30%);
+}  /*좋아요랑 좋아요 한후 */
+
 
 
 .likeAndReport .report{

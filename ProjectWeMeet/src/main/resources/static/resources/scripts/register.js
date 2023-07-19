@@ -229,6 +229,7 @@ registerForm.onsubmit = e =>{
             registerForm['email'].select();
             return;
         }
+
         if (registerForm['nickname'].value === '') {
             // 별명 미입력
             registerForm.nicknameWarning.show('별명을 입력해 주세요.');

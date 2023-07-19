@@ -140,10 +140,8 @@ public class ArticleController {
             method = RequestMethod.GET)
     public ModelAndView getWrite(@RequestParam(value = "index") int index, HttpSession session) {
         ArticleEntity article = articleService.getPatchIndexArticle(index,session);
-        ArticleEntity[] articleTag = articleService.getPatchIndexArticleHashTag(index);
         ModelAndView modelAndView = new ModelAndView("home/patchWrite");
         modelAndView.addObject("article", article);
-        modelAndView.addObject("articleTag",articleTag);
         return modelAndView;
     }
     //게시판 수정 폼 받아오기

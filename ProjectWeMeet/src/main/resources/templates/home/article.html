@@ -150,8 +150,10 @@
                                 </div>
                                 <div class="article-content-box">
                                     <div class="article-tag">
+                                        <span class="tag comment" th:if="${article.getHashtag() != null}" th:text="${article.getHashtag()}">
+                                           좋아요!!
+                                        </span>
                                         <span class="tag" th:text="${article.getCategory()}">태그</span>
-                                        <span class="tag comment" th:if="${article.getLikeCount()>10}">좋아요!!</span>
                                     </div>
                                     <h2 class="article-content" th:text="${article.getTitle()}"></h2>
                                     <span class="article-map">
@@ -193,11 +195,6 @@
                   <!-- 제한인원 제한 걸때 value??  -->
               </span>
               </span>
-
-
-
-
-
                                     </span>
                                 </div>
                             </a>
@@ -205,14 +202,23 @@
 
 
                     </div>
+
                     <ul class="pageContainer">
-                        <li class="page"
-                            th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
+                        <li class="page" th:if="${pagingCategory.requestPage > 1}">
+                            <a class="link" th:href="@{'/article' (p = ${1}, category=${category})}">처음</a>
+                        </li>
+
+                        <li class="page" th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
                             <a class="link" th:href="@{'/article' (p = ${page},category=${category})}"
                                th:text="${page}"></a>
                         </li>
+                        <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
+                            <a class="link" th:href="@{'/article' (p = ${pagingCategory.requestPage + 1}, category=${category})}">다음</a>
+                        </li>
+                        <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
+                            <a class="link" th:href="@{'/article' (p = ${pagingCategory.maxPage}, category=${category})}">마지막</a>
+                        </li>
                     </ul>
-
 
                 </div>
             </div>  <!--전체-->

@@ -37,9 +37,6 @@ public interface ArticleMapper {
     ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
     //게시물 수정 인덱스 찾기
 
-    ArticleEntity[] selectArticleByPatchHashTag(@Param(value = "index") int index);
-    //게시물 해쉬태그 select
-
     ParticipantsEntity selectParticipants(@Param(value = "index") int index);
     // 참여인원 중복되있는지 select
 
