@@ -38,6 +38,9 @@ public class ArticleService {
         return this.articleMapper.selectCountCategoryByPage(pagingModel,category);
     }
 
+    public ArticleEntity getArticleByIndex(int index) {
+        return this.articleMapper.selectArticleByIndex(index);
+    }
 
     public ArticleEntity[] getMainArticle() {
         return this.articleMapper.selectArticleMain();
@@ -258,18 +261,7 @@ public class ArticleService {
         return this.articleMapper.selectCommentByArticleIndex(articleIndex);
     }
 
-//    public boolean putComment(HttpServletRequest request, CommentEntity comment,HttpSession session){
-//
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-//
-//
-//        comment.setEmail(loginUser.getEmail())
-//                .setDeleted(false)
-//                .setCreatedAt(new Date())
-//                .setClientIp(request.getRemoteAddr())
-//                .setClientUa(request.getHeader("User-Agent"));
-//        return this.articleMapper.insertComment(comment)>0;
-//    }
+
 
 
     public CreateCommentResult putComment(HttpServletRequest request, CommentEntity comment, HttpSession session, String articleEmail) {

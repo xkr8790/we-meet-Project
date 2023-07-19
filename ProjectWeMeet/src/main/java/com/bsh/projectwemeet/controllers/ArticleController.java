@@ -9,6 +9,7 @@ import com.bsh.projectwemeet.models.PagingModel;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
 import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.json.JSONObject;
@@ -269,8 +270,16 @@ public class ArticleController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public CommentEntity[] getComment(@RequestParam(value = "articleIndex")int articleIndex){
-        return this.articleService.getCommentsOf(articleIndex);
+    public String getComment(@RequestParam(value = "articleIndex")int articleIndex){
+        ArticleEntity article = this.articleService.getArticleByIndex(articleIndex);
+        CommentEntity[] comments = this.articleService.getCommentsOf(articleIndex);
+        JSONArray responseArray = new JSONArray();
+        for (CommentEntity comment : comments) {
+            JSONObject commentObject = new JSONObject(comment);
+            commentObject.put("same", article.getEmail().equals(comment.getEmail()));
+            responseArray.put(commentObject);
+        }
+        return responseArray.toString();
     }
 
 //    @RequestMapping(value = "comment",

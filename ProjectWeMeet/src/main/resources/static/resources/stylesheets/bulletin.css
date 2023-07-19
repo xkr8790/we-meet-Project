@@ -505,6 +505,11 @@ allContainer > .header > .login > a {
     margin-left: 0.45rem;
 }
 
+.comment-left > .comment-body{
+    width: 100%;
+    word-wrap: break-word;
+}
+
 .comment-right {
     margin-bottom: 1rem;
     background-color: #3498db;
@@ -514,5 +519,8 @@ allContainer > .header > .login > a {
     margin-right: 0.45rem;
 }
 
-
+.comment-right > .comment-body{
+    width: 100%;
+    word-wrap: break-word;
+}
 
