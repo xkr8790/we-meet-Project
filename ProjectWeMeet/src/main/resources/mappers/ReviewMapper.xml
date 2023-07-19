@@ -104,4 +104,13 @@
         LIMIT 1
     </delete>
 
+
+
+    <select id="avgStar" resultType="java.lang.Double">
+        SELECT AVG(reviewStar)
+        FROM `wemeet_project`.`reviews`
+        WHERE `article_index` = #{articleIndex}
+        GROUP BY `article_index`
+    </select>
+
 </mapper>

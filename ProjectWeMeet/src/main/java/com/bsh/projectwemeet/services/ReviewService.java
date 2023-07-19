@@ -54,5 +54,14 @@ public class ReviewService {
         return this.reviewMapper.deleteByReview(index) > 0;
     }
 
+    public Double avgStar(int articleIndex){
+        Double averageScore = reviewMapper.avgStar(articleIndex);
+        System.out.println("???");
+        System.out.println(averageScore);
+        if(averageScore != null){
+            return Math.round(averageScore * 10.0) / 10.0;
+        }
+        return null;
+    }
 
 }

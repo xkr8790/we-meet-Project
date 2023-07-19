@@ -20,5 +20,10 @@ public interface ReviewMapper {
 
     int deleteByReview(@Param(value="index") int index);
 
+
+    Double avgStar(@Param(value="articleIndex") int articleIndex);
 //    int updateByText(ReviewEntity reviewEntity);
+
+
+
 }

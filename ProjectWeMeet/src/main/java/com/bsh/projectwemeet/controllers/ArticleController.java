@@ -280,9 +280,12 @@ public class ArticleController {
 
     @RequestMapping(value="article/review", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getUpdateCategory(@RequestParam(value="index")int index, String category){
+        System.out.println("???");
         ModelAndView modelAndView = new ModelAndView("home/review");
         ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
         ReviewEntity[] reviewEntities = this.reviewService.getAll();
+        Double reviewAvgStar = reviewService.avgStar(index);
+        modelAndView.addObject("avgStar", reviewAvgStar);
         modelAndView.addObject("article", article);
         modelAndView.addObject("reviews", reviewEntities);
         return modelAndView;

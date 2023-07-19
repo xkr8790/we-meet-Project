@@ -42,7 +42,7 @@ function postReview(content, toFocus, refreshCommentAfter) {
     // if (reviewIndex !== null && reviewIndex !== undefined) {
     //     formData.append('reviewIndex', reviewIndex)
     // }
-    xhr.open('POST', `review/record`);
+    xhr.open('POST', `review/index`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
