@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>소소한 일상의 변화. WeMeet!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/article.css}">
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
     <script defer th:src="@{/resources/scripts/article.js}"></script>
@@ -212,9 +212,11 @@
                             <a class="link" th:href="@{'/article' (p = ${page},category=${category})}"
                                th:text="${page}"></a>
                         </li>
+
                         <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
                             <a class="link" th:href="@{'/article' (p = ${pagingCategory.requestPage + 1}, category=${category})}">다음</a>
                         </li>
+
                         <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
                             <a class="link" th:href="@{'/article' (p = ${pagingCategory.maxPage}, category=${category})}">마지막</a>
                         </li>

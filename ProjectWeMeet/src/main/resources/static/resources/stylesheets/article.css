@@ -488,8 +488,6 @@ a {
 .pageContainer > .page {
     background-color: #eaecee;
     user-select: none;
-    border-radius: 1rem;
-    margin: 0.5rem;
 }
 
 .pageContainer > .page:hover {

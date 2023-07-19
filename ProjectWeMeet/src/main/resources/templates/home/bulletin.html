@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <script defer th:src="@{/resources/scripts/bulltinScript/bulletin.js}"></script>
     <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
     <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
@@ -67,7 +68,6 @@
                     오지마세요!
                 </div>
             </div>
-            <div class="bulletin-title" th:text="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
         </div>
     </div>
 
@@ -112,7 +112,6 @@
 
     <div class="content">
         <div th:utext="${article.getContent()}"></div>
-        <div th:text="${article.getCategory()}"></div>
     </div>
     </div>
 
@@ -227,7 +226,6 @@
                     <img th:src="@{./image(index=${articles.getIndex()})}" alt="">
                 </a>
                 <div class="text">
-                    <div class="category"  th:text="${articles.getCategory()}">온라인</div>
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
