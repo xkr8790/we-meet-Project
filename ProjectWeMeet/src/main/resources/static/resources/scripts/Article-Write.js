@@ -21,9 +21,11 @@ const Tags = document.querySelector('.tags');
 
 
 ArticleTag.addEventListener('click', function () {
+
     if (event.target.classList.contains('tag')) {
         return; // 이미 생성된 태그를 클릭한 경우 생성 코드 실행하지 않음
     }
+
     if (tagCounter >= 5) {
         alert('태그는 최대5개까지만 작성가능합니다');
         return; // 태그 개수가 5개 이상인 경우 동작하지 않음
