@@ -379,9 +379,15 @@ function refreshComment() {
                     const bodyDiv = document.createElement('div');
                     bodyDiv.classList.add('comment-body');
 
-                    const dtDate = comment['createdAt'].split('T')[0];
-                    const dtTime = comment['createdAt'].split('T')[1].split('.')[0];
-                    headDiv.innerText = `${dtDate} ${dtTime}`;
+                    const createdAt = new Date(comment['createdAt']); // Convert to Date object
+                    const year = createdAt.getFullYear();
+                    const month = String(createdAt.getMonth() + 1).padStart(2, '0');
+                    const day = String(createdAt.getDate()).padStart(2, '0');
+                    const hour = String(createdAt.getHours() % 12 || 12).padStart(2, '0');
+                    const minute = String(createdAt.getMinutes()).padStart(2, '0');
+                    const ampm = createdAt.getHours() < 12 ? '오전' : '오후';
+
+                    headDiv.innerText = `${year}/${month}/${day} ${ampm} ${hour}:${minute}`;
 
                     const deleteButton = document.createElement('button');
                     deleteButton.classList.add('delete-button');
@@ -445,6 +451,7 @@ function refreshComment() {
     };
     xhr.send();
 }
+
 
 bulletinForm.onsubmit = function (e) {
     e.preventDefault();
