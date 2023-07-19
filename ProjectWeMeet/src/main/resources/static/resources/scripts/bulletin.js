@@ -379,8 +379,11 @@ function refreshComment() {
                 // Collect existing comment indices
                 const existingComments = document.querySelectorAll('.comment-left, .comment-right');
                 for (const comment of existingComments) {
-                    const commentIndex = comment.querySelector('.delete-button').dataset.commentIndex;
-                    existingCommentIndices.push(commentIndex);
+                    const deleteButton = comment.querySelector('.delete-button');
+                    if (deleteButton) {
+                        const commentIndex = deleteButton.dataset.commentIndex;
+                        existingCommentIndices.push(commentIndex);
+                    }
                 }
 
                 commentContainer.innerHTML = ''; // Clear existing comments
@@ -392,7 +395,7 @@ function refreshComment() {
                     }
 
                     const div = document.createElement('div');
-                    const commentClass = comment['deleted'] ? 'comment-left' : 'comment-right';
+                    const commentClass = 'comment-left';
 
                     div.classList.add(commentClass);
                     const headDiv = document.createElement('div');
@@ -466,6 +469,7 @@ function refreshComment() {
     };
     xhr.send();
 }
+
 
 // success_same일 때
 function refreshCommentSuccessSame() {
@@ -478,13 +482,14 @@ function refreshCommentSuccessSame() {
                 const comments = JSON.parse(xhr.responseText);
 
                 for (const comment of comments) {
+                    // Check if the comment already exists
                     const existingComment = document.querySelector(`[data-comment-index="${comment.index}"]`);
                     if (existingComment) {
                         continue; // Skip if the comment already exists
                     }
 
                     const div = document.createElement('div');
-                    const commentClass = comment['deleted'] ? 'comment-left' : 'comment-right';
+                    const commentClass = 'comment-right';
 
                     div.classList.add(commentClass);
                     const headDiv = document.createElement('div');
@@ -559,9 +564,10 @@ function refreshCommentSuccessSame() {
     xhr.send();
 }
 
+
 bulletinForm.onsubmit = function (e) {
     e.preventDefault();
-    if (bulletinForm['content'].value == '') {
+    if (bulletinForm['content'].value === '') {
         alert('댓글을 입력해 주세요.');
         bulletinForm['content'].focus();
         return;

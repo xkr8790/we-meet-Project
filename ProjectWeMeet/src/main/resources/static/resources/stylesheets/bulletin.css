@@ -500,7 +500,7 @@ allContainer > .header > .login > a {
 .comment-left {
     margin-bottom: 1rem;
     background-color: yellow;
-    max-width: 50%;
+    max-width: 45%;
     align-self: flex-start;
     margin-left: 0.45rem;
 }
@@ -508,7 +508,7 @@ allContainer > .header > .login > a {
 .comment-right {
     margin-bottom: 1rem;
     background-color: #3498db;
-    max-width: 50%;
+    max-width: 45%;
     align-self: flex-end;
     margin-left: auto; /* Align to the right side */
     margin-right: 0.45rem;
