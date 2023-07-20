@@ -13,56 +13,59 @@
 </head>
 <body>
 <form id="Article">
-<div class="_container" id="headerContainer">
-    <header class="_content header">
-        <ul class="menu left">
-            <li class="item main-menu">
-                <label class="icon-text-button">
-                    <a class="icon-box" href="/">
-                        <img th:src="@{/resources/images/logoImages/logo-224x80.png}" class="icon">
+    <div class="_container" id="headerContainer">
+        <header class="_content header">
+            <ul class="menu left">
+                <li class="item main-menu">
+                    <label class="icon-text-button">
+                        <a class="icon-box" href="/">
+                            <img th:src="@{/resources/images/logoImages/logo-224x80.png}" class="icon">
+                        </a>
+                    </label>
+                </li>
+            </ul>
+            <ul class="menu right" th:if="${session.user == null}">
+                <li class="item">
+                    <a href="#" class="icon-text-button">
+                        <span class="text">회원가입</span>
                     </a>
-                </label>
-            </li>
-        </ul>
-        <ul class="menu right" th:if="${session.user == null}">
-            <li class="item">
-                <a href="#" class="icon-text-button">
-                    <span class="text">회원가입</span>
-                </a>
-            </li>
-            <li class="item">
-                <a class="icon-text-button" href="#">
-                    <span class="text">로그인</span>
-                </a>
-            </li>
+                </li>
+                <li class="item">
+                    <a class="icon-text-button" href="/login">
+                        <span class="text">로그인</span>
+                    </a>
+                </li>
 
-        </ul>
-        <ul class="menu right" th:if="${session.user != null}">
-            <li class="item">
-                <a href="#" class="icon-text-button">
-                    <div class="profile">
-                        프로필
-                    </div>
-                </a>
-            </li>
-            <li class="item">
-                <button>
-                    <a href="/write">
-                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+            </ul>
+            <ul class="menu right" th:if="${session.user != null}">
+                <li class="item">
+                    <a href="#" class="icon-text-button">
+                        <div class="profile">
+                            프로필
+                        </div>
                     </a>
-                </button>
-            </li>
-            <li class="item">
-                <button data-action="logout">
-                    <a href="">
-                        <i class="fa-solid fa-right-from-bracket fa-lg"></i>
-                    </a>
-                </button>
-            </li>
+                </li>
+                <li class="item">
+                    <button>
+                        <a href="/write">
+                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        </a>
+                    </button>
+                </li>
+                <li class="item">
+                            <i class="fa-solid fa-bell"></i>
+                </li>
+                <li class="item">
+                    <button data-action="logout">
+                        <a href="">
+                            <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                        </a>
+                    </button>
+                </li>
 
-        </ul>
-    </header>
-</div>
+            </ul>
+        </header>
+    </div>
 
     <section class="article-category">
         <div class="introduce_article">
@@ -74,7 +77,7 @@
             <ul class="category">
 
                 <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='')}">
+                    <a class="articleLink"th:href="@{'/article' (p=1, category='')}">
                         전체
                     </a>
                 </li>
@@ -122,7 +125,7 @@
                 </li>
 
                 <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='')}">
+                    <a class="articleLink" th:href="@{'/article' (p=1, category='완료')}">
                         <img class="category-img" th:src="@{/resources/images/category/all.png}">
                         완료
                     </a>
@@ -134,28 +137,43 @@
 
     <section class="article-container">
         <div class="slider">
-
             <div class="slide">
                 <div class="article-box">
                     <div class="article-box-grid">
-                        <div class="article-list" th:each="article : ${articleCategory}">
-                            <a class="article-link" th:href="@{article/read(index=${article.getIndex()})}">
+                        <div class="article-list"  th:each="article : ${articleCategory}">
+<!--                           ${article.equals('완료')} ? 'article/read(index=' + article.getIndex() + ')' : 'article/review(index=' + article.getIndex() + ')' -->
+                            <a class="article-link" th:href="@{${article.getCategory().equals('완료') ? 'article/review' : 'article/read'} (index = ${article.getIndex()})}">
+<!--                               th:if="!article.equauls('완료')" ? th:href="@{article/read(index=${article.getIndex()})}" : th:href="@{article/review(index=${article.getIndex()})}" >-->
                                 <div class="article-thumbnail">
                                     <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}"
                                          alt="Thumbnail">
                                 </div>
                                 <div class="article-content-box">
                                     <div class="article-tag">
+                                        <span class="tag comment" th:if="${article.getHashtag() != null}" th:text="${article.getHashtag()}">
+                                           좋아요!!
+                                        </span>
                                         <span class="tag" th:text="${article.getCategory()}">태그</span>
-                                        <span class="tag comment" th:if="${article.getLikeCount()>10}">좋아요!!</span>
                                     </div>
                                     <h2 class="article-content" th:text="${article.getTitle()}"></h2>
                                     <span class="article-map">
-                                <span th:text="${article.getAddress()}">위치</span>
-                                <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
-                                <span th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
-                                + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
-                                    <span class="article-human">
+
+                                 <div class="article-location">
+                                     <img class="location" th:src="@{/resources/images/articleImages/location.png}">
+                                     <span th:text="${article.getAddress()}">위치</span>
+                                 </div>
+
+                                 <div class="article-location">
+                                    <img class="day-img" th:src="@{/resources/images/articleImages/day.png}">
+                                    <div th:text="${#dates.format(article.getAppointmentStartDate(), 'MM월 dd일')}"></div>
+                                 </div>
+
+                                <div class="article-location">
+                                    <img class="time-img" th:src="@{/resources/images/articleImages/limit-time.png}">
+                                    <span th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
+                                    + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
+                                </div>
+                                                                    <span class="article-human">
               <span class="Profile-Picture">
                  <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
               </span>
@@ -177,16 +195,30 @@
                   <!-- 제한인원 제한 걸때 value??  -->
               </span>
               </span>
+                                    </span>
                                 </div>
                             </a>
                         </div>
+
+
                     </div>
+
                     <ul class="pageContainer">
+                        <li class="page" th:if="${pagingCategory.requestPage > 1}">
+                            <a class="link" th:href="@{'/article' (p = ${1}, category=${category})}">처음</a>
+                        </li>
+
                         <li class="page" th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
-                            <a class="link" th:href="@{'/article' (p = ${page},category=${category})}" th:text="${page}"></a>
+                            <a class="link" th:href="@{'/article' (p = ${page},category=${category})}"
+                               th:text="${page}"></a>
+                        </li>
+                        <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
+                            <a class="link" th:href="@{'/article' (p = ${pagingCategory.requestPage + 1}, category=${category})}">다음</a>
+                        </li>
+                        <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
+                            <a class="link" th:href="@{'/article' (p = ${pagingCategory.maxPage}, category=${category})}">마지막</a>
                         </li>
                     </ul>
-
 
                 </div>
             </div>  <!--전체-->

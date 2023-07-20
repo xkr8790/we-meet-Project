@@ -1,6 +1,6 @@
 package com.bsh.projectwemeet.enums;
 
-public enum FinishResult {
+public enum UpdateCategoryResult {
     FAILURE,
     SUCCESS
 }

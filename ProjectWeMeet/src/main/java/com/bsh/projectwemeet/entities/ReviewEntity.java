@@ -16,6 +16,17 @@ public class ReviewEntity {
     private String clientUa;
     private String email;
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public ReviewEntity setNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+    private String nickname;
+
     public String getEmail() {
         return email;
     }

@@ -6,29 +6,40 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>게시글</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"/>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/review.css}">
 
     <script defer th:src="@{/resources/scripts/review.js}"></script>
+    <script defer th:src="@{/resources/scripts/logout.js}"></script>
 
 </head>
 <body>
-<form class="allContainer" id="reviewForm" >
+<form class="allContainer" id="reviewForm">
     <div class="header">
         <a href="/">
-            <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
+            <img th:src="@{/resources/images/logoImages/bulletinLogo-244x48.png}" alt="로고">
         </a>
         <div class="login" th:if="${session.user == null}">
             <a href="/login">로그인</a>
             <a href="/register/">회원가입</a>
         </div>
+        <div class="login" th:if="${session.user != null}">
+            <button class="write" name="write">
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                <div class="tooltip">글작성</div>
+            </button>
+            <button class="write"  data-action="logout">
+                <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                <div class="tooltip">로그아웃</div>
+            </button>
+        </div>
     </div>
 
     <div class="main-template">
         <div class="img-profile-title">
-            <img th:src="@{/resources/images/bulletinImags/images.jpeg}"
-                 alt="">
+            <img th:src="@{/article/image(index=${article.getIndex()})}"
+                 alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">
@@ -36,16 +47,11 @@
                     </a>
                     <p>쵸단</p>
                 </div>
-                <div class="bulletin-title">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
+                <div class="bulletin-title" th:utext="${article.getTitle()}"></div>
             </div>
         </div>
         <div class="content">
-            <div>소환자의 협곡에 여러분을 초대합니다.
-                저는 현재 골드1~플4를 왔다갔다 하는 서폿,탑 유저입니다.
-                혼자서 아무리 발악해바야 못올라가는걸 알고있습니다.
-                이럴수록 뭉쳐서 맞서 싸워야합니다.
-                데마시안의 이름으로 적들을 처단합시다.
-                참고로 탑 티모
+            <div th:utext="${article.getContent()}">
             </div>
         </div>
     </div>
@@ -77,7 +83,7 @@
             <div class="reviewContainer">
                 <div class="reviewTitle">당신의 추억을 남겨주세요</div>
                 <div class="reviewContent" id="reviewContent">
-                    <div class="reviewBox" th:each="review : ${reviews}">
+                    <div class="reviewBox" th:if="${article.getIndex() == review.getArticleIndex()}"  th:each="review : ${reviews}">
                         <div class="core">
                             <span th:each="star : ${#numbers.sequence(1, review.getReviewStar())}">★</span>
                         </div>
@@ -87,16 +93,19 @@
                             <span class="profile">
                                 <img src="/resources/images/bulletinImags/쵸단.png" alt="이미지">
                             </span>
-                            <span class="text" th:text="${#dates.format(review.getCreatedAt(), 'yyyy-MM-dd')}"></span>
+                            <div class="user">
+                                <span class="email" th:text="${review.getNickname()}"></span>
+                                <span class="text" th:text="${#dates.format(review.getCreatedAt(), 'yyyy-MM-dd')}"></span>
+                            </div>
                         </div>
-                        <div class="deleteButton">
+                        <div class="deleteButton" th:if="${session.user != null and session.user.email == review.getEmail()}">
                             <a href="#" class="delete" rel="delete" th:data-index="${review.getIndex()}">삭제</a>
                         </div>
                     </div>
                 </div>
-                <div class="reviewInput">
-                    <input type="hidden" name="articleIndex" value="290">
-                    <input class="content" type="text" name="content">
+                <div class="reviewInput" th:if="${session.user != null}">
+                    <input type="hidden" name="articleIndex" th:value="${article.getIndex()}">
+                    <textarea class="content"  rows="3"  name="content" wrap="physical"></textarea>
                     <div class="starBox">
                         <div class="fieldset">
                             <input type="radio" name="reviewStar" value="5" id="rate1"><label
@@ -107,10 +116,10 @@
                                 for="rate3">★</label>
                             <input type="radio" name="reviewStar" value="2" id="rate4"><label
                                 for="rate4">★</label>
-                            <input type="radio" name="reviewStar" value="1" id="rate5"><label
+                            <input type="radio" name="reviewStar" value="1" id="rate5" checked><label
                                 for="rate5">★</label>
                         </div>
-                        <input class="button" id="reviewButton" type="submit" value="등록">
+                        <input class="button" name="submit" id="reviewButton" type="submit" value="등록">
                     </div>
                 </div>
             </div>

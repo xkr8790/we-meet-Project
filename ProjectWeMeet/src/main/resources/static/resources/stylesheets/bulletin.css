@@ -146,26 +146,62 @@ allContainer > .header > .login > a {
     margin: 0 1rem;
 }
 
-.allContainer > .main-template > .likeAndReport>.like{
-    width: 1.3rem;
-}
-.allContainer > .main-template > .likeAndReport>.report{
-    width: 1.4rem;
-}
-
-
-.likeAndReport .like,
-.likeAndReport .report {
-    margin-right: 5px;
-}
-
-.likeAndReport{
+.likeAndReport {
     margin-right: 0rem;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
+
+.likeAndReport .like {
+    margin-right: 5px;
+    width: 1.5rem;
+    filter: brightness(30%);
+}
+
+/*좋아요랑 좋아요 한후 */
+
+.likeAndReport .like:hover {
+    filter: brightness(90%);
+}
+
+/*좋아요랑 좋아요 한후 */
+
+.likeAndReport .deleteLike {
+    margin-right: 5px;
+    width: 1.5rem;
+} /*좋아요랑 좋아요 한후 */
+
+.likeAndReport .deleteLike:hover {
+    filter: brightness(30%);
+}  /*좋아요랑 좋아요 한후 */
+
+
+
+.likeAndReport .report{
+    margin-right: 5px;
+    width: 1.6rem;
+} /* 신고 하기전 색상 회색*/
+
+.likeAndReport .report:hover{
+    filter: brightness(50%);
+} /* 신고 하기전 색상 회색*/
+
+.likeAndReport .deleteReport {
+    margin-right: 5px;
+    width: 1.6rem;
+    filter: brightness(10%);
+} /* 신고 하고나서 색상 검은색*/
+
+.likeAndReport .deleteReport:hover{
+    margin-right: 5px;
+    width: 1.6rem;
+    filter: brightness(50%);
+} /* 신고 하고나서 색상 검은색*/
+
+
+
 
 
 .announcement {

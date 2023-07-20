@@ -65,8 +65,6 @@ const onScrollEnd = (e) => {
 bindEvents();
 
 
-const ParticipateButton = bulletinForm.querySelector('[name="Participate"]');
-const ParticipateDeleteButton = bulletinForm.querySelector('[name="ParticipateDelete"]');
 const deleteButton = bulletinForm.querySelector('[name="delete"]');
 const patchButton = bulletinForm.querySelector('[name="patch"]');
 
@@ -132,146 +130,6 @@ patchButton.addEventListener('click', e => {
     };
     xhr.send();
 }); //게시판 수정
-
-
-ParticipateButton.addEventListener('click', e => {
-    e.preventDefault();
-    const index = ParticipateButton.dataset.index;
-
-    const confirmResult = confirm('참여하시겠습니까?');
-    if (confirmResult === true) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', `./Participate?index=${index}`);
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    const responseText = xhr.responseText;
-                    if (responseText === 'true') {
-                        alert('참여되었습니다');
-                        location.href = `/article/read?index=` + index;
-                        return;
-                    } else {
-                        alert('제한인원을 초과했습니다');
-                        return;
-                    }
-                } else {
-                    alert('이미 참여한 사용자입니다');
-                    return;
-                }
-            }
-        };
-        xhr.send();
-    }else if (confirmResult === false) {
-        alert('참여를 취소합니다');
-        return;
-    }
-});
-
-ParticipateDeleteButton.addEventListener('click', e => {
-    e.preventDefault();
-    const index = ParticipateDeleteButton.dataset.index;
-
-    const confirmResult = confirm('참여를 취소하시겠습니까?');
-    if (confirmResult === true) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('PATCH', `./Participate?index=${index}`)
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    const responseObject = JSON.parse(xhr.responseText);
-                    switch (responseObject.result) {
-                        case 'success':
-                            alert('참여가 취소되었습니다');
-                            location.href = `/article/read?index=` + index;
-                            break;
-                        case 'failure':
-                            alert('먼저 참여를 해주세요');
-                            break;
-                        default:
-                            alert('무슨오류일까?');
-                    }
-                } else {
-                    alert('먼저 참여를 해주세요');
-                }
-            }
-        };
-        xhr.send();
-    }else if (confirmResult === false) {
-        alert('참여를 취소합니다');
-        return;
-    }
-});
-
-const like = bulletinForm.querySelector('.like');
-const Report = bulletinForm.querySelector('.report');
-
-like.addEventListener('click', e => {
-    e.preventDefault();
-    const index = like.dataset.index;
-    const xhr = new XMLHttpRequest();
-    const formData = new FormData();
-    xhr.open('PATCH', `./like?index=${index}`);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseObject = JSON.parse(xhr.responseText);
-                switch (responseObject.result) {
-                    case 'success':
-                        alert('좋아요');
-                        location.href = `/article/read?index=` + index;
-                        break;
-                    case 'failure':
-                        alert('자신의 게시물에 좋아요를 할수 없습니다');
-                        break;
-                    default:
-                        alert('좋아요 실패?');
-                }
-            } else {
-                alert('좋아요 실패');
-            }
-        }
-    };
-    xhr.send();
-})
-
-
-Report.addEventListener('click', e => {
-    e.preventDefault();
-    const index = Report.dataset.index;
-    const xhr = new XMLHttpRequest();
-    const formData = new FormData();
-    xhr.open('PATCH', `./Report?index=${index}`);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                const responseObject = JSON.parse(xhr.responseText);
-                switch (responseObject.result) {
-                    case 'success':
-                        alert('신고가 되었습니다');
-                        location.href = `/article/read?index=` + index;
-                        break;
-                    case 'failure':
-                        alert('자신의 게시물에 신고를 할수 없습니다');
-                        break;
-                    default:
-                        alert('좋아요 실패?');
-                }
-            } else {
-                alert('좋아요 실패');
-            }
-        }
-    };
-    xhr.send();
-})
-
-//게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//
-
-
-
-
-
-
-
 
 
 
@@ -447,15 +305,74 @@ function refreshComment() {
 }
 
 
-bulletinForm.onsubmit = function (e) {
+
+
+
+
+
+const writeButton = bulletinForm.querySelector('[name="write"]');
+
+finishButton.addEventListener('click', e => {
     e.preventDefault();
-    if (bulletinForm['content'].value == '') {
-        alert('댓글을 입력해 주세요.');
-        bulletinForm['content'].focus();
+    const index = finishButton.dataset.index;
+    const confirmResult = confirm('게시물을 완료 하시겠습니까?');
+    if (confirmResult === true) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PATCH', `./review?index=${index}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseObject = JSON.parse(xhr.responseText);
+                    switch (responseObject.result) {
+                        case 'success':
+                            alert('게시물을 완료하였습니다.')
+                            const xhr = new XMLHttpRequest();
+                            xhr.open('GET', `./review?index=${index}`);
+                            xhr.onreadystatechange = () => {
+                                if (xhr.readyState === XMLHttpRequest.DONE) {
+                                    if (xhr.status >= 200 && xhr.status < 300) {
+                                        location.href = `/article/review?index=${index}`
+                                    } else {
+                                        alert('사용자님의 게시물이 아니라 완료가 불가능합니다.');
+                                    }
+                                }
+                            };
+                            xhr.send();
+                            break;
+                        case 'failure':
+                            alert('사용자님의 게시물이 아닙니다.');
+                            break;
+                        default:
+                            alert('default 값');
+                    }
+                } else {
+                    alert('서버에서 문제가 생겼습니다.');
+                }
+            }
+        };
+        xhr.send();
+    } else if (confirmResult === false) {
+        alert('완료를 취소합니다');
         return;
     }
-    postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
-}
+})
+
+
+writeButton.addEventListener('click', e => {
+    e.preventDefault();
+    window.location.href = "/write";
+})
+
+
+// bulletinForm.onsubmit = function (e) {
+//     e.preventDefault();
+//     if (bulletinForm['content'].value == '') {
+//         alert('댓글을 입력해 주세요.');
+//         bulletinForm['content'].focus();
+//         return;
+//     }
+//     postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
     refreshComment();

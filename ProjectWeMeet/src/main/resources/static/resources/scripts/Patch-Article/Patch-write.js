@@ -168,7 +168,7 @@ articleForm.onsubmit = e => {
         return;
     }
 
-    if (tags.value === '') {
+    if(Tags.value === ''){
         alert('해쉬태그를 입력해주세요');
         return;
     }

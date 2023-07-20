@@ -204,7 +204,7 @@ section > #Article-Write > .article-tag > .tags >.tag-container> .tag {
 
 .tags {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     position: relative;
     align-items: center;
 }
@@ -219,7 +219,8 @@ section > #Article-Write > .article-tag > .tags >.tag-container> .tag {
     font-size: 0.8rem;
     font-weight: 500;
     border-radius: 0.3rem;
-    left: 18px;
+    white-space: nowrap;
+    left: -10px;
     top: -27px;
     color: black;
     background-color: white;

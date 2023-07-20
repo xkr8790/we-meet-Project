@@ -1,16 +1,12 @@
 package com.bsh.projectwemeet.controllers;
 
-import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.entities.CommentEntity;
-import com.bsh.projectwemeet.entities.ParticipantsEntity;
-import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.models.PagingModel;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
 import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
-import org.json.JSONObject;
-import org.apache.ibatis.annotations.Param;
+import com.bsh.projectwemeet.services.ReviewService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,8 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -36,10 +30,12 @@ import java.util.Date;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final ReviewService reviewService;
 
     @Autowired
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(ArticleService articleService, ReviewService reviewService) {
         this.articleService = articleService;
+        this.reviewService = reviewService;
     }
 
     @RequestMapping(value = "article",
@@ -53,6 +49,7 @@ public class ArticleController {
                 ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
                 this.articleService.getCountCategory(category),
                 requestPage); //객체화
+
 
         ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage(pagingCategory, category);
         //페이징하면서 카테고리 관련 게시물 나타내기
@@ -104,22 +101,26 @@ public class ArticleController {
     }
 
 
-
-
     @RequestMapping(value = "article/read",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRead(@RequestParam(value = "index") int index) {
+    public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session,boolean flag) {
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
 
-        // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
         ArticleEntity article = this.articleService.readArticle(index);
-
         ArticleEntity[] articles = this.articleService.getMiniArticle();
+        LikeReportEntity LikeResult = this.articleService.selectLike(index,session,flag);
+        LikeReportEntity ReportResult = this.articleService.selectReport(index,session,flag);
+        SelectParticipantsResult ParticipantsResult = this.articleService.selectParticipants(index,session);
+        // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
+
 
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
         modelAndView.addObject("article", article);
         modelAndView.addObject("articles", articles);
+        modelAndView.addObject("LikeResult",LikeResult);
+        modelAndView.addObject("ReportResult",ReportResult);
+        modelAndView.addObject("ParticipantsResult",ParticipantsResult.name().toLowerCase());
 
         return modelAndView;
     }//인덱스번호로 각 게시판 값 나타내기
@@ -139,10 +140,8 @@ public class ArticleController {
             method = RequestMethod.GET)
     public ModelAndView getWrite(@RequestParam(value = "index") int index, HttpSession session) {
         ArticleEntity article = articleService.getPatchIndexArticle(index,session);
-        ArticleEntity[] articleTag = articleService.getPatchIndexArticleHashTag(index);
         ModelAndView modelAndView = new ModelAndView("home/patchWrite");
         modelAndView.addObject("article", article);
-        modelAndView.addObject("articleTag",articleTag);
         return modelAndView;
     }
     //게시판 수정 폼 받아오기
@@ -188,7 +187,7 @@ public class ArticleController {
             method = RequestMethod.POST)
     @ResponseBody //주소도 같고 메서드도 같으면 충돌이 일어난다.
     public String postParticipate(@RequestParam(value = "index") int index, ParticipantsEntity participants, HttpSession session) {
-        boolean result = this.articleService.Participate(index, participants, session);
+        boolean result = this.articleService.InsertParticipate(index, participants, session);
         return String.valueOf(result);
     } //인원참가시 1증가하는 POST 방식 컨트롤러 (중복 체크 불가)
 
@@ -215,28 +214,60 @@ public class ArticleController {
     } //인원이 참가 했을시 취소 가능하게
 
     @RequestMapping(value = "article/like",
-            method = RequestMethod.PATCH,
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody //있어야지 JSON 사용가능
-    public String patchLike(@RequestParam(value = "index") int index, HttpSession session) {
-        LIkeAndReportResult result = this.articleService.UpdateLikeResult(index, session);
+    @ResponseBody
+    public String postLike(@RequestParam(value = "index") int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
+        InsertLikeAndReportResult result = this.articleService.InsertLike(index,likeEntity,session,flag);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+    //좋아요를 누르면 좋아요가 오르고 새로고침됨 - 중복시 좋아요 못함 - 게시판 작성자와 로그인 사용자 이메일 같으면 실패
 
-    @RequestMapping(value = "article/Report",
-            method = RequestMethod.PATCH,
+    @RequestMapping(value = "article/report",
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody //있어야지 JSON 사용가능
-    public String patchReport(@RequestParam(value = "index") int index, HttpSession session) {
-        LIkeAndReportResult result = this.articleService.UpdateReportResult(index, session);
+    @ResponseBody
+    public String postReport(@RequestParam(value = "index") int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
+        InsertLikeAndReportResult result = this.articleService.InsertReport(index,likeEntity,session,flag);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+    //를 누르면 좋아요가 오르고 새로고침됨 - 중복시 좋아요 못함 - 게시판 작성자와 로그인 사용자 이메일 같으면 실패
+
+    @RequestMapping(value = "article/like",
+            method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteLike(@RequestParam(value = "index") int index,HttpSession session,boolean flag) {
+        DeleteLikeReportResult result = this.articleService.deleteLike(index,session,flag);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+    //좋아요 취소하는 컨트롤러
+
+    @RequestMapping(value = "article/report",
+            method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteReport(@RequestParam(value = "index") int index,HttpSession session,boolean flag) {
+        DeleteLikeReportResult result = this.articleService.deleteReport(index,session,flag);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+    //신고를 취소하는 컨트롤러
+
+
+
+
 
     @RequestMapping(value="article/review", method = RequestMethod.GET)
     public ModelAndView getFinish(int index, HttpSession session){
@@ -315,6 +346,32 @@ public class ArticleController {
         }};
         return responseObject.toString();
     }
+
+
+//    완료 후 다음으로 보내기
+
+    @RequestMapping(value="article/review", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getUpdateCategory(@RequestParam(value="index")int index, String category){
+        ModelAndView modelAndView = new ModelAndView("home/review");
+        ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
+        ReviewEntity[] reviewEntities = this.reviewService.getAll();
+        modelAndView.addObject("article", article);
+        modelAndView.addObject("reviews", reviewEntities);
+        return modelAndView;
+    }
+
+
+
+    @RequestMapping(value="article/review", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updateCategory(int index, HttpSession session){
+        UpdateCategoryResult result = this.articleService.updateCategory(index, session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+
 
 
 

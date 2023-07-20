@@ -147,16 +147,28 @@
                     <div class="article-content-box">
                         <div class="article-tag">
                             <span class="tag" th:text="${article.getCategory()}"></span>
-                            <span class="tag comment">추천!!</span>
+                            <span class="tag comment" th:if="${article.getLikeCount()>10}">추천!!</span>
                         </div>
                         <span class="article-content">
                             <h2 class="article-content-title" th:text="${article.getTitle()}">장문복이랑 놀러갈 사람?</h2>
                         </span>
+
                         <div class="article-map">
-                            <span class="map-item" th:text="${article.getAddress()}">위치</span>
-                            <span class="map-item" th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">날짜</span>
-                            <span class="map-item" th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
+                            <div class="article-location">
+                                <img class="location" th:src="@{/resources/images/articleImages/location.png}">
+                                <span class="map-item" th:text="${article.getAddress()}">위치</span>
+                            </div>
+                            <div class="article-location">
+                                <img class="day-img" th:src="@{/resources/images/articleImages/day.png}">
+                                <span class="map-item"
+                                      th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">날짜</span>
+                            </div>
+                            <div class="article-location">
+                                <img class="time-img" th:src="@{/resources/images/articleImages/limit-time.png}">
+                                <span class="map-item" th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
                                 + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
+                            </div>
+
                         </div>
                         <span class="article-human">
               <span class="Profile-Picture">

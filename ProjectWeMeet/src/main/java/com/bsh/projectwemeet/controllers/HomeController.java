@@ -25,9 +25,9 @@ public class HomeController {
     @RequestMapping(value = "/",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getMain(){
+    public ModelAndView getMain(boolean isFinished){
         ModelAndView modelAndView = new ModelAndView("home/main");
-        ArticleEntity[] articles = this.articleService.getMainArticle();
+        ArticleEntity[] articles = this.articleService.getMainArticle(isFinished);
         modelAndView.addObject("article", articles);
         return modelAndView;
     } //메인 홈 주소
@@ -60,7 +60,6 @@ public class HomeController {
         ArticleEntity article = this.articleService.readArticle(index);
 
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
-
         modelAndView.addObject("article", article);
 
         return modelAndView;

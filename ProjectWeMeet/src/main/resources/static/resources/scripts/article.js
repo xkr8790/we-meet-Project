@@ -20,7 +20,10 @@ if(!categoryParam){ //전체
     articleLink[5].classList.add('underline');
 }else if(categoryParam === '만남'){
     articleLink[6].classList.add('underline');
+}else if(categoryParam === '완료'){
+    articleLink[7].classList.add('underline');
 }
+
 
 
 

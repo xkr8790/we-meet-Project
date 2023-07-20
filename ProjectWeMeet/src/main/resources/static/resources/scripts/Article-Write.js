@@ -13,16 +13,22 @@ const thumbnail1 = document.querySelector('.thumbnail1');
 
 ClassicEditor.create(articleForm['content'], {}); //파일 업로드
 
-// var contents = CKEDITOR.instances.editor.getData();
 
 
 const ArticleTag = document.querySelector('.article-tag'); //tag를 담을 부모
 const explainTag = document.querySelector('.explainTag'); //설명
 const Tags = document.querySelector('.tags');
 
+
 ArticleTag.addEventListener('click', function () {
+
     if (event.target.classList.contains('tag')) {
         return; // 이미 생성된 태그를 클릭한 경우 생성 코드 실행하지 않음
+    }
+
+    if (tagCounter >= 5) {
+        alert('태그는 최대5개까지만 작성가능합니다');
+        return; // 태그 개수가 5개 이상인 경우 동작하지 않음
     }
 
     explainTag.addEventListener('click', function () {
@@ -51,6 +57,7 @@ ArticleTag.addEventListener('click', function () {
     Tag.classList.add('tag'); // 처음 생성시 tag 클래스 추가
     Tag.maxLength = 7;
     Tag.style.width = "120px";
+    Tag.autocomplete = "off"; //자동완성 기능 Off
 
     Tags.appendChild(TagContainer);
     TagContainer.appendChild(TagWarning);
@@ -109,7 +116,7 @@ ArticleTag.addEventListener('click', function () {
     }
     tags.push(Tag);
     tagCounter++; // 태그 생성 횟수 증가
-    Tag.focus();
+    Tag.focus(); //태그 생성시 자동으로 포커스되게
 });
 
 
@@ -160,22 +167,41 @@ articleForm.onsubmit = e => {
     if(articleForm['upload'].value === ''){
         alert('썸네일을 업로드 해주세요');
         return;
-    }
+    }//썸네일 업로드 안했을시
 
     if(articleForm['title'].value === ''){
         alert('제목을 입력해주세요');
         return;
-    }
+    } //제목이 비어있을때
+
+    if(articleForm['title'].value === ''){
+        alert('제목을 입력해주세요');
+        return;
+    }//제목에 욕설이나 정규식에 부합하는 제목이 적혀있을때
 
     if(articleForm['content'].value === ''){
         alert('게시판을 입력해주세요');
         return;
-    }
+    } //게시판 내용이 비어있을때
 
-    if(tags.value === ''){
-        alert('해쉬태그를 입력해주세요');
+    // if(!new RegExp().test(articleForm['content'].value)){
+    //     alert('욕설이 포함되있습니다 다시 입력해주세요');
+    //     articleForm['content'].value ='';
+    //     articleForm['content'].focus();
+    //     articleForm['content'].select();
+    //     return;
+    // } //게시판 내용이 비어있을때
+
+    if (Tags.children.length === 0) {
+        alert('해시태그를 입력해주세요.');
         return;
-    }
+    } //해시태그 비어있을때
+
+    // if (Tags.children.length === 0) {
+    //     alert('해시태그를 입력해주세요.');
+    //     return;
+    // } // 해시태그 정규식
+
 
     //폼데이터 추가될떄 무조건 문자열로 처리해주기 떄문에 requestParam으로 처리해줘야됨
 

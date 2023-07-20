@@ -8,11 +8,18 @@
     <title>계정찾기</title>
 
     <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverAccount.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/loading.css}">
     <script defer th:src="@{/resources/scripts/recoverAccount.js}"></script>
 
 
 </head>
 <body th:if="${session.user == null}">
+
+<div id="_loading">
+    <img alt="" class="_icon" th:src="@{/resources/images/Loding/_loading.png}">
+    <span class="_text">잠시만 기다려 주세요...</span>
+</div>
+
 <form id="recoverForm">
     <h2 class="title">
         <a th:href="@{/}">
@@ -57,6 +64,8 @@
         <input class="object-button emailSend" name="emailSend" id="emailSend" type="submit" value="다음">
     </div>
 </form>
+
+
 
 <form id="linkCoverForm">
     <div class="cover">

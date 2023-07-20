@@ -409,6 +409,7 @@ object-fit: cover;
     color: black;
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 3rem;
+    margin-bottom: 3rem;
 }
 
 .article-container {
@@ -448,8 +449,8 @@ object-fit: cover;
 }
 
 .article-container > .slider > .slide > .article-box > .article-list {
-    width: 33rem;
-    height: 15rem;
+    width: 35rem;
+    height: 16rem;
     background-color: rgb(244, 244, 244);
     align-items: center;
     display: flex;
@@ -458,6 +459,7 @@ object-fit: cover;
     border: 0.125rem solid rgb(244, 244, 244);
     border-radius: 15px;
     gap: 1rem;
+    padding: 1rem 1rem 1rem 0;
 
     margin-bottom: 0.7rem; /*게시글 목록 상하 간격 조절*/
 
@@ -465,23 +467,24 @@ object-fit: cover;
 
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-thumbnail {
-    width: 12rem;
-    height: 13rem;
+    width: 14rem;
+    height: 14rem;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgb(244, 244, 244);
     border-radius: 0.3rem;
-    padding-left: 0.3rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
 }
 
 .article-container > .slider > .slide > .article-box > .article-list >
 .article-thumbnail > .thumbnail {
     background-color: rgb(244, 244, 244);
     border-radius: 15px;
-    width: 12rem;
-    height: 13rem;
+    width: 14rem;
+    height: 14rem;
     padding-left: 0.3rem;
     object-fit: cover;
 }
@@ -548,9 +551,23 @@ object-fit: cover;
 .article-map {
     font-weight: 800;
     background-color: rgb(244, 244, 244);
-
-
 }
+
+.article-map > .article-location {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(244, 244, 244);
+    margin-bottom: 0.3rem;
+}
+
+.article-map > .article-location > .location, .day-img, .time-img {
+    width: 1.35rem;
+    height: 1.35rem;
+    background-color: rgb(244, 244, 244);
+    margin-right: 0.3rem;
+}
+
 
 .map-item {
     background-color: rgb(244, 244, 244);
@@ -570,12 +587,11 @@ h2 {
     flex-direction: row;
     justify-content: center;
     background-color: rgb(244, 244, 244);
-
-
+    margin-left: -0.5rem;
 }
 
 .Profile-Picture {
-    margin-top: 1rem;
+    margin-bottom:0.3rem;
     margin-right: -0.4rem;
     width: 2.5rem;
     height: 2.5rem;
@@ -607,13 +623,13 @@ h2 {
 .limit-image {
     width: 2.5rem;
     margin-left: 1rem;
-    margin-top: 0.5rem;
+    margin-bottom: 1rem;
     background-color: rgb(244, 244, 244);
 
 }
 
 .number {
-    margin-top: 1rem;
+    margin-bottom: 0rem;
     white-space: nowrap;
     background-color: rgb(244, 244, 244);
 
