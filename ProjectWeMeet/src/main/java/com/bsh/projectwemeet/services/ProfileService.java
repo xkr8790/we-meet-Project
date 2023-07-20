@@ -36,17 +36,15 @@ public class ProfileService {
         return this.profileMapper.selectAll(loginUser.getEmail());
     }
 
+    //비밀번호 확인
     public LoginResult checkPassword(UserEntity user) {
-        if (user.getEmail() == null ||
-                user.getPassword() == null) {
+        if (user.getPassword() == null) {
             return LoginResult.FAILURE;
         }
-        UserEntity existingUser = this.loginMapper.selectUserByEmail(user.getEmail());
-        user.setPassword(CryptoUtil.hashSha512(user.getPassword()));
+        UserEntity existingUser = this.profileMapper.selectPasswordByEmail(user.getEmail());
         if (!user.getPassword().equals(existingUser.getPassword())) {
             return LoginResult.FAILURE;
         }
-
         return LoginResult.SUCCESS;
     }
 
@@ -62,7 +60,7 @@ public class ProfileService {
         return this.profileMapper.insertProfile(profile) > 0;
     }
 
-    //연락처 코드
+    //연락처 코드 전송
     public SendRegisterContactCodeResult sendContactCodeResult(RegisterContactCodeEntity registerContactCode) {
 
         if (registerContactCode == null ||
@@ -96,6 +94,7 @@ public class ProfileService {
                 : SendRegisterContactCodeResult.FAILURE;
     }
 
+    //인증코드 확인
     public VerifyRegisterContactCodeResult verifyRegisterContactCodeResult(RegisterContactCodeEntity registerContactCode) {
         registerContactCode = this.profileMapper.selectContactCodeByContactCodeSalt(registerContactCode);
         if (registerContactCode == null) {
@@ -111,6 +110,7 @@ public class ProfileService {
     }
 
 
+    //비밀번호 변경
     public ModifyPasswordResult modifyPassword(String password, UserEntity user, HttpSession session) {
 
         if (!(session.getAttribute("user") instanceof UserEntity)) {
@@ -126,6 +126,7 @@ public class ProfileService {
                 ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
     }
 
+    // 연락처 변경
     public ModifyPasswordResult resetContact(String contact, UserEntity user, HttpSession session) {
         if (!(session.getAttribute("user") instanceof UserEntity)) {
             return ModifyPasswordResult.FAILURE;
@@ -140,6 +141,7 @@ public class ProfileService {
                 ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
     }
 
+    // 주소 변경
     public ModifyPasswordResult resetAddress(String postal, String primary, String secondary, UserEntity user, HttpSession session) {
         if (!(session.getAttribute("user") instanceof UserEntity)) {
             return ModifyPasswordResult.FAILURE;
@@ -150,4 +152,5 @@ public class ProfileService {
         return this.profileMapper.updateAddress(user) > 0
                 ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
     }
+
 }

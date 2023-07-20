@@ -37,16 +37,20 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "checkPassword",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    method = RequestMethod.GET,
+    produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getCheckPassword() {
+        return new ModelAndView("home/profile");
+    }
+    @RequestMapping(value = "checkPassword",
+    method = RequestMethod.POST,
+    produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postCheckPassword(HttpSession session, UserEntity user) {
+    public String postCheckPassword(HttpSession session, @RequestParam("checkPassword") String password) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
         LoginResult result = this.profileService.checkPassword(user);
-        if (result == LoginResult.SUCCESS) {
-            session.setAttribute("user", user);
-        }
         JSONObject responseObject = new JSONObject() {{
-            put("result",result.name().toLowerCase());
+            put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }

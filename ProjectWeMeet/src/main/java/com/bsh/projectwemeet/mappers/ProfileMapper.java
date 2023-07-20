@@ -17,6 +17,8 @@ public interface ProfileMapper {
     UserEntity selectUserByContact(@Param(value = "contact") String contact);
     RegisterContactCodeEntity selectContactCodeByContactCodeSalt(RegisterContactCodeEntity registerContactCode);
 
+    UserEntity selectPasswordByEmail(@Param(value = "email") String email);
+
     int updatePassword(UserEntity user);
 
     int updateContactCode(RegisterContactCodeEntity registerContactCode);
