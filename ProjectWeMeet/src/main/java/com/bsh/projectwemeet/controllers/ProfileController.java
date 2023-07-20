@@ -166,9 +166,21 @@ public class ProfileController {
         return responseObject.toString();
     }
 
-//    @RequestMapping(value = "account",
-//    method = RequestMethod.PATCH,
-//    produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public String patchAccount()
+    @RequestMapping(value = "deleteUser",
+    method = RequestMethod.DELETE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteUser(HttpSession session) {
+        UserEntity loggedInUser = (UserEntity) session.getAttribute("user");
+        session.setAttribute("user", loggedInUser);
+        DeleteUserResult result = this.profileService.deleteUserResult(session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+
+        if (result == DeleteUserResult.SUCCESS) {
+            session.invalidate();
+        }
+        return responseObject.toString();
+    }
 }

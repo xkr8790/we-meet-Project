@@ -26,4 +26,6 @@ public interface ProfileMapper {
     int updateContact(UserEntity user);
 
     int updateAddress(UserEntity user);
+
+    int deleteUser(@Param(value = "email") String email);
 }

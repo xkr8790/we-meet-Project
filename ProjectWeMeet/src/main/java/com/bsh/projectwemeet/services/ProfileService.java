@@ -153,4 +153,12 @@ public class ProfileService {
                 ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
     }
 
+    // 회원탈퇴
+    public DeleteUserResult deleteUserResult(HttpSession session) {
+        UserEntity loggedInUser = (UserEntity) session.getAttribute("user");
+        if (loggedInUser == null) {
+            return DeleteUserResult.FAILURE;
+        }
+        return DeleteUserResult.SUCCESS;
+    }
 }

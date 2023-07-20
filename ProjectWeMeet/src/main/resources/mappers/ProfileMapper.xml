@@ -156,4 +156,11 @@
         WHERE `email` = #{email}
         LIMIT 1
     </update>
+
+    <delete id="deleteUser">
+        DELETE
+        FROM `wemeet_project`.`users`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </delete>
 </mapper>
