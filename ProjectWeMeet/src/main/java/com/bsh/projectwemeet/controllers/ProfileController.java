@@ -1,11 +1,9 @@
 package com.bsh.projectwemeet.controllers;
 
-import com.bsh.projectwemeet.entities.ProfileEntity;
-import com.bsh.projectwemeet.entities.RecoverContactCodeEntity;
-import com.bsh.projectwemeet.entities.RegisterContactCodeEntity;
-import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.services.ProfileService;
+import org.apache.catalina.User;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -52,9 +51,72 @@ public class ProfileController {
         return responseObject.toString();
     }
 
+    @RequestMapping(value = "/modifyPassword",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getModifyPassword(){
+        return new ModelAndView("home/profile");
+    }
+
+    @RequestMapping(value = "/modifyPassword",
+            method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String modifyPassword(HttpSession session, @RequestParam("infoPassword") String password) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ModifyPasswordResult result = this.profileService.modifyPassword(password, user, session);
+
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+
+    @RequestMapping(value = "/resetContact",
+    method = RequestMethod.GET,
+    produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getResetContact() {
+        return new ModelAndView("home/profile");
+    }
+
+    @RequestMapping(value = "/resetContact",
+    method = RequestMethod.PATCH,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchResetContact(HttpSession session, @RequestParam("infoContact") String contact) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ModifyPasswordResult result = this.profileService.resetContact(contact, user, session);
+
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+
+    @RequestMapping(value = "/resetAddress",
+    method = RequestMethod.GET,
+    produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getResetAddress(){
+        return new ModelAndView("home/profile");
+    }
+
+
+    @RequestMapping(value = "/resetAddress",
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchResetAddress(HttpSession session, @RequestParam("infoAddressPostal") String postal,
+                                    @RequestParam("infoAddressPrimary") String primary, @RequestParam("infoAddressSecondary") String secondary) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ModifyPasswordResult result = this.profileService.resetAddress(postal, primary, secondary, user, session);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+
     @RequestMapping(value = "index",
     method = RequestMethod.POST,
-    produces = MediaType.TEXT_XML_VALUE)
+    produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public ModelAndView postIndex(HttpServletRequest request,
                                   ProfileEntity profile,
@@ -99,4 +161,10 @@ public class ProfileController {
 
         return responseObject.toString();
     }
+
+//    @RequestMapping(value = "account",
+//    method = RequestMethod.PATCH,
+//    produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public String patchAccount()
 }

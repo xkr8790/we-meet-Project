@@ -105,6 +105,24 @@
         LIMIT 1
     </select>
 
+    <update id="updateUser"
+    parameterType="com.bsh.projectwemeet.entities.UserEntity">
+        UPDATE `wemeet_project`.`users`
+        SET `name` = #{name},
+            `nickname` = #{nickname},
+            `contact` = #{contact},
+            `admin_flag` = #{isAdmin},
+            `birth` = #{birth},
+            `registered_at` = #{registeredAt},
+            `address_postal` = #{addressPostal},
+            `address_primary` = #{addressPrimary},
+            `address_secondary` = #{addressSecondary},
+            `gender` = #{gender},
+            `password` = #{password}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
     <update id="updateContactCode"
     parameterType="com.bsh.projectwemeet.entities.RegisterContactCodeEntity">
         UPDATE `wemeet_project`.`register_contact_codes`
@@ -115,6 +133,32 @@
             `expires_at`   = #{expiresAt},
             `expired_flag` = #{isExpired}
         WHERE `index` = #{index}
+        LIMIT 1
+    </update>
+
+    <update id="updatePassword"
+    parameterType="com.bsh.projectwemeet.entities.UserEntity">
+        UPDATE `wemeet_project`.`users`
+        SET `password` = #{password}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
+    <update id="updateContact"
+    parameterType="com.bsh.projectwemeet.entities.UserEntity">
+        UPDATE `wemeet_project`.`users`
+        SET `contact` = #{contact}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
+    <update id="updateAddress"
+            parameterType="com.bsh.projectwemeet.entities.UserEntity">
+        UPDATE `wemeet_project`.`users`
+        SET `address_postal` = #{addressPostal},
+            `address_primary` = #{addressPrimary},
+            `address_secondary` = #{addressSecondary}
+        WHERE `email` = #{email}
         LIMIT 1
     </update>
 </mapper>

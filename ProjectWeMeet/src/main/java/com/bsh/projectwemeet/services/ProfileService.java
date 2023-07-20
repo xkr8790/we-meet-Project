@@ -111,4 +111,43 @@ public class ProfileService {
     }
 
 
+    public ModifyPasswordResult modifyPassword(String password, UserEntity user, HttpSession session) {
+
+        if (!(session.getAttribute("user") instanceof UserEntity)) {
+            return ModifyPasswordResult.FAILURE; //세션에서 user를 가져옴, 로그인 안 함
+        }
+        UserEntity signedUser = (UserEntity) session.getAttribute("user");
+        password = CryptoUtil.hashSha512(password);
+        if (password.equals(signedUser.getPassword())) {
+            return ModifyPasswordResult.FAILURE_PASSWORD_MISMATCH; // 입력한 기존 비밀번호가 현재 비밀번호랑 다름
+        }
+        user.setPassword(password);
+        return this.profileMapper.updatePassword(user) > 0
+                ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
+    }
+
+    public ModifyPasswordResult resetContact(String contact, UserEntity user, HttpSession session) {
+        if (!(session.getAttribute("user") instanceof UserEntity)) {
+            return ModifyPasswordResult.FAILURE;
+        }
+        UserEntity signedUser = (UserEntity) session.getAttribute("user");
+
+        if (contact.equals(signedUser.getContact())) {
+            return ModifyPasswordResult.FAILURE_PASSWORD_MISMATCH;
+        }
+        user.setContact(contact);
+        return this.profileMapper.updateContact(user) > 0
+                ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
+    }
+
+    public ModifyPasswordResult resetAddress(String postal, String primary, String secondary, UserEntity user, HttpSession session) {
+        if (!(session.getAttribute("user") instanceof UserEntity)) {
+            return ModifyPasswordResult.FAILURE;
+        }
+        user.setAddressPostal(postal)
+                .setAddressPrimary(primary)
+                .setAddressSecondary(secondary);
+        return this.profileMapper.updateAddress(user) > 0
+                ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
+    }
 }

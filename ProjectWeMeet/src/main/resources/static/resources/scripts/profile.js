@@ -19,9 +19,6 @@ settingButton.addEventListener('click', () => {
 
 
 //??
-saveButton.addEventListener('click', () => {
-    popup.style.display = 'none';
-});
 
 //??
 HTMLInputElement.prototype.focusAndSelect = function () {
@@ -223,9 +220,39 @@ popup['infoContactVerify'].onclick = () => {
                         alert('인증이 완료되었습니다.');
                         popup['infoContactCode'].setAttribute('disabled', 'disabled');
                         popup['infoContactVerify'].setAttribute('disabled', 'disabled');
+                        popup['changeContact'].removeAttribute('disabled');
                         break;
                     default:
                         alert('서버가 알 수 없는 응답을 반환하였습니다.');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
+}
+
+popup['changeContact'].onclick = e => {
+    e.preventDefault();
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('infoContact', popup['infoContact'].value);
+    xhr.open('PATCH', `./resetContact`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure' :
+                        alert('이전 번호와 일치합니다. 다시 입력해 주세요.');
+                        break;
+                    case 'success' :
+                        alert('연락처가 변경되었습니다.');
+                        popup['changeContact'].setAttribute('disabled', 'disabled');
+                        break;
+                    default :
+                        alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
                 }
             } else {
                 alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
@@ -270,13 +297,78 @@ popup['infoAddressFind'].onclick = () => {
     addressLayer.show();
 };
 
-popup['save'].addEventListener('click', () => {
-    var r = confirm("저장하시겠습니까?");
-    if (r == true) {
-        alert("저장되었습니다!");
-        popup.classList.remove('step-2');
-    } else {
-        alert("취소하였습니다!");
-        popup.style.display = 'block';
+popup['changeAddress'].onclick = e => {
+    e.preventDefault();
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('infoAddressPostal', popup['infoAddressPostal'].value);
+    formData.append('infoAddressPrimary', popup['infoAddressPrimary'].value);
+    formData.append('infoAddressSecondary', popup['infoAddressSecondary'].value);
+    xhr.open('PATCH', `./resetAddress`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure':
+                        alert('이전 주소와 일치합니다. 다시 입력해 주세요.');
+                        break;
+                    case 'success':
+                        alert('주소가 변경되었습니다.');
+                        popup['infoAddressPostal'].setAttribute('disabled', 'disabled');
+                        popup['infoAddressFind'].setAttribute('disabled', 'disabled');
+                        popup['infoAddressPrimary'].setAttribute('disabled', 'disabled');
+                        popup['infoAddressSecondary'].setAttribute('disabled', 'disabled');
+                        break;
+                    default:
+                        alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
+}
+
+popup['changePassword'].onclick = e => {
+    e.preventDefault();
+
+    if (popup['infoPassword'].value === '') {
+        alert('비밀번호를 입력해 주세요.');
+        return;
+    } else if (popup['infoPasswordCheck'].value === '') {
+        alert('비밀번호를 재입력해 주세요.');
+        return;
+    } else if (popup['infoPassword'].value !== popup['infoPasswordCheck'].value) {
+        alert('비밀번호가 일치하지 않습니다. 다시 입력해 주세요.');
+        return;
     }
-})
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('infoPassword', popup['infoPassword'].value);
+    xhr.open('PATCH', `./modifyPassword`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure':
+                        alert('이전 비밀번호와 일치합니다. 다시 입력해 주세요.');
+                        break;
+                    case 'success':
+                        alert('비밀번호가 변경되었습니다.');
+                        popup['infoPassword'].setAttribute('disabled', 'disabled');
+                        popup['infoPasswordCheck'].setAttribute('disabled', 'disabled');
+                        break;
+                    default:
+                        alert('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
+}
