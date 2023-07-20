@@ -61,7 +61,7 @@
         LIMIT 1
     </select>
 
-    <select id="selectContactCodeByContactSalt"
+    <select id="selectRegisterContactCodeByContactSalt"
             parameterType="com.bsh.projectwemeet.entities.RegisterContactCodeEntity"
             resultType="com.bsh.projectwemeet.entities.RegisterContactCodeEntity">
         SELECT `index`        AS `index`,
@@ -79,7 +79,7 @@
     </select>
 
 
-    <insert id="insertContactCode"
+    <insert id="insertRegisterContactCode"
             useGeneratedKeys="true"
             keyColumn="index"
             keyProperty="index"
@@ -110,7 +110,7 @@
                 #{password})
     </insert>
 
-    <update id="updateContactCode"
+    <update id="updateRegisterCode"
             parameterType="com.bsh.projectwemeet.entities.RegisterContactCodeEntity">
         UPDATE `wemeet_project`.`register_contact_codes`
         SET `contact`      =#{contact},

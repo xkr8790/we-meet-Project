@@ -166,7 +166,7 @@ public class ProfileController {
         return responseObject.toString();
     }
 
-    @RequestMapping(value = "deleteUser",
+    @RequestMapping(value = "/deleteUser",
     method = RequestMethod.DELETE,
     produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

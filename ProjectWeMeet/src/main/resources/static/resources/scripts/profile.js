@@ -372,30 +372,31 @@ popup['changePassword'].onclick = e => {
 
 popup['deleteUser'].onclick = e => {
     e.preventDefault();
-    alert('zz');
-    if(!confirm("정말로 삭제하시겠습니까?")) {
+    if (!confirm("정말로 삭제하시겠습니까?")) {
         alert('취소하였습니다.');
     } else {
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
         formData.append('deleteUser', popup['deleteUser'].value);
-        xhr.open('DELETE',`./deleteUser`);
+        xhr.open('DELETE', `./deleteUser`);
         xhr.onreadystatechange = () => {
-         if(xhr.readyState === XMLHttpRequest.DONE){
-            if(xhr.status >= 200 && xhr.status<300) {
-                const responseObject = JSON.parse(xhr.responseText);
-                switch (responseObject.result) {
-                    case 'failure' :
-                        alert('탈퇴에 실패하였습니다. 다시 시도해 주세요.');
-                    case 'success':
-                        alert('탈퇴하셨습니다.');
-
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseObject = JSON.parse(xhr.responseText);
+                    switch (responseObject.result) {
+                        case 'failure' :
+                            alert('탈퇴에 실패하였습니다. 다시 시도해 주세요.');
+                            break;
+                        case 'success':
+                            alert('탈퇴하셨습니다.');
+                            location.href = `/`;
+                            break;
+                    }
+                } else {
+                    alert('서버와 통신할 수 없습니다. 잠시 후 다시 시도해 주세요.');
                 }
-            }else {
-            
             }
-           }
         };
-        xhr.send();
+        xhr.send(formData);
     }
 }

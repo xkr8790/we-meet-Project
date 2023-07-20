@@ -14,7 +14,7 @@ public interface RegisterMapper {
     RegisterContactCodeEntity selectRegisterContactCodeByContactSalt(RegisterContactCodeEntity registerContactCode);
 
 
-    int insertRegisterContactCode (RegisterContactCodeEntity registerContactCode);
+    int insertRegisterContactCode(RegisterContactCodeEntity registerContactCode);
     int insertUser(UserEntity user);
 
 

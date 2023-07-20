@@ -159,6 +159,8 @@ public class ProfileService {
         if (loggedInUser == null) {
             return DeleteUserResult.FAILURE;
         }
-        return DeleteUserResult.SUCCESS;
+        return this.profileMapper.deleteUser(loggedInUser.getEmail()) > 0
+                ? DeleteUserResult.SUCCESS
+                : DeleteUserResult.FAILURE;
     }
 }
