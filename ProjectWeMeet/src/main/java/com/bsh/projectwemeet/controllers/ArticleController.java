@@ -6,6 +6,9 @@ import com.bsh.projectwemeet.models.PagingModel;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
 import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import com.bsh.projectwemeet.services.ReviewService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,11 +107,14 @@ public class ArticleController {
     @RequestMapping(value = "article/read",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session) {
     public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session,boolean flag) {
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
 
         ArticleEntity article = this.articleService.readArticle(index);
         ArticleEntity[] articles = this.articleService.getMiniArticle();
+        UserEntity user = this.articleService.userEmail(session);
+
         LikeReportEntity LikeResult = this.articleService.selectLike(index,session,flag);
         LikeReportEntity ReportResult = this.articleService.selectReport(index,session,flag);
         SelectParticipantsResult ParticipantsResult = this.articleService.selectParticipants(index,session);
@@ -118,6 +124,7 @@ public class ArticleController {
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
         modelAndView.addObject("article", article);
         modelAndView.addObject("articles", articles);
+        modelAndView.addObject("user", user);
         modelAndView.addObject("LikeResult",LikeResult);
         modelAndView.addObject("ReportResult",ReportResult);
         modelAndView.addObject("ParticipantsResult",ParticipantsResult.name().toLowerCase());
@@ -300,37 +307,29 @@ public class ArticleController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public CommentEntity[] getComment(@RequestParam(value = "articleIndex")int articleIndex){
-        return this.articleService.getCommentsOf(articleIndex);
+    public String getComment(@RequestParam(value = "articleIndex")int articleIndex){
+        ArticleEntity article = this.articleService.getArticleByIndex(articleIndex);
+        CommentEntity[] comments = this.articleService.getCommentsOf(articleIndex);
+        JSONArray responseArray = new JSONArray();
+        for (CommentEntity comment : comments) {
+            JSONObject commentObject = new JSONObject(comment);
+            commentObject.put("same", article.getEmail().equals(comment.getEmail()));
+            responseArray.put(commentObject);
+        }
+        return responseArray.toString();
     }
 
-//    @RequestMapping(value = "comment",
-//            method = RequestMethod.POST,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public String postComment(HttpServletRequest request,
-//                              CommentEntity comment,
-//                              HttpSession session){
-//        boolean result = this.articleService.putComment(request, comment,session);
-//
-//
-//        return String.valueOf(result);
-//    }
 
-    @RequestMapping(value = "comment",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "comment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postComment(HttpServletRequest request,
-                              CommentEntity comment,
-                              HttpSession session,
-                              ArticleEntity article){
-        CreateCommentResult result = this.articleService.putComment(request, comment, session, article);
-        JSONObject responseObject = new JSONObject(){{
-            put("result",result.name().toLowerCase());
+    public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail,@RequestParam("nickname")String nickname) {
+        CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail,nickname);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+
 
     @RequestMapping(value = "comment",
             method = RequestMethod.DELETE,

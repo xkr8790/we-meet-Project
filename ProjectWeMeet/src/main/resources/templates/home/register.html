@@ -24,7 +24,8 @@
 <form id="registerForm" class="container">
     <div class="inner">
         <h1 class="logo_we_meet">
-            <a href="http://localhost:6795/" class="link"><img th:src="@{/resources/images/registerImags/logo.jpg}" class="logo"/></a>
+            <a href="http://localhost:6795/" class="link"><img
+                    th:src="@{/resources/images/registerImags/logo-224x80.png}" class="logo"/></a>
         </h1>
         <main class="main step-1">
             <section class="all">
@@ -306,7 +307,8 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                     </div>
                     <div class="form_item">
                         <div class="input-wrapper">
-                            <input type="text" class="input" placeholder="별명(2글자 이상 영어 대소문자,한글)" maxlength="10" name="nickname">
+                            <input type="text" class="input" placeholder="별명(2글자 이상 영어 대소문자,한글)" maxlength="10"
+                                   name="nickname">
                             <img th:src="@{/resources/images/registerImags/nickname.png}" alt="x" class="img">
                         </div>
                     </div>
@@ -314,8 +316,8 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                         <div class="input-wrapper showHide">
                             <input type="password" class="input " placeholder="비밀번호" name="password">
                             <img th:src="@{/resources/images/registerImags/lock.png}" alt="x" class="img">
-                            <img th:src="@{/resources/images/registerImags/eyes_on.png}" alt="x" class="img on" id="onIcon">
-                            <img th:src="@{/resources/images/registerImags/eyes_off.png}" alt="x" class="img off" id="offIcon">
+                            <img th:src="@{/resources/images/registerImags/eyes_on.png}" alt="x" class="on clickIcon" id="offIcon">
+                            <img th:src="@{/resources/images/registerImags/eyes_off.png}" alt="x" class="off clickIcon" id="onIcon">
                         </div>
                     </div>
                     <div class="form_item">
@@ -359,20 +361,19 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                         <input disabled class="contactVerify" name="contactVerify" type="button" value="인증번호 확인">
                     </div>
                     <input hidden name="contactSalt" type="hidden">
-
                 </div>
                 <ul class="warningList">
                     <li class="warning"><span class="warning" rel="contactWarning"></span></li>
                 </ul>
+                <div class="button-container">
+                    <input disabled class="_object-button  button complete" type="submit" value="완료">
+                </div>
             </section>
-            <div class="button-container">
-                <input disabled class="_object-button  button complete" type="submit" value="완료">
-            </div>
         </main>
         <main class="main step-3">
             <section class="success">
-                <span class="text">완료</span>
-                <a href="http://localhost:6795/login">로그인 하러가기</a>
+                <div class="text">WeMeet 회원가입을 완료하였습니다.</div>
+                <a href="http://localhost:6795/login" class="link">로그인 하러가기</a>
             </section>
         </main>
     </div>

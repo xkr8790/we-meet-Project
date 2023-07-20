@@ -67,10 +67,19 @@
                     오지마세요!
                 </div>
             </div>
+        </div>
+    </div>
             <div class="bulletin-title" th:text="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
         </div>
     </div>
 
+    <div class="likeAndReport">
+        <img class="like" th:data-index="${article.getIndex()}" th:src="@{/resources/images/bulletinImags/like.png}">
+        <span class="like" th:text="${article.getLikeCount()}"></span>
+        <img class="report" th:data-index="${article.getIndex()}"
+             th:src="@{/resources/images/bulletinImags/_report.png}">
+        <span class="report" th:text="${article.getReport()}"></span>
+    </div>
     <div class="likeAndReport" th:if="${session.user == null}">
         <div class="likeAndReport" th:if="${session.user == null}">
             <img class="like" th:data-index="${article.getIndex()}"
@@ -140,7 +149,7 @@
                         <span>2</span>
                         <span>3</span>
                         <span>4</span>
-                        <span>5</span>  
+                        <span>5</span>
                         <span>6</span>
                     </div>
 
@@ -153,6 +162,9 @@
                     <!--  참가안했을때    -->
                     <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure')}">
                         <button  name="Participate" th:data-index="${article.getIndex()}">
+                    <!-- 참가 기능  -->
+                    <div class="participating-button">
+                        <button name="Participate" th:data-index="${article.getIndex()}">
                             참여하기
                         </button>
                     </div>
@@ -193,7 +205,7 @@
                 <div class="map" id="map"></div>
                 <input name="lat" th:value="${article.getLatitude()}" readonly style="display: none">
                 <input name="lng" th:value="${article.getLongitude()}" readonly style="display: none">
-                <input name="mapPlace" th:value="${article.getPlace()}"readonly style="display: none">
+                <input name="mapPlace" th:value="${article.getPlace()}" readonly style="display: none">
             </div>
 
 
@@ -205,6 +217,8 @@
                     </div>
                     <div class="content-write">
                         <input name="articleIndex" type="hidden" th:value="${article.getIndex()}">
+                        <input name="articleEmail" type="hidden" th:value="${article.getEmail()}">
+                        <input name="nickname" type="hidden" th:value="${user.getNickname()}">
 
                         <label>
                             <input type="text" name="content" placeholder="댓글" maxlength="100">
@@ -227,8 +241,10 @@
                     <img th:src="@{./image(index=${articles.getIndex()})}" alt="">
                 </a>
                 <div class="text">
-                    <div class="category"  th:text="${articles.getCategory()}">온라인</div>
+                    <div class="category" th:text="${articles.getCategory()}">온라인</div>
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
+                    <div class="time"
+                         th:text="${#dates.format(articles.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
                         <div class="human">프로필</div>

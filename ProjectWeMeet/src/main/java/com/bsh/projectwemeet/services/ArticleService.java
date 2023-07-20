@@ -35,6 +35,9 @@ public class ArticleService {
         return this.articleMapper.selectCountCategoryByPage(pagingModel,category);
     }
 
+    public ArticleEntity getArticleByIndex(int index) {
+        return this.articleMapper.selectArticleByIndex(index);
+    }
 
     public ArticleEntity[] getMainArticle(boolean isFinished) {
         return this.articleMapper.selectArticleMain(isFinished);
@@ -368,21 +371,10 @@ public class ArticleService {
         return this.articleMapper.selectCommentByArticleIndex(articleIndex);
     }
 
-//    public boolean putComment(HttpServletRequest request, CommentEntity comment,HttpSession session){
-//
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-//
-//
-//        comment.setEmail(loginUser.getEmail())
-//                .setDeleted(false)
-//                .setCreatedAt(new Date())
-//                .setClientIp(request.getRemoteAddr())
-//                .setClientUa(request.getHeader("User-Agent"));
-//        return this.articleMapper.insertComment(comment)>0;
-//    }
 
 
-    public CreateCommentResult putComment(HttpServletRequest request, CommentEntity comment, HttpSession session, ArticleEntity article) {
+
+    public CreateCommentResult putComment(HttpServletRequest request, CommentEntity comment, HttpSession session, String articleEmail,String nickname) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
         if (loginUser == null) {
@@ -393,20 +385,29 @@ public class ArticleService {
                 .setDeleted(false)
                 .setCreatedAt(new Date())
                 .setClientIp(request.getRemoteAddr())
-                .setClientUa(request.getHeader("User-Agent"));
+                .setClientUa(request.getHeader("User-Agent"))
+                .setNickname(loginUser.getNickname());
 
         // 게시글 작성자와 댓글 작성자가 동일한지 확인
-        if (article != null && Objects.equals(loginUser.getEmail(), article.getEmail())) {
-            return CreateCommentResult.SUCCESS_SAME; // 로그인한 유저와 게시글을 작성한 유저가 동일할 때
+        if (articleEmail != null && loginUser.getEmail().equals(articleEmail)) {
+            // Insert the comment for the 'SUCCESS_SAME' case
+            int rowsAffected = articleMapper.insertComment(comment);
+            if (rowsAffected > 0) {
+                return CreateCommentResult.SUCCESS_SAME;
+            } else {
+                return CreateCommentResult.FAILURE;
+            }
+        } else {
+            // Insert the comment for the 'SUCCESS' case
+            int rowsAffected = articleMapper.insertComment(comment);
+            if (rowsAffected > 0) {
+                return CreateCommentResult.SUCCESS;
+            } else {
+                return CreateCommentResult.FAILURE;
+            }
         }
-        System.out.println(article.getEmail());
-
-        // CommentEntity를 DB에 저장하고 결과에 따라 CreateCommentResult 반환
-        return this.articleMapper.insertComment(comment) > 0
-                ? CreateCommentResult.SUCCESS
-                : CreateCommentResult.FAILURE;
-
     }
+
 
 
 
@@ -431,7 +432,7 @@ public class ArticleService {
         }
 
         if (existingComment.isDeleted()) {
-            return DeleteCommentResult.FAILURE_DELETED; // 이미 삭제된 댓글 일 경우,현재는 삭제 삭제버튼이 없기 때문에 작동할 경우는 없음
+            return DeleteCommentResult.FAILURE_DELETED; // 이미 삭제된 댓글 일 경우
         }
 
         existingComment.setDeleted(true);
@@ -443,6 +444,16 @@ public class ArticleService {
         } else {
             return DeleteCommentResult.FAILURE; // 실패
         }
+    }
+
+    public UserEntity userEmail(HttpSession session){
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+
+        if(articleMapper.selectUser(loginUser.getEmail())!=null){
+            return  this.articleMapper.selectUser(loginUser.getEmail());
+        }
+
+        return null;
     }
 
 

@@ -528,6 +528,56 @@ allContainer > .header > .login > a {
 
 
 /*댓글*/
-.comment-left{
-    margin-bottom: 1rem;
+.contentBox {
+    display: flex;
+    flex-direction: column;
 }
+
+.comment-left {
+    margin-bottom: 1rem;
+    max-width: 45%;
+    align-self: flex-start;
+    margin-left: 0.45rem;
+}
+
+.comment-left > .comment-nickname{
+    margin-bottom: 0.5rem;
+}
+
+.comment-left > .comment-box{
+    border: 1px solid red;
+    border-radius: 15px;
+    padding: 0.5rem;
+}
+
+.comment-left >.comment-box> .comment-body{
+    width: 100%;
+    word-wrap: break-word;
+}
+
+
+
+.comment-right {
+    margin-bottom: 1rem;
+    max-width: 45%;
+    align-self: flex-end;
+    margin-left: auto; /* Align to the right side */
+    margin-right: 0.8rem;
+}
+
+.comment-right > .comment-nickname{
+    margin-bottom: 0.5rem;
+    text-align: right;
+}
+
+.comment-right > .comment-box {
+    border: 1px solid #3498db;
+    border-radius: 15px;
+    padding: 0.5rem;
+}
+
+.comment-right >.comment-box > .comment-body{
+    width: 100%;
+    word-wrap: break-word;
+}
+

@@ -1,5 +1,8 @@
 package com.bsh.projectwemeet.mappers;
 
+import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.ParticipantsEntity;
+import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.models.PagingModel;
 import org.apache.ibatis.annotations.Mapper;
@@ -104,6 +107,8 @@ public interface ArticleMapper {
     int insertComment(CommentEntity comment);
 
     int updateComment(CommentEntity comment);
+
+    UserEntity selectUser(@Param(value = "email") String email);
 
 
     //    완료 페이지로 넘기기
