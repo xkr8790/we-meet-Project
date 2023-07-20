@@ -9,7 +9,6 @@
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
     <script defer th:src="@{/resources/scripts/article.js}"></script>
 
-
 </head>
 <body>
 <form id="Article">
@@ -138,7 +137,7 @@
     <section class="article-container">
         <div class="slider">
             <div class="slide">
-                <div class="article-box">
+                <div class="article-box collapsed">
                     <div class="article-box-grid">
                         <div class="article-list"  th:each="article : ${articleCategory}">
 <!--                           ${article.equals('완료')} ? 'article/read(index=' + article.getIndex() + ')' : 'article/review(index=' + article.getIndex() + ')' -->

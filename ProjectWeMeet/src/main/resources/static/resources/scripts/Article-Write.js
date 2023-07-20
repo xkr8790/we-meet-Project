@@ -1,5 +1,4 @@
 const articleForm = document.getElementById('Article-Form');
-const BulletinForm = document.getElementById('bulletinForm');
 
 
 let tagCounter = 0; //전역변수 태그카운터
@@ -216,34 +215,57 @@ articleForm.onsubmit = e => {
         return;
     } //제목이 비어있을때
 
+    if (!new RegExp('^([가-힣]{2,10})$').test(articleForm['title'].value)) {
+        alert('제목을 제대로 입력해주세요');
+        articleForm['title'].value ='';
+        articleForm['title'].focus();
+        articleForm['title'].select();
+        return;
+    }//제목 정규식
+
     if (abuse.some(x => articleForm['title'].value.indexOf(x) > -1)) {
         alert('제목에 욕설이 포함되있습니다 다시 입력해주세요');
         articleForm['title'].value ='';
         articleForm['title'].focus();
         articleForm['title'].select();
         return;
-    }//게시판 욕설
+    }//제목 욕설포함
 
 
     if(articleForm['content'].value === ''){
-        alert('게시판을 입력해주세요');
+        alert('내용을 입력해주세요');
         return;
     } //게시판 내용이 비어있을때
 
+    //
+    // if (!new RegExp('^([가-힣]{2,})$').test(articleForm['content'].value)) {
+    //     alert('내용을 제대로 입력해주세요');
+    //     return;
+    // }
+
     if (abuse.some(x => articleForm['content'].value.indexOf(x) > -1)) {
         alert('내용에 욕설이 포함되있습니다 다시 입력해주세요');
-        articleForm['content'].value ='';
-        articleForm['content'].focus();
-        articleForm['content'].select();
         return;
     }//게시판 욕설
 
-    if (Tags.children.length === 0) {
-        alert('해시태그를 입력해주세요.');
-        return;
-    } //해시태그 비어있을때
 
 
+
+    for(let i=0; i<5; i++){
+        if (!new RegExp('^#([가-힣]{2,7})$').test(articleForm['hashTag'][i].value)) {
+            alert('태그를 제대로 입력해주세요');
+            return;
+        }
+    } //해쉬태그 정규식
+
+
+    for(let i=0; i<5; i++){
+        if(abuse.some(x =>articleForm['hashTag'][i].value.indexOf(x) > -1)){
+            articleForm['hashTag'].remove();
+            alert('태그에 욕설이 포함되있습니다 다시 입력해주세요');
+            return;
+        }
+    } //해쉬태그 욕설
 
 
     //폼데이터 추가될떄 무조건 문자열로 처리해주기 떄문에 requestParam으로 처리해줘야됨
@@ -259,6 +281,7 @@ articleForm.onsubmit = e => {
     formData.append('title', articleForm['title'].value); //제목값
     formData.append('content', articleForm['content'].value); //ck에디터 내용 가져오기
     formData.append('thumbnailMultipart', articleForm['upload'].files[0]);
+
     for (let i = 0; i < tags.length; i++) { //태그 반복해서 나타내기
         formData.append('hashtag', tags[i].value);
     }

@@ -11,6 +11,7 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <script defer th:src="@{/resources/scripts/bulltinScript/bulletin.js}"></script>
+    <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
     <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
     <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
     <script defer th:if="${session.user != null && LikeResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteLike.js}"></script>
@@ -56,7 +57,7 @@
 
     <div class="main-template">
         <div class="img-profile-title">
-            <img class="image" th:src="@{/article/image(index=${article.getIndex()})}" alt="Thumbnail">
+            <img class="image" th:src="@{/article/read/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">
@@ -113,7 +114,6 @@
     <div class="content">
         <div th:utext="${article.getContent()}"></div>
     </div>
-    </div>
 
 
     <div class="announcement">
@@ -143,6 +143,10 @@
                         <span>6</span>
                     </div>
 
+                    <!--  자신의 게시판일때   -->
+                    <div class="participating-button">
+                    </div>
+                    <!--  참여하기 클릭시 인원 1명증가하고 참여취소 버튼으로 바뀜    -->
 
                     <!--  자신의 게시판일때   -->
                     <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure_mine')}">
@@ -188,6 +192,7 @@
                 </p>
                 <p class="place">
                     <i class="fa-solid fa-location-dot"></i>
+                    <span style="font-weight: 500" th:text="${article.getPlace()}"></span>
                 </p>
                 <div class="map" id="map"></div>
                 <input name="lat" th:value="${article.getLatitude()}" readonly style="display: none">
@@ -226,10 +231,12 @@
                     <img th:src="@{./image(index=${articles.getIndex()})}" alt="">
                 </a>
                 <div class="text">
+                    <div class="category" th:text="${articles.getCategory()}">모여라~~ 영웅을 기다린다</div>
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
                         <div class="human">프로필</div>
+                        <i class="fa-solid fa-user-group"></i>
                         <div class="number" th:text="${articles.getParticipation()}">인원</div>
                         <div class="number">/</div>
                         <div class="number" th:text="${articles.getLimitPeople()}">인원</div>

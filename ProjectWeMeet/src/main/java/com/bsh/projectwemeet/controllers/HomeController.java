@@ -32,6 +32,23 @@ public class HomeController {
         return modelAndView;
     } //메인 홈 주소
 
+    @RequestMapping(value = "/Privacy-Policy",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getPrivacyPolicy(){
+        ModelAndView modelAndView = new ModelAndView("home/Privacy-Policy/Privacy-Policy");
+        return modelAndView;
+    } //메인 홈 주소
+
+    @RequestMapping(value = "/TermsOfService",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getTermsOfService(){
+        ModelAndView modelAndView = new ModelAndView("home/Privacy-Policy/Terms-of-Service");
+        return modelAndView;
+    } //메인 홈 주소
+
+
     @RequestMapping(value = "/image",
             method = RequestMethod.GET)
     public ResponseEntity<byte[]> getThumbnail(@RequestParam(value = "index")int index){
