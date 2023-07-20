@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
     <script defer th:src="@{/resources/scripts/bulltinScript/bulletin.js}"></script>
+    <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
     <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
     <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
     <script defer th:if="${session.user != null && LikeResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteLike.js}"></script>
@@ -55,7 +56,7 @@
 
     <div class="main-template">
         <div class="img-profile-title">
-            <img class="image" th:src="@{/article/image(index=${article.getIndex()})}" alt="Thumbnail">
+            <img class="image" th:src="@{/article/read/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">
@@ -69,17 +70,8 @@
             </div>
         </div>
     </div>
-            <div class="bulletin-title" th:text="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하 오지마세요!</div>
-        </div>
-    </div>
 
-    <div class="likeAndReport">
-        <img class="like" th:data-index="${article.getIndex()}" th:src="@{/resources/images/bulletinImags/like.png}">
-        <span class="like" th:text="${article.getLikeCount()}"></span>
-        <img class="report" th:data-index="${article.getIndex()}"
-             th:src="@{/resources/images/bulletinImags/_report.png}">
-        <span class="report" th:text="${article.getReport()}"></span>
-    </div>
+    <!-- 로그인한 유저가 없을때   -->
     <div class="likeAndReport" th:if="${session.user == null}">
         <div class="likeAndReport" th:if="${session.user == null}">
             <img class="like" th:data-index="${article.getIndex()}"
@@ -93,7 +85,9 @@
             <span class="report" th:text="${article.getReport()}"></span>
         </div>
     </div>
+    <!-- 로그인한 유저가 없을때   -->
 
+    <!-- 로그인한 유저가 있을때   -->
     <div class="likeAndReport" th:if="${session.user != null}">
         <div class="likeAndReport" th:if="${session.user != null && LikeResult == null}">
             <img class="like" th:data-index="${article.getIndex()}"
@@ -117,7 +111,7 @@
             <span class="deleteReport" th:text="${article.getReport()}"></span>
         </div>
     </div>
-
+    <!-- 로그인한 유저가 있을때   -->
 
     <div class="content">
         <div th:utext="${article.getContent()}"></div>
@@ -164,9 +158,6 @@
                     <!--  참가안했을때    -->
                     <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure')}">
                         <button  name="Participate" th:data-index="${article.getIndex()}">
-                    <!-- 참가 기능  -->
-                    <div class="participating-button">
-                        <button name="Participate" th:data-index="${article.getIndex()}">
                             참여하기
                         </button>
                     </div>
@@ -179,8 +170,6 @@
                         </button>
                     </div>
                     <!-- 참여취소 클릭시 참여하기로 변경 -->
-
-
 
                 </div>
                 <div class="login-before-human" th:if="${session.user == null}">
@@ -221,7 +210,7 @@
                     <div class="content-write">
                         <input name="articleIndex" type="hidden" th:value="${article.getIndex()}">
                         <input name="articleEmail" type="hidden" th:value="${article.getEmail()}">
-                        <input name="nickname" type="hidden" th:if="${session.user != null}" th:value="${user.getNickname()}">
+                        <input name="nickname" type="hidden" th:value="${user.getNickname()}">
 
                         <label>
                             <input type="text" name="content" placeholder="댓글" maxlength="100">

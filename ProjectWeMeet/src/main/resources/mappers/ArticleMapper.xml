@@ -41,15 +41,16 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.CommentEntity">
-        INSERT INTO `wemeet_project`.`comments`(`article_index`, `email`, `content`, `deleted_flag`,
-                                                `created_at`, `client_ip`, `client_ua`)
+        INSERT INTO `wemeet_project`.`comments`(`article_index`,`email`, `content`, `deleted_flag`,
+                                                `created_at`, `client_ip`, `client_ua`,`nickname`)
         VALUES (#{articleIndex},
                 #{email},
                 #{content},
                 #{isDeleted},
                 IFNULL(#{createdAt}, DEFAULT(`created_at`)),
                 #{clientIp},
-                #{clientUa})
+                #{clientUa},
+                #{nickname})
     </insert>
 
     <insert id="insertParticipants"
@@ -271,7 +272,8 @@
                `deleted_flag`  AS `isDeleted`,
                `created_at`    AS `createdAt`,
                `client_ip`     AS `clientIp`,
-               `client_ua`     AS `clientUa`
+               `client_ua`     AS `clientUa`,
+               `nickname`      AS `nickname`
         FROM `wemeet_project`.`comments`
         WHERE `article_index` = #{articleIndex}
         ORDER BY `index` ASC
@@ -286,7 +288,8 @@
                `deleted_flag`  AS `isDeleted`,
                `created_at`    AS `createdAt`,
                `client_ip`     AS `clientIp`,
-               `client_ua`     AS `clientUa`
+               `client_ua`     AS `clientUa`,
+               `nickname`      AS `nickname`
         FROM `wemeet_project`.`comments`
         WHERE `index` = #{index}
         LIMIT 1
