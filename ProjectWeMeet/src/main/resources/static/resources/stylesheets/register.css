@@ -221,6 +221,31 @@ html{
 }
 
 
+/* Chrome, Safari, and Opera */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    /* 아이콘을 원하는 위치로 이동시키세요 */
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translate(2250%,-50%);
+}
+
+/*!* Firefox *!*/
+/*input[type="date"]::-moz-calendar-picker-indicator {*/
+/*    !* 아이콘을 원하는 위치로 이동시키세요 *!*/
+/*    margin-left: 10px;*/
+/*    margin-top: 5px;*/
+/*}*/
+
+/* Edge */
+input[type="date"]::-ms-clear {
+    /* 아이콘을 원하는 위치로 이동시키세요 */
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translate(2250%,-50%);
+}
+
 
 
 /**/
@@ -267,15 +292,38 @@ html{
 
 
 /*step-3*/
-
-#registerForm > .inner > .step-3 > .success{
-
+.step-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-#registerForm > .inner > .step-3 > .success >.text{
+.success {
+    text-align: center;
+    border: 1px solid #ef5350;
+    padding: 20px;
+}
 
+
+
+
+#registerForm > .inner > .step-3 > .success >.text{
+    font: inherit;
+    font-size: 30px;
+    margin-bottom: 1rem;
 }
 
 #registerForm > .inner > .step-3 > .success > .link {
+    font: inherit;
+    font-size: 30px;
+    text-decoration: none;
+}
 
+a.link {
+    color: #3498db; /* 원래의 링크 색상 설정 */
+}
+
+a.link:visited {
+    color: #3498db; /* 방문한 링크의 색상 설정 */
 }
