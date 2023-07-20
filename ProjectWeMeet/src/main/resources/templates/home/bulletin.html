@@ -121,8 +121,6 @@
 
     <div class="content">
         <div th:utext="${article.getContent()}"></div>
-        <div th:text="${article.getCategory()}"></div>
-    </div>
     </div>
 
 
@@ -153,6 +151,10 @@
                         <span>6</span>
                     </div>
 
+                    <!--  자신의 게시판일때   -->
+                    <div class="participating-button">
+                    </div>
+                    <!--  참여하기 클릭시 인원 1명증가하고 참여취소 버튼으로 바뀜    -->
 
                     <!--  자신의 게시판일때   -->
                     <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure_mine')}">
@@ -201,6 +203,7 @@
                 </p>
                 <p class="place">
                     <i class="fa-solid fa-location-dot"></i>
+                    <span style="font-weight: 500" th:text="${article.getPlace()}"></span>
                 </p>
                 <div class="map" id="map"></div>
                 <input name="lat" th:value="${article.getLatitude()}" readonly style="display: none">
@@ -241,13 +244,12 @@
                     <img th:src="@{./image(index=${articles.getIndex()})}" alt="">
                 </a>
                 <div class="text">
-                    <div class="category" th:text="${articles.getCategory()}">온라인</div>
+                    <div class="category" th:text="${articles.getCategory()}">모여라~~ 영웅을 기다린다</div>
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
-                    <div class="time"
-                         th:text="${#dates.format(articles.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
                         <div class="human">프로필</div>
+                        <i class="fa-solid fa-user-group"></i>
                         <div class="number" th:text="${articles.getParticipation()}">인원</div>
                         <div class="number">/</div>
                         <div class="number" th:text="${articles.getLimitPeople()}">인원</div>

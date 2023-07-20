@@ -74,62 +74,62 @@ const finishButton = bulletinForm.querySelector('[name="finish"]');
 
 
 //게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//
-// deleteButton.addEventListener('click', e => {
-//     e.preventDefault();
-//     const index = deleteButton.dataset.index;
-//     const confirmResult = confirm('삭제하시겠습니까?');
-//     if (confirmResult === true) {
-//         const xhr = new XMLHttpRequest();
-//         xhr.open('DELETE', `./read?index=${index}`);
-//         xhr.onreadystatechange = () => {
-//             if (xhr.readyState === XMLHttpRequest.DONE) {
-//                 if (xhr.status >= 200 && xhr.status < 300) {
-//                     const responseText = xhr.responseText;
-//                     if (responseText === 'true') {
-//                         alert('삭제되었습니다');
-//                         location.href = '/article';
-//                         return;
-//                     } else {
-//                         alert('작성한 사용자가 아니므로 삭제하지 못합니다');
-//                         return;
-//                     }
-//                 } else {
-//                     alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
-//                     return;
-//                 }
-//             }
-//         };
-//         xhr.send();
-//     } else if (confirmResult === false) {
-//         alert('삭제를 취소합니다');
-//         return;
-//     }
-// }); //게시판 삭제
+deleteButton.addEventListener('click', e => {
+    e.preventDefault();
+    const index = deleteButton.dataset.index;
+    const confirmResult = confirm('삭제하시겠습니까?');
+    if (confirmResult === true) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('DELETE', `./read?index=${index}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseText = xhr.responseText;
+                    if (responseText === 'true') {
+                        alert('삭제되었습니다');
+                        location.href = '/article';
+                        return;
+                    } else {
+                        alert('작성한 사용자가 아니므로 삭제하지 못합니다');
+                        return;
+                    }
+                } else {
+                    alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
+                    return;
+                }
+            }
+        };
+        xhr.send();
+    } else if (confirmResult === false) {
+        alert('삭제를 취소합니다');
+        return;
+    }
+}); //게시판 삭제
 
-// patchButton.addEventListener('click', e => {
-//     e.preventDefault();
-//
-//     const index = patchButton.dataset.index;
-//
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('GET', `./patch?index=${index}`);
-//     xhr.onreadystatechange = () => {
-//         if (xhr.readyState === XMLHttpRequest.DONE) {
-//             if (xhr.status >= 200 && xhr.status < 300) {
-//                 const confirmResult = confirm('수정을 하시겠습니까?');
-//                 if (confirmResult === true) {
-//                     location.href = `/article/patch?index=${index}`
-//                 } else if (confirmResult === false) {
-//                     alert('수정을 취소합니다');
-//                     return;
-//                 }
-//             } else {
-//                 alert('작성한 사용자가 아니라 수정이 불가능합니다.');
-//             }
-//         }
-//     };
-//     xhr.send();
-// }); //게시판 수정
+patchButton.addEventListener('click', e => {
+    e.preventDefault();
+
+    const index = patchButton.dataset.index;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `./patch?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const confirmResult = confirm('수정을 하시겠습니까?');
+                if (confirmResult === true) {
+                    location.href = `/article/patch?index=${index}`
+                } else if (confirmResult === false) {
+                    alert('수정을 취소합니다');
+                    return;
+                }
+            } else {
+                alert('작성한 사용자가 아니라 수정이 불가능합니다.');
+            }
+        }
+    };
+    xhr.send();
+}); //게시판 수정
 
 
 
@@ -138,22 +138,22 @@ const finishButton = bulletinForm.querySelector('[name="finish"]');
 
 //게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//
 
-// finishButton.addEventListener('click', e => {
-//     e.preventDefault();
-//     const index = finishButton.dataset.index;
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('GET',`/article/review?index=${index}`);
-//     xhr.onreadystatechange = () => {
-//         if(xhr.readyState === XMLHttpRequest.DONE){
-//             if(xhr.status >=200 && xhr.status<300){
-//                 location.href = `/article/review?index=${index}`
-//             }else{
-//                 alert('작성한 사용자가 아니라 수정이 불가능합니다.');
-//             }
-//         }
-//     };
-//     xhr.send();
-// })
+finishButton.addEventListener('click', e => {
+    e.preventDefault();
+    const index = finishButton.dataset.index;
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET',`/article/review?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status >=200 && xhr.status<300){
+                location.href = `/article/review?index=${index}`
+            }else{
+                alert('작성한 사용자가 아니라 수정이 불가능합니다.');
+            }
+        }
+    };
+    xhr.send();
+})
 
 //게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//
 
@@ -166,19 +166,13 @@ const finishButton = bulletinForm.querySelector('[name="finish"]');
 
 // 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트//
 
-
-
-//
 function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     refreshCommentAfter ??= true;
     const articleIndex = bulletinForm['articleIndex'].value;
-    const articleEmail = bulletinForm['articleEmail'].value;
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('articleIndex', articleIndex);
     formData.append('content', content);
-    formData.append('articleEmail', articleEmail);
-    formData.append('nickname',bulletinForm['nickname'].value);
     if (commentIndex) {
         formData.append('commentIndex', commentIndex);
     }
@@ -195,6 +189,14 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
                         alert('로그인 상태가 아닙니다. 로그인해주세요.');
                         break;
                     case 'success':
+                        if (toFocus) {
+                            toFocus.value = '';
+                            toFocus.focus();
+                        }
+                        if (refreshCommentAfter === true) {
+                            refreshComment();
+                        }
+                        break;
                     case 'success_same':
                         if (toFocus) {
                             toFocus.value = '';
@@ -215,6 +217,7 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     xhr.send(formData);
 }
 
+
 function refreshComment() {
     const articleIndex = bulletinForm['articleIndex'].value;
     const xhr = new XMLHttpRequest();
@@ -227,33 +230,16 @@ function refreshComment() {
 
                 for (const comment of comments) {
                     const div = document.createElement('div');
-                    let commentClass = 'comment-left';
-
-                    if (comment.same === true) {
-                        commentClass = 'comment-right';
-                    }
-                    div.classList.add(commentClass);
-
-                    const nicknameDiv = document.createElement('div');
-                    nicknameDiv.classList.add('comment-nickname');
-                    nicknameDiv.innerText = comment['nickname'];
+                    div.classList.add('comment-left');
 
                     const headDiv = document.createElement('div');
                     headDiv.classList.add('comment-head');
-
-
                     const bodyDiv = document.createElement('div');
                     bodyDiv.classList.add('comment-body');
 
-                    const createdAt = new Date(comment['createdAt']); // Convert to Date object
-                    const year = createdAt.getFullYear();
-                    const month = String(createdAt.getMonth() + 1).padStart(2, '0');
-                    const day = String(createdAt.getDate()).padStart(2, '0');
-                    const hour = String(createdAt.getHours() % 12 || 12).padStart(2, '0');
-                    const minute = String(createdAt.getMinutes()).padStart(2, '0');
-                    const ampm = createdAt.getHours() < 12 ? '오전' : '오후';
-
-                    headDiv.innerText = `${year}/${month}/${day} ${ampm} ${hour}:${minute}`;
+                    const dtDate = comment['createdAt'].split('T')[0];
+                    const dtTime = comment['createdAt'].split('T')[1].split('.')[0];
+                    headDiv.innerText = `${dtDate} ${dtTime}`;
 
                     const deleteButton = document.createElement('button');
                     deleteButton.classList.add('delete-button');
@@ -276,7 +262,7 @@ function refreshComment() {
                                             alert('알 수 없는 이유로 댓글을 삭제하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
                                             break;
                                         case 'failure_deleted':
-                                            alert('이미 삭제된 댓글 입니다. 새로고침 후 확인해 주세요.');
+                                            alert('이미 삭제된 댓글 입니다 새로고침 후 확인해 주세요.');
                                             break;
                                         case 'failure_no_authority':
                                             alert('삭제할 수 있는 권한이 없습니다.');
@@ -305,12 +291,7 @@ function refreshComment() {
                         div.appendChild(bodyDiv);
                     } else {
                         bodyDiv.innerText = comment['content'];
-                        const commentBox = document.createElement('div');
-                        commentBox.classList.add('comment-box');
-
-                        // Append headDiv, deleteButton, and bodyDiv as children of commentBox
-                        commentBox.append(headDiv, deleteButton, bodyDiv);
-                        div.append(nicknameDiv,commentBox);
+                        div.append(headDiv, deleteButton, bodyDiv);
                     }
 
                     commentContainer.appendChild(div);
@@ -328,78 +309,71 @@ function refreshComment() {
 
 
 
+
+const writeButton = bulletinForm.querySelector('[name="write"]');
+
+finishButton.addEventListener('click', e => {
+    e.preventDefault();
+    const index = finishButton.dataset.index;
+    const confirmResult = confirm('게시물을 완료 하시겠습니까?');
+    if (confirmResult === true) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PATCH', `./review?index=${index}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const responseObject = JSON.parse(xhr.responseText);
+                    switch (responseObject.result) {
+                        case 'success':
+                            alert('게시물을 완료하였습니다.')
+                            const xhr = new XMLHttpRequest();
+                            xhr.open('GET', `./review?index=${index}`);
+                            xhr.onreadystatechange = () => {
+                                if (xhr.readyState === XMLHttpRequest.DONE) {
+                                    if (xhr.status >= 200 && xhr.status < 300) {
+                                        location.href = `/article/review?index=${index}`
+                                    } else {
+                                        alert('사용자님의 게시물이 아니라 완료가 불가능합니다.');
+                                    }
+                                }
+                            };
+                            xhr.send();
+                            break;
+                        case 'failure':
+                            alert('사용자님의 게시물이 아닙니다.');
+                            break;
+                        default:
+                            alert('default 값');
+                    }
+                } else {
+                    alert('서버에서 문제가 생겼습니다.');
+                }
+            }
+        };
+        xhr.send();
+    } else if (confirmResult === false) {
+        alert('완료를 취소합니다');
+        return;
+    }
+})
+
+
+writeButton.addEventListener('click', e => {
+    e.preventDefault();
+    window.location.href = "/write";
+})
+
+
 // bulletinForm.onsubmit = function (e) {
-//
-//
-//
-//
-//
-// const writeButton = bulletinForm.querySelector('[name="write"]');
-//
-// finishButton.addEventListener('click', e => {
 //     e.preventDefault();
-//     const index = finishButton.dataset.index;
-//     const confirmResult = confirm('게시물을 완료 하시겠습니까?');
-//     if (confirmResult === true) {
-//         const xhr = new XMLHttpRequest();
-//         xhr.open('PATCH', `./review?index=${index}`);
-//         xhr.onreadystatechange = () => {
-//             if (xhr.readyState === XMLHttpRequest.DONE) {
-//                 if (xhr.status >= 200 && xhr.status < 300) {
-//                     const responseObject = JSON.parse(xhr.responseText);
-//                     switch (responseObject.result) {
-//                         case 'success':
-//                             alert('게시물을 완료하였습니다.')
-//                             const xhr = new XMLHttpRequest();
-//                             xhr.open('GET', `./review?index=${index}`);
-//                             xhr.onreadystatechange = () => {
-//                                 if (xhr.readyState === XMLHttpRequest.DONE) {
-//                                     if (xhr.status >= 200 && xhr.status < 300) {
-//                                         location.href = `/article/review?index=${index}`
-//                                     } else {
-//                                         alert('사용자님의 게시물이 아니라 완료가 불가능합니다.');
-//                                     }
-//                                 }
-//                             };
-//                             xhr.send();
-//                             break;
-//                         case 'failure':
-//                             alert('사용자님의 게시물이 아닙니다.');
-//                             break;
-//                         default:
-//                             alert('default 값');
-//                     }
-//                 } else {
-//                     alert('서버에서 문제가 생겼습니다.');
-//                 }
-//             }
-//         };
-//         xhr.send();
-//     } else if (confirmResult === false) {
-//         alert('완료를 취소합니다');
+//     if (bulletinForm['content'].value == '') {
+//         alert('댓글을 입력해 주세요.');
+//         bulletinForm['content'].focus();
 //         return;
 //     }
 //     postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
-// });
-
-
-// writeButton.addEventListener('click', e => {
-//     e.preventDefault();
-//     window.location.href = "/write";
-// })
-
-
-bulletinForm.onsubmit = function (e) {
-    e.preventDefault();
-    if (bulletinForm['content'].value == '') {
-        alert('댓글을 입력해 주세요.');
-        bulletinForm['content'].focus();
-        return;
-    }
-    postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
-}
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
     refreshComment();
 });
-

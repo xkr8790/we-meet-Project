@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainStyle.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainMenu.css}">
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
     <script defer src="/resources/scripts/slide.js"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
@@ -137,12 +138,10 @@
 
 <section class="article-container">
     <h2 class="article-list-header">똑같은 일상의 소소한 변화</h2>
-    <div class="slider">
-        <div class="slide">
             <div class="article-box">
                 <a th:href="@{article/read(index=${article.getIndex()})}" class="article-list" th:each="article : ${article}">
                     <div class="article-thumbnail">
-                        <img class="thumbnail" th:src="@{./image(index=${article.getIndex()})}">
+                        <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}">
                     </div>
                     <div class="article-content-box">
                         <div class="article-tag">
@@ -196,8 +195,7 @@
                     </div>
                 </a>
             </div>
-        </div>
-    </div>
+
 </section>
 
 <footer id="footer">
@@ -222,7 +220,7 @@
                 주소 : 뉴욕광역시 맨해튼구 덕산동 29-2 스타크타워 10층 <br>
                 사업자등록번호 : 123-23-12321 | 통신판매 : 제 2023-뉴욕맨해튼-12321 <br>
                 고객센터 : @카카오톡채널 | 운영시간 : (월~금)오전 9:00~오후 6:00/(주말 및 공휴일)오전 8:00~오후 7:00</p>
-            <p class="about-info"><a class="last-a-tag" href="#">이용약관</a> | <a class="last-a-tag" href="#">개인정보처리방침</a>
+            <p class="about-info"><a class="last-a-tag" href="/TermsOfService">이용약관</a> | <a class="last-a-tag" href="/Privacy-Policy">개인정보처리방침</a>
                 | <a class="last-a-tag" href="#">사업자정보확인</a></p>
         </div>
     </div>

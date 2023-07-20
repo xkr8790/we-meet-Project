@@ -134,7 +134,7 @@
         `limit` AS `limit`,
         `like_count` AS `likeCount`,
         `participation` AS `participation`,
-        SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+        SUBSTRING_INDEX(SUBSTRING_INDEX(hashtag, ',', 1), ',', -1) AS `hashtag`,
         `day` AS `appointmentStartDate`,
         `time` AS `appointmentStartTime`,
         `finished_flag` AS `isFinished`
@@ -291,6 +291,7 @@
         WHERE `index` = #{index}
         LIMIT 1
     </select>
+
     <select id="selectArticleByEmail"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
@@ -321,6 +322,7 @@
         WHERE email = #{email}
         LIMIT 1
     </select>
+
     <select id="selectCommentByEmail"
             resultType="com.bsh.projectwemeet.entities.CommentEntity">
         SELECT `index`         AS `index`,
