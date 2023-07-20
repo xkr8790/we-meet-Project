@@ -504,15 +504,19 @@ allContainer > .header > .login > a {
     margin-left: 0.45rem;
 }
 
+.comment-left > .comment-nickname{
+    margin-bottom: 0.5rem;
+}
+
 .comment-left > .comment-box{
     border: 1px solid red;
+    border-radius: 15px;
     padding: 0.5rem;
 }
 
 .comment-left >.comment-box> .comment-body{
     width: 100%;
     word-wrap: break-word;
-
 }
 
 
@@ -522,11 +526,17 @@ allContainer > .header > .login > a {
     max-width: 45%;
     align-self: flex-end;
     margin-left: auto; /* Align to the right side */
-    margin-right: 0.45rem;
+    margin-right: 0.8rem;
+}
+
+.comment-right > .comment-nickname{
+    margin-bottom: 0.5rem;
+    text-align: right;
 }
 
 .comment-right > .comment-box {
     border: 1px solid #3498db;
+    border-radius: 15px;
     padding: 0.5rem;
 }
 
