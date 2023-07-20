@@ -40,6 +40,7 @@ public class RegisterService {
         if (this.registerMapper.selectUserByContact(registerContactCode.getContact()) !=null){ //사용중인 연락처일 때
             return SendRegisterContactCodeResult.FAILURE_DUPLICATE;
         }
+        
         String code = RandomStringUtils.randomNumeric(6); //랜덤 숫자 6자리 (인증번호)
         String salt = CryptoUtil.hashSha512(String.format("%s%s%f%f", //비밀번호 암호화
                 registerContactCode.getCode(),

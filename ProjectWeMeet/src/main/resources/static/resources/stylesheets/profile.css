@@ -47,7 +47,7 @@ html {
     max-width: 77.5rem;
 }
 
-#topMenuContainer > .top-menu {
+#topMenuContainer1 > .top-menu {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -59,20 +59,21 @@ html {
     margin-bottom: 1.5rem;
     padding-inline: unset;
     padding: 1rem 0 0 0;
+    background-color: white;
 }
 
-#topMenuContainer > .top-menu > .item > .link {
+#topMenuContainer1 > .top-menu > .item > .link {
     color: #9da3d6;
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 1.5rem;
 }
 
-#topMenuContainer > .top-menu > .alarm > .link > .alarm {
+#topMenuContainer1 > .top-menu > .alarm > .link > .alarm {
     width: 1.75rem;
     margin-right: 1.25rem;
 }
 
-#topMenuContainer > .top-menu > .item + .item {
+#topMenuContainer1 > .top-menu > .item + .item {
     margin-left: 1.75rem;
 }
 
@@ -84,16 +85,17 @@ html {
     align-items: stretch;
     display: flex;
     flex-direction: row;
-    justify-content: stretch;
+    justify-content: space-evenly;
 }
 
 #mainContainer > .left-profile {
     background-color: white;
 
+
     align-items: flex-start;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: revert;
 }
 
 #mainContainer > .left-profile > .thumbnail {
@@ -109,6 +111,8 @@ html {
 }
 
 #mainContainer > .left-profile > .thumbnail > .default > .profile {
+    aspect-ratio: 1/1;
+    object-fit: cover;
     background-color: white;
     border-radius: 50%;
     width: 100%;
@@ -129,8 +133,9 @@ html {
     box-shadow: 1px 1px 2px 0 #888;
 }
 
-#mainContainer > .left-profile > .thumbnail > .pencil > .change_button {
+#mainContainer > .left-profile > .thumbnail > .pencil > .pencil > .change_button {
     background-color: white;
+    cursor: pointer;
     top: 22.5%;
     left: 22.5%;
     width: 1.1rem;
@@ -143,7 +148,7 @@ html {
 
 #mainContainer > .left-profile > .text-box {
     background-color: white;
-    margin-top: 4rem;
+    margin-top: 5rem;
     margin-left: 2.5rem;
     font-size: 1.125rem;
     font-weight: bold;
@@ -157,7 +162,7 @@ html {
 
 #mainContainer > .left-profile > .text-box > .user-name {
     background-color: white;
-    margin-bottom: 1.125rem;
+    /*margin-bottom: 1.125rem;*/
     white-space: nowrap;
 }
 
@@ -190,9 +195,17 @@ html {
     resize: none;
 }
 
+.right-profileF,
+.right-profileS {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+
 #mainContainer > .right-profileF {
     background-color: white;
-    margin-left: 7.5rem;
     border-left: 1px solid black;
 
     align-items: center;
@@ -338,6 +351,7 @@ html {
 
 #postContainer > .postF > .post2 > .link1 > .link {
     background-color: white;
+    object-fit: cover;
     padding: 4rem;
     box-sizing: border-box;
     border: 1px solid #000000;
@@ -346,6 +360,7 @@ html {
 
 #postContainer > .postF > .post3 > .link1 > .link {
     background-color: white;
+    object-fit: cover;
     padding: 4rem;
     box-sizing: border-box;
     border: 1px solid #000000;
@@ -511,7 +526,12 @@ html {
 /*    pointer-events: all;*/
 /*}*/
 
-.popup {
+#popup.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#popup {
     display: none;
     position: absolute;
     top: 0;
@@ -526,7 +546,17 @@ html {
     transition-timing-function: ease-in-out;
 }
 
-.popup-content.step-1 {
+#popup > .popup-content {
+    opacity: 0;
+    overflow: hidden auto;
+}
+
+#popup.step-2 > .popup-content.step-1 {
+    transform: rotateY(0deg) translate(-50%, -50%);
+}
+
+#popup.step-1 > .popup-content.step-1 {
+    opacity: 1;
     position: absolute;
     display: block;
     font-style: inherit;
@@ -539,14 +569,15 @@ html {
     height: 12.5rem;
     text-align: center;
     list-style-type: none;
+    z-index: 9;
 }
 
-#popup > .popup-content.step-1 > .title {
+#popup.step-1 > .popup-content.step-1 > .title {
     background-color: white;
     font-style: inherit;
 }
 
-#popup > .popup-content.step-1 > .item {
+#popup.step-1 > .popup-content.step-1 > .item {
     background-color: white;
 
     align-items: center;
@@ -555,7 +586,7 @@ html {
     justify-content: center;
 }
 
-#popup > .popup-content.step-1 > .item > ._object-input {
+#popup.step-1 > .popup-content.step-1 > .item > ._object-input {
     width: 80%;
     height: 1.5rem;
     border-radius: 0.5rem;
@@ -564,7 +595,7 @@ html {
     font-style: inherit;
 }
 
-#popup > .popup-content.step-1 > .check {
+#popup.step-1 > .popup-content.step-1 > .check {
     background-color: white;
 
     align-items: flex-end;
@@ -573,7 +604,7 @@ html {
     justify-content: flex-end;
 }
 
-#popup > .popup-content.step-1 > .check > .checkPassword {
+#popup.step-1 > .popup-content.step-1 > .check > .checkPassword {
     background-color: #9da3d6;
     color: black;
     font-style: inherit;
@@ -583,7 +614,7 @@ html {
     opacity: 0.8;
 }
 
-#popup > .popup-content.step-1 > .check > .checkPassword:hover {
+#popup.step-1 > .popup-content.step-1 > .check > .checkPassword:hover {
     opacity: 1;
 }
 
@@ -592,7 +623,9 @@ html {
     color: #959595;
 }
 
-.popup-content.step-2 {
+
+#popup.step-2 > .popup-content.step-2 {
+    opacity: 1;
     position: absolute;
     display: block;
     font-style: inherit;
@@ -604,24 +637,85 @@ html {
     width: 30rem;
     height: 70%;
     list-style-type: none;
+    z-index: 7;
 }
 
-#popup > .popup-content.step-2 > .title {
+#popup.step-2 > .popup-content.step-2 > .title {
     background-color: white;
     font-style: inherit;
-    font-size: 2rem;
+    font-size: 1.75rem;
+    font-weight: 1;
 
     margin-top: 0.625rem;
     margin-bottom: 1.25rem;
 }
 
-#popup > .popup-content.step-2 > .passwordReset {
+#popup.step-2 > .popup-content.step-2 > .profileImage {
+    background-color: white;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profileImage > .profile {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    background-color: white;
+    border-radius: 50%;
+    width: 20%;
+    height: 20%;
+    position: relative;
+    box-shadow: 1px 1px 2px 0 #888;
+    background-size: cover;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profile_file {
+    background-color: white;
+    margin-top: 0.625rem;
+    margin-right: 0.625rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profile_file > .change {
+    background-color: white;
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .profile_file input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profile_file > .delete {
+    background-color: white;
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#popup.step-2 > .popup-content.step-2 > .passwordReset {
     background-color: white;
 
     margin-bottom: 1rem;
 }
 
-#popup > .popup-content.step-2 > .passwordReset > .title {
+#popup.step-2 > .popup-content.step-2 > .passwordReset > .title {
     background-color: white;
     font-size: 1.25rem;
     font-weight: bold;
@@ -633,7 +727,7 @@ html {
     justify-content: flex-start;
 }
 
-#popup > .popup-content.step-2 > .passwordReset > .password {
+#popup.step-2 > .popup-content.step-2 > .passwordReset > .password {
     background-color: white;
     color: #959595;
     margin-bottom: 0.625rem;
@@ -643,7 +737,7 @@ html {
     border-radius: 0.5rem;
 }
 
-#popup > .popup-content.step-2 > .passwordReset > .passwordRe {
+#popup.step-2 > .popup-content.step-2 > .passwordReset > .passwordRe {
     background-color: white;
     color: #959595;
     font-size: 1rem;
@@ -652,7 +746,7 @@ html {
     border-radius: 0.5rem;
 }
 
-#popup > .popup-content.step-2 > .passwordReset > .resetButton {
+#popup.step-2 > .popup-content.step-2 > .passwordReset > .resetButton {
     background-color: #9da3d6;
     color: black;
     font-size: 1rem;
@@ -660,14 +754,14 @@ html {
     opacity: 0.8;
 }
 
-#popup > .popup-content.step-2 > .nicknameReset {
+#popup.step-2 > .popup-content.step-2 > .nicknameReset {
     background-color: white;
 
     margin-bottom: 1rem;
 }
 
 
-#popup > .popup-content.step-2 > .nicknameReset > .title {
+#popup.step-2 > .popup-content.step-2 > .nicknameReset > .title {
     background-color: white;
     font-size: 1.25rem;
     font-weight: bold;
@@ -679,7 +773,7 @@ html {
     justify-content: flex-start;
 }
 
-#popup > .popup-content.step-2 > .nicknameReset > .nickname {
+#popup.step-2 > .popup-content.step-2 > .nicknameReset > .nickname {
     background-color: white;
     color: #959595;
     font-size: 1rem;
@@ -688,7 +782,7 @@ html {
     border-radius: 0.5rem;
 }
 
-#popup > .popup-content.step-2 > .nicknameReset > .resetButton {
+#popup.step-2 > .popup-content.step-2 > .nicknameReset > .resetButton {
     background-color: #9da3d6;
     color: black;
     font-size: 1rem;
@@ -696,13 +790,13 @@ html {
     opacity: 0.8;
 }
 
-#popup > .popup-content.step-2 > .addressReset {
+#popup.step-2 > .popup-content.step-2 > .addressReset {
     background-color: white;
 
     margin-bottom: 1rem;
 }
 
-#popup > .popup-content.step-2 > .addressReset > .title {
+#popup.step-2 > .popup-content.step-2 > .addressReset > .title {
     background-color: white;
     font-size: 1.25rem;
     font-weight: bold;
@@ -714,12 +808,12 @@ html {
     justify-content: flex-start;
 }
 
-#popup > .popup-content.step-2 > .addressReset > .addressFirst {
+#popup.step-2 > .popup-content.step-2 > .addressReset > .addressFirst {
     background-color: white;
     margin-bottom: 0.625rem;
 }
 
-#popup > .popup-content.step-2 > .addressReset > .addressFirst > .address {
+#popup.step-2 > .popup-content.step-2 > .addressReset > .addressFirst > .address {
     background-color: white;
     color: #959595;
     font-size: 1rem;
@@ -728,7 +822,7 @@ html {
     border-radius: 0.5rem;
 }
 
-#popup > .popup-content.step-2 > .addressReset > .addressFirst > .findButton {
+#popup.step-2 > .popup-content.step-2 > .addressReset > .addressFirst > .findButton {
     background-color: #9da3d6;
     color: black;
     font-size: 1rem;
@@ -736,12 +830,12 @@ html {
     opacity: 0.8;
 }
 
-#popup > .popup-content.step-2 > .addressReset > .addressSecond {
+#popup.step-2 > .popup-content.step-2 > .addressReset > .addressSecond {
     background-color: white;
     margin-bottom: 0.625rem;
 }
 
-#popup > .popup-content.step-2 > .addressReset > .addressSecond > .address {
+#popup.step-2 > .popup-content.step-2 > .addressReset > .addressSecond > .address {
     background-color: white;
     color: #959595;
     font-size: 1rem;
@@ -750,11 +844,11 @@ html {
     border-radius: 0.5rem;
 }
 
-#popup > .popup-content.step-2 > .addressReset > .addressThird {
+#popup.step-2 > .popup-content.step-2 > .addressReset > .addressThird {
     background-color: white;
 }
 
-#popup > .popup-content.step-2 > .addressReset > .addressThird > .address {
+#popup.step-2 > .popup-content.step-2 > .addressReset > .addressThird > .address {
     background-color: white;
     color: #959595;
     font-size: 1rem;
@@ -763,12 +857,12 @@ html {
     border-radius: 0.5rem;
 }
 
-#popup > .popup-content.step-2 > .die {
+#popup.step-2 > .popup-content.step-2 > .die {
     background-color: white;
     margin-bottom: 0.625rem;
 }
 
-#popup > .popup-content.step-2 > .die > .link {
+#popup.step-2 > .popup-content.step-2 > .die > .link {
     background-color: white;
     font-size: 0.9rem;
     font-style: inherit;
@@ -776,17 +870,140 @@ html {
     text-decoration: black underline;
 }
 
-#popup > .popup-content.step-2 > .save {
-    background-color: white;
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
+._object-box {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
-#popup > .popup-content.step-2 > .save > .save {
-    background-color: #9da3d6;
-    color: black;
-    font-size: 1.25rem;
-    opacity: 0.8;
-    border-radius: 0.5rem;
+
+#popup.step-2 > .popup-content.step-2 > .__body {
+    background-color: white;
+    flex: 1;
+    margin-top: unset;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > * + * {
+    background-color: white;
+    margin-top: 0.5rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > ._object-box {
+    background-color: white;
+    margin-top: 1rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > ._object-box > ._object-input {
+    background-color: white;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-password-container > ._object-box {
+    background-color: white;
+    margin-top: 1rem;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-password-container > ._object-box > ._object-input {
+    background-color: white;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > ._object-check-container > ._text {
+    background-color: white;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-contact-container {
+    background-color: white;
+    max-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition-duration: 250ms;
+    transition-property: max-height, margin-top;
+    transition-timing-function: ease;
+
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-contact-container > .multi-container {
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > ._object-check-container:has(> ._check-input:checked) + .new-contact-container {
+    max-height: 10rem;
+    margin-top: 0.5rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-contact-container > ._object-box {
+    background-color: white;
+    margin-top: 1rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-contact-container > ._object-box > ._object-input {
+    background-color: white;
+}
+
+/*dialog 배경화면 어둡게-주소찾기 클릭시 사용*/
+#dialogCoverP {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000060;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    transition-duration: 250ms;
+    transition-property: opacity;
+    transition-timing-function: linear;
+    z-index: 8;
+}
+
+#dialogCoverP.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#addressLayerP {
+    top: 50%;
+    left: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 0 1rem 0.0625rem #00000060;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    transform: scale(90%) translate(-50%, -50%);
+    transition-duration: 250ms;
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+    z-index: 9;
+}
+
+#addressLayerP.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(100%) translate(-50%, -50%);
+}
+
+#popup > .cNotification {
+    max-height: 0;
+    color: blue;
+    font-size: 0.9rem;
+    margin: unset;
+    overflow: hidden;
+    padding-top: 0;
+    transition-duration: 500ms;
+    transition-property: max-height, padding-top;
+    transition-timing-function: ease;
+}
+
+#popup > .cNotification.visible {
+    max-height: 3rem;
+    padding-top: 0.5rem;
 }

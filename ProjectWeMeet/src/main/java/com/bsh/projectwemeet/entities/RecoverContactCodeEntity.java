@@ -10,6 +10,7 @@ public class RecoverContactCodeEntity {
     private String salt;
     private Date createdAt;
     private Date expiresAt;
+    private boolean isExpired;
 
     public boolean isExpired() {
         return isExpired;
@@ -19,8 +20,6 @@ public class RecoverContactCodeEntity {
         isExpired = expired;
         return this;
     }
-
-    private boolean isExpired;
     private String name;
 
     public String getName() {
