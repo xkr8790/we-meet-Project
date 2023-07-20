@@ -448,6 +448,7 @@ public class ArticleService {
 
     public UserEntity userEmail(HttpSession session){
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        
 
         if(articleMapper.selectUser(loginUser.getEmail())!=null){
             return  this.articleMapper.selectUser(loginUser.getEmail());

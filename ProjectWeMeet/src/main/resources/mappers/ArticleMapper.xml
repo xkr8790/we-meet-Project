@@ -41,16 +41,15 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.CommentEntity">
-        INSERT INTO `wemeet_project`.`comments`(`article_index`,`email`, `content`, `deleted_flag`,
-                                                `created_at`, `client_ip`, `client_ua`,`nickname`)
+        INSERT INTO `wemeet_project`.`comments`(`article_index`, `email`, `content`, `deleted_flag`,
+                                                `created_at`, `client_ip`, `client_ua`)
         VALUES (#{articleIndex},
                 #{email},
                 #{content},
                 #{isDeleted},
                 IFNULL(#{createdAt}, DEFAULT(`created_at`)),
                 #{clientIp},
-                #{clientUa},
-                #{nickname})
+                #{clientUa})
     </insert>
 
     <insert id="insertParticipants"
@@ -272,8 +271,7 @@
                `deleted_flag`  AS `isDeleted`,
                `created_at`    AS `createdAt`,
                `client_ip`     AS `clientIp`,
-               `client_ua`     AS `clientUa`,
-               `nickname` AS `nickname`
+               `client_ua`     AS `clientUa`
         FROM `wemeet_project`.`comments`
         WHERE `article_index` = #{articleIndex}
         ORDER BY `index` ASC
@@ -288,20 +286,84 @@
                `deleted_flag`  AS `isDeleted`,
                `created_at`    AS `createdAt`,
                `client_ip`     AS `clientIp`,
-               `client_ua`     AS `clientUa`,
-               `nickname` AS `nickname`
+               `client_ua`     AS `clientUa`
         FROM `wemeet_project`.`comments`
         WHERE `index` = #{index}
         LIMIT 1
     </select>
+    <select id="selectArticleByEmail"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `email`          AS `email`,
+               `title`          AS `email`,
+               `category`       AS `category`,
+               `content`        AS `content`,
+               `place`          AS `place`,
+               `address`        AS `address`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`,
+               `view`           AS `view`,
+               `created_at`     AS `createdAt`,
+               `day`            AS `day`,
+               `time`           AS `time`,
+               `limit`          AS `limit`,
+               `participation`  AS `participation`,
+               `like_count`     AS `likeCount`,
+               `report`         AS `report`,
+               `deleted_flag`   AS `isDeleted`,
+               `finished_flag`  AS `isFinished`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`,
+               `hashtag`        AS `hashtag`,
+               `client_ip`      AS `clientIp`,
+               `client_ua`      AS `clientUa`
+        FROM `wemeet_project`.`articles`
+        WHERE email = #{email}
+        LIMIT 1
+    </select>
+    <select id="selectCommentByEmail"
+            resultType="com.bsh.projectwemeet.entities.CommentEntity">
+        SELECT `index`         AS `index`,
+               `article_index` AS `articleIndex`,
+               `email`         AS `email`,
+               `content`       AS `content`,
+               `deleted_flag`  AS `isDeleted`,
+               `created_at`    AS `createdAt`,
+               `client_ip`     AS `clientIp`,
+               `client_ua`     AS `clientUa`
+        FROM `wemeet_project`.`comments`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
 
-
-    <select id="selectUser"
-            resultType="com.bsh.projectwemeet.entities.UserEntity">
-        SELECT `email` AS `email`,
-               `nickname` AS `nickname`
-        FROM `wemeet_project`.`users`
-        WHERE `email` =#{email}
+    <select id="selectArticleByArticleIndex"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `email`          AS `email`,
+               `title`          AS `title`,
+               `category`       AS `category`,
+               `content`        AS `content`,
+               `place`          AS `place`,
+               `address`        AS `address`,
+               `thumbnail`      AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`,
+               `view`           AS `view`,
+               `created_at`     AS `createdAt`,
+               `day`            AS `day`,
+               `time`           AS `time`,
+               `limit`          AS `limit`,
+               `participation`  AS `participation`,
+               `like_count`     AS `likeCount`,
+               `report`         AS `report`,
+               `deleted_flag`   AS `isDeleted`,
+               `finished_flag`  AS `isFinished`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`,
+               `hashtag`        AS `hashtag`,
+               `client_ip`      AS `clientIp`,
+               `client_ua`      AS `clientUa`
+        FROM `wemeet_project`.`articles`
+        WHERE `email` = #{email}
         LIMIT 1
     </select>
     <!-- 참여인원 중복되있는지 select -->
@@ -326,6 +388,15 @@
         LIMIT 1
     </update>
     <!-- 좋아요 업데이트 -->
+
+    <select id="selectUser"
+            resultType="com.bsh.projectwemeet.entities.UserEntity">
+        SELECT `email` AS `email`,
+               `nickname` AS `nickname`
+        FROM `wemeet_project`.`users`
+        WHERE `email` =#{email}
+        LIMIT 1
+    </select>
 
     <!-- 싫어요 업데이트 -->
     <update id="updateReport"
@@ -367,21 +438,19 @@
     </update>
     <!-- 게시판 수정 -->
 
-<update id="updateComment"
-        parameterType="com.bsh.projectwemeet.entities.CommentEntity">
-    UPDATE `wemeet_project`.`comments`
-    SET `article_index` =#{articleIndex},
-        `email` = #{email},
-        `content` =#{content},
-        `deleted_flag` = #{isDeleted},
-        `created_at` =#{createdAt},
-        `client_ip` = #{clientIp},
-        `client_ua` = #{clientUa},
-        `nickname` = #{nickname}
-    WHERE `index` = #{index}
-    LIMIT 1
-</update>
-
+    <update id="updateComment"
+            parameterType="com.bsh.projectwemeet.entities.CommentEntity">
+        UPDATE `wemeet_project`.`comments`
+        SET `article_index` =#{articleIndex},
+            `email`         = #{email},
+            `content`       =#{content},
+            `deleted_flag`  = #{isDeleted},
+            `created_at`    =#{createdAt},
+            `client_ip`     = #{clientIp},
+            `client_ua`     = #{clientUa}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
 
 
     <!-- 게시판 삭제 -->
