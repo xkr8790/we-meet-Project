@@ -328,77 +328,76 @@ function refreshComment() {
 
 
 
-bulletinForm.onsubmit = function (e) {
-
-
-
-
-
-const writeButton = bulletinForm.querySelector('[name="write"]');
-
-finishButton.addEventListener('click', e => {
-    e.preventDefault();
-    const index = finishButton.dataset.index;
-    const confirmResult = confirm('게시물을 완료 하시겠습니까?');
-    if (confirmResult === true) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('PATCH', `./review?index=${index}`);
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    const responseObject = JSON.parse(xhr.responseText);
-                    switch (responseObject.result) {
-                        case 'success':
-                            alert('게시물을 완료하였습니다.')
-                            const xhr = new XMLHttpRequest();
-                            xhr.open('GET', `./review?index=${index}`);
-                            xhr.onreadystatechange = () => {
-                                if (xhr.readyState === XMLHttpRequest.DONE) {
-                                    if (xhr.status >= 200 && xhr.status < 300) {
-                                        location.href = `/article/review?index=${index}`
-                                    } else {
-                                        alert('사용자님의 게시물이 아니라 완료가 불가능합니다.');
-                                    }
-                                }
-                            };
-                            xhr.send();
-                            break;
-                        case 'failure':
-                            alert('사용자님의 게시물이 아닙니다.');
-                            break;
-                        default:
-                            alert('default 값');
-                    }
-                } else {
-                    alert('서버에서 문제가 생겼습니다.');
-                }
-            }
-        };
-        xhr.send();
-    } else if (confirmResult === false) {
-        alert('완료를 취소합니다');
-        return;
-    }
-    postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
-};
-})
-
-
-writeButton.addEventListener('click', e => {
-    e.preventDefault();
-    window.location.href = "/write";
-})
-
-
 // bulletinForm.onsubmit = function (e) {
+//
+//
+//
+//
+//
+// const writeButton = bulletinForm.querySelector('[name="write"]');
+//
+// finishButton.addEventListener('click', e => {
 //     e.preventDefault();
-//     if (bulletinForm['content'].value == '') {
-//         alert('댓글을 입력해 주세요.');
-//         bulletinForm['content'].focus();
+//     const index = finishButton.dataset.index;
+//     const confirmResult = confirm('게시물을 완료 하시겠습니까?');
+//     if (confirmResult === true) {
+//         const xhr = new XMLHttpRequest();
+//         xhr.open('PATCH', `./review?index=${index}`);
+//         xhr.onreadystatechange = () => {
+//             if (xhr.readyState === XMLHttpRequest.DONE) {
+//                 if (xhr.status >= 200 && xhr.status < 300) {
+//                     const responseObject = JSON.parse(xhr.responseText);
+//                     switch (responseObject.result) {
+//                         case 'success':
+//                             alert('게시물을 완료하였습니다.')
+//                             const xhr = new XMLHttpRequest();
+//                             xhr.open('GET', `./review?index=${index}`);
+//                             xhr.onreadystatechange = () => {
+//                                 if (xhr.readyState === XMLHttpRequest.DONE) {
+//                                     if (xhr.status >= 200 && xhr.status < 300) {
+//                                         location.href = `/article/review?index=${index}`
+//                                     } else {
+//                                         alert('사용자님의 게시물이 아니라 완료가 불가능합니다.');
+//                                     }
+//                                 }
+//                             };
+//                             xhr.send();
+//                             break;
+//                         case 'failure':
+//                             alert('사용자님의 게시물이 아닙니다.');
+//                             break;
+//                         default:
+//                             alert('default 값');
+//                     }
+//                 } else {
+//                     alert('서버에서 문제가 생겼습니다.');
+//                 }
+//             }
+//         };
+//         xhr.send();
+//     } else if (confirmResult === false) {
+//         alert('완료를 취소합니다');
 //         return;
 //     }
 //     postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
-// }
+// });
+
+
+// writeButton.addEventListener('click', e => {
+//     e.preventDefault();
+//     window.location.href = "/write";
+// })
+
+
+bulletinForm.onsubmit = function (e) {
+    e.preventDefault();
+    if (bulletinForm['content'].value == '') {
+        alert('댓글을 입력해 주세요.');
+        bulletinForm['content'].focus();
+        return;
+    }
+    postComment(bulletinForm['content'].value, undefined, bulletinForm['content']);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     refreshComment();

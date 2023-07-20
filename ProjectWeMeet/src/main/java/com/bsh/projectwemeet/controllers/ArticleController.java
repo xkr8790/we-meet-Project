@@ -107,8 +107,8 @@ public class ArticleController {
     @RequestMapping(value = "article/read",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session) {
-    public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session,boolean flag) {
+    public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session,
+   boolean flag) {
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
 
         ArticleEntity article = this.articleService.readArticle(index);
@@ -370,8 +370,6 @@ public class ArticleController {
         }};
         return responseObject.toString();
     }
-
-
 
 
 

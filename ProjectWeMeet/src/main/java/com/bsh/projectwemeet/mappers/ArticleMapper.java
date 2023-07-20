@@ -88,9 +88,6 @@ public interface ArticleMapper {
 
 
 
-
-
-
     ArticleEntity selectArticleByIndexEmail(@Param(value="index") int index);
 
     int updateFinished(ArticleEntity article);
@@ -98,11 +95,6 @@ public interface ArticleMapper {
     CommentEntity[] selectCommentByArticleIndex(@Param(value = "articleIndex")int articleIndex);
     CommentEntity selectComment(@Param(value = "index") int index);
 
-    CommentEntity selectCommentByEmail(CommentEntity comment);
-
-    ArticleEntity selectArticleByEmail(ArticleEntity article);
-
-    ArticleEntity selectArticleByArticleIndex(@Param("articleIndex") int articleIndex);
 
     int insertComment(CommentEntity comment);
 
