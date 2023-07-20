@@ -447,7 +447,12 @@ function refreshComment() {
                         div.appendChild(bodyDiv);
                     } else {
                         bodyDiv.innerText = comment['content'];
-                        div.append(nicknameDiv,headDiv, deleteButton, bodyDiv);
+                        const commentBox = document.createElement('div');
+                        commentBox.classList.add('comment-box');
+
+                        // Append headDiv, deleteButton, and bodyDiv as children of commentBox
+                        commentBox.append(headDiv, deleteButton, bodyDiv);
+                        div.append(nicknameDiv,commentBox);
                     }
 
                     commentContainer.appendChild(div);

@@ -499,29 +499,38 @@ allContainer > .header > .login > a {
 
 .comment-left {
     margin-bottom: 1rem;
-    border: 1px solid red;
     max-width: 45%;
     align-self: flex-start;
     margin-left: 0.45rem;
 }
 
-.comment-left > .comment-body{
+.comment-left > .comment-box{
+    border: 1px solid red;
+    padding: 0.5rem;
+}
+
+.comment-left >.comment-box> .comment-body{
     width: 100%;
     word-wrap: break-word;
+
 }
 
 
 
 .comment-right {
     margin-bottom: 1rem;
-    border: 1px solid #3498db;
     max-width: 45%;
     align-self: flex-end;
     margin-left: auto; /* Align to the right side */
     margin-right: 0.45rem;
 }
 
-.comment-right > .comment-body{
+.comment-right > .comment-box {
+    border: 1px solid #3498db;
+    padding: 0.5rem;
+}
+
+.comment-right >.comment-box > .comment-body{
     width: 100%;
     word-wrap: break-word;
 }
