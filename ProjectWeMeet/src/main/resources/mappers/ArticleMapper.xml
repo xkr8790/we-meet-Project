@@ -42,14 +42,15 @@
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.CommentEntity">
         INSERT INTO `wemeet_project`.`comments`(`article_index`,`email`, `content`, `deleted_flag`,
-                                                `created_at`, `client_ip`, `client_ua`)
+                                                `created_at`, `client_ip`, `client_ua`,`nickname`)
         VALUES (#{articleIndex},
                 #{email},
                 #{content},
                 #{isDeleted},
                 IFNULL(#{createdAt}, DEFAULT(`created_at`)),
                 #{clientIp},
-                #{clientUa})
+                #{clientUa},
+                #{nickname})
     </insert>
 
 
@@ -215,7 +216,8 @@
                `deleted_flag`  AS `isDeleted`,
                `created_at`    AS `createdAt`,
                `client_ip`     AS `clientIp`,
-               `client_ua`     AS `clientUa`
+               `client_ua`     AS `clientUa`,
+               `nickname` AS `nickname`
         FROM `wemeet_project`.`comments`
         WHERE `article_index` = #{articleIndex}
         ORDER BY `index` ASC
@@ -230,11 +232,13 @@
                `deleted_flag`  AS `isDeleted`,
                `created_at`    AS `createdAt`,
                `client_ip`     AS `clientIp`,
-               `client_ua`     AS `clientUa`
+               `client_ua`     AS `clientUa`,
+               `nickname` AS `nickname`
         FROM `wemeet_project`.`comments`
         WHERE `index` = #{index}
         LIMIT 1
     </select>
+
 <select id="selectArticleByEmail"
         resultType="com.bsh.projectwemeet.entities.ArticleEntity">
     SELECT `index` AS `index`,
@@ -265,6 +269,7 @@
     WHERE email = #{email}
     LIMIT 1
 </select>
+
 <select id="selectCommentByEmail"
         resultType="com.bsh.projectwemeet.entities.CommentEntity">
     SELECT `index` AS `index`,
@@ -274,7 +279,8 @@
            `deleted_flag` AS `isDeleted`,
            `created_at` AS `createdAt`,
            `client_ip` AS `clientIp`,
-           `client_ua` AS `clientUa`
+           `client_ua` AS `clientUa`,
+           `nickname` AS `nickname`
     FROM `wemeet_project`.`comments`
     WHERE `email` =#{email}
     LIMIT 1
@@ -310,6 +316,16 @@
     WHERE `email` =#{email}
     LIMIT 1
 </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <select id="selectUser"
+            resultType="com.bsh.projectwemeet.entities.UserEntity">
+        SELECT `email` AS `email`,
+               `nickname` AS `nickname`
+        FROM `wemeet_project`.`users`
+        WHERE `email` =#{email}
+        LIMIT 1
+    </select>
     <!-- 참여인원 중복되있는지 select -->
 
     <!-- 조회수 업데이트 -->
@@ -381,7 +397,8 @@
         `deleted_flag` = #{isDeleted},
         `created_at` =#{createdAt},
         `client_ip` = #{clientIp},
-        `client_ua` = #{clientUa}
+        `client_ua` = #{clientUa},
+        `nickname` = #{nickname}
     WHERE `index` = #{index}
     LIMIT 1
 </update>

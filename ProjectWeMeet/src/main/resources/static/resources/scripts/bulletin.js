@@ -320,6 +320,7 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     formData.append('articleIndex', articleIndex);
     formData.append('content', content);
     formData.append('articleEmail', articleEmail);
+    formData.append('nickname',bulletinForm['nickname'].value);
     if (commentIndex) {
         formData.append('commentIndex', commentIndex);
     }
@@ -374,8 +375,15 @@ function refreshComment() {
                         commentClass = 'comment-right';
                     }
                     div.classList.add(commentClass);
+
+                    const nicknameDiv = document.createElement('div');
+                    nicknameDiv.classList.add('comment-nickname');
+                    nicknameDiv.innerText = comment['nickname'];
+
                     const headDiv = document.createElement('div');
                     headDiv.classList.add('comment-head');
+
+
                     const bodyDiv = document.createElement('div');
                     bodyDiv.classList.add('comment-body');
 
@@ -439,7 +447,7 @@ function refreshComment() {
                         div.appendChild(bodyDiv);
                     } else {
                         bodyDiv.innerText = comment['content'];
-                        div.append(headDiv, deleteButton, bodyDiv);
+                        div.append(nicknameDiv,headDiv, deleteButton, bodyDiv);
                     }
 
                     commentContainer.appendChild(div);
@@ -451,6 +459,10 @@ function refreshComment() {
     };
     xhr.send();
 }
+
+
+
+
 
 
 bulletinForm.onsubmit = function (e) {

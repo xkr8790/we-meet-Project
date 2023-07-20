@@ -264,7 +264,7 @@ public class ArticleService {
 
 
 
-    public CreateCommentResult putComment(HttpServletRequest request, CommentEntity comment, HttpSession session, String articleEmail) {
+    public CreateCommentResult putComment(HttpServletRequest request, CommentEntity comment, HttpSession session, String articleEmail,String nickname) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
         if (loginUser == null) {
@@ -275,7 +275,8 @@ public class ArticleService {
                 .setDeleted(false)
                 .setCreatedAt(new Date())
                 .setClientIp(request.getRemoteAddr())
-                .setClientUa(request.getHeader("User-Agent"));
+                .setClientUa(request.getHeader("User-Agent"))
+                .setNickname(loginUser.getNickname());
 
         // 게시글 작성자와 댓글 작성자가 동일한지 확인
         if (articleEmail != null && loginUser.getEmail().equals(articleEmail)) {
@@ -333,6 +334,16 @@ public class ArticleService {
         } else {
             return DeleteCommentResult.FAILURE; // 실패
         }
+    }
+
+    public UserEntity userEmail(HttpSession session){
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+
+        if(articleMapper.selectUser(loginUser.getEmail())!=null){
+            return  this.articleMapper.selectUser(loginUser.getEmail());
+        }
+
+        return null;
     }
 
 

@@ -110,17 +110,19 @@ public class ArticleController {
     @RequestMapping(value = "article/read",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRead(@RequestParam(value = "index") int index) {
+    public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
 
         // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
         ArticleEntity article = this.articleService.readArticle(index);
-
         ArticleEntity[] articles = this.articleService.getMiniArticle();
+        UserEntity user = this.articleService.userEmail(session);
+
 
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
         modelAndView.addObject("article", article);
         modelAndView.addObject("articles", articles);
+        modelAndView.addObject("user", user);
 
         return modelAndView;
     }//인덱스번호로 각 게시판 값 나타내기
@@ -282,23 +284,11 @@ public class ArticleController {
         return responseArray.toString();
     }
 
-//    @RequestMapping(value = "comment",
-//            method = RequestMethod.POST,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public String postComment(HttpServletRequest request,
-//                              CommentEntity comment,
-//                              HttpSession session){
-//        boolean result = this.articleService.putComment(request, comment,session);
-//
-//
-//        return String.valueOf(result);
-//    }
 
     @RequestMapping(value = "comment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail) {
-        CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail);
+    public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail,@RequestParam("nickname")String nickname) {
+        CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail,nickname);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};

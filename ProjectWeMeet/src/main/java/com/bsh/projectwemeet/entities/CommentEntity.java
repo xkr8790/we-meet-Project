@@ -12,6 +12,9 @@ public class CommentEntity {
     private Date createdAt;
     private String clientIp;
     private String clientUa;
+    private String nickname;
+
+
 
     public int getIndex() {
         return index;
@@ -82,6 +85,15 @@ public class CommentEntity {
 
     public CommentEntity setClientUa(String clientUa) {
         this.clientUa = clientUa;
+        return this;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public CommentEntity setNickname(String nickname) {
+        this.nickname = nickname;
         return this;
     }
 

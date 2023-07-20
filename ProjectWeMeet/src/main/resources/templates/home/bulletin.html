@@ -154,6 +154,7 @@
                     <div class="content-write">
                         <input name="articleIndex" type="hidden" th:value="${article.getIndex()}">
                         <input name="articleEmail" type="hidden" th:value="${article.getEmail()}">
+                        <input name="nickname" type="hidden" th:value="${user.getNickname()}">
 
                         <label>
                             <input type="text" name="content" placeholder="댓글" maxlength="100">
