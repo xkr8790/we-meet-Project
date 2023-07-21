@@ -399,7 +399,7 @@ function refreshComment() {
                     const amOrPm = hour < 12 ? '오전' : '오후';
                     const hour12Format = addLeadingZero(hour % 12 || 12);
                     const formattedDate = `${year}/${month}/${day} ${amOrPm} ${hour12Format}:${minute}`;
-                    headDiv.innerText = formattedDate;
+                    headDiv.innerText = formattedDate;//
 
                     const deleteButton = document.createElement('button');
                     deleteButton.classList.add('delete-button');
