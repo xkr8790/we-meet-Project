@@ -545,3 +545,6 @@ allContainer > .header > .login > a {
     word-wrap: break-word;
 }
 
+.del {
+    background-color: #5F5F5F;
+}

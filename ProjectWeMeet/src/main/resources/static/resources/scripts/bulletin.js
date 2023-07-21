@@ -448,6 +448,7 @@ function refreshComment() {
                         bodyDiv.innerText = '삭제된 댓글입니다.';
                         bodyDiv.style.color = '#a0a0a0';
                         bodyDiv.style.fontStyle = 'italic';
+                        bodyDiv.classList.add('del');
                         div.appendChild(bodyDiv);
                     } else {
                         bodyDiv.innerText = comment['content'];
