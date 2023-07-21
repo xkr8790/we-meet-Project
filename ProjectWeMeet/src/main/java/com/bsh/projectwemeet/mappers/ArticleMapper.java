@@ -55,6 +55,12 @@ public interface ArticleMapper {
                                 @Param(value = "email") String email,
                                 @Param(value = "reportFlag") boolean reportFlag);
 
+    ParticipantsEntity selectParticipantPeople(@Param(value = "ArticleIndex") int ArticleIndex,
+                                               @Param(value = "email") String email);
+
+
+    ProfileEntity selectProfile(@Param(value = "email")String email);
+
 
     int updateLike(ArticleEntity article);
     //좋아요를 업데이트 하기위한 매퍼
@@ -89,6 +95,7 @@ public interface ArticleMapper {
 
 
     ArticleEntity selectArticleByIndexEmail(@Param(value="index") int index);
+    ArticleEntity[] selectArticleBylimitPeople(@Param(value="index") int index);
 
     int updateFinished(ArticleEntity article);
 //    댓글

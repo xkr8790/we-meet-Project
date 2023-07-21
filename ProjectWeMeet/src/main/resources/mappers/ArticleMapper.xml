@@ -373,6 +373,37 @@
     </select>
     <!-- 참여인원 중복되있는지 select -->
 
+    <select id="selectArticleBylimitPeople"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `limit`          AS `limit`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <select id="selectParticipantPeople"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+          AND `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectProfile"
+            resultType="com.bsh.projectwemeet.entities.ProfileEntity">
+        SELECT `email`                  AS `email`,
+               `profile_thumbnail`      AS `profileThumbnail`,
+               `profile_thumbnail_mime` AS `profileThumbnailMime`
+        FROM `wemeet_project`.`mypages`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
             parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
