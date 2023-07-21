@@ -367,7 +367,7 @@ function refreshComment() {
                 const comments = JSON.parse(xhr.responseText);
                 commentContainer.innerHTML = ''; // Clear existing comments
 
-                for (const comment of comments) {
+                for (const comment of comments) { //왼쪽(글작성자 != 댓글작성자) 오른쪽(글작성자==댓글작성자)
                     const div = document.createElement('div');
                     let commentClass = 'comment-left';
 
@@ -376,26 +376,30 @@ function refreshComment() {
                     }
                     div.classList.add(commentClass);
 
-                    const nicknameDiv = document.createElement('div');
+                    const nicknameDiv = document.createElement('div'); //닉네임 들어갈 div
                     nicknameDiv.classList.add('comment-nickname');
                     nicknameDiv.innerText = comment['nickname'];
 
                     const headDiv = document.createElement('div');
-                    headDiv.classList.add('comment-head');
+                    headDiv.classList.add('comment-head'); //시간 및 날짜 들어갈 div
 
 
                     const bodyDiv = document.createElement('div');
-                    bodyDiv.classList.add('comment-body');
+                    bodyDiv.classList.add('comment-body'); //내용 들어갈 div
 
-                    const createdAt = new Date(comment['createdAt']); // Convert to Date object
-                    const year = createdAt.getFullYear();
-                    const month = String(createdAt.getMonth() + 1).padStart(2, '0');
-                    const day = String(createdAt.getDate()).padStart(2, '0');
-                    const hour = String(createdAt.getHours() % 12 || 12).padStart(2, '0');
-                    const minute = String(createdAt.getMinutes()).padStart(2, '0');
-                    const ampm = createdAt.getHours() < 12 ? '오전' : '오후';
-
-                    headDiv.innerText = `${year}/${month}/${day} ${ampm} ${hour}:${minute}`;
+                    const commentDate = new Date(comment['createdAt']); //DB의 시간 넣기
+                    function addLeadingZero(number) {
+                        return number < 10 ? '0' + number : number;
+                    }
+                    const year = commentDate.getFullYear();
+                    const month = addLeadingZero(commentDate.getMonth() + 1);
+                    const day = addLeadingZero(commentDate.getDate());
+                    const hour = commentDate.getHours();
+                    const minute = addLeadingZero(commentDate.getMinutes());
+                    const amOrPm = hour < 12 ? '오전' : '오후';
+                    const hour12Format = addLeadingZero(hour % 12 || 12);
+                    const formattedDate = `${year}/${month}/${day} ${amOrPm} ${hour12Format}:${minute}`;
+                    headDiv.innerText = formattedDate;
 
                     const deleteButton = document.createElement('button');
                     deleteButton.classList.add('delete-button');
