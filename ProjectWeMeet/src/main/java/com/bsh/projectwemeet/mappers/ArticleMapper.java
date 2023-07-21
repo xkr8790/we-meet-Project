@@ -40,8 +40,17 @@ public interface ArticleMapper {
     ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
     //게시물 수정 인덱스 찾기
 
-    ParticipantsEntity selectParticipants(@Param(value = "index") int index);
+    ParticipantsEntity selectParticipants(@Param(value = "ArticleIndex") int ArticleIndex);
     // 참여인원 중복되있는지 select
+
+    ParticipantsEntity selectParticipantsEmail(@Param(value = "ArticleIndex") int ArticleIndex,
+                                          @Param(value = "email")String email);
+    // 참여인원 중복되있는지 select
+
+
+    ParticipantsEntity[] selectParticipantsProfile(@Param(value = "ArticleIndex") int ArticleIndex);
+    // 참여인원 중복되있는지 select
+
 
     ParticipantsEntity selectCheckParticipants(@Param(value = "ArticleIndex") int ArticleIndex,
                                                @Param(value = "email") String email);

@@ -244,8 +244,31 @@
                `ArticleIndex`               AS `ArticleIndex`,
                `check_participation_status` AS `checkParticipationStatus`
         FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` = #{index}
+        WHERE `ArticleIndex` = #{ArticleIndex}
         LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsEmail"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`                      AS `index`,
+               `email`                      AS `email`,
+               `ArticleIndex`               AS `ArticleIndex`,
+               `check_participation_status` AS `checkParticipationStatus`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex} AND `email` = #{email}
+        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsProfile"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
     </select>
     <!-- 참여인원 중복되있는지 select -->
 
@@ -403,6 +426,7 @@
         LIMIT 1
     </select>
     <!-- 참여인원 중복되있는지 select -->
+
 
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"

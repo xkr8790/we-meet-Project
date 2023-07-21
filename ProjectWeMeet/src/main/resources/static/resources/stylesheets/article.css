@@ -115,10 +115,13 @@ body {
     position: relative;
     background-color: white;
     object-fit: cover;
+    margin-top: 1rem;
+    border-radius: 10rem;
 }
 #headerContainer > .header > .menu > .item > a > .profile > img {
-    width: 100px;
-    height: 100px;
+    border-radius: 10rem;
+    width: 70px;
+    height: 70px;
 }
 
 #headerContainer > .header > .menu > .item > button {

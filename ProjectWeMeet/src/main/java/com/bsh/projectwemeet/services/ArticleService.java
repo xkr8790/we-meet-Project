@@ -73,19 +73,6 @@ public class ArticleService {
         return this.articleMapper.selectArticleBylimitPeople(index);
     }
 
-    public ProfileEntity selectParticipateProfile(int index,HttpSession session){
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-        ParticipantsEntity participants = articleMapper.selectParticipantPeople(index, loginUser.getEmail());
-        ProfileEntity profile = articleMapper.selectProfile(loginUser.getEmail());
-
-        if(Objects.equals(participants.getEmail(), profile.getEmail())){
-            return articleMapper.selectProfile(loginUser.getEmail());
-        }
-        return null;
-    }
-
-
-
 
     public boolean InsertParticipate(int index, ParticipantsEntity participants, HttpSession session) {
 
@@ -122,8 +109,8 @@ public class ArticleService {
 
     public boolean checkParticipationStatus(int index, ParticipantsEntity participants, HttpSession session) {
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
-        participants = this.articleMapper.selectParticipants(article.getIndex());
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        participants = this.articleMapper.selectParticipants(article.getIndex());
 
         if (loginUser != null && participants != null && loginUser.getEmail().equals(participants.getEmail())) {
             return participants.isCheckParticipationStatus();
@@ -154,9 +141,11 @@ public class ArticleService {
 
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
 
-        participants = this.articleMapper.selectParticipants(article.getIndex());
 
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
+
+        participants = this.articleMapper.selectParticipantsEmail(article.getIndex(), loginUser.getEmail());
+
 
         if (participants == null) {
             return SelectParticipantsResult.FAILURE;
@@ -166,6 +155,7 @@ public class ArticleService {
         if(!Objects.equals(loginUser.getEmail(), participants.getEmail())){
             return SelectParticipantsResult.FAILURE;
         } //참여자의 이메일과 지금 로그인한 이메일의 사용자가 같지않다면 실패 반환
+        //오류발생
 
 
         if(article.getParticipation() <= article.getLimitPeople()){
@@ -348,21 +338,45 @@ public class ArticleService {
     public ProfileEntity profileBulletin(int index){
         ArticleEntity article = articleMapper.selectArticleByIndex(index);
         ProfileEntity profile = articleMapper.selectProfile(article.getEmail());
+        if(profile == null){
+            return null;
+        }
         if(Objects.equals(article.getEmail(), profile.getEmail())){
             return articleMapper.selectProfile(article.getEmail());
-        }
+        } //로그인한유저와 프로필테이블의 이메일이같다면 return해서 돌려준다
         return null;
-    }
+    } //게시판 주인 select
 
     public ProfileEntity profileArticle(HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("user");
         ProfileEntity profile = articleMapper.selectProfile(user.getEmail());
         if(Objects.equals(user.getEmail(), profile.getEmail())){
             return articleMapper.selectProfile(user.getEmail());
-        }
+        } //게시판의 주인과 프로필의 이메일이 같다면 return해서 게시판 주인의 프로필 나타냄
         return null;
-    }
+    } //유저의 프로필 사진 select
 
+    public ParticipantsEntity[] selectParticipantsProfile(int index){
+        return articleMapper.selectParticipantsProfile(index);
+    } //참여한 인원수만큼 배열 반환
+
+    public ProfileEntity selectParticipateProfile(int index) {
+
+        ParticipantsEntity participants = articleMapper.selectParticipants(index);
+        //게시판 인덱스 번호로 이메일,게시판인덱스 찾는다
+
+        if(participants == null){
+            return null;
+        }
+
+        ProfileEntity profile = articleMapper.selectProfile(participants.getEmail());
+
+        if(profile == null){
+            return null;
+        }
+
+        return profile;
+    }
 
 
 

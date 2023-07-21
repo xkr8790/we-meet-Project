@@ -172,18 +172,9 @@
                                     <span th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
                                     + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
                                 </div>
-                                                                    <span class="article-human">
-              <span class="Profile-Picture">
+            <span class="article-human">
+              <span class="Profile-Picture" th:each="i : ${#numbers.sequence(1, article.getLimitPeople()-1)}">
                  <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-                  <span class="Profile-Picture">
-              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-              <span class="Profile-Picture">
-                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-              <span class="Profile-Picture">
-                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
               </span>
 
               <img class="limit-image" th:src="@{/resources/images/category/human.png}">
