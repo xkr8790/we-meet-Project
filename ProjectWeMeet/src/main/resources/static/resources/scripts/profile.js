@@ -400,3 +400,30 @@ popup['deleteUser'].onclick = e => {
         xhr.send(formData);
     }
 }
+
+popup['saveProfile'].onclick = e => {
+    e.preventDefault();
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append("thumbnailMultipart", popup['change_profile'].files[0]);
+    xhr.open('POST', './profileImage');
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseText = xhr.responseText;
+                if (responseText === 'true') {
+                    alert('변경완료');
+                    return;
+                } else {
+                    alert('제한인원을 초과했습니다');
+                    return;
+                }
+            } else {
+                alert('이미 참여한 사용자입니다');
+                return;
+            }
+        }
+    };
+    xhr.send(formData);
+};

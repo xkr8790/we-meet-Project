@@ -69,6 +69,22 @@ public class ArticleService {
 
     } //게시판 나타내기
 
+    public ArticleEntity[] selectArticleByLimitPeople(int index){
+        return this.articleMapper.selectArticleBylimitPeople(index);
+    }
+
+    public ProfileEntity selectParticipateProfile(int index,HttpSession session){
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        ParticipantsEntity participants = articleMapper.selectParticipantPeople(index, loginUser.getEmail());
+        ProfileEntity profile = articleMapper.selectProfile(loginUser.getEmail());
+
+        if(Objects.equals(participants.getEmail(), profile.getEmail())){
+            return articleMapper.selectProfile(loginUser.getEmail());
+        }
+        return null;
+    }
+
+
 
 
     public boolean InsertParticipate(int index, ParticipantsEntity participants, HttpSession session) {
@@ -327,6 +343,24 @@ public class ArticleService {
         return this.articleMapper.deleteByReport(index, user.getEmail(),flag) > 0
                 ? DeleteLikeReportResult.SUCCESS_REPORT
                 : DeleteLikeReportResult.FAILURE_REPORT;
+    }
+
+    public ProfileEntity profileBulletin(int index){
+        ArticleEntity article = articleMapper.selectArticleByIndex(index);
+        ProfileEntity profile = articleMapper.selectProfile(article.getEmail());
+        if(Objects.equals(article.getEmail(), profile.getEmail())){
+            return articleMapper.selectProfile(article.getEmail());
+        }
+        return null;
+    }
+
+    public ProfileEntity profileArticle(HttpSession session){
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ProfileEntity profile = articleMapper.selectProfile(user.getEmail());
+        if(Objects.equals(user.getEmail(), profile.getEmail())){
+            return articleMapper.selectProfile(user.getEmail());
+        }
+        return null;
     }
 
 

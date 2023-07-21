@@ -112,10 +112,13 @@ body {
 }
 
 #headerContainer > .header > .menu > .item > a > .profile {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: 1px solid red;
+    position: relative;
+    background-color: white;
+    object-fit: cover;
+}
+#headerContainer > .header > .menu > .item > a > .profile > img {
+    width: 100px;
+    height: 100px;
 }
 
 #headerContainer > .header > .menu > .item > button {

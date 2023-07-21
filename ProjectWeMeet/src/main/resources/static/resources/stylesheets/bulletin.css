@@ -145,7 +145,7 @@ allContainer > .header > .login > a {
     object-fit: cover;
 }
 
-.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img > a > img {
+.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img > img {
     border-radius: 50%;
 }
 

@@ -118,22 +118,21 @@ public class ProfileController {
         return responseObject.toString();
     }
 
-    @RequestMapping(value = "index",
+    @RequestMapping(value = "/profileImage",
     method = RequestMethod.POST,
     produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public ModelAndView postIndex(HttpServletRequest request,
+    public String postIndex(HttpServletRequest request,
                                   ProfileEntity profile,
                                   @RequestParam(value = "thumbnailMultipart")MultipartFile thumbnailMultipart,
                                   HttpSession session) throws IOException {
         profile.setProfileThumbnail(thumbnailMultipart.getBytes());
         profile.setProfileThumbnailMime(thumbnailMultipart.getContentType());
         boolean result = this.profileService.putProfile(request, profile, session);
-        ModelAndView modelAndView = new ModelAndView();
-        if (result) {
-            modelAndView.setViewName("redirect:/profile");
-        }
-        return modelAndView;
+//        if (result) {
+//            modelAndView.setViewName("redirect:/profile");
+//        }
+        return String.valueOf(result);
     }
 
     //인증번호 전송 코드
