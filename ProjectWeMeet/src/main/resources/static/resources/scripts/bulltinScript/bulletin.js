@@ -130,7 +130,7 @@ function refreshComment() {
                 const comments = JSON.parse(xhr.responseText);
                 commentContainer.innerHTML = ''; // Clear existing comments
 
-                for (const comment of comments) {
+                for (const comment of comments) { //왼쪽(글작성자 != 댓글작성자) 오른쪽(글작성자==댓글작성자)
                     const div = document.createElement('div');
                     let commentClass = 'comment-left';
 
@@ -139,7 +139,7 @@ function refreshComment() {
                     }
                     div.classList.add(commentClass);
 
-                    const nicknameDiv = document.createElement('div');
+                    const nicknameDiv = document.createElement('div'); //닉네임 들어갈 div
                     nicknameDiv.classList.add('comment-nickname');
                     nicknameDiv.innerText = comment['nickname'];
 
@@ -163,7 +163,6 @@ function refreshComment() {
                     const hour12Format = addLeadingZero(hour % 12 || 12);
                     const formattedDate = `${year}/${month}/${day} ${amOrPm} ${hour12Format}:${minute}`;
                     headDiv.innerText = formattedDate;
-
 
                     const deleteButton = document.createElement('button');
                     deleteButton.classList.add('delete-button');
