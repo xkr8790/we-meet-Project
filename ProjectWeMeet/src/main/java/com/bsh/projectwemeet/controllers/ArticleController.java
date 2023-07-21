@@ -6,7 +6,12 @@ import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.entities.ReviewEntity;
 import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.models.PagingModel;
+import com.bsh.projectwemeet.enums.CreateCommentResult;
+import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import com.bsh.projectwemeet.services.ReviewService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +27,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -70,6 +80,24 @@ public class ArticleController {
         return modelAndView;
     } //게시판 카테고리별//
 
+    @RequestMapping(value = "article/profile", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getMainProfile(HttpSession session) {
+
+        ProfileEntity profile = this.articleService.profileArticle(session);
+
+        ResponseEntity<byte[]> response;
+        if (profile == null){
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(),headers,HttpStatus.OK);
+        }
+        return response;
+    }
+    //게시판주인의 프로필 사진
+
 
     @RequestMapping(value = "article/image",
             method = RequestMethod.GET)
@@ -81,10 +109,39 @@ public class ArticleController {
         if (article == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentLength(article.getThumbnail().length);
-            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
-            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
+            try {
+                // 원본 이미지를 BufferedImage로 변환
+                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(article.getThumbnail()));
+
+                // 새로운 크기로 이미지 조정
+                int newWidth = 256;
+                int newHeight = 256;
+                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+                // BufferedImage 생성
+                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+
+                // Graphics2D를 사용하여 이미지 그리기
+                Graphics2D graphics = outputImage.createGraphics();
+                graphics.drawImage(resizedImage, 0, 0, null);
+                graphics.dispose();
+
+                // 조정된 이미지를 바이트 배열로 변환
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(outputImage, "jpg", baos);
+                byte[] resizedImageBytes = baos.toByteArray();
+
+                // HTTP 응답 헤더 설정
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentLength(resizedImageBytes.length);
+                headers.setContentType(MediaType.IMAGE_JPEG);
+
+                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
         return response;
     }
@@ -109,23 +166,182 @@ public class ArticleController {
     }
 
 
+
+
     @RequestMapping(value = "article/read",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRead(@RequestParam(value = "index") int index) {
+    public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session,
+   boolean flag) {
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
 
-        // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
         ArticleEntity article = this.articleService.readArticle(index);
-
         ArticleEntity[] articles = this.articleService.getMiniArticle();
+        UserEntity user = this.articleService.userEmail(session);
+
+        LikeReportEntity LikeResult = this.articleService.selectLike(index,session,flag);
+        LikeReportEntity ReportResult = this.articleService.selectReport(index,session,flag);
+        SelectParticipantsResult ParticipantsResult = this.articleService.selectParticipants(index,session);
+        ArticleEntity[] articleLimitPeople = this.articleService.selectArticleByLimitPeople(index);
+        // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
+
 
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
         modelAndView.addObject("article", article);
         modelAndView.addObject("articles", articles);
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("LikeResult",LikeResult);
+        modelAndView.addObject("ReportResult",ReportResult);
+        modelAndView.addObject("ParticipantsResult",ParticipantsResult.name().toLowerCase());
+        modelAndView.addObject("articleLimitPeople",articleLimitPeople);
 
         return modelAndView;
     }//인덱스번호로 각 게시판 값 나타내기
+
+    @RequestMapping(value = "article/read/image", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getThumbnai(@RequestParam(value = "index") int index) {
+
+        ArticleEntity article = this.articleService.readArticle(index);
+
+        ResponseEntity<byte[]> response;
+        if (article == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            try {
+                // 원본 이미지를 BufferedImage로 변환
+                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(article.getThumbnail()));
+
+                // 새로운 크기로 이미지 조정
+                int newWidth = 640;
+                int newHeight = 640;
+                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+                // BufferedImage 생성
+                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+
+                // Graphics2D를 사용하여 이미지 그리기
+                Graphics2D graphics = outputImage.createGraphics();
+                graphics.drawImage(resizedImage, 0, 0, null);
+                graphics.dispose();
+
+                // 조정된 이미지를 바이트 배열로 변환
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(outputImage, "jpg", baos);
+                byte[] resizedImageBytes = baos.toByteArray();
+
+                // HTTP 응답 헤더 설정
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentLength(resizedImageBytes.length);
+                headers.setContentType(MediaType.IMAGE_JPEG);
+
+                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return response;
+    }
+
+    @RequestMapping(value = "article/read/profile", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getProfile(@RequestParam(value = "index") int index) {
+
+        ProfileEntity profile = this.articleService.profileBulletin(index);
+
+        ResponseEntity<byte[]> response;
+        if (profile == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            try {
+                // 원본 이미지를 BufferedImage로 변환
+                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
+
+                // 새로운 크기로 이미지 조정
+                int newWidth = 60;
+                int newHeight = 60;
+                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+                // BufferedImage 생성
+                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+
+                // Graphics2D를 사용하여 이미지 그리기
+                Graphics2D graphics = outputImage.createGraphics();
+                graphics.drawImage(resizedImage, 0, 0, null);
+                graphics.dispose();
+
+                // 조정된 이미지를 바이트 배열로 변환
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(outputImage, "jpg", baos);
+                byte[] resizedImageBytes = baos.toByteArray();
+
+                // HTTP 응답 헤더 설정
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentLength(resizedImageBytes.length);
+                headers.setContentType(MediaType.IMAGE_JPEG);
+
+                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return response;
+    }
+    //게시판주인의 프로필 사진
+
+    @RequestMapping(value = "article/Participate/profile", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getParticipants(@RequestParam(value = "index") int index,HttpSession session) {
+
+        ProfileEntity profile = this.articleService.selectParticipateProfile(index,session);
+
+        ResponseEntity<byte[]> response;
+        if (profile == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            try {
+                // 원본 이미지를 BufferedImage로 변환
+                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
+
+                // 새로운 크기로 이미지 조정
+                int newWidth = 60;
+                int newHeight = 60;
+                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+                // BufferedImage 생성
+                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+
+                // Graphics2D를 사용하여 이미지 그리기
+                Graphics2D graphics = outputImage.createGraphics();
+                graphics.drawImage(resizedImage, 0, 0, null);
+                graphics.dispose();
+
+                // 조정된 이미지를 바이트 배열로 변환
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(outputImage, "jpg", baos);
+                byte[] resizedImageBytes = baos.toByteArray();
+
+                // HTTP 응답 헤더 설정
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentLength(resizedImageBytes.length);
+                headers.setContentType(MediaType.IMAGE_JPEG);
+
+                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return response;
+    }
+    //게시판주인의 프로필 사진
+
+
+
+
+
 
     //인덱스 번호로 사진가져와서 인덱스에 해당하는 게시판에 사진 나타내기
 
@@ -141,11 +357,11 @@ public class ArticleController {
     @RequestMapping(value = "article/patch",
             method = RequestMethod.GET)
     public ModelAndView getWrite(@RequestParam(value = "index") int index, HttpSession session) {
-        ArticleEntity article = articleService.getPatchIndexArticle(index, session);
+        ArticleEntity article = articleService.getPatchIndexArticle(index,session);
         ArticleEntity[] articleTag = articleService.getPatchIndexArticleHashTag(index);
         ModelAndView modelAndView = new ModelAndView("home/patchWrite");
         modelAndView.addObject("article", article);
-        modelAndView.addObject("articleTag", articleTag);
+        modelAndView.addObject("articleTag",articleTag);
         return modelAndView;
     }
     //게시판 수정 폼 받아오기
@@ -191,7 +407,7 @@ public class ArticleController {
             method = RequestMethod.POST)
     @ResponseBody //주소도 같고 메서드도 같으면 충돌이 일어난다.
     public String postParticipate(@RequestParam(value = "index") int index, ParticipantsEntity participants, HttpSession session) {
-        boolean result = this.articleService.Participate(index, participants, session);
+        boolean result = this.articleService.InsertParticipate(index, participants, session);
         return String.valueOf(result);
     } //인원참가시 1증가하는 POST 방식 컨트롤러 (중복 체크 불가)
 
@@ -200,7 +416,7 @@ public class ArticleController {
     public ModelAndView getArticle(@RequestParam(value = "index") int index, ParticipantsEntity participants, HttpSession session) {
         boolean result = this.articleService.checkParticipationStatus(index, participants, session);
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
-        modelAndView.addObject("result", result);
+        modelAndView.addObject("result",result);
         return modelAndView;
     } //인원의 참가여부 select로 표현
 
@@ -218,28 +434,84 @@ public class ArticleController {
     } //인원이 참가 했을시 취소 가능하게
 
     @RequestMapping(value = "article/like",
-            method = RequestMethod.PATCH,
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody //있어야지 JSON 사용가능
-    public String patchLike(@RequestParam(value = "index") int index, HttpSession session) {
-        LIkeAndReportResult result = this.articleService.UpdateLikeResult(index, session);
+    @ResponseBody
+    public String postLike(@RequestParam(value = "index") int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
+        InsertLikeAndReportResult result = this.articleService.InsertLike(index,likeEntity,session,flag);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+    //좋아요를 누르면 좋아요가 오르고 새로고침됨 - 중복시 좋아요 못함 - 게시판 작성자와 로그인 사용자 이메일 같으면 실패
 
-    @RequestMapping(value = "article/Report",
-            method = RequestMethod.PATCH,
+    @RequestMapping(value = "article/report",
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody //있어야지 JSON 사용가능
-    public String patchReport(@RequestParam(value = "index") int index, HttpSession session) {
-        LIkeAndReportResult result = this.articleService.UpdateReportResult(index, session);
+    @ResponseBody
+    public String postReport(@RequestParam(value = "index") int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
+        InsertLikeAndReportResult result = this.articleService.InsertReport(index,likeEntity,session,flag);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+    //를 누르면 좋아요가 오르고 새로고침됨 - 중복시 좋아요 못함 - 게시판 작성자와 로그인 사용자 이메일 같으면 실패
+
+    @RequestMapping(value = "article/like",
+            method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteLike(@RequestParam(value = "index") int index,HttpSession session,boolean flag) {
+        DeleteLikeReportResult result = this.articleService.deleteLike(index,session,flag);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+    //좋아요 취소하는 컨트롤러
+
+    @RequestMapping(value = "article/report",
+            method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteReport(@RequestParam(value = "index") int index,HttpSession session,boolean flag) {
+        DeleteLikeReportResult result = this.articleService.deleteReport(index,session,flag);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+    //신고를 취소하는 컨트롤러
+
+
+
+
+
+    @RequestMapping(value="article/review", method = RequestMethod.GET)
+    public ModelAndView getFinish(int index, HttpSession session){
+        boolean result = this.articleService.patchFinish(index ,session);
+        ModelAndView modelAndView = new ModelAndView("home/review");
+        modelAndView.addObject("result", result);
+        return modelAndView;
+   }
+//   게시물 작성자와 로그인된 아이디가 같은지 다른지에 대한 여부를 통해 페이지 넘어가게 하기
+
+//    @RequestMapping(value="article/review", method = RequestMethod.PATCH)
+//    @ResponseBody
+//    public String patchFinished(ArticleEntity article, HttpSession session){
+//        FinishResult result = this.articleService.patchFinished(article, session);
+//        JSONObject responseObject = new JSONObject() {{
+//            put("result", result.name().toLowerCase());
+//        }};
+//        return responseObject.toString();
+//    }
+
+
+
+
+
 
 
 //    댓글
@@ -248,24 +520,29 @@ public class ArticleController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public CommentEntity[] getComment(@RequestParam(value = "articleIndex") int articleIndex) {
-        return this.articleService.getCommentsOf(articleIndex);
+    public String getComment(@RequestParam(value = "articleIndex")int articleIndex){
+        ArticleEntity article = this.articleService.getArticleByIndex(articleIndex);
+        CommentEntity[] comments = this.articleService.getCommentsOf(articleIndex);
+        JSONArray responseArray = new JSONArray();
+        for (CommentEntity comment : comments) {
+            JSONObject commentObject = new JSONObject(comment);
+            commentObject.put("same", article.getEmail().equals(comment.getEmail()));
+            responseArray.put(commentObject);
+        }
+        return responseArray.toString();
     }
 
-    @RequestMapping(value = "comment",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(value = "comment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postComment(HttpServletRequest request,
-                              CommentEntity comment,
-                              HttpSession session,
-                              ArticleEntity article) {
-        CreateCommentResult result = this.articleService.putComment(request, comment, session, article);
+    public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail,@RequestParam("nickname")String nickname) {
+        CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail,nickname);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+
 
     @RequestMapping(value = "comment",
             method = RequestMethod.DELETE,
@@ -285,28 +562,31 @@ public class ArticleController {
 
 //    완료 후 다음으로 보내기
 
-    @RequestMapping(value = "article/review", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getUpdateCategory(@RequestParam(value = "index") int index, String category) {
+    @RequestMapping(value="article/review", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getUpdateCategory(@RequestParam(value="index")int index, String category){
         ModelAndView modelAndView = new ModelAndView("home/review");
         ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
         ReviewEntity[] reviewEntities = this.reviewService.getAll();
-        Double reviewAvgStar = reviewService.avgStar(index);
-        modelAndView.addObject("avgStar", reviewAvgStar);
         modelAndView.addObject("article", article);
         modelAndView.addObject("reviews", reviewEntities);
         return modelAndView;
     }
 
 
-    @RequestMapping(value = "article/review", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(value="article/review", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String updateCategory(int index, HttpSession session) {
+    public String updateCategory(int index, HttpSession session){
         UpdateCategoryResult result = this.articleService.updateCategory(index, session);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+
+
+
+
 
 
 }

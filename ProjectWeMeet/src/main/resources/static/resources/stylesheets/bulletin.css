@@ -1,9 +1,16 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
+
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
 * {
     /*border: 1px solid red;*/
     margin: 0;
     padding: 0;
-
 }
+
 
 .a.disabled{
     pointer-events: none;
@@ -16,11 +23,11 @@ body {
 }
 
 .allContainer {
-    width: 50%;
+    width: 40%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #f4f3f1;
+    background-color: #f4f4f4;
 }
 
 .allContainer > .header {
@@ -34,6 +41,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 0.5rem 0 0.5rem 0;
 
 }
 
@@ -80,6 +88,7 @@ allContainer > .header > .login > a {
 .allContainer > .main-template {
     width: 100%;
     height: auto;
+    margin: 2rem 0 0 0;
 }
 
 .allContainer > .main-template > .img-profile-title {
@@ -90,6 +99,7 @@ allContainer > .header > .login > a {
     flex-direction: column;
     justify-content: end;
     background-color: #f4f3f1;
+    margin: 0 0 1rem 0;
 }
 
 
@@ -99,15 +109,19 @@ allContainer > .header > .login > a {
     background-repeat: no-repeat;
     background-position: center;
     object-fit: cover;
+}
 
-
+#bulletinForm>.content{
+    margin: 1rem 0 3rem 1rem;
+    line-height: 28px;
+    font-size: 17px;
 }
 
 .allContainer > .main-template > .img-profile-title > .profile-title {
     position: relative;
     width: calc(100% - 28px);
     height: auto;
-    top: -25px;
+    top: -17px;
     align-items: center;
     z-index: 100;
     text-align: center;
@@ -116,6 +130,8 @@ allContainer > .header > .login > a {
     justify-content: center;
     border-radius: 16px;
     background-color: white;
+    padding-bottom: 1rem;
+    font-family: Pretendard;
 
 }
 
@@ -129,7 +145,7 @@ allContainer > .header > .login > a {
     object-fit: cover;
 }
 
-.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img > a > img {
+.allContainer > .main-template > .img-profile-title > .profile-title > .profile-img > img {
     border-radius: 50%;
 }
 
@@ -138,6 +154,8 @@ allContainer > .header > .login > a {
     height: 2rem;
     border-radius: 16px;
     background-color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 .allContainer > .main-template > .content {
@@ -146,49 +164,82 @@ allContainer > .header > .login > a {
     margin: 0 1rem;
 }
 
-.allContainer > .main-template > .likeAndReport>.like{
-    width: 1.3rem;
-}
-.allContainer > .main-template > .likeAndReport>.report{
-    width: 1.4rem;
-}
-
-
-.likeAndReport .like,
-.likeAndReport .report {
-    margin-right: 5px;
-}
-
-.likeAndReport{
-    margin-right: 0rem;
+.likeAndReport {
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    margin: 0rem 0 1rem 0;
 }
+
+.likeAndReport .like {
+    margin-right: 5px;
+    width: 1.5rem;
+    filter: brightness(30%);
+}
+
+/*좋아요랑 좋아요 한후 */
+
+.likeAndReport .like:hover {
+    filter: brightness(90%);
+}
+
+/*좋아요랑 좋아요 한후 */
+
+.likeAndReport .deleteLike {
+    margin-right: 5px;
+    width: 1.5rem;
+} /*좋아요랑 좋아요 한후 */
+
+.likeAndReport .deleteLike:hover {
+    filter: brightness(30%);
+}  /*좋아요랑 좋아요 한후 */
+
+
+
+.likeAndReport .report{
+    margin-right: 5px;
+    width: 1.6rem;
+} /* 신고 하기전 색상 회색*/
+
+.likeAndReport .report:hover{
+    filter: brightness(50%);
+} /* 신고 하기전 색상 회색*/
+
+.likeAndReport .deleteReport {
+    margin-right: 5px;
+    width: 1.6rem;
+    filter: brightness(10%);
+} /* 신고 하고나서 색상 검은색*/
+
+.likeAndReport .deleteReport:hover{
+    margin-right: 5px;
+    width: 1.6rem;
+    filter: brightness(50%);
+} /* 신고 하고나서 색상 검은색*/
 
 
 .announcement {
     width: 100%;
-    align-items: start;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
     padding-bottom: 1rem;
 }
 
 .announcement > .introduction {
     width: 100%;
-    margin: 0 1rem
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .announcement > .introduction > .member {
     color: red;
     font-size: 0.7rem;
+    margin-left: 0.1rem;
 }
 
 .announcement > .introduction > .subTitle {
     font-size: 1.2rem;
+    margin: 0.3rem 0 0.8rem 0;
 }
 
 .announcement > .introduction > .my {
@@ -274,7 +325,8 @@ allContainer > .header > .login > a {
     border: 1px solid red;
     flex-wrap: wrap;
 }
-.announcement > .participant > .participantContainer > .login-after-human > .profile > span{
+
+.announcement > .participant > .participantContainer > .login-after-human > .profile > span {
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
@@ -282,7 +334,11 @@ allContainer > .header > .login > a {
     border: 1px solid blue;
 }
 
-.announcement > .participant > .participantContainer > .login-after-human > .participating-button{
+.announcement > .participant > .participantContainer > .login-after-human > .profile > span > img {
+    object-fit: cover;
+}
+
+.announcement > .participant > .participantContainer > .login-after-human > .participating-button {
     margin: 0.5rem;
     width: 10rem;
     height: 2rem;
@@ -348,6 +404,15 @@ allContainer > .header > .login > a {
     color: red;
 }
 
+.announcement > .guide > .guideContainer > .total {
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.announcement > .guide > .guideContainer > .place {
+    margin: 0.5rem 0 0.8rem 0;
+}
+
+
 .announcement > .guide > .guideContainer > .map {
 
     height: 9.8rem;
@@ -399,6 +464,7 @@ allContainer > .header > .login > a {
 }
 
 .preview{
+    margin: 3rem 0 0rem 0rem;
     position: relative;
     width: 100%;
     height: 13rem;
@@ -467,7 +533,10 @@ allContainer > .header > .login > a {
     width: 10rem;
     height: 1.5rem;
     margin-bottom: 0.2rem;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
 }
 
 .preview > .container > .previewContainer > .text > .time {
@@ -484,14 +553,70 @@ allContainer > .header > .login > a {
     flex-direction: row;
     justify-content: start;
 }
+
 .preview > .container > .previewContainer > .text > .participant > .human {
     width: 2.27rem;
     height: 2.27rem;
     border-radius: 50%;
 }
 
+.preview > .container > .previewContainer > .text > .participant >.fa-solid.fa-user-group,.number {
+    margin: 0.1rem;
+}
+
+
 
 /*댓글*/
-.comment-left{
-    margin-bottom: 1rem;
+.contentBox {
+    display: flex;
+    flex-direction: column;
 }
+
+.comment-left {
+    margin-bottom: 1rem;
+    max-width: 45%;
+    align-self: flex-start;
+    margin-left: 0.45rem;
+}
+
+.comment-left > .comment-nickname{
+    margin-bottom: 0.5rem;
+}
+
+.comment-left > .comment-box{
+    border: 1px solid red;
+    border-radius: 15px;
+    padding: 0.5rem;
+}
+
+.comment-left >.comment-box> .comment-body{
+    width: 100%;
+    word-wrap: break-word;
+}
+
+
+
+.comment-right {
+    margin-bottom: 1rem;
+    max-width: 45%;
+    align-self: flex-end;
+    margin-left: auto; /* Align to the right side */
+    margin-right: 0.8rem;
+}
+
+.comment-right > .comment-nickname{
+    margin-bottom: 0.5rem;
+    text-align: right;
+}
+
+.comment-right > .comment-box {
+    border: 1px solid #3498db;
+    border-radius: 15px;
+    padding: 0.5rem;
+}
+
+.comment-right >.comment-box > .comment-body{
+    width: 100%;
+    word-wrap: break-word;
+}
+

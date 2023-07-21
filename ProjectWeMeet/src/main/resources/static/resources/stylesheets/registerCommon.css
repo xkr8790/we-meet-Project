@@ -10,7 +10,7 @@ body,html{
     margin: 0;
     width: 100%;
     height: 100%;
-    background-color: #f4f3f1;
+    /*background-color: #f4f3f1;*/
 }
 
 
@@ -131,7 +131,7 @@ h1 {
 }
 
 .warning.green{
-    color: #33ff33;
+    color: #3498db;
 }
 
 

@@ -280,22 +280,22 @@ Report.addEventListener('click', e => {
 
 //게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//
 
-// finishButton.addEventListener('click', e => {
-//     e.preventDefault();
-//     const index = finishButton.dataset.index;
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('GET',`/article/review?index=${index}`);
-//     xhr.onreadystatechange = () => {
-//         if(xhr.readyState === XMLHttpRequest.DONE){
-//             if(xhr.status >=200 && xhr.status<300){
-//                 location.href = `/article/review?index=${index}`
-//             }else{
-//                 alert('작성한 사용자가 아니라 수정이 불가능합니다.');
-//             }
-//         }
-//     };
-//     xhr.send();
-// })
+finishButton.addEventListener('click', e => {
+    e.preventDefault();
+    const index = finishButton.dataset.index;
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET',`/article/review?index=${index}`);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status >=200 && xhr.status<300){
+                location.href = `/article/review?index=${index}`
+            }else{
+                alert('작성한 사용자가 아니라 수정이 불가능합니다.');
+            }
+        }
+    };
+    xhr.send();
+})
 
 //게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//
 
@@ -474,6 +474,8 @@ finishButton.addEventListener('click', e => {
                                 if (xhr.readyState === XMLHttpRequest.DONE) {
                                     if (xhr.status >= 200 && xhr.status < 300) {
                                         location.href = `/article/review?index=${index}`
+                                    } else {
+                                        alert('사용자님의 게시물이 아니라 완료가 불가능합니다.');
                                     }
                                 }
                             };

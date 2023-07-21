@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainStyle.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainMenu.css}">
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
     <script defer src="/resources/scripts/slide.js"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
@@ -137,26 +138,36 @@
 
 <section class="article-container">
     <h2 class="article-list-header">똑같은 일상의 소소한 변화</h2>
-    <div class="slider">
-        <div class="slide">
             <div class="article-box">
                 <a th:href="@{article/read(index=${article.getIndex()})}" class="article-list" th:each="article : ${article}">
                     <div class="article-thumbnail">
-                        <img class="thumbnail" th:src="@{./image(index=${article.getIndex()})}">
+                        <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}">
                     </div>
                     <div class="article-content-box">
                         <div class="article-tag">
                             <span class="tag" th:text="${article.getCategory()}"></span>
-                            <span class="tag comment">추천!!</span>
+                            <span class="tag comment" th:if="${article.getLikeCount()>10}">추천!!</span>
                         </div>
                         <span class="article-content">
                             <h2 class="article-content-title" th:text="${article.getTitle()}">장문복이랑 놀러갈 사람?</h2>
                         </span>
+
                         <div class="article-map">
-                            <span class="map-item" th:text="${article.getAddress()}">위치</span>
-                            <span class="map-item" th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">날짜</span>
-                            <span class="map-item" th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
+                            <div class="article-location">
+                                <img class="location" th:src="@{/resources/images/articleImages/location.png}">
+                                <span class="map-item" th:text="${article.getAddress()}">위치</span>
+                            </div>
+                            <div class="article-location">
+                                <img class="day-img" th:src="@{/resources/images/articleImages/day.png}">
+                                <span class="map-item"
+                                      th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">날짜</span>
+                            </div>
+                            <div class="article-location">
+                                <img class="time-img" th:src="@{/resources/images/articleImages/limit-time.png}">
+                                <span class="map-item" th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
                                 + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
+                            </div>
+
                         </div>
                         <span class="article-human">
               <span class="Profile-Picture">
@@ -184,8 +195,7 @@
                     </div>
                 </a>
             </div>
-        </div>
-    </div>
+
 </section>
 
 <footer id="footer">
@@ -210,7 +220,7 @@
                 주소 : 경기 성남시 분당구 판교 <br>
                 사업자등록번호 : 123-23-12321 | 통신판매 : 제 2023-경기분당-12321 <br>
                 고객센터 : @카카오톡채널 | 운영시간 : (월~금)오전 9:00~오후 6:00/(주말 및 공휴일)오전 8:00~오후 7:00</p>
-            <p class="about-info"><a class="last-a-tag" href="#">이용약관</a> | <a class="last-a-tag" href="#">개인정보처리방침</a>
+            <p class="about-info"><a class="last-a-tag" href="/TermsOfService">이용약관</a> | <a class="last-a-tag" href="/Privacy-Policy">개인정보처리방침</a>
                 | <a class="last-a-tag" href="#">사업자정보확인</a></p>
         </div>
     </div>

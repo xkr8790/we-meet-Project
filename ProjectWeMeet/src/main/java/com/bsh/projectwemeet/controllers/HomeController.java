@@ -25,12 +25,29 @@ public class HomeController {
     @RequestMapping(value = "/",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getMain(){
+    public ModelAndView getMain(boolean isFinished){
         ModelAndView modelAndView = new ModelAndView("home/main");
-        ArticleEntity[] articles = this.articleService.getMainArticle();
+        ArticleEntity[] articles = this.articleService.getMainArticle(isFinished);
         modelAndView.addObject("article", articles);
         return modelAndView;
     } //메인 홈 주소
+
+    @RequestMapping(value = "/Privacy-Policy",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getPrivacyPolicy(){
+        ModelAndView modelAndView = new ModelAndView("home/Privacy-Policy/Privacy-Policy");
+        return modelAndView;
+    } //메인 홈 주소
+
+    @RequestMapping(value = "/TermsOfService",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getTermsOfService(){
+        ModelAndView modelAndView = new ModelAndView("home/Privacy-Policy/Terms-of-Service");
+        return modelAndView;
+    } //메인 홈 주소
+
 
     @RequestMapping(value = "/image",
             method = RequestMethod.GET)
@@ -60,7 +77,6 @@ public class HomeController {
         ArticleEntity article = this.articleService.readArticle(index);
 
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
-
         modelAndView.addObject("article", article);
 
         return modelAndView;

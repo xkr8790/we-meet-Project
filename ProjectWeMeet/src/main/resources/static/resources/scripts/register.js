@@ -118,51 +118,10 @@ function updateButtonState() {
 }
 
 
-// 페이지 전환시 초기화
-// 이전 버튼이 없어서 필요하지 않을 수도 있는데 혹시 몰라서 넣어둠
-registerForm.show = () => {
-
-    registerForm['name'].value='';
-    registerForm.nameWarning.hide();
-
-    registerForm['birth'].value='';
-    registerForm.birthWarning.hide();
-
-
-
-    // gender는 체크박스라서 조금 달라서 추후 예정
-    // registerForm['gender'].value='';
-    // registerForm.genderWarning.hide();
-
-    registerForm['email'].value = '';
-    registerForm.emailWarning.hide();
-
-    registerForm['nickname'].value='';
-    registerForm.nicknameWarning.hide();
-
-    registerForm['password'].value = '';
-    registerForm['passwordCheck'].value = '';
-    registerForm.passwordWarning.hide();
-
-    registerForm['addressPostal'].value='';
-    registerForm['addressPrimary'].value='';
-    registerForm['addressSecondary'].value='';
-    registerForm.addressWarning.hide();
 
 
 
 
-    registerForm['contact'].value = '';
-    registerForm['contact'].removeAttribute('disabled');
-    registerForm['contactSend'].removeAttribute('disabled');
-    registerForm['contactCode'].value = '';
-    registerForm['contactCode'].setAttribute('disabled', 'disabled');
-    registerForm['contactVerify'].setAttribute('disabled', 'disabled');
-    registerForm['contactSalt'].value = '';
-
-    registerForm.classList.remove('step-1', 'step-2', 'step-3');
-    registerForm.classList.add('step-1', 'visible');
-};
 
 // 다음 주소 API
 addressLayer.show = () => {
@@ -191,6 +150,8 @@ nextButton.addEventListener('click', function() {
     step1.style.display = 'none';
     step2.style.display = 'block';
 });
+
+//
 
 // 2페이지 warning&회원가입
 registerForm.onsubmit = e =>{
@@ -229,6 +190,7 @@ registerForm.onsubmit = e =>{
             registerForm['email'].select();
             return;
         }
+
         if (registerForm['nickname'].value === '') {
             // 별명 미입력
             registerForm.nicknameWarning.show('별명을 입력해 주세요.');

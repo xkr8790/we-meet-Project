@@ -41,15 +41,16 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.CommentEntity">
-        INSERT INTO `wemeet_project`.`comments`(`article_index`, `email`, `content`, `deleted_flag`,
-                                                `created_at`, `client_ip`, `client_ua`)
+        INSERT INTO `wemeet_project`.`comments`(`article_index`,`email`, `content`, `deleted_flag`,
+                                                `created_at`, `client_ip`, `client_ua`,`nickname`)
         VALUES (#{articleIndex},
                 #{email},
                 #{content},
                 #{isDeleted},
                 IFNULL(#{createdAt}, DEFAULT(`created_at`)),
                 #{clientIp},
-                #{clientUa})
+                #{clientUa},
+                #{nickname})
     </insert>
 
 
@@ -65,6 +66,55 @@
                 #{checkParticipationStatus})
     </insert>
 
+    <insert id="insertLike"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.bsh.projectwemeet.entities.LikeReportEntity">
+        INSERT INTO `wemeet_project`.`like_report`(article_index, email, created_at, like_flag)
+        VALUES (#{ArticleIndex},
+                #{email},
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
+                #{likeFlag})
+    </insert>
+
+    <insert id="insertReport"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.bsh.projectwemeet.entities.LikeReportEntity">
+        INSERT INTO `wemeet_project`.`like_report`(article_index, email, created_at, report_flag)
+        VALUES (#{ArticleIndex},
+                #{email},
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
+                #{reportFlag})
+    </insert>
+
+
+    <select id="selectLike"
+            resultType="com.bsh.projectwemeet.entities.LikeReportEntity">
+        SELECT `index`         AS `index`,
+               `article_index` AS `ArticleIndex`,
+               `email`         AS `email`,
+               `like_flag`     AS `likeFlag`
+        FROM `wemeet_project`.`like_report`
+        WHERE `article_index` = #{ArticleIndex}
+          AND `email` = #{email}
+          AND `like_flag` = #{likeFlag}
+    </select>
+
+
+    <select id="selectReport"
+            resultType="com.bsh.projectwemeet.entities.LikeReportEntity">
+        SELECT `index`         AS `index`,
+               `article_index` AS `ArticleIndex`,
+               `email`         AS `email`,
+               `report_flag`   AS `reportFlag`
+        FROM `wemeet_project`.`like_report`
+        WHERE `article_index` = #{ArticleIndex}
+          AND `email` = #{email}
+          AND `report_flag` = #{reportFlag}
+    </select>
 
     <!-- 카테고리 관련 레코드 조회-->
     <select id="selectCountCategory"
@@ -99,9 +149,10 @@
         `limit` AS `limit`,
         `like_count` AS `likeCount`,
         `participation` AS `participation`,
-        SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+        SUBSTRING_INDEX(SUBSTRING_INDEX(hashtag, ',', 1), ',', -1) AS `hashtag`,
         `day` AS `appointmentStartDate`,
-        `time` AS `appointmentStartTime`
+        `time` AS `appointmentStartTime`,
+        `finished_flag` AS `isFinished`
         FROM `wemeet_project`.`articles`
         <where>
             <if test='searchCriterion.equals("all")'>
@@ -123,6 +174,14 @@
     <!-- 카테고리별 페이징 -->
 
 
+
+
+
+
+
+
+
+
     <!--메인에 나타낼 게시물 6개-->
     <select id="selectArticleMain"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -135,8 +194,10 @@
                `limit`                   AS `limit`,
                `participation`           AS `participation`,
                `day`                     AS `appointmentStartDate`,
-               `time`                    AS `appointmentStartTime`
+               `time`                    AS `appointmentStartTime`,
+               `finished_flag`           AS `isFinished`
         FROM `wemeet_project`.`articles`
+        WHERE `finished_flag` = #{isFinished}
         ORDER BY `index` DESC
         LIMIT 6
     </select>
@@ -213,7 +274,7 @@
     <!-- 게시물 해쉬태그 select -->
     <select id="selectArticleByPatchHashTag"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`                   AS `index`,
+        SELECT `index`          AS `index`,
                SUBSTRING(hashtag, 1, 11) AS `hashtag`
         FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
@@ -231,7 +292,20 @@
         WHERE `ArticleIndex` = #{index}
         LIMIT 1
     </select>
-    <!--메인에 나타낼 게시물 6개-->
+    <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectCheckParticipants"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`                      AS `index`,
+               `email`                      AS `email`,
+               `ArticleIndex`               AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+        AND `email` = #{email}
+        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
 
     <!--댓글-->
     <select id="selectCommentByArticleIndex"
@@ -243,7 +317,8 @@
                `deleted_flag`  AS `isDeleted`,
                `created_at`    AS `createdAt`,
                `client_ip`     AS `clientIp`,
-               `client_ua`     AS `clientUa`
+               `client_ua`     AS `clientUa`,
+               `nickname`      AS `nickname`
         FROM `wemeet_project`.`comments`
         WHERE `article_index` = #{articleIndex}
         ORDER BY `index` ASC
@@ -258,11 +333,13 @@
                `deleted_flag`  AS `isDeleted`,
                `created_at`    AS `createdAt`,
                `client_ip`     AS `clientIp`,
-               `client_ua`     AS `clientUa`
+               `client_ua`     AS `clientUa`,
+               `nickname`      AS `nickname`
         FROM `wemeet_project`.`comments`
         WHERE `index` = #{index}
         LIMIT 1
     </select>
+
     <select id="selectArticleByEmail"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index`          AS `index`,
@@ -293,6 +370,7 @@
         WHERE email = #{email}
         LIMIT 1
     </select>
+
     <select id="selectCommentByEmail"
             resultType="com.bsh.projectwemeet.entities.CommentEntity">
         SELECT `index`         AS `index`,
@@ -340,6 +418,37 @@
     </select>
     <!-- 참여인원 중복되있는지 select -->
 
+    <select id="selectArticleBylimitPeople"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               `limit`          AS `limit`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <select id="selectParticipantPeople"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+          AND `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectProfile"
+            resultType="com.bsh.projectwemeet.entities.ProfileEntity">
+        SELECT `email`                  AS `email`,
+               `profile_thumbnail`      AS `profileThumbnail`,
+               `profile_thumbnail_mime` AS `profileThumbnailMime`
+        FROM `wemeet_project`.`mypages`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
             parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -360,6 +469,15 @@
         LIMIT 1
     </update>
     <!-- 좋아요 업데이트 -->
+
+    <select id="selectUser"
+            resultType="com.bsh.projectwemeet.entities.UserEntity">
+        SELECT `email` AS `email`,
+               `nickname` AS `nickname`
+        FROM `wemeet_project`.`users`
+        WHERE `email` =#{email}
+        LIMIT 1
+    </select>
 
     <!-- 싫어요 업데이트 -->
     <update id="updateReport"
@@ -395,7 +513,8 @@
             `latitude`       = #{latitude},
             `longitude`      = #{longitude},
             `thumbnail`      = IFNULL(#{thumbnail}, `thumbnail`),
-            `thumbnail_mime` = IFNULL(#{thumbnailMime}, `thumbnail_mime`)
+            `thumbnail_mime` = IFNULL(#{thumbnailMime}, `thumbnail_mime`),
+            `hashtag` = #{hashtag}
         WHERE `index` = #{index}
     </update>
     <!-- 게시판 수정 -->
@@ -415,6 +534,7 @@
     </update>
 
 
+
     <!-- 게시판 삭제 -->
     <delete id="deleteByArticle">
         DELETE
@@ -432,6 +552,28 @@
         LIMIT 1
     </delete>
     <!-- 참여 여부 삭제 -->
+
+    <!-- 좋아요 취소-->
+    <delete id="deleteByLike">
+        DELETE
+        FROM `wemeet_project`.`like_report`
+        WHERE `article_index` = #{articleIndex}
+          AND `email` = #{email}
+          AND `like_flag` = #{likeFlag}
+        LIMIT 1
+    </delete>
+    <!-- 좋아요 취소 -->
+
+    <!-- 좋아요 취소-->
+    <delete id="deleteByReport">
+        DELETE
+        FROM `wemeet_project`.`like_report`
+        WHERE `article_index` = #{articleIndex}
+          AND `email` = #{email}
+          AND `report_flag` = #{reportFlag}
+        LIMIT 1
+    </delete>
+    <!-- 좋아요 취소 -->
 
 
     <update id="updateCategory"
@@ -490,6 +632,14 @@
         WHERE `index` = #{index}
         LIMIT 1
     </select>
+
+    <update id="updateFinished"
+            parameterType="com.bsh.projectwemeet.entities.ArticleEntity">
+        UPDATE `wemeet_project`.`articles`
+        SET `finished_flag` = #{isFinished}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
 
 
 </mapper>

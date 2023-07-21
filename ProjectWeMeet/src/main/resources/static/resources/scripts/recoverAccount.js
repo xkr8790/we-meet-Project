@@ -5,6 +5,7 @@ const emailContainer = document.getElementById('email-container');
 const passwordContainer = document.getElementById('password-container');
 const contactSend = document.getElementById('contactSend');
 const emailSend = document.getElementById('emailSend');
+const loadingForm = document.getElementById('_loading');
 const linkCoverForm = document.getElementById('linkCoverForm');
 
 // 이메일, 비밀번호 option에 맞게 아래의 container가 나타나게 하는 코드
@@ -16,6 +17,15 @@ linkCoverForm.show= () => {
 linkCoverForm.hide = () => {
     linkCoverForm.classList.remove('visible');
 }; //커버폼 숨기게 클래스 제거
+
+
+loadingForm.show = () =>{
+    loadingForm.classList.add('visible');
+}
+loadingForm.hide = () =>{
+    loadingForm.classList.remove('visible');
+}
+
 
 
 emailOption.addEventListener('change', function () {
@@ -219,6 +229,7 @@ recoverForm.onsubmit = function (e) {
 
 recoverForm['emailSend'].onclick = e =>{
     e.preventDefault();
+
     let coverText = document.getElementsByClassName('cover-text');
     const link = document.querySelector('.cover-button');
         if (!new RegExp('^(?=.{10,50}$)([\\da-zA-Z\\-_\\.]{5,25})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$').test(recoverForm['pEmail'].value)) {
@@ -230,6 +241,7 @@ recoverForm['emailSend'].onclick = e =>{
             });
             return;
         }
+        loadingForm.show();
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
         formData.append('email', recoverForm['pEmail'].value);
@@ -240,6 +252,7 @@ recoverForm['emailSend'].onclick = e =>{
                     const responseObject = JSON.parse(xhr.responseText);
                     switch (responseObject.result) {
                         case 'failure':
+                           loadingForm.hide();
                            linkCoverForm.show();
                             coverText[0].innerText = "확인되지 않거나 없는 이메일입니다";
                             coverText[1].innerText = "다시 이메일을 적어주세요";
@@ -248,6 +261,7 @@ recoverForm['emailSend'].onclick = e =>{
                             });
                             break;
                         case 'success':
+                            loadingForm.hide();
                             linkCoverForm.show();
                             coverText[0].innerText = "이메일로 인증번호를 보냈습니다";
                             coverText[1].innerText = "확인을 눌러 이메일 인증해주세요";
