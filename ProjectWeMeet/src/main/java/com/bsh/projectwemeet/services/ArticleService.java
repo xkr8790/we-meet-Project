@@ -452,12 +452,6 @@ public class ArticleService {
         }
     }
 
-        // CommentEntity를 DB에 저장하고 결과에 따라 CreateCommentResult 반환
-        return this.articleMapper.insertComment(comment) > 0
-                ? CreateCommentResult.SUCCESS
-                : CreateCommentResult.FAILURE;
-
-    }
 
 
 
@@ -516,22 +510,22 @@ public class ArticleService {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ArticleEntity articles = this.articleMapper.selectArticleByCompleteIndex(index);
         if(loginUser == null){
-            System.out.println("서비스1");
+
             return  UpdateCategoryResult.FAILURE;
         }
         if(articles ==null){
-            System.out.println("서비스2");
+
             return UpdateCategoryResult.FAILURE;
         }
         if(loginUser.getEmail().equals(articles.getEmail())){
-            System.out.println("서비스3");
+
             articles.setFinished(true);
             articles.setCategory("완료");
         }else{
-            System.out.println("서비스4");
+
             return UpdateCategoryResult.FAILURE;
         }
-        System.out.println("서비스5");
+
         return this.articleMapper.updateCategory(articles) > 0
                 ? UpdateCategoryResult.SUCCESS
                 : UpdateCategoryResult.FAILURE;

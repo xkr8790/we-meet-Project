@@ -210,62 +210,62 @@ articleForm.onsubmit = e => {
         return;
     }//썸네일 업로드 안했을시
 
-    if(articleForm['title'].value === ''){
-        alert('제목을 입력해주세요');
-        return;
-    } //제목이 비어있을때
-
-    if (!new RegExp('^([가-힣]{2,10})$').test(articleForm['title'].value)) {
-        alert('제목을 제대로 입력해주세요');
-        articleForm['title'].value ='';
-        articleForm['title'].focus();
-        articleForm['title'].select();
-        return;
-    }//제목 정규식
-
-    if (abuse.some(x => articleForm['title'].value.indexOf(x) > -1)) {
-        alert('제목에 욕설이 포함되있습니다 다시 입력해주세요');
-        articleForm['title'].value ='';
-        articleForm['title'].focus();
-        articleForm['title'].select();
-        return;
-    }//제목 욕설포함
-
-
-    if(articleForm['content'].value === ''){
-        alert('내용을 입력해주세요');
-        return;
-    } //게시판 내용이 비어있을때
-
-    //
-    // if (!new RegExp('^([가-힣]{2,})$').test(articleForm['content'].value)) {
-    //     alert('내용을 제대로 입력해주세요');
+    // if(articleForm['title'].value === ''){
+    //     alert('제목을 입력해주세요');
     //     return;
-    // }
-
-    if (abuse.some(x => articleForm['content'].value.indexOf(x) > -1)) {
-        alert('내용에 욕설이 포함되있습니다 다시 입력해주세요');
-        return;
-    }//게시판 욕설
-
-
-
-
-    for(let i=0; i<5; i++){
-        if (!new RegExp('^#([가-힣]{2,7})$').test(articleForm['hashTag'][i].value)) {
-            alert('태그를 제대로 입력해주세요');
-            return;
-        }
-    } //해쉬태그 정규식
-
-
-    for(let i=0; i<5; i++){
-        if(abuse.some(x =>articleForm['hashTag'][i].value.indexOf(x) > -1)){
-            articleForm['hashTag'].remove();
-            alert('태그에 욕설이 포함되있습니다 다시 입력해주세요');
-            return;
-        }
-    } //해쉬태그 욕설
+    // } //제목이 비어있을때
+    // //
+    // if (!new RegExp('^([가-힣]{2,10})$').test(articleForm['title'].value)) {
+    //     alert('제목을 제대로 입력해주세요');
+    //     articleForm['title'].value ='';
+    //     articleForm['title'].focus();
+    //     articleForm['title'].select();
+    //     return;
+    // }//제목 정규식
+    //
+    // if (abuse.some(x => articleForm['title'].value.indexOf(x) > -1)) {
+    //     alert('제목에 욕설이 포함되있습니다 다시 입력해주세요');
+    //     articleForm['title'].value ='';
+    //     articleForm['title'].focus();
+    //     articleForm['title'].select();
+    //     return;
+    // }//제목 욕설포함
+    //
+    //
+    // if(articleForm['content'].value === ''){
+    //     alert('내용을 입력해주세요');
+    //     return;
+    // } //게시판 내용이 비어있을때
+    //
+    // //
+    // // if (!new RegExp('^([가-힣]{2,})$').test(articleForm['content'].value)) {
+    // //     alert('내용을 제대로 입력해주세요');
+    // //     return;
+    // // }
+    //
+    // if (abuse.some(x => articleForm['content'].value.indexOf(x) > -1)) {
+    //     alert('내용에 욕설이 포함되있습니다 다시 입력해주세요');
+    //     return;
+    // }//게시판 욕설
+    //
+    //
+    //
+    //
+    // for(let i=0; i<5; i++){
+    //     if (!new RegExp('^#([가-힣]{2,7})$').test(articleForm['hashTag'][i].value)) {
+    //         alert('태그를 제대로 입력해주세요');
+    //         return;
+    //     }
+    // } //해쉬태그 정규식
+    //
+    //
+    // for(let i=0; i<5; i++){
+    //     if(abuse.some(x =>articleForm['hashTag'][i].value.indexOf(x) > -1)){
+    //         articleForm['hashTag'].remove();
+    //         alert('태그에 욕설이 포함되있습니다 다시 입력해주세요');
+    //         return;
+    //     }
+    // } //해쉬태그 욕설
 
 
     //폼데이터 추가될떄 무조건 문자열로 처리해주기 떄문에 requestParam으로 처리해줘야됨

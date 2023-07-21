@@ -156,7 +156,7 @@
             <div class="slide">
                 <div class="article-box collapsed">
                     <div class="article-box-grid">
-                        <div class="article-list"  th:each="article : ${articleCategory}">
+                        <div class="article-list"  th:if="${!article.getCategory().equals('완료')}" th:each="article : ${articleCategory}">
 <!--                           ${article.equals('완료')} ? 'article/read(index=' + article.getIndex() + ')' : 'article/review(index=' + article.getIndex() + ')' -->
                             <a class="article-link" th:href="@{${article.getCategory().equals('완료') ? 'article/review' : 'article/read'} (index = ${article.getIndex()})}">
 <!--                               th:if="!article.equauls('완료')" ? th:href="@{article/read(index=${article.getIndex()})}" : th:href="@{article/review(index=${article.getIndex()})}" >-->

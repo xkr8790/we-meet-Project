@@ -1,9 +1,6 @@
 package com.bsh.projectwemeet.controllers;
 
-import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.entities.CommentEntity;
-import com.bsh.projectwemeet.entities.ParticipantsEntity;
-import com.bsh.projectwemeet.entities.ReviewEntity;
+import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.models.PagingModel;
 import com.bsh.projectwemeet.enums.CreateCommentResult;
@@ -489,13 +486,13 @@ public class ArticleController {
 
 
 
-    @RequestMapping(value="article/review", method = RequestMethod.GET)
-    public ModelAndView getFinish(int index, HttpSession session){
-        boolean result = this.articleService.patchFinish(index ,session);
-        ModelAndView modelAndView = new ModelAndView("home/review");
-        modelAndView.addObject("result", result);
-        return modelAndView;
-   }
+//    @RequestMapping(value="article/review", method = RequestMethod.GET)
+//    public ModelAndView getFinish(int index, HttpSession session){
+//        boolean result = this.articleService.patchFinish(index ,session);
+//        ModelAndView modelAndView = new ModelAndView("home/review");
+//        modelAndView.addObject("result", result);
+//        return modelAndView;
+//   }
 //   게시물 작성자와 로그인된 아이디가 같은지 다른지에 대한 여부를 통해 페이지 넘어가게 하기
 
 //    @RequestMapping(value="article/review", method = RequestMethod.PATCH)
