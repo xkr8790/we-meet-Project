@@ -1,10 +1,11 @@
 package com.bsh.projectwemeet.controllers;
 
-import com.bsh.projectwemeet.entities.*;
+import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.CommentEntity;
+import com.bsh.projectwemeet.entities.ParticipantsEntity;
+import com.bsh.projectwemeet.entities.ReviewEntity;
 import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.models.PagingModel;
-import com.bsh.projectwemeet.enums.CreateCommentResult;
-import com.bsh.projectwemeet.enums.DeleteCommentResult;
 import com.bsh.projectwemeet.services.ArticleService;
 import com.bsh.projectwemeet.services.ReviewService;
 import org.json.JSONObject;
@@ -14,7 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,23 +46,28 @@ public class ArticleController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getArticle(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
-                                   @RequestParam(value = "category", required = false) String category) {
+                                   @RequestParam(value = "category", required = false) String category,
+                                   @RequestParam(value = "c", defaultValue = "", required = false) String searchCriterion,
+                                   @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery) {
 
-            ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
-            PagingModel pagingCategory = new PagingModel(
-                    ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
-                    this.articleService.getCountCategory(category),
-                    requestPage); //객체화
-
-            ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage(pagingCategory, category);
-            //페이징하면서 카테고리 관련 게시물 나타내기
+        ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
 
 
-            modelAndView.addObject("articleCategory", articleCategory);
-            modelAndView.addObject("pagingCategory", pagingCategory);
-            modelAndView.addObject("category", category);
-            return modelAndView;
 
+        PagingModel pagingCategory = new PagingModel(
+                ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
+                this.articleService.getCountCategory(searchCriterion,searchQuery, category),
+                requestPage); //객체화
+        ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage( pagingCategory, searchCriterion,searchQuery,category);
+        //페이징하면서 카테고리 관련 게시물 나타내기
+        modelAndView.addObject("articleCategory", articleCategory);
+        modelAndView.addObject("pagingCategory", pagingCategory);
+        modelAndView.addObject("category", category);
+        modelAndView.addObject("searchCriterion", searchCriterion);
+        modelAndView.addObject("searchQuery", searchQuery);
+
+
+        return modelAndView;
     } //게시판 카테고리별//
 
 
@@ -100,8 +109,6 @@ public class ArticleController {
     }
 
 
-
-
     @RequestMapping(value = "article/read",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
@@ -134,11 +141,11 @@ public class ArticleController {
     @RequestMapping(value = "article/patch",
             method = RequestMethod.GET)
     public ModelAndView getWrite(@RequestParam(value = "index") int index, HttpSession session) {
-        ArticleEntity article = articleService.getPatchIndexArticle(index,session);
+        ArticleEntity article = articleService.getPatchIndexArticle(index, session);
         ArticleEntity[] articleTag = articleService.getPatchIndexArticleHashTag(index);
         ModelAndView modelAndView = new ModelAndView("home/patchWrite");
         modelAndView.addObject("article", article);
-        modelAndView.addObject("articleTag",articleTag);
+        modelAndView.addObject("articleTag", articleTag);
         return modelAndView;
     }
     //게시판 수정 폼 받아오기
@@ -193,7 +200,7 @@ public class ArticleController {
     public ModelAndView getArticle(@RequestParam(value = "index") int index, ParticipantsEntity participants, HttpSession session) {
         boolean result = this.articleService.checkParticipationStatus(index, participants, session);
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
-        modelAndView.addObject("result",result);
+        modelAndView.addObject("result", result);
         return modelAndView;
     } //인원의 참가여부 select로 표현
 
@@ -241,7 +248,7 @@ public class ArticleController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public CommentEntity[] getComment(@RequestParam(value = "articleIndex")int articleIndex){
+    public CommentEntity[] getComment(@RequestParam(value = "articleIndex") int articleIndex) {
         return this.articleService.getCommentsOf(articleIndex);
     }
 
@@ -252,10 +259,10 @@ public class ArticleController {
     public String postComment(HttpServletRequest request,
                               CommentEntity comment,
                               HttpSession session,
-                              ArticleEntity article){
+                              ArticleEntity article) {
         CreateCommentResult result = this.articleService.putComment(request, comment, session, article);
-        JSONObject responseObject = new JSONObject(){{
-            put("result",result.name().toLowerCase());
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
@@ -278,9 +285,8 @@ public class ArticleController {
 
 //    완료 후 다음으로 보내기
 
-    @RequestMapping(value="article/review", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getUpdateCategory(@RequestParam(value="index")int index, String category){
-        System.out.println("???");
+    @RequestMapping(value = "article/review", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getUpdateCategory(@RequestParam(value = "index") int index, String category) {
         ModelAndView modelAndView = new ModelAndView("home/review");
         ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
         ReviewEntity[] reviewEntities = this.reviewService.getAll();
@@ -292,20 +298,15 @@ public class ArticleController {
     }
 
 
-
-    @RequestMapping(value="article/review", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "article/review", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String updateCategory(int index, HttpSession session){
+    public String updateCategory(int index, HttpSession session) {
         UpdateCategoryResult result = this.articleService.updateCategory(index, session);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
-
-
-
-
 
 
 }

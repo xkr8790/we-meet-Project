@@ -30,14 +30,25 @@ public class ArticleService {
     }
 
 
-    public int getCountCategory(String category){
-        return this.articleMapper.selectCountCategory(category);
+
+    public int getCountCategory(String searchCriterion, String searchQuery, String category){
+        return this.articleMapper.selectCountCategory(searchCriterion,searchQuery, category);
     }
 
-    public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String category){
+    public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String searchCriterion, String searchQuery, String category){
 
-        return this.articleMapper.selectCountCategoryByPage(pagingModel,category);
+        return this.articleMapper.selectCountCategoryByPage(pagingModel,searchCriterion,searchQuery, category);
     }
+
+
+
+
+
+
+
+
+
+
 
 
     public ArticleEntity[] getMainArticle() {
@@ -304,22 +315,22 @@ public class ArticleService {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ArticleEntity articles = this.articleMapper.selectArticleByCompleteIndex(index);
         if(loginUser == null){
-            System.out.println("서비스1");
+
             return  UpdateCategoryResult.FAILURE;
         }
         if(articles ==null){
-            System.out.println("서비스2");
+
             return UpdateCategoryResult.FAILURE;
         }
         if(loginUser.getEmail().equals(articles.getEmail())){
-            System.out.println("서비스3");
+
             articles.setFinished(true);
-            articles.setCategory("완료");
+
         }else{
-            System.out.println("서비스4");
+
             return UpdateCategoryResult.FAILURE;
         }
-        System.out.println("서비스5");
+
         return this.articleMapper.updateCategory(articles) > 0
                 ? UpdateCategoryResult.SUCCESS
                 : UpdateCategoryResult.FAILURE;
@@ -334,6 +345,11 @@ public class ArticleService {
     public ArticleEntity getUpdateCategoryByIndex(int index){
         return this.articleMapper.selectUpdateCategoryByIndex(index);
     }
+
+
+
+
+
 
 
 

@@ -19,10 +19,6 @@ public class ReviewService {
     }
 
 
-    public ArticleEntity[] articleAll() {
-        return this.reviewMapper.articleAll();
-    }
-
 
     public boolean reviewWrite(HttpServletRequest request, ReviewEntity reviewEntity) {
 
@@ -44,10 +40,6 @@ public class ReviewService {
         return this.reviewMapper.selectArticleIndex(articleIndex);
     }
 
-    public ReviewEntity readReview(int index) {
-        ReviewEntity reviewEntity = this.reviewMapper.selectReviewByIndex(index);
-        return reviewEntity;
-    }
 
 
     public boolean deleteByIndex(int index) {

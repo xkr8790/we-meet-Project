@@ -29,6 +29,11 @@ body{
     transition-duration: 550ms;
     transition-property: opacity;
     transition-timing-function: ease;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .up-button{
@@ -166,7 +171,7 @@ body{
 }
 .introduce_article {
     width: 77rem;
-    padding: 2rem 0 2rem 0;
+    padding: 2rem 0 1rem 0;
     margin: 2rem 0 0rem 0;
     background-color: white;
     border-radius: 0.3rem;
@@ -246,6 +251,29 @@ body{
 .introduce_article > .category > .menu:hover {
     cursor: pointer;
 }
+
+.search-box{
+    width: 1240px;
+
+}
+.search-box>.search{
+    float: right;
+    margin-top: 1rem;
+}
+.search-box> .search > .input{
+    width: 9rem;
+    height: 1.5rem;
+     padding-left: 0.5rem;
+}
+.search-box> .search > .button{
+    width: 4rem;
+    height: 1.5rem;
+}
+
+.search-box> .search > .button:hover{
+
+}
+
 
 /*----------------------------------------------------------------------------------*/
 .article-container {

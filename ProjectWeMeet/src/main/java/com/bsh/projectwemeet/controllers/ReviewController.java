@@ -27,12 +27,9 @@ public class ReviewController {
         System.out.println("???");
         ModelAndView modelAndView = new ModelAndView("home/review");
         ReviewEntity[] reviewEntities = this.reviewService.selectAll(articleIndex);
-//        Double reviewAvgStar = reviewService.avgStar(articleIndex);
-//        System.out.println(reviewAvgStar);
-//        ArticleEntity[] articles = this.reviewService.articleAll();
+
         modelAndView.addObject("reviews", reviewEntities);
-//        modelAndView.addObject("avgStar", reviewAvgStar);
-//        modelAndView.addObject("article", articles);
+
         return modelAndView;
     }
 

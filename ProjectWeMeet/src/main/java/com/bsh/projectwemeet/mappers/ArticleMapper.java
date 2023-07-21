@@ -14,16 +14,17 @@ public interface ArticleMapper {
 
     int insertParticipants(ParticipantsEntity participants);
 
-
-    int selectCountCategory(@Param(value = "category") String category);
+    int selectCountCategory(@Param(value = "searchCriterion") String searchCriterion,
+                            @Param(value = "searchQuery") String searchQuery,
+                            @Param(value = "category") String category);
     //param을 이용해 관련 카테고리만 조회해서 가져온다
 
 
     ArticleEntity[] selectCountCategoryByPage(@Param(value = "pagingModel") PagingModel pagingModel,
+                                              @Param(value = "searchCriterion") String searchCriterion,
+                                              @Param(value = "searchQuery") String searchQuery,
                                               @Param(value = "category") String category);
     //카테고리 관련 페이징을 위한 매퍼
-
-
 
 
     ArticleEntity[] selectArticleMain();
@@ -85,8 +86,13 @@ public interface ArticleMapper {
 
     //    완료 페이지로 넘기기
     ArticleEntity selectArticleByCompleteIndex(@Param(value = "index") int index);
+
     int updateCategory(ArticleEntity article);
+
     ArticleEntity[] selectCategory(@Param(value = "category") String category);
-    ArticleEntity selectUpdateCategoryByIndex(@Param(value="index")int index);
+
+    ArticleEntity selectUpdateCategoryByIndex(@Param(value = "index") int index);
+
+
 
 }
