@@ -83,8 +83,8 @@ public class ArticleController {
                 BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
 
                 // 새로운 크기로 이미지 조정
-                int newWidth = 256;
-                int newHeight = 256;
+                int newWidth = 64;
+                int newHeight = 64;
                 Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
 
                 // BufferedImage 생성
@@ -266,8 +266,8 @@ public class ArticleController {
                 BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
 
                 // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
+                int newWidth = 64;
+                int newHeight = 64;
                 Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
 
                 // BufferedImage 생성
