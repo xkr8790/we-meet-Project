@@ -135,7 +135,7 @@
                     <p>함께 할 멤버!</p>
                     <div class="profile">
                  <span th:each="i : ${#numbers.sequence(1, article.getLimitPeople()-1)}">
-                        <img  th:src="@{/article/Participate/profile(index=${article.getIndex()})}">
+                        <img th:src="@{/article/Participate/profile(index=${article.getIndex()})}">
                  </span>
                     </div>
 
