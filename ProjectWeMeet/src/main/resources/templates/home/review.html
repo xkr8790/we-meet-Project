@@ -30,7 +30,7 @@
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
                 <div class="tooltip">글작성</div>
             </button>
-            <button class="write"  data-action="logout">
+            <button class="write" name="logout"  data-action="logout">
                 <i class="fa-solid fa-right-from-bracket fa-lg"></i>
                 <div class="tooltip">로그아웃</div>
             </button>
@@ -74,9 +74,10 @@
         </div>
         <div class="participant">
             <div class="participantContainer">
-                <div class="login-after-human">
-                    참여한 사람들의 목록
-                </div>
+                <span>평점</span>
+                <span style="color: rgba(250, 208, 0, 0.99); font-size: 1.3rem;">★</span>
+                <span th:text="${avgStar}"></span>
+                <span>/5</span>
             </div>
         </div>
 

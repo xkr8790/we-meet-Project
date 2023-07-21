@@ -22,17 +22,18 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @RequestMapping(value = "/review/record", method = RequestMethod.GET)
-    public ModelAndView getReview(int articleIndex) {
-        ModelAndView modelAndView = new ModelAndView("home/review");
-        ReviewEntity[] reviewEntities = this.reviewService.selectAll(articleIndex);
-//        ArticleEntity[] articles = this.reviewService.articleAll();
-        modelAndView.addObject("reviews", reviewEntities);
-//        modelAndView.addObject("article", articles);
-        return modelAndView;
-    }
+//    @RequestMapping(value = "review", method = RequestMethod.GET)
+//    public ModelAndView getReview(@RequestParam(value = "index") int articleIndex) {
+//        System.out.println("???");
+//        ModelAndView modelAndView = new ModelAndView("home/review");
+//        ReviewEntity[] reviewEntities = this.reviewService.selectAll(articleIndex);
+//
+//        modelAndView.addObject("reviews", reviewEntities);
+//
+//        return modelAndView;
+//    }
 
-    @RequestMapping(value = "/review/record", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/review/index", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postReview(HttpServletRequest request, ReviewEntity reviewEntity, @SessionAttribute(value = "user") UserEntity user) {
         reviewEntity.setNickname(user.getNickname());

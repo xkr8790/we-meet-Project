@@ -17,7 +17,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,20 +53,27 @@ public class ArticleController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getArticle(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
-                                   @RequestParam(value = "category", required = false) String category) {
+                                   @RequestParam(value = "category", required = false) String category,
+                                   @RequestParam(value = "c", defaultValue = "", required = false) String searchCriterion,
+                                   @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery) {
+
         ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
+
+
 
         PagingModel pagingCategory = new PagingModel(
                 ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
-                this.articleService.getCountCategory(category),
+                this.articleService.getCountCategory(searchCriterion,searchQuery, category),
                 requestPage); //객체화
-
-        ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage(pagingCategory, category);
+        ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage( pagingCategory, searchCriterion,searchQuery,category);
         //페이징하면서 카테고리 관련 게시물 나타내기
-
         modelAndView.addObject("articleCategory", articleCategory);
         modelAndView.addObject("pagingCategory", pagingCategory);
         modelAndView.addObject("category", category);
+        modelAndView.addObject("searchCriterion", searchCriterion);
+        modelAndView.addObject("searchQuery", searchQuery);
+
+
         return modelAndView;
 
     } //게시판 카테고리별//
@@ -73,48 +83,19 @@ public class ArticleController {
 
         ProfileEntity profile = this.articleService.profileArticle(session);
 
-
         ResponseEntity<byte[]> response;
-        if (profile == null) {
+        if (profile == null){
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 64;
-                int newHeight = 64;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "jpg", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                // HTTP 응답 헤더 설정
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        }else{
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(),headers,HttpStatus.OK);
         }
         return response;
     }
     //게시판주인의 프로필 사진
+
 
 
     @RequestMapping(value = "article/image", method = RequestMethod.GET)
@@ -162,7 +143,25 @@ public class ArticleController {
         }
         return response;
     }
-    //게시판 썸네일 가져오기
+
+
+    @RequestMapping(value = "article/category/image",
+            method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getCategoryThumbnail(@RequestParam(value = "index") int index) {
+
+        ArticleEntity article = this.articleService.readArticle(index);
+
+        ResponseEntity<byte[]> response;
+        if (article == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
+        }
+        return response;
+    }
 
 
     @RequestMapping(value = "article/read",
@@ -181,13 +180,6 @@ public class ArticleController {
         SelectParticipantsResult ParticipantsResult = this.articleService.selectParticipants(index,session);
         ArticleEntity[] articleLimitPeople = this.articleService.selectArticleByLimitPeople(index);
         // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
-        ProfileEntity profile = this.articleService.profileBulletin(index);
-        //게시판 인덱스를 통해 게시판의 작성자가 프로필 테이블에 사진이 있다면 가져오고
-
-        //없다면 디폴트 이미지 나타내기
-        ProfileEntity ParticipateProfile = this.articleService.selectParticipateProfile(index);
-        //시발
-        ParticipantsEntity[] participantsEntities = this.articleService.selectParticipantsProfile(index);
 
 
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
@@ -198,9 +190,6 @@ public class ArticleController {
         modelAndView.addObject("ReportResult",ReportResult);
         modelAndView.addObject("ParticipantsResult",ParticipantsResult.name().toLowerCase());
         modelAndView.addObject("articleLimitPeople",articleLimitPeople);
-        modelAndView.addObject("profile",profile);
-        modelAndView.addObject("ParticipateProfile",ParticipateProfile);
-        modelAndView.addObject("participantsEntities",participantsEntities);
 
         return modelAndView;
     }//인덱스번호로 각 게시판 값 나타내기
@@ -250,7 +239,6 @@ public class ArticleController {
         }
         return response;
     }
-    //게시판 썸네일 가져오기 큰버전
 
     @RequestMapping(value = "article/read/profile", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getProfile(@RequestParam(value = "index") int index) {
@@ -266,8 +254,8 @@ public class ArticleController {
                 BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
 
                 // 새로운 크기로 이미지 조정
-                int newWidth = 64;
-                int newHeight = 64;
+                int newWidth = 60;
+                int newHeight = 60;
                 Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
 
                 // BufferedImage 생성
@@ -302,7 +290,7 @@ public class ArticleController {
     @RequestMapping(value = "article/Participate/profile", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getParticipants(@RequestParam(value = "index") int index,HttpSession session) {
 
-        ProfileEntity profile = this.articleService.selectParticipateProfile(index);
+        ProfileEntity profile = this.articleService.selectParticipateProfile(index,session);
 
         ResponseEntity<byte[]> response;
         if (profile == null) {
@@ -495,13 +483,13 @@ public class ArticleController {
 
 
 
-    @RequestMapping(value="article/review", method = RequestMethod.GET)
-    public ModelAndView getFinish(int index, HttpSession session){
-        boolean result = this.articleService.patchFinish(index ,session);
-        ModelAndView modelAndView = new ModelAndView("home/review");
-        modelAndView.addObject("result", result);
-        return modelAndView;
-   }
+//    @RequestMapping(value="article/review", method = RequestMethod.GET)
+//    public ModelAndView getFinish(int index, HttpSession session){
+//        boolean result = this.articleService.patchFinish(index ,session);
+//        ModelAndView modelAndView = new ModelAndView("home/review");
+//        modelAndView.addObject("result", result);
+//        return modelAndView;
+//   }
 //   게시물 작성자와 로그인된 아이디가 같은지 다른지에 대한 여부를 통해 페이지 넘어가게 하기
 
 //    @RequestMapping(value="article/review", method = RequestMethod.PATCH)

@@ -53,6 +53,7 @@
                 #{nickname})
     </insert>
 
+
     <insert id="insertParticipants"
             useGeneratedKeys="true"
             keyColumn="index"
@@ -120,7 +121,20 @@
             resultType="int">
         SELECT COUNT(0) AS `count`
         FROM `wemeet_project`.`articles`
-        WHERE `category` LIKE CONCAT('%', #{category}, '%')
+        <where>
+            <if test='searchCriterion.equals("all")'>
+                AND `content` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            <if test='searchCriterion.equals("title")'>
+                AND `title` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            <if test='searchCriterion.equals("address")'>
+                AND `address` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            AND `category` LIKE CONCAT('%', #{category}, '%')
+        </where>
     </select>
     <!-- 카테고리 관련 레코드 조회-->
 
@@ -140,11 +154,33 @@
         `time` AS `appointmentStartTime`,
         `finished_flag` AS `isFinished`
         FROM `wemeet_project`.`articles`
-        WHERE `category` LIKE CONCAT('%', #{category}, '%')
+        <where>
+            <if test='searchCriterion.equals("all")'>
+                AND `content` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            <if test='searchCriterion.equals("title")'>
+                AND `title` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            <if test='searchCriterion.equals("address")'>
+                AND `address` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            AND `category` LIKE CONCAT('%', #{category}, '%')
+        </where>
         ORDER BY `index` DESC
         LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
     </select>
     <!-- 카테고리별 페이징 -->
+
+
+
+
+
+
+
+
+
 
     <!--메인에 나타낼 게시물 6개-->
     <select id="selectArticleMain"
@@ -235,6 +271,15 @@
     </select>
     <!-- 게시물 수정 찾기 -->
 
+    <!-- 게시물 해쉬태그 select -->
+    <select id="selectArticleByPatchHashTag"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               SUBSTRING(hashtag, 1, 11) AS `hashtag`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+    </select>
+    <!-- 게시물 해쉬태그 select -->
 
     <!-- 참여인원 중복되있는지 select -->
     <select id="selectParticipants"
@@ -511,6 +556,7 @@
         WHERE `index` = #{index}
         LIMIT 1
     </update>
+
 
 
     <!-- 게시판 삭제 -->

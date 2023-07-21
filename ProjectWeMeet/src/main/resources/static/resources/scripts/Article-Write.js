@@ -205,16 +205,16 @@ articleForm.onsubmit = e => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
-    // if(articleForm['upload'].value === ''){
-    //     alert('썸네일을 업로드 해주세요');
-    //     return;
-    // }//썸네일 업로드 안했을시
-    //
+    if(articleForm['upload'].value === ''){
+        alert('썸네일을 업로드 해주세요');
+        return;
+    }//썸네일 업로드 안했을시
+
     // if(articleForm['title'].value === ''){
     //     alert('제목을 입력해주세요');
     //     return;
     // } //제목이 비어있을때
-    //
+    // //
     // if (!new RegExp('^([가-힣]{2,10})$').test(articleForm['title'].value)) {
     //     alert('제목을 제대로 입력해주세요');
     //     articleForm['title'].value ='';

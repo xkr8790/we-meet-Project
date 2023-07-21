@@ -27,12 +27,14 @@ public class ArticleService {
     }
 
 
-    public int getCountCategory(String category){
-        return this.articleMapper.selectCountCategory(category);
+
+    public int getCountCategory(String searchCriterion, String searchQuery, String category){
+        return this.articleMapper.selectCountCategory(searchCriterion,searchQuery, category);
     }
 
-    public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String category){
-        return this.articleMapper.selectCountCategoryByPage(pagingModel,category);
+    public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String searchCriterion, String searchQuery, String category){
+
+        return this.articleMapper.selectCountCategoryByPage(pagingModel,searchCriterion,searchQuery, category);
     }
 
     public ArticleEntity getArticleByIndex(int index) {
@@ -92,10 +94,12 @@ public class ArticleService {
         } //제한인원을 초과해서 입력시 실패
 
 
+
         participants.setArticleIndex(article.getIndex())
                 .setCreatedAt(new Date())
                 .setEmail(loginUser.getEmail())
                 .setCheckParticipationStatus(true);
+
 
         if (this.articleMapper.insertParticipants(participants) > 0) {
             article.setParticipation(article.getParticipation() + 1);
@@ -192,6 +196,12 @@ public class ArticleService {
 
         return this.articleMapper.selectArticleByPatchIndex(index);
     }
+
+    public ArticleEntity[] getPatchIndexArticleHashTag(int index){
+        return this.articleMapper.selectArticleByPatchHashTag(index);
+    }
+
+
 
     public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
 
@@ -514,22 +524,22 @@ public class ArticleService {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ArticleEntity articles = this.articleMapper.selectArticleByCompleteIndex(index);
         if(loginUser == null){
-            System.out.println("서비스1");
+
             return  UpdateCategoryResult.FAILURE;
         }
         if(articles ==null){
-            System.out.println("서비스2");
+
             return UpdateCategoryResult.FAILURE;
         }
         if(loginUser.getEmail().equals(articles.getEmail())){
-            System.out.println("서비스3");
+
             articles.setFinished(true);
             articles.setCategory("완료");
         }else{
-            System.out.println("서비스4");
+
             return UpdateCategoryResult.FAILURE;
         }
-        System.out.println("서비스5");
+
         return this.articleMapper.updateCategory(articles) > 0
                 ? UpdateCategoryResult.SUCCESS
                 : UpdateCategoryResult.FAILURE;
