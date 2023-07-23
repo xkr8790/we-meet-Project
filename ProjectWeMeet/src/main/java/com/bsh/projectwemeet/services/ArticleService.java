@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -113,8 +115,8 @@ public class ArticleService {
 
     public boolean checkParticipationStatus(int index, ParticipantsEntity participants, HttpSession session) {
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
         participants = this.articleMapper.selectParticipants(article.getIndex());
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
         if (loginUser != null && participants != null && loginUser.getEmail().equals(participants.getEmail())) {
             return participants.isCheckParticipationStatus();
@@ -148,8 +150,7 @@ public class ArticleService {
 
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-        participants = this.articleMapper.selectParticipantsEmail(article.getIndex(), loginUser.getEmail());
-
+        participants = this.articleMapper.selectCheckParticipants(index, loginUser.getEmail());
 
         if (participants == null) {
             return SelectParticipantsResult.FAILURE;
@@ -159,7 +160,6 @@ public class ArticleService {
         if(!Objects.equals(loginUser.getEmail(), participants.getEmail())){
             return SelectParticipantsResult.FAILURE;
         } //참여자의 이메일과 지금 로그인한 이메일의 사용자가 같지않다면 실패 반환
-        //오류발생
 
 
         if(article.getParticipation() <= article.getLimitPeople()){
@@ -196,11 +196,6 @@ public class ArticleService {
 
         return this.articleMapper.selectArticleByPatchIndex(index);
     }
-
-    public ArticleEntity[] getPatchIndexArticleHashTag(int index){
-        return this.articleMapper.selectArticleByPatchHashTag(index);
-    }
-
 
 
     public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
@@ -353,40 +348,83 @@ public class ArticleService {
         }
         if(Objects.equals(article.getEmail(), profile.getEmail())){
             return articleMapper.selectProfile(article.getEmail());
-        } //로그인한유저와 프로필테이블의 이메일이같다면 return해서 돌려준다
+        }
         return null;
-    } //게시판 주인 select
+    }
 
     public ProfileEntity profileArticle(HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("user");
         ProfileEntity profile = articleMapper.selectProfile(user.getEmail());
-        if(Objects.equals(user.getEmail(), profile.getEmail())){
-            return articleMapper.selectProfile(user.getEmail());
-        } //게시판의 주인과 프로필의 이메일이 같다면 return해서 게시판 주인의 프로필 나타냄
-        return null;
-    } //유저의 프로필 사진 select
-
-    public ParticipantsEntity[] selectParticipantsProfile(int index){
-        return articleMapper.selectParticipantsProfile(index);
-    } //참여한 인원수만큼 배열 반환
-
-    public ProfileEntity selectParticipateProfile(int index) {
-
-        ParticipantsEntity participants = articleMapper.selectParticipants(index);
-        //게시판 인덱스 번호로 이메일,게시판인덱스 찾는다
-
-        if(participants == null){
-            return null;
-        }
-
-        ProfileEntity profile = articleMapper.selectProfile(participants.getEmail());
 
         if(profile == null){
             return null;
         }
 
-        return profile;
+        if(Objects.equals(user.getEmail(), profile.getEmail())){
+            return articleMapper.selectProfile(user.getEmail());
+        }
+        return null;
     }
+
+    public ParticipantsEntity[] selectParticipantsProfile(int index){
+        return articleMapper.selectParticipantsProfile(index);
+    } //참여한 인원수만큼 배열 반환 -> 배열로 해야지 반복문을 사용해 참가자 수만큼 나타낼수 있음
+
+    public selectParticipateProfile selectParticipateProfile(int index){
+        ParticipantsEntity participants = articleMapper.selectParticipants(index);
+
+        if(participants == null){
+            return selectParticipateProfile.FAILURE;
+        } //계정이 참여한적없을때
+
+        ProfileEntity profile = articleMapper.selectProfile(participants.getEmail());
+
+        if(participants!=null && profile == null){
+            return selectParticipateProfile.FAILURE_PROFILE;
+        }
+
+        return participants!=null && profile!=null
+                ? selectParticipateProfile.SUCCESS
+                : selectParticipateProfile.FAILURE;
+
+    }
+
+    public ProfileEntity[] ParticipateProfile(int index,String email) {
+        // 주어진 index에 해당하는 ArticleEntity를 가져옴
+        ArticleEntity article = articleMapper.selectArticleByIndex(index);
+
+        // 주어진 index에 해당하는 모든 참여자(ParticipantsEntity)들을 가져옴
+        ParticipantsEntity[] participants = articleMapper.selectParticipantsProfiles(index,email);
+
+        // 프로필들을 저장할 비어있는 ArrayList 생성
+        List<ProfileEntity> profileList = new ArrayList<>();
+
+        // participants 배열을 순회하면서 각 참여자의 프로필을 가져와서 profileList에 추가
+        for (ParticipantsEntity participant : participants) {
+            // 참여자의 이메일을 사용하여 해당하는 프로필(ProfileEntity)을 가져옴
+            ProfileEntity profile = articleMapper.selectProfile(participant.getEmail());
+
+            // 프로필이 존재하면 profileList에 추가
+            if (profile != null) {
+                profileList.add(profile);
+            }else {
+                return null;
+            }
+        }
+
+        // List<ProfileEntity>를 ProfileEntity 배열로 변환하여 반환
+        // article.getLimitPeople()에서 1을 빼는 이유는 생성된 프로필 배열의 크기를
+        // article의 설정된 제한 인원보다 1 작게 만들기 위함입니다.
+        ProfileEntity[] profilesArray = profileList.toArray(new ProfileEntity[1]);
+
+        // 생성된 프로필 배열의 길이를 출력 (디버깅용)
+        System.out.println(profilesArray.length);
+
+        // 프로필 배열 반환
+        return profilesArray;
+    }
+
+
 
 
 

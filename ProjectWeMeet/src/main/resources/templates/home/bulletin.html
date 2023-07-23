@@ -25,6 +25,7 @@
 <form id="bulletinForm" class="allContainer">
     <input type="hidden" name="index" th:value="${article.getIndex()}" )>
     <div class="header">
+
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
         </a>
@@ -136,16 +137,13 @@
                 <div class="login-after-human">
                     <p>함께 할 멤버!</p>
                     <div class="profile">
-
-                        <img
-
-                             th:src="@{/article/Participate/profile(index=${article.getIndex()})}">
-
-<!--                        <img th:each="participantsEntities : ${participantsEntities}"-->
-<!--                             th:if="${ParticipateProfile == null}"-->
-<!--                             th:src="@{/resources/images/articleImages/day.png}">-->
-
-
+                     <span th:if="${selectParticipateProfile.equals('failure') ||
+                                    selectParticipateProfile.equals('failure_profile') ||
+                                    selectParticipateProfile.equals('success')}"
+                          th:each="participantsArray : ${participantsArray}">
+                         <p th:text="${participantsArray.getEmail()}"></p>
+                         <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
+                     </span>
                     </div>
 
                     <!--  자신의 게시판일때   -->
@@ -240,7 +238,10 @@
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
-                        <div class="human">프로필</div>
+                        <div class="human">
+                            <img class="human-image" th:if="${articles == null}" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
+                            <img class="human-image" th:if="${articles != null}" th:src="@{/article/read/profile(index=${articles.getIndex()})}" alt="Thumbnail">
+                        </div>
                         <i class="fa-solid fa-user-group"></i>
                         <div class="number" th:text="${articles.getParticipation()}">인원</div>
                         <div class="number">/</div>

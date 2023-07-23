@@ -263,7 +263,7 @@ body{
 .search-box> .search > .input{
     width: 9rem;
     height: 1.5rem;
-     padding-left: 0.5rem;
+    padding-left: 0.5rem;
 }
 .search-box> .search > .button{
     width: 4rem;
