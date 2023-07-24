@@ -536,6 +536,11 @@ allContainer > .header > .login > a {
     font-weight: 600;
 }
 
+.comment-right > .del{
+    text-align: right;
+}
+
+
 .comment-right > .comment-box {
     border: 1px solid #3498db;
     border-radius: 15px;
@@ -549,4 +554,8 @@ allContainer > .header > .login > a {
 
 .del {
     background-color: #5F5F5F;
+    width: 70%;
+}
+.comment-body .del {
+    margin-right: 0;
 }
