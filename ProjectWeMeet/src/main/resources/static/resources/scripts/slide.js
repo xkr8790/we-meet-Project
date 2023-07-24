@@ -1,10 +1,10 @@
 const body = document.getElementById('body');
 
 window.onload = function() {
-    body.style.transitionDuration = '600ms'; // 애니메이션 지속 시간 설정
-    body.style.transitionTimingFunction = 'ease'; // 타이밍 함수 설정
-    body.style.transitionProperty = 'opacity'; // 타이밍 함수 설정
-    body.style.opacity = '1';
+   document.body.style.transitionDuration = '600ms'; // 애니메이션 지속 시간 설정
+    document.body.style.transitionTimingFunction = 'ease'; // 타이밍 함수 설정
+    document.body.style.transitionProperty = 'opacity'; // 타이밍 함수 설정
+    document.body.style.opacity = '1';
 }
 
 

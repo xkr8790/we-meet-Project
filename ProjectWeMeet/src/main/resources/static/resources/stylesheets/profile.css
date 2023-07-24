@@ -10,7 +10,7 @@
 * {
     text-decoration: none;
     background-color: #f4f3f1;
-    /*border: 1px solid red;*/
+    border: 1px solid red;
 }
 
 h2 {
@@ -881,72 +881,128 @@ html {
 #popup.step-2 > .popup-content.step-2 > .__body {
     background-color: white;
     flex: 1;
-    margin-top: unset;
+    margin-top: 1rem;
+    border: 1px solid black;
 
-    align-items: stretch;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > * + * {
-    background-color: white;
-    margin-top: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > ._object-box {
-    background-color: white;
-    margin-top: 1rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > ._object-box > ._object-input {
-    background-color: white;
-}
-
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-password-container > ._object-box {
-    background-color: white;
-    margin-top: 1rem;
-}
-
-
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-password-container > ._object-box > ._object-input {
-    background-color: white;
-}
-
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > ._object-check-container > ._text {
-    background-color: white;
-}
-
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-contact-container {
-    background-color: white;
-    max-height: 0;
-    margin-top: 0;
-    overflow: hidden;
-    transition-duration: 250ms;
-    transition-property: max-height, margin-top;
-    transition-timing-function: ease;
-
+#popup.step-2 > .popup-content.step-2 > .__body > .box {
     align-items: stretch;
     display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+    height: auto;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid black;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .box > .subTitle {
+    align-items: center;
+    display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    width: 8rem;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-contact-container > .multi-container {
+#popup.step-2 > .popup-content.step-2 > .__body > .box > .object {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > ._object-check-container:has(> ._check-input:checked) + .new-contact-container {
-    max-height: 10rem;
-    margin-top: 0.5rem;
+#popup.step-2 > .popup-content.step-2 > .__body > .email > .object > ._object-box > ._object-input {
+    border: none;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-contact-container > ._object-box {
-    background-color: white;
-    margin-top: 1rem;
+#popup.step-2 > .popup-content.step-2 > .__body > .email > .object > .message-box {
+    font-size: 0.6rem;
+    color: #ef5350;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body[data-mz-step="info"] > .new-contact-container > ._object-box > ._object-input {
-    background-color: white;
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-box > ._object-input {
+    margin-bottom: 0.4rem;
+    height: 1.2rem;
+    padding-left: 0.3rem;
+    width: 17rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button {
+    width: 100%;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button > .change {
+    float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object {
+
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > .message-box {
+    font-size: 0.6rem;
+    color: #ef5350;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > ._object-box {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button{
+    align-items: end;
+    display: flex;
+    /*flex-direction: ;*/
+    justify-content: end;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .subTitle{
+    width: 11rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 100%;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button{
+align-items: end;
+display: flex;
+/*flex-direction: ;*/
+justify-content: end;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container {
+    align-items: start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 
 /*dialog 배경화면 어둡게-주소찾기 클릭시 사용*/
