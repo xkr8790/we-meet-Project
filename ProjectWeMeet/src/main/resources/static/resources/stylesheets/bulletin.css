@@ -506,6 +506,7 @@ allContainer > .header > .login > a {
 
 .comment-left > .comment-nickname{
     margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .comment-left > .comment-box{
@@ -532,6 +533,7 @@ allContainer > .header > .login > a {
 .comment-right > .comment-nickname{
     margin-bottom: 0.5rem;
     text-align: right;
+    font-weight: 600;
 }
 
 .comment-right > .comment-box {

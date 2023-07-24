@@ -336,16 +336,18 @@ public class ArticleService {
         }
     }
 
-    public UserEntity userEmail(HttpSession session){
+    public UserEntity userEmail(HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-        if(articleMapper.selectUser(loginUser.getEmail())!=null){
-            return  this.articleMapper.selectUser(loginUser.getEmail());
+        if (loginUser == null) {
+            // Return a default user with nickname "notLogin"
+            return new UserEntity().setNickname("notLogin");
         }
 
+        // Now, check if the user exists in the database using their email
+        UserEntity user = this.articleMapper.selectUser(loginUser.getEmail());
 
-
-        return null;
+        return user;
     }
 
 

@@ -4,6 +4,7 @@ const listClientWidth = list.clientWidth;
 
 const bulletinForm = document.getElementById('bulletinForm');
 const commentContainer = document.getElementById('commentContainer');
+const commentButton = bulletinForm.querySelector('[name="commentButton"]');
 
 
 let startX = 0;
@@ -399,7 +400,7 @@ function refreshComment() {
                     const amOrPm = hour < 12 ? '오전' : '오후';
                     const hour12Format = addLeadingZero(hour % 12 || 12);
                     const formattedDate = `${year}/${month}/${day} ${amOrPm} ${hour12Format}:${minute}`;
-                    headDiv.innerText = formattedDate;//
+                    headDiv.innerText = formattedDate;//편집한 시간 넣기
 
                     const deleteButton = document.createElement('button');
                     deleteButton.classList.add('delete-button');
@@ -455,7 +456,7 @@ function refreshComment() {
                         const commentBox = document.createElement('div');
                         commentBox.classList.add('comment-box');
 
-                        // Append headDiv, deleteButton, and bodyDiv as children of commentBox
+
                         commentBox.append(headDiv, deleteButton, bodyDiv);
                         div.append(nicknameDiv,commentBox);
                     }
