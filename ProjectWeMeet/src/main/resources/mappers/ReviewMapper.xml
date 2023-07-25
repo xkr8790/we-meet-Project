@@ -37,6 +37,8 @@
                    #{email})
     </insert>
 
+
+
     <select id="selectAll"
             resultType="com.bsh.projectwemeet.entities.ReviewEntity">
         SELECT `index` AS `index`,
@@ -92,10 +94,6 @@
     </select>
 
 
-
-
-
-
     <delete id="deleteByReview"
             parameterType="com.bsh.projectwemeet.entities.ReviewEntity">
         DELETE
@@ -112,5 +110,58 @@
         WHERE `article_index` = #{articleIndex}
         GROUP BY `article_index`
     </select>
+
+
+
+<!--    <select id="selectArticleWriter"-->
+<!--            resultType="com.bsh.projectwemeet.entities.ArticleEntity">-->
+<!--        SELECT `index`          AS `index`,-->
+<!--               `title`          AS `title`,-->
+<!--               `category`       AS `category`,-->
+<!--               `content`        AS `content`,-->
+<!--               `place`          AS `place`,-->
+<!--               `address`        AS `address`,-->
+<!--               `thumbnail`      AS `thumbnail`,-->
+<!--               `thumbnail_mime` AS `thumbnailMime`,-->
+<!--               `view` AS `view`,-->
+<!--               `created_at` AS `createdAt`,-->
+<!--               `day` AS `day`,-->
+<!--               `time`           AS `appointmentStartTime`,-->
+<!--               `limit`          AS `limit`,-->
+<!--               `participation` AS `participation`,-->
+<!--               `like_count` AS `likeCount`,-->
+<!--               `report` AS `report`,-->
+<!--               `deleted_flag` AS `isDeleted`,-->
+<!--               `finished_flag` AS `isFinished`,-->
+<!--               `latitude`       AS `latitude`,-->
+<!--               `longitude`      AS `longitude`,-->
+<!--               `hashtag`        AS `hashtag`,-->
+<!--               `client_ip` AS `clientIp`,-->
+<!--               `client_ua` AS `clientUa`-->
+<!--        FROM `wemeet_project`.`articles`-->
+<!--        WHERE `index` = #{index}-->
+<!--        AND `email` = #{email}-->
+<!--        LIMIT 1-->
+<!--    </select>-->
+
+
+    <select id="selectArticleWriter"
+            resultType="int">
+        SELECT COUNT(0) > 0 AS `writer`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+          AND `email` = #{email}
+        LIMIT 1;
+    </select>
+
+    <select id="selectParticipant"
+    resultType="int">
+        SELECT COUNT(0) > 0 AS `participant`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` =#{ArticleIndex}
+     AND      `email` = #{email}
+        LIMIT 1;
+    </select>
+
 
 </mapper>

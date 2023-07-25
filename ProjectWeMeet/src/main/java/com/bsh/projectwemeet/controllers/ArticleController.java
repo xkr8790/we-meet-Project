@@ -286,8 +286,8 @@ public class ArticleController {
         }
         return response;
     }
-    //게시판주인의 프로필 사진
 
+    //게시판주인의 프로필 사진
     @RequestMapping(value = "article/Participate/profile", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getParticipants(@RequestParam(value = "index") int index,HttpSession session) {
 
@@ -483,34 +483,6 @@ public class ArticleController {
     //신고를 취소하는 컨트롤러
 
 
-
-
-
-//    @RequestMapping(value="article/review", method = RequestMethod.GET)
-//    public ModelAndView getFinish(int index, HttpSession session){
-//        boolean result = this.articleService.patchFinish(index ,session);
-//        ModelAndView modelAndView = new ModelAndView("home/review");
-//        modelAndView.addObject("result", result);
-//        return modelAndView;
-//   }
-//   게시물 작성자와 로그인된 아이디가 같은지 다른지에 대한 여부를 통해 페이지 넘어가게 하기
-
-//    @RequestMapping(value="article/review", method = RequestMethod.PATCH)
-//    @ResponseBody
-//    public String patchFinished(ArticleEntity article, HttpSession session){
-//        FinishResult result = this.articleService.patchFinished(article, session);
-//        JSONObject responseObject = new JSONObject() {{
-//            put("result", result.name().toLowerCase());
-//        }};
-//        return responseObject.toString();
-//    }
-
-
-
-
-
-
-
 //    댓글
 
     @RequestMapping(value = "comment",
@@ -564,6 +536,8 @@ public class ArticleController {
         ModelAndView modelAndView = new ModelAndView("home/review");
         ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
         ReviewEntity[] reviewEntities = this.reviewService.getAll();
+        Double reviewAvgStar = reviewService.avgStar(index);
+        modelAndView.addObject("avgStar", reviewAvgStar);
         modelAndView.addObject("article", article);
         modelAndView.addObject("reviews", reviewEntities);
         return modelAndView;

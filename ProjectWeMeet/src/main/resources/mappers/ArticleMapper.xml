@@ -41,8 +41,8 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.CommentEntity">
-        INSERT INTO `wemeet_project`.`comments`(`article_index`,`email`, `content`, `deleted_flag`,
-                                                `created_at`, `client_ip`, `client_ua`,`nickname`)
+        INSERT INTO `wemeet_project`.`comments`(`article_index`, `email`, `content`, `deleted_flag`,
+                                                `created_at`, `client_ip`, `client_ua`, `nickname`)
         VALUES (#{articleIndex},
                 #{email},
                 #{content},
@@ -59,11 +59,10 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.ParticipantsEntity">
-        INSERT INTO `wemeet_project`.`Participants`(email, ArticleIndex, created_at, check_participation_status)
+        INSERT INTO `wemeet_project`.`Participants`(email, ArticleIndex, created_at)
         VALUES (#{email},
                 #{ArticleIndex},
-                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
-                #{checkParticipationStatus})
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)))
     </insert>
 
     <insert id="insertLike"
@@ -174,14 +173,6 @@
     <!-- 카테고리별 페이징 -->
 
 
-
-
-
-
-
-
-
-
     <!--메인에 나타낼 게시물 6개-->
     <select id="selectArticleMain"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -274,7 +265,7 @@
     <!-- 게시물 해쉬태그 select -->
     <select id="selectArticleByPatchHashTag"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`          AS `index`,
+        SELECT `index`                   AS `index`,
                SUBSTRING(hashtag, 1, 11) AS `hashtag`
         FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
@@ -287,7 +278,7 @@
         SELECT `index`                      AS `index`,
                `email`                      AS `email`,
                `ArticleIndex`               AS `ArticleIndex`,
-               `check_participation_status` AS `checkParticipationStatus`
+               `created_at` AS `createdAt`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{index}
         LIMIT 1
@@ -297,12 +288,12 @@
     <!-- 참여인원 중복되있는지 select -->
     <select id="selectCheckParticipants"
             resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
-        SELECT `index`                      AS `index`,
-               `email`                      AS `email`,
-               `ArticleIndex`               AS `ArticleIndex`
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{ArticleIndex}
-        AND `email` = #{email}
+          AND `email` = #{email}
         LIMIT 1
     </select>
     <!-- 참여인원 중복되있는지 select -->
@@ -420,8 +411,8 @@
 
     <select id="selectArticleBylimitPeople"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`          AS `index`,
-               `limit`          AS `limit`
+        SELECT `index` AS `index`,
+               `limit` AS `limit`
         FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
     </select>
@@ -472,10 +463,10 @@
 
     <select id="selectUser"
             resultType="com.bsh.projectwemeet.entities.UserEntity">
-        SELECT `email` AS `email`,
+        SELECT `email`    AS `email`,
                `nickname` AS `nickname`
         FROM `wemeet_project`.`users`
-        WHERE `email` =#{email}
+        WHERE `email` = #{email}
         LIMIT 1
     </select>
 
@@ -514,7 +505,7 @@
             `longitude`      = #{longitude},
             `thumbnail`      = IFNULL(#{thumbnail}, `thumbnail`),
             `thumbnail_mime` = IFNULL(#{thumbnailMime}, `thumbnail_mime`),
-            `hashtag` = #{hashtag}
+            `hashtag`        = #{hashtag}
         WHERE `index` = #{index}
     </update>
     <!-- 게시판 수정 -->
@@ -532,7 +523,6 @@
         WHERE `index` = #{index}
         LIMIT 1
     </update>
-
 
 
     <!-- 게시판 삭제 -->
@@ -641,5 +631,13 @@
         LIMIT 1
     </update>
 
+
+    <select id="selectasd"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT *
+        FROM `wemeet_project`.`articles`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
 
 </mapper>
