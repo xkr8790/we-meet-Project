@@ -32,7 +32,9 @@ public class ProfileController {
     public ModelAndView getProfile(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("home/profile");
         UserEntity userEntities = this.profileService.getAll(session);
+        int article = this.profileService.getArticleIndexCountByEmail(session);
         modelAndView.addObject("profile", userEntities);
+        modelAndView.addObject("article",article);
         return modelAndView;
     }
 

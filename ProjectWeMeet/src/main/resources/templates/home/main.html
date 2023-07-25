@@ -10,6 +10,7 @@
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
     <script defer src="/resources/scripts/slide.js"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
+    <script defer th:src="@{/resources/scripts/main.js}"></script>
 </head>
 
 <body>
@@ -136,10 +137,11 @@
 </div>
 
 
-<section class="article-container">
+<section class="article-container" id="article">
     <h2 class="article-list-header">똑같은 일상의 소소한 변화</h2>
             <div class="article-box">
                 <a th:href="@{article/read(index=${article.getIndex()})}" class="article-list" th:each="article : ${article}">
+                    <input hidden th:value="${article.getIndex()}" name="index">
                     <div class="article-thumbnail">
                         <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}">
                     </div>
@@ -170,32 +172,19 @@
 
                         </div>
                         <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item" th:text="${article.getParticipation()}"></span>
-                <span class="map-item">/</span>
-                <span class="map-item" th:text="${article.getLimitPeople()}"></span>
-              </span>
-              </span>
+                              <span class="Profile-Picture" th:each="article : ${participantsArray}">
+                                     <img class="Profile" th:src="@{/resources/images/mainImages/조보아.jpg}" th:attr="data-article-index=${article.getIndex()}">
+                            </span>
+                                <img class="limit-image" src="/resources/images/category/human.png">
+                      <span class="number">
+                        <span class="map-item" th:text="${article.getParticipation()}"></span>
+                        <span class="map-item">/</span>
+                        <span class="map-item" th:text="${article.getLimitPeople()}"></span>
+                      </span>
+                      </span>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-
 </section>
 
 <footer id="footer">

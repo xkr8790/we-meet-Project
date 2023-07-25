@@ -193,7 +193,7 @@
                                 </div>
             <span class="article-human">
               <span class="Profile-Picture" th:each="i : ${#numbers.sequence(1, article.getLimitPeople()-1)}">
-                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+                <img class="profile" th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${article.getEmail()})}">
               </span>
 
               <img class="limit-image" th:src="@{/resources/images/category/human.png}">
@@ -209,8 +209,6 @@
                                 </div>
                             </a>
                         </div>
-
-
                     </div>
                     <ul class="pageContainer">
 

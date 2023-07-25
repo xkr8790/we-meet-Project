@@ -29,7 +29,6 @@ public class ArticleService {
     }
 
 
-
     public int getCountCategory(String searchCriterion, String searchQuery, String category){
         return this.articleMapper.selectCountCategory(searchCriterion,searchQuery, category);
     }
@@ -354,11 +353,11 @@ public class ArticleService {
 
     public ProfileEntity profileArticle(HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("user");
-        ProfileEntity profile = articleMapper.selectProfile(user.getEmail());
 
-        if(profile == null){
+        if(user == null){
             return null;
         }
+        ProfileEntity profile = articleMapper.selectProfile(user.getEmail());
 
         if(Objects.equals(user.getEmail(), profile.getEmail())){
             return articleMapper.selectProfile(user.getEmail());
@@ -401,14 +400,13 @@ public class ArticleService {
 
         // participants 배열을 순회하면서 각 참여자의 프로필을 가져와서 profileList에 추가
         for (ParticipantsEntity participant : participants) {
+            participant = articleMapper.selectParticipants(index);
             // 참여자의 이메일을 사용하여 해당하는 프로필(ProfileEntity)을 가져옴
             ProfileEntity profile = articleMapper.selectProfile(participant.getEmail());
 
             // 프로필이 존재하면 profileList에 추가
             if (profile != null) {
                 profileList.add(profile);
-            }else {
-                return null;
             }
         }
 
@@ -417,7 +415,6 @@ public class ArticleService {
         // article의 설정된 제한 인원보다 1 작게 만들기 위함입니다.
         ProfileEntity[] profilesArray = profileList.toArray(new ProfileEntity[1]);
 
-        // 생성된 프로필 배열의 길이를 출력 (디버깅용)
         System.out.println(profilesArray.length);
 
         // 프로필 배열 반환

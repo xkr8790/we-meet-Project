@@ -144,6 +144,7 @@
         `title` AS `title`,
         `content` AS `content`,
         `category` AS `category`,
+        `email` AS `email`,
         `address` AS `address`,
         `limit` AS `limit`,
         `like_count` AS `likeCount`,
@@ -311,7 +312,7 @@
                `email`        AS `email`,
                `ArticleIndex` AS `ArticleIndex`
         FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` = #{ArticleIndex}
+        WHERE `ArticleIndex` = #{index}
     </select>
     <!-- 참여인원 중복되있는지 select -->
 
@@ -322,8 +323,7 @@
                `email`        AS `email`,
                `ArticleIndex` AS `ArticleIndex`
         FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` = #{ArticleIndex} AND
-            `email` = #{email}
+        WHERE `ArticleIndex` = #{ArticleIndex} AND `email` = #{email}
     </select>
     <!-- 참여인원 중복되있는지 select -->
 

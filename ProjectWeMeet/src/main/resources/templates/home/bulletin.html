@@ -142,7 +142,9 @@
                                     selectParticipateProfile.equals('success')}"
                           th:each="participantsArray : ${participantsArray}">
                          <p th:text="${participantsArray.getEmail()}"></p>
-                         <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
+                         <p th:text="${profile.getEmail()}"></p>
+                             <img th:if="${profile != null}" th:src="@{/article/Participate/profile(index=${article.getIndex()}, email=${participantsArray.getEmail()})}">
+                             <img th:if="${profile == null}" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}">
                      </span>
                     </div>
 

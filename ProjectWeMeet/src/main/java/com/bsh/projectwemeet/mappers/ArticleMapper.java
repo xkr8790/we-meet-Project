@@ -69,7 +69,7 @@ public interface ArticleMapper {
     ProfileEntity[] selectProfiles(@Param(value = "email")String email);
     //프로필을 배열로 설정해 여러 사용자의 값을 받는다
 
-    ParticipantsEntity[] selectParticipantsProfile(@Param(value = "ArticleIndex") int ArticleIndex);
+    ParticipantsEntity[] selectParticipantsProfile(@Param(value = "index") int index);
     // 참여인원 중복되있는지 select
 
     ParticipantsEntity[] selectParticipantsProfiles(@Param(value = "ArticleIndex") int ArticleIndex,

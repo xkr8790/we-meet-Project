@@ -1,16 +1,16 @@
 @charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
-@font-face {
-    font-family: 'Humanbumsuk';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
+
 
 * {
     text-decoration: none;
-    background-color: #f4f3f1;
+    background-color: white;
     /*border: 1px solid red;*/
+
 }
 
 h2 {
@@ -28,6 +28,17 @@ h2 {
 html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
+
+body{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.main{
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 1rem;
+}
+
 
 
 ._container {
@@ -79,27 +90,26 @@ html {
 
 #mainContainer {
     background-color: white;
-    border: 1px outset white;
-    margin: 5rem 8rem 0 8rem;
-
-    align-items: stretch;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 #mainContainer > .left-profile {
     background-color: white;
-
-
-    align-items: flex-start;
+    align-items: center;
     display: flex;
-    flex-direction: row;
-    justify-content: revert;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #mainContainer > .left-profile > .thumbnail {
     background-color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #mainContainer > .left-profile > .thumbnail > .default {
@@ -107,7 +117,9 @@ html {
     border-radius: 50%;
     width: 6rem;
     height: 6rem;
-    margin: 2rem 0 2rem 3rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 #mainContainer > .left-profile > .thumbnail > .default > .profile {
@@ -120,7 +132,13 @@ html {
     position: relative;
     box-shadow: 1px 1px 2px 0 #888;
     background-size: cover;
-    margin: 1rem 0 0 1rem;
+    margin-bottom: 1rem;
+}
+
+#mainContainer > .left-profile > .thumbnail > .default > .user-name {
+    white-space: nowrap;
+    background-color: white;
+    font-weight: bold;
 }
 
 #mainContainer > .left-profile > .thumbnail > .pencil {
@@ -129,8 +147,9 @@ html {
     width: 2rem;
     height: 2rem;
     position: relative;
-    transform: translate(410%, -160%);
     box-shadow: 1px 1px 2px 0 #888;
+    left: 40px;
+    bottom: 35px;
 }
 
 #mainContainer > .left-profile > .thumbnail > .pencil > .pencil > .change_button {
@@ -148,15 +167,6 @@ html {
 
 #mainContainer > .left-profile > .text-box {
     background-color: white;
-    margin-top: 5rem;
-    margin-left: 2.5rem;
-    font-size: 1.125rem;
-    font-weight: bold;
-
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
 }
 
 
@@ -178,324 +188,82 @@ html {
     color: #3498db;
 }
 
-
-#mainContainer > .middle-profile {
-    background-color: white;
-    margin-left: 6rem;
-    border-left: 1px solid black;
-}
-
-
-#mainContainer > .middle-profile > .intro {
-    margin-top: 3rem;
-    margin-left: 7.5rem;
-    background-color: white;
-    font-size: 1rem;
-    font-weight: unset;
-    resize: none;
-}
-
-.right-profileF,
-.right-profileS {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-
-#mainContainer > .right-profileF {
-    background-color: white;
-    border-left: 1px solid black;
-
+#mainContainer > .right-profileF{
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-}
-
-
-#mainContainer > .right-profileF > .posts {
-    background-color: white;
+    justify-content: center;
     color: black;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-left: 1.5rem;
-    margin-top: 3rem;
-    white-space: nowrap;
+    background-color: white;
 }
 
-#mainContainer > .right-profileF > .postH {
+#mainContainer > .right-profileF >.posts,.postH{
     background-color: white;
-    font-size: 1.25rem;
-    font-weight: revert;
-    margin-left: 1.5rem;
-    margin-top: 1rem;
-    white-space: nowrap;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
+
 
 #mainContainer > .right-profileS {
-    background-color: white;
-
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#mainContainer > .right-profileS > .item {
-    background-color: white;
-
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    background-color: white;
 }
 
-#mainContainer > .right-profileS > .item > .like {
-    background-color: white;
-    width: 3rem;
-    margin-left: 1rem;
-    margin-top: 2rem;
-    margin-right: 1rem;
-}
-
-#mainContainer > .right-profileS > .item > .likes {
-    background-color: white;
-    color: black;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-top: 1.5rem;
-    white-space: nowrap;
-}
-
-
-#mainContainer > .right-profileS > .item > .report {
-    background-color: white;
-    width: 3rem;
-    margin-left: 2rem;
-    margin-top: 1.5rem;
-    margin-right: 1rem;
-
-}
-
-
-#mainContainer > .right-profileS > .item > .reports {
-    background-color: white;
-    color: black;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-top: 1.5rem;
-    white-space: nowrap;
-}
-
-#postContainer {
-    background-color: white;
-    border: 1px outset white;
-    margin: 2rem 8rem 0 8rem;
-
+#mainContainer > .right-profileS > .item {
     align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    background-color: white;
     position: relative;
 }
 
-#postContainer > .postF {
-    background-color: white;
-
-    align-items: stretch;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    position: relative;
+#mainContainer > .right-profileS > .item > .like, .report {
+    width: 3rem;
+    padding: 0.5rem;
 }
 
 
-#postContainer > .postF > .post1 {
-    background-color: white;
-    margin: 1rem;
+#mainContainer > .right-profileS > .item >.likes,.reports {
+   margin-top: 0.4rem;
 }
 
-#postContainer > .postF > .post2 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postF > .post3 {
-    background-color: white;
-    margin: 1rem;
-}
-
-
-#postContainer > .postF > .post1 > .link1 {
+#mainContainer > .right-profileS > .item > .like, .report,.likes,.reports {
     background-color: white;
 }
 
 
-#postContainer > .postF > .post2 > .link1 {
-    background-color: white;
+
+
+
+#postContainer {
+
+
 }
 
-#postContainer > .postF > .post3 > .link1 {
-    background-color: white;
+#postContainer  > .article-box-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    background-color: #f4f3f1;
+    border-radius: 0.3rem;
+    padding: 1rem 0 0.5rem 0;
 }
 
-#postContainer > .postF > .post1 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
+#postContainer  > .article-box-grid > .article-list{
+    padding: 10rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    border-radius: 0.3rem;
 
-#postContainer > .postF > .post2 > .link1 > .link {
-    background-color: white;
-    object-fit: cover;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postF > .post3 > .link1 > .link {
-    background-color: white;
-    object-fit: cover;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postS {
-    background-color: white;
-
-    align-items: stretch;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    position: relative;
+    gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
 }
 
 
-#postContainer > .postS > .post1 {
-    background-color: white;
-    margin: 1rem;
-}
 
-#postContainer > .postS > .post2 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postS > .post3 {
-    background-color: white;
-    margin: 1rem;
-}
-
-
-#postContainer > .postS > .post1 > .link1 {
-    background-color: white;
-}
-
-
-#postContainer > .postS > .post2 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postS > .post3 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postS > .post1 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postS > .post2 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postS > .post3 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postT {
-    background-color: white;
-
-    align-items: stretch;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    position: relative;
-}
-
-
-#postContainer > .postT > .post1 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postT > .post2 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postT > .post3 {
-    background-color: white;
-    margin: 1rem;
-}
-
-
-#postContainer > .postT > .post1 > .link1 {
-    background-color: white;
-}
-
-
-#postContainer > .postT > .post2 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postT > .post3 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postT > .post1 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postT > .post2 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postT > .post3 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
 
 
 /*#popup {*/

@@ -81,8 +81,6 @@ public class ArticleController {
         modelAndView.addObject("searchCriterion", searchCriterion);
         modelAndView.addObject("searchQuery", searchQuery);
         modelAndView.addObject("profile",profile);
-
-
         return modelAndView;
 
     } //게시판 카테고리별//
@@ -446,25 +444,12 @@ public class ArticleController {
 
     @RequestMapping(value = "article/Participate/profile", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getParticipants(@RequestParam(value = "index") int index,
-                                                  @RequestParam(value = "email") String email) {
+                                                  @RequestParam(value = "email") String email) throws IOException {
 
         ProfileEntity[] profiles = this.articleService.ParticipateProfile(index, email);
         ResponseEntity<byte[]> response = null;
 
-        if (profiles == null || profiles.length == 0) {
-            try {
-                byte[] defaultImageBytes = getBytesFromImagePath();
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(defaultImageBytes.length);
-                System.out.println(defaultImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_PNG);
-
-                response = new ResponseEntity<>(defaultImageBytes, headers, HttpStatus.OK);
-            } catch (IOException e) {
-                // Handle the exception if the default image cannot be loaded
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        if (profiles == null) {
         } else {
             // profiles 배열의 각 프로필에 대해 처리
             for (ProfileEntity profile : profiles) {
@@ -472,18 +457,11 @@ public class ArticleController {
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentLength(profile.getProfileThumbnail().length);
                 headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+                System.out.println(profiles.length);
                 response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
             }
         }
-
         return response;
-    }
-
-    private byte[] getBytesFromImagePath() throws IOException {
-        ClassPathResource resource = new ClassPathResource("/resources/images/profileImages/icons8-male-user-96.png");
-        try (InputStream inputStream = resource.getInputStream()) {
-            return inputStream.readAllBytes();
-        }
     }
 
 
