@@ -496,6 +496,20 @@ allContainer > .header > .login > a {
     display: flex;
     flex-direction: column;
 }
+.del {
+    background-color: #5F5F5F;
+    width: 100%;
+    text-align: center;
+}
+
+.comment-head{
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 1rem;
+}
+.delete-button{
+
+}
 
 .comment-left {
     margin-bottom: 1rem;
@@ -551,11 +565,7 @@ allContainer > .header > .login > a {
     width: 100%;
     word-wrap: break-word;
 }
+.comment-right > .del {
+    text-align: center;
+}
 
-.del {
-    background-color: #5F5F5F;
-    width: 70%;
-}
-.comment-body .del {
-    margin-right: 0;
-}

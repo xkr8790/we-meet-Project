@@ -450,6 +450,7 @@ function refreshComment() {
                         bodyDiv.style.color = '#a0a0a0';
                         bodyDiv.style.fontStyle = 'italic';
                         bodyDiv.classList.add('del');
+                        div.appendChild(nicknameDiv);
                         div.appendChild(bodyDiv);
                     } else {
                         bodyDiv.innerText = comment['content'];
