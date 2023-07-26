@@ -139,7 +139,7 @@ html{
     flex: 1;
     width: 100%;
     height: 100%;
-    padding: 0;
+    padding: 0 0 0 1rem;
     border: none;
     outline: none;
 }
@@ -293,10 +293,17 @@ input[type="date"]::-ms-clear {
 
 /*step-3*/
 .step-3 {
-    display: flex;
+    display: none;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
+    height: 75vh;
+}
+
+.step-3 > .img{
+    display: block;
+    margin-bottom: 1rem;
+    width: 40rem;
 }
 
 .success {
@@ -304,8 +311,6 @@ input[type="date"]::-ms-clear {
     border: 1px solid #ef5350;
     padding: 20px;
 }
-
-
 
 
 #registerForm > .inner > .step-3 > .success >.text{
@@ -327,3 +332,44 @@ a.link {
 a.link:visited {
     color: #3498db; /* 방문한 링크의 색상 설정 */
 }
+
+
+/*반응형*/
+
+
+/*step-1*/
+@media (max-width: 570px) {
+    #registerForm > .inner > .step-1 > .button-container > .next {
+        width: 100%; /* Adjust the width to fill the entire container */
+        max-width: 28rem; /* Limit the maximum width to 500px */
+    }
+
+    .inner {
+        width: 28rem; /* Adjust the width of .inner to fill the entire container */
+    }
+}
+
+@media (max-width: 360px) {
+    .inner{
+        width: 25rem;
+    }
+}
+
+@media (max-width: 315px) {
+    #registerForm > .inner > .step-1 > .button-container > .next {
+        max-width: 20rem; /* Limit the maximum width to 360px */
+    }
+
+    #registerForm > .inner > .step-1>.all > .check-container > .title{
+        font-size: 1.5rem;
+    }
+
+    #registerForm > .inner > .step-1>.service > .term_list> .term_item > .check-container > .title{
+        font-size: 1.25rem;
+    }
+    .inner {
+        width: 20rem; /* Adjust the width of .inner to fill the entire container */
+    }
+}
+
+/*step-2*/
