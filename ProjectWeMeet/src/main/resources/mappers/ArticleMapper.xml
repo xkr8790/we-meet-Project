@@ -122,9 +122,10 @@
         FROM `wemeet_project`.`articles`
         <where>
             <if test='searchCriterion.equals("all")'>
-                AND `content` LIKE CONCAT('%', #{searchQuery}, '%')
+                AND `category` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `hashtag` LIKE CONCAT('%', #{searchQuery}, '%')
             </if>
             <if test='searchCriterion.equals("title")'>
                 AND `title` LIKE CONCAT('%', #{searchQuery}, '%')
@@ -134,6 +135,7 @@
             </if>
             AND `category` LIKE CONCAT('%', #{category}, '%')
         </where>
+
     </select>
     <!-- 카테고리 관련 레코드 조회-->
 
@@ -155,9 +157,10 @@
         FROM `wemeet_project`.`articles`
         <where>
             <if test='searchCriterion.equals("all")'>
-                AND `content` LIKE CONCAT('%', #{searchQuery}, '%')
+                AND `category` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `hashtag` LIKE CONCAT('%', #{searchQuery}, '%')
             </if>
             <if test='searchCriterion.equals("title")'>
                 AND `title` LIKE CONCAT('%', #{searchQuery}, '%')
@@ -275,10 +278,10 @@
     <!-- 참여인원 중복되있는지 select -->
     <select id="selectParticipants"
             resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
-        SELECT `index`                      AS `index`,
-               `email`                      AS `email`,
-               `ArticleIndex`               AS `ArticleIndex`,
-               `created_at` AS `createdAt`
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`,
+               `created_at`   AS `createdAt`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{index}
         LIMIT 1

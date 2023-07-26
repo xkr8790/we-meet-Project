@@ -10,7 +10,7 @@
 * {
     text-decoration: none;
     background-color: #f4f3f1;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 
 h2 {
@@ -882,7 +882,7 @@ html {
     background-color: white;
     flex: 1;
     margin-top: 1rem;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 
     align-items: center;
     display: flex;
@@ -898,7 +898,7 @@ html {
     width: 100%;
     height: auto;
     padding: 0.5rem 0;
-    border-bottom: 1px solid black;
+    border: 1px solid black;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .box > .subTitle {
@@ -910,10 +910,12 @@ html {
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .box > .object {
-    align-items: center;
+    align-items: start;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-left: 0.7rem;
+    border-left: 1px solid black;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .email > .object > ._object-box > ._object-input {
@@ -922,6 +924,7 @@ html {
 
 #popup.step-2 > .popup-content.step-2 > .__body > .email > .object > .message-box {
     font-size: 0.6rem;
+    text-align: unset;
     color: #ef5350;
 }
 
@@ -979,7 +982,7 @@ html {
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .subTitle{
-    width: 11rem;
+    width: 11.5rem;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object {
@@ -989,12 +992,17 @@ html {
     justify-content: start;
     width: 100%;
 }
-
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box{
+    width: 83%;
+}
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box > ._object-input{
+    width: 100%;
+}
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button{
 align-items: end;
 display: flex;
-/*flex-direction: ;*/
 justify-content: end;
+    width: 85%;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .option-container {
@@ -1002,7 +1010,13 @@ justify-content: end;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-top: 0.5rem;
+
     width: 100%;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container> * > input{
+    height: 2rem;
 }
 
 /*dialog 배경화면 어둡게-주소찾기 클릭시 사용*/

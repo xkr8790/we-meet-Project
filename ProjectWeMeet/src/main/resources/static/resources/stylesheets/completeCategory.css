@@ -1,10 +1,8 @@
 @charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
-@font-face {
-    font-family: 'Humanbumsuk';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 * {
@@ -29,6 +27,10 @@ body{
     transition-duration: 550ms;
     transition-property: opacity;
     transition-timing-function: ease;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .up-button{
@@ -115,11 +117,14 @@ body{
     margin-left: 0.75rem;
 }
 
-#headerContainer > .header > .menu > .item > a > .profile{
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: 1px solid red;
+#headerContainer > .header > .menu > .item > a > .profile {
+    position: relative;
+    background-color: white;
+    object-fit: cover;
+}
+#headerContainer > .header > .menu > .item > a > .profile > img {
+    width: 100px;
+    height: 100px;
 }
 
 #headerContainer > .header > .menu > .item > button {
@@ -166,7 +171,7 @@ body{
 }
 .introduce_article {
     width: 77rem;
-    padding: 2rem 0 2rem 0;
+    padding: 2rem 0 1rem 0;
     margin: 2rem 0 0rem 0;
     background-color: white;
     border-radius: 0.3rem;
@@ -247,6 +252,33 @@ body{
     cursor: pointer;
 }
 
+.search-box{
+    width: 1240px;
+}
+
+.search-box>.search{
+    float: right;
+    margin-top: 1rem;
+}
+.search-box>.search > .select{
+    height: 1.5rem;
+}
+
+.search-box> .search > .input{
+    width: 9rem;
+    height: 1.5rem;
+    padding-left: 0.5rem;
+}
+.search-box> .search > .button{
+    width: 4rem;
+    height: 1.5rem;
+}
+
+.search-box> .search > .button:hover{
+
+}
+
+
 /*----------------------------------------------------------------------------------*/
 .article-container {
     width: 1240px;
@@ -288,50 +320,56 @@ body{
 }
 
 
-.article-list{
+/*.article-list{*/
+/*    !*border: 1px solid red;*!*/
+/*    width: 35rem;*/
+/*    height: 16rem;*/
+/*    background-color: white;*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*    border-radius: 0.5rem;*/
+/*    margin-bottom: 2rem;*/
+/*    margin-top: 2rem;*/
+/*    padding: 1rem 1rem 1rem 0;*/
+
+/*    gap: 1rem; !* 이미지와 텍스트 사이의 간격 *!*/
+/*}*/
+
+.article-list > .article-link {
     /*border: 1px solid red;*/
     width: 35rem;
-    height: 14rem;
+    height: 16rem;
     background-color: white;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
     border-radius: 0.5rem;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
-    gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
-}
+    padding: 1rem 0rem 1rem 1.5rem;
 
-
-.article-list >.article-link{
-    /*border: 1px solid red;*/
-    width: 35rem;
-    height: 18rem;
-    background-color: white;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
     gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
 }
 
 
 .article-list > .article-link > .article-thumbnail {
-    width: 17rem;
-    height: 15rem;
+    width: 14rem;
+    height: 14rem;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-}
-.article-list>.article-link >.article-thumbnail>.thumbnail{
     border-radius: 0.3rem;
-    width: 11rem;
-    height: 12rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
+
+.article-list > .article-link > .article-thumbnail > .thumbnail {
+    border-radius: 15px;
+    width: 14rem;
+    height: 14rem;
+    padding-left: 0.3rem;
     object-fit: cover;
 }
 
@@ -354,13 +392,14 @@ body{
     border-radius: 0.7rem;
     margin: 0rem 0.8rem 0rem 0;
     background-color: #eaeaea;
-    font-weight: bold;
-    color: gray;
+    font-weight: 500;
+    color: black;
     padding: 0.6rem;
     font-size: 1.1rem;
 }
 .tag.comment{
     color: white;
+    font-weight: 500;
     background-color: #ff7257;
 }
 
@@ -375,6 +414,22 @@ body{
     font-weight: 800;
 }
 
+
+.article-map > .article-location {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+
+.article-map > .article-location > .location, .day-img, .time-img {
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-right: 0.3rem;
+}
+
+
 h2 {
     white-space: nowrap;
     overflow: hidden;
@@ -386,10 +441,12 @@ h2 {
     flex-direction: row;
     justify-content: center;
     flex-shrink: 0;
+    margin-left: -0.5rem;
+    margin-top: 0.5rem;
 }
 
 .Profile-Picture {
-    margin-top: 1rem;
+    margin-bottom: 0.3rem;
     margin-right: -0.4rem;
     width: 2.5rem;
     height: 2.5rem;
@@ -420,11 +477,11 @@ h2 {
 .limit-image{
     width: 2.5rem;
     margin-left: 1rem;
-    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 .number{
-    margin-top: 1rem;
     white-space: nowrap;
+    margin-top: 0.3rem;
 }
 
 .cover{
@@ -460,8 +517,14 @@ a {
     user-select: none;
 }
 
+.pageContainer > .page:hover {
+    background-color: #d5d8dc;
+}
+
+
 .pageContainer > .page.selected {
     background-color: #d5d8dc;
+    color: black;
     pointer-events: none;
 }
 

@@ -27,6 +27,10 @@ body{
     transition-duration: 550ms;
     transition-property: opacity;
     transition-timing-function: ease;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .up-button{
@@ -250,12 +254,16 @@ body{
 
 .search-box{
     width: 1240px;
-
 }
+
 .search-box>.search{
     float: right;
     margin-top: 1rem;
 }
+.search-box>.search > .select{
+    height: 1.5rem;
+}
+
 .search-box> .search > .input{
     width: 9rem;
     height: 1.5rem;

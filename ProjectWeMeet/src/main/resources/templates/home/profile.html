@@ -68,7 +68,7 @@
                         <input disabled readonly class="_object-input" type="email" spellcheck="false"
                                th:value="${profile?.getEmail()}">
                     </label>
-                    <div class="message-box">이메일 주소는 변경할 수 없습니다.</div>
+                    <div class="message-box">이메일은 변경할 수 없습니다.</div>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
                         <input disabled readonly class="_object-input" spellcheck="false" type="text"
                                th:value="${profile?.getNickname()}">
                     </label>
-                    <span class="message-box">닉네임은 변경할 수 없습니다.</span>
+                    <div class="message-box">닉네임은 변경할 수 없습니다.</div>
                 </div>
             </div>
 
@@ -115,7 +115,7 @@
                 <div class="object">
                     <label class="_object-box">
                         <input type="tel" disabled readonly class="_object-input" name="infoCurrentContact"
-                               spellcheck="false">
+                               spellcheck="false" th:value="${session.user.getContact()}" >
                     </label>
                     <div class="new-contact-container">
                         <div class="multi-container">
@@ -134,7 +134,7 @@
                                    value="인증번호 확인">
                         </div>
                         <div>
-                            <input type="text" placeholder="새로 등록할 연락처를 입력해 주세요">
+                            <input type="text" placeholder="새로운 연락처를 입력해 주세요">
                         </div>
                         <label class="_object-button">
                             <input disabled type="button" name="changeContact" class="change" value="변경">
@@ -180,7 +180,7 @@
                     <input type="button" value="회원탈퇴" name="deleteUser" class="link">
                 </div>
                 <div class="finish">
-                    <input class="close" name="close" type="button" value="나가기" data-mz-close>
+                    <input class="close" name="close" type="button" value="취소" data-mz-close>
                     <!--                <input type="button" name="save" class="save" value="저장">-->
                 </div>
             </div>
