@@ -39,13 +39,14 @@ public class ProfileService {
 
     public ProfileEntity getThumbnail(HttpSession session) {
         UserEntity user = (UserEntity) session.getAttribute("user");
-       ProfileEntity profile = profileMapper.selectThumbnail(user.getEmail());
+        ProfileEntity profile = profileMapper.selectThumbnail(user.getEmail());
 
 
         return profile == null
                 ? null
                 : profile;
     }
+
     public DeleteUserResult deleteThumbnailResult(HttpSession session, ProfileEntity profile) {
         UserEntity user = (UserEntity) session.getAttribute("user");
         if (user == null) {
@@ -73,18 +74,11 @@ public class ProfileService {
     }
 
 
-
     @Transactional
-    public boolean putProfile(HttpServletRequest request, ProfileEntity profile, HttpSession session) {
+    public boolean putProfile(ProfileEntity profile) {
 
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        return this.profileMapper.updateThumbnail(profile) > 0;
 
-        if (this.profileMapper.selectThumbnail(profile.getProfileThumbnailMime()) == null) {
-            return this.profileMapper.updateThumbnail(profile) > 0;
-        }
-        profile.setEmail(loginUser.getEmail())
-                .setCreatedAt(new Date());
-        return this.profileMapper.insertProfile(profile) > 0;
     }
 
     public int getArticleIndexCountByEmail(HttpSession session) {
@@ -100,8 +94,8 @@ public class ProfileService {
     public SendRegisterContactCodeResult sendContactCodeResult(RegisterContactCodeEntity registerContactCode) {
 
         if (registerContactCode == null ||
-        registerContactCode.getContact() == null ||
-        !registerContactCode.getContact().matches("^(010)(\\d{8})$")) {
+                registerContactCode.getContact() == null ||
+                !registerContactCode.getContact().matches("^(010)(\\d{8})$")) {
             return SendRegisterContactCodeResult.FAILURE;
         }
 

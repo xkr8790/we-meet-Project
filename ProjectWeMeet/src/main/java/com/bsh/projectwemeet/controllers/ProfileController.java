@@ -144,11 +144,10 @@ public class ProfileController {
     @ResponseBody
     public String postIndex(HttpServletRequest request,
                                   ProfileEntity profile,
-                                  @RequestParam(value = "thumbnailMultipart")MultipartFile thumbnailMultipart,
-                                  HttpSession session) throws IOException {
+                                  @RequestParam(value = "thumbnailMultipart")MultipartFile thumbnailMultipart) throws IOException {
         profile.setProfileThumbnail(thumbnailMultipart.getBytes());
         profile.setProfileThumbnailMime(thumbnailMultipart.getContentType());
-        boolean result = this.profileService.putProfile(request, profile, session);
+        boolean result = this.profileService.putProfile(profile);
 //        if (result) {
 //            modelAndView.setViewName("redirect:/profile");
 //        }

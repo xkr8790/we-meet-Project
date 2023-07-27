@@ -36,7 +36,7 @@
                `profile_thumbnail` AS `profileThumbnail`,
                `profile_thumbnail_mime` AS `profileThumbnailMime`
         FROM `wemeet_project`.`mypages`
-        WHERE `index` = #{index}
+        WHERE `email` = #{email}
     </select>
 
     <select id="selectAll"
@@ -91,6 +91,18 @@
         WHERE `contact` = #{contact}
           AND BINARY `code` = #{code}
           AND BINARY `salt` = #{salt}
+        LIMIT 1
+    </select>
+
+    <select id="selectThumbnail"
+    resultType="com.bsh.projectwemeet.entities.ProfileEntity">
+        SELECT `index` AS `index`,
+               `email` AS `email`,
+               `profile_thumbnail` AS `profileThumbnail`,
+               `profile_thumbnail_mime` AS `profileThumbnailMime`,
+               `introduce_text` AS `introduceText`
+        FROM `wemeet_project`.`mypages`
+        WHERE `email` = #{email}
         LIMIT 1
     </select>
 
@@ -169,7 +181,8 @@
             parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
         UPDATE `wemeet_project`.`mypages`
         SET `profile_thumbnail` = #{profileThumbnail},
-            `profile_thumbnail_mime` = #{profileThumbnailMime}
+            `profile_thumbnail_mime` = #{profileThumbnailMime},
+            `introduce_text` = #{introduceText}
         WHERE `email` = #{email}
         LIMIT 1
     </update>
@@ -180,7 +193,9 @@
         WHERE `email` = #{email}
         LIMIT 1
     </delete>
-    <update id="deleteThumbnail">
+
+    <update id="deleteThumbnail"
+    parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
         UPDATE `wemeet_project`.`mypages`
         SET `profile_thumbnail` = #{profileThumbnail},
             `profile_thumbnail_mime` = #{profileThumbnailMime}
