@@ -235,9 +235,8 @@
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
-                        <div class="human">
-                            <img class="human-image" th:if="${articles == null}" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
-                            <img class="human-image" th:if="${articles != null}" th:src="@{/article/read/profile(index=${articles.getIndex()})}" alt="Thumbnail">
+                        <div class="human" th:each="participantsArrays : ${participantsArrays}">
+                            as
                         </div>
                         <i class="fa-solid fa-user-group"></i>
                         <div class="number" th:text="${articles.getParticipation()}">인원</div>

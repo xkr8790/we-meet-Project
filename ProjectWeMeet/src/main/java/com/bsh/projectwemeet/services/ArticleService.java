@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class ArticleService {
@@ -392,6 +389,22 @@ public class ArticleService {
         return profileList;
     } //이미지 추가
 
+    public ArticleEntity[] getMiniArticles(){
+        return this.articleMapper.selectDifferentArticle();
+    }
+
+    public List<ParticipantsEntity> selectParticipantsProfiles() {
+        ArticleEntity[] miniArticles = getMiniArticles();
+        List<ParticipantsEntity> allParticipants = new ArrayList<>();
+
+        for (ArticleEntity article : miniArticles) {
+                ParticipantsEntity[] participantsProfiles = articleMapper.selectParticipantsProfile(article.getIndex());
+                allParticipants.addAll(Arrays.asList(participantsProfiles));
+            System.out.println(article.getIndex());
+        }
+
+        return allParticipants;
+    }
 
 
 
@@ -512,10 +525,9 @@ public class ArticleService {
     public UserEntity userEmail(HttpSession session){
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-        if(loginUser ==null){
-            return null;
+        if(loginUser == null){
+            return new UserEntity().setEmail("notLogin");
         }
-
         if(articleMapper.selectUser(loginUser.getEmail())!=null){
             return  this.articleMapper.selectUser(loginUser.getEmail());
         }

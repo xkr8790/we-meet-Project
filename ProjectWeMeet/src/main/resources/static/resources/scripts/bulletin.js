@@ -355,16 +355,37 @@ function refreshComment() {
 
                 for (const comment of comments) {
                     const div = document.createElement('div');
-                    div.classList.add('comment-left');
+                    let commentClass = 'comment-left';
+
+                    if (comment.same === true) {
+                        commentClass = 'comment-right';
+                    }
+                    div.classList.add(commentClass);
+
+                    const nicknameDiv = document.createElement('div');
+                    nicknameDiv.classList.add('comment-nickname');
+                    nicknameDiv.innerText = comment['nickname'];
 
                     const headDiv = document.createElement('div');
                     headDiv.classList.add('comment-head');
+
                     const bodyDiv = document.createElement('div');
                     bodyDiv.classList.add('comment-body');
 
-                    const dtDate = comment['createdAt'].split('T')[0];
-                    const dtTime = comment['createdAt'].split('T')[1].split('.')[0];
-                    headDiv.innerText = `${dtDate} ${dtTime}`;
+                    const commentDate = new Date(comment['createdAt']);
+
+                    const options = {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true,
+                        hourCycle: 'h12',
+                    };
+
+                    const formattedDate = commentDate.toLocaleString('en-US', options);
+                    headDiv.innerText = formattedDate;
 
                     const deleteButton = document.createElement('button');
                     deleteButton.classList.add('delete-button');
@@ -387,7 +408,7 @@ function refreshComment() {
                                             alert('알 수 없는 이유로 댓글을 삭제하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
                                             break;
                                         case 'failure_deleted':
-                                            alert('이미 삭제된 댓글 입니다 새로고침 후 확인해 주세요.');
+                                            alert('이미 삭제된 댓글 입니다. 새로고침 후 확인해 주세요.');
                                             break;
                                         case 'failure_no_authority':
                                             alert('삭제할 수 있는 권한이 없습니다.');
@@ -413,10 +434,16 @@ function refreshComment() {
                         bodyDiv.innerText = '삭제된 댓글입니다.';
                         bodyDiv.style.color = '#a0a0a0';
                         bodyDiv.style.fontStyle = 'italic';
+                        bodyDiv.classList.add('del');
+                        div.appendChild(nicknameDiv);
                         div.appendChild(bodyDiv);
                     } else {
                         bodyDiv.innerText = comment['content'];
-                        div.append(headDiv, deleteButton, bodyDiv);
+                        const commentBox = document.createElement('div');
+                        commentBox.classList.add('comment-box');
+
+                        commentBox.append(headDiv, deleteButton, bodyDiv);
+                        div.append(nicknameDiv, commentBox);
                     }
 
                     commentContainer.appendChild(div);

@@ -163,6 +163,7 @@ public class ArticleController {
         ArticleEntity[] articles = this.articleService.getMiniArticle();
         UserEntity user = this.articleService.userEmail(session);
 
+
         LikeReportEntity LikeResult = this.articleService.selectLike(index,session,flag);
         LikeReportEntity ReportResult = this.articleService.selectReport(index,session,flag);
         SelectParticipantsResult ParticipantsResult = this.articleService.selectParticipants(index,session);
@@ -174,7 +175,7 @@ public class ArticleController {
         //참가자의 참여부를 따지기
         ProfileEntity[] profiles = this.articleService.ParticipateProfile(index, email);
 
-
+        List<ParticipantsEntity> participantsArrays = this.articleService.selectParticipantsProfiles();
 
 
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
@@ -188,6 +189,7 @@ public class ArticleController {
         modelAndView.addObject("profile",profile);
         modelAndView.addObject("participantsArray",participantsArray);
         modelAndView.addObject("profiles",profiles);
+        modelAndView.addObject("participantsArrays",participantsArrays);
         //참가자의 참여부를 따져서 결과 반환
 
         return modelAndView;
