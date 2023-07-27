@@ -38,9 +38,9 @@
             </ul>
             <ul class="menu right" th:if="${session.user != null}">
                 <li class="item">
-                    <a href="#" class="icon-text-button">
+                    <a  href="/profile/profile" class="icon-text-button">
                         <div class="profile">
-                            프로필
+                            <img th:src="@{/article/profile}">
                         </div>
                     </a>
                 </li>

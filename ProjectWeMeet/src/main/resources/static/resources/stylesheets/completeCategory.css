@@ -123,8 +123,9 @@ body{
     object-fit: cover;
 }
 #headerContainer > .header > .menu > .item > a > .profile > img {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50% ;
 }
 
 #headerContainer > .header > .menu > .item > button {

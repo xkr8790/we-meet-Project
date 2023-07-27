@@ -44,7 +44,7 @@
             <div class="profile-title">
                 <div class="profile-img">
                     <a href="">
-                        <img th:src="@{/resources/images/bulletinImags/쵸단.png}" alt="몰루">
+                        <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="몰루">
                     </a>
                     <p>쵸단</p>
                 </div>
@@ -64,7 +64,7 @@
             <p class="subTitle">오늘 처음이세요?</p>
             <div class="my">
                 <a class="myImages">
-                    <img src="/resources/images/bulletinImags/쵸단.png" alt="">
+                    <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                 </a>
                 <div class="myIntroduction">
                     <p class="nickname">닉네임</p>
