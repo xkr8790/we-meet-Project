@@ -37,19 +37,17 @@ body {
     justify-content: center;
 }
 
-.allContainer > .header > .login > a {
-
-}
 
 .allContainer > .header > .login > a {
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 1rem;
     text-decoration: none;
     color: black;
+    margin-left: 0.3rem;
 }
 
 .allContainer > .header > .login > a:hover {
-    color: blue;
+    color: #ef5350;
 }
 
 .allContainer > .header > .login > button {

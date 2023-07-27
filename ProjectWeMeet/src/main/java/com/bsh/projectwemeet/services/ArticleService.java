@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ArticleService {
@@ -242,7 +245,7 @@ public class ArticleService {
         } //좋아요 인서트
 
 
-      return InsertLikeAndReportResult.FAILURE;
+        return InsertLikeAndReportResult.FAILURE;
     }
 
     public InsertLikeAndReportResult InsertReport(int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
@@ -289,7 +292,7 @@ public class ArticleService {
             return result;
         }
 
-       return null;
+        return null;
     }
 
     public LikeReportEntity selectReport(int index,HttpSession session,boolean flag){
@@ -389,29 +392,7 @@ public class ArticleService {
         return profileList;
     } //이미지 추가
 
-    public ArticleEntity[] getMiniArticles(){
-        return this.articleMapper.selectDifferentArticle();
-    }
-
-    public List<ParticipantsEntity> selectParticipantsProfiles() {
-        ArticleEntity[] miniArticles = getMiniArticles();
-        List<ParticipantsEntity> allParticipants = new ArrayList<>();
-
-        for (ArticleEntity article : miniArticles) {
-                ParticipantsEntity[] participantsProfiles = articleMapper.selectParticipantsProfile(article.getIndex());
-                allParticipants.addAll(Arrays.asList(participantsProfiles));
-            System.out.println(article.getIndex());
-        }
-
-        return allParticipants;
-    }
-
-
-
-
-
-
-    //-----------------------------------------------게시판 리뷰-------------------------------------------------------------
+//-----------------------------------------------게시판리뷰-------------------------------------------------------------
     public boolean patchFinish(int index, HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(index);
@@ -440,6 +421,9 @@ public class ArticleService {
 
 
 //-------------------------------------- 댓글 리뷰 --------------------------------------------------------------
+
+
+//-------------------------------------- 댓글 리뷰-----------------------------------------------------------
 
     //    댓글
     public CommentEntity[] getCommentsOf(int articleIndex) {
@@ -522,17 +506,18 @@ public class ArticleService {
         }
     }
 
-    public UserEntity userEmail(HttpSession session){
+    public UserEntity userEmail(HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-        if(loginUser == null){
-            return new UserEntity().setEmail("notLogin");
-        }
-        if(articleMapper.selectUser(loginUser.getEmail())!=null){
-            return  this.articleMapper.selectUser(loginUser.getEmail());
+        if (loginUser == null) {
+            // Return a default user with nickname "notLogin"
+            return new UserEntity().setNickname("notLogin");
         }
 
-        return null;
+        // Now, check if the user exists in the database using their email
+        UserEntity user = this.articleMapper.selectUser(loginUser.getEmail());
+
+        return user;
     }
 
 

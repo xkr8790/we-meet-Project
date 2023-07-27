@@ -1,5 +1,7 @@
 package com.bsh.projectwemeet.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -9,6 +11,7 @@ public class CommentEntity {
     private String email;
     private String content;
     private boolean isDeleted;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
     private Date createdAt;
     private String clientIp;
     private String clientUa;

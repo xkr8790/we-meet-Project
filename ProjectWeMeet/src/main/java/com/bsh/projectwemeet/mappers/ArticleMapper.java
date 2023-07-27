@@ -127,4 +127,7 @@ public interface ArticleMapper {
     ArticleEntity[] selectCategory(@Param(value = "category") String category);
     ArticleEntity selectUpdateCategoryByIndex(@Param(value="index")int index);
 
+
+    ArticleEntity selectasd(@Param(value="email")String email);
+
 }

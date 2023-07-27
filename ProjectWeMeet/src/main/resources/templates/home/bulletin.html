@@ -26,7 +26,6 @@
 <form id="bulletinForm" class="allContainer">
     <input type="hidden" name="index" th:value="${article.getIndex()}" )>
     <div class="header">
-
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
         </a>
@@ -61,8 +60,7 @@
             <img class="image" th:src="@{/article/read/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
-                    <img th:if="${profile ==null}" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
-                    <img th:if="${profile !=null}" th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
+                        <img class="profile" th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                 </div>
                 <div class="bulletin-title" th:text="${article.getTitle()}">오늘 저녁 7시 30분 소환자의 계곡으로 떠납시다. 골드 2이하
                     오지마세요!
@@ -124,8 +122,7 @@
             <p class="subTitle">오늘 처음이세요?</p>
             <div class="my">
                 <a class="myImages">
-                    <img th:if="${profile ==null}" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
-                    <img th:if="${profile !=null}" th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
+                    <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                 </a>
                 <div class="myIntroduction">
                     <p class="nickname">닉네임</p>
@@ -208,12 +205,12 @@
                     <div class="content-write">
                         <input name="articleIndex" type="hidden" th:value="${article.getIndex()}">
                         <input name="articleEmail" type="hidden" th:value="${article.getEmail()}">
-                        <input name="nickname" type="hidden" th:if="${user!=null}" th:value="${user.getNickname()}">
+                        <input name="nickname" type="hidden" th:value="${user.getNickname()}">
 
                         <label>
                             <input type="text" name="content" placeholder="댓글" maxlength="100">
                         </label>
-                        <input type="submit" value="작성">
+                        <input type="submit" value="작성" name="commentButton">
                     </div>
                 </div>
             </div>
@@ -225,7 +222,7 @@
         <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
             <!--            여기서 부터 list-->
-            <div class="previewContainer" th:each="articles : ${articles}">
+            <div class="previewContainer" th:if="${!articles.getCategory().equals('완료')}" th:each="articles : ${articles}">
                 <!--                이게 item-->
                 <a class="img" th:href="@{./read(index=${articles.getIndex()})}">
                     <img th:src="@{./image(index=${articles.getIndex()})}" alt="">
