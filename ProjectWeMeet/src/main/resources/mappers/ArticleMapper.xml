@@ -53,16 +53,16 @@
                 #{nickname})
     </insert>
 
+
     <insert id="insertParticipants"
             useGeneratedKeys="true"
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.ParticipantsEntity">
-        INSERT INTO `wemeet_project`.`Participants`(email, ArticleIndex, created_at, check_participation_status)
+        INSERT INTO `wemeet_project`.`Participants`(email, ArticleIndex, created_at)
         VALUES (#{email},
                 #{ArticleIndex},
-                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
-                #{checkParticipationStatus})
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)))
     </insert>
 
     <insert id="insertLike"
@@ -120,7 +120,20 @@
             resultType="int">
         SELECT COUNT(0) AS `count`
         FROM `wemeet_project`.`articles`
-        WHERE `category` LIKE CONCAT('%', #{category}, '%')
+        <where>
+            <if test='searchCriterion.equals("all")'>
+                AND `content` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            <if test='searchCriterion.equals("title")'>
+                AND `title` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            <if test='searchCriterion.equals("address")'>
+                AND `address` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            AND `category` LIKE CONCAT('%', #{category}, '%')
+        </where>
     </select>
     <!-- 카테고리 관련 레코드 조회-->
 
@@ -131,6 +144,7 @@
         `title` AS `title`,
         `content` AS `content`,
         `category` AS `category`,
+        `email` AS `email`,
         `address` AS `address`,
         `limit` AS `limit`,
         `like_count` AS `likeCount`,
@@ -140,11 +154,33 @@
         `time` AS `appointmentStartTime`,
         `finished_flag` AS `isFinished`
         FROM `wemeet_project`.`articles`
-        WHERE `category` LIKE CONCAT('%', #{category}, '%')
+        <where>
+            <if test='searchCriterion.equals("all")'>
+                AND `content` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            <if test='searchCriterion.equals("title")'>
+                AND `title` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            <if test='searchCriterion.equals("address")'>
+                AND `address` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+            AND `category` LIKE CONCAT('%', #{category}, '%')
+        </where>
         ORDER BY `index` DESC
         LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
     </select>
     <!-- 카테고리별 페이징 -->
+
+
+
+
+
+
+
+
+
 
     <!--메인에 나타낼 게시물 6개-->
     <select id="selectArticleMain"
@@ -235,17 +271,59 @@
     </select>
     <!-- 게시물 수정 찾기 -->
 
+    <!-- 게시물 해쉬태그 select -->
+    <select id="selectArticleByPatchHashTag"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `index`          AS `index`,
+               SUBSTRING(hashtag, 1, 11) AS `hashtag`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+    </select>
+    <!-- 게시물 해쉬태그 select -->
 
     <!-- 참여인원 중복되있는지 select -->
     <select id="selectParticipants"
             resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
         SELECT `index`                      AS `index`,
                `email`                      AS `email`,
-               `ArticleIndex`               AS `ArticleIndex`,
-               `check_participation_status` AS `checkParticipationStatus`
+               `ArticleIndex`               AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsPeoples"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`                      AS `index`,
+               `email`                      AS `email`,
+               `ArticleIndex`               AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsProfile"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{index}
-        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsProfiles"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex} AND `email` = #{email}
     </select>
     <!-- 참여인원 중복되있는지 select -->
 
@@ -400,9 +478,13 @@
                `profile_thumbnail_mime` AS `profileThumbnailMime`
         FROM `wemeet_project`.`mypages`
         WHERE `email` = #{email}
-        LIMIT 1
+        ORDER BY `index` DESC
+        LIMIT 2
     </select>
     <!-- 참여인원 중복되있는지 select -->
+
+
+
 
     <!-- 조회수 업데이트 -->
     <update id="updateArticle"
@@ -487,6 +569,7 @@
         WHERE `index` = #{index}
         LIMIT 1
     </update>
+
 
 
     <!-- 게시판 삭제 -->

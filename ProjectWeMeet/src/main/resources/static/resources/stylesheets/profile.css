@@ -1,16 +1,16 @@
 @charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 
-@font-face {
-    font-family: 'Humanbumsuk';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
+
 
 * {
     text-decoration: none;
-    background-color: #f4f3f1;
+    background-color: white;
     /*border: 1px solid red;*/
+
 }
 
 h2 {
@@ -27,6 +27,15 @@ h2 {
 
 html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+body{
+    width: 60%;
+    margin: 0 auto;
+}
+
+.logo{
+    margin: 0.5rem 0 1.5rem 0;
 }
 
 
@@ -78,28 +87,27 @@ html {
 }
 
 #mainContainer {
-    background-color: white;
-    border: 1px outset white;
-    margin: 5rem 8rem 0 8rem;
-
-    align-items: stretch;
+    align-items: center;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
 }
 
+
 #mainContainer > .left-profile {
     background-color: white;
-
-
-    align-items: flex-start;
+    align-items: center;
     display: flex;
-    flex-direction: row;
-    justify-content: revert;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #mainContainer > .left-profile > .thumbnail {
     background-color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #mainContainer > .left-profile > .thumbnail > .default {
@@ -107,7 +115,9 @@ html {
     border-radius: 50%;
     width: 6rem;
     height: 6rem;
-    margin: 2rem 0 2rem 3rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 #mainContainer > .left-profile > .thumbnail > .default > .profile {
@@ -120,7 +130,13 @@ html {
     position: relative;
     box-shadow: 1px 1px 2px 0 #888;
     background-size: cover;
-    margin: 1rem 0 0 1rem;
+    margin-bottom: 1rem;
+}
+
+#mainContainer > .left-profile > .thumbnail > .default > .user-name {
+    white-space: nowrap;
+    background-color: white;
+    font-weight: bold;
 }
 
 #mainContainer > .left-profile > .thumbnail > .pencil {
@@ -129,8 +145,9 @@ html {
     width: 2rem;
     height: 2rem;
     position: relative;
-    transform: translate(410%, -160%);
     box-shadow: 1px 1px 2px 0 #888;
+    left: 40px;
+    bottom: 35px;
 }
 
 #mainContainer > .left-profile > .thumbnail > .pencil > .pencil > .change_button {
@@ -148,15 +165,6 @@ html {
 
 #mainContainer > .left-profile > .text-box {
     background-color: white;
-    margin-top: 5rem;
-    margin-left: 2.5rem;
-    font-size: 1.125rem;
-    font-weight: bold;
-
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
 }
 
 
@@ -179,323 +187,123 @@ html {
 }
 
 
-#mainContainer > .middle-profile {
-    background-color: white;
-    margin-left: 6rem;
-    border-left: 1px solid black;
+#mainContainer > .introduce{
+    width: 15rem;
+    text-align: center;
+    margin: 2rem;
 }
 
-
-#mainContainer > .middle-profile > .intro {
-    margin-top: 3rem;
-    margin-left: 7.5rem;
-    background-color: white;
-    font-size: 1rem;
-    font-weight: unset;
-    resize: none;
+/*---- 게시물 표시---------*/
+#postContainer  > .article-box-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    background-color: #f4f3f1;
+    border-radius: 0.3rem;
 }
 
-.right-profileF,
-.right-profileS {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-
-#mainContainer > .right-profileF {
-    background-color: white;
-    border-left: 1px solid black;
-
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-
-#mainContainer > .right-profileF > .posts {
-    background-color: white;
-    color: black;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-left: 1.5rem;
-    margin-top: 3rem;
-    white-space: nowrap;
-}
-
-#mainContainer > .right-profileF > .postH {
-    background-color: white;
-    font-size: 1.25rem;
-    font-weight: revert;
-    margin-left: 1.5rem;
-    margin-top: 1rem;
-    white-space: nowrap;
-}
-
-#mainContainer > .right-profileS {
-    background-color: white;
-
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#mainContainer > .right-profileS > .item {
-    background-color: white;
-
+#postContainer >span{
     align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+    border-radius: 0.3rem;
+    margin-bottom: 1rem;
 }
 
-#mainContainer > .right-profileS > .item > .like {
-    background-color: white;
-    width: 3rem;
-    margin-left: 1rem;
+#postContainer >span>.article-post{
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+
+
+#postContainer >span>.article-status>.status{
+    font-weight: bold;
+    border-radius: 0.3rem;
+    margin: 0.2rem;
+    padding: 0.5rem;
+    color: white;
+    background-color: gray;
+}
+
+
+#postContainer  > .article-box-grid > .article-list{
+    margin-bottom: 1rem;
     margin-top: 2rem;
-    margin-right: 1rem;
+    border-radius: 0.7rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
 }
 
-#mainContainer > .right-profileS > .item > .likes {
-    background-color: white;
-    color: black;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-top: 1.5rem;
-    white-space: nowrap;
+#postContainer  > .article-box-grid > .article-list >.myArticleLink{
+   align-items: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
 }
 
-
-#mainContainer > .right-profileS > .item > .report {
-    background-color: white;
-    width: 3rem;
-    margin-left: 2rem;
-    margin-top: 1.5rem;
-    margin-right: 1rem;
-
+#postContainer  > .article-box-grid > .article-list >.myArticleLink:visited{
+   color: black;
 }
 
 
-#mainContainer > .right-profileS > .item > .reports {
-    background-color: white;
-    color: black;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-top: 1.5rem;
-    white-space: nowrap;
+#postContainer  > .article-box-grid > .article-list >.myArticleLink >h2{
+    width:15rem;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+/*Width보다 넓이 크게 글씨 쓰면 가려짐*/
+
+
+#postContainer  > .article-box-grid >.article-list >.myArticleLink > .article-thumbnail{
+    width: 15rem;
+    height: 15rem;
 }
 
-#postContainer {
-    background-color: white;
-    border: 1px outset white;
-    margin: 2rem 8rem 0 8rem;
+#postContainer > .article-box-grid > .article-list > .myArticleLink > .article-thumbnail > .thumbnail {
+    border-radius: 0.2rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
+#postContainer > .article-box-grid > .article-list > .likeAndReport {
     align-items: center;
     display: flex;
-    flex-direction: column;
-    position: relative;
+    justify-content: space-between;
+    margin-top: 0.5rem;
 }
-
-#postContainer > .postF {
-    background-color: white;
-
-    align-items: stretch;
-    box-sizing: border-box;
+#postContainer > .article-box-grid > .article-list > .likeAndReport >.likeImage {
+    align-items: center;
     display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    position: relative;
+}
+
+#postContainer > .article-box-grid > .article-list > .likeAndReport > .likeImage > span {
+    font-size: 0.8rem;
+    margin: 0.09rem;
+}
+
+#postContainer > .article-box-grid > .article-list > .likeAndReport > .likeImage > .Like, .Report {
+    width: 1.1rem;
+    margin: 0.1rem;
+}
+
+#postContainer > .article-box-grid > .article-list > .likeAndReport > .HashTag > span {
+    border-radius: 1rem;
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    color: white;
+    font-weight: 500;
+    background-color: #ff7257;
 }
 
 
-#postContainer > .postF > .post1 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postF > .post2 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postF > .post3 {
-    background-color: white;
-    margin: 1rem;
-}
 
 
-#postContainer > .postF > .post1 > .link1 {
-    background-color: white;
-}
 
-
-#postContainer > .postF > .post2 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postF > .post3 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postF > .post1 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postF > .post2 > .link1 > .link {
-    background-color: white;
-    object-fit: cover;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postF > .post3 > .link1 > .link {
-    background-color: white;
-    object-fit: cover;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postS {
-    background-color: white;
-
-    align-items: stretch;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    position: relative;
-}
-
-
-#postContainer > .postS > .post1 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postS > .post2 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postS > .post3 {
-    background-color: white;
-    margin: 1rem;
-}
-
-
-#postContainer > .postS > .post1 > .link1 {
-    background-color: white;
-}
-
-
-#postContainer > .postS > .post2 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postS > .post3 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postS > .post1 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postS > .post2 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postS > .post3 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postT {
-    background-color: white;
-
-    align-items: stretch;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    position: relative;
-}
-
-
-#postContainer > .postT > .post1 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postT > .post2 {
-    background-color: white;
-    margin: 1rem;
-}
-
-#postContainer > .postT > .post3 {
-    background-color: white;
-    margin: 1rem;
-}
-
-
-#postContainer > .postT > .post1 > .link1 {
-    background-color: white;
-}
-
-
-#postContainer > .postT > .post2 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postT > .post3 > .link1 {
-    background-color: white;
-}
-
-#postContainer > .postT > .post1 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postT > .post2 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
-
-#postContainer > .postT > .post3 > .link1 > .link {
-    background-color: white;
-    padding: 4rem;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    box-shadow: 1px 1px 2px 0 #888;
-}
 
 
 /*#popup {*/

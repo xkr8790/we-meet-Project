@@ -19,10 +19,6 @@ public class ReviewService {
     }
 
 
-    public ArticleEntity[] articleAll() {
-        return this.reviewMapper.articleAll();
-    }
-
 
     public boolean reviewWrite(HttpServletRequest request, ReviewEntity reviewEntity) {
 
@@ -44,15 +40,20 @@ public class ReviewService {
         return this.reviewMapper.selectArticleIndex(articleIndex);
     }
 
-    public ReviewEntity readReview(int index) {
-        ReviewEntity reviewEntity = this.reviewMapper.selectReviewByIndex(index);
-        return reviewEntity;
-    }
 
 
     public boolean deleteByIndex(int index) {
         return this.reviewMapper.deleteByReview(index) > 0;
     }
 
+    public Double avgStar(int articleIndex){
+        Double averageScore = reviewMapper.avgStar(articleIndex);
+        System.out.println("???");
+        System.out.println(averageScore);
+        if(averageScore != null){
+            return Math.round(averageScore * 10.0) / 10.0;
+        }
+        return null;
+    }
 
 }

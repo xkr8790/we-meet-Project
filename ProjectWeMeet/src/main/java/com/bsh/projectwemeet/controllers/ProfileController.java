@@ -35,9 +35,7 @@ public class ProfileController {
     public ModelAndView getProfile(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("home/profile");
         UserEntity userEntities = this.profileService.getAll(session);
-        ProfileEntity profile = this.profileService.getThumbnail(session);
         modelAndView.addObject("profile", userEntities);
-        modelAndView.addObject("thumbnail", profile);
         return modelAndView;
     }
 
@@ -217,5 +215,4 @@ public class ProfileController {
         }
         return responseObject.toString();
     }
-
 }

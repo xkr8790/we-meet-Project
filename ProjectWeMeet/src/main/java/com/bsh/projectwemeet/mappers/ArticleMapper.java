@@ -15,7 +15,9 @@ public interface ArticleMapper {
 
     int insertParticipants(ParticipantsEntity participants);
 
-    int selectCountCategory(@Param(value = "category")String category);
+    int selectCountCategory(@Param(value = "searchCriterion") String searchCriterion,
+                            @Param(value = "searchQuery") String searchQuery,
+                            @Param(value = "category") String category);
     //param을 이용해 관련 카테고리만 조회해서 가져온다
 
     int insertLike(LikeReportEntity likeEntity);
@@ -24,6 +26,8 @@ public interface ArticleMapper {
 
 
     ArticleEntity[] selectCountCategoryByPage(@Param(value = "pagingModel") PagingModel pagingModel,
+                                              @Param(value = "searchCriterion") String searchCriterion,
+                                              @Param(value = "searchQuery") String searchQuery,
                                               @Param(value = "category") String category);
     //카테고리 관련 페이징을 위한 매퍼
 
@@ -40,7 +44,7 @@ public interface ArticleMapper {
     ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
     //게시물 수정 인덱스 찾기
 
-    ParticipantsEntity selectParticipants(@Param(value = "index") int index);
+    ParticipantsEntity selectParticipants(@Param(value = "ArticleIndex") int ArticleIndex);
     // 참여인원 중복되있는지 select
 
     ParticipantsEntity selectCheckParticipants(@Param(value = "ArticleIndex") int ArticleIndex,
@@ -55,11 +59,18 @@ public interface ArticleMapper {
                                 @Param(value = "email") String email,
                                 @Param(value = "reportFlag") boolean reportFlag);
 
-    ParticipantsEntity selectParticipantPeople(@Param(value = "ArticleIndex") int ArticleIndex,
-                                               @Param(value = "email") String email);
-
 
     ProfileEntity selectProfile(@Param(value = "email")String email);
+
+
+    ParticipantsEntity[] selectParticipantsProfile(@Param(value = "index") int index);
+    // 참여인원 중복되있는지 select
+
+    ParticipantsEntity[] selectParticipantsProfiles(@Param(value = "ArticleIndex") int ArticleIndex,
+                                                   @Param(value = "email")String email);
+    // 참여인원 중복되있는지 select
+
+
 
 
     int updateLike(ArticleEntity article);

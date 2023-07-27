@@ -1,5 +1,6 @@
 package com.bsh.projectwemeet.services;
 
+import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ProfileEntity;
 import com.bsh.projectwemeet.entities.RegisterContactCodeEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
@@ -85,6 +86,15 @@ public class ProfileService {
                 .setCreatedAt(new Date());
         return this.profileMapper.insertProfile(profile) > 0;
     }
+
+    public int getArticleIndexCountByEmail(HttpSession session) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        Integer articleIndexCount = profileMapper.getArticleIndexCountByEmail(loginUser.getEmail());
+
+        // articleIndexCount가 null인 경우 0으로 처리합니다.
+        return articleIndexCount != null ? articleIndexCount : 0;
+    }
+
 
     //연락처 코드 전송
     public SendRegisterContactCodeResult sendContactCodeResult(RegisterContactCodeEntity registerContactCode) {

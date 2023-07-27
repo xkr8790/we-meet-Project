@@ -10,6 +10,7 @@
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
     <script defer src="/resources/scripts/slide.js"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
+    <script defer th:src="@{/resources/scripts/main.js}"></script>
 </head>
 
 <body>
@@ -38,7 +39,7 @@
                 </a>
             </li>
             <li class="item" data-action="logout">
-                <a>
+                <a href="/logout" class="icon-text-button">
                     <span class="text">로그아웃</span>
                 </a>
             </li>
@@ -125,7 +126,7 @@
             </li>
 
             <li class="item">
-                <a class="link" th:href="@{'/article' (p=1, category='완료')}">
+                <a class="link" th:href="@{'/complete' (p=1, category='완료')}">
                     <img alt="완료" class="image" th:src="@{/resources/images/testImages/완료.png}">
                     <span class="text">완료</span>
                 </a>
@@ -136,10 +137,11 @@
 </div>
 
 
-<section class="article-container">
+<section class="article-container" id="article">
     <h2 class="article-list-header">똑같은 일상의 소소한 변화</h2>
             <div class="article-box">
                 <a th:href="@{article/read(index=${article.getIndex()})}" class="article-list" th:each="article : ${article}">
+                    <input hidden th:value="${article.getIndex()}" name="index">
                     <div class="article-thumbnail">
                         <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}">
                     </div>
@@ -170,32 +172,19 @@
 
                         </div>
                         <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                  <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-                <span class="Profile-Picture">
-                 <img class="Profile" src="/resources/images/mainImages/조보아.jpg">
-              </span>
-              <img class="limit-image" src="/resources/images/category/human.png">
-              <span class="number">
-                <span class="map-item" th:text="${article.getParticipation()}"></span>
-                <span class="map-item">/</span>
-                <span class="map-item" th:text="${article.getLimitPeople()}"></span>
-              </span>
-              </span>
+                           <span class="Profile-Picture" th:each="participant : ${participantsArray}">
+                                <img class="profile" th:src="@{/article/Participate/profile(index=${participant.getIndex()}, email=${participant.getEmail()})}">
+                            </span>
+                                <img class="limit-image" src="/resources/images/category/human.png">
+                      <span class="number">
+                        <span class="map-item" th:text="${article.getParticipation()}"></span>
+                        <span class="map-item">/</span>
+                        <span class="map-item" th:text="${article.getLimitPeople()}"></span>
+                      </span>
+                      </span>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-
 </section>
 
 <footer id="footer">
@@ -215,10 +204,10 @@
         </div>
         <div class="grid-twin big">
             <p class="about-info about-a-tag second-info">㈜ 위밋</p>
-            <p class="about-info small-info second-info">대표 : 카직스 | 개인정보관리책임자 : 자르반 <br>
-                이메일 : leageOfLegend@gmail.com | 대표번호 : 010-4989-4989 <br>
-                주소 : 뉴욕광역시 맨해튼구 덕산동 29-2 스타크타워 10층 <br>
-                사업자등록번호 : 123-23-12321 | 통신판매 : 제 2023-뉴욕맨해튼-12321 <br>
+            <p class="about-info small-info second-info">대표 : 백성현 | 개인정보관리책임자 : 정인탁 <br>
+                이메일 : tjdgus4869@naver.com | 대표번호 : 010-1234-1234 <br>
+                주소 : 경기 성남시 분당구 판교 <br>
+                사업자등록번호 : 123-23-12321 | 통신판매 : 제 2023-경기분당-12321 <br>
                 고객센터 : @카카오톡채널 | 운영시간 : (월~금)오전 9:00~오후 6:00/(주말 및 공휴일)오전 8:00~오후 7:00</p>
             <p class="about-info"><a class="last-a-tag" href="/TermsOfService">이용약관</a> | <a class="last-a-tag" href="/Privacy-Policy">개인정보처리방침</a>
                 | <a class="last-a-tag" href="#">사업자정보확인</a></p>

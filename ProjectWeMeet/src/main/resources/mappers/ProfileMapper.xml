@@ -8,10 +8,11 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
-        INSERT INTO `wemeet_project`.`mypages` (`email`, `profile_thumbnail`, `profile_thumbnail_mime`)
+        INSERT INTO `wemeet_project`.`mypages` (email, profile_thumbnail, profile_thumbnail_mime,introduce_text)
         VALUES (#{email},
                 #{profileThumbnail},
-                #{profileThumbnailMime})
+                #{profileThumbnailMime},
+                #{introduceText})
     </insert>
 
     <insert id="insertContactCode"
@@ -50,8 +51,8 @@
                `address_postal`    AS `addressPostal`,
                `address_primary`   AS `addressPrimary`,
                `address_secondary` AS `addressSecondary`,
-               `gender`            AS `gender`,
-               `password`          AS `password`
+               `gender` AS `gender`,
+               `password` AS `password`
         FROM `wemeet_project`.`users`
         WHERE BINARY `email` = #{email}
         LIMIT 1
@@ -101,13 +102,10 @@
         LIMIT 1
     </select>
 
-    <select id="selectThumbnail"
-    resultType="com.bsh.projectwemeet.entities.ProfileEntity">
-        SELECT `profile_thumbnail`      AS `profileThumbnail`,
-               `profile_thumbnail_mime` AS `profileThumbnailMime`
-        FROM `wemeet_project`.`mypages`
+    <select id="getArticleIndexCountByEmail" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT `index`)
+        FROM `wemeet_project`.`articles`
         WHERE `email` = #{email}
-        LIMIT 1
     </select>
 
     <update id="updateUser"
