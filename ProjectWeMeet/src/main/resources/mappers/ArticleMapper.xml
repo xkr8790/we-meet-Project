@@ -651,4 +651,25 @@
         LIMIT 1
     </select>
 
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsProfile"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{index}
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsProfiles"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex} AND `email` = #{email}
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
 </mapper>
