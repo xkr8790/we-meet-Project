@@ -8,10 +8,11 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
-        INSERT INTO `wemeet_project`.`mypages` (email, profile_thumbnail, profile_thumbnail_mime)
+        INSERT INTO `wemeet_project`.`mypages` (email, profile_thumbnail, profile_thumbnail_mime,introduce_text)
         VALUES (#{email},
                 #{profileThumbnail},
-                #{profileThumbnailMime})
+                #{profileThumbnailMime},
+                #{introduceText})
     </insert>
 
     <insert id="insertContactCode"
@@ -100,26 +101,32 @@
         LIMIT 1
     </select>
 
+    <select id="getArticleIndexCountByEmail" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT `index`)
+        FROM `wemeet_project`.`articles`
+        WHERE `email` = #{email}
+    </select>
+
     <update id="updateUser"
-    parameterType="com.bsh.projectwemeet.entities.UserEntity">
+            parameterType="com.bsh.projectwemeet.entities.UserEntity">
         UPDATE `wemeet_project`.`users`
-        SET `name` = #{name},
-            `nickname` = #{nickname},
-            `contact` = #{contact},
-            `admin_flag` = #{isAdmin},
-            `birth` = #{birth},
-            `registered_at` = #{registeredAt},
-            `address_postal` = #{addressPostal},
-            `address_primary` = #{addressPrimary},
+        SET `name`              = #{name},
+            `nickname`          = #{nickname},
+            `contact`           = #{contact},
+            `admin_flag`        = #{isAdmin},
+            `birth`             = #{birth},
+            `registered_at`     = #{registeredAt},
+            `address_postal`    = #{addressPostal},
+            `address_primary`   = #{addressPrimary},
             `address_secondary` = #{addressSecondary},
-            `gender` = #{gender},
-            `password` = #{password}
+            `gender`            = #{gender},
+            `password`          = #{password}
         WHERE `email` = #{email}
         LIMIT 1
     </update>
 
     <update id="updateContactCode"
-    parameterType="com.bsh.projectwemeet.entities.RegisterContactCodeEntity">
+            parameterType="com.bsh.projectwemeet.entities.RegisterContactCodeEntity">
         UPDATE `wemeet_project`.`register_contact_codes`
         SET `contact`      =#{contact},
             `code`         = #{code},

@@ -1,5 +1,7 @@
 package com.bsh.projectwemeet.services;
 
+import com.bsh.projectwemeet.entities.ProfileEntity;
+import com.bsh.projectwemeet.mappers.ProfileMapper;
 import com.bsh.projectwemeet.mappers.RegisterMapper;
 import com.bsh.projectwemeet.entities.RegisterContactCodeEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
@@ -14,8 +16,10 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.context.Context;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
@@ -23,11 +27,14 @@ import java.util.Date;
 public class RegisterService {
 
     private final RegisterMapper registerMapper;
+    private final ProfileMapper profileMapper;
 
     @Autowired
-    public RegisterService(RegisterMapper registerMapper) {
+    public RegisterService(RegisterMapper registerMapper, ProfileMapper profileMapper) {
         this.registerMapper = registerMapper;
+        this.profileMapper = profileMapper;
     }
+
 
 
     public SendRegisterContactCodeResult sendRegisterContactCodeResult(RegisterContactCodeEntity registerContactCode){
@@ -75,7 +82,7 @@ public class RegisterService {
     }
 
 
-    public RegisterResult register(UserEntity user,RegisterContactCodeEntity registerContactCode)throws NoSuchAlgorithmException {
+    public RegisterResult register(UserEntity user,RegisterContactCodeEntity registerContactCode,ProfileEntity profile)throws NoSuchAlgorithmException {
 
         if (this.registerMapper.selectUserByEmail(user.getEmail()) != null) {
             return RegisterResult.FAILURE_DUPLICATE_EMAIL; //사용중인 이메일
@@ -93,7 +100,26 @@ public class RegisterService {
         user.setPassword(CryptoUtil.hashSha512(user.getPassword())); //저장되는 패스워드 암호화
 
 
-        return this.registerMapper.insertUser(user) > 0
+        String defaultProfileImagePath = "src/main/resources/static/resources/images/profileImages/icons8-male-user-96.png";
+        //기본이미지 루트
+
+        try {
+            // 이미지 파일을 바이트 배열로 읽어옴
+            byte[] defaultProfileImageBytes = Files.readAllBytes(Paths.get(defaultProfileImagePath));
+
+            // ProfileEntity 생성
+            profile.setEmail(user.getEmail())
+                    .setCreatedAt(new Date())
+                    .setProfileThumbnail(defaultProfileImageBytes)
+                    .setProfileThumbnailMime("image/png")
+                    .setIntroduceText("");// 이미지의 MIME 타입을 설정해야 합니다.
+
+        } catch (IOException e) {
+            // 파일 읽기 오류 처리
+            e.printStackTrace();
+        } //회원가입시 같이 프로필 추가되게
+
+        return this.registerMapper.insertUser(user) > 0 && profileMapper.insertProfile(profile) > 0
                 ? RegisterResult.SUCCESS
                 : RegisterResult.FAILURE;
     }

@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -25,7 +27,6 @@ public class ArticleService {
     public ArticleService(ArticleMapper articleMapper) {
         this.articleMapper = articleMapper;
     }
-
 
 
     public int getCountCategory(String searchCriterion, String searchQuery, String category){
@@ -74,19 +75,6 @@ public class ArticleService {
     public ArticleEntity[] selectArticleByLimitPeople(int index){
         return this.articleMapper.selectArticleBylimitPeople(index);
     }
-
-    public ProfileEntity selectParticipateProfile(int index,HttpSession session){
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-        ParticipantsEntity participants = articleMapper.selectParticipantPeople(index, loginUser.getEmail());
-        ProfileEntity profile = articleMapper.selectProfile(loginUser.getEmail());
-
-        if(Objects.equals(participants.getEmail(), profile.getEmail())){
-            return articleMapper.selectProfile(loginUser.getEmail());
-        }
-        return null;
-    }
-
-
 
 
     public boolean InsertParticipate(int index, ParticipantsEntity participants, HttpSession session) {
@@ -158,9 +146,10 @@ public class ArticleService {
 
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
 
-        participants = this.articleMapper.selectParticipants(article.getIndex());
 
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
+
+        participants = this.articleMapper.selectCheckParticipants(index, loginUser.getEmail());
 
         if (participants == null) {
             return SelectParticipantsResult.FAILURE;
@@ -206,11 +195,6 @@ public class ArticleService {
 
         return this.articleMapper.selectArticleByPatchIndex(index);
     }
-
-    public ArticleEntity[] getPatchIndexArticleHashTag(int index){
-        return this.articleMapper.selectArticleByPatchHashTag(index);
-    }
-
 
 
     public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
@@ -358,6 +342,9 @@ public class ArticleService {
     public ProfileEntity profileBulletin(int index){
         ArticleEntity article = articleMapper.selectArticleByIndex(index);
         ProfileEntity profile = articleMapper.selectProfile(article.getEmail());
+        if(profile == null){
+            return null;
+        }
         if(Objects.equals(article.getEmail(), profile.getEmail())){
             return articleMapper.selectProfile(article.getEmail());
         }
@@ -366,12 +353,44 @@ public class ArticleService {
 
     public ProfileEntity profileArticle(HttpSession session){
         UserEntity user = (UserEntity) session.getAttribute("user");
+
+        if(user == null){
+            return null;
+        }
         ProfileEntity profile = articleMapper.selectProfile(user.getEmail());
+
         if(Objects.equals(user.getEmail(), profile.getEmail())){
             return articleMapper.selectProfile(user.getEmail());
         }
         return null;
     }
+
+    public ParticipantsEntity[] selectParticipantsProfile(int index){
+        return articleMapper.selectParticipantsProfile(index);
+    } //참여한 인원수만큼 배열 반환 -> 배열로 해야지 반복문을 사용해 참가자 수만큼 나타낼수 있음
+
+
+    public ProfileEntity[] ParticipateProfile(int index, String email) {
+        // 주어진 index에 해당하는 ArticleEntity를 가져옴
+        ArticleEntity article = articleMapper.selectArticleByIndex(index);
+
+        // 주어진 index에 해당하는 모든 참여자(ParticipantsEntity)들을 가져옴
+        ParticipantsEntity[] participants = articleMapper.selectParticipantsProfiles(index, email);
+
+        // 프로필들을 저장할 비어있는 ArrayList 생성
+        ProfileEntity[] profileList = new ProfileEntity[participants.length];
+
+        // participants 배열을 순회하면서 각 참여자의 프로필을 가져와서 profileList에 추가
+        for (int i = 0; i < participants.length; i++) {
+            ParticipantsEntity participant = participants[i];
+            ProfileEntity profile = articleMapper.selectProfile(participant.getEmail());
+            // 프로필을 profileList에 추가
+            profileList[i] = profile;
+        }
+
+        // 프로필 배열 반환
+        return profileList;
+    } //이미지 추가
 
 
 

@@ -38,17 +38,13 @@ public interface ArticleMapper {
     ArticleEntity[] selectDifferentArticle();
     //이런만남은 어때요?를 나타내기 위한 매퍼
 
-
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
     //클릭시 해당게시물을 가기위해 index값으로 찾기위해 사용되는 매퍼
 
     ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
     //게시물 수정 인덱스 찾기
 
-    ArticleEntity[] selectArticleByPatchHashTag(@Param(value = "index") int index);
-    //게시물 해쉬태그 select
-
-    ParticipantsEntity selectParticipants(@Param(value = "index") int index);
+    ParticipantsEntity selectParticipants(@Param(value = "ArticleIndex") int ArticleIndex);
     // 참여인원 중복되있는지 select
 
     ParticipantsEntity selectCheckParticipants(@Param(value = "ArticleIndex") int ArticleIndex,
@@ -63,11 +59,18 @@ public interface ArticleMapper {
                                 @Param(value = "email") String email,
                                 @Param(value = "reportFlag") boolean reportFlag);
 
-    ParticipantsEntity selectParticipantPeople(@Param(value = "ArticleIndex") int ArticleIndex,
-                                               @Param(value = "email") String email);
-
 
     ProfileEntity selectProfile(@Param(value = "email")String email);
+
+
+    ParticipantsEntity[] selectParticipantsProfile(@Param(value = "index") int index);
+    // 참여인원 중복되있는지 select
+
+    ParticipantsEntity[] selectParticipantsProfiles(@Param(value = "ArticleIndex") int ArticleIndex,
+                                                   @Param(value = "email")String email);
+    // 참여인원 중복되있는지 select
+
+
 
 
     int updateLike(ArticleEntity article);
@@ -110,11 +113,6 @@ public interface ArticleMapper {
     CommentEntity[] selectCommentByArticleIndex(@Param(value = "articleIndex")int articleIndex);
     CommentEntity selectComment(@Param(value = "index") int index);
 
-    CommentEntity selectCommentByEmail(CommentEntity comment);
-
-    ArticleEntity selectArticleByEmail(ArticleEntity article);
-
-    ArticleEntity selectArticleByArticleIndex(@Param("articleIndex") int articleIndex);
 
     int insertComment(CommentEntity comment);
 

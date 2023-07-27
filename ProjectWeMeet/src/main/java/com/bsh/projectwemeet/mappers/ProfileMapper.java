@@ -1,5 +1,6 @@
 package com.bsh.projectwemeet.mappers;
 
+import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ProfileEntity;
 import com.bsh.projectwemeet.entities.RegisterContactCodeEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
@@ -18,6 +19,8 @@ public interface ProfileMapper {
     RegisterContactCodeEntity selectContactCodeByContactCodeSalt(RegisterContactCodeEntity registerContactCode);
 
     UserEntity selectPasswordByEmail(@Param(value = "email") String email);
+
+    int getArticleIndexCountByEmail(@Param(value = "email")String email);
 
     int updatePassword(UserEntity user);
 

@@ -8,6 +8,7 @@
     <title>게시글</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
     <script defer th:src="@{/resources/scripts/bulltinScript/bulletin.js}"></script>
     <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
@@ -134,9 +135,9 @@
                 <div class="login-after-human">
                     <p>함께 할 멤버!</p>
                     <div class="profile">
-                 <span th:each="i : ${#numbers.sequence(1, article.getLimitPeople()-1)}">
-                        <img th:src="@{/article/Participate/profile(index=${article.getIndex()})}">
-                 </span>
+                     <span th:each="participantsArray : ${participantsArray}">
+                         <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
+                     </span>
                     </div>
 
                     <!--  자신의 게시판일때   -->
@@ -204,7 +205,7 @@
                     <div class="content-write">
                         <input name="articleIndex" type="hidden" th:value="${article.getIndex()}">
                         <input name="articleEmail" type="hidden" th:value="${article.getEmail()}">
-                        <input name="nickname" type="hidden" th:value="${user?.getNickname()}">
+                        <input name="nickname" type="hidden" th:value="${user.getNickname()}">
 
                         <label>
                             <input type="text" name="content" placeholder="댓글" maxlength="100">
@@ -231,7 +232,10 @@
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
-                        <div class="human">프로필</div>
+                        <div class="human">
+                            <img class="human-image" th:if="${articles == null}" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
+                            <img class="human-image" th:if="${articles != null}" th:src="@{/article/read/profile(index=${articles.getIndex()})}" alt="Thumbnail">
+                        </div>
                         <i class="fa-solid fa-user-group"></i>
                         <div class="number" th:text="${articles.getParticipation()}">인원</div>
                         <div class="number">/</div>
