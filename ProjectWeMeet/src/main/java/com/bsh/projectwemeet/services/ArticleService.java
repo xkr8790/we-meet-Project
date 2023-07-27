@@ -245,7 +245,7 @@ public class ArticleService {
         } //좋아요 인서트
 
 
-      return InsertLikeAndReportResult.FAILURE;
+        return InsertLikeAndReportResult.FAILURE;
     }
 
     public InsertLikeAndReportResult InsertReport(int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
@@ -292,7 +292,7 @@ public class ArticleService {
             return result;
         }
 
-       return null;
+        return null;
     }
 
     public LikeReportEntity selectReport(int index,HttpSession session,boolean flag){
@@ -392,13 +392,7 @@ public class ArticleService {
         return profileList;
     } //이미지 추가
 
-
-
-
-
-
-
-    //-----------------------------------------------게시판 리뷰-------------------------------------------------------------
+//-----------------------------------------------게시판리뷰-------------------------------------------------------------
     public boolean patchFinish(int index, HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(index);
@@ -427,6 +421,9 @@ public class ArticleService {
 
 
 //-------------------------------------- 댓글 리뷰 --------------------------------------------------------------
+
+
+//-------------------------------------- 댓글 리뷰-----------------------------------------------------------
 
     //    댓글
     public CommentEntity[] getCommentsOf(int articleIndex) {
@@ -509,18 +506,18 @@ public class ArticleService {
         }
     }
 
-    public UserEntity userEmail(HttpSession session){
+    public UserEntity userEmail(HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-        if(loginUser ==null){
-            return null;
+        if (loginUser == null) {
+            // Return a default user with nickname "notLogin"
+            return new UserEntity().setNickname("notLogin");
         }
 
-        if(articleMapper.selectUser(loginUser.getEmail())!=null){
-            return  this.articleMapper.selectUser(loginUser.getEmail());
-        }
+        // Now, check if the user exists in the database using their email
+        UserEntity user = this.articleMapper.selectUser(loginUser.getEmail());
 
-        return null;
+        return user;
     }
 
 

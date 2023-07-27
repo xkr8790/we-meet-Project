@@ -281,7 +281,7 @@ registerForm.onsubmit = e =>{
                             break;
                         case 'success':
                             step2.style.display = 'none';
-                            step3.style.display = 'block';
+                            step3.style.display = 'flex';
                             break;
                         default:
                             registerForm.contactWarning.show('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');

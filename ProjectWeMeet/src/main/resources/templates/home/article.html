@@ -40,7 +40,7 @@
             </ul>
             <ul class="menu right" th:if="${session.user != null}">
                 <li class="item">
-                    <a href="#" class="icon-text-button">
+                    <a href="/profile/profile" class="icon-text-button">
                         <div class="profile">
                             <img th:if="${profile == null}" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}">
                             <img th:if="${profile != null}" th:src="@{/article/profile}">
@@ -140,12 +140,12 @@
 
     <section class="search-box">
             <div class="search">
-                <select name="c" id="lang">
+                <select class="select" name="c" id="lang">
                     <option value="all">전체</option>
                     <option value="title">제목</option>
                     <option value="address">지역</option>
                 </select>
-                <input type="hidden" name="category">
+                <input type="hidden" name="category" >
                 <input class="input"  name="q" placeholder="검색어를 입력해주세요" type="text">
                 <input class="button" type="submit" value="검색">
             </div>

@@ -39,24 +39,31 @@ function postReview(content, toFocus, refreshCommentAfter) {
     formData.append('articleIndex', articleIndex);
     formData.append('content', content);
     formData.append('reviewStar', reviewStar);
-    // if (reviewIndex !== null && reviewIndex !== undefined) {
-    //     formData.append('reviewIndex', reviewIndex)
-    // }
     xhr.open('POST', `review/index`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                if (toFocus) {
-                    toFocus.value = '';
-                    toFocus.focus();
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'success':
+                        if (toFocus) {
+                            toFocus.value = '';
+                            toFocus.focus();
+                        }
+                        if (refreshCommentAfter === true) {
+                            location.href += '';
+                        }
+                        break;
+                    case 'failure_exception':
+                        alert('사용자님은 권한이 없습니다.');
+                        break;
+                    case 'failure':
+                        alert('이건몰루!');
+                        break;
+                    default:
+                        alert('댓글을 작성하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
                 }
-                if (refreshCommentAfter === true) {
-                    location.href += '';
-                } else {
-                    alert('댓글을 작성하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
-
-                }
-            } else {
+            }else {
                 alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
 
             }

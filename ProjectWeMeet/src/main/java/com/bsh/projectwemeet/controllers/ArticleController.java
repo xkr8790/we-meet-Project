@@ -239,6 +239,56 @@ public class ArticleController {
         return response;
     }
 
+    @RequestMapping(value = "article/read/profile", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getProfile(@RequestParam(value = "index") int index) {
+
+        ProfileEntity profile = this.articleService.profileBulletin(index);
+
+        ResponseEntity<byte[]> response;
+        if (profile == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            try {
+                // 원본 이미지를 BufferedImage로 변환
+                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
+
+                // 새로운 크기로 이미지 조정
+                int newWidth = 60;
+                int newHeight = 60;
+                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+                // BufferedImage 생성
+                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+
+                // Graphics2D를 사용하여 이미지 그리기
+                Graphics2D graphics = outputImage.createGraphics();
+                graphics.drawImage(resizedImage, 0, 0, null);
+                graphics.dispose();
+
+                // 조정된 이미지를 바이트 배열로 변환
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(outputImage, "jpg", baos);
+                byte[] resizedImageBytes = baos.toByteArray();
+
+                // HTTP 응답 헤더 설정
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentLength(resizedImageBytes.length);
+                headers.setContentType(MediaType.IMAGE_JPEG);
+
+                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return response;
+    }
+    //게시판주인의 프로필 사진
+
+
+
+
     //인덱스 번호로 사진가져와서 인덱스에 해당하는 게시판에 사진 나타내기
 
     @RequestMapping(value = "article/read",
@@ -250,15 +300,6 @@ public class ArticleController {
     }
     //게시판 삭제
 
-    @RequestMapping(value = "article/patch",
-            method = RequestMethod.GET)
-    public ModelAndView getWrite(@RequestParam(value = "index") int index, HttpSession session) {
-        ArticleEntity article = articleService.getPatchIndexArticle(index,session);
-        ModelAndView modelAndView = new ModelAndView("home/patchWrite");
-        modelAndView.addObject("article", article);
-        return modelAndView;
-    }
-    //게시판 수정 폼 받아오기
 
     @RequestMapping(value = "article/patch",
             method = RequestMethod.PATCH,
@@ -397,52 +438,7 @@ public class ArticleController {
     }
     //게시판주인의 프로필 사진
 
-    @RequestMapping(value = "article/read/profile", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> getProfile(@RequestParam(value = "index") int index) {
 
-        ProfileEntity profile = this.articleService.profileBulletin(index);
-
-        ResponseEntity<byte[]> response;
-        if (profile == null) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "jpg", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                // HTTP 응답 헤더 설정
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-        return response;
-    }
-    //게시판주인의 프로필 사진
 
     @RequestMapping(value = "article/Participate/profile", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getParticipants(@RequestParam(value = "index") int index,
@@ -551,6 +547,8 @@ public class ArticleController {
         ModelAndView modelAndView = new ModelAndView("home/review");
         ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
         ReviewEntity[] reviewEntities = this.reviewService.getAll();
+        Double reviewAvgStar = reviewService.avgStar(index);
+        modelAndView.addObject("avgStar", reviewAvgStar);
         modelAndView.addObject("article", article);
         modelAndView.addObject("reviews", reviewEntities);
         return modelAndView;
