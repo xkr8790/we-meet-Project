@@ -6,40 +6,31 @@ import java.util.Objects;
 public class ProfileEntity {
     private int index;
     private String email;
-    private String content;
     private byte[] profileThumbnail;
     private String profileThumbnailMime;
     private Date createdAt;
-    private Date updatedAt;
-    private String nickname;
-    private String contact;
-    private String registerBy;
+    private String introduceText;
 
-    public String getNickname() {
-        return nickname;
+    public String getIntroduceText() {
+        return introduceText;
     }
 
-    public ProfileEntity setNickname(String nickname) {
-        this.nickname = nickname;
+    public ProfileEntity setIntroduceText(String introduceText) {
+        this.introduceText = introduceText;
         return this;
     }
 
-    public String getContact() {
-        return contact;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProfileEntity profile = (ProfileEntity) o;
+        return index == profile.index;
     }
 
-    public ProfileEntity setContact(String contact) {
-        this.contact = contact;
-        return this;
-    }
-
-    public String getRegisterBy() {
-        return registerBy;
-    }
-
-    public ProfileEntity setRegisterBy(String registerBy) {
-        this.registerBy = registerBy;
-        return this;
+    @Override
+    public int hashCode() {
+        return Objects.hash(index);
     }
 
     public int getIndex() {
@@ -57,15 +48,6 @@ public class ProfileEntity {
 
     public ProfileEntity setEmail(String email) {
         this.email = email;
-        return this;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public ProfileEntity setContent(String content) {
-        this.content = content;
         return this;
     }
 
@@ -94,27 +76,5 @@ public class ProfileEntity {
     public ProfileEntity setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public ProfileEntity setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProfileEntity that = (ProfileEntity) o;
-        return index == that.index;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(index);
     }
 }

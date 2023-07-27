@@ -172,8 +172,8 @@
 
                         </div>
                         <span class="article-human">
-                              <span class="Profile-Picture" th:each="article : ${participantsArray}">
-                                     <img class="Profile" th:src="@{/resources/images/mainImages/조보아.jpg}" th:attr="data-article-index=${article.getIndex()}">
+                           <span class="Profile-Picture" th:each="participant : ${participantsArray}">
+                                <img class="profile" th:src="@{/article/Participate/profile(index=${participant.getIndex()}, email=${participant.getEmail()})}">
                             </span>
                                 <img class="limit-image" src="/resources/images/category/human.png">
                       <span class="number">

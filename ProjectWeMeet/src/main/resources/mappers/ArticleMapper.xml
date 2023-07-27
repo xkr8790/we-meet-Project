@@ -294,7 +294,7 @@
     <!-- 참여인원 중복되있는지 select -->
 
     <!-- 참여인원 중복되있는지 select -->
-    <select id="selectParticipantss"
+    <select id="selectParticipantsPeoples"
             resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
         SELECT `index`                      AS `index`,
                `email`                      AS `email`,

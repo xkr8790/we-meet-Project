@@ -8,6 +8,7 @@
     <title>게시글</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
     <script defer th:src="@{/resources/scripts/bulltinScript/bulletin.js}"></script>
     <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
@@ -137,14 +138,8 @@
                 <div class="login-after-human">
                     <p>함께 할 멤버!</p>
                     <div class="profile">
-                     <span th:if="${selectParticipateProfile.equals('failure') ||
-                                    selectParticipateProfile.equals('failure_profile') ||
-                                    selectParticipateProfile.equals('success')}"
-                          th:each="participantsArray : ${participantsArray}">
-                         <p th:text="${participantsArray.getEmail()}"></p>
-                         <p th:text="${profile.getEmail()}"></p>
-                             <img th:if="${profile != null}" th:src="@{/article/Participate/profile(index=${article.getIndex()}, email=${participantsArray.getEmail()})}">
-                             <img th:if="${profile == null}" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}">
+                     <span th:each="participantsArray : ${participantsArray}">
+                         <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
                      </span>
                     </div>
 

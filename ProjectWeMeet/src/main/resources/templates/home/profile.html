@@ -152,71 +152,209 @@
             </div>
         </div>
     </div>
-    <div class="right-profileF">
-        <span class="posts">참여한 게시물</span>
-        <span class="postH" th:text="${article}">9</span>
+    <div class="introduce">
+        <span>방갑습니다 친하게 지내요</span>
     </div>
-    <div class="right-profileS">
-        <div class="item">
-            <img class="like" th:src="@{/resources/images/profileImages/icons8-like-100.png}" alt="">
-            <a href="#" class="likes">좋아요</a>
-        </div>
-        <div class="item">
-            <img class="report" th:src="@{/resources/images/profileImages/icons8-warning-100.png}" alt="">
-            <a href="#" class="reports">신고누적</a>
-        </div>
-    </div>
+
 </form>
 
 
 <div class="post-container" id="postContainer">
+    <span>
+        <span class="article-post">
+            <span class="posts">참여한 게시물</span>
+            <span class="postH" th:text="${article}"></span>
+         </span>
+        <span class="article-status">
+            <a class="status" href="/">게시글</a>
+            <a class="status" href="/">참여</a>
+            <a class="status" href="/">완료</a>
+        </span>
+    </span>
+
     <div class="article-box-grid">
         <div class="article-list">
-            <a class="link1" href="#">
-                <img class="link" src="resources/images/다운로드.png" alt="">
+            <a class="myArticleLink" href="#">
+                <h2>안녕하세요</h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
+                </div>
             </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span>5</span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span>5</span>
+                </span>
+                <span class="HashTag">
+                     <span>식사</span>
+                     <span>#안녕하세요</span>
+                </span>
+            </div>
         </div>
         <div class="article-list">
-            <a class="link1" href="#">
-                <img class="link" src="resources/images/다운로드.png" alt="">
+            <a class="myArticleLink" href="#">
+                <h2>안녕하세요</h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
+                </div>
             </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span>5</span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span>5</span>
+                </span>
+                <span class="HashTag">
+                     <span>식사</span>
+                     <span>#안녕하세요</span>
+                </span>
+            </div>
         </div>
         <div class="article-list">
-            <a class="link1" href="#">
-                <img class="link" src="resources/images/다운로드.png" alt="">
+            <a class="myArticleLink" href="#">
+                <h2>안녕하세요</h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
+                </div>
             </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span>5</span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span>5</span>
+                </span>
+                <span class="HashTag">
+                     <span>식사</span>
+                     <span>#안녕하세요</span>
+                </span>
+            </div>
         </div>
         <div class="article-list">
-            <a class="link1" href="#">
-                <img class="link" src="resources/images/다운로드.png" alt="">
+            <a class="myArticleLink" href="#">
+                <h2>안녕하세요</h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
+                </div>
             </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span>5</span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span>5</span>
+                </span>
+                <span class="HashTag">
+                     <span>식사</span>
+                     <span>#안녕하세요</span>
+                </span>
+            </div>
         </div>
         <div class="article-list">
-            <a class="link1" href="#">
-                <img class="link" src="resources/images/다운로드.png" alt="">
+            <a class="myArticleLink" href="#">
+                <h2>안녕하세요</h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
+                </div>
             </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span>5</span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span>5</span>
+                </span>
+                <span class="HashTag">
+                     <span>식사</span>
+                     <span>#안녕하세요</span>
+                </span>
+            </div>
         </div>
         <div class="article-list">
-            <a class="link1" href="#">
-                <img class="link" src="resources/images/다운로드.png" alt="">
+            <a class="myArticleLink" href="#">
+                <h2>안녕하세요</h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
+                </div>
             </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span>5</span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span>5</span>
+                </span>
+                <span class="HashTag">
+                     <span>식사</span>
+                     <span>#안녕하세요</span>
+                </span>
+            </div>
         </div>
         <div class="article-list">
-            <a class="link1" href="#">
-                <img class="link" src="resources/images/다운로드.png" alt="">
+            <a class="myArticleLink" href="#">
+                <h2>안녕하세요</h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
+                </div>
             </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span>5</span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span>5</span>
+                </span>
+                <span class="HashTag">
+                     <span>식사</span>
+                     <span>#안녕하세요</span>
+                </span>
+            </div>
         </div>
         <div class="article-list">
-            <a class="link1" href="#">
-                <img class="link" src="resources/images/다운로드.png" alt="">
+            <a class="myArticleLink" href="#">
+                <h2>안녕하세요</h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
+                </div>
             </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span>5</span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span>5</span>
+                </span>
+                <span class="HashTag">
+                     <span>식사</span>
+                     <span>#안녕하세요</span>
+                </span>
+            </div>
         </div>
         <div class="article-list">
-            <a class="link1" href="#">
-                <img class="link" src="resources/images/다운로드.png" alt="">
+            <a class="myArticleLink" href="#">
+                <h2>안녕하세요</h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
+                </div>
             </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span>5</span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span>5</span>
+                </span>
+                <span class="HashTag">
+                     <span>식사</span>
+                     <span>#안녕하세요</span>
+                </span>
+            </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

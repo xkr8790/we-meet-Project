@@ -47,7 +47,6 @@ public interface ArticleMapper {
     ParticipantsEntity selectParticipants(@Param(value = "ArticleIndex") int ArticleIndex);
     // 참여인원 중복되있는지 select
 
-
     ParticipantsEntity selectCheckParticipants(@Param(value = "ArticleIndex") int ArticleIndex,
                                                @Param(value = "email") String email);
 
@@ -60,14 +59,9 @@ public interface ArticleMapper {
                                 @Param(value = "email") String email,
                                 @Param(value = "reportFlag") boolean reportFlag);
 
-    ParticipantsEntity selectParticipantPeople(@Param(value = "ArticleIndex") int ArticleIndex,
-                                               @Param(value = "email") String email);
-
 
     ProfileEntity selectProfile(@Param(value = "email")String email);
 
-    ProfileEntity[] selectProfiles(@Param(value = "email")String email);
-    //프로필을 배열로 설정해 여러 사용자의 값을 받는다
 
     ParticipantsEntity[] selectParticipantsProfile(@Param(value = "index") int index);
     // 참여인원 중복되있는지 select

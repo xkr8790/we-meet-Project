@@ -369,58 +369,28 @@ public class ArticleService {
         return articleMapper.selectParticipantsProfile(index);
     } //참여한 인원수만큼 배열 반환 -> 배열로 해야지 반복문을 사용해 참가자 수만큼 나타낼수 있음
 
-    public selectParticipateProfile selectParticipateProfile(int index){
-        ParticipantsEntity participants = articleMapper.selectParticipants(index);
 
-        if(participants == null){
-            return selectParticipateProfile.FAILURE;
-        } //계정이 참여한적없을때
-
-        ProfileEntity profile = articleMapper.selectProfile(participants.getEmail());
-
-        if(participants!=null && profile == null){
-            return selectParticipateProfile.FAILURE_PROFILE;
-        }
-
-        return participants!=null && profile!=null
-                ? selectParticipateProfile.SUCCESS
-                : selectParticipateProfile.FAILURE;
-
-    }
-
-    public ProfileEntity[] ParticipateProfile(int index,String email) {
+    public ProfileEntity[] ParticipateProfile(int index, String email) {
         // 주어진 index에 해당하는 ArticleEntity를 가져옴
         ArticleEntity article = articleMapper.selectArticleByIndex(index);
 
         // 주어진 index에 해당하는 모든 참여자(ParticipantsEntity)들을 가져옴
-        ParticipantsEntity[] participants = articleMapper.selectParticipantsProfiles(index,email);
+        ParticipantsEntity[] participants = articleMapper.selectParticipantsProfiles(index, email);
 
         // 프로필들을 저장할 비어있는 ArrayList 생성
-        List<ProfileEntity> profileList = new ArrayList<>();
+        ProfileEntity[] profileList = new ProfileEntity[participants.length];
 
         // participants 배열을 순회하면서 각 참여자의 프로필을 가져와서 profileList에 추가
-        for (ParticipantsEntity participant : participants) {
-            participant = articleMapper.selectParticipants(index);
-            // 참여자의 이메일을 사용하여 해당하는 프로필(ProfileEntity)을 가져옴
+        for (int i = 0; i < participants.length; i++) {
+            ParticipantsEntity participant = participants[i];
             ProfileEntity profile = articleMapper.selectProfile(participant.getEmail());
-
-            // 프로필이 존재하면 profileList에 추가
-            if (profile != null) {
-                profileList.add(profile);
-            }
+            // 프로필을 profileList에 추가
+            profileList[i] = profile;
         }
 
-        // List<ProfileEntity>를 ProfileEntity 배열로 변환하여 반환
-        // article.getLimitPeople()에서 1을 빼는 이유는 생성된 프로필 배열의 크기를
-        // article의 설정된 제한 인원보다 1 작게 만들기 위함입니다.
-        ProfileEntity[] profilesArray = profileList.toArray(new ProfileEntity[1]);
-
-        System.out.println(profilesArray.length);
-
         // 프로필 배열 반환
-        return profilesArray;
-    }
-
+        return profileList;
+    } //이미지 추가
 
 
 

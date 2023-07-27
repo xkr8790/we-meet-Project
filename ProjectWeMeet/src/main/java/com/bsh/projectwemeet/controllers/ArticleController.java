@@ -41,6 +41,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/")
@@ -155,7 +156,7 @@ public class ArticleController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session,
-   boolean flag) {
+   boolean flag,String email) {
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
 
         ArticleEntity article = this.articleService.readArticle(index);
@@ -170,8 +171,9 @@ public class ArticleController {
         ProfileEntity profile = this.articleService.profileBulletin(index);
         //게시판 인덱스를 통해 게시판의 작성자가 프로필 테이블에 사진이 있다면 가져오고
         ParticipantsEntity[] participantsArray = this.articleService.selectParticipantsProfile(index);
-        selectParticipateProfile selectParticipateProfile = this.articleService.selectParticipateProfile(index);
         //참가자의 참여부를 따지기
+        ProfileEntity[] profiles = this.articleService.ParticipateProfile(index, email);
+
 
 
 
@@ -185,7 +187,7 @@ public class ArticleController {
         modelAndView.addObject("articleLimitPeople",articleLimitPeople);
         modelAndView.addObject("profile",profile);
         modelAndView.addObject("participantsArray",participantsArray);
-        modelAndView.addObject("selectParticipateProfile",selectParticipateProfile.name().toLowerCase());
+        modelAndView.addObject("profiles",profiles);
         //참가자의 참여부를 따져서 결과 반환
 
         return modelAndView;
@@ -449,17 +451,11 @@ public class ArticleController {
         ProfileEntity[] profiles = this.articleService.ParticipateProfile(index, email);
         ResponseEntity<byte[]> response = null;
 
-        if (profiles == null) {
-        } else {
-            // profiles 배열의 각 프로필에 대해 처리
-            for (ProfileEntity profile : profiles) {
-                // 각 프로필에 대해 응답 생성
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(profile.getProfileThumbnail().length);
-                headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
-                System.out.println(profiles.length);
-                response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
-            }
+        for (ProfileEntity profile : profiles) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }

@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -35,11 +32,11 @@ public class HomeController {
         return modelAndView;
     } //메인 홈 주소
 
-    @RequestMapping(value = "/profile",
+    @RequestMapping(value = "/profile/{index}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ModelAndView getMainArticle(@RequestParam(value = "index")int index){
+    public ModelAndView getMainArticle(@PathVariable(value = "index")int index){
         System.out.println("Received index: " + index); // index 값을 출력
         ModelAndView modelAndView = new ModelAndView("home/main");
         ParticipantsEntity[] participantsArray = this.articleService.selectParticipantsProfile(index);
