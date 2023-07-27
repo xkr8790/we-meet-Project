@@ -142,35 +142,7 @@ public class ArticleService {
     }
 
 
-    public SelectParticipantsResult SelectParticipants(int index, ParticipantsEntity participants, HttpSession session) {
 
-        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
-
-
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-
-        participants = this.articleMapper.selectCheckParticipants(index, loginUser.getEmail());
-
-        if (participants == null) {
-            return SelectParticipantsResult.FAILURE;
-        }
-
-
-        if(!Objects.equals(loginUser.getEmail(), participants.getEmail())){
-            return SelectParticipantsResult.FAILURE;
-        } //참여자의 이메일과 지금 로그인한 이메일의 사용자가 같지않다면 실패 반환
-
-
-        if(article.getParticipation() <= article.getLimitPeople()){
-            article.setParticipation(article.getParticipation() - 1);
-            this.articleMapper.updateParticipate(article);
-        }    // 게시글의 참가 인원을 1명 줄입니다
-
-
-        return this.articleMapper.deleteByParticipants(participants.getIndex()) > 0
-                ? SelectParticipantsResult.SUCCESS
-                : SelectParticipantsResult.FAILURE;
-    } //참여 인원 삭제
 
     public boolean deleteByIndex(int index,ArticleEntity article,HttpSession session){
 
@@ -197,6 +169,8 @@ public class ArticleService {
     }
 
 
+
+
     public PatchArticleResult UpdateArticle(ArticleEntity article,HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
@@ -215,190 +189,41 @@ public class ArticleService {
                 : PatchArticleResult.FAILURE;
     }
 
-
-    public InsertLikeAndReportResult InsertLike(int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
-
-        UserEntity user = (UserEntity) session.getAttribute("user");
-        ArticleEntity article = this.articleMapper.selectArticleByIndex(index); //인덱스로 게시판찾기
-        flag = true;
-
-        if (Objects.equals(user.getEmail(), article.getEmail())) {
-            return InsertLikeAndReportResult.FAILURE;
-        } //자기가 작성한 이메일에 좋아요를 못하게하는 if문
-
-
-        if (articleMapper.selectLike(index, user.getEmail(),flag) != null) {
-            return InsertLikeAndReportResult.FAILURE_LIKE;
-        } //만약에 아이디와 게시판 인덱스를 검색해서 이미 좋아요를 했다면 select해서 중복실패가 나오게한다.
-
-
-        if (articleMapper.selectLike(index, user.getEmail(),flag) == null) {
-            article.setLikeCount(article.getLikeCount() + 1);
-            likeEntity.setArticleIndex(index)
-                    .setEmail(user.getEmail())
-                    .setCreatedAt(new Date())
-                    .setLikeFlag(true);
-            articleMapper.updateLike(article);
-            return articleMapper.insertLike(likeEntity) > 0
-                    ? InsertLikeAndReportResult.SUCCESS_LIKE
-                    : InsertLikeAndReportResult.FAILURE_LIKE;
-        } //좋아요 인서트
-
-
-      return InsertLikeAndReportResult.FAILURE;
-    }
-
-    public InsertLikeAndReportResult InsertReport(int index, LikeReportEntity likeEntity, HttpSession session,boolean flag) {
+    public LIkeAndReportResult UpdateLikeResult(int index, HttpSession session) {
 
         UserEntity user = (UserEntity) session.getAttribute("user");
-        ArticleEntity article = this.articleMapper.selectArticleByIndex(index); //인덱스로 게시판찾기
-        flag = true;
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
 
-        if (Objects.equals(user.getEmail(), article.getEmail())) {
-            return InsertLikeAndReportResult.FAILURE;
-        } //자기가 작성한 이메일에 좋아요를 못하게하는 if문
+        if(Objects.equals(user.getEmail(), article.getEmail())){
+            return LIkeAndReportResult.FAILURE; //7사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
+        }
 
-        if (articleMapper.selectReport(index, user.getEmail(),flag) != null) {
-            return InsertLikeAndReportResult.FAILURE_REPORT;
-        } //만약에 아이디와 게시판 인덱스를 검색해서 이미 좋아요를 했다면 select해서 중복실패가 나오게한다.
+        article.setLikeCount(article.getLikeCount() + 1);
 
-        if (articleMapper.selectReport(index, user.getEmail(),flag) == null) {
-            article.setReport(article.getReport() + 1);
-            likeEntity.setArticleIndex(index)
-                    .setEmail(user.getEmail())
-                    .setCreatedAt(new Date())
-                    .setReportFlag(true);
-            articleMapper.updateReport(article);
-            return articleMapper.insertReport(likeEntity) > 0
-                    ? InsertLikeAndReportResult.SUCCESS_REPORT
-                    : InsertLikeAndReportResult.FAILURE_REPORT;
-        } //싫어요 인서트
-
-        return InsertLikeAndReportResult.FAILURE;
+        return this.articleMapper.updateLike(article) > 0
+                ? LIkeAndReportResult.SUCCESS
+                : LIkeAndReportResult.FAILURE;
     }
 
-    public LikeReportEntity selectLike(int index,HttpSession session,boolean flag){
+    public LIkeAndReportResult UpdateReportResult(int index, HttpSession session) {
+
         UserEntity user = (UserEntity) session.getAttribute("user");
-        flag = true;
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
 
-        if (user == null) {
-            // 예외 처리: user가 null인 경우에 대한 처리 로직 추가
-            return null; // 또는 예외 처리에 맞는 반환값 설정
+        if(Objects.equals(user.getEmail(), article.getEmail())){
+            return LIkeAndReportResult.FAILURE; //사용자의 이메일과 작성자의 이메일이 같다면 실패 / 좋아요 싫어요 실패
         }
 
-        LikeReportEntity result = articleMapper.selectLike(index, user.getEmail(), flag);
+        article.setReport(article.getReport() + 1);
 
-        if(result != null){
-            return result;
-        }
-
-       return null;
+        return this.articleMapper.updateReport(article) > 0
+                ? LIkeAndReportResult.SUCCESS
+                : LIkeAndReportResult.FAILURE;
     }
 
-    public LikeReportEntity selectReport(int index,HttpSession session,boolean flag){
-        UserEntity user = (UserEntity) session.getAttribute("user");
-        flag = true;
-
-        if (user == null) {
-            // 예외 처리: user가 null인 경우에 대한 처리 로직 추가
-            return null; // 또는 예외 처리에 맞는 반환값 설정
-        }
-
-        LikeReportEntity result = articleMapper.selectReport(index, user.getEmail(), flag);
-
-        if(result != null){
-            return result;
-        }
-
-        return null;
-    }
-
-    public DeleteLikeReportResult deleteLike(int index,HttpSession session, boolean flag){
-        UserEntity user = (UserEntity) session.getAttribute("user");
-        ArticleEntity article = this.articleMapper.selectArticleByIndex(index); //인덱스로 게시판찾기
-        flag = true;
-
-        article.setLikeCount(article.getLikeCount() - 1);
-        articleMapper.updateLike(article);
-
-        return this.articleMapper.deleteByLike(index, user.getEmail(),flag) > 0
-                ? DeleteLikeReportResult.SUCCESS_LIKE
-                : DeleteLikeReportResult.FAILURE_LIKE;
-    }
-
-    public DeleteLikeReportResult deleteReport(int index,HttpSession session, boolean flag){
-        UserEntity user = (UserEntity) session.getAttribute("user");
-        ArticleEntity article = this.articleMapper.selectArticleByIndex(index); //인덱스로 게시판찾기
-        flag = true;
-
-        article.setReport(article.getReport() - 1); //신고 취소할경우 줄어들기
-        articleMapper.updateReport(article);  //업데이트
-
-        return this.articleMapper.deleteByReport(index, user.getEmail(),flag) > 0
-                ? DeleteLikeReportResult.SUCCESS_REPORT
-                : DeleteLikeReportResult.FAILURE_REPORT;
-    }
-
-    public ProfileEntity profileBulletin(int index){
-        ArticleEntity article = articleMapper.selectArticleByIndex(index);
-        ProfileEntity profile = articleMapper.selectProfile(article.getEmail());
-        if(profile == null){
-            return null;
-        }
-        if(Objects.equals(article.getEmail(), profile.getEmail())){
-            return articleMapper.selectProfile(article.getEmail());
-        }
-        return null;
-    }
-
-    public ProfileEntity profileArticle(HttpSession session){
-        UserEntity user = (UserEntity) session.getAttribute("user");
-
-        if(user == null){
-            return null;
-        }
-        ProfileEntity profile = articleMapper.selectProfile(user.getEmail());
-
-        if(Objects.equals(user.getEmail(), profile.getEmail())){
-            return articleMapper.selectProfile(user.getEmail());
-        }
-        return null;
-    }
-
-    public ParticipantsEntity[] selectParticipantsProfile(int index){
-        return articleMapper.selectParticipantsProfile(index);
-    } //참여한 인원수만큼 배열 반환 -> 배열로 해야지 반복문을 사용해 참가자 수만큼 나타낼수 있음
-
-
-    public ProfileEntity[] ParticipateProfile(int index, String email) {
-        // 주어진 index에 해당하는 ArticleEntity를 가져옴
-        ArticleEntity article = articleMapper.selectArticleByIndex(index);
-
-        // 주어진 index에 해당하는 모든 참여자(ParticipantsEntity)들을 가져옴
-        ParticipantsEntity[] participants = articleMapper.selectParticipantsProfiles(index, email);
-
-        // 프로필들을 저장할 비어있는 ArrayList 생성
-        ProfileEntity[] profileList = new ProfileEntity[participants.length];
-
-        // participants 배열을 순회하면서 각 참여자의 프로필을 가져와서 profileList에 추가
-        for (int i = 0; i < participants.length; i++) {
-            ParticipantsEntity participant = participants[i];
-            ProfileEntity profile = articleMapper.selectProfile(participant.getEmail());
-            // 프로필을 profileList에 추가
-            profileList[i] = profile;
-        }
-
-        // 프로필 배열 반환
-        return profileList;
-    } //이미지 추가
 
 
 
-
-
-
-
-    //-----------------------------------------------게시판 리뷰-------------------------------------------------------------
     public boolean patchFinish(int index, HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(index);
@@ -509,18 +334,18 @@ public class ArticleService {
         }
     }
 
-    public UserEntity userEmail(HttpSession session){
+    public UserEntity userEmail(HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
-        if(loginUser ==null){
-            return null;
+        if (loginUser == null) {
+            // Return a default user with nickname "notLogin"
+            return new UserEntity().setNickname("notLogin");
         }
 
-        if(articleMapper.selectUser(loginUser.getEmail())!=null){
-            return  this.articleMapper.selectUser(loginUser.getEmail());
-        }
+        // Now, check if the user exists in the database using their email
+        UserEntity user = this.articleMapper.selectUser(loginUser.getEmail());
 
-        return null;
+        return user;
     }
 
 

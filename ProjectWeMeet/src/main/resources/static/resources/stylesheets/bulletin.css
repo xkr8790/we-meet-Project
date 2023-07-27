@@ -579,6 +579,20 @@ allContainer > .header > .login > a {
     display: flex;
     flex-direction: column;
 }
+.del {
+    background-color: #5F5F5F;
+    width: 100%;
+    text-align: center;
+}
+
+.comment-head{
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 1rem;
+}
+.delete-button{
+
+}
 
 .comment-left {
     margin-bottom: 1rem;
@@ -589,6 +603,7 @@ allContainer > .header > .login > a {
 
 .comment-left > .comment-nickname{
     margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .comment-left > .comment-box{
@@ -615,7 +630,13 @@ allContainer > .header > .login > a {
 .comment-right > .comment-nickname{
     margin-bottom: 0.5rem;
     text-align: right;
+    font-weight: 600;
 }
+
+.comment-right > .del{
+    text-align: right;
+}
+
 
 .comment-right > .comment-box {
     border: 1px solid #3498db;
@@ -626,5 +647,8 @@ allContainer > .header > .login > a {
 .comment-right >.comment-box > .comment-body{
     width: 100%;
     word-wrap: break-word;
+}
+.comment-right > .del {
+    text-align: center;
 }
 
