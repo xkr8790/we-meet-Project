@@ -15,9 +15,12 @@ public interface ProfileMapper {
     UserEntity selectAll(@Param(value = "email") String email);
 
     UserEntity selectUserByContact(@Param(value = "contact") String contact);
+
     RegisterContactCodeEntity selectContactCodeByContactCodeSalt(RegisterContactCodeEntity registerContactCode);
 
     UserEntity selectPasswordByEmail(@Param(value = "email") String email);
+
+    ProfileEntity selectThumbnail(@Param(value = "email") String email);
 
     int updatePassword(UserEntity user);
 
@@ -26,6 +29,8 @@ public interface ProfileMapper {
     int updateContact(UserEntity user);
 
     int updateAddress(UserEntity user);
+    int updateThumbnail(ProfileEntity profile);
 
     int deleteUser(@Param(value = "email") String email);
+    int deleteThumbnail(ProfileEntity profile);
 }

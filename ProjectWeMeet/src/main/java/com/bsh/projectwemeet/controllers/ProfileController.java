@@ -5,7 +5,10 @@ import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.services.ProfileService;
 import org.apache.catalina.User;
 import org.json.JSONObject;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,8 +35,27 @@ public class ProfileController {
     public ModelAndView getProfile(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("home/profile");
         UserEntity userEntities = this.profileService.getAll(session);
+        ProfileEntity profile = this.profileService.getThumbnail(session);
         modelAndView.addObject("profile", userEntities);
+        modelAndView.addObject("thumbnail", profile);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "Thumbnail",
+    method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getThumbnail(HttpSession session) {
+        ProfileEntity profile = this.profileService.getThumbnail(session);
+
+        ResponseEntity<byte[]> response;
+        if (profile == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else  {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
+        }
+        return response;
     }
 
     @RequestMapping(value = "checkPassword",
@@ -164,6 +186,19 @@ public class ProfileController {
 
         return responseObject.toString();
     }
+    @RequestMapping(value = "/deleteThumbnail",
+    method = RequestMethod.PATCH,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteThumbnail(HttpSession session, ProfileEntity profile) {
+        DeleteUserResult result = this.profileService.deleteThumbnailResult((HttpSession) profile, (ProfileEntity) session);
+
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+
+        return  responseObject.toString();
+    }
 
     @RequestMapping(value = "/deleteUser",
     method = RequestMethod.DELETE,
@@ -182,4 +217,5 @@ public class ProfileController {
         }
         return responseObject.toString();
     }
+
 }

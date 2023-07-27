@@ -39,13 +39,17 @@
     <div class="popup-content step-2" id="popup-content_step-2">
         <h3 class="title">개인 정보 수정</h3>
         <div class="profileImage">
-            <img class="profile" rel="profileF" th:name="profile" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
+            <img th:if="${thumbnail != null}" class="profile" rel="profileF" th:name="profile" th:src="@{/profile/Thumbnail}" alt="">
+            <img th:if="${thumbnail == null}" class="profile" rel="profileF" th:name="profile" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
         </div>
         <label class="profile_file" rel="profilePreview">
             <label for="change_profile" class="change">프로필 바꾸기</label>
 <!--                    <input hidden="hidden" type="file" id="profile" accept="image/*" name="profile">-->
             <input type="file" id="change_profile" class="change_profile" accept="image/*" name="change_profile">
-            <label class="delete" rel="profileDelete">삭제</label>
+            <input type="button" class="deleteThumbnail" name="deleteThumbnail" rel="profileDelete" value="삭제">
+            <label class="_object-button">
+                <input type="button" name="saveProfile" class="change" value="저장">
+            </label>
         </label>
         <div class="__body" data-mz-step="info">
             <label class="_object-box">
@@ -113,9 +117,6 @@
             <label class="_object-button">
                 <input type="button" name="changeAddress" class="change" value="변경">
             </label>
-            <label class="_object-button">
-                <input type="button" name="saveProfile" class="change" value="저장">
-            </label>
             <span class="_object-warning"></span>
             <input hidden name="infoContactSalt" type="hidden">
             <div class="die">
@@ -133,7 +134,8 @@
     <div class="left-profile">
         <div class="thumbnail">
             <div class="default" rel="thumbnailDefault">
-                <img class="profile" rel="profile1" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
+                <img th:if="${thumbnail != null}" class="profile" rel="profile1" th:src="@{/profile/Thumbnail}" alt="">
+                <img th:if="${thumbnail == null}" class="profile" rel="profile1" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
             </div>
             <div class="pencil">
                 <label class="pencil">

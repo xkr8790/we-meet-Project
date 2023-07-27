@@ -8,7 +8,7 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
-        INSERT INTO `wemeet_project`.`mypages` (email, profile_thumbnail, profile_thumbnail_mime)
+        INSERT INTO `wemeet_project`.`mypages` (`email`, `profile_thumbnail`, `profile_thumbnail_mime`)
         VALUES (#{email},
                 #{profileThumbnail},
                 #{profileThumbnailMime})
@@ -40,17 +40,18 @@
 
     <select id="selectAll"
     resultType="com.bsh.projectwemeet.entities.UserEntity">
-        SELECT `email` AS  `email`,
-               `name` AS `name`,
-               `nickname` AS `nickname`,
-               `contact` AS `contact`,
-               `admin_flag` AS `isAdmin`,
-               `birth` AS `birth`,
-               `address_postal` AS `addressPostal`,
-               `address_primary` AS `addressPrimary`,
+        SELECT `email`             AS `email`,
+               `name`              AS `name`,
+               `nickname`          AS `nickname`,
+               `contact`           AS `contact`,
+               `admin_flag`        AS `isAdmin`,
+               `birth`             AS `birth`,
+               `registered_at`     AS `registeredAt`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
                `address_secondary` AS `addressSecondary`,
-               `gender` AS `gender`,
-               `password` AS `password`
+               `gender`            AS `gender`,
+               `password`          AS `password`
         FROM `wemeet_project`.`users`
         WHERE BINARY `email` = #{email}
         LIMIT 1
@@ -96,6 +97,15 @@
     resultType="com.bsh.projectwemeet.entities.UserEntity">
         SELECT `password` AS `password`
         FROM `wemeet_project`.`users`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectThumbnail"
+    resultType="com.bsh.projectwemeet.entities.ProfileEntity">
+        SELECT `profile_thumbnail`      AS `profileThumbnail`,
+               `profile_thumbnail_mime` AS `profileThumbnailMime`
+        FROM `wemeet_project`.`mypages`
         WHERE `email` = #{email}
         LIMIT 1
     </select>
@@ -157,10 +167,26 @@
         LIMIT 1
     </update>
 
+    <update id="updateThumbnail"
+            parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
+        UPDATE `wemeet_project`.`mypages`
+        SET `profile_thumbnail` = #{profileThumbnail},
+            `profile_thumbnail_mime` = #{profileThumbnailMime}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
     <delete id="deleteUser">
         DELETE
         FROM `wemeet_project`.`users`
         WHERE `email` = #{email}
         LIMIT 1
     </delete>
+    <update id="deleteThumbnail">
+        UPDATE `wemeet_project`.`mypages`
+        SET `profile_thumbnail` = #{profileThumbnail},
+            `profile_thumbnail_mime` = #{profileThumbnailMime}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
 </mapper>

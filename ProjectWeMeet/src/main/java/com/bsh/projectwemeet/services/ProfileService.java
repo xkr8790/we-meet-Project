@@ -31,9 +31,32 @@ public class ProfileService {
 
     public UserEntity getAll(HttpSession session) {
 
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        UserEntity user = (UserEntity) session.getAttribute("user");
 
-        return this.profileMapper.selectAll(loginUser.getEmail());
+        return this.profileMapper.selectAll(user.getEmail());
+    }
+
+    public ProfileEntity getThumbnail(HttpSession session) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+       ProfileEntity profile = profileMapper.selectThumbnail(user.getEmail());
+
+
+        return profile == null
+                ? null
+                : profile;
+    }
+    public DeleteUserResult deleteThumbnailResult(HttpSession session, ProfileEntity profile) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        if (user == null) {
+            return DeleteUserResult.FAILURE;
+        }
+
+        profile.setProfileThumbnail(null)
+                .setProfileThumbnailMime(null);
+
+        return this.profileMapper.deleteThumbnail(profile) > 0
+                ? DeleteUserResult.SUCCESS
+                : DeleteUserResult.FAILURE;
     }
 
     //비밀번호 확인
@@ -55,6 +78,9 @@ public class ProfileService {
 
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
+        if (this.profileMapper.selectThumbnail(profile.getProfileThumbnailMime()) == null) {
+            return this.profileMapper.updateThumbnail(profile) > 0;
+        }
         profile.setEmail(loginUser.getEmail())
                 .setCreatedAt(new Date());
         return this.profileMapper.insertProfile(profile) > 0;
@@ -152,6 +178,8 @@ public class ProfileService {
         return this.profileMapper.updateAddress(user) > 0
                 ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
     }
+
+    //프로필 이미지 삭제
 
     // 회원탈퇴
     public DeleteUserResult deleteUserResult(HttpSession session) {

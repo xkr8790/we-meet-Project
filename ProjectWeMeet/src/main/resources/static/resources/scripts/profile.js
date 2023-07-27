@@ -98,6 +98,7 @@ popup['close'].addEventListener('click', () => {
     if (r == true) {
         popup.classList.remove('step-2');
         popup.style.display = 'none';
+        location.href += '';
     } else {
         alert("수정 페이지로 돌아갑니다!");
     }
@@ -416,14 +417,42 @@ popup['saveProfile'].onclick = e => {
                     alert('변경완료');
                     return;
                 } else {
-                    alert('제한인원을 초과했습니다');
+                    alert('변경 실패. 잠시 후 다시 시도해 주세요.');
                     return;
                 }
             } else {
-                alert('이미 참여한 사용자입니다');
+                alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
                 return;
             }
         }
     };
     xhr.send(formData);
 };
+
+popup['deleteThumbnail'].onclick = e => {
+    e.preventDefault();
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('deleteThumbnail', popup['deleteThumbnail'].value)
+    xhr.open('DELETE', `./deleteThumbnail`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result){
+                    case 'failure':
+                        alert('삭제 실패했습니다. 잠시 후 다시 시도해 주세요.');
+                        break;
+                    case 'success':
+                        alert('프로필 이미지를 삭제했습니다.');
+                        break;
+                    default:
+                        alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                alert('서버와 통신할 수 없습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
+}

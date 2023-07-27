@@ -37,7 +37,7 @@ public class RegisterService {
             return SendRegisterContactCodeResult.FAILURE;
         }
 
-        if (this.registerMapper.selectUserByContact(registerContactCode.getContact()) !=null){ //사용중인 연락처일 때
+        if (this.registerMapper.selectUserByContact(registerContactCode.getContact()) != null){ //사용중인 연락처일 때
             return SendRegisterContactCodeResult.FAILURE_DUPLICATE;
         }
         
