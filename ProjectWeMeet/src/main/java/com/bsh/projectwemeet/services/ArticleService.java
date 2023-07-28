@@ -450,7 +450,7 @@ public class ArticleService {
 
         // 게시글 작성자와 댓글 작성자가 동일한지 확인
         if (articleEmail != null && loginUser.getEmail().equals(articleEmail)) {
-            // Insert the comment for the 'SUCCESS_SAME' case
+            //  'SUCCESS_SAME' case
             int rowsAffected = articleMapper.insertComment(comment);
             if (rowsAffected > 0) {
                 return CreateCommentResult.SUCCESS_SAME;
@@ -458,7 +458,7 @@ public class ArticleService {
                 return CreateCommentResult.FAILURE;
             }
         } else {
-            // Insert the comment for the 'SUCCESS' case
+            // 'SUCCESS' case
             int rowsAffected = articleMapper.insertComment(comment);
             if (rowsAffected > 0) {
                 return CreateCommentResult.SUCCESS;

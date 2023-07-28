@@ -134,8 +134,12 @@ finishButton.addEventListener('click', e => {
     }
 })
 
-writeButton.addEventListener('click', e => {
-    e.preventDefault();
-    window.location.href = "/write";
-})
+writeButton.onclick = function(e) {
+    if (!e.target.form) {
+        // 이벤트가 버튼 자체에서 발생한 경우에만 이동하도록 함
+        e.preventDefault();
+        window.location.href = "/write";
+    }
+    return;
+}
 //게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//
