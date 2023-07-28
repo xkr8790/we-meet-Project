@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
-    <script defer th:src="@{/resources/scripts/bulltinScript/bulletin.js}"></script>
+    <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
+    <script defer th:src="@{/resources/scripts/bulltinScript/proplie.js}"></script>
     <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
     <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
     <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
@@ -24,7 +25,6 @@
 </head>
 <body>
 <form id="bulletinForm" class="allContainer">
-    <input type="hidden" name="index" th:value="${article.getIndex()}" )>
     <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
@@ -222,7 +222,7 @@
         <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
             <!--            여기서 부터 list-->
-            <div class="previewContainer" th:if="${!articles.getCategory().equals('완료')}" th:each="articles : ${articles}">
+            <div class="previewContainer" th:if="${!articles.getCategory().equals('완료')}" th:each="articles : ${articles}" >
                 <!--                이게 item-->
                 <a class="img" th:href="@{./read(index=${articles.getIndex()})}">
                     <img th:src="@{./image(index=${articles.getIndex()})}" alt="">
@@ -232,8 +232,9 @@
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
-                        <div class="human" th:each="participantsArrays : ${participantsArrays}">
-                            as
+                        <input name="index" hidden th:value="${articles.getIndex()}">
+                        <div class="human">
+                            <img class="human-image" th:src="@{/article/read/profile(index=${articles.getIndex()})}" alt="">
                         </div>
                         <i class="fa-solid fa-user-group"></i>
                         <div class="number" th:text="${articles.getParticipation()}">인원</div>

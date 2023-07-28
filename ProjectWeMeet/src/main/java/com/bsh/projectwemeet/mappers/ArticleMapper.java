@@ -8,6 +8,8 @@ import com.bsh.projectwemeet.models.PagingModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface ArticleMapper {
 
@@ -70,6 +72,7 @@ public interface ArticleMapper {
                                                    @Param(value = "email")String email);
     // 참여인원 중복되있는지 select
 
+    ParticipantsEntity[] selectdifferentParticipantsProfileWithNames(@Param(value = "ArticleIndex")int ArticleIndex);
 
 
 

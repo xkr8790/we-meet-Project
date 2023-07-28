@@ -220,7 +220,7 @@
                `thumbnail_mime` AS `thumbnailMime`
         FROM `wemeet_project`.`articles`
         ORDER BY `index` DESC
-        LIMIT 7
+        LIMIT 4
     </select>
     <!-- 이런 모임은 어때요 조회-->
 
@@ -661,6 +661,32 @@
         WHERE `ArticleIndex` = #{index}
     </select>
     <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsProfiless"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{index}
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+
+    <select id="selectdifferentParticipantsProfileWithNames"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT p.`index`             AS `index`,
+               p.`email`             AS `email`,
+               p.`ArticleIndex`      AS `ArticleIndex`,
+               u.`profile_thumbnail` AS `profileThumbnail`,
+               u.`profile_thumbnail` AS `profileThumbnailMime`
+        FROM `wemeet_project`.`Participants` p
+                 LEFT JOIN `wemeet_project`.`mypages` u ON p.`email` = u.`email`
+        WHERE p.`ArticleIndex` = #{ArticleIndex}
+    </select>
+
+
     <!-- 참여인원 중복되있는지 select -->
     <select id="selectParticipantsProfiles"
             resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
@@ -671,5 +697,17 @@
         WHERE `ArticleIndex` = #{ArticleIndex} AND `email` = #{email}
     </select>
     <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectProfiles"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
 
 </mapper>

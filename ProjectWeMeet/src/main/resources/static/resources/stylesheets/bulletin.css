@@ -281,7 +281,7 @@ allContainer > .header > .login > a {
 
 
 .announcement > .participant {
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     width: 100%;
     height: auto;
     align-items: center;
@@ -322,7 +322,7 @@ allContainer > .header > .login > a {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     flex-wrap: wrap;
 }
 
@@ -560,6 +560,8 @@ allContainer > .header > .login > a {
     height: 1.8rem;
     object-fit: cover;
     margin-right: 0.3rem;
+    display: flex;
+    flex-direction: row;
 }
 
 .preview > .container > .previewContainer > .text > .participant > .human >.human-image {

@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class ArticleService {
@@ -392,7 +389,34 @@ public class ArticleService {
         return profileList;
     } //이미지 추가
 
-//-----------------------------------------------게시판리뷰-------------------------------------------------------------
+
+    public ProfileEntity[] ParticipateProfiles(int index) {
+        // 주어진 index에 해당하는 ArticleEntity를 가져옴
+        ArticleEntity article = articleMapper.selectArticleByIndex(index);
+
+        // 주어진 index에 해당하는 모든 참여자(ParticipantsEntity)들을 가져옴
+        ParticipantsEntity[] participants = articleMapper.selectParticipantsProfile(index);
+
+        // 프로필들을 저장할 비어있는 ArrayList 생성
+        ProfileEntity[] profileList = new ProfileEntity[participants.length];
+
+        // participants 배열을 순회하면서 각 참여자의 프로필을 가져와서 profileList에 추가
+        for (int i = 0; i < participants.length; i++) {
+            ParticipantsEntity participant = participants[i];
+            ProfileEntity profile = articleMapper.selectProfile(participant.getEmail());
+            // 프로필을 profileList에 추가
+            profileList[i] = profile;
+        }
+
+        // 프로필 배열 반환
+        return profileList;
+    } //이미지 추가
+
+
+
+
+
+    //-----------------------------------------------게시판리뷰-------------------------------------------------------------
     public boolean patchFinish(int index, HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ArticleEntity articles = this.articleMapper.selectArticleByIndexEmail(index);

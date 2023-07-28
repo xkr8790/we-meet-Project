@@ -4,7 +4,14 @@ const writeButton = bulletinForm.querySelector('[name="write"]');
 const finishButton = bulletinForm.querySelector('[name="finish"]');
 
 
-
+writeButton.onclick = function(e) {
+    if (!e.target.form) {
+        // 이벤트가 버튼 자체에서 발생한 경우에만 이동하도록 함
+        e.preventDefault();
+        window.location.href = "/write";
+    }
+    return;
+}
 
 //게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//
 deleteButton.addEventListener('click', e => {
@@ -73,22 +80,6 @@ patchButton.addEventListener('click', e => {
 
 //게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//
 
-// finishButton.addEventListener('click', e => {
-//     e.preventDefault();
-//     const index = finishButton.dataset.index;
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('GET',`/article/review?index=${index}`);
-//     xhr.onreadystatechange = () => {
-//         if(xhr.readyState === XMLHttpRequest.DONE){
-//             if(xhr.status >=200 && xhr.status<300){
-//                 location.href = `/article/review?index=${index}`
-//             }else{
-//                 alert('작성한 사용자가 아니라 수정이 불가능합니다.');
-//             }
-//         }
-//     };
-//     xhr.send();
-// })
 finishButton.addEventListener('click', e => {
     e.preventDefault();
     const index = finishButton.dataset.index;
@@ -134,8 +125,5 @@ finishButton.addEventListener('click', e => {
     }
 })
 
-writeButton.addEventListener('click', e => {
-    e.preventDefault();
-    window.location.href = "/write";
-})
+
 //게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//
