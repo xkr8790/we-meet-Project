@@ -5,12 +5,13 @@
     <title>비밀번호 찾기</title>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverEmail.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverPassword.css}">
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <script defer th:src="@{/resources/scripts/verifyCode.js}"></script>
 </head>
 <body>
 
 <form id="verifyCode">
-    <img src="/resources/images/logoImages/logo-224x80.png">
+    <img class="Logo" src="/resources/images/logoImages/logo-224x80.png">
     <span class="codeExplain">비밀번호 인증 코드를 입력해 주세요.</span>
     <input hidden name="email" type="hidden" th:value="${recoverEmailCode.getEmail()}">
     <input hidden name="salt" type="hidden" th:value="${recoverEmailCode.getSalt()}">
@@ -22,9 +23,9 @@
 
 
 <form id="passwordReset">
-    <img class="Logo password" th:src="@{/resources/images/logoImages/logo-224x80.png}" alt="logo">
+    <img class="Logo" th:src="@{/resources/images/logoImages/logo-224x80.png}" alt="logo">
+    <h2 class="title">변경할 비밀번호를 입력해주세요</h2>
     <div class="passwordReset-form">
-        <h2 class="title">비밀번호 변경</h2>
         <input disabled name="email" type="email" class="input" th:value="${recoverEmailCode.getEmail()}">
         <input disabled hidden name="code" type="text">
         <input disabled hidden name="salt" type="text" th:value="${recoverEmailCode.getSalt()}">

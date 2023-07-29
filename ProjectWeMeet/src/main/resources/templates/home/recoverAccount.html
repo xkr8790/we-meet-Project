@@ -9,11 +9,25 @@
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverAccount.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/loading.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
     <script defer th:src="@{/resources/scripts/recoverAccount.js}"></script>
+    <script defer th:src="@{/resources/scripts/commonDialog.js}"></script>
 
 
 </head>
 <body th:if="${session.user == null}">
+
+<div id="dialogCover"></div>
+<div id="dialogLayer">
+    <span class="title" rel="title"></span>
+    <span class="content" rel="content"></span>
+
+    <div class="button-container">
+        <a class="button cancel" href="#" rel="cancel">취소</a>
+        <a class="button confirm" href="#" rel="confirm">확인</a>
+    </div>
+</div>
+
 
 <div id="_loading">
     <img alt="" class="_icon" th:src="@{/resources/images/Loding/_loading.png}">
@@ -64,16 +78,5 @@
         <input class="object-button emailSend" name="emailSend" id="emailSend" type="submit" value="다음">
     </div>
 </form>
-
-
-
-<form id="linkCoverForm">
-    <div class="cover">
-        <div class="cover-text"></div>
-        <div class="cover-text"></div>
-        <a class="cover-button">확인</a>
-    </div>
-</form>
-
 </body>
 </html>

@@ -8,7 +8,7 @@ const closeEye = document.querySelector('.closeEye');
 let code;
 
 window.onload = function() {
-    verifyCode.style.transitionDuration = '600ms'; // 애니메이션 지속 시간 설정
+    verifyCode.style.transitionDuration = '300ms'; // 애니메이션 지속 시간 설정
     verifyCode.style.transitionTimingFunction = 'ease'; // 타이밍 함수 설정
     verifyCode.style.transitionProperty = 'opacity'; // 타이밍 함수 설정
     verifyCode.style.opacity = '1';
@@ -57,6 +57,9 @@ verifyCode.onsubmit = e => {
         verifyCode['EmailCode'].classList.add('_invalid');
         verifyCode['EmailCode'].focus();
         verifyCode['EmailCode'].select();
+        setTimeout(() => {
+            hideElement(verifyCode.warning);
+        }, 1000);
         return;
     }
 
@@ -77,12 +80,18 @@ verifyCode.onsubmit = e => {
                         verifyCode['EmailCode'].classList.add('_invalid');
                         verifyCode['EmailCode'].focus();
                         verifyCode['EmailCode'].select();
+                        setTimeout(() => {
+                            hideElement(verifyCode.warning);
+                        }, 1000);
                         break;
                     case 'failure_expired':
                         showWarning(verifyCode.warning, "인증 코드가 만료되었습니다. 이메일 인증을 새로 해주세요.");
                         verifyCode['EmailCode'].classList.add('_invalid');
                         verifyCode['EmailCode'].focus();
                         verifyCode['EmailCode'].select();
+                        setTimeout(() => {
+                            hideElement(verifyCode.warning);
+                        }, 1000);
                         break;
                     case 'success':
                         passwordReset['code'].value = verifyCode['EmailCode'].value;
