@@ -37,7 +37,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -159,6 +160,7 @@ public class ArticleController {
 
         ArticleEntity article = this.articleService.readArticle(index);
         ArticleEntity[] articles = this.articleService.getMiniArticle();
+        ParticipantsEntity[] getMini = this.articleService.getMini();
         UserEntity user = this.articleService.userEmail(session);
 
 
@@ -174,6 +176,7 @@ public class ArticleController {
         ProfileEntity[] profiles = this.articleService.ParticipateProfile(index, email);
 
 
+
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
         modelAndView.addObject("article", article);
         modelAndView.addObject("articles", articles);
@@ -185,10 +188,11 @@ public class ArticleController {
         modelAndView.addObject("profile",profile);
         modelAndView.addObject("participantsArray",participantsArray);
         modelAndView.addObject("profiles",profiles);
+        modelAndView.addObject("getMini",getMini);
+
 
         return modelAndView;
     }//인덱스번호로 각 게시판 값 나타내기
-
 
 
 
@@ -459,20 +463,20 @@ public class ArticleController {
         }
         return response;
     }
-    @RequestMapping(value = "article/Participate/profiles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(value ="article/Participate/profiles",method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Map<String, String>> getParticipants(@RequestParam(value = "index") int index) throws IOException {
-        System.out.println(index);
+    public ResponseEntity<byte[]> getDifferent(@RequestParam(value = "index") int index){
         ProfileEntity[] profiles = this.articleService.ParticipateProfiles(index);
-        Map<String, String> responseMap = new HashMap<>();
+        ResponseEntity<byte[]> response = null;
 
         for (ProfileEntity profile : profiles) {
-            String base64Image = Base64.getEncoder().encodeToString(profile.getProfileThumbnail());
-            responseMap.put("profileThumbnail", base64Image);
-            responseMap.put("profileThumbnailMime", profile.getProfileThumbnailMime());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
         }
-
-        return ResponseEntity.ok(responseMap);
+        return response;
     }
 
 

@@ -40,6 +40,9 @@ public interface ArticleMapper {
     ArticleEntity[] selectDifferentArticle();
     //이런만남은 어때요?를 나타내기 위한 매퍼
 
+    ParticipantsEntity[] selectDifferent();
+    //이런만남은 어때요?를 나타내기 위한 매퍼
+
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
     //클릭시 해당게시물을 가기위해 index값으로 찾기위해 사용되는 매퍼
 
@@ -72,7 +75,6 @@ public interface ArticleMapper {
                                                    @Param(value = "email")String email);
     // 참여인원 중복되있는지 select
 
-    ParticipantsEntity[] selectdifferentParticipantsProfileWithNames(@Param(value = "ArticleIndex")int ArticleIndex);
 
 
 

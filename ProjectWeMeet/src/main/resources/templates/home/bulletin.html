@@ -20,8 +20,10 @@
     <script defer th:if="${session.user!=null && ParticipantsResult.equals('failure')}" th:src="@{/resources/scripts/bulltinScript/InsertParticipate.js}"></script>
     <script defer th:if="${session.user!=null && ParticipantsResult.equals('success')}" th:src="@{/resources/scripts/bulltinScript/DeleteParticipate.js}"></script>
     <script defer th:src="@{/resources/scripts/bulletinMap.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
+
 </head>
 <body>
 <form id="bulletinForm" class="allContainer">
@@ -218,23 +220,25 @@
     </div>
 
 
-    <div class="preview">
+    <div class="preview" id="preview">
         <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
             <!--            여기서 부터 list-->
-            <div class="previewContainer" th:if="${!articles.getCategory().equals('완료')}" th:each="articles : ${articles}" >
-                <!--                이게 item-->
+            <div class="previewContainer" th:if="${!articles.getCategory().equals('완료')}" th:each="articles : ${articles}">
+
                 <a class="img" th:href="@{./read(index=${articles.getIndex()})}">
                     <img th:src="@{./image(index=${articles.getIndex()})}" alt="">
                 </a>
+
                 <div class="text">
                     <div class="category" th:text="${articles.getCategory()}">모여라~~ 영웅을 기다린다</div>
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
-                        <input name="index" hidden th:value="${articles.getIndex()}">
                         <div class="human">
                             <img class="human-image" th:src="@{/article/read/profile(index=${articles.getIndex()})}" alt="">
+                            <img class="human-image" rel="thumbnail">
+                            <img class="human-image" rel="thumbnail">
                         </div>
                         <i class="fa-solid fa-user-group"></i>
                         <div class="number" th:text="${articles.getParticipation()}">인원</div>
@@ -245,9 +249,8 @@
             </div>
         </div>
     </div>
-
-
 </form>
+
 
 
 </body>

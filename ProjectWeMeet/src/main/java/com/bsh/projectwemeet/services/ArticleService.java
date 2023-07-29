@@ -47,6 +47,12 @@ public class ArticleService {
         return this.articleMapper.selectDifferentArticle();
     }
 
+    public ParticipantsEntity[] getMini(){
+        return this.articleMapper.selectDifferent();
+    }
+
+
+
 
 
     public ArticleEntity readArticle(int index) {

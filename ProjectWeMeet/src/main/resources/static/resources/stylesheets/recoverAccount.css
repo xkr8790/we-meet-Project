@@ -52,7 +52,6 @@ body {
 #recoverForm > .option-container > .label {
     cursor: pointer;
     width: 100%;
-    display: inline-block;
     height: 2.5rem;
     border: 1px solid #FB6161;
     border-radius: 15px;
