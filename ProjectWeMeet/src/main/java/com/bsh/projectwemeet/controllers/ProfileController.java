@@ -68,6 +68,7 @@ public class ProfileController {
     @ResponseBody
     public String postCheckPassword(HttpSession session, @RequestParam("checkPassword") String password) {
         UserEntity user = (UserEntity) session.getAttribute("user");
+        user.setPassword(password);
         LoginResult result = this.profileService.checkPassword(user);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
@@ -139,7 +140,7 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/profileImage",
-    method = RequestMethod.POST,
+    method = RequestMethod.PATCH,
     produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String postIndex(HttpServletRequest request,

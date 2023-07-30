@@ -62,23 +62,49 @@ public class ProfileService {
     }
 
     //비밀번호 확인
+//    public LoginResult checkPassword(UserEntity user) {
+//        if (user.getPassword() == null) {
+//            System.out.println("1");
+//            return LoginResult.FAILURE;
+//        }
+//
+//        UserEntity existingUser = this.profileMapper.selectPasswordByEmail(user.getEmail());
+//
+//        user.setPassword(CryptoUtil.hashSha512(user.getPassword()));
+//
+//        if (!user.getPassword().equals(existingUser.getPassword())) {
+//            System.out.println(user.getPassword());
+//            System.out.println(existingUser.getPassword());
+//            return LoginResult.FAILURE;
+//        }
+//
+//        return LoginResult.SUCCESS;
+//    }
+
     public LoginResult checkPassword(UserEntity user) {
         if (user.getPassword() == null) {
             return LoginResult.FAILURE;
         }
+
+        // 데이터베이스에서 해당 이메일에 해당하는 사용자 정보를 가져옴
         UserEntity existingUser = this.profileMapper.selectPasswordByEmail(user.getEmail());
-        if (!user.getPassword().equals(existingUser.getPassword())) {
-            return LoginResult.FAILURE;
+
+        // 입력받은 비밀번호를 해시화하여 사용자의 비밀번호와 비교
+        String hashedPassword = CryptoUtil.hashSha512(user.getPassword());
+        if (existingUser != null && existingUser.getPassword().equals(hashedPassword)) {
+            return LoginResult.SUCCESS; // 비밀번호 일치로 인증 성공
+        } else {
+            System.out.println(user.getPassword());
+            System.out.println(existingUser.getPassword());
+            return LoginResult.FAILURE; // 비밀번호 불일치로 인증 실패
         }
-        return LoginResult.SUCCESS;
     }
+
 
 
     @Transactional
     public boolean putProfile(ProfileEntity profile) {
-
         return this.profileMapper.updateThumbnail(profile) > 0;
-
     }
 
     public int getArticleIndexCountByEmail(HttpSession session) {

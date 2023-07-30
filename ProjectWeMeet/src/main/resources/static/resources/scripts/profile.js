@@ -82,14 +82,6 @@ popup['checkPasswordButton'].onclick = e => {
         }
     };
     xhr.send(formData);
-    // if (password === '1234') {
-    //     popup.classList.remove('step-1');
-    //     popup.classList.add('step-2');
-    // } else {
-    //     alert('비밀번호가 올바르지 않습니다.');
-    //     popup['_object-input'].value = '';
-    //     popup['_object-input'].focus();
-    // }
 };
 
 //취소 버튼
@@ -408,7 +400,7 @@ popup['saveProfile'].onclick = e => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append("thumbnailMultipart", popup['change_profile'].files[0]);
-    xhr.open('POST', './profileImage');
+    xhr.open('PATCH', './profileImage');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -429,12 +421,13 @@ popup['saveProfile'].onclick = e => {
     xhr.send(formData);
 };
 
-popup['deleteThumbnail'].onclick = e => {
+popup['deleteThumbnail'].onsubmit = e => {
     e.preventDefault();
+
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('deleteThumbnail', popup['deleteThumbnail'].value)
-    xhr.open('DELETE', `./deleteThumbnail`);
+    xhr.open('PATCH', `/deleteThumbnail`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {

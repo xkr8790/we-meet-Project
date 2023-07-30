@@ -510,12 +510,13 @@ body{
     border: 0;
 }
 
-#popup.step-2 > .popup-content.step-2 > .profile_file > .delete {
+#popup.step-2 > .popup-content.step-2 > .profile_file > .delete > .profileDelete {
     background-color: white;
     font-size: 1rem;
     text-decoration: underline;
     cursor: pointer;
 }
+
 
 #popup.step-2 > .popup-content.step-2 > .passwordReset {
     background-color: white;

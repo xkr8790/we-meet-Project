@@ -3,6 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bsh.projectwemeet.mappers.ProfileMapper">
+
+    <delete id="deleteUser">
+        DELETE
+        FROM `wemeet_project`.`users`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </delete>
+
     <insert id="insertProfile"
             useGeneratedKeys="true"
             keyColumn="index"
@@ -110,7 +118,7 @@
     resultType="com.bsh.projectwemeet.entities.UserEntity">
         SELECT `password` AS `password`
         FROM `wemeet_project`.`users`
-        WHERE `email` = #{email}
+        WHERE BINARY `email` = #{email}
         LIMIT 1
     </select>
 
@@ -187,12 +195,6 @@
         LIMIT 1
     </update>
 
-    <delete id="deleteUser">
-        DELETE
-        FROM `wemeet_project`.`users`
-        WHERE `email` = #{email}
-        LIMIT 1
-    </delete>
 
     <update id="deleteThumbnail"
     parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
