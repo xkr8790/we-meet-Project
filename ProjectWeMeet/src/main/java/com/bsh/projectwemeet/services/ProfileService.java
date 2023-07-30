@@ -9,6 +9,7 @@ import com.bsh.projectwemeet.mappers.LoginMapper;
 import com.bsh.projectwemeet.mappers.ProfileMapper;
 import com.bsh.projectwemeet.utils.CryptoUtil;
 import com.bsh.projectwemeet.utils.NCloudUtil;
+import org.apache.catalina.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,6 +166,19 @@ public class ProfileService {
                 : VerifyRegisterContactCodeResult.FAILURE;
     }
 
+    public ModifyPasswordResult resetNickname(String nickname, UserEntity user, HttpSession session) {
+        if (!(session.getAttribute("user") instanceof UserEntity)) {
+            return ModifyPasswordResult.FAILURE;
+        }
+        UserEntity signedUser = (UserEntity) session.getAttribute("user");
+
+        if (nickname.equals(signedUser.getNickname())) {
+            return ModifyPasswordResult.FAILURE_PASSWORD_MISMATCH;
+        }
+        user.setNickname(nickname);
+        return this.profileMapper.updateNickname(user) > 0
+                ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
+    }
 
     //비밀번호 변경
     public ModifyPasswordResult modifyPassword(String password, UserEntity user, HttpSession session) {

@@ -117,6 +117,27 @@ public class ProfileController {
         return responseObject.toString();
     }
 
+    @RequestMapping(value = "/resetNickname",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getResetNickname() {
+        return new ModelAndView("home/profile");
+    }
+
+    @RequestMapping(value = "/resetNickname",
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchResetNickname(HttpSession session, @RequestParam("infoNickname") String nickname) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ModifyPasswordResult result = this.profileService.resetNickname(nickname, user, session);
+
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+
     @RequestMapping(value = "/resetAddress",
     method = RequestMethod.GET,
     produces = MediaType.TEXT_HTML_VALUE)

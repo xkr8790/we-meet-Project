@@ -31,6 +31,8 @@ public interface ProfileMapper {
 
     int updateContact(UserEntity user);
 
+    int updateNickname(UserEntity user);
+
     int updateAddress(UserEntity user);
     int updateThumbnail(ProfileEntity profile);
 

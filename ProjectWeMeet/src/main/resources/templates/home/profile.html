@@ -70,10 +70,12 @@
                 </div>
                 <div class="object">
                     <label class="_object-box">
-                        <input disabled readonly class="_object-input" spellcheck="false" type="text"
+                        <input name="infoNickname" class="_object-input" spellcheck="false" type="text"
                                th:value="${profile?.getNickname()}">
                     </label>
-                    <span class="message-box">닉네임은 변경할 수 없습니다.</span>
+                    <label class="_object-button">
+                        <input type="button" name="changeNickname" class="change" value="변경">
+                    </label>
                 </div>
             </div>
 

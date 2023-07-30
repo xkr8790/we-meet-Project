@@ -321,6 +321,48 @@ popup['changeAddress'].onclick = e => {
     xhr.send(formData);
 }
 
+popup['changeNickname'].onclick = e => {
+    e.preventDefault();
+
+    if (popup['infoNickname'].value === '') {
+        alert('변경할 별명을 입력해 주세요.');
+        popup['infoNickname'].focus();
+        return;
+    }
+    if (!new RegExp('^([가-힣]{2,10})$').test(popup['infoNickname'].value)) {
+        alert('올바른 별명을 입력해주세요.');
+        // 별명의 형식 2글자 이상 영어 대소문자,한글
+        popup['infoNickname'].focus();
+        popup['infoNickname'].select();
+        return;
+    }
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('infoNickname', popup['infoNickname'].value);
+    xhr.open('PATCH', `./resetNickname`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure':
+                        alert('이전 별명와 일치합니다. 다시 입력해 주세요.');
+                        break;
+                    case 'success':
+                        alert('별명이 변경되었습니다.');
+                        popup['infoNickname'].setAttribute('disable', 'disable');
+                        break;
+                    default:
+                        alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
+}
+
 popup['changePassword'].onclick = e => {
     e.preventDefault();
 
@@ -432,7 +474,7 @@ popup['deleteThumbnail'].onsubmit = e => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseObject = JSON.parse(xhr.responseText);
-                switch (responseObject.result){
+                switch (responseObject.result) {
                     case 'failure':
                         alert('삭제 실패했습니다. 잠시 후 다시 시도해 주세요.');
                         break;

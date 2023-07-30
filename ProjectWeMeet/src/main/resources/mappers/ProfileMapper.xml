@@ -167,6 +167,14 @@
         LIMIT 1
     </update>
 
+    <update id="updateNickname"
+            parameterType="com.bsh.projectwemeet.entities.UserEntity">
+        UPDATE `wemeet_project`.`users`
+        SET `nickname` = #{nickname}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
     <update id="updateContact"
     parameterType="com.bsh.projectwemeet.entities.UserEntity">
         UPDATE `wemeet_project`.`users`
