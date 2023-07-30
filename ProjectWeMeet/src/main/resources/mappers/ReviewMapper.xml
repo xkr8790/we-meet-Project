@@ -163,5 +163,17 @@
         LIMIT 1;
     </select>
 
+    <select id="selectProfileImage"
+    resultType="com.bsh.projectwemeet.entities.ProfileEntity">
+        SELECT `index` AS `index`,
+               `email` AS `email`,
+               `profile_thumbnail` AS `profileThumbnail`,
+               `profile_thumbnail_mime` AS `profileThumbnailMime`,
+               `introduce_text` AS `introduceText`
+        FROM `wemeet_project`.`mypages`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
+
 
 </mapper>

@@ -30,6 +30,31 @@ public class ArticleEntity {
     private String hashtag;
     private String clientIp;
     private String clientUa;
+
+    private byte[] participantThumbnail;
+
+    public byte[] getParticipantThumbnail() {
+        return participantThumbnail;
+    }
+
+    public ArticleEntity setParticipantThumbnail(byte[] participantThumbnail) {
+        this.participantThumbnail = participantThumbnail;
+        return this;
+    }
+
+    public String getParticipantThumbnailMime() {
+        return participantThumbnailMime;
+    }
+
+    public ArticleEntity setParticipantThumbnailMime(String participantThumbnailMime) {
+        this.participantThumbnailMime = participantThumbnailMime;
+        return this;
+    }
+
+    private String participantThumbnailMime;
+
+
+
     public String getClientIp() {
         return clientIp;
     }

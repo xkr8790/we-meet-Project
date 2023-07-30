@@ -69,6 +69,34 @@ public class ArticleService {
 
     } //게시판 나타내기
 
+
+    public ArticleEntity readProfile(int index) {
+        ArticleEntity article = this.articleMapper.selectArticleProfileByIndex(index);
+        return article;
+    }
+
+
+    public ArticleEntity readParticipantProfile(int index) {
+        ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
+      return article.getThumbnail() != null ? article : null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public ArticleEntity[] selectArticleByLimitPeople(int index){
         return this.articleMapper.selectArticleBylimitPeople(index);
     }

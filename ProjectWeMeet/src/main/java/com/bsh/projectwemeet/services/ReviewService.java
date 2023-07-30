@@ -1,5 +1,7 @@
 package com.bsh.projectwemeet.services;
 
+import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.ProfileEntity;
 import com.bsh.projectwemeet.entities.ReviewEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.enums.ReviewResult;
@@ -59,5 +61,12 @@ public class ReviewService {
         }
         return null;
     }
+
+    public ProfileEntity readReviewProfile(String email) {
+//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        ProfileEntity article = this.reviewMapper.selectProfileImage(email);
+        return article;
+    }
+
 
 }

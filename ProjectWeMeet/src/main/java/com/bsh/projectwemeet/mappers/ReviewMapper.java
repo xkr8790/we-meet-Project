@@ -2,6 +2,7 @@ package com.bsh.projectwemeet.mappers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ParticipantsEntity;
+import com.bsh.projectwemeet.entities.ProfileEntity;
 import com.bsh.projectwemeet.entities.ReviewEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -31,5 +32,6 @@ public interface ReviewMapper {
 
     Double avgStar(@Param(value = "articleIndex") int articleIndex);
 
+ProfileEntity selectProfileImage (@Param(value="email") String email);
 
 }

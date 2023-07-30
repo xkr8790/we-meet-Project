@@ -41,8 +41,8 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.CommentEntity">
-        INSERT INTO `wemeet_project`.`comments`(`article_index`,`email`, `content`, `deleted_flag`,
-                                                `created_at`, `client_ip`, `client_ua`,`nickname`)
+        INSERT INTO `wemeet_project`.`comments`(`article_index`, `email`, `content`, `deleted_flag`,
+                                                `created_at`, `client_ip`, `client_ua`, `nickname`)
         VALUES (#{articleIndex},
                 #{email},
                 #{content},
@@ -175,14 +175,6 @@
     <!-- 카테고리별 페이징 -->
 
 
-
-
-
-
-
-
-
-
     <!--메인에 나타낼 게시물 6개-->
     <select id="selectArticleMain"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -249,6 +241,93 @@
     </select>
     <!-- 필요한 게시물 조회  -->
 
+
+    <select id="selectArticleProfileByIndex"
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `article`.`index`                 AS `index`,
+               `article`.`email`                 AS `email`,
+               `article`.`title`                 AS `title`,
+               `article`.`content`               AS `content`,
+               `article`.`category`              AS `category`,
+               `article`.`view`                  AS `view`,
+               `article`.`limit`                 AS `limit`,
+               `article`.`place`                 AS `place`,
+               `article`.`address`               AS `address`,
+               `article`.`like_count`            AS `likeCount`,
+               `article`.`report`                AS `report`,
+               `article`.`participation`         AS `participation`,
+               `article`.`latitude`              AS `latitude`,
+               `article`.`longitude`             AS `longitude`,
+               `mypage`.`profile_thumbnail`      AS `thumbnail`,
+               `mypage`.`profile_thumbnail_mime` AS `thumbnailMime`
+        FROM `wemeet_project`.`articles` AS `article`
+                 LEFT JOIN `wemeet_project`.`mypages` AS `mypage` ON `article`.`email` = `mypage`.`email`
+        WHERE `article`.`index` = #{index}
+        LIMIT 1
+    </select>
+
+<!--    <select id="selectParticipantProfileByIndex"-->
+<!--            resultType="com.bsh.projectwemeet.entities.ArticleEntity">-->
+<!--        SELECT `article`.`index`                                        AS `index`,-->
+<!--               `article`.`email`                                        AS `email`,-->
+<!--               `article`.`title`                                        AS `title`,-->
+<!--               `article`.`content`                                      AS `content`,-->
+<!--               `article`.`category`                                     AS `category`,-->
+<!--               `article`.`view`                                         AS `view`,-->
+<!--               `article`.`limit`                                        AS `limit`,-->
+<!--               `article`.`place`                                        AS `place`,-->
+<!--               `article`.`address`                                      AS `address`,-->
+<!--               `article`.`like_count`                                   AS `likeCount`,-->
+<!--               `article`.`report`                                       AS `report`,-->
+<!--               `article`.`participation`                                AS `participation`,-->
+<!--               `article`.`latitude`                                     AS `latitude`,-->
+<!--               `article`.`longitude`                                    AS `longitude`,-->
+<!--               (SELECT `email` AS `email`-->
+<!--                FROM `wemeet_project`.`Participants`-->
+<!--                WHERE `article`.`index` = `participant`.`ArticleIndex`) AS `participantEmail`,-->
+<!--               (SELECT `profile_thumbnail` AS `profileThumnail`-->
+<!--                FROM `wemeet_project`.`mypages`-->
+<!--                WHERE participantEmail = `mypage`.`email`)              AS `thumnail`-->
+<!--        FROM `wemeet_project`.`articles` AS `article`-->
+<!--                 LEFT JOIN `wemeet_project`.`mypages` AS `mypage` ON `article`.`email` = `mypage`.`email`-->
+<!--                 LEFT JOIN `wemeet_project`.`Participants` AS `participant`-->
+<!--                           ON `article`.`index` = `participant`.`ArticleIndex`-->
+<!--        WHERE `article`.`index` = #{index}-->
+<!--        LIMIT 2-->
+<!--    </select>-->
+
+    <select  id="selectParticipantProfileByIndex"
+             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
+        SELECT `article`.`index`         AS `index`,
+               `article`.`email`         AS `email`,
+               `article`.`title`         AS `title`,
+               `article`.`content`       AS `content`,
+               `article`.`category`      AS `category`,
+               `article`.`view`          AS `view`,
+               `article`.`limit`         AS `limit`,
+               `article`.`place`         AS `place`,
+               `article`.`address`       AS `address`,
+               `article`.`like_count`    AS ` likeCount`,
+               `article`.`report`        AS `report`,
+               `article`.`participation` AS `participation`,
+               `article`.`latitude`      AS `latitude`,
+               `article`.`longitude`     AS `longitude`,
+               (SELECT `Participants`.`email`
+                FROM `wemeet_project`.`Participants`
+                WHERE `article`.`index` = `Participants`.`ArticleIndex`
+                LIMIT 1)                 AS `participantEmail`,
+               (SELECT `mypages`.`profile_thumbnail`
+                FROM `wemeet_project`.`mypages`
+                WHERE `participantEmail` = `mypages`.`email`
+                LIMIT 1)                 AS `thumbnail`
+        FROM `wemeet_project`.`articles` AS `article`
+                 LEFT JOIN `wemeet_project`.`mypages` AS `mypage` ON `article`.`email` = `mypage`.`email`
+                 LEFT JOIN `wemeet_project`.`Participants` AS `participant` ON `article`.`index` = `participant`.`ArticleIndex`
+        WHERE `article`.`index` = #{index}
+        LIMIT 1;
+    </select>
+
+
     <!-- 게시물 수정 찾기 -->
     <select id="selectArticleByPatchIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -275,7 +354,7 @@
     <!-- 게시물 해쉬태그 select -->
     <select id="selectArticleByPatchHashTag"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`          AS `index`,
+        SELECT `index`                   AS `index`,
                SUBSTRING(hashtag, 1, 11) AS `hashtag`
         FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
@@ -298,12 +377,12 @@
     <!-- 참여인원 중복되있는지 select -->
     <select id="selectCheckParticipants"
             resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
-        SELECT `index`                      AS `index`,
-               `email`                      AS `email`,
-               `ArticleIndex`               AS `ArticleIndex`
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{ArticleIndex}
-        AND `email` = #{email}
+          AND `email` = #{email}
         LIMIT 1
     </select>
     <!-- 참여인원 중복되있는지 select -->
@@ -421,8 +500,8 @@
 
     <select id="selectArticleBylimitPeople"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`          AS `index`,
-               `limit`          AS `limit`
+        SELECT `index` AS `index`,
+               `limit` AS `limit`
         FROM `wemeet_project`.`articles`
         WHERE `index` = #{index}
     </select>
@@ -473,10 +552,10 @@
 
     <select id="selectUser"
             resultType="com.bsh.projectwemeet.entities.UserEntity">
-        SELECT `email` AS `email`,
+        SELECT `email`    AS `email`,
                `nickname` AS `nickname`
         FROM `wemeet_project`.`users`
-        WHERE `email` =#{email}
+        WHERE `email` = #{email}
         LIMIT 1
     </select>
 
@@ -515,7 +594,7 @@
             `longitude`      = #{longitude},
             `thumbnail`      = IFNULL(#{thumbnail}, `thumbnail`),
             `thumbnail_mime` = IFNULL(#{thumbnailMime}, `thumbnail_mime`),
-            `hashtag` = #{hashtag}
+            `hashtag`        = #{hashtag}
         WHERE `index` = #{index}
     </update>
     <!-- 게시판 수정 -->
@@ -533,7 +612,6 @@
         WHERE `index` = #{index}
         LIMIT 1
     </update>
-
 
 
     <!-- 게시판 삭제 -->
@@ -694,7 +772,8 @@
                `email`        AS `email`,
                `ArticleIndex` AS `ArticleIndex`
         FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` = #{ArticleIndex} AND `email` = #{email}
+        WHERE `ArticleIndex` = #{ArticleIndex}
+          AND `email` = #{email}
     </select>
     <!-- 참여인원 중복되있는지 select -->
 
