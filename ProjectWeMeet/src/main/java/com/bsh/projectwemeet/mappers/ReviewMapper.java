@@ -17,7 +17,7 @@ public interface ReviewMapper {
 
     int insertReview(ReviewEntity reviewEntity);
 
-    ParticipantsEntity selectParticipantsEmail(@Param(value = "email") String email);
+    ReviewEntity selectParticipantsEmail(@Param(value = "email") String email);
     //    참여자의 데이터 베이스에서 이메일과 게시글번호와 같은지에 대한 정보가 필요하다.
 
 
@@ -32,6 +32,8 @@ public interface ReviewMapper {
 
     Double avgStar(@Param(value = "articleIndex") int articleIndex);
 
-ProfileEntity selectProfileImage (@Param(value="email") String email);
+    ReviewEntity selectEmail(@Param(value="index")int index);
+
+    ProfileEntity selectProfileImage (@Param(value="email")String email);
 
 }

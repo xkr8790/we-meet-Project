@@ -163,6 +163,24 @@
         LIMIT 1;
     </select>
 
+
+    <select id="selectEmail"
+            resultType="com.bsh.projectwemeet.entities.ReviewEntity">
+        SELECT `index`,
+               `content` AS `content`,
+               `created_at` AS `createdAt`,
+               `reviewStar` AS `reviewStar`,
+               `article_index` AS `articleIndex`,
+               `client_ip` AS `clientIp`,
+               `client_ua` AS `clientUa`,
+               `nickname` AS `nickname`,
+               `email` AS `email`
+        FROM `wemeet_project`.`reviews`
+        WHERE `article_index` = #{index}
+        LIMIT 1
+    </select>
+
+
     <select id="selectProfileImage"
     resultType="com.bsh.projectwemeet.entities.ProfileEntity">
         SELECT `index` AS `index`,
@@ -174,6 +192,8 @@
         WHERE `email` = #{email}
         LIMIT 1
     </select>
+
+
 
 
 </mapper>

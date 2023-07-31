@@ -146,7 +146,7 @@ body {
 .allContainer > .main-template > .content {
     background-color: #f4f3f1;
 
-    padding-bottom: 2rem;
+    padding: 0 0 2rem 1.25rem;
     margin: 0 1rem;
 }
 
@@ -441,6 +441,7 @@ body {
     border: 1px solid gray;
     display: block;
     resize: none;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 

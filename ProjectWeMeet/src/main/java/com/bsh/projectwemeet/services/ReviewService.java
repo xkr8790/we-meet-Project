@@ -62,9 +62,9 @@ public class ReviewService {
         return null;
     }
 
-    public ProfileEntity readReviewProfile(String email) {
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-        ProfileEntity article = this.reviewMapper.selectProfileImage(email);
+    public ProfileEntity readReviewProfile(int index) {
+        ReviewEntity reviews = this.reviewMapper.selectEmail(index);
+        ProfileEntity article = this.reviewMapper.selectProfileImage(reviews.getEmail());
         return article;
     }
 

@@ -81,6 +81,15 @@ public class ArticleService {
       return article.getThumbnail() != null ? article : null;
     }
 
+    public ArticleEntity readParticipantProfileTwo(int index) {
+        ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
+        ArticleEntity articleTwo = this.articleMapper.selectParticipantProfileByIndexTwo(index);
+        if(article.getEmail().equals(articleTwo.getEmail())){
+            return null;
+        }
+
+        return articleTwo.getThumbnail() != null ? article : null;
+    }
 
 
 

@@ -44,7 +44,25 @@ public interface ArticleMapper {
     //클릭시 해당게시물을 가기위해 index값으로 찾기위해 사용되는 매퍼
 
     ArticleEntity selectArticleProfileByIndex(@Param(value = "index") int index);
+
+
+
+
+
+
+
+
     ArticleEntity selectParticipantProfileByIndex(@Param(value = "index") int index);
+    ArticleEntity selectParticipantProfileByIndexTwo(@Param(value = "index") int index);
+
+
+
+
+
+
+
+
+
 
 
 

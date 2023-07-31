@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainStyle.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainMenu.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
     <script defer src="/resources/scripts/slide.js"></script>
@@ -37,13 +38,24 @@
         <ul class="menu right" th:if="${session.user != null}">
             <li class="item">
                 <a href="/profile/profile" class="icon-text-button">
-                    <span class="text">나의 프로필</span>
+                    <img th:src="@{/profiles}" alt="프로필">
                 </a>
             </li>
-            <li class="item" data-action="logout">
-                <a href="/logout" class="icon-text-button">
-                    <span class="text">로그아웃</span>
-                </a>
+            <li class="item">
+                <button name="write">
+                    <a href="/write">
+                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        <div class="tooltip">글작성</div>
+                    </a>
+                </button>
+            </li>
+            <li class="item">
+                <button data-action="logout" name="logout">
+                    <a href="">
+                        <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                        <div class="tooltip">로그아웃</div>
+                    </a>
+                </button>
             </li>
         </ul>
     </div>
@@ -177,6 +189,7 @@
                             <span class="Profile-Picture">
                                 <img class="profile" th:src="@{/article/profiles(index=${article.getIndex()})}">
                                 <img class="profile" onerror="this.style.display='none'" th:src="@{/article/participant/profiles(index=${article.getIndex()})}">
+                                <img class="profile" onerror="this.style.display='none'" th:src="@{/article/participant/profiless(index=${article.getIndex()})}">
                             </span>
                       <span class="number">
                         <span class="map-item" th:text="${article.getParticipation()}"></span>

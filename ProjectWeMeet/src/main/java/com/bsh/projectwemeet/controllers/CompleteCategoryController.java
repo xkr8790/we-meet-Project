@@ -32,22 +32,26 @@ public class CompleteCategoryController {
 
     @RequestMapping(value = "complete", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getComplete(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
-                                    @RequestParam(value = "category", required = false) String category) {
+                                    @RequestParam(value = "category", required = false) String category,
+                                    @RequestParam(value = "c", defaultValue = "complete", required = false) String searchCriterion,
+                                    @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery) {
 
 
             ModelAndView modelAndView = new ModelAndView("home/completeCategory"); //index.html 연결
             PagingModel pagingCategory = new PagingModel(
                     ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
-                    this.completeService.getCountCategory(category),
+                    this.completeService.getCountCategory(searchCriterion, searchQuery,category),
                     requestPage); //객체화
 
-            ArticleEntity[] articleCategory = this.completeService.getCountCategoryByPage(pagingCategory, category);
+            ArticleEntity[] articleCategory = this.completeService.getCountCategoryByPage(pagingCategory, searchCriterion, searchQuery, category);
             //페이징하면서 카테고리 관련 게시물 나타내기
 
 
             modelAndView.addObject("articleCategory", articleCategory);
             modelAndView.addObject("pagingCategory", pagingCategory);
             modelAndView.addObject("category", category);
+        modelAndView.addObject("searchCriterion", searchCriterion);
+        modelAndView.addObject("searchQuery", searchQuery);
             return modelAndView;
 
         }

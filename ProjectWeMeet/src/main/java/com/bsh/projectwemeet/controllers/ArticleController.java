@@ -170,6 +170,7 @@ public class ArticleController {
         return response;
     }
 
+
     @RequestMapping(value = "article/participant/profiles", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getParticipantProfileThumbnail(@RequestParam(value = "index") int index) {
 
@@ -217,7 +218,52 @@ public class ArticleController {
         return response;
     }
 
+    @RequestMapping(value = "article/participant/profiless", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getParticipantProfileThumbnailTwo(@RequestParam(value = "index") int index) {
 
+        ArticleEntity article = this.articleService.readParticipantProfileTwo(index);
+
+        ResponseEntity<byte[]> response;
+        if (article == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            try {
+                // 원본 이미지를 BufferedImage로 변환
+
+                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(article.getThumbnail()));
+
+                // 새로운 크기로 이미지 조정
+                int newWidth = 60;
+                int newHeight = 60;
+                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+
+                // BufferedImage 생성
+                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+
+                // Graphics2D를 사용하여 이미지 그리기
+                Graphics2D graphics = outputImage.createGraphics();
+                graphics.drawImage(resizedImage, 0, 0, null);
+                graphics.dispose();
+
+                // 조정된 이미지를 바이트 배열로 변환
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(outputImage, "jpg", baos);
+                byte[] resizedImageBytes = baos.toByteArray();
+
+                // HTTP 응답 헤더 설정
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentLength(resizedImageBytes.length);
+                headers.setContentType(MediaType.IMAGE_JPEG);
+
+                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return response;
+    }
 
 
     @RequestMapping(value = "article/category/image",
@@ -256,13 +302,15 @@ public class ArticleController {
         LikeReportEntity ReportResult = this.articleService.selectReport(index, session, flag);
         SelectParticipantsResult ParticipantsResult = this.articleService.selectParticipants(index, session);
         ArticleEntity[] articleLimitPeople = this.articleService.selectArticleByLimitPeople(index);
+
+
+
         // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
         ProfileEntity profile = this.articleService.profileBulletin(index);
         //게시판 인덱스를 통해 게시판의 작성자가 프로필 테이블에 사진이 있다면 가져오고
         ParticipantsEntity[] participantsArray = this.articleService.selectParticipantsProfile(index);
         //참가자의 참여부를 따지기
         ProfileEntity[] profiles = this.articleService.ParticipateProfile(index, email);
-
 
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
         modelAndView.addObject("article", article);
@@ -562,8 +610,6 @@ public class ArticleController {
 
         return ResponseEntity.ok(responseMap);
     }
-
-
 
 
 //    댓글

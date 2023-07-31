@@ -283,4 +283,17 @@ public class ArticleEntity {
         this.hashtag = hashtag;
         return this;
     }
+
+    ////////
+
+    private String[] participantEmails;
+
+    public String[] getParticipantEmails() {
+        return participantEmails;
+    }
+
+    public ArticleEntity setParticipantEmails(String[] participantEmails) {
+        this.participantEmails = participantEmails;
+        return this;
+    }
 }

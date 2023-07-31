@@ -102,12 +102,36 @@ body{
 }
 #logo-container > .container > ul > li {
     margin-left: 0.5rem;
-    margin-right: 0.5rem;
+
 }
 
+#logo-container > .container > ul > li > a > img{
+    border-radius: 50%;
+}
 #logo-container > .container > ul > li > a > span{
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 1.5rem;
+}
+
+#logo-container > .container > ul > li > button{
+border-style: none;
+    padding: 0;
+}
+#logo-container > .container > ul > li > button > a > i{
+    font-size: 1.25rem;
+}
+#logo-container > .container > ul > li > button > a > i:hover{
+    color: #FB6161;
+}
+#logo-container > .container > ul > li > button > a:hover .tooltip{
+    opacity: 1;
+    visibility: visible;
+}
+#logo-container > .container > ul > li > button > a> .tooltip{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition:opacity 0.3s ease-in-out;
 }
 
 #topMenuContainer > .top-menu {
