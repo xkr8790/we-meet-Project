@@ -526,6 +526,8 @@ public class ArticleController {
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
+        System.out.println(created);
+        System.out.println(new Date());
         return responseObject.toString();
     }
 

@@ -123,16 +123,7 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
 }
 
 // 댓글의 시간수정
-function formatDate(date) {
-    const options = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-    };
-    return new Date(date).toLocaleString('en-US', options);
-}
+
 function refreshComment() {
     const articleIndex = bulletinForm['articleIndex'].value;
     const xhr = new XMLHttpRequest();
@@ -158,8 +149,8 @@ function refreshComment() {
 
                     const headDiv = document.createElement('div');
                     headDiv.classList.add('comment-head');
-                    const formattedDate = formatDate(comment['createdAt']);
-                    headDiv.innerText = formattedDate;
+                    headDiv.innerText = comment['createdAt'];
+
 
 
                     const bodyDiv = document.createElement('div');
