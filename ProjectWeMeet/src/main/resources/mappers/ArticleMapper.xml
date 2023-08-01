@@ -312,7 +312,7 @@
                `created_at`   AS `createdAt`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{ArticleIndex}
-        ORDER BY `index` DESC
+        ORDER BY `index`
         LIMIT 1
     </select>
     <!-- 참여인원 중복되있는지 select -->
@@ -326,7 +326,7 @@
                `created_at`   AS `createdAt`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{ArticleIndex}
-        ORDER BY `index`
+        ORDER BY `index` DESC
         LIMIT 1
     </select>
     <!-- 참여인원 중복되있는지 select -->

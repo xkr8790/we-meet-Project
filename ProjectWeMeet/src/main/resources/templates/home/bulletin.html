@@ -237,8 +237,8 @@
                     <div class="participant">
                         <div class="human">
                             <img class="human-image" th:src="@{/article/read/profile(index=${articles.getIndex()})}" alt="">
-                            <img class="human-image" rel="thumbnail">
-                            <img class="human-image" rel="thumbnail">
+                            <img class="human-image" onerror="this.style.display='none'" th:src="@{/article/profile/participant1(index=${articles.getIndex()})}">
+                            <img class="human-image" onerror="this.style.display='none'" th:src="@{/article/profile/participant2(index=${articles.getIndex()})}">
                         </div>
                         <i class="fa-solid fa-user-group"></i>
                         <div class="number" th:text="${articles.getParticipation()}">인원</div>

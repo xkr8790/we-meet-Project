@@ -368,7 +368,6 @@ public class ArticleService {
     public ProfileEntity profile1(int index){
         ParticipantsEntity participants = articleMapper.selectParticipantsArticle1(index);
 
-        System.out.println(participants.getEmail());
 
         if(participants == null){
             return null;
@@ -382,6 +381,10 @@ public class ArticleService {
     public ProfileEntity profile2(int index){
         ParticipantsEntity participants1 = articleMapper.selectParticipantsArticle1(index);
         ParticipantsEntity participants2 = articleMapper.selectParticipantsArticle2(index);
+
+        System.out.println(index);
+        System.out.println(participants1.getEmail());
+        System.out.println(participants2.getEmail());
 
 
 
