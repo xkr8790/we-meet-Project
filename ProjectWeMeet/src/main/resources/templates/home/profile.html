@@ -36,7 +36,7 @@
         <h3 class="title">개인 정보 수정</h3>
         <div class="profileImage">
             <img class="profile" rel="profileF" th:name="profile"
-                 th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
+                 th:src="@{/profile/Thumbnail}" alt="">
         </div>
         <label class="profile_file" rel="profilePreview">
             <label for="change_profile" class="change">프로필 바꾸기</label>
@@ -188,7 +188,7 @@
         <div class="thumbnail">
             <div class="none"></div>
             <div class="default" rel="thumbnailDefault">
-                <img class="profile" rel="profile1" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}"
+                <img class="profile" rel="profile1" th:src="@{/profile/Thumbnail}"
                      alt="">
                 <span class="user-name" th:text="${profile?.getNickname()+'님'}"></span>
             </div>

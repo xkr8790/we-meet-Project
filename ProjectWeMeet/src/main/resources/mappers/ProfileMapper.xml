@@ -16,7 +16,7 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
-        INSERT INTO `wemeet_project`.`mypages` (email, profile_thumbnail, profile_thumbnail_mime,introduce_text)
+        INSERT INTO `wemeet_project`.`mypages` (`email`, `profile_thumbnail`, `profile_thumbnail_mime`,`introduce_text`)
         VALUES (#{email},
                 #{profileThumbnail},
                 #{profileThumbnailMime},
@@ -50,16 +50,11 @@
     <select id="selectAll"
     resultType="com.bsh.projectwemeet.entities.UserEntity">
         SELECT `email`             AS `email`,
-               `name`              AS `name`,
                `nickname`          AS `nickname`,
                `contact`           AS `contact`,
-               `admin_flag`        AS `isAdmin`,
-               `birth`             AS `birth`,
-               `registered_at`     AS `registeredAt`,
                `address_postal`    AS `addressPostal`,
                `address_primary`   AS `addressPrimary`,
                `address_secondary` AS `addressSecondary`,
-               `gender` AS `gender`,
                `password` AS `password`
         FROM `wemeet_project`.`users`
         WHERE BINARY `email` = #{email}
@@ -217,8 +212,7 @@
             parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
         UPDATE `wemeet_project`.`mypages`
         SET `profile_thumbnail` = #{profileThumbnail},
-            `profile_thumbnail_mime` = #{profileThumbnailMime},
-            `introduce_text` = #{introduceText}
+            `profile_thumbnail_mime` = #{profileThumbnailMime}
         WHERE `email` = #{email}
         LIMIT 1
     </update>

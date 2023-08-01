@@ -112,6 +112,7 @@ public class ProfileService {
         return this.profileMapper.updateThumbnail(profile) > 0;
     }
 
+
     public int getArticleIndexCountByEmail(HttpSession session) {
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
         Integer articleIndexCount = profileMapper.getArticleIndexCountByEmail(loginUser.getEmail());

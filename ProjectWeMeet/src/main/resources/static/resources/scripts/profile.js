@@ -463,6 +463,8 @@ popup['saveProfile'].onclick = e => {
     xhr.send(formData);
 };
 
+
+
 popup['deleteThumbnail'].onsubmit = e => {
     e.preventDefault();
 
