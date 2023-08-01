@@ -102,12 +102,36 @@ body{
 }
 #logo-container > .container > ul > li {
     margin-left: 0.5rem;
-    margin-right: 0.5rem;
+
 }
 
+#logo-container > .container > ul > li > a > img{
+    border-radius: 50%;
+}
 #logo-container > .container > ul > li > a > span{
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 1.5rem;
+}
+
+#logo-container > .container > ul > li > button{
+border-style: none;
+    padding: 0;
+}
+#logo-container > .container > ul > li > button > a > i{
+    font-size: 1.25rem;
+}
+#logo-container > .container > ul > li > button > a > i:hover{
+    color: #FB6161;
+}
+#logo-container > .container > ul > li > button > a:hover .tooltip{
+    opacity: 1;
+    visibility: visible;
+}
+#logo-container > .container > ul > li > button > a> .tooltip{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition:opacity 0.3s ease-in-out;
 }
 
 #topMenuContainer > .top-menu {
@@ -448,7 +472,7 @@ object-fit: cover;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
     margin-top: 2rem;
-    margin-bottom: 5rem;
+    /*margin-bottom: 5rem;*/
     align-items: center; /* 수직 정렬 */
     justify-items: start;
 }
@@ -531,13 +555,12 @@ object-fit: cover;
 }
 
 .article-tag > .tag {
-    border-radius: 0.7rem;
+    border-radius: 0.5rem;
     margin: 0 0.8rem 0 0;
     font-weight: bold;
-    color: gray;
+    color: black;
     padding: 0.6rem;
     font-size: 1.1rem;
-    background-color: white;
 }
 
 .tag.Popular {
@@ -588,59 +611,78 @@ h2 {
 }
 
 .article-human {
+    width: auto;
+    height: 3.75rem;
+    align-items: start;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    background-color: rgb(244, 244, 244);
+    /*margin-left: -0.5rem;*/
+}
+.article-human > .Profile-Picture{
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
     background-color: rgb(244, 244, 244);
-    margin-left: -0.5rem;
 }
+.article-human > .Profile-Picture > .profile{
+    border-radius: 50%;
+}
+.article-human > .number{
+    margin-left: 0.5rem;
+    height: 3.75rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgb(244, 244, 244);
+}
+/*.Profile-Picture {*/
+/*    margin-bottom:0.3rem;*/
+/*    margin-right: -0.4rem;*/
+/*    width: 2.5rem;*/
+/*    height: 2.5rem;*/
+/*    object-fit: cover;*/
+/*    border-radius: 10rem;*/
+/*    border: 3px white solid;*/
+/*    position: relative;*/
+/*}*/
 
-.Profile-Picture {
-    margin-bottom:0.3rem;
-    margin-right: -0.4rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    object-fit: cover;
-    border-radius: 10rem;
-    border: 3px white solid;
-    position: relative;
-}
+/*.Profile {*/
+/*    object-fit: cover;*/
+/*    border-radius: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
 
-.Profile {
-    object-fit: cover;
-    border-radius: 100%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.Profile {
-    object-fit: cover;
-    border-radius: 100%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
+/*.Profile {*/
+/*    object-fit: cover;*/
+/*    border-radius: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    position: absolute;*/
+/*}*/
 
 .limit-image {
     width: 2.5rem;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     background-color: rgb(244, 244, 244);
 
 }
 
-.number {
-    margin-bottom: 0rem;
-    white-space: nowrap;
-    background-color: rgb(244, 244, 244);
+/*.number {*/
+/*    margin-bottom: 0rem;*/
+/*    white-space: nowrap;*/
+/*    background-color: rgb(244, 244, 244);*/
 
 
-}
+/*}*/
 
 .cover {
     width: 2.5rem;
@@ -656,6 +698,31 @@ h2 {
 a {
     color: black;
 }
+
+.more-button{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.more-button> a{
+    border: 1px solid rgb(244, 244, 244);
+    border-radius: 68px;
+    width: 15rem;
+    height: 6rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(244, 244, 244);
+}
+.more-button> a> p{
+    background: rgb(244, 244, 244);
+    font-size: 1.5rem;
+}
+
 
 
 #footer {

@@ -8,7 +8,7 @@ const closeEye = document.querySelector('.closeEye');
 let code;
 
 window.onload = function() {
-    verifyCode.style.transitionDuration = '600ms'; // 애니메이션 지속 시간 설정
+    verifyCode.style.transitionDuration = '300ms'; // 애니메이션 지속 시간 설정
     verifyCode.style.transitionTimingFunction = 'ease'; // 타이밍 함수 설정
     verifyCode.style.transitionProperty = 'opacity'; // 타이밍 함수 설정
     verifyCode.style.opacity = '1';
@@ -36,7 +36,7 @@ closeEye.addEventListener("click", function () {
     openEye.style.display = "block";
     passwordInput.type = 'text';
 });
-
+verifyCode.warning = verifyCode.querySelector('[rel="codeWarning"]');
 passwordReset.warning = passwordReset.querySelector('[rel="passwordWarning"]');
 passwordReset.Againwarning = passwordReset.querySelector('[rel="passwordAgainWarning"]');
 
@@ -52,6 +52,17 @@ function hideElement(element) {
 
 verifyCode.onsubmit = e => {
     e.preventDefault();
+    if(verifyCode['EmailCode'].value === ''){
+        showWarning(verifyCode.warning, "인증번호가 비어있습니다");
+        verifyCode['EmailCode'].classList.add('_invalid');
+        verifyCode['EmailCode'].focus();
+        verifyCode['EmailCode'].select();
+        setTimeout(() => {
+            hideElement(verifyCode.warning);
+        }, 1000);
+        return;
+    }
+
     let emailCode = document.getElementById("verifyCode").elements["EmailCode"].value;
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
@@ -65,10 +76,22 @@ verifyCode.onsubmit = e => {
                 const responseObject = JSON.parse(xhr.responseText);
                 switch (responseObject.result) {
                     case 'failure':
-                        // alert("인증 코드가 올바르지 않습니다. 코드를 다시 확인해 주세요.");
+                        showWarning(verifyCode.warning, "인증 코드가 올바르지 않습니다. 코드를 다시 확인해 주세요.");
+                        verifyCode['EmailCode'].classList.add('_invalid');
+                        verifyCode['EmailCode'].focus();
+                        verifyCode['EmailCode'].select();
+                        setTimeout(() => {
+                            hideElement(verifyCode.warning);
+                        }, 1000);
                         break;
                     case 'failure_expired':
-                        // alert("인증 코드가 만료되었습니다. 이메일 인증을 다시 해주세요.");
+                        showWarning(verifyCode.warning, "인증 코드가 만료되었습니다. 이메일 인증을 새로 해주세요.");
+                        verifyCode['EmailCode'].classList.add('_invalid');
+                        verifyCode['EmailCode'].focus();
+                        verifyCode['EmailCode'].select();
+                        setTimeout(() => {
+                            hideElement(verifyCode.warning);
+                        }, 1000);
                         break;
                     case 'success':
                         passwordReset['code'].value = verifyCode['EmailCode'].value;
@@ -99,6 +122,7 @@ passwordReset.onsubmit = e => {
         passwordReset['password'].select();
         return;
     }
+
     else if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]};:\'",<.>/?]{8,50})$').test(passwordReset['password'].value)) {
         showWarning(passwordReset.warning,"비밀번호가 규칙에 맞지않습니다");
         passwordReset['password'].classList.add('_invalid');

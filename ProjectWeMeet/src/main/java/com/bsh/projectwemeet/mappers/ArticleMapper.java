@@ -8,6 +8,8 @@ import com.bsh.projectwemeet.models.PagingModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface ArticleMapper {
 
@@ -38,14 +40,47 @@ public interface ArticleMapper {
     ArticleEntity[] selectDifferentArticle();
     //이런만남은 어때요?를 나타내기 위한 매퍼
 
+    ParticipantsEntity[] selectDifferent();
+    //이런만남은 어때요?를 나타내기 위한 매퍼
+
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
     //클릭시 해당게시물을 가기위해 index값으로 찾기위해 사용되는 매퍼
+
+    ArticleEntity selectArticleProfileByIndex(@Param(value = "index") int index);
+
+
+
+
+
+
+
+
+    ArticleEntity selectParticipantProfileByIndex(@Param(value = "index") int index);
+    ArticleEntity selectParticipantProfileByIndexTwo(@Param(value = "index") int index);
+
+
+
+
+
+
+
+
+
+
+
 
     ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
     //게시물 수정 인덱스 찾기
 
     ParticipantsEntity selectParticipants(@Param(value = "ArticleIndex") int ArticleIndex);
     // 참여인원 중복되있는지 select
+
+    ParticipantsEntity selectParticipantsArticle1(@Param(value = "ArticleIndex") int ArticleIndex);
+    // 프로필사진을 위해 참여인원 구하기
+
+    ParticipantsEntity selectParticipantsArticle2(@Param(value = "ArticleIndex") int ArticleIndex);
+    // 프로필사진을 위해 참여인원 구하기
+
 
     ParticipantsEntity selectCheckParticipants(@Param(value = "ArticleIndex") int ArticleIndex,
                                                @Param(value = "email") String email);
@@ -65,6 +100,10 @@ public interface ArticleMapper {
 
     ParticipantsEntity[] selectParticipantsProfile(@Param(value = "index") int index);
     // 참여인원 중복되있는지 select
+
+    ParticipantsEntity[] selectArticleParticipantsProfile();
+    // 참여인원 중복되있는지 select
+
 
     ParticipantsEntity[] selectParticipantsProfiles(@Param(value = "ArticleIndex") int ArticleIndex,
                                                    @Param(value = "email")String email);

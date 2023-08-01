@@ -3,35 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
-    <link rel="stylesheet" href="/resources/stylesheets/recoverPassword.css">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverEmail.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverPassword.css}">
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <script defer th:src="@{/resources/scripts/verifyCode.js}"></script>
 </head>
 <body>
 
-<form id="verifyCode" style="display: flex; align-items: center; flex-direction: column; justify-content: center;">
-    <div style="border: 1px solid #9da3d6; font-size: 20px; padding: 20px 32px; align-items: center; display: flex; flex-direction: row; justify-content: center">
-        <img src="/resources/images/loginImages/lastLogo.jpg" alt="" style="">
-    </div>
-    <span style="margin-top: 2rem; font-size: 1.5rem; display: flex; align-items: center; flex-direction: column; justify-content: center;">인증 코드를 입력해 주세요.</span>
+<form id="verifyCode">
+    <img class="Logo" src="/resources/images/logoImages/logo-224x80.png">
+    <span class="codeExplain">비밀번호 인증 코드를 입력해 주세요.</span>
     <input hidden name="email" type="hidden" th:value="${recoverEmailCode.getEmail()}">
     <input hidden name="salt" type="hidden" th:value="${recoverEmailCode.getSalt()}">
-    <label class="label"
-           style="margin-right: 1rem; margin-top: 2rem; display: flex; align-items: center; flex-direction: column; justify-content: center">
-        <input style="height: 100%; font-size: 1.25rem;" autofocus class="_object-input" maxlength="6" name="EmailCode"
-               placeholder="인증코드를 입력해 주세요." type="text">
-    </label>
-    <label class="submit"
-           style="margin-top: 2rem; display: flex; align-items: center; flex-direction: column; justify-content: center;">
-        <input style="color: white; font-size: 1rem; opacity: 0.8; background-color: #9da3d6" class="_object-button"
-               type="submit" value="인증">
-    </label>
+    <input autofocus class="_object-input" maxlength="8" name="EmailCode" placeholder="인증코드를 입력해 주세요." type="text">
+    <span class="warning code" rel="codeWarning"></span>
+    <input class="_object-button" type="submit" value="인증">
+    <span class="newCode">인증번호가 만료되었다면? <a href="/recoverAccount/">이메일 인증</a></span>
 </form>
 
 
 <form id="passwordReset">
-    <img class="Logo password" th:src="@{/resources/images/logoImages/logo-224x80.png}" alt="logo">
+    <img class="Logo" th:src="@{/resources/images/logoImages/logo-224x80.png}" alt="logo">
+    <h2 class="title">변경할 비밀번호를 입력해주세요</h2>
     <div class="passwordReset-form">
-        <h2 class="title">비밀번호 변경</h2>
         <input disabled name="email" type="email" class="input" th:value="${recoverEmailCode.getEmail()}">
         <input disabled hidden name="code" type="text">
         <input disabled hidden name="salt" type="text" th:value="${recoverEmailCode.getSalt()}">
@@ -55,7 +49,6 @@
         <div class="button-container">
             <input class="submit _color-concept" name="send" type="submit" value="재설정">
         </div>
-        <img class="mini" th:src="@{/resources/images/logoImages/logo-224x80.png}">
     </div>
 </form>
 
