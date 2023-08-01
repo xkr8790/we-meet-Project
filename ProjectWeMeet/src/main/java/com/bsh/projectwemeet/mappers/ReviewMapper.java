@@ -36,4 +36,5 @@ public interface ReviewMapper {
 
     ProfileEntity selectProfileImage (@Param(value="email")String email);
 
+
 }

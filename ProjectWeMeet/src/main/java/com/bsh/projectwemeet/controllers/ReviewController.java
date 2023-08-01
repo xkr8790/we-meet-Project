@@ -35,17 +35,6 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-//    @RequestMapping(value = "review", method = RequestMethod.GET)
-//    public ModelAndView getReview(@RequestParam(value = "index") int articleIndex) {
-//        System.out.println("???");
-//        ModelAndView modelAndView = new ModelAndView("home/review");
-//        ReviewEntity[] reviewEntities = this.reviewService.selectAll(articleIndex);
-//
-//        modelAndView.addObject("reviews", reviewEntities);
-//
-//        return modelAndView;
-//    }
-
     @RequestMapping(value = "review/index", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postReview(@SessionAttribute(value = "user") UserEntity user,
@@ -85,6 +74,8 @@ public class ReviewController {
         }
         return response;
     }
+
+
 
 
 }

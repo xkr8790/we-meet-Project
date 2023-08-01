@@ -4,7 +4,7 @@
 
 
 *{
-    /*border: 1px solid red;*/
+    border: 1px solid red;
     padding: 0;
     margin: 0;
 }
@@ -147,13 +147,15 @@ body {
 
 #loginForm >.passwordBox > i{
     position: absolute;
-    padding-left: 0.2rem;
+    margin-left: 0.2rem;
 }
 #loginForm >.passwordBox > #showIcon{
     display: none;
+
 }
 #loginForm >.passwordBox > #hideIcon{
     display: block;
+
 }
 
 #loginForm > .login-button{

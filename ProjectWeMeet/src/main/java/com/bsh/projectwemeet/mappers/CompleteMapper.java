@@ -1,6 +1,8 @@
 package com.bsh.projectwemeet.mappers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.ParticipantsEntity;
+import com.bsh.projectwemeet.entities.ProfileEntity;
 import com.bsh.projectwemeet.models.PagingModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,7 +27,13 @@ public interface CompleteMapper {
 
     int updateArticle(ArticleEntity article);
     //조회수 수정
+    ProfileEntity selectProfile(@Param(value = "email")String email);
 
+    ParticipantsEntity selectParticipantsArticle1(@Param(value = "ArticleIndex") int ArticleIndex);
+    // 프로필사진을 위해 참여인원 구하기
+
+    ParticipantsEntity selectParticipantsArticle2(@Param(value = "ArticleIndex") int ArticleIndex);
+    // 프로필사진을 위해 참여인원 구하기
 
 
 

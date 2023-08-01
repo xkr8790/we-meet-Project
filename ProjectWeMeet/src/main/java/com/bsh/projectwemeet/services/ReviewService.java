@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.Objects;
 
 @Service
 public class ReviewService {
@@ -67,6 +68,9 @@ public class ReviewService {
         ProfileEntity article = this.reviewMapper.selectProfileImage(reviews.getEmail());
         return article;
     }
+
+
+
 
 
 }

@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
     <link rel="stylesheet" th:href="@{/resources/stylesheets/completeCategory.css}">
-    <script defer th:src="@{/resources/scripts/logout.js}"></script>
     <script defer th:src="@{/resources/scripts/completeCategory.js}"></script>
+    <script defer th:src="@{/resources/scripts/logout.js}"></script>
 
 
 </head>
@@ -38,25 +38,29 @@
             </ul>
             <ul class="menu right" th:if="${session.user != null}">
                 <li class="item">
-                    <a  href="/profile/profile" class="icon-text-button">
-                        <div class="profile">
-                            <img th:src="@{/article/profile}">
-                        </div>
+                    <a class="profile-tag" href="/profile/profile">
+                        <img th:src="@{/article/profile}" alt="">
+                    </a>
+
+<!--                    <a href="/profile/profile" class="icon-text-button">-->
+<!--                        <div class="profile">-->
+<!--                            <img th:src="@{/article/profile}">-->
+<!--                        </div>-->
+<!--                    </a>-->
+                </li>
+                <li class="item">
+                    <a href="/write">
+                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        <div class="tooltip">글작성</div>
                     </a>
                 </li>
                 <li class="item">
-                    <button>
-                        <a href="/write">
-                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                        </a>
-                    </button>
-                </li>
-                <li class="item">
-                    <button data-action="logout">
-                        <a href="">
-                            <i class="fa-solid fa-right-from-bracket fa-lg"></i>
-                        </a>
-                    </button>
+
+                    <a data-action="logout">
+                        <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                        <div class="tooltip">로그아웃</div>
+                    </a>
+
                 </li>
 
             </ul>
@@ -136,12 +140,11 @@
             <select class="select" name="c" id="lang" hidden="hidden">
                 <option value="complete"></option>
             </select>
-            <input type="hidden" name="category" >
-            <input class="input"  name="q" placeholder="검색어를 입력해주세요" type="text">
+            <input type="hidden" name="category">
+            <input class="input" name="q" placeholder="검색어를 입력해주세요" type="text">
             <input class="button" type="submit" value="검색">
         </div>
     </section>
-
 
 
     <section class="article-container">
@@ -149,7 +152,8 @@
             <div class="slide">
                 <div class="article-box">
                     <div class="article-box-grid">
-                        <div class="article-list" th:if="${article.getCategory().equals('완료')}" th:each="article : ${articleCategory}">
+                        <div class="article-list" th:if="${article.getCategory().equals('완료')}"
+                             th:each="article : ${articleCategory}">
                             <a class="article-link" th:href="@{${'article/review'} (index = ${article.getIndex()})}">
                                 <div class="article-thumbnail">
                                     <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}"
@@ -157,7 +161,8 @@
                                 </div>
                                 <div class="article-content-box">
                                     <div class="article-tag">
-                                        <span class="tag comment" th:if="${article.getHashtag() != null}" th:text="${article.getHashtag()}">
+                                        <span class="tag comment" th:if="${article.getHashtag() != null}"
+                                              th:text="${article.getHashtag()}">
                                            좋아요!!
                                         </span>
                                         <span class="tag" th:text="${article.getCategory()}">태그</span>
@@ -184,14 +189,16 @@
 
                                     <span class="article-human">
               <span class="Profile-Picture">
-                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
+                 <img class="Profile" th:src="@{/complete/read/profile(index=${article.getIndex()})}">
+                  <img class="Profile" onerror="this.style.display='none'" th:src="@{/complete/profile/participant1(index=${article.getIndex()})}">
+                                    <img class="Profile" onerror="this.style.display='none'" th:src="@{/complete/profile/participant2(index=${article.getIndex()})}">
               </span>
 
-              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
               <span class="number">
                 <span th:text="${article.getParticipation()}"></span>
                 <span>/</span>
                 <span th:text="${article.getLimitPeople()}"></span>
+              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
                   <!-- 제한인원 제한 걸때 value??  -->
               </span>
               </span>
@@ -199,7 +206,6 @@
                                 </div>
                             </a>
                         </div>
-
 
 
                     </div>

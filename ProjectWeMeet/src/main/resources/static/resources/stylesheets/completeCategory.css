@@ -6,7 +6,6 @@ html {
 }
 
 * {
-    /*border: 1px solid red;*/
     text-decoration: none;
     margin: 0;
     padding: 0;
@@ -58,34 +57,6 @@ body{
     max-width: 67.5rem;
 }
 
-#topMenuContainer > .top-menu {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    font-size: 0.8rem;
-    justify-content: flex-end;
-    list-style-type: none;
-    margin-block: unset;
-    margin-inline: unset;
-    margin-bottom: 1.5rem;
-    padding-inline: unset;
-    padding: 1rem 0 0 0;
-}
-
-#topMenuContainer > .top-menu > .item > .link {
-    color: #000;
-    font-family: 'Humanbumsuk', sans-serif;
-    font-size: 1.5rem;
-}
-
-#topMenuContainer > .top-menu > .item > .empty-space {
-
-}
-
-#topMenuContainer > .top-menu > .item + .item {
-    margin-left: 1.75rem;
-}
-
 #headerContainer {
     top: 0;
     background-color: var(--concept-color-light);
@@ -114,12 +85,12 @@ body{
 }
 
 #headerContainer > .header > .menu > .item + .item {
-    margin-left: 0.75rem;
+    margin-left: 0.4rem;
 }
 
 #headerContainer > .header > .menu > .item > a > .profile {
     position: relative;
-    background-color: white;
+    /*background-color: white;*/
     object-fit: cover;
 }
 #headerContainer > .header > .menu > .item > a > span{
@@ -128,14 +99,22 @@ body{
 #headerContainer > .header > .menu > .item > a > .profile > img {
     width: 60px;
     height: 60px;
-    border-radius: 50% ;
+    border-radius: 50%;
 }
 
 #headerContainer > .header > .menu > .item > button {
     border: 0;
     background-color: white;
 }
-
+#headerContainer > .header > .menu > .item > .profile-tag{
+    width: 60px;
+    height: 60px;
+}
+#headerContainer > .header > .menu > .item > .profile-tag > img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
 #headerContainer > .header > .menu > .item > .icon-text-button {
     align-items: center;
     display: flex;
@@ -155,6 +134,34 @@ body{
     align-items: center;
     margin-top: 0.5rem;
 }
+#headerContainer > .header > .menu > .item > .profile{
+    width: 60px;
+    height: 60px;
+}
+#headerContainer > .header > .menu > .item  > a > i{
+    font-size: 1.5rem;
+}
+#headerContainer > .header > .menu > .item  > a > i:hover{
+    color: #FB6161;
+    border: none;
+    background-color: white;
+    cursor:pointer;
+}
+#headerContainer > .header > .menu > .item  > a:hover .tooltip{
+    opacity: 1;
+    padding: 0;
+    margin: 0;
+    visibility: visible;
+    width: 5rem;
+    font-size: 1rem;
+}
+#headerContainer > .header > .menu > .item  > a > div{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
 
 #headerContainer > .header > .empty-box {
     align-items: center;
@@ -470,10 +477,10 @@ h2 {
     text-overflow: ellipsis;
 }
 .article-human{
-    align-items: center;
+    align-items: start;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     flex-shrink: 0;
     margin-left: -0.5rem;
     margin-top: 0.5rem;
@@ -510,12 +517,16 @@ h2 {
 
 .limit-image{
     width: 2.5rem;
-    margin-left: 1rem;
     margin-bottom: 0.5rem;
 }
 .number{
     white-space: nowrap;
-    margin-top: 0.3rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin-left: 0.5rem;
+    width: 10rem;
 }
 
 .cover{

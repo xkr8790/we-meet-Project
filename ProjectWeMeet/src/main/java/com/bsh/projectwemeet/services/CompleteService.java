@@ -1,10 +1,14 @@
 package com.bsh.projectwemeet.services;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
+import com.bsh.projectwemeet.entities.ParticipantsEntity;
+import com.bsh.projectwemeet.entities.ProfileEntity;
 import com.bsh.projectwemeet.mappers.CompleteMapper;
 import com.bsh.projectwemeet.models.PagingModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 
@@ -47,5 +51,48 @@ public class CompleteService {
         //결과적으로 삭제되지않거나
         //결과적으로 삭제되지않거나
     } //게시판 나타내기
+
+    public ProfileEntity profileBulletin(int index){
+        ArticleEntity article = completeMapper.selectArticleByIndex(index);
+        ProfileEntity profile = completeMapper.selectProfile(article.getEmail());
+        if(profile == null){
+            return null;
+        }
+        if(Objects.equals(article.getEmail(), profile.getEmail())){
+            return completeMapper.selectProfile(article.getEmail());
+        }
+
+        return null;
+    }
+
+
+    public ProfileEntity profile1(int index){
+        ParticipantsEntity participants = completeMapper.selectParticipantsArticle1(index);
+
+        System.out.println(participants.getEmail());
+
+        if(participants == null){
+            return null;
+        }
+
+        ProfileEntity profile = completeMapper.selectProfile(participants.getEmail());
+
+        return profile;
+    }
+
+    public ProfileEntity profile2(int index){
+        ParticipantsEntity participants1 = completeMapper.selectParticipantsArticle1(index);
+        ParticipantsEntity participants2 = completeMapper.selectParticipantsArticle2(index);
+
+
+
+        if(Objects.equals(participants1.getEmail(), participants2.getEmail())){
+            return null;
+        }
+
+        ProfileEntity profile = completeMapper.selectProfile(participants2.getEmail());
+
+        return profile;
+    }
 
 }
