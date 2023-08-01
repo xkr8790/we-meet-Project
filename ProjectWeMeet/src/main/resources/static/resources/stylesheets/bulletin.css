@@ -115,6 +115,7 @@ allContainer > .header > .login > a {
     margin: 1rem 0 3rem 1rem;
     line-height: 28px;
     font-size: 17px;
+    padding: 0.5rem;
 }
 
 .allContainer > .main-template > .img-profile-title > .profile-title {
@@ -131,7 +132,6 @@ allContainer > .header > .login > a {
     border-radius: 16px;
     background-color: white;
     padding-bottom: 1rem;
-    font-family: Pretendard;
 
 }
 
@@ -261,7 +261,6 @@ allContainer > .header > .login > a {
     border-radius: 50%;
     width: 4rem;
     height: 4rem;
-    border-radius: 50%;
 }
 
 .announcement > .introduction > .my > .myIntroduction {
@@ -289,6 +288,7 @@ allContainer > .header > .login > a {
     flex-direction: column;
     justify-content: center;
     position: relative;
+    padding: 1rem 0 1rem 0;
 }
 
 .announcement > .participant > .participantContainer {
@@ -310,6 +310,7 @@ allContainer > .header > .login > a {
     display: flex;
     flex-direction: column;
     justify-content: start;
+    background-color: white;
 }
 
 .announcement > .participant > .participantContainer > .login-after-human > p{
@@ -324,10 +325,12 @@ allContainer > .header > .login > a {
     justify-content: center;
     /*border: 1px solid red;*/
     flex-wrap: wrap;
+    background-color: white;
+    border-radius: 0.2rem;
+    padding: 1rem;
 }
 
 .announcement > .participant > .participantContainer > .login-after-human > .profile > span {
-
     margin-right: 0.2rem;
     border: 1px solid blue;
 }
@@ -357,11 +360,10 @@ allContainer > .header > .login > a {
     cursor: pointer;
     opacity: 0.5;
 }
+
 .announcement > .participant > .participantContainer > .login-after-human > .participating-button > button:hover{
     opacity: 1;
 }
-
-
 
 .announcement > .participant > .participantContainer > .login-before-human {
     position: absolute;

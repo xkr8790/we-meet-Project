@@ -51,7 +51,7 @@ body {
     margin: unset;
     overflow: hidden;
     padding-top: 0;
-    transition-duration: 150ms;
+    transition-duration: 250ms;
     transition-property: max-height, padding-top;
     transition-timing-function: ease;
 }
@@ -59,7 +59,6 @@ body {
 #verifyCode  > .warning.code.visible {
     max-height: 3rem;
     margin-bottom: 1rem;
-    margin-left: 0.3rem;
 }
 
 

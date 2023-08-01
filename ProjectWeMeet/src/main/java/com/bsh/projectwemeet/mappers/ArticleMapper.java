@@ -52,6 +52,13 @@ public interface ArticleMapper {
     ParticipantsEntity selectParticipants(@Param(value = "ArticleIndex") int ArticleIndex);
     // 참여인원 중복되있는지 select
 
+    ParticipantsEntity selectParticipantsArticle1(@Param(value = "ArticleIndex") int ArticleIndex);
+    // 프로필사진을 위해 참여인원 구하기
+
+    ParticipantsEntity selectParticipantsArticle2(@Param(value = "ArticleIndex") int ArticleIndex);
+    // 프로필사진을 위해 참여인원 구하기
+
+
     ParticipantsEntity selectCheckParticipants(@Param(value = "ArticleIndex") int ArticleIndex,
                                                @Param(value = "email") String email);
 
@@ -70,6 +77,10 @@ public interface ArticleMapper {
 
     ParticipantsEntity[] selectParticipantsProfile(@Param(value = "index") int index);
     // 참여인원 중복되있는지 select
+
+    ParticipantsEntity[] selectArticleParticipantsProfile();
+    // 참여인원 중복되있는지 select
+
 
     ParticipantsEntity[] selectParticipantsProfiles(@Param(value = "ArticleIndex") int ArticleIndex,
                                                    @Param(value = "email")String email);

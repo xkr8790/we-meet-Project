@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>소소한 일상의 변화. WeMeet!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/completeCategory.css}">
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
     <script defer th:src="@{/resources/scripts/completeCategory.js}"></script>
@@ -185,28 +185,23 @@
                                     + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
                                 </div>
 
-                                    <span class="article-human">
-              <span class="Profile-Picture">
-                 <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-                  <span class="Profile-Picture">
-              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-              <span class="Profile-Picture">
-                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-              <span class="Profile-Picture">
-                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-
-              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
-              <span class="number">
-                <span th:text="${article.getParticipation()}"></span>
-                <span>/</span>
-                <span th:text="${article.getLimitPeople()}"></span>
-                  <!-- 제한인원 제한 걸때 value??  -->
-              </span>
-              </span>
+                                      <span class="article-human">
+                                          <span class="Profile-Picture">
+                                             <img class="Profile" th:src="@{/article/profile/owner(index=${article.getIndex()})}">
+                                          </span>
+                                           <span class="Profile-Picture">
+                                             <img class="Profile" th:src="@{/article/profile/owner(index=${article.getIndex()})}">
+                                          </span>
+                                           <span class="Profile-Picture">
+                                             <img class="Profile" th:src="@{/article/profile/owner(index=${article.getIndex()})}">
+                                          </span>
+                                          <img class="limit-image" th:src="@{/resources/images/category/human.png}">
+                                          <span class="number">
+                                            <span th:text="${article.getParticipation()}"></span>
+                                            <span>/</span>
+                                            <span th:text="${article.getLimitPeople()}"></span>
+                                          </span>
+                                        </span>
                                     </span>
                                 </div>
                             </a>

@@ -52,9 +52,6 @@ public class ArticleService {
     }
 
 
-
-
-
     public ArticleEntity readArticle(int index) {
 
         ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
@@ -368,6 +365,37 @@ public class ArticleService {
         return null;
     }
 
+    public ProfileEntity profile1(int index){
+        ParticipantsEntity participants = articleMapper.selectParticipantsArticle1(index);
+
+        System.out.println(participants.getEmail());
+
+        if(participants == null){
+            return null;
+        }
+
+        ProfileEntity profile = articleMapper.selectProfile(participants.getEmail());
+
+        return profile;
+    }
+
+    public ProfileEntity profile2(int index){
+        ParticipantsEntity participants1 = articleMapper.selectParticipantsArticle1(index);
+        ParticipantsEntity participants2 = articleMapper.selectParticipantsArticle2(index);
+
+
+
+        if(Objects.equals(participants1.getEmail(), participants2.getEmail())){
+            return null;
+        }
+
+        ProfileEntity profile = articleMapper.selectProfile(participants2.getEmail());
+
+        return profile;
+    }
+
+
+
     public ParticipantsEntity[] selectParticipantsProfile(int index){
         return articleMapper.selectParticipantsProfile(index);
     } //참여한 인원수만큼 배열 반환 -> 배열로 해야지 반복문을 사용해 참가자 수만큼 나타낼수 있음
@@ -548,6 +576,20 @@ public class ArticleService {
         UserEntity user = this.articleMapper.selectUser(loginUser.getEmail());
 
         return user;
+    }
+
+    public UserEntity IntroduceUser(int index){
+        ArticleEntity article = articleMapper.selectArticleByIndex(index);
+        UserEntity user = articleMapper.selectUser(article.getEmail());
+
+        return user;
+    }
+
+    public ProfileEntity IntroduceText(int index){
+        ArticleEntity article = articleMapper.selectArticleByIndex(index);
+        ProfileEntity profile = articleMapper.selectProfile(article.getEmail());
+
+        return profile;
     }
 
 

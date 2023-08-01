@@ -297,7 +297,36 @@
                `ArticleIndex` AS `ArticleIndex`,
                `created_at`   AS `createdAt`
         FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` = #{index}
+        WHERE `ArticleIndex` = #{ArticleIndex}
+        ORDER BY `index`
+        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsArticle1"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`,
+               `created_at`   AS `createdAt`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+        ORDER BY `index` DESC
+        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsArticle2"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`,
+               `created_at`   AS `createdAt`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+        ORDER BY `index`
         LIMIT 1
     </select>
     <!-- 참여인원 중복되있는지 select -->
@@ -450,7 +479,8 @@
             resultType="com.bsh.projectwemeet.entities.ProfileEntity">
         SELECT `email`                  AS `email`,
                `profile_thumbnail`      AS `profileThumbnail`,
-               `profile_thumbnail_mime` AS `profileThumbnailMime`
+               `profile_thumbnail_mime` AS `profileThumbnailMime`,
+               `introduce_text`         AS `introduceText`
         FROM `wemeet_project`.`mypages`
         WHERE `email` = #{email}
         LIMIT 1
@@ -540,8 +570,6 @@
         WHERE `index` = #{index}
         LIMIT 1
     </update>
-
-
 
     <!-- 게시판 삭제 -->
     <delete id="deleteByArticle">
@@ -670,15 +698,16 @@
     <!-- 참여인원 중복되있는지 select -->
 
     <!-- 참여인원 중복되있는지 select -->
-    <select id="selectParticipantsProfiless"
+    <select id="selectArticleParticipantsProfile"
             resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
         SELECT `index`        AS `index`,
                `email`        AS `email`,
                `ArticleIndex` AS `ArticleIndex`
         FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` = #{index}
+        ORDER BY `index` DESC
     </select>
     <!-- 참여인원 중복되있는지 select -->
+
 
 
     <!-- 참여인원 중복되있는지 select -->
