@@ -9,8 +9,10 @@ import com.bsh.projectwemeet.mappers.LoginMapper;
 import com.bsh.projectwemeet.mappers.ProfileMapper;
 import com.bsh.projectwemeet.utils.CryptoUtil;
 import com.bsh.projectwemeet.utils.NCloudUtil;
+import org.apache.catalina.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,43 +24,92 @@ import java.util.Date;
 @Service
 public class ProfileService {
     private final ProfileMapper profileMapper;
-    private final LoginMapper loginMapper;
 
     @Autowired
-    public ProfileService(ProfileMapper profileMapper, LoginMapper loginMapper) {
+    public ProfileService(ProfileMapper profileMapper) {
         this.profileMapper = profileMapper;
-        this.loginMapper = loginMapper;
     }
 
     public UserEntity getAll(HttpSession session) {
 
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        UserEntity user = (UserEntity) session.getAttribute("user");
 
-        return this.profileMapper.selectAll(loginUser.getEmail());
+        return this.profileMapper.selectAll(user.getEmail());
+    }
+
+    public ArticleEntity getCountCategoryByPage(HttpSession session) {
+
+        ArticleEntity article = (ArticleEntity) session.getAttribute("article");
+
+        return this.profileMapper.selectCountCategoryByPage(article.getIndex());
+    }
+
+    public ProfileEntity getThumbnail(HttpSession session) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        ProfileEntity profile = profileMapper.selectThumbnail(user.getEmail());
+
+
+        return profile == null
+                ? null
+                : profile;
+    }
+
+    public DeleteUserResult deleteThumbnailResult(HttpSession session, ProfileEntity profile) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        if (user == null) {
+            return DeleteUserResult.FAILURE;
+        }
+
+        profile.setProfileThumbnail(null)
+                .setProfileThumbnailMime(null);
+
+        return this.profileMapper.deleteThumbnail(profile) > 0
+                ? DeleteUserResult.SUCCESS
+                : DeleteUserResult.FAILURE;
     }
 
     //비밀번호 확인
+//    public LoginResult checkPassword(UserEntity user) {
+//        if (user.getPassword() == null) {
+//            System.out.println("1");
+//            return LoginResult.FAILURE;
+//        }
+//
+//        UserEntity existingUser = this.profileMapper.selectPasswordByEmail(user.getEmail());
+//
+//        user.setPassword(CryptoUtil.hashSha512(user.getPassword()));
+//
+//        if (!user.getPassword().equals(existingUser.getPassword())) {
+//            System.out.println(user.getPassword());
+//            System.out.println(existingUser.getPassword());
+//            return LoginResult.FAILURE;
+//        }
+//
+//        return LoginResult.SUCCESS;
+//    }
+
     public LoginResult checkPassword(UserEntity user) {
         if (user.getPassword() == null) {
             return LoginResult.FAILURE;
         }
+
+        // 데이터베이스에서 해당 이메일에 해당하는 사용자 정보를 가져옴
         UserEntity existingUser = this.profileMapper.selectPasswordByEmail(user.getEmail());
-        if (!user.getPassword().equals(existingUser.getPassword())) {
-            return LoginResult.FAILURE;
+
+        // 입력받은 비밀번호를 해시화하여 사용자의 비밀번호와 비교
+        String hashedPassword = CryptoUtil.hashSha512(user.getPassword());
+        if (existingUser != null && existingUser.getPassword().equals(hashedPassword)) {
+            return LoginResult.SUCCESS; // 비밀번호 일치로 인증 성공
+        } else {
+            return LoginResult.FAILURE; // 비밀번호 불일치로 인증 실패
         }
-        return LoginResult.SUCCESS;
     }
 
 
 
     @Transactional
-    public boolean putProfile(HttpServletRequest request, ProfileEntity profile, HttpSession session) {
-
-        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-
-        profile.setEmail(loginUser.getEmail())
-                .setCreatedAt(new Date());
-        return this.profileMapper.insertProfile(profile) > 0;
+    public boolean putProfile(ProfileEntity profile) {
+        return this.profileMapper.updateThumbnail(profile) > 0;
     }
 
     public int getArticleIndexCountByEmail(HttpSession session) {
@@ -74,8 +125,8 @@ public class ProfileService {
     public SendRegisterContactCodeResult sendContactCodeResult(RegisterContactCodeEntity registerContactCode) {
 
         if (registerContactCode == null ||
-        registerContactCode.getContact() == null ||
-        !registerContactCode.getContact().matches("^(010)(\\d{8})$")) {
+                registerContactCode.getContact() == null ||
+                !registerContactCode.getContact().matches("^(010)(\\d{8})$")) {
             return SendRegisterContactCodeResult.FAILURE;
         }
 
@@ -119,6 +170,19 @@ public class ProfileService {
                 : VerifyRegisterContactCodeResult.FAILURE;
     }
 
+    public ModifyPasswordResult resetNickname(String nickname, UserEntity user, HttpSession session) {
+        if (!(session.getAttribute("user") instanceof UserEntity)) {
+            return ModifyPasswordResult.FAILURE;
+        }
+        UserEntity signedUser = (UserEntity) session.getAttribute("user");
+
+        if (nickname.equals(signedUser.getNickname())) {
+            return ModifyPasswordResult.FAILURE_PASSWORD_MISMATCH;
+        }
+        user.setNickname(nickname);
+        return this.profileMapper.updateNickname(user) > 0
+                ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
+    }
 
     //비밀번호 변경
     public ModifyPasswordResult modifyPassword(String password, UserEntity user, HttpSession session) {
@@ -162,6 +226,8 @@ public class ProfileService {
         return this.profileMapper.updateAddress(user) > 0
                 ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
     }
+
+    //프로필 이미지 삭제
 
     // 회원탈퇴
     public DeleteUserResult deleteUserResult(HttpSession session) {

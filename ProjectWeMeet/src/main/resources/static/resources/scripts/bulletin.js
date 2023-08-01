@@ -67,6 +67,13 @@ bindEvents();
 
 
 
+
+
+
+
+
+
+
 // 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트//
 
 
@@ -118,6 +125,17 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     xhr.send(formData);
 }
 
+// 댓글의 시간수정
+function formatDate(date) {
+    const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    return new Date(date).toLocaleString('en-US', options);
+}
 function refreshComment() {
     const articleIndex = bulletinForm['articleIndex'].value;
     const xhr = new XMLHttpRequest();
@@ -143,24 +161,14 @@ function refreshComment() {
 
                     const headDiv = document.createElement('div');
                     headDiv.classList.add('comment-head');
+                    const formattedDate = formatDate(comment['createdAt']);
+                    headDiv.innerText = formattedDate;
+
 
                     const bodyDiv = document.createElement('div');
                     bodyDiv.classList.add('comment-body');
 
-                    const commentDate = new Date(comment['createdAt']);
 
-                    const options = {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: true,
-                        hourCycle: 'h12',
-                    };
-
-                    const formattedDate = commentDate.toLocaleString('en-US', options);
-                    headDiv.innerText = formattedDate;
 
                     const deleteButton = document.createElement('button');
                     deleteButton.classList.add('delete-button');
@@ -234,6 +242,9 @@ function refreshComment() {
 
 
 
+
+
+
 bulletinForm.onsubmit = function (e) {
     e.preventDefault();
     if (bulletinForm['content'].value == '') {
@@ -247,3 +258,4 @@ bulletinForm.onsubmit = function (e) {
 document.addEventListener('DOMContentLoaded', () => {
     refreshComment();
 });
+

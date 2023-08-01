@@ -44,7 +44,7 @@ public class RegisterService {
             return SendRegisterContactCodeResult.FAILURE;
         }
 
-        if (this.registerMapper.selectUserByContact(registerContactCode.getContact()) !=null){ //사용중인 연락처일 때
+        if (this.registerMapper.selectUserByContact(registerContactCode.getContact()) != null){ //사용중인 연락처일 때
             return SendRegisterContactCodeResult.FAILURE_DUPLICATE;
         }
         
@@ -100,7 +100,7 @@ public class RegisterService {
         user.setPassword(CryptoUtil.hashSha512(user.getPassword())); //저장되는 패스워드 암호화
 
 
-        String defaultProfileImagePath = "src/main/resources/static/resources/images/profileImages/icons8-male-user-96.png";
+        String defaultProfileImagePath = "src/main/resources/static/day.png";
         //기본이미지 루트
 
         try {
@@ -112,7 +112,7 @@ public class RegisterService {
                     .setCreatedAt(new Date())
                     .setProfileThumbnail(defaultProfileImageBytes)
                     .setProfileThumbnailMime("image/png")
-                    .setIntroduceText("");// 이미지의 MIME 타입을 설정해야 합니다.
+                    .setIntroduceText("마이페이지에서 수정해주세요");// 이미지의 MIME 타입을 설정해야 합니다.
 
         } catch (IOException e) {
             // 파일 읽기 오류 처리

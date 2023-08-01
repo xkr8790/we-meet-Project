@@ -6,17 +6,8 @@ const passwordContainer = document.getElementById('password-container');
 const contactSend = document.getElementById('contactSend');
 const emailSend = document.getElementById('emailSend');
 const loadingForm = document.getElementById('_loading');
-const linkCoverForm = document.getElementById('linkCoverForm');
 
 // 이메일, 비밀번호 option에 맞게 아래의 container가 나타나게 하는 코드
-
-
-linkCoverForm.show= () => {
-    linkCoverForm.classList.add('visible');
-}; //커버폼 보이게 클래스추가
-linkCoverForm.hide = () => {
-    linkCoverForm.classList.remove('visible');
-}; //커버폼 숨기게 클래스 제거
 
 
 loadingForm.show = () =>{
@@ -233,11 +224,15 @@ recoverForm['emailSend'].onclick = e =>{
     let coverText = document.getElementsByClassName('cover-text');
     const link = document.querySelector('.cover-button');
         if (!new RegExp('^(?=.{10,50}$)([\\da-zA-Z\\-_\\.]{5,25})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$').test(recoverForm['pEmail'].value)) {
-            linkCoverForm.show();
-            coverText[0].innerText = "이메일 규칙에 맞지않습니다";
-            coverText[1].innerText = "다시 이메일을 적어주세요";
-            link.addEventListener('click', function() {
-                linkCoverForm.hide();
+            dialogCover.show();
+            dialogLayer.show({
+                title: 'We-Meet',
+                content: '이메일을 입력해주세요.',
+                onConfirm: e => {
+                    e.preventDefault();
+                    dialogCover.hide();
+                    dialogLayer.hide();
+                }
             });
             return;
         }
@@ -253,21 +248,31 @@ recoverForm['emailSend'].onclick = e =>{
                     switch (responseObject.result) {
                         case 'failure':
                            loadingForm.hide();
-                           linkCoverForm.show();
-                            coverText[0].innerText = "확인되지 않거나 없는 이메일입니다";
-                            coverText[1].innerText = "다시 이메일을 적어주세요";
-                            link.addEventListener('click', function() {
-                              linkCoverForm.hide();
+                            dialogCover.show();
+                            dialogLayer.show({
+                                title: 'We-Meet',
+                                content: '가입 되지 않은 이메일 입니다',
+                                onConfirm: e => {
+                                    e.preventDefault();
+                                    dialogCover.hide();
+                                    dialogLayer.hide();
+                                }
                             });
                             break;
                         case 'success':
                             loadingForm.hide();
-                            linkCoverForm.show();
-                            coverText[0].innerText = "이메일로 인증번호를 보냈습니다";
-                            coverText[1].innerText = "확인을 눌러 이메일 인증해주세요";
-                            link.addEventListener('click', function() {
-                                location.href = responseObject['redirect'];
+                            dialogCover.show();
+                            dialogLayer.show({
+                                title: 'We-Meet',
+                                content: '확인을 누를시 인증페이지로 이동합니다.',
+                                onConfirm: e => {
+                                    e.preventDefault();
+                                    location.href = responseObject['redirect'];
+                                    dialogCover.hide();
+                                    dialogLayer.hide();
+                                }
                             });
+
                             break;
                         default:
                             alert('서버오류');
