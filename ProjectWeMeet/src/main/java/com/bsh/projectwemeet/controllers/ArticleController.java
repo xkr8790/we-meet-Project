@@ -680,6 +680,7 @@ public class ArticleController {
         Date created = sdf.parse(String.valueOf(new Date()));
         comment.setCreatedAt(created);
 
+
         CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail, nickname);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
