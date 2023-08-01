@@ -100,7 +100,7 @@ public class RegisterService {
         user.setPassword(CryptoUtil.hashSha512(user.getPassword())); //저장되는 패스워드 암호화
 
 
-        String defaultProfileImagePath = "src/main/resources/static/resources/images/profileImages/icons8-male-user-96.png";
+        String defaultProfileImagePath = "src/main/resources/static/day.png";
         //기본이미지 루트
 
         try {

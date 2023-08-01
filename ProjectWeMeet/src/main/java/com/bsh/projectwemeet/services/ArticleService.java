@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ArticleService {
@@ -499,12 +504,16 @@ public class ArticleService {
             return CreateCommentResult.FAILURE_NOT_LOGIN; // 로그인 상태가 아닐 때
         }
 
+
+
         comment.setEmail(loginUser.getEmail())
                 .setDeleted(false)
                 .setCreatedAt(new Date())
                 .setClientIp(request.getRemoteAddr())
                 .setClientUa(request.getHeader("User-Agent"))
                 .setNickname(loginUser.getNickname());
+
+
 
         // 게시글 작성자와 댓글 작성자가 동일한지 확인
         if (articleEmail != null && loginUser.getEmail().equals(articleEmail)) {

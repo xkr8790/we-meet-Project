@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
-    <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
-    <script defer th:src="@{/resources/scripts/bulltinScript/proplie.js}"></script>
+    <script defer th:src="@{/resources/scripts/bulltinScript/bulletin.js}"></script>
     <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
     <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
     <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
@@ -20,13 +19,13 @@
     <script defer th:if="${session.user!=null && ParticipantsResult.equals('failure')}" th:src="@{/resources/scripts/bulltinScript/InsertParticipate.js}"></script>
     <script defer th:if="${session.user!=null && ParticipantsResult.equals('success')}" th:src="@{/resources/scripts/bulltinScript/DeleteParticipate.js}"></script>
     <script defer th:src="@{/resources/scripts/bulletinMap.js}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
 
 </head>
 <body>
 <form id="bulletinForm" class="allContainer">
+    <input type="hidden" name="index" th:value="${article.getIndex()}" )>
     <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
@@ -170,9 +169,10 @@
                     <!-- 참여취소 클릭시 참여하기로 변경 -->
 
                 </div>
-
                 <div class="login-before-human" th:if="${session.user == null}">
                     <p>로그인 후 확인해 주세요</p>
+                    <!--                    <p>여기는 로그인 전 나올 화면입니다.</p>-->
+                    <!--                    <a href="/login"><input class="attend" type="button" value="참여하기"></a>-->
                 </div>
 
             </div>
@@ -249,8 +249,9 @@
             </div>
         </div>
     </div>
-</form>
 
+
+</form>
 
 
 </body>
