@@ -23,6 +23,8 @@ public interface ProfileMapper {
 
     ProfileEntity selectThumbnail(@Param(value = "email") String email);
 
+    ArticleEntity selectCountCategoryByPage(@Param(value = "index") int index);
+
     int getArticleIndexCountByEmail(@Param(value = "email")String email);
 
     int updatePassword(UserEntity user);

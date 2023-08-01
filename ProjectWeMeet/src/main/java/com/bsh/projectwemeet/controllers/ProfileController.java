@@ -39,6 +39,16 @@ public class ProfileController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "article",
+    method = RequestMethod.GET,
+    produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getArticle(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("home/profile");
+        ArticleEntity article = this.profileService.getCountCategoryByPage(session);
+        modelAndView.addObject("article", article);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "Thumbnail",
     method = RequestMethod.GET)
     public ResponseEntity<byte[]> getThumbnail(HttpSession session) {

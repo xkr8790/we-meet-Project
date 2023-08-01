@@ -12,6 +12,7 @@ import com.bsh.projectwemeet.utils.NCloudUtil;
 import org.apache.catalina.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +24,10 @@ import java.util.Date;
 @Service
 public class ProfileService {
     private final ProfileMapper profileMapper;
-    private final LoginMapper loginMapper;
 
     @Autowired
-    public ProfileService(ProfileMapper profileMapper, LoginMapper loginMapper) {
+    public ProfileService(ProfileMapper profileMapper) {
         this.profileMapper = profileMapper;
-        this.loginMapper = loginMapper;
     }
 
     public UserEntity getAll(HttpSession session) {
@@ -36,6 +35,13 @@ public class ProfileService {
         UserEntity user = (UserEntity) session.getAttribute("user");
 
         return this.profileMapper.selectAll(user.getEmail());
+    }
+
+    public ArticleEntity getCountCategoryByPage(HttpSession session) {
+
+        ArticleEntity article = (ArticleEntity) session.getAttribute("article");
+
+        return this.profileMapper.selectCountCategoryByPage(article.getIndex());
     }
 
     public ProfileEntity getThumbnail(HttpSession session) {
@@ -95,8 +101,6 @@ public class ProfileService {
         if (existingUser != null && existingUser.getPassword().equals(hashedPassword)) {
             return LoginResult.SUCCESS; // 비밀번호 일치로 인증 성공
         } else {
-            System.out.println(user.getPassword());
-            System.out.println(existingUser.getPassword());
             return LoginResult.FAILURE; // 비밀번호 불일치로 인증 실패
         }
     }
