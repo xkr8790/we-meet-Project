@@ -360,16 +360,16 @@ public class ArticleController {
     @RequestMapping(value = "article/participant/profiless", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getParticipantProfileThumbnailTwo(@RequestParam(value = "index") int index) {
 
-        ArticleEntity article = this.articleService.readParticipantProfileTwo(index);
+        ArticleEntity articles = this.articleService.readParticipantProfileTwo(index);
 
         ResponseEntity<byte[]> response;
-        if (article == null) {
+        if (articles == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             try {
                 // 원본 이미지를 BufferedImage로 변환
 
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(article.getThumbnail()));
+                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(articles.getThumbnail()));
 
                 // 새로운 크기로 이미지 조정
                 int newWidth = 60;

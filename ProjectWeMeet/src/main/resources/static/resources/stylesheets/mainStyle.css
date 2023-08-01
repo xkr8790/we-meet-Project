@@ -118,7 +118,7 @@ border-style: none;
     padding: 0;
 }
 #logo-container > .container > ul > li > button > a > i{
-    font-size: 1.25rem;
+    font-size: 2rem;
 }
 #logo-container > .container > ul > li > button > a > i:hover{
     color: #FB6161;
@@ -126,6 +126,7 @@ border-style: none;
 #logo-container > .container > ul > li > button > a:hover .tooltip{
     opacity: 1;
     visibility: visible;
+    font-size: 1.2rem;
 }
 #logo-container > .container > ul > li > button > a> .tooltip{
     position: absolute;
@@ -480,12 +481,12 @@ object-fit: cover;
 .article-container > .article-box > .article-list {
     width: 35rem;
     height: 16rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: start;
-    border: 0.125rem solid rgb(244, 244, 244);
+    border: 0.125rem solid lightgray;
     border-radius: 15px;
     gap: 1rem;
     padding: 1rem 1rem 1rem 0;
@@ -502,7 +503,7 @@ object-fit: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     border-radius: 0.3rem;
     padding-left: 0.8rem;
     padding-right: 0.8rem;
@@ -510,7 +511,7 @@ object-fit: cover;
 
 .article-container > .article-box > .article-list >
 .article-thumbnail > .thumbnail {
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     border-radius: 15px;
     width: 14rem;
     height: 14rem;
@@ -527,21 +528,21 @@ object-fit: cover;
     justify-content: center;
     margin-right: 2rem;
     margin-top: 2rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     border-radius: 0.3rem;
 }
 .article-container > .article-box > .article-list >
 .article-content-box > .article-content{
     width: 17rem;
     text-overflow: ellipsis;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 }
 
 .article-container  > .article-box > .article-list >
 .article-content-box > .article-content > .article-content-title {
     /*background-color: white;*/
     width: 17rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 
 }
 
@@ -550,7 +551,7 @@ object-fit: cover;
     display: block;
     width: 17rem;
     margin-bottom: 1.5rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     /*background-color: gray;*/
 }
 
@@ -573,19 +574,19 @@ object-fit: cover;
     white-space: nowrap;
     overflow: hidden;
     margin-bottom: 1rem;
-    background-color: white;
+    background-color: lightgray;
 }
 
 .article-map {
     font-weight: 800;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 }
 
 .article-map > .article-location {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     margin-bottom: 0.3rem;
     line-height: 25px;
 }
@@ -593,13 +594,13 @@ object-fit: cover;
 .article-map > .article-location > .location, .day-img, .time-img {
     width: 1.35rem;
     height: 1.35rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     margin-right: 0.3rem;
 }
 
 
 .map-item {
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 
 }
 
@@ -617,7 +618,7 @@ h2 {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     /*margin-left: -0.5rem;*/
 }
 .article-human > .Profile-Picture{
@@ -625,7 +626,7 @@ h2 {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 }
 .article-human > .Profile-Picture > .profile{
     border-radius: 50%;
@@ -637,42 +638,14 @@ h2 {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 }
-/*.Profile-Picture {*/
-/*    margin-bottom:0.3rem;*/
-/*    margin-right: -0.4rem;*/
-/*    width: 2.5rem;*/
-/*    height: 2.5rem;*/
-/*    object-fit: cover;*/
-/*    border-radius: 10rem;*/
-/*    border: 3px white solid;*/
-/*    position: relative;*/
-/*}*/
 
-/*.Profile {*/
-/*    object-fit: cover;*/
-/*    border-radius: 100%;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*}*/
-
-/*.Profile {*/
-/*    object-fit: cover;*/
-/*    border-radius: 100%;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    position: absolute;*/
-/*}*/
 
 .limit-image {
     width: 2.5rem;
     margin-bottom: 0.5rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 
 }
 

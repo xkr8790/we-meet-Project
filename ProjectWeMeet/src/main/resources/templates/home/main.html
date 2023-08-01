@@ -183,15 +183,11 @@
 
                 </div>
                 <span class="article-human">
-<!--                           <span class="Profile-Picture" th:each="participant : ${participantsArray}">-->
-                    <!--                                                    <img class="profile" th:src="@{/article/Participate/profile(index=${participant.getIndex()}, email=${participant.getEmail()})}">-->
-                    <!--                                                </span>-->
                             <span class="Profile-Picture">
                                 <img class="profile" th:src="@{/article/profiles(index=${article.getIndex()})}">
                                 <img class="profile" onerror="this.style.display='none'" th:src="@{/article/participant/profiles(index=${article.getIndex()})}">
                                 <img class="profile" onerror="this.style.display='none'" th:src="@{/article/participant/profiless(index=${article.getIndex()})}">
                             </span>
-                                <img class="limit-image" src="/resources/images/category/human.png">
                       <span class="number">
                         <span class="map-item" th:text="${article.getParticipation()}"></span>
                         <span class="map-item">/</span>
@@ -203,7 +199,9 @@
         </a>
     </div>
 </section>
-
+<section class="more-button">
+    <a href="http://localhost:6795/article?p=1&category="><p>더보기 ></p></a>
+</section>
 <footer id="footer">
     <div class="wrap">
         <div class="grid-twin">
