@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
     <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
     <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
@@ -206,6 +207,7 @@
                         <input name="articleIndex" type="hidden" th:value="${article.getIndex()}">
                         <input name="articleEmail" type="hidden" th:value="${article.getEmail()}">
                         <input name="nickname" type="hidden" th:value="${user.getNickname()}">
+
 
                         <label>
                             <input type="text" name="content" placeholder="댓글" maxlength="100">

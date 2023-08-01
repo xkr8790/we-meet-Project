@@ -42,6 +42,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping(value = "/")
@@ -515,13 +516,19 @@ public class ArticleController {
 
     @RequestMapping(value = "comment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail,@RequestParam("nickname")String nickname) {
-        CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail,nickname);
+    public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail, @RequestParam("nickname") String nickname) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+        Date created = sdf.parse(String.valueOf(new Date()));
+        comment.setCreatedAt(created);
+
+        CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail, nickname);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+
 
 
     @RequestMapping(value = "comment",
