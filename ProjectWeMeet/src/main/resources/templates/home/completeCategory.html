@@ -149,24 +149,8 @@
             <div class="slide">
                 <div class="article-box">
                     <div class="article-box-grid">
-                        <div class="article-list" th:each="article : ${articleCategory}">
+                        <div class="article-list" th:if="${article.getCategory().equals('완료')}" th:each="article : ${articleCategory}">
                             <a class="article-link" th:href="@{${'article/review'} (index = ${article.getIndex()})}">
-
-<!--                                <div class="article-thumbnail">-->
-<!--                                    <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}"-->
-<!--                                         alt="Thumbnail">-->
-<!--                                </div>-->
-<!--                                <div class="article-content-box">-->
-<!--                                    <div class="article-tag">-->
-<!--                                        <span class="tag" th:text="${article.getCategory()}">태그</span>-->
-<!--                                        <span class="tag comment" th:if="${article.getLikeCount()>10}">좋아요!!</span>-->
-<!--                                    </div>-->
-<!--                                    <h2 class="article-content" th:text="${article.getTitle()}"></h2>-->
-<!--                                    <span class="article-map">-->
-<!--                                <span th:text="${article.getAddress()}">위치</span>-->
-<!--                                <div th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></div>-->
-<!--                                <span th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '-->
-<!--                                + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>-->
                                 <div class="article-thumbnail">
                                     <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}"
                                          alt="Thumbnail">
@@ -201,15 +185,6 @@
                                     <span class="article-human">
               <span class="Profile-Picture">
                  <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-                  <span class="Profile-Picture">
-              <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-              <span class="Profile-Picture">
-                     <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
-              </span>
-              <span class="Profile-Picture">
-                   <img class="Profile" th:src="@{/resources/images/profileImages/다운로드.png}">
               </span>
 
               <img class="limit-image" th:src="@{/resources/images/category/human.png}">

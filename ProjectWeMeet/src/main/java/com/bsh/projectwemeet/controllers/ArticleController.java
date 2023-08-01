@@ -435,6 +435,8 @@ public class ArticleController {
         ArticleEntity article = this.articleService.readArticle(index);
         ArticleEntity[] articles = this.articleService.getMiniArticle();
         UserEntity user = this.articleService.userEmail(session);
+        UserEntity articleUser = this.articleService.IntroduceUser(index);
+        ProfileEntity profileUser = this.articleService.IntroduceText(index);
 
 
         LikeReportEntity LikeResult = this.articleService.selectLike(index,session,flag);
@@ -453,6 +455,8 @@ public class ArticleController {
         modelAndView.addObject("article", article);
         modelAndView.addObject("articles", articles);
         modelAndView.addObject("user", user);
+        modelAndView.addObject("articleUser", articleUser);
+        modelAndView.addObject("profileUser", profileUser);
         modelAndView.addObject("LikeResult",LikeResult);
         modelAndView.addObject("ReportResult",ReportResult);
         modelAndView.addObject("ParticipantsResult",ParticipantsResult.name().toLowerCase());
@@ -748,45 +752,6 @@ public class ArticleController {
         }
         return response;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    @RequestMapping(value="article/review", method = RequestMethod.GET)
-//    public ModelAndView getFinish(int index, HttpSession session){
-//        boolean result = this.articleService.patchFinish(index ,session);
-//        ModelAndView modelAndView = new ModelAndView("home/review");
-//        modelAndView.addObject("result", result);
-//        return modelAndView;
-//   }
-//   게시물 작성자와 로그인된 아이디가 같은지 다른지에 대한 여부를 통해 페이지 넘어가게 하기
-
-//    @RequestMapping(value="article/review", method = RequestMethod.PATCH)
-//    @ResponseBody
-//    public String patchFinished(ArticleEntity article, HttpSession session){
-//        FinishResult result = this.articleService.patchFinished(article, session);
-//        JSONObject responseObject = new JSONObject() {{
-//            put("result", result.name().toLowerCase());
-//        }};
-//        return responseObject.toString();
-//    }
-
-
-
-
 
 
 
