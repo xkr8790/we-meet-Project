@@ -15,9 +15,12 @@ import com.bsh.projectwemeet.utils.NCloudUtil;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
@@ -100,14 +103,18 @@ public class RegisterService {
         user.setPassword(CryptoUtil.hashSha512(user.getPassword())); //저장되는 패스워드 암호화
 
 
-        String defaultProfileImagePath = "src/main/resources/static/day.png";
-        //기본이미지 루트
+        ClassPathResource resource = new ClassPathResource("profile.png");
+        byte[] defaultProfileImageBytes = null;
 
-        try {
-            // 이미지 파일을 바이트 배열로 읽어옴
-            byte[] defaultProfileImageBytes = Files.readAllBytes(Paths.get(defaultProfileImagePath));
+        try (InputStream inputStream = resource.getInputStream()) {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            defaultProfileImageBytes = outputStream.toByteArray();
 
-            // ProfileEntity 생성
             profile.setEmail(user.getEmail())
                     .setCreatedAt(new Date())
                     .setProfileThumbnail(defaultProfileImageBytes)
@@ -115,8 +122,7 @@ public class RegisterService {
                     .setIntroduceText("마이페이지에서 수정해주세요");// 이미지의 MIME 타입을 설정해야 합니다.
 
         } catch (IOException e) {
-            // 파일 읽기 오류 처리
-            e.printStackTrace();
+
         } //회원가입시 같이 프로필 추가되게
 
         return this.registerMapper.insertUser(user) > 0 && profileMapper.insertProfile(profile) > 0
