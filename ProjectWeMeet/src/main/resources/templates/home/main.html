@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainMenu.css}">
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <script defer src="/resources/scripts/slide.js"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
     <script defer th:src="@{/resources/scripts/main.js}"></script>
@@ -19,7 +20,7 @@
     <div class="container">
         <div class="logo">
             <a href="/">
-            <img src="/resources/images/logoImages/logo-224x80.png" alt="logo">
+                <img src="/resources/images/logoImages/logo-224x80.png" alt="logo">
             </a>
         </div>
         <ul class="menu right" th:if="${session.user == null}">
@@ -37,13 +38,24 @@
         <ul class="menu right" th:if="${session.user != null}">
             <li class="item">
                 <a href="/profile/profile" class="icon-text-button">
-                    <span class="text">나의 프로필</span>
+                    <img th:src="@{/profiles}" alt="프로필">
                 </a>
             </li>
-            <li class="item" data-action="logout">
-                <a href="/logout" class="icon-text-button">
-                    <span class="text">로그아웃</span>
-                </a>
+            <li class="item">
+                <button name="write">
+                    <a href="/write">
+                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        <div class="tooltip">글작성</div>
+                    </a>
+                </button>
+            </li>
+            <li class="item">
+                <button data-action="logout" name="logout">
+                    <a href="">
+                        <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                        <div class="tooltip">로그아웃</div>
+                    </a>
+                </button>
             </li>
         </ul>
     </div>
@@ -147,42 +159,49 @@
                     <div class="article-content-box">
                         <div class="article-tag">
                             <span class="tag" th:text="${article.getCategory()}"></span>
+                            <span class="tag comment" th:if="${article.getLikeCount()>10}">추천!!</span>
                         </div>
                         <span class="article-content">
                             <h2 class="article-content-title" th:text="${article.getTitle()}">장문복이랑 놀러갈 사람?</h2>
                         </span>
 
-                        <div class="article-map">
-                            <div class="article-location">
-                                <img class="location" th:src="@{/resources/images/articleImages/location.png}">
-                                <span class="map-item" th:text="${article.getAddress()}">위치</span>
-                            </div>
-                            <div class="article-location">
-                                <img class="day-img" th:src="@{/resources/images/articleImages/day.png}">
-                                <span class="map-item"
-                                      th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">날짜</span>
-                            </div>
-                            <div class="article-location">
-                                <img class="time-img" th:src="@{/resources/images/articleImages/limit-time.png}">
-                                <span class="map-item" th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
+                <div class="article-map">
+                    <div class="article-location">
+                        <img class="location" th:src="@{/resources/images/articleImages/location.png}">
+                        <span class="map-item" th:text="${article.getAddress()}">위치</span>
+                    </div>
+                    <div class="article-location">
+                        <img class="day-img" th:src="@{/resources/images/articleImages/day.png}">
+                        <span class="map-item"
+                              th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">날짜</span>
+                    </div>
+                    <div class="article-location">
+                        <img class="time-img" th:src="@{/resources/images/articleImages/limit-time.png}">
+                        <span class="map-item" th:text="${article.getAppointmentStartTime().hours >= 12 ? '오후 ' + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분') : '오전 '
                                 + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
-                            </div>
+                    </div>
 
-                        </div>
-                        <span class="article-human">
-                           <span class="Profile-Picture" th:each="participant : ${participantsArray}">
-                                <img class="profile" th:src="@{/article/Participate/profile(index=${participant.getIndex()}, email=${participant.getEmail()})}">
+                </div>
+                <span class="article-human">
+<!--                           <span class="Profile-Picture" th:each="participant : ${participantsArray}">-->
+                    <!--                                                    <img class="profile" th:src="@{/article/Participate/profile(index=${participant.getIndex()}, email=${participant.getEmail()})}">-->
+                    <!--                                                </span>-->
+                            <span class="Profile-Picture">
+                                <img class="profile" th:src="@{/article/profiles(index=${article.getIndex()})}">
+                                <img class="profile" onerror="this.style.display='none'" th:src="@{/article/participant/profiles(index=${article.getIndex()})}">
+                                <img class="profile" onerror="this.style.display='none'" th:src="@{/article/participant/profiless(index=${article.getIndex()})}">
                             </span>
                                 <img class="limit-image" src="/resources/images/category/human.png">
                       <span class="number">
                         <span class="map-item" th:text="${article.getParticipation()}"></span>
                         <span class="map-item">/</span>
                         <span class="map-item" th:text="${article.getLimitPeople()}"></span>
+                    <img class="limit-image" src="/resources/images/category/human.png">
                       </span>
-                      </span>
-                            </div>
-                        </a>
-                    </div>
+                </span>
+            </div>
+        </a>
+    </div>
 </section>
 
 <footer id="footer">
@@ -207,7 +226,8 @@
                 주소 : 경기 성남시 분당구 판교 <br>
                 사업자등록번호 : 123-23-12321 | 통신판매 : 제 2023-경기분당-12321 <br>
                 고객센터 : @카카오톡채널 | 운영시간 : (월~금)오전 9:00~오후 6:00/(주말 및 공휴일)오전 8:00~오후 7:00</p>
-            <p class="about-info"><a class="last-a-tag" href="/TermsOfService">이용약관</a> | <a class="last-a-tag" href="/Privacy-Policy">개인정보처리방침</a>
+            <p class="about-info"><a class="last-a-tag" href="/TermsOfService">이용약관</a> | <a class="last-a-tag"
+                                                                                             href="/Privacy-Policy">개인정보처리방침</a>
                 | <a class="last-a-tag" href="#">사업자정보확인</a></p>
         </div>
     </div>
