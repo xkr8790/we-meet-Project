@@ -47,9 +47,6 @@ public class ArticleService {
         return this.articleMapper.selectDifferentArticle();
     }
 
-    public ParticipantsEntity[] getMini(){
-        return this.articleMapper.selectDifferent();
-    }
 
 
     public ArticleEntity readArticle(int index) {
@@ -368,7 +365,6 @@ public class ArticleService {
     public ProfileEntity profile1(int index){
         ParticipantsEntity participants = articleMapper.selectParticipantsArticle1(index);
 
-
         if(participants == null){
             return null;
         }
@@ -382,11 +378,9 @@ public class ArticleService {
         ParticipantsEntity participants1 = articleMapper.selectParticipantsArticle1(index);
         ParticipantsEntity participants2 = articleMapper.selectParticipantsArticle2(index);
 
-        System.out.println(index);
-        System.out.println(participants1.getEmail());
-        System.out.println(participants2.getEmail());
-
-
+        if(participants1 == null){
+            return null;
+        }
 
         if(Objects.equals(participants1.getEmail(), participants2.getEmail())){
             return null;

@@ -185,16 +185,10 @@
                                     + #dates.format(article.getAppointmentStartTime(), 'hh시 mm분')}"></span>
                                 </div>
 
-                                      <span class="article-human">
-                                          <span class="Profile-Picture">
-                                             <img class="Profile" th:src="@{/article/profile/owner(index=${article.getIndex()})}">
-                                          </span>
-                                           <span class="Profile-Picture">
-                                             <img class="Profile" th:src="@{/article/profile/owner(index=${article.getIndex()})}">
-                                          </span>
-                                           <span class="Profile-Picture">
-                                             <img class="Profile" th:src="@{/article/profile/owner(index=${article.getIndex()})}">
-                                          </span>
+                               <span class="article-human">
+                                    <img class="Profile" th:src="@{/article/profile/owner(index=${article.getIndex()})}">
+                                    <img class="Profile" onerror="this.style.display='none'" th:src="@{/article/profile/participant1(index=${article.getIndex()})}">
+                                    <img class="Profile" onerror="this.style.display='none'" th:src="@{/article/profile/participant2(index=${article.getIndex()})}">
                                           <img class="limit-image" th:src="@{/resources/images/category/human.png}">
                                           <span class="number">
                                             <span th:text="${article.getParticipation()}"></span>

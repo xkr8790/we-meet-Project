@@ -95,7 +95,6 @@ public class ArticleController {
 
         ArticleEntity article = this.articleService.readArticle(index);
         ArticleEntity[] articles = this.articleService.getMiniArticle();
-        ParticipantsEntity[] getMini = this.articleService.getMini();
         UserEntity user = this.articleService.userEmail(session);
         UserEntity articleUser = this.articleService.IntroduceUser(index);
         ProfileEntity profileUser = this.articleService.IntroduceText(index);
@@ -127,7 +126,6 @@ public class ArticleController {
         modelAndView.addObject("profile",profile);
         modelAndView.addObject("participantsArray",participantsArray);
         modelAndView.addObject("profiles",profiles);
-        modelAndView.addObject("getMini",getMini);
         return modelAndView;
     }//bulletin 게시판 나타내기
 

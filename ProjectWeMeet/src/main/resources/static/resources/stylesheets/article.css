@@ -122,8 +122,8 @@ body{
     background-color: white;
     object-fit: cover;
     border-radius: 10rem;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
 }
 #headerContainer > .header > .menu > .item > a > .profile > img {
     border-radius: 10rem;
