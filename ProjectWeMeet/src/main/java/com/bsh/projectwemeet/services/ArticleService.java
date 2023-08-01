@@ -82,13 +82,13 @@ public class ArticleService {
     }
 
     public ArticleEntity readParticipantProfileTwo(int index) {
-        ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
+//        ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
         ArticleEntity articleTwo = this.articleMapper.selectParticipantProfileByIndexTwo(index);
-        if(article.getEmail().equals(articleTwo.getEmail())){
-            return null;
-        }
+//        if(article.getThumbnail() == articleTwo.getThumbnail()){
+//            return null;
+//        }
 
-        return articleTwo.getThumbnail() != null ? article : null;
+        return articleTwo.getThumbnail() != null ? articleTwo : null;
     }
 
 

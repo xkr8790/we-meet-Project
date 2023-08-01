@@ -31,6 +31,12 @@ public class ArticleEntity {
     private String clientIp;
     private String clientUa;
 
+    public ArticleEntity setParticipantEmails(String participantEmails) {
+        ParticipantEmails = participantEmails;
+        return this;
+    }
+
+    private String ParticipantEmails;
     private byte[] participantThumbnail;
 
     public byte[] getParticipantThumbnail() {

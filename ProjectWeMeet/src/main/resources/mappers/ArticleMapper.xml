@@ -291,18 +291,17 @@
                (SELECT `Participants`.`email`
                 FROM `wemeet_project`.`Participants`
                 WHERE `article`.`index` = `Participants`.`ArticleIndex`
-                LIMIT 1)                 AS `participantEmail`,
+                LIMIT 1 OFFSET 0)                 AS `participantEmail`,
                (SELECT `mypages`.`profile_thumbnail`
                 FROM `wemeet_project`.`mypages`
                 WHERE `participantEmail` = `mypages`.`email`
-                LIMIT 1)                 AS `thumbnail`
+                AND `mypage`.`index`
+                LIMIT 1 )                 AS `thumbnail`
         FROM `wemeet_project`.`articles` AS `article`
                  LEFT JOIN `wemeet_project`.`mypages` AS `mypage` ON `article`.`email` = `mypage`.`email`
                  LEFT JOIN `wemeet_project`.`Participants` AS `participant` ON `article`.`index` = `participant`.`ArticleIndex`
         WHERE `article`.`index` = #{index}
-        GROUP BY `participantEmail`
-        ORDER BY `participantEmail` ASC
-        LIMIT 1;
+        LIMIT 1 ;
     </select>
     <select  id="selectParticipantProfileByIndexTwo"
              resultType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -323,18 +322,16 @@
                (SELECT `Participants`.`email`
                 FROM `wemeet_project`.`Participants`
                 WHERE `article`.`index` = `Participants`.`ArticleIndex`
-                LIMIT 1)                 AS `participantEmail`,
+                LIMIT 1 OFFSET 1)                 AS `participantEmail`,
                (SELECT `mypages`.`profile_thumbnail`
                 FROM `wemeet_project`.`mypages`
                 WHERE `participantEmail` = `mypages`.`email`
-                LIMIT 1)                 AS `thumbnail`
+                LIMIT 1 )                 AS `thumbnail`
         FROM `wemeet_project`.`articles` AS `article`
                  LEFT JOIN `wemeet_project`.`mypages` AS `mypage` ON `article`.`email` = `mypage`.`email`
                  LEFT JOIN `wemeet_project`.`Participants` AS `participant` ON `article`.`index` = `participant`.`ArticleIndex`
         WHERE `article`.`index` = #{index}
-        GROUP BY `participantEmail`
-        ORDER BY `participantEmail` DESC
-        LIMIT 1;
+        LIMIT 1 ;
     </select>
 
 
