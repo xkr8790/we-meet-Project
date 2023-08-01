@@ -815,8 +815,12 @@ public class ArticleController {
         ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
         ReviewEntity[] reviewEntities = this.reviewService.getAll();
         Double reviewAvgStar = reviewService.avgStar(index);
+        UserEntity articleUser = this.articleService.IntroduceUser(index);
+        ProfileEntity profileUser = this.articleService.IntroduceText(index);
         modelAndView.addObject("avgStar", reviewAvgStar);
         modelAndView.addObject("article", article);
+        modelAndView.addObject("profileUser", profileUser);
+        modelAndView.addObject("articleUser", articleUser);
         modelAndView.addObject("reviews", reviewEntities);
         return modelAndView;
     }

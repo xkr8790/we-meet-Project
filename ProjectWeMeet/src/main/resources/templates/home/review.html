@@ -46,7 +46,7 @@
                     <a href="">
                         <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="몰루">
                     </a>
-                    <p>쵸단</p>
+                    <p th:text="${articleUser.getNickname()}"></p>
                 </div>
                 <div class="bulletin-title" th:utext="${article.getTitle()}"></div>
             </div>
@@ -67,8 +67,8 @@
                     <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                 </a>
                 <div class="myIntroduction">
-                    <p class="nickname">닉네임</p>
-                    <p class="text">자신 소개글</p>
+                    <p class="nickname" th:text="${articleUser.getNickname()}">닉네임</p>
+                    <p class="text" th:text="${profileUser.getIntroduceText()}">자신 소개글</p>
                 </div>
             </div>
         </div>
