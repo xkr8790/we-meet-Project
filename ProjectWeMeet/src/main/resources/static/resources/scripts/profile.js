@@ -82,14 +82,6 @@ popup['checkPasswordButton'].onclick = e => {
         }
     };
     xhr.send(formData);
-    // if (password === '1234') {
-    //     popup.classList.remove('step-1');
-    //     popup.classList.add('step-2');
-    // } else {
-    //     alert('비밀번호가 올바르지 않습니다.');
-    //     popup['_object-input'].value = '';
-    //     popup['_object-input'].focus();
-    // }
 };
 
 //취소 버튼
@@ -98,6 +90,7 @@ popup['close'].addEventListener('click', () => {
     if (r == true) {
         popup.classList.remove('step-2');
         popup.style.display = 'none';
+        location.href += '';
     } else {
         alert("수정 페이지로 돌아갑니다!");
     }
@@ -328,6 +321,48 @@ popup['changeAddress'].onclick = e => {
     xhr.send(formData);
 }
 
+popup['changeNickname'].onclick = e => {
+    e.preventDefault();
+
+    if (popup['infoNickname'].value === '') {
+        alert('변경할 별명을 입력해 주세요.');
+        popup['infoNickname'].focus();
+        return;
+    }
+    if (!new RegExp('^([가-힣]{2,10})$').test(popup['infoNickname'].value)) {
+        alert('올바른 별명을 입력해주세요.');
+        // 별명의 형식 2글자 이상 영어 대소문자,한글
+        popup['infoNickname'].focus();
+        popup['infoNickname'].select();
+        return;
+    }
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('infoNickname', popup['infoNickname'].value);
+    xhr.open('PATCH', `./resetNickname`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure':
+                        alert('이전 별명와 일치합니다. 다시 입력해 주세요.');
+                        break;
+                    case 'success':
+                        alert('별명이 변경되었습니다.');
+                        popup['infoNickname'].setAttribute('disable', 'disable');
+                        break;
+                    default:
+                        alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                alert('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
+}
+
 popup['changePassword'].onclick = e => {
     e.preventDefault();
 
@@ -407,7 +442,7 @@ popup['saveProfile'].onclick = e => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append("thumbnailMultipart", popup['change_profile'].files[0]);
-    xhr.open('POST', './profileImage');
+    xhr.open('PATCH', './profileImage');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -416,14 +451,43 @@ popup['saveProfile'].onclick = e => {
                     alert('변경완료');
                     return;
                 } else {
-                    alert('제한인원을 초과했습니다');
+                    alert('변경 실패. 잠시 후 다시 시도해 주세요.');
                     return;
                 }
             } else {
-                alert('이미 참여한 사용자입니다');
+                alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
                 return;
             }
         }
     };
     xhr.send(formData);
 };
+
+popup['deleteThumbnail'].onsubmit = e => {
+    e.preventDefault();
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('deleteThumbnail', popup['deleteThumbnail'].value)
+    xhr.open('PATCH', `/deleteThumbnail`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'failure':
+                        alert('삭제 실패했습니다. 잠시 후 다시 시도해 주세요.');
+                        break;
+                    case 'success':
+                        alert('프로필 이미지를 삭제했습니다.');
+                        break;
+                    default:
+                        alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                alert('서버와 통신할 수 없습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send(formData);
+}

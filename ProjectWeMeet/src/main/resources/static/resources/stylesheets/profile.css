@@ -29,12 +29,12 @@ html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
-body{
+body {
     width: 60%;
     margin: 0 auto;
 }
 
-.logo{
+.logo {
     margin: 0.5rem 0 1.5rem 0;
 }
 
@@ -187,14 +187,14 @@ body{
 }
 
 
-#mainContainer > .introduce{
+#mainContainer > .introduce {
     width: 15rem;
     text-align: center;
     margin: 2rem;
 }
 
 /*---- 게시물 표시---------*/
-#postContainer  > .article-box-grid{
+#postContainer > .article-box-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
@@ -202,7 +202,7 @@ body{
     border-radius: 0.3rem;
 }
 
-#postContainer >span{
+#postContainer > span {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -211,14 +211,13 @@ body{
     margin-bottom: 1rem;
 }
 
-#postContainer >span>.article-post{
+#postContainer > span > .article-post {
     font-weight: bold;
     font-size: 1.3rem;
 }
 
 
-
-#postContainer >span>.article-status>.status{
+#postContainer > span > .article-status > .status {
     font-weight: bold;
     border-radius: 0.3rem;
     margin: 0.2rem;
@@ -228,37 +227,38 @@ body{
 }
 
 
-#postContainer  > .article-box-grid > .article-list{
+#postContainer > .article-box-grid > .article-list {
     margin-bottom: 1rem;
     margin-top: 2rem;
     border-radius: 0.7rem;
     padding: 1rem 1.5rem 1rem 1.5rem;
 }
 
-#postContainer  > .article-box-grid > .article-list >.myArticleLink{
-   align-items: center;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
+#postContainer > .article-box-grid > .article-list > .myArticleLink {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-#postContainer  > .article-box-grid > .article-list >.myArticleLink:visited{
-   color: black;
+#postContainer > .article-box-grid > .article-list > .myArticleLink:visited {
+    color: black;
 }
 
 
-#postContainer  > .article-box-grid > .article-list >.myArticleLink >h2{
-    width:15rem;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+#postContainer > .article-box-grid > .article-list > .myArticleLink > h2 {
+    width: 15rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-align: center;
     margin-bottom: 1rem;
 }
+
 /*Width보다 넓이 크게 글씨 쓰면 가려짐*/
 
 
-#postContainer  > .article-box-grid >.article-list >.myArticleLink > .article-thumbnail{
+#postContainer > .article-box-grid > .article-list > .myArticleLink > .article-thumbnail {
     width: 15rem;
     height: 15rem;
 }
@@ -276,7 +276,8 @@ body{
     justify-content: space-between;
     margin-top: 0.5rem;
 }
-#postContainer > .article-box-grid > .article-list > .likeAndReport >.likeImage {
+
+#postContainer > .article-box-grid > .article-list > .likeAndReport > .likeImage {
     align-items: center;
     display: flex;
 }
@@ -299,11 +300,6 @@ body{
     font-weight: 500;
     background-color: #ff7257;
 }
-
-
-
-
-
 
 
 /*#popup {*/
@@ -510,12 +506,13 @@ body{
     border: 0;
 }
 
-#popup.step-2 > .popup-content.step-2 > .profile_file > .delete {
+#popup.step-2 > .popup-content.step-2 > .profile_file > .delete > .profileDelete {
     background-color: white;
     font-size: 1rem;
     text-decoration: underline;
     cursor: pointer;
 }
+
 
 #popup.step-2 > .popup-content.step-2 > .passwordReset {
     background-color: white;
@@ -752,7 +749,22 @@ body{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
 
+#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-box > ._object-input {
+    margin-bottom: 0.4rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button {
+    width: 100%;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button > .change {
+    float: right;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > .message-box {
@@ -782,14 +794,14 @@ body{
     justify-content: start;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button{
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button {
     align-items: end;
     display: flex;
     /*flex-direction: ;*/
     justify-content: end;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .subTitle{
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .subTitle {
     width: 11.5rem;
 }
 
@@ -800,16 +812,19 @@ body{
     justify-content: start;
     width: 100%;
 }
-#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box{
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box {
     width: 83%;
 }
-#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box > ._object-input{
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box > ._object-input {
     width: 100%;
 }
-#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button{
-align-items: end;
-display: flex;
-justify-content: end;
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button {
+    align-items: end;
+    display: flex;
+    justify-content: end;
     width: 85%;
 }
 
@@ -823,7 +838,7 @@ justify-content: end;
     width: 100%;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .option-container> * > input{
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container > * > input {
     height: 2rem;
 }
 
