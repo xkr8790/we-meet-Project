@@ -10,15 +10,15 @@ body {
 }
 
 .allContainer {
-    width: 50%;
-    height: 100%;
+    width: 640px;
+    height: auto;
     display: flex;
     flex-direction: column;
     background-color: #f4f3f1;
 }
 
 .allContainer > .header {
-    /*border: 1px solid red;*/
+    border: 1px solid red;
     width: 100%;
     height: 3.5rem;
     z-index: 99;
@@ -43,6 +43,7 @@ body {
     text-decoration: none;
     color: black;
     margin-left: 0.3rem;
+    display: block;
 }
 
 .allContainer > .header > .login > a:hover {
@@ -463,4 +464,16 @@ body {
 .announcement > .review > .reviewContainer > .reviewInput > .starBox > .button {
     width: 4rem;
     height: 1.5rem;
+}
+
+@media screen and (max-width: 670px)  {
+    .allContainer{
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 310px){
+    .allContainer > .header > .login > a{
+      font-size: 5vw;
+    }
 }
