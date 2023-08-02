@@ -25,7 +25,8 @@ emailOption.addEventListener('change', function () {
         passwordContainer.style.display = 'none';
         contactSend.style.display = 'block';
         emailSend.style.display = 'none';
-
+        recoverForm.cNotification.hide();
+        recoverForm.warning.hide();
     }
 });
 
@@ -35,6 +36,8 @@ passwordOption.addEventListener('change', function () {
         passwordContainer.style.display = 'block';
         contactSend.style.display = 'none';
         emailSend.style.display = 'block';
+        recoverForm.warning.hide();
+        recoverForm.cNotification.hide();
     }
 });
 
@@ -56,14 +59,18 @@ recoverForm.warning.show = (text) => {
     recoverForm.warning.innerText = text;
     recoverForm.warning.classList.add('visible');
 };
-recoverForm.warning.hide = () => recoverForm.warning.classList.remove('visible');
-
+recoverForm.warning.hide = () => {
+    recoverForm.warning.classList.remove('visible');
+}
 recoverForm.cNotification = recoverForm.querySelector('[rel="cNotification"]');
+
 recoverForm.cNotification.show = (text) => {
     recoverForm.cNotification.innerText = text;
     recoverForm.cNotification.classList.add('visible');
 };
-recoverForm.cNotification.hide = () => recoverForm.cNotification.classList.remove('visible');
+recoverForm.cNotification.hide = () => {
+    recoverForm.cNotification.classList.remove('visible');
+}
 
 
 
