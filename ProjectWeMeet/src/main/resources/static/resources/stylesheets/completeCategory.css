@@ -588,3 +588,5 @@ a {
     padding: 0 0.75rem;
     text-decoration: none;
 }
+
+@media screen and (max-width: 1278px)
