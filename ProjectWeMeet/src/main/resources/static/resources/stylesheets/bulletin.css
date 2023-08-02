@@ -593,6 +593,7 @@ allContainer > .header > .login > a {
     font-size: 12px;
     display: inline-block;
     margin-right: 1rem;
+    width: 100%;
 }
 .delete-button{
 
