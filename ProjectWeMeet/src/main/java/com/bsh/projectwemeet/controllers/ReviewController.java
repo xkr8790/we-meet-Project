@@ -55,7 +55,7 @@ public class ReviewController {
     @ResponseBody
     public String deleteReview(@RequestParam(value = "index") int index) {
         boolean result = this.reviewService.deleteByIndex(index);
-        System.out.println(result);
+//        System.out.println(result);
         return String.valueOf(result);
     }
 
