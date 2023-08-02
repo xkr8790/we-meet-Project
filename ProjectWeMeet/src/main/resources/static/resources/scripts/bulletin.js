@@ -122,8 +122,19 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     xhr.send(formData);
 }
 
-// 댓글의 시간수정
-
+// 시간수정
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleString('en', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+    return formattedDate;
+}
+//
 function refreshComment() {
     const articleIndex = bulletinForm['articleIndex'].value;
     const xhr = new XMLHttpRequest();
@@ -149,7 +160,7 @@ function refreshComment() {
 
                     const headDiv = document.createElement('div');
                     headDiv.classList.add('comment-head');
-                    headDiv.innerText = comment['createdAt'];
+                    headDiv.innerText = formatDate(comment['createdAt']);
 
 
 
