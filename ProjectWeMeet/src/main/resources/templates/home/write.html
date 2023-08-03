@@ -13,9 +13,13 @@
     <script th:src="@{/resources/libraries/ckeditor/ckeditor.js}"></script>
     <script defer th:src="@{/resources/scripts/map.js}"></script>
     <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
+    <script th:if="${session.user == null}">
+        alert('로그인하고 이용해주세요');
+        window.location.href="/";
+    </script>
 
 </head>
-<body>
+<body th:if="${session.user != null}">
 <div class="inner" >
     <h2 class="logo_we_meet">
         <a href="http://localhost:6795/" class="link">

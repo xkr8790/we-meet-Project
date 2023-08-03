@@ -8,7 +8,6 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainMenu.css}">
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <script defer src="/resources/scripts/slide.js"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
     <script defer th:src="@{/resources/scripts/main.js}"></script>
@@ -20,7 +19,7 @@
     <div class="container">
         <div class="logo">
             <a href="/">
-                <img src="/resources/images/logoImages/logo-224x80.png" alt="logo">
+            <img src="/resources/images/logoImages/logo-224x80.png" alt="logo">
             </a>
         </div>
         <ul class="menu right" th:if="${session.user == null}">
@@ -192,12 +191,11 @@
                         <span class="map-item" th:text="${article.getParticipation()}"></span>
                         <span class="map-item">/</span>
                         <span class="map-item" th:text="${article.getLimitPeople()}"></span>
-                    <img class="limit-image" src="/resources/images/category/human.png">
                       </span>
-                </span>
-            </div>
-        </a>
-    </div>
+                      </span>
+                            </div>
+                        </a>
+                    </div>
 </section>
 <section class="more-button">
     <a href="http://localhost:6795/article?p=1&category="><p>더보기 ></p></a>
@@ -206,11 +204,9 @@
     <div class="wrap">
         <div class="grid-twin">
             <p class="about-info about-a-tag">위밋 정보</p>
-            <p class="about-info"><a class="about-a-tag" href="#">공지사항</a></p>
+            <p class="about-info"><a class="about-a-tag" href="/notice">공지사항</a></p>
             <p class="about-info"><a class="about-a-tag" href="#">이벤트</a></p>
             <p class="about-info"><a class="about-a-tag" href="#">자주 묻는 질문</a></p>
-            <p class="about-info"><a class="about-a-tag" href="#">제휴 및 입점 문의</a></p>
-            <p class="about-info"><a class="about-a-tag" href="#">채용</a></p>
         </div>
         <div class="grid-twin">
             <p class="about-info about-a-tag">소셜 미디어</p>
@@ -224,9 +220,7 @@
                 주소 : 경기 성남시 분당구 판교 <br>
                 사업자등록번호 : 123-23-12321 | 통신판매 : 제 2023-경기분당-12321 <br>
                 고객센터 : @카카오톡채널 | 운영시간 : (월~금)오전 9:00~오후 6:00/(주말 및 공휴일)오전 8:00~오후 7:00</p>
-            <p class="about-info"><a class="last-a-tag" href="/TermsOfService">이용약관</a> | <a class="last-a-tag"
-                                                                                             href="/Privacy-Policy">개인정보처리방침</a>
-                | <a class="last-a-tag" href="#">사업자정보확인</a></p>
+            <p class="about-info"><a class="last-a-tag" href="/TermsOfService">이용약관</a> | <a class="last-a-tag" href="/Privacy-Policy">개인정보처리방침</a>
         </div>
     </div>
 </footer>

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
-    <script defer th:src="@{/resources/scripts/bulltinScript/bulletin.js}"></script>
+    <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
     <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
     <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
     <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
@@ -73,14 +73,12 @@
     <!-- 로그인한 유저가 없을때   -->
     <div class="likeAndReport" th:if="${session.user == null}">
         <div class="likeAndReport" th:if="${session.user == null}">
-            <img class="like" th:data-index="${article.getIndex()}"
-                 th:src="@{/resources/images/bulletinImags/like.png}">
+            <img class="notUserLike" th:src="@{/resources/images/bulletinImags/like.png}">
             <span class="like" th:text="${article.getLikeCount()}"></span>
         </div>
 
         <div class="likeAndReport" th:if="${session.user == null}">
-            <img class="report" th:data-index="${article.getIndex()}"
-                 th:src="@{/resources/images/bulletinImags/_report.png}">
+            <img class="notUserReport" th:src="@{/resources/images/bulletinImags/_report.png}">
             <span class="report" th:text="${article.getReport()}"></span>
         </div>
     </div>
@@ -133,7 +131,13 @@
         </div>
         <div class="participant">
             <div class="participantContainer">
-                <div class="login-after-human">
+
+                <div class="login-before-human" th:if="${session.user == null}">
+                    <p>로그인하고 이용해주세요!</p>
+                    <a class="loginLink" href="/login">로그인</a>
+                </div>
+
+                <div class="login-after-human" th:if="${session.user != null}">
                     <p>함께 할 멤버!</p>
                     <div class="profile">
                      <span th:each="participantsArray : ${participantsArray}">
@@ -168,11 +172,6 @@
                     </div>
                     <!-- 참여취소 클릭시 참여하기로 변경 -->
 
-                </div>
-                <div class="login-before-human" th:if="${session.user == null}">
-                    <p>로그인 후 확인해 주세요</p>
-                    <!--                    <p>여기는 로그인 전 나올 화면입니다.</p>-->
-                    <!--                    <a href="/login"><input class="attend" type="button" value="참여하기"></a>-->
                 </div>
 
             </div>
@@ -235,16 +234,15 @@
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
-                        <input name="index" hidden th:value="${articles.getIndex()}">
                         <div class="human">
                             <img class="human-image" th:src="@{/article/read/profile(index=${articles.getIndex()})}" alt="">
-                            <img class="human-image" rel="thumbnail">
-                            <img class="human-image" rel="thumbnail">
+                            <img class="human-image" onerror="this.style.display='none'" th:src="@{/article/profile/participant1(index=${articles.getIndex()})}">
+                            <img class="human-image" onerror="this.style.display='none'" th:src="@{/article/profile/participant2(index=${articles.getIndex()})}">
+                            <i class="fa-solid fa-user-group"></i>
+                            <div class="number" th:text="${articles.getParticipation()}">인원</div>
+                            <div class="number">/</div>
+                            <div class="number" th:text="${articles.getLimitPeople()}">인원</div>
                         </div>
-                        <i class="fa-solid fa-user-group"></i>
-                        <div class="number" th:text="${articles.getParticipation()}">인원</div>
-                        <div class="number">/</div>
-                        <div class="number" th:text="${articles.getLimitPeople()}">인원</div>
                     </div>
                 </div>
             </div>

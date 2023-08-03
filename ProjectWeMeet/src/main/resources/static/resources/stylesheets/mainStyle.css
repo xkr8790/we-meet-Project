@@ -532,14 +532,14 @@ object-fit: cover;
     border-radius: 0.3rem;
 }
 .article-container > .article-box > .article-list >
-.article-content-box > .article-content{
+.article-content-box > .article-title{
     width: 17rem;
     text-overflow: ellipsis;
     background-color: lightgray;
 }
 
 .article-container  > .article-box > .article-list >
-.article-content-box > .article-content > .article-content-title {
+.article-content-box > .article-title > .article-content-title {
     /*background-color: white;*/
     width: 17rem;
     background-color: lightgray;
@@ -569,7 +569,7 @@ object-fit: cover;
     background-color: #ff7257;
 }
 
-.article-content {
+.article-title {
     width: 19rem;
     white-space: nowrap;
     overflow: hidden;
@@ -699,7 +699,6 @@ a {
 
 
 #footer {
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -747,3 +746,4 @@ a {
 #footer > .wrap > .grid-twin > .about-info > .last-a-tag {
     color: black;
 }
+

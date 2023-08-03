@@ -75,6 +75,24 @@ public class HomeController {
     } //메인 홈 주소
 
 
+    @RequestMapping(value = "/image",
+            method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getThumbnail(@RequestParam(value = "index")int index){
+
+        ArticleEntity article = this.articleService.readArticle(index);
+
+        ResponseEntity<byte[]> response;
+        if (article == null){
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(),headers,HttpStatus.OK);
+        }
+        return response;
+    }
+
     @RequestMapping(value = "/read",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
