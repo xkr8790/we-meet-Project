@@ -45,5 +45,19 @@ body{
 
 .main{
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 800px;
+}
+
+.main > div{
+    padding: 1rem;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.main >div> .title{
+    font-weight: bold;
+}
+
+.main >div> .explain{
+    color: #666666;
+    line-height: 30px;
 }

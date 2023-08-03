@@ -54,6 +54,7 @@ public class ArticleController {
         this.reviewService = reviewService;
     }
 
+
     @RequestMapping(value = "article",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
@@ -63,16 +64,23 @@ public class ArticleController {
                                    @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery,
                                    HttpSession session) {
 
-        ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
+        ModelAndView modelAndView;
 
+        int searchResultCount = this.articleService.getCountCategory(searchCriterion, searchQuery, category);
 
+        if (searchResultCount > 0) {
+            modelAndView = new ModelAndView("home/article"); //index.html 연결
+        } else {
+            modelAndView = new ModelAndView("home/articleNone"); // 검색 결과가 없으면 "home/articleNone" 뷰를 사용합니다.
+
+        } //검색결과 존재 안할시
 
         PagingModel pagingCategory = new PagingModel(
                 ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
-                this.articleService.getCountCategory(searchCriterion,searchQuery, category),
+                this.articleService.getCountCategory(searchCriterion, searchQuery, category),
                 requestPage); //객체화
 
-        ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage( pagingCategory, searchCriterion,searchQuery,category);
+        ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage(pagingCategory, searchCriterion, searchQuery, category);
         //페이징하면서 카테고리 관련 게시물 나타내기
 
 
@@ -81,6 +89,8 @@ public class ArticleController {
         modelAndView.addObject("category", category);
         modelAndView.addObject("searchCriterion", searchCriterion);
         modelAndView.addObject("searchQuery", searchQuery);
+        modelAndView.addObject("searchResultCount",searchResultCount);
+        modelAndView.addObject("requestPage",requestPage);
         return modelAndView;
 
     } //각 게시판 카테고리 별 //

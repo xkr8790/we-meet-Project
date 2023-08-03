@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>소소한 일상의 변화. WeMeet!</title>
-
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainStyle.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/mainMenu.css}">
-    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
-    <link rel="icno" href="/resources/images/mainImages/favicon-16x16.png">
-    <script defer src="/resources/scripts/slide.js"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
-    <script defer th:src="@{/resources/scripts/main.js}"></script>
+    <script defer src="/resources/scripts/slide.js"></script>
 </head>
 
 <body>
@@ -148,7 +145,7 @@
                         <div class="article-tag">
                             <span class="tag" th:text="${article.getCategory()}"></span>
                         </div>
-                        <span class="article-content">
+                        <span class="article-title">
                             <h2 class="article-content-title" th:text="${article.getTitle()}">장문복이랑 놀러갈 사람?</h2>
                         </span>
 
@@ -189,11 +186,9 @@
     <div class="wrap">
         <div class="grid-twin">
             <p class="about-info about-a-tag">위밋 정보</p>
-            <p class="about-info"><a class="about-a-tag" href="#">공지사항</a></p>
+            <p class="about-info"><a class="about-a-tag" href="/notice">공지사항</a></p>
             <p class="about-info"><a class="about-a-tag" href="#">이벤트</a></p>
             <p class="about-info"><a class="about-a-tag" href="#">자주 묻는 질문</a></p>
-            <p class="about-info"><a class="about-a-tag" href="#">제휴 및 입점 문의</a></p>
-            <p class="about-info"><a class="about-a-tag" href="#">채용</a></p>
         </div>
         <div class="grid-twin">
             <p class="about-info about-a-tag">소셜 미디어</p>
@@ -208,7 +203,6 @@
                 사업자등록번호 : 123-23-12321 | 통신판매 : 제 2023-경기분당-12321 <br>
                 고객센터 : @카카오톡채널 | 운영시간 : (월~금)오전 9:00~오후 6:00/(주말 및 공휴일)오전 8:00~오후 7:00</p>
             <p class="about-info"><a class="last-a-tag" href="/TermsOfService">이용약관</a> | <a class="last-a-tag" href="/Privacy-Policy">개인정보처리방침</a>
-                | <a class="last-a-tag" href="#">사업자정보확인</a></p>
         </div>
     </div>
 </footer>
