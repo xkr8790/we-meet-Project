@@ -30,6 +30,37 @@ public class ArticleEntity {
     private String hashtag;
     private String clientIp;
     private String clientUa;
+
+    public ArticleEntity setParticipantEmails(String participantEmails) {
+        ParticipantEmails = participantEmails;
+        return this;
+    }
+
+    private String ParticipantEmails;
+    private byte[] participantThumbnail;
+
+    public byte[] getParticipantThumbnail() {
+        return participantThumbnail;
+    }
+
+    public ArticleEntity setParticipantThumbnail(byte[] participantThumbnail) {
+        this.participantThumbnail = participantThumbnail;
+        return this;
+    }
+
+    public String getParticipantThumbnailMime() {
+        return participantThumbnailMime;
+    }
+
+    public ArticleEntity setParticipantThumbnailMime(String participantThumbnailMime) {
+        this.participantThumbnailMime = participantThumbnailMime;
+        return this;
+    }
+
+    private String participantThumbnailMime;
+
+
+
     public String getClientIp() {
         return clientIp;
     }
@@ -256,6 +287,19 @@ public class ArticleEntity {
 
     public ArticleEntity setHashtag(String hashtag) {
         this.hashtag = hashtag;
+        return this;
+    }
+
+    ////////
+
+    private String[] participantEmails;
+
+    public String[] getParticipantEmails() {
+        return participantEmails;
+    }
+
+    public ArticleEntity setParticipantEmails(String[] participantEmails) {
+        this.participantEmails = participantEmails;
         return this;
     }
 }

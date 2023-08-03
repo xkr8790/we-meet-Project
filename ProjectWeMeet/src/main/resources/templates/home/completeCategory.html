@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>소소한 일상의 변화. WeMeet!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
+
     <link rel="stylesheet" th:href="@{/resources/stylesheets/completeCategory.css}">
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
     <script defer th:src="@{/resources/scripts/completeCategory.js}"></script>
@@ -131,6 +131,19 @@
         </div>
     </section>
 
+    <section class="search-box">
+        <div class="search">
+            <select class="select" name="c" id="lang" hidden="hidden">
+                <option value="complete"></option>
+            </select>
+            <input type="hidden" name="category" >
+            <input class="input"  name="q" placeholder="검색어를 입력해주세요" type="text">
+            <input class="button" type="submit" value="검색">
+        </div>
+    </section>
+
+
+
     <section class="article-container">
         <div class="slider">
             <div class="slide">
@@ -166,7 +179,7 @@
                                         <span class="tag" th:text="${article.getCategory()}">태그</span>
                                         <span class="tag comment" th:if="${article.getLikeCount()>10}">좋아요!!</span>
                                     </div>
-                                    <h2 class="article-title" th:text="${article.getTitle()}"></h2>
+                                    <h2 class="article-content" th:text="${article.getTitle()}"></h2>
                                     <span class="article-map">
 
                                  <div class="article-location">

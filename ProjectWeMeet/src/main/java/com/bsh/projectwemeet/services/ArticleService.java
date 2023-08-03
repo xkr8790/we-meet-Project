@@ -74,6 +74,43 @@ public class ArticleService {
 
     } //게시판 나타내기
 
+
+    public ArticleEntity readProfile(int index) {
+        ArticleEntity article = this.articleMapper.selectArticleProfileByIndex(index);
+        return article;
+    }
+
+
+    public ArticleEntity readParticipantProfile(int index) {
+        ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
+      return article.getThumbnail() != null ? article : null;
+    }
+
+    public ArticleEntity readParticipantProfileTwo(int index) {
+//        ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
+        ArticleEntity articleTwo = this.articleMapper.selectParticipantProfileByIndexTwo(index);
+//        if(article.getThumbnail() == articleTwo.getThumbnail()){
+//            return null;
+//        }
+
+        return articleTwo.getThumbnail() != null ? articleTwo : null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public ArticleEntity[] selectArticleByLimitPeople(int index){
         return this.articleMapper.selectArticleBylimitPeople(index);
     }

@@ -11,10 +11,12 @@ public class CommentEntity {
     private String email;
     private String content;
     private boolean isDeleted;
+
     private Date createdAt;
     private String clientIp;
     private String clientUa;
     private String nickname;
+
 
 
     public int getIndex() {

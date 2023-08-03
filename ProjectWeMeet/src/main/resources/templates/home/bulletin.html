@@ -11,7 +11,6 @@
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
     <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
-    <script defer th:src="@{/resources/scripts/bulltinScript/proplie.js}"></script>
     <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
     <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
     <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
@@ -20,13 +19,13 @@
     <script defer th:if="${session.user!=null && ParticipantsResult.equals('failure')}" th:src="@{/resources/scripts/bulltinScript/InsertParticipate.js}"></script>
     <script defer th:if="${session.user!=null && ParticipantsResult.equals('success')}" th:src="@{/resources/scripts/bulltinScript/DeleteParticipate.js}"></script>
     <script defer th:src="@{/resources/scripts/bulletinMap.js}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
 
 </head>
 <body>
 <form id="bulletinForm" class="allContainer">
+    <input type="hidden" name="index" th:value="${article.getIndex()}" )>
     <div class="header">
         <a href="/">
             <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
@@ -143,9 +142,14 @@
                     <div class="profile">
                      <span th:each="participantsArray : ${participantsArray}">
                          <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
+                         <p></p>
                      </span>
                     </div>
 
+                    <!--  자신의 게시판일때   -->
+                    <div class="participating-button">
+                    </div>
+                    <!--  참여하기 클릭시 인원 1명증가하고 참여취소 버튼으로 바뀜    -->
 
                     <!--  자신의 게시판일때   -->
                     <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure_mine')}">
@@ -244,8 +248,9 @@
             </div>
         </div>
     </div>
-</form>
 
+
+</form>
 
 
 </body>

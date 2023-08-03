@@ -58,7 +58,7 @@ function postReview(content, toFocus, refreshCommentAfter) {
                         alert('사용자님은 권한이 없습니다.');
                         break;
                     case 'failure':
-                        alert('이건몰루!');
+                        alert('회사에 문의해주시기 바랍니다.');
                         break;
                     default:
                         alert('댓글을 작성하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
@@ -74,30 +74,30 @@ function postReview(content, toFocus, refreshCommentAfter) {
 
 
 
-// reviewForm.onsubmit = e => {
-//     e.preventDefault();
-//
-//     if (reviewForm['content'].value === '') {
-//         alert('댓글을 입력해 주세요');
-//         reviewForm['content'].focus();
-//         return;
-//     }
-//     postReview(reviewForm['content'].value);
-// };
-
-
-submitForm = reviewForm.querySelector('[name="submit"]')
-
-submitForm.addEventListener('click', e=>{
+reviewForm.onsubmit = e => {
     e.preventDefault();
+
     if (reviewForm['content'].value === '') {
         alert('댓글을 입력해 주세요');
         reviewForm['content'].focus();
         return;
     }
-
     postReview(reviewForm['content'].value);
-})
+};
+
+
+// submitForm = reviewForm.querySelector('[name="submit"]')
+//
+// submitForm.addEventListener('click', e=>{
+//     e.preventDefault();
+//     if (reviewForm['content'].value === '') {
+//         alert('댓글을 입력해 주세요');
+//         reviewForm['content'].focus();
+//         return;
+//     }
+//
+//     postReview(reviewForm['content'].value);
+// })
 
 const writeButton = reviewForm.querySelector('[name="write"]');
 

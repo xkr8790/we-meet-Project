@@ -122,9 +122,12 @@ body{
     background-color: white;
     object-fit: cover;
 }
+#headerContainer > .header > .menu > .item > a > span{
+    font-size: 1.5rem;
+}
 #headerContainer > .header > .menu > .item > a > .profile > img {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 50% ;
 }
 
@@ -278,6 +281,36 @@ body{
 .search-box> .search > .button:hover{
 
 }
+
+
+.search-box{
+    width: 1240px;
+}
+
+.search-box>.search{
+    float: right;
+    margin-top: 1rem;
+}
+.search-box>.search > .select{
+    height: 1.5rem;
+}
+
+.search-box> .search > .input{
+    width: 9rem;
+    height: 1.5rem;
+    padding-left: 0.5rem;
+}
+.search-box> .search > .button{
+    width: 4rem;
+    height: 1.5rem;
+}
+
+.search-box> .search > .button:hover{
+
+}
+
+
+
 
 
 /*----------------------------------------------------------------------------------*/
