@@ -1,5 +1,6 @@
 package com.bsh.projectwemeet.services;
 
+import com.bsh.projectwemeet.entities.NoticeWriterArticleEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.mappers.NoticeSeeMapper;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,9 @@ public class NoticeSeeService {
         UserEntity check = noticeSeeMapper.selectCheckUser(user.getEmail());
 
         return check;
+    }
+
+    public NoticeWriterArticleEntity[] getCountArticle(){
+        return this.noticeSeeMapper.selectCountArticle();
     }
 }

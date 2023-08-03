@@ -49,6 +49,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: center;
+
 }
 
 .layout > .header_wrap > .logo > a {
@@ -60,8 +61,10 @@ body{
     justify-content: center;
 }
 
+
 .layout > .header_wrap > .logo > a > .icon{
-    width: 4rem;
+    width: 10rem;
+    height: 2rem;
 }
 
 .layout > .header_wrap > .register > a{
@@ -105,8 +108,10 @@ body{
     color:#fff;
     border-radius: 0.3rem;
 }
+#main > .notice-main > div > .box{
 
-#main > .notice-main > div > .article-notice {
+}
+#main > .notice-main > div > .box > .article-notice {
     padding: 1rem;
     font-size: 1.2rem;
     border-bottom: 1px solid #bdbdbd;
@@ -115,7 +120,7 @@ body{
     justify-content: center;
 }
 
-#main > .notice-main > div > a > span {
+#main > .notice-main > div  > .box > a > span {
     color: #bdbdbd;
     margin-top: 1rem;
     font-size: 1rem;

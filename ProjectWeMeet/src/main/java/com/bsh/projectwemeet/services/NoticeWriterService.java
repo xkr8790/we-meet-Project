@@ -40,10 +40,7 @@ public class NoticeWriterService {
     }
 
 
-    public boolean deleteNoticeView(int index) {
-      return this.noticeWriterMapper.deleteArticleByIndex(index) >0;
 
-    }
 
 
     public NoticeWriterImagesEntity putImage(HttpServletRequest request, MultipartFile file) throws IOException {

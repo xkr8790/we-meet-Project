@@ -12,9 +12,9 @@
     <div class="header_wrap">
         <h2 class="logo">
             <a href="/">
-                <img class="icon" th:src="@{/resources/images/noticeImages/whiteLogo.png}">
+                <img class="icon" th:src="@{/resources/images/noticeImages/whiteLogo.png}" >
             </a>
-            <a href="/notice">공지사항</a>
+
         </h2>
         <h2 class="register" th:if="${user == null}">
             <a class="login" href="/login"> 로그인</a>
@@ -32,15 +32,13 @@
         <h1>공지사항</h1>
 
         <div>
-            <a class="button" href="#" th:if="${user != null && user.isAdmin() == true}">작성</a>
-            <a class="article-notice" href="#">
-                [공지] We-Meet 사용 가이드
-                <span class="day">2023.07.02</span>
+            <a class="button" href="/noticeWriter" th:if="${user != null && user.isAdmin() == true}">작성</a>
+            <div class="box" th:each="articles: ${article}">
+            <a class="article-notice" th:href="@{noticeView(index=${articles.getIndex()})}">
+                <span th:text="${articles.getTitle}"></span>
+                <span class="day" th:text="${articles.getCreatedAt()}">2023.07.02</span>
             </a>
-            <a class="article-notice" href="#">
-                [공지] We-Meet 사용 가이드
-                <span class="day">2023.07.02</span>
-            </a>
+            </div>
         </div>
     </div>
 </main>
