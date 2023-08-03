@@ -40,9 +40,6 @@ public interface ArticleMapper {
     ArticleEntity[] selectDifferentArticle();
     //이런만남은 어때요?를 나타내기 위한 매퍼
 
-    ParticipantsEntity[] selectDifferent();
-    //이런만남은 어때요?를 나타내기 위한 매퍼
-
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
     //클릭시 해당게시물을 가기위해 index값으로 찾기위해 사용되는 매퍼
 

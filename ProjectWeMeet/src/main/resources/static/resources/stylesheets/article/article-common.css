@@ -1,0 +1,52 @@
+
+#footer {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer > .wrap {
+    padding-top: 2rem;
+    width: 75rem;
+    height: 10rem; /* Adjust the height according to your needs */
+    /*background-color: aqua;*/
+    display: grid;
+    row-gap: 3rem;
+    column-gap: 3rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 11.375rem;
+}
+
+#footer > .wrap > .grid-twin {
+    /*background-color: #f0a0a0;*/
+    color: #666;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.43;
+}
+
+#footer > .wrap > .grid-twin > .about-info > .about-a-tag {
+    color: black;
+}
+
+#footer > .wrap > .grid-twin > .small-info {
+    font-size: 0.75rem;
+    margin-bottom: 3rem;
+}
+
+#footer > .wrap > .grid-twin.big {
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+
+#footer > .wrap > .grid-twin > .about-info > .secone-info {
+    padding-left: -2rem;
+}
+
+#footer > .wrap > .grid-twin > .about-info > .last-a-tag {
+    color: black;
+}
+
+

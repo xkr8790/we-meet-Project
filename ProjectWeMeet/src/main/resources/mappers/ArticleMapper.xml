@@ -213,22 +213,9 @@
                `thumbnail_mime` AS `thumbnailMime`
         FROM `wemeet_project`.`articles`
         ORDER BY `index` DESC
-        LIMIT 4
+        LIMIT 6
     </select>
     <!-- 이런 모임은 어때요 조회-->
-
-    <!-- 이런 모임은 어때요 조회-->
-    <select id="selectDifferent"
-            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
-        SELECT `index`        AS `index`,
-               `email`        AS `email`,
-               `ArticleIndex` AS `ArticleIndex`
-        FROM `wemeet_project`.`Participants`
-        ORDER BY `index` DESC
-    </select>
-    <!-- 이런 모임은 어때요 조회-->
-
-
 
 
     <!-- 필요한 게시물 조회  -->
@@ -312,7 +299,7 @@
                `created_at`   AS `createdAt`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{ArticleIndex}
-        ORDER BY `index` DESC
+        ORDER BY `index`
         LIMIT 1
     </select>
     <!-- 참여인원 중복되있는지 select -->
@@ -326,7 +313,7 @@
                `created_at`   AS `createdAt`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{ArticleIndex}
-        ORDER BY `index`
+        ORDER BY `index` DESC
         LIMIT 1
     </select>
     <!-- 참여인원 중복되있는지 select -->
