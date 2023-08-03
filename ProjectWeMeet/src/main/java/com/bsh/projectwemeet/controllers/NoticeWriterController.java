@@ -1,7 +1,9 @@
 package com.bsh.projectwemeet.controllers;
 
+import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterImagesEntity;
+import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.services.NoticeWriterService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -54,10 +57,12 @@ public class NoticeWriterController {
 
     @RequestMapping(value = "noticeView",
             method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRead(@RequestParam(value = "index") int index) {
+    public ModelAndView getRead(@RequestParam(value = "index") int index,HttpSession session) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
         ModelAndView modelAndView = new ModelAndView("home/noticeView");
         NoticeWriterArticleEntity article = this.noticeWriterService.readArticle(index);
         modelAndView.addObject("article", article);
+        modelAndView.addObject("user", loginUser);
         return modelAndView;
     }
 
@@ -109,6 +114,15 @@ public class NoticeWriterController {
         return String.valueOf(result);
     }
 
+    @RequestMapping(value = "noticeWrite/patch",
+            method = RequestMethod.GET)
+    public ModelAndView patchNotice(@RequestParam(value = "index") int index, HttpSession session) {
+        NoticeWriterArticleEntity article = noticeWriterService.getPatchIndexArticle(index,session);
+        ModelAndView modelAndView = new ModelAndView("home/patchNoticeWrite");
+        modelAndView.addObject("article", article);
+
+        return modelAndView;
+    }
 
 
 }

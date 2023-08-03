@@ -1,6 +1,6 @@
 const noticeViewForm = document.getElementById('noticeView');
 const deleteButton = noticeViewForm.querySelectorAll('[rel="delete"]');
-
+const patchButton = noticeViewForm.querySelector('[name="patch"]');
 
 deleteButton.forEach(deleteButton => {
     deleteButton.addEventListener('click', (e) => {
@@ -12,10 +12,16 @@ deleteButton.forEach(deleteButton => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     const responseText = xhr.responseText; // 'true' | 'false'
-                    if (responseText === 'true') {
-                        window.location.replace('/notice');
-                    } else {
-                        alert('알 수 없는 이유로 삭제하지 못하였습니다.\n\n이미 삭제된 공지사항일 수도 있습니다.');
+                    const confirmResult = confirm('삭제 하시겠습니까?');
+                    if (confirmResult === true) {
+                        if (responseText === 'true') {
+                            window.location.replace('/notice');
+                        } else {
+                            alert('알 수 없는 이유로 삭제하지 못하였습니다.\n\n이미 삭제된 공지사항일 수도 있습니다.');
+                        }
+                    } else if (confirmResult === false) {
+                        alert('삭제를 취소합니다');
+                        return;
                     }
                 } else {
                     alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
@@ -24,4 +30,31 @@ deleteButton.forEach(deleteButton => {
         };
         xhr.send();
     });
+});
+
+patchButton.forEach(patchButton => {
+    patchButton.addEventListener('click', e => {
+        e.preventDefault();
+
+        const index = patchButton.dataset.index;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `./patch?index=${index}`);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    const confirmResult = confirm('수정을 하시겠습니까?');
+                    if (confirmResult === true) {
+                        location.href = `noticeWrite/patch?index=${index}`
+                    } else if (confirmResult === false) {
+                        alert('수정을 취소합니다');
+                        return;
+                    }
+                } else {
+                    alert('알수 없는 이유로 수정이 불가능 합니다.');
+                }
+            }
+        };
+        xhr.send();
+    }); //공지사항 수정
 });

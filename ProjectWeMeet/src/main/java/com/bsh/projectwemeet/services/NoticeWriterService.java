@@ -1,15 +1,19 @@
 package com.bsh.projectwemeet.services;
 
+import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterImagesEntity;
+import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.mappers.NoticeWriterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
 
 @Service
 public class NoticeWriterService {
@@ -68,5 +72,16 @@ public class NoticeWriterService {
 
     }
 
+    public NoticeWriterArticleEntity getPatchIndexArticle(int index, HttpSession session){
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        System.out.println("1");
+        if(loginUser.isAdmin() != true){
+            System.out.println("2");
+            return null; //사용자가 관리자가 아니라면
+        }
+        System.out.println("3");
+
+        return this.noticeWriterMapper.selectArticleByPatchIndex(index);
+    }
 
 }

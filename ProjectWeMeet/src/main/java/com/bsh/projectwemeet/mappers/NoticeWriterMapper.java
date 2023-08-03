@@ -1,5 +1,6 @@
 package com.bsh.projectwemeet.mappers;
 
+import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterImagesEntity;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,4 +18,6 @@ public interface NoticeWriterMapper {
     NoticeWriterImagesEntity selectImage(@Param(value="index") int index);
 
     int deleteArticleByIndex(@Param(value = "index")int index);
+
+    NoticeWriterArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
 }
