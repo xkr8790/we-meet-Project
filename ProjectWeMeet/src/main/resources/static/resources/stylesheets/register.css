@@ -258,12 +258,14 @@ body {
 
 .showHide .clickIcon {
     position: absolute;
+
+
     width: 20px; /* 이미지의 크기를 조절하세요 */
     height: 20px;
-
     pointer-events: all;
     cursor: pointer;
 }
+
 
 .eyesBox {
     position: relative;
