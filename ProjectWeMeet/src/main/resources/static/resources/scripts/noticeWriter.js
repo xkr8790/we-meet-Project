@@ -43,7 +43,7 @@ noticeWriteForm.onsubmit = e => {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     const responseText = xhr.responseText; // 'true' | 'false'
                     if (responseText === 'true') {
-                        location.href += 'localhost:6795/';
+                        location.href += 'noticeWriter';
                     } else {
                         alert('알 수 없는 이유로 삭제하지 못하였습니다.\n\n이미 삭제된 공지사항일 수도 있습니다..');
                     }

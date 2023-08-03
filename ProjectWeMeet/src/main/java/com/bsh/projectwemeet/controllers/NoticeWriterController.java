@@ -63,8 +63,8 @@ public class NoticeWriterController {
 
     @RequestMapping(value="noticeView", method = RequestMethod.DELETE, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String deleteNoticeView(NoticeWriterArticleEntity noticeWriterArticle){
-        boolean result = this.noticeWriterService.deleteNoticeView(noticeWriterArticle);
+    public String deleteNoticeView(@RequestParam(value="index")int index){
+        boolean result = this.noticeWriterService.deleteNoticeView(index);
         return String.valueOf(result);
     }
 

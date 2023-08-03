@@ -40,8 +40,8 @@ public class NoticeWriterService {
     }
 
 
-    public boolean deleteNoticeView(NoticeWriterArticleEntity noticeWriterArticle) {
-      return this.noticeWriterMapper.deleteArticleByIndex(noticeWriterArticle.getIndex()) >0;
+    public boolean deleteNoticeView(int index) {
+      return this.noticeWriterMapper.deleteArticleByIndex(index) >0;
 
     }
 
