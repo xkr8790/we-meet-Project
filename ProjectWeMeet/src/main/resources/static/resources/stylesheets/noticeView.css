@@ -16,14 +16,15 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #aa4d3b ;
+    background-color: #FB6161;
     margin-bottom: 2.5rem;
 }
 header > a{
     text-decoration: none;
 }
-header > a > h1{
-    color: white;
+header > a > img{
+    width: 10rem;
+    height: 2rem;
 
 }
 form{
@@ -49,6 +50,7 @@ form > .title > .option{
 
 
 form > .content{
+    padding: 1rem 0;
     width: 100%;
     margin-left: 0.4rem;
     height: auto;

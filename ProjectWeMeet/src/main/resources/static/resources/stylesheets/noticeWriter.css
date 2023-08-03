@@ -15,14 +15,15 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #aa4d3b ;
+    background-color: #FB6161;
     margin-bottom: 2.5rem;
 }
 header > a{
     text-decoration: none;
 }
-header > a > h1{
-    color: white;
+header > a > img{
+    width: 10rem;
+    height: 2rem;
 
 }
 
@@ -41,7 +42,7 @@ header > a > h1{
     justify-content:start;
     width: 100%;
     height: auto;
-    margin-bottom: 0.5rem;
+    margin: 0.25rem 0;
 }
 .notice-writer-body > .item > .user-name{
     width: 10rem;
@@ -113,15 +114,31 @@ width: 100%;
     flex-direction: row;
     justify-content: space-between;
 }
-.notice-writer-body > .send > .button-menu > button{
+.notice-writer-body > .send > .button-menu > a{
+    text-decoration: none;
     width: 4rem;
     height: 2rem;
+    font-size: 0.8rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 2rem;
+}
+.notice-writer-body > .send > .button-menu > a:hover{
+    background-color: #FB6161;
 }
 .notice-writer-body > .send > .button-menu > input{
     width: 4rem;
+    font-size: 0.8rem;
     height: 2rem;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black
 }
-
+.notice-writer-body > .send > .button-menu > input:hover{
+    background-color: #FB6161;
+}
 
 
 
