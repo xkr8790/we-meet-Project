@@ -589,4 +589,9 @@ a {
     text-decoration: none;
 }
 
-@media screen and (max-width: 1278px)
+@media screen and (max-width: 1300px){
+
+    ._container{
+        width: 95%;
+    }
+}

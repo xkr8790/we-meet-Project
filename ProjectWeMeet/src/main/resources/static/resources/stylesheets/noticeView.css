@@ -1,0 +1,114 @@
+*{
+    padding: 0;
+    margin: 0;
+    /*border: 1px solid red;*/
+}
+body{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+header{
+    width: 100%;
+    height: 4rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #aa4d3b ;
+    margin-bottom: 2.5rem;
+}
+header > a{
+    text-decoration: none;
+}
+header > a > h1{
+    color: white;
+
+}
+form{
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 50%;
+    margin-bottom: 0.4rem;
+}
+form > .title{
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 0.25rem;
+    width: 100%;
+    margin-left: 0.4rem;
+}
+form > .title > .option{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+form > .content{
+    width: 100%;
+    margin-left: 0.4rem;
+    height: auto;
+}
+
+
+
+
+
+
+
+
+
+#footer {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+#footer > .wrap {
+    border-top: 1px solid #666;
+    padding-top: 2rem;
+    width: 75rem;
+    height: 10rem; /* Adjust the height according to your needs */
+    /*background-color: aqua;*/
+    display: grid;
+    row-gap: 3rem;
+    column-gap: 3rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 11.375rem;
+}
+
+#footer > .wrap > .grid-twin {
+    /*background-color: #f0a0a0;*/
+    color: #666;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.43;
+}
+
+#footer > .wrap > .grid-twin > .about-info > .about-a-tag {
+    color: black;
+}
+
+#footer > .wrap > .grid-twin > .small-info {
+    font-size: 0.75rem;
+    margin-bottom: 3rem;
+}
+
+#footer > .wrap > .grid-twin.big {
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
+
+#footer > .wrap > .grid-twin > .about-info > .secone-info {
+    padding-left: -2rem;
+}
+
+#footer > .wrap > .grid-twin > .about-info > .last-a-tag {
+    color: black;
+}
