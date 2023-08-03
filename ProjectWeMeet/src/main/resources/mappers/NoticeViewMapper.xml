@@ -5,11 +5,11 @@
 <mapper namespace="com.bsh.projectwemeet.mappers.NoticeViewMapper">
 
 
-<delete id="deleteArticleByIndex">
-    DELETE
-    FROM `wemeet_project`.`notice_articles`
-    WHERE `index` = #{index}
-    LIMIT 1
-</delete>
+<!--<delete id="deleteArticleByIndex">-->
+<!--    DELETE-->
+<!--    FROM `wemeet_project`.`notice_articles`-->
+<!--    WHERE `index` = #{index}-->
+<!--    LIMIT 1-->
+<!--</delete>-->
 
 </mapper>

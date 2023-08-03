@@ -115,7 +115,6 @@ width: 100%;
     justify-content: space-between;
 }
 .notice-writer-body > .send > .button-menu > a{
-    text-decoration: none;
     width: 4rem;
     height: 2rem;
     font-size: 0.8rem;
@@ -124,9 +123,12 @@ width: 100%;
     border-radius: 10px;
     text-align: center;
     line-height: 2rem;
+    text-decoration: none;
+    color: black;
 }
 .notice-writer-body > .send > .button-menu > a:hover{
     background-color: #FB6161;
+    border: 1px solid #FB6161;
 }
 .notice-writer-body > .send > .button-menu > input{
     width: 4rem;
@@ -138,6 +140,7 @@ width: 100%;
 }
 .notice-writer-body > .send > .button-menu > input:hover{
     background-color: #FB6161;
+    border: 1px solid #FB6161;
 }
 
 

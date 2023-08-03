@@ -63,4 +63,10 @@ public class NoticeWriterService {
     }
 
 
+    public boolean deleteNoticeView(int index) {
+        return this.noticeWriterMapper.deleteArticleByIndex(index) >0;
+
+    }
+
+
 }

@@ -66,6 +66,13 @@
         ORDER BY `index`
     </select>
 
+    <delete id="deleteArticleByIndex">
+        DELETE
+        FROM `wemeet_project`.`notice_articles`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </delete>
+
 
 
 

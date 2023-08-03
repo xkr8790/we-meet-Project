@@ -36,7 +36,7 @@
             <div class="box" th:each="articles: ${article}">
             <a class="article-notice" th:href="@{noticeView(index=${articles.getIndex()})}">
                 <span th:text="${articles.getTitle}"></span>
-                <span class="day" th:text="${articles.getCreatedAt()}">2023.07.02</span>
+                <span class="day" th:text="${articles.getCreatedAt()}"></span>
             </a>
             </div>
         </div>

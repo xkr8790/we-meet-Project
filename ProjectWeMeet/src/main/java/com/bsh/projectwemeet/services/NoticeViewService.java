@@ -14,9 +14,9 @@ public class NoticeViewService {
         this.noticeViewMapper = noticeViewMapper;
     }
 
-
-    public boolean deleteNoticeView(int index) {
-        return this.noticeViewMapper.deleteArticleByIndex(index) >0;
-
-    }
+//
+//    public boolean deleteNoticeView(int index) {
+//        return this.noticeViewMapper.deleteArticleByIndex(index) >0;
+//
+//    }
 }

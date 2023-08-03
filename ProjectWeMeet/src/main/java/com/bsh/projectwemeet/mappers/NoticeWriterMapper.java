@@ -16,4 +16,5 @@ public interface NoticeWriterMapper {
 
     NoticeWriterImagesEntity selectImage(@Param(value="index") int index);
 
+    int deleteArticleByIndex(@Param(value = "index")int index);
 }

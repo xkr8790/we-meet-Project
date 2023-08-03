@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Param;
 public interface NoticeViewMapper {
 
 
-    int deleteArticleByIndex(@Param(value = "index")int index);
+//    int deleteArticleByIndex(@Param(value = "index")int index);
 
 }

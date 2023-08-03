@@ -6,7 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/noticeView.css}">
-    <script defer th:src="@{/resources/scripts/noticeWriter.js}"></script>
+<!--    <script defer th:src="@{/resources/scripts/noticeWriter.js}"></script>-->
+    <script defer th:src="@{/resources/scripts/noticeView.js}"></script>
 
     <title th:if="${article ==null}">글 읽기 - 존재하지 않는 게시글</title>
     <title th:if="${article !=null}" th:text="${'공지사항 - ' + article.getTitle()}"></title>

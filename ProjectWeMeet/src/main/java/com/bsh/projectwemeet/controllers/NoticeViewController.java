@@ -19,10 +19,10 @@ public class NoticeViewController {
         this.noticeViewService = noticeViewService;
     }
 
-    @RequestMapping(value="delete", method = RequestMethod.DELETE, produces = MediaType.TEXT_HTML_VALUE)
-    @ResponseBody
-    public String deleteNoticeView(@RequestParam(value="index")int index){
-        boolean result = this.noticeViewService.deleteNoticeView(index);
-        return String.valueOf(result);
-    }
+//    @RequestMapping(value="delete", method = RequestMethod.DELETE, produces = MediaType.TEXT_HTML_VALUE)
+//    @ResponseBody
+//    public String deleteNoticeView(@RequestParam(value="index")int index){
+//        boolean result = this.noticeViewService.deleteNoticeView(index);
+//        return String.valueOf(result);
+//    }
 }
