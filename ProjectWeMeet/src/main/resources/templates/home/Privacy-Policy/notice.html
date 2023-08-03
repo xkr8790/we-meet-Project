@@ -35,8 +35,8 @@
             <a class="button" href="/noticeWriter" th:if="${user != null && user.isAdmin() == true}">작성</a>
             <div class="box" th:each="articles: ${article}">
             <a class="article-notice" th:href="@{noticeView(index=${articles.getIndex()})}">
-                <span th:text="${articles.getTitle}"></span>
-                <span class="day" th:text="${articles.getCreatedAt()}"></span>
+                <span class="title" th:text="${articles.getTitle}"></span>
+                <span class="day"th:text="${#dates.format(articles.getCreatedAt(), 'yyyy-MM-dd')}"></span>
             </a>
             </div>
         </div>

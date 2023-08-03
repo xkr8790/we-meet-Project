@@ -119,7 +119,10 @@ body{
     flex-direction: column;
     justify-content: center;
 }
-
+#main > .notice-main > div > .box > .article-notice> .title{
+    color: black;
+    font-size: 1.3rem;
+}
 #main > .notice-main > div  > .box > a > span {
     color: #bdbdbd;
     margin-top: 1rem;
