@@ -145,6 +145,7 @@ body {
 
 #registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .showHide{
     width: 440px;
+    position: relative;
 }
 
 
@@ -257,9 +258,6 @@ body {
 
 .showHide .clickIcon {
     position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translate(2250%,-50%);
     width: 20px; /* 이미지의 크기를 조절하세요 */
     height: 20px;
 
@@ -267,14 +265,17 @@ body {
     cursor: pointer;
 }
 
+.eyesBox {
+    position: relative;
+}
 
 /* Chrome, Safari, and Opera */
 input[type="date"]::-webkit-calendar-picker-indicator {
     /* 아이콘을 원하는 위치로 이동시키세요 */
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translate(2250%,-50%);
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 5px;*/
+    /*transform: translate(2250%,-50%);*/
 }
 
 /*!* Firefox *!*/
@@ -287,10 +288,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Edge */
 input[type="date"]::-ms-clear {
     /* 아이콘을 원하는 위치로 이동시키세요 */
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translate(2250%,-50%);
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 5px;*/
+    /*transform: translate(2250%,-50%);*/
 }
 
 

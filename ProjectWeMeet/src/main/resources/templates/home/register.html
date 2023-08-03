@@ -317,8 +317,12 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                         <div class="showHide">
                             <input type="password" class="input" placeholder="비밀번호" name="password">
                             <img th:src="@{/resources/images/registerImags/lock.png}" alt="x" class="img">
-                            <img th:src="@{/resources/images/registerImags/eyes_on.png}" alt="x" class="on clickIcon" id="offIcon">
-                            <img th:src="@{/resources/images/registerImags/eyes_off.png}" alt="x" class="off clickIcon" id="onIcon">
+                            <span class="eyesBox">
+                                <img th:src="@{/resources/images/registerImags/eyes_on.png}" alt="x" class="on clickIcon" id="offIcon" style="display:none;">
+                            </span>
+                            <span class="eyesBox">
+                                <img th:src="@{/resources/images/registerImags/eyes_off.png}" alt="x" class="off clickIcon" id="onIcon" style="display:block;">
+                            </span>
                         </div>
                     </div>
                     <div class="form_item">

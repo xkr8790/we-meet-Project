@@ -144,6 +144,11 @@ registerForm['addressFind'].onclick = () => {
     dialogCover.show();
     addressLayer.show();
 };
+// dialogCover 클릭시 돌아오기
+dialogCover.addEventListener('click',function () {
+    dialogCover.hide();
+    addressLayer.hide();
+});
 
 //1페이지 넘기기
 nextButton.addEventListener('click', function() {

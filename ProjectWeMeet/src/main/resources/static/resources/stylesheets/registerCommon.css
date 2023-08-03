@@ -43,15 +43,15 @@ button {
 }
 
 ._object-button._blue {
-    background-color: #3498db;
+    background-color: #ef5350;
 }
 
 ._object-button._blue:hover {
-    background-color: #2e86c1;
+    background-color: #DA4F4A;
 }
 
 ._object-button._blue:active {
-    background-color: #2874a6;
+    background-color: #C64743;
 }
 
 ._object-button:disabled {
