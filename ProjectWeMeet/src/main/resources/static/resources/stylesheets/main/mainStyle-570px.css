@@ -23,15 +23,12 @@
         background-color: var(--concept-color-light);
         overflow: hidden;
         z-index: 100;
-        width: 70%;
+        width: 80%;
         height: 100%;
         margin: 0 auto;
     }
 
     #headerContainer > .header {
-        color: black;
-        font-family: 'Humanbumsuk', sans-serif;
-        font-size: 1.5rem;
         align-items: center;
         display: flex;
         flex-direction: row;
@@ -62,7 +59,6 @@
         width: 40px;
         height: 40px;
     }
-
     #headerContainer > .header > .menu > .item > a > .profile > img {
         border-radius: 10rem;
         width: 100%;
@@ -82,17 +78,18 @@
         justify-content: flex-start;
     }
 
-    .text {
-        color: black;
-        font-weight: 500;
+    .text{
+        color:black;
         font-family: 'Humanbumsuk', sans-serif;
-        font-size: 1.3rem;
         white-space: nowrap;
+        font-size: 1.3rem;
+        font-weight: 500;
     }
 
 
     #headerContainer > .header > .menu > .item > .icon-text-button > .icon-box > .icon {
-        width: auto;
+        width: 60%;
+        height: 60%;
         align-items: center;
         margin-top: 0.5rem;
     }
@@ -216,8 +213,6 @@
         width: 50%;
         height: 80%;
         border-radius: 0.5rem;
-        max-height: 17.375rem; /* 이미지의 최대 높이 */
-        object-fit: cover; /* 이미지를 잘라내어 비율을 유지한 채로 채우도록 설정 */
         margin-bottom: 0.8rem;
     }
 
