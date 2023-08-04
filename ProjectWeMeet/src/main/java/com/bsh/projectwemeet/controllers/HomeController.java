@@ -56,13 +56,15 @@ public class HomeController {
         return modelAndView;
     } //메인 홈 주소
 
-    @RequestMapping(value = "/TermsOfService",
+    @RequestMapping(value = "TermsOfService",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getTermsOfService(){
         ModelAndView modelAndView = new ModelAndView("home/Privacy-Policy/Terms-of-Service");
         return modelAndView;
     } //메인 홈 주소
+
+
 
 
     @RequestMapping(value = "/image",

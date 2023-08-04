@@ -204,45 +204,6 @@ body{
     cursor: pointer;
 }
 
-.search-box {
-    margin: 0 auto;
-}
-
-.search-box > .search {
-    margin: 1rem;
-}
-
-.search-box > .search > .select {
-    width: 100px;
-    height: 33px;
-    border-radius: 0.2rem;
-}
-
-.search-box > .search > .input {
-    width: 180px;
-    height: 28px;
-    border:1px solid #ddd;
-    padding: 0.2rem;
-    border-radius: 0.3rem;
-}
-
-.search-box > .search > .input::placeholder {
-    color: #999; /* 원하는 색상으로 변경해주세요 */
-}
-
-.search-box > .search > .button {
-    background-color: #FB6161;
-    border: none;
-    width: 56px;
-    height: 33px;
-    border-radius: 0.2rem;
-    color: #fff;
-    font-weight: 500;
-}
-
-.search-box > .search > .button:hover {
-    cursor: pointer;
-}
 
 
 /*----------------------------------------------------------------------------------*/
@@ -416,6 +377,9 @@ h2 {
 a {
     color: black;
 }
+
+/*---------------------------------------------------------------------------------------------------------------------*/
+
 
 /*---------------------------------------------------------------------------------------------------------------------*/
 .pageContainer {

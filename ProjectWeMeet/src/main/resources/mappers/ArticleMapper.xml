@@ -184,7 +184,7 @@
                `content`                 AS `content`,
                `category`                AS `category`,
                `address`                 AS `address`,
-               SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+               SUBSTRING_INDEX(SUBSTRING_INDEX(hashtag, ',', 1), ',', -1) AS `hashtag`,
                `limit`                   AS `limit`,
                `participation`           AS `participation`,
                `day`                     AS `appointmentStartDate`,
