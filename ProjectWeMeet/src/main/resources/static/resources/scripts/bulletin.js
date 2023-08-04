@@ -40,7 +40,7 @@ const onScrollMove = (e) => {
     nowX = getClientX(e);
     const v = listX + nowX - startX;
     if (v > 0) return;
-    if (v < -(227 * list.childElementCount)) return;
+    if (v < -(260 * list.childElementCount)) return;
     console.log(v);
     setTranslateX(v);
 };
