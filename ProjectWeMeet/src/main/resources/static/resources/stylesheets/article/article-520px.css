@@ -176,9 +176,6 @@
         margin-bottom: 0.9rem;
     }
 
-
-
-
     .category{
         display: none;
     }
@@ -401,8 +398,8 @@
     .article-human > .Profile {
         object-fit: cover;
         border-radius: 100%;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.8rem;
+        height: 1.8rem;
         margin: -0.15rem;
         border: 0.2rem solid white;
     }
