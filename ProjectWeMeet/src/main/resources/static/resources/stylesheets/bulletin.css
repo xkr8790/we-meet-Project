@@ -23,7 +23,7 @@ body {
 }
 
 .allContainer {
-    width: 40%;
+    width: 40rem;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -688,3 +688,57 @@ allContainer > .header > .login > a {
     text-align: center;
 }
 
+@media screen and (max-width: 650px){
+    .allContainer{
+        width: 98%;
+    }
+}
+@media screen and (max-width: 500px){
+    .announcement > .guide {
+height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+    .announcement > .guide > .guideContainer{
+        width: 95%;
+        align-items: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+    .announcement > .guide > .guideContainer > .map{
+        width: 100%;
+    }
+
+    .announcement > .guide > .comments {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+    .announcement > .guide > .comments > .contentBox > .content-write > label > input{
+        width: 70%;
+    }
+    .announcement > .guide > .comments > .contentBox > .content-write > input{
+        width: 20%;
+    }
+
+
+}
+
+@media screen and (max-width: 400px){
+
+    .preview > .container > .previewContainer{
+        width: 90%;
+        height: 9rem;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        margin: 0 1rem;
+        border: 1px solid white;
+        background-color: white;
+        border-radius: 15px;
+    }
+}
