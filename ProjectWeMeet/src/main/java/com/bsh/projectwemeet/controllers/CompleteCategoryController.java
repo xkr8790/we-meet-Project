@@ -43,6 +43,7 @@ public class CompleteCategoryController {
                                     @RequestParam(value = "c", defaultValue = "complete", required = false) String searchCriterion,
                                     @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery) {
 
+        int searchResultCount = this.completeService.getCountCategory(searchCriterion, searchQuery, category);
 
             ModelAndView modelAndView = new ModelAndView("home/completeCategory"); //index.html 연결
             PagingModel pagingCategory = new PagingModel(
@@ -57,8 +58,9 @@ public class CompleteCategoryController {
             modelAndView.addObject("articleCategory", articleCategory);
             modelAndView.addObject("pagingCategory", pagingCategory);
             modelAndView.addObject("category", category);
-        modelAndView.addObject("searchCriterion", searchCriterion);
-        modelAndView.addObject("searchQuery", searchQuery);
+            modelAndView.addObject("searchCriterion", searchCriterion);
+            modelAndView.addObject("searchQuery", searchQuery);
+            modelAndView.addObject("searchResultCount",searchResultCount);
             return modelAndView;
 
         }

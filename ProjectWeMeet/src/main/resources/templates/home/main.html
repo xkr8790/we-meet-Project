@@ -161,7 +161,7 @@
                             <span class="tag comment" th:if="${article.getLikeCount()>10}">추천!!</span>
                         </div>
                         <span class="article-content">
-                            <h2 class="article-content-title" th:text="${article.getTitle()}">장문복이랑 놀러갈 사람?</h2>
+                            <h2 class="article-content-title" th:text="${#strings.abbreviate(article.getTitle(), 18)}">장문복이랑 놀러갈 사람?</h2>
                         </span>
 
                 <div class="article-map">

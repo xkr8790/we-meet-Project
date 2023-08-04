@@ -32,7 +32,7 @@
         `limit` AS `limit`,
         `like_count` AS `likeCount`,
         `participation` AS `participation`,
-        SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+        SUBSTRING_INDEX(SUBSTRING_INDEX(hashtag, ',', 1), ',', -1) AS `hashtag`,
         `day` AS `appointmentStartDate`,
         `time` AS `appointmentStartTime`
         FROM `wemeet_project`.`articles`
