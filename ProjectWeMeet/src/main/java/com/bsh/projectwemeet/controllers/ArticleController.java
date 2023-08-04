@@ -124,6 +124,7 @@ public class ArticleController {
 
 
 
+
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
         modelAndView.addObject("article", article);
         modelAndView.addObject("articles", articles);

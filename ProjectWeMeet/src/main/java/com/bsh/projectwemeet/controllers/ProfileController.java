@@ -3,7 +3,6 @@ package com.bsh.projectwemeet.controllers;
 import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.services.ProfileService;
-import org.apache.catalina.User;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,14 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
 import java.io.IOException;
-import java.text.ParseException;
 
 @Controller
-@RequestMapping(value="profile")
+@RequestMapping(value = "profile")
 public class ProfileController {
     private final ProfileService profileService;
 
@@ -29,35 +25,50 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @RequestMapping(value="profile",
+    @RequestMapping(value = "/",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getProfile(HttpSession session){
+    public ModelAndView getProfile(HttpSession session, @RequestParam(value = "nickname") String nickName) {
         ModelAndView modelAndView = new ModelAndView("home/profile");
-        UserEntity userEntities = this.profileService.getAll(session);
-        modelAndView.addObject("profile", userEntities);
+
+        UserEntity user = this.profileService.getUserByNickName(nickName);
+        modelAndView.addObject("profile", user);
+
+
+        ArticleEntity[] article = this.profileService.getCountCategoryByPage(nickName);
+        ProfileEntity profile = this.profileService.getThumbnail(nickName);
+        modelAndView.addObject("article", article);
+        modelAndView.addObject("content", profile);
         return modelAndView;
     }
 
-    @RequestMapping(value = "article",
-    method = RequestMethod.GET,
-    produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getArticle(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView("home/profile");
-        ArticleEntity article = this.profileService.getCountCategoryByPage(session);
-        modelAndView.addObject("article", article);
-        return modelAndView;
+
+    @RequestMapping(value = "article/image",
+            method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getArticleImage(@RequestParam(value = "index") int index) {
+        ArticleEntity article = this.profileService.getArticleImage(index);
+
+        ResponseEntity<byte[]> response;
+        if (article == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
+        }
+        return response;
     }
 
     @RequestMapping(value = "Thumbnail",
-    method = RequestMethod.GET)
-    public ResponseEntity<byte[]> getThumbnail(HttpSession session) {
-        ProfileEntity profile = this.profileService.getThumbnail(session);
+            method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getThumbnail(@RequestParam(value = "nickname") String nickname) {
+        ProfileEntity profile = this.profileService.getThumbnail(nickname);
 
         ResponseEntity<byte[]> response;
         if (profile == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else  {
+        } else {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentLength(profile.getProfileThumbnail().length);
             headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
@@ -67,14 +78,15 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "checkPassword",
-    method = RequestMethod.GET,
-    produces = MediaType.TEXT_HTML_VALUE)
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getCheckPassword() {
         return new ModelAndView("home/profile");
     }
+
     @RequestMapping(value = "checkPassword",
-    method = RequestMethod.POST,
-    produces = MediaType.APPLICATION_JSON_VALUE)
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postCheckPassword(HttpSession session, @RequestParam("checkPassword") String password) {
         UserEntity user = (UserEntity) session.getAttribute("user");
@@ -89,7 +101,7 @@ public class ProfileController {
     @RequestMapping(value = "/modifyPassword",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getModifyPassword(){
+    public ModelAndView getModifyPassword() {
         return new ModelAndView("home/profile");
     }
 
@@ -107,15 +119,15 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/resetContact",
-    method = RequestMethod.GET,
-    produces = MediaType.TEXT_HTML_VALUE)
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getResetContact() {
         return new ModelAndView("home/profile");
     }
 
     @RequestMapping(value = "/resetContact",
-    method = RequestMethod.PATCH,
-    produces = MediaType.APPLICATION_JSON_VALUE)
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String patchResetContact(HttpSession session, @RequestParam("infoContact") String contact) {
         UserEntity user = (UserEntity) session.getAttribute("user");
@@ -126,6 +138,7 @@ public class ProfileController {
         }};
         return responseObject.toString();
     }
+
 
     @RequestMapping(value = "/resetNickname",
             method = RequestMethod.GET,
@@ -149,9 +162,9 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/resetAddress",
-    method = RequestMethod.GET,
-    produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getResetAddress(){
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getResetAddress() {
         return new ModelAndView("home/profile");
     }
 
@@ -170,26 +183,48 @@ public class ProfileController {
         return responseObject.toString();
     }
 
+    //프로필 이미지 변경
     @RequestMapping(value = "/profileImage",
-    method = RequestMethod.PATCH,
-    produces = MediaType.TEXT_HTML_VALUE)
+            method = RequestMethod.PATCH,
+            produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String postIndex(HttpServletRequest request,
-                                  ProfileEntity profile,
-                                  @RequestParam(value = "thumbnailMultipart")MultipartFile thumbnailMultipart) throws IOException {
+    public String postIndex(HttpSession session,
+                            ProfileEntity profile,
+                            @RequestParam(value = "thumbnailMultipart") MultipartFile thumbnailMultipart) throws IOException {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        profile.setEmail(user.getEmail());
         profile.setProfileThumbnail(thumbnailMultipart.getBytes());
         profile.setProfileThumbnailMime(thumbnailMultipart.getContentType());
         boolean result = this.profileService.putProfile(profile);
-//        if (result) {
-//            modelAndView.setViewName("redirect:/profile");
-//        }
         return String.valueOf(result);
     }
 
+    @RequestMapping(value = "/resetContent",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getResetContent() {
+        return new ModelAndView("home/profile");
+    }
+
+    @RequestMapping(value = "/resetContent",
+            method = RequestMethod.PATCH,
+            produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String patchResetContent(HttpSession session,
+                                    ProfileEntity profile,
+                                    @RequestParam("infoContent") String content) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        profile.setEmail(user.getEmail());
+        profile.setIntroduceText(content);
+        boolean result = this.profileService.resetContent(profile, content);
+        return String.valueOf(result);
+    }
+
+
     //인증번호 전송 코드
     @RequestMapping(value = "contactCodeRec",
-    method = RequestMethod.GET,
-    produces = MediaType.APPLICATION_JSON_VALUE)
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getContactCodeRec(RegisterContactCodeEntity registerContactCode) {
         SendRegisterContactCodeResult result = this.profileService.sendContactCodeResult(registerContactCode);
@@ -204,8 +239,8 @@ public class ProfileController {
 
     //인증번호 6자리 확인 코드
     @RequestMapping(value = "contactCodeRec",
-    method = RequestMethod.PATCH,
-    produces = MediaType.APPLICATION_JSON_VALUE)
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String patchContactCodeRec(RegisterContactCodeEntity registerContactCode) {
         VerifyRegisterContactCodeResult result = this.profileService.verifyRegisterContactCodeResult(registerContactCode);
@@ -215,9 +250,10 @@ public class ProfileController {
 
         return responseObject.toString();
     }
+
     @RequestMapping(value = "/deleteThumbnail",
-    method = RequestMethod.PATCH,
-    produces = MediaType.APPLICATION_JSON_VALUE)
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String deleteThumbnail(HttpSession session, ProfileEntity profile) {
         DeleteUserResult result = this.profileService.deleteThumbnailResult((HttpSession) profile, (ProfileEntity) session);
@@ -226,12 +262,12 @@ public class ProfileController {
             put("result", result.name().toLowerCase());
         }};
 
-        return  responseObject.toString();
+        return responseObject.toString();
     }
 
     @RequestMapping(value = "/deleteUser",
-    method = RequestMethod.DELETE,
-    produces = MediaType.APPLICATION_JSON_VALUE)
+            method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String deleteUser(HttpSession session) {
         UserEntity loggedInUser = (UserEntity) session.getAttribute("user");

@@ -7,6 +7,8 @@ const addressLayer = document.getElementById('addressLayerP');
 const dialogCover = document.getElementById('dialogCoverP');
 
 
+
+
 //설정변경 눌렀을때 창띄우는 코드
 settingButton.addEventListener('click', () => {
     popup.classList.add('step-1');
@@ -16,6 +18,23 @@ settingButton.addEventListener('click', () => {
     popup['_object-input'].focus();
 });
 
+popup['cancelButton'].onclick = e => {
+    e.preventDefault();
+    alert('취소되었습니다.');
+    popup.classList.remove('step-1');
+    popup.style.display = 'none';
+}
+
+popup['close'].addEventListener('click', () => {
+    var r = confirm("나가시겠습니까?");
+    if (r == true) {
+        popup.classList.remove('step-2');
+        popup.style.display = 'none';
+        location.href += '';
+    } else {
+        alert("수정 페이지로 돌아갑니다!");
+    }
+});
 
 //??
 
@@ -85,16 +104,6 @@ popup['checkPasswordButton'].onclick = e => {
 };
 
 //취소 버튼
-popup['close'].addEventListener('click', () => {
-    var r = confirm("나가시겠습니까?");
-    if (r == true) {
-        popup.classList.remove('step-2');
-        popup.style.display = 'none';
-        location.href += '';
-    } else {
-        alert("수정 페이지로 돌아갑니다!");
-    }
-});
 
 
 //프로필 사진 변경
@@ -222,6 +231,8 @@ popup['infoContactVerify'].onclick = () => {
     };
     xhr.send(formData);
 }
+
+
 
 popup['changeContact'].onclick = e => {
     e.preventDefault();
@@ -462,6 +473,34 @@ popup['saveProfile'].onclick = e => {
     };
     xhr.send(formData);
 };
+
+
+popup['changeContent'].onclick = e => {
+    e.preventDefault();
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('infoContent', popup['infoContent'].value);
+    xhr.open('PATCH', `./resetContent`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseText = xhr.responseText;
+                if (responseText === 'true') {
+                    alert('소개글 변경 완료.');
+                    return;
+                } else {
+                    alert('변경 실패. 잠시 후 다시 시도해 주세요.');
+                    return;
+                }
+            } else {
+                alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
+                return;
+            }
+        }
+    };
+    xhr.send(formData);
+}
+
 
 popup['deleteThumbnail'].onsubmit = e => {
     e.preventDefault();

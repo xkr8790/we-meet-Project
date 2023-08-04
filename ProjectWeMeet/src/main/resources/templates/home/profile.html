@@ -28,6 +28,9 @@
             <input id="_object-input" class="_object-input input" maxlength="50" name="1checkPassword"
                    placeholder="**********" type="password">
         </label>
+        <label class="cancel">
+            <input type="button" value="취소" name="cancelButton">
+        </label>
         <div class="check">
             <input id="checkPassword" name="checkPasswordButton" class="checkPassword" type="button" value="확인">
         </div>
@@ -36,7 +39,7 @@
         <h3 class="title">개인 정보 수정</h3>
         <div class="profileImage">
             <img class="profile" rel="profileF" th:name="profile"
-                 th:src="@{/resources/images/profileImages/icons8-male-user-96.png}" alt="">
+                 th:src="@{/profile/Thumbnail}" alt="">
         </div>
         <label class="profile_file" rel="profilePreview">
             <label for="change_profile" class="change">프로필 바꾸기</label>
@@ -102,6 +105,21 @@
                 </div>
             </div>
 
+            <div class="content-container box">
+                <div class="subTitle">
+                    <p>소개글</p>
+                </div>
+                <div class="object">
+                    <label class="_object-box">
+                        <input name="infoContent" class="_object-input" spellcheck="false" type="text"
+                               th:value="${content.getIntroduceText()}">
+                    </label>
+                    <label class="_object-button">
+                        <input type="button" name="changeContent" class="change" value="변경">
+                    </label>
+                </div>
+            </div>
+
             <div class="contact-container  box">
                 <div class="subTitle">
                     <p>연락처</p>
@@ -147,7 +165,7 @@
                         <label class="_object-label _with-icon big">
                             <input readonly class="_object-input" maxlength="5" name="infoAddressPostal"
                                    placeholder="우편번호"
-                                   spellcheck="false" type="text" th:value="${session.user.getAddressPostal()}">
+                                   spellcheck="false" type="text" th:value="${profile?.getAddressPostal()}">
                         </label>
                         <input type="button" class="_object-button" name="infoAddressFind" value="우편번호 찾기">
                     </div>
@@ -188,12 +206,12 @@
         <div class="thumbnail">
             <div class="none"></div>
             <div class="default" rel="thumbnailDefault">
-                <img class="profile" rel="profile1" th:src="@{/resources/images/profileImages/icons8-male-user-96.png}"
+                <img class="profile" rel="profile1" th:src="@{/profile/Thumbnail(nickname=${profile?.getNickname()})}"
                      alt="">
                 <span class="user-name" th:text="${profile?.getNickname()+'님'}"></span>
             </div>
             <div class="pencil">
-                <label class="pencil">
+                <label class="pencil" th:if="${profile.getEmail() == session.user.getEmail()}">
                     <img id="setting" class="change_button"
                          th:src="@{/resources/images/profileImages/icons8-pencil-50.png}" alt="">
                 </label>
@@ -201,7 +219,7 @@
         </div>
     </div>
     <div class="introduce">
-        <span>방갑습니다 친하게 지내요</span>
+        <span th:text="${content.getIntroduceText()}"></span>
     </div>
 
 </form>
@@ -211,13 +229,34 @@
     <span>
         <span class="article-post">
             <span class="posts">참여한 게시물</span>
-            <span class="postH" th:text="${article}"></span>
          </span>
     </span>
 
     <div class="article-box-grid">
-        <div class="article-list" th:each="article : ${article}">
-            <a class="myArticleLink" th:href="@{${article.getCategory().equals('완료') ? 'article/review' : 'article/read'} (index = ${article.getIndex()})}">
+        <div class="article-list" th:each="article : ${article}" >
+            <a class="myArticleLink" th:href="@{/article/read(index=${article.getIndex()})}">
+                <h2 th:text="${article.getTitle()}"></h2>
+                <div class="article-thumbnail">
+                    <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="">
+                </div>
+            </a>
+            <div class="likeAndReport">
+                <span class="likeImage">
+                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
+                    <span th:text="${article.getLikeCount()}"></span>
+                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
+                    <span th:text="${article.getReport()}"></span>
+                </span>
+                <span class="HashTag">
+                     <span th:text="${article.getCategory()}"></span>
+                    <span th:text="${article.getHashtag()}"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="article-box-grid">
+        <div class="article-list">
+            <a class="myArticleLink">
                 <h2>안녕하세요</h2>
                 <div class="article-thumbnail">
                     <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
