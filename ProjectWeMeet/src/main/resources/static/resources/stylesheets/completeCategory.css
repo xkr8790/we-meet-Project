@@ -125,11 +125,12 @@ body{
 #headerContainer > .header > .menu > .item > a > span{
     font-size: 1.5rem;
 }
-#headerContainer > .header > .menu > .item > a > .profile > img {
+#headerContainer > .header > .menu > .item > a > img {
     width: 60px;
     height: 60px;
-    border-radius: 50% ;
+    border-radius: 50%;
 }
+
 
 #headerContainer > .header > .menu > .item > button {
     border: 0;
@@ -286,10 +287,14 @@ body{
 
 .search-box{
     width: 1240px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .search-box>.search{
-    float: right;
+
     margin-top: 1rem;
 }
 .search-box>.search > .select{

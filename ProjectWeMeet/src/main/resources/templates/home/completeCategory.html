@@ -129,18 +129,6 @@
         </div>
     </section>
 
-    <section class="search-box">
-        <div class="search">
-            <select class="select" name="c" id="lang" hidden="hidden">
-                <option value="complete"></option>
-            </select>
-            <input type="hidden" name="category">
-            <input class="input" name="q" placeholder="검색어를 입력해주세요" type="text">
-            <input class="button" type="submit" value="검색">
-        </div>
-    </section>
-
-
 
     <section class="article-container">
         <div class="slider">
@@ -212,7 +200,16 @@
                                th:text="${page}"></a>
                         </li>
                     </ul>
-
+                    <section class="search-box">
+                        <div class="search">
+                            <select class="select" name="c" id="lang" hidden="hidden">
+                                <option value="complete"></option>
+                            </select>
+                            <input type="hidden" name="category">
+                            <input class="input" name="q" placeholder="검색어를 입력해주세요" type="text">
+                            <input class="button" type="submit" value="검색">
+                        </div>
+                    </section>
 
                 </div>
             </div>  <!--전체-->
