@@ -362,7 +362,11 @@
         background-color: rgb(244, 244, 244);
     }
 
-    .article-content-box > .article-human > .Profile {
+    .article-content-box > .article-human > .Profile-Picture {
+        background-color: rgb(244, 244, 244);
+    }
+
+    .article-content-box > .article-human > .Profile-Picture > .profile {
         object-fit: cover;
         border-radius: 100%;
         width: 2rem;
@@ -388,6 +392,32 @@
 
     .article-human > .number > .map-item {
         background-color: rgb(244, 244, 244);
+    }
+
+    .more-button {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 3rem;
+    }
+
+    .more-button > a {
+        border: 1px solid rgb(244, 244, 244);
+        border-radius: 68px;
+        width: 15rem;
+        height: 6rem;
+        margin-bottom: 1rem;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: rgb(244, 244, 244);
+    }
+
+    .more-button > a > p {
+        background: rgb(244, 244, 244);
+        font-size: 1.5rem;
     }
 }
 /*-----------------------------------------------------------------------------------------------------*/
