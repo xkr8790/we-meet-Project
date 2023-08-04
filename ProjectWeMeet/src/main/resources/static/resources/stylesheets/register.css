@@ -4,8 +4,7 @@
 /**/
 
 
-
-html{
+html {
     font-size: 12px;
 }
 
@@ -13,11 +12,12 @@ body {
     align-items: center;
     display: flex;
     flex-direction: column;
+    margin: 0;
 }
 
 
 /*전체길이*/
-.container{
+.container {
     width: 50%;
     height: 100%;
 }
@@ -25,61 +25,59 @@ body {
 /*중앙 컨텐츠들*/
 .inner {
     width: 100%;
+    height: 100%;
     max-width: 500px;
-    margin: 0 auto;
-}
 
-.inner {
+    margin: 0 auto;
+    padding: 1rem;
+
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 100%;
 
-    padding: 1rem;
 }
+
 /*로고*/
-.container > .inner > .logo_we_meet > .ExclamationMark {
-    width: 95px;
-    height: 18px;
+.logo {
+    width: 12rem;
 }
 
 /*전체 동의*/
-#registerForm > .inner > .step-1>.all > .check-container > .title{
+#registerForm > .inner > .step-1 > .all > .check-container > .title {
     font-size: 2rem;
     margin-left: 0.5rem;
 }
 
-#registerForm > .inner > .step-1 > .all > .text{
+#registerForm > .inner > .step-1 > .all > .text {
     margin-top: 1rem;
     font-size: 15px;
 }
 
 
-
 /*이용약관 동의하기*/
 
-#registerForm > .inner > .step-1>.service{
+#registerForm > .inner > .step-1 > .service {
     margin-top: 3rem;
     position: relative;
 }
 
-#registerForm > .inner > .step-1>.service > .term_list{
+#registerForm > .inner > .step-1 > .service > .term_list {
     list-style: none;
     padding: 0;
 }
 
-#registerForm > .inner > .step-1>.service > .term_list> .term_item{
+#registerForm > .inner > .step-1 > .service > .term_list > .term_item {
     margin-bottom: 50px;
 }
 
-#registerForm > .inner > .step-1>.service > .term_list> .term_item > .check-container > .title{
+#registerForm > .inner > .step-1 > .service > .term_list > .term_item > .check-container > .title {
     font-size: 2rem;
     margin-left: 0.5rem;
 }
 
 /*다음 버튼*/
 
-#registerForm > .inner > .step-1> .button-container > .next{
+#registerForm > .inner > .step-1 > .button-container > .next {
     width: 50%;
     max-width: 500px;
     padding: 14px 0;
@@ -96,20 +94,21 @@ body {
 }
 
 /*화면 전환을 위한 display 값들*/
-.step-1{
+.step-1 {
     display: block;
 }
 
-.step-2{
+.step-2 {
     display: none;
     margin-top: 2rem;
 }
-.step-3{
+
+.step-3 {
     display: none;
 }
 
 
-#registerForm > .inner > .step-1 > .sign{
+#registerForm > .inner > .step-1 > .sign {
     margin-top: 3rem;
     position: relative;
 }
@@ -120,7 +119,7 @@ body {
     font-size: 16px;
 }
 
-#registerForm > .inner > .step-2 > .sign > .form_list{
+#registerForm > .inner > .step-2 > .sign > .form_list {
     margin-bottom: 30px;
     width: 100%;
     max-width: 500px;
@@ -128,7 +127,9 @@ body {
     border-radius: 2px;
 
 }
-#registerForm > .inner > .step-2 > .sign > .form_list > .form_item{
+
+
+#registerForm > .inner > .step-2 > .sign > .form_list > .form_item {
     display: flex;
     align-items: stretch;
     position: relative;
@@ -139,11 +140,12 @@ body {
 
     border-bottom: 1px solid #d6d6d6;
 }
-#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .input-wrapper{
+
+#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .input-wrapper {
     width: 470px;
 }
 
-#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .showHide{
+#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .showHide {
     width: 440px;
     position: relative;
 }
@@ -159,20 +161,20 @@ body {
     outline: none;
 }
 
-#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .contactCode{
+#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .contactCode {
     height: 100%;
     flex: 1;
     padding: 0;
 }
 
-#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .contactSend{
+#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .contactSend {
     height: 100%;
     flex: 1;
     padding: 0;
 }
 
 /*step-2 complete button*/
-#registerForm > .inner > .step-2>.sign> .button-container > .complete{
+#registerForm > .inner > .step-2 > .sign > .button-container > .complete {
     width: 100%;
     padding: 14px 0;
     border-radius: 6px;
@@ -189,7 +191,7 @@ body {
 
 
 /*img*/
-.input-wrapper >.input{
+.input-wrapper > .input {
     flex: 1;
     width: 100%;
     height: 100%;
@@ -198,7 +200,7 @@ body {
     outline: none;
 }
 
-.showHide > .input{
+.showHide > .input {
     flex: 1;
     width: 100%;
     height: 100%;
@@ -208,7 +210,7 @@ body {
     padding-left: 30px;
 }
 
-.input-wrapper > .button{
+.input-wrapper > .button {
     flex: 1;
     width: 100%;
     height: 100%;
@@ -297,7 +299,6 @@ input[type="date"]::-ms-clear {
 }
 
 
-
 /**/
 
 .input-wrapper .input {
@@ -307,14 +308,14 @@ input[type="date"]::-ms-clear {
 
 /*gender*/
 
-.form_item>input[type="radio"]{
+.form_item > input[type="radio"] {
     display: none;
 }
 
-.form_item>label{
+.form_item > label {
     position: relative;
     font-size: 15px;
-    border:1px solid #d6d6d6 ;
+    border: 1px solid #d6d6d6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -323,22 +324,18 @@ input[type="date"]::-ms-clear {
     width: 50%;
 }
 
-.form_item>input[type="radio"]:checked + label{
+.form_item > input[type="radio"]:checked + label {
     background-color: #ef5350;
     color: white;
 }
 
 /*address*/
 
-#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .contactVerify{
+#registerForm > .inner > .step-2 > .sign > .form_list > .form_item > .contactVerify {
     height: 100%;
     flex: 1;
     padding: 0;
 }
-
-
-
-
 
 
 /*step-3*/
@@ -350,7 +347,7 @@ input[type="date"]::-ms-clear {
     height: 75vh;
 }
 
-.step-3 > .img{
+.step-3 > .img {
     display: block;
     margin-bottom: 1rem;
     width: 40rem;
@@ -363,7 +360,7 @@ input[type="date"]::-ms-clear {
 }
 
 
-#registerForm > .inner > .step-3 > .success >.text{
+#registerForm > .inner > .step-3 > .success > .text {
     font: inherit;
     font-size: 30px;
     margin-bottom: 1rem;
@@ -387,39 +384,93 @@ a.link:visited {
 /*반응형*/
 
 
-/*!*step-1*!*/
-/*@media (max-width: 570px) {*/
-/*    #registerForm > .inner > .step-1 > .button-container > .next {*/
-/*        width: 100%; !* Adjust the width to fill the entire container *!*/
-/*        max-width: 28rem; !* Limit the maximum width to 500px *!*/
-/*    }*/
+/*step-1*/
+@media (max-width: 610px) {
+    html {
+        font-size: 10px;
+    }
 
-/*    .inner {*/
-/*        width: 28rem; !* Adjust the width of .inner to fill the entire container *!*/
-/*    }*/
-/*}*/
+    .title{
+        font-size: 1rem;
+    }
 
-/*@media (max-width: 360px) {*/
-/*    .inner{*/
-/*        width: 25rem;*/
-/*    }*/
-/*}*/
+    #registerForm > .inner > .step-1 > .service > .term_list > .term_item > .check-container > .title {
+        font-size: 1rem;
+    }
 
-/*@media (max-width: 315px) {*/
-/*    #registerForm > .inner > .step-1 > .button-container > .next {*/
-/*        max-width: 20rem; !* Limit the maximum width to 360px *!*/
-/*    }*/
+    .term_box {
+        font-size: 7px;
+    }
 
-/*    #registerForm > .inner > .step-1>.all > .check-container > .title{*/
-/*        font-size: 1.5rem;*/
-/*    }*/
+    .term_box_small {
+        font-size: 7px;
+    }
 
-/*    #registerForm > .inner > .step-1>.service > .term_list> .term_item > .check-container > .title{*/
-/*        font-size: 1.25rem;*/
-/*    }*/
-/*    .inner {*/
-/*        width: 20rem; !* Adjust the width of .inner to fill the entire container *!*/
-/*    }*/
-/*}*/
+    .logo {
+        width: 10rem;
+    }
+
+    #registerForm > .inner > .step-1 > .all > .text {
+
+    }
+}
+
+@media (max-width: 500px) {
+    html {
+        font-size: 7px;
+    }
+
+    .title{
+        font-size: 0.7rem;
+    }
+
+    #registerForm > .inner > .step-1 > .service > .term_list > .term_item > .check-container > .title {
+        font-size: 0.7rem;
+    }
+
+    .term_box {
+        font-size: 4px;
+    }
+
+    .term_box_small {
+        font-size: 4px;
+    }
+
+    #registerForm > .inner > .step-1 > .all > .text {
+
+    }
+}
+
+@media (max-width: 367px) {
+    html {
+        font-size: 4px;
+    }
+
+    .title{
+        font-size: 0.23rem;
+    }
+
+    #registerForm > .inner > .step-1 > .service > .term_list > .term_item > .check-container > .title {
+        font-size: 0.5px;
+    }
+    p{
+        font-size: 0.25rem;
+    }
+
+    .term_box {
+        font-size: 2px;
+    }
+
+    .term_box_small {
+        font-size: 2px;
+    }
+
+    #registerForm > .inner > .step-1 > .all > .text {
+        font-size: 3px;
+    }
+}
+
 
 /*step-2*/
+
+
