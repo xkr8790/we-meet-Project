@@ -28,26 +28,23 @@ public class ProfileController {
     @RequestMapping(value = "/",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getProfile(HttpSession session, @RequestParam(value = "nickName") String nickName) {
+    public ModelAndView getProfile(HttpSession session, @RequestParam(value = "nickname") String nickName) {
         ModelAndView modelAndView = new ModelAndView("home/profile");
-        UserEntity userEntities = this.profileService.getAll(session);
 
-            UserEntity user = this.profileService.getUserByNickName(nickName);
-            modelAndView.addObject("profile", user);
+        UserEntity user = this.profileService.getUserByNickName(nickName);
+        modelAndView.addObject("profile", user);
 
 
-        ArticleEntity[] article = this.profileService.getCountCategoryByPage(session);
-        ProfileEntity profile = this.profileService.getThumbnail(session);
-        modelAndView.addObject("profile", userEntities);
+        ArticleEntity[] article = this.profileService.getCountCategoryByPage(nickName);
+        ProfileEntity profile = this.profileService.getThumbnail(nickName);
         modelAndView.addObject("article", article);
         modelAndView.addObject("content", profile);
         return modelAndView;
     }
 
 
-
     @RequestMapping(value = "article/image",
-    method = RequestMethod.GET)
+            method = RequestMethod.GET)
     public ResponseEntity<byte[]> getArticleImage(@RequestParam(value = "index") int index) {
         ArticleEntity article = this.profileService.getArticleImage(index);
 
@@ -65,8 +62,8 @@ public class ProfileController {
 
     @RequestMapping(value = "Thumbnail",
             method = RequestMethod.GET)
-    public ResponseEntity<byte[]> getThumbnail(HttpSession session) {
-        ProfileEntity profile = this.profileService.getThumbnail(session);
+    public ResponseEntity<byte[]> getThumbnail(@RequestParam(value = "nickname") String nickname) {
+        ProfileEntity profile = this.profileService.getThumbnail(nickname);
 
         ResponseEntity<byte[]> response;
         if (profile == null) {
@@ -143,7 +140,6 @@ public class ProfileController {
     }
 
 
-
     @RequestMapping(value = "/resetNickname",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
@@ -202,6 +198,7 @@ public class ProfileController {
         boolean result = this.profileService.putProfile(profile);
         return String.valueOf(result);
     }
+
     @RequestMapping(value = "/resetContent",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
@@ -222,7 +219,6 @@ public class ProfileController {
         boolean result = this.profileService.resetContent(profile, content);
         return String.valueOf(result);
     }
-
 
 
     //인증번호 전송 코드

@@ -35,7 +35,7 @@
         </ul>
         <ul class="menu right" th:if="${session.user != null}">
             <li class="item">
-                <a th:href="${'profile/'+ session.user.getNickname()}" class="icon-text-button" id="myButton">
+                <a th:href="@{'profile/?nickname='+ ${session.user.getNickname()}}" class="icon-text-button" id="myButton">
                     <span class="text">나의 프로필</span>
                 </a>
             </li>

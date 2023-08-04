@@ -38,10 +38,9 @@ public class ProfileService {
     }
 
 
-    public ArticleEntity[] getCountCategoryByPage(HttpSession session) {
+    public ArticleEntity[] getCountCategoryByPage(String nickname) {
 
-        UserEntity user = (UserEntity) session.getAttribute("user");
-        System.out.println(user.getEmail());
+        UserEntity user = profileMapper.selectNickName(nickname);
 
         return this.profileMapper.selectCountCategoryByPage(user.getEmail());
     }
@@ -52,10 +51,9 @@ public class ProfileService {
         return article;
     }
 
-    public ProfileEntity getThumbnail(HttpSession session) {
-        UserEntity user = (UserEntity) session.getAttribute("user");
+    public ProfileEntity getThumbnail(String nickname) {
+        UserEntity user = profileMapper.selectNickName(nickname);
         ProfileEntity profile = profileMapper.selectThumbnail(user.getEmail());
-
 
         return profile == null
                 ? null

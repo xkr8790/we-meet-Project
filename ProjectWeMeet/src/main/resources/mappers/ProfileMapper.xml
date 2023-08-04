@@ -72,7 +72,6 @@
                `password` AS `password`
         FROM `wemeet_project`.`users`
         WHERE  `nickname` = #{nickname}
-        LIMIT 1
     </select>
 
     <select id="selectUserByContact"

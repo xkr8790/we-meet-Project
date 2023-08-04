@@ -32,17 +32,7 @@ public class HomeController {
         return modelAndView;
     } //메인 홈 주소
 
-    @RequestMapping(value = "/profile/{index}",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ModelAndView getMainArticle(@PathVariable(value = "index")int index){
-        System.out.println("Received index: " + index); // index 값을 출력
-        ModelAndView modelAndView = new ModelAndView("home/main");
-        ParticipantsEntity[] participantsArray = this.articleService.selectParticipantsProfile(index);
-        modelAndView.addObject("participantsArray",participantsArray);
-        return modelAndView;
-    } //메인 홈 주소
+
 
     @RequestMapping(value = "/Privacy-Policy",
             method = RequestMethod.GET,
