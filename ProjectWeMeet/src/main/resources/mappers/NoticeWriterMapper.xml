@@ -86,4 +86,18 @@
         LIMIT 1
     </select>
 
+    <update id="updateArticleContent"
+            parameterType="com.bsh.projectwemeet.entities.NoticeWriterArticleEntity">
+        UPDATE `wemeet_project`.`notice_articles`
+        SET
+           `title` = #{title},
+            `content` = #{content},
+            `created_at` = #{createdAt},
+            `client_ip` = #{clientIp},
+            `client_ua` = #{clientUa}
+        WHERE `index` = #{index}
+    </update>
+
+
+
 </mapper>

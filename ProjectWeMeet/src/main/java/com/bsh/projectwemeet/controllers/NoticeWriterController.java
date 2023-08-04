@@ -4,6 +4,8 @@ import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterImagesEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.PatchArticleResult;
+import com.bsh.projectwemeet.enums.PatchNoticeViewResult;
 import com.bsh.projectwemeet.services.NoticeWriterService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/")
@@ -109,20 +114,39 @@ public class NoticeWriterController {
 
     @RequestMapping(value="delete", method = RequestMethod.DELETE, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String deleteNoticeView(@RequestParam(value="index")int index){
-        boolean result = this.noticeWriterService.deleteNoticeView(index);
+    public String deleteNoticeView(@RequestParam(value="index")int index, HttpSession session){
+        boolean result = this.noticeWriterService.deleteNoticeView(index,session);
         return String.valueOf(result);
     }
 
-    @RequestMapping(value = "noticeWrite/patch",
+    @RequestMapping(value = "noticeView/patch",
             method = RequestMethod.GET)
     public ModelAndView patchNotice(@RequestParam(value = "index") int index, HttpSession session) {
         NoticeWriterArticleEntity article = noticeWriterService.getPatchIndexArticle(index,session);
-        ModelAndView modelAndView = new ModelAndView("home/patchNoticeWrite");
+        ModelAndView modelAndView = new ModelAndView("home/patchNoticeWriter");
         modelAndView.addObject("article", article);
 
         return modelAndView;
     }
+
+    @RequestMapping(value = "noticeView/patch",
+            method = RequestMethod.PATCH,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String PatchWrite(NoticeWriterArticleEntity noticeWriterArticle,
+                             HttpSession session,
+                             HttpServletRequest request) {
+
+        PatchNoticeViewResult result = this.noticeWriterService.UpdateArticle(noticeWriterArticle, session, request);
+        JSONObject responseObject = new JSONObject();
+        responseObject.put("result", result.name().toLowerCase());
+        return responseObject.toString();
+
+    }
+
+
+
+
 
 
 }

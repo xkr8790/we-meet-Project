@@ -4,6 +4,8 @@ import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterImagesEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.enums.PatchArticleResult;
+import com.bsh.projectwemeet.enums.PatchNoticeViewResult;
 import com.bsh.projectwemeet.mappers.NoticeWriterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,21 +69,39 @@ public class NoticeWriterService {
     }
 
 
-    public boolean deleteNoticeView(int index) {
+    public boolean deleteNoticeView(int index, HttpSession session) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("user");
+        if(loginUser.isAdmin() != true){
+            return false; //사용자가 관리자가 아니라면
+        }
         return this.noticeWriterMapper.deleteArticleByIndex(index) >0;
 
     }
 
     public NoticeWriterArticleEntity getPatchIndexArticle(int index, HttpSession session){
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
-        System.out.println("1");
         if(loginUser.isAdmin() != true){
-            System.out.println("2");
             return null; //사용자가 관리자가 아니라면
         }
-        System.out.println("3");
-
         return this.noticeWriterMapper.selectArticleByPatchIndex(index);
     }
+
+    public PatchNoticeViewResult UpdateArticle(NoticeWriterArticleEntity noticeWriterArticle, HttpSession session, HttpServletRequest request) {
+
+        UserEntity user = (UserEntity) session.getAttribute("user");
+
+        if(user == null){
+
+            return PatchNoticeViewResult.FAILURE;
+        }
+            noticeWriterArticle.setClientIp(request.getRemoteAddr())
+                    .setClientUa(request.getHeader("User-Agent"))
+                    .setCreatedAt(new Date());
+        return this.noticeWriterMapper.updateArticleContent(noticeWriterArticle) > 0
+                ? PatchNoticeViewResult.SUCCESS
+                : PatchNoticeViewResult.FAILURE;
+    }
+
+
 
 }

@@ -86,11 +86,14 @@
 
     <!-- 로그인한 유저가 있을때   -->
     <div class="likeAndReport" th:if="${session.user != null}">
+
         <div class="likeAndReport" th:if="${session.user != null && LikeResult == null}">
             <img class="like" th:data-index="${article.getIndex()}"
                  th:src="@{/resources/images/bulletinImags/like.png}">
             <span class="like" th:text="${article.getLikeCount()}"></span>
         </div>
+
+
         <div class="likeAndReport" th:if="${session.user != null && LikeResult != null}">
             <img class="deleteLike" th:data-index="${article.getIndex()}"
                  th:src="@{/resources/images/bulletinImags/like.png}">

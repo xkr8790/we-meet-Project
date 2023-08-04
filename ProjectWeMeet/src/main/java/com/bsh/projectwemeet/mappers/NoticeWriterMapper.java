@@ -1,5 +1,6 @@
 package com.bsh.projectwemeet.mappers;
 
+
 import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterArticleEntity;
 import com.bsh.projectwemeet.entities.NoticeWriterImagesEntity;
@@ -20,4 +21,6 @@ public interface NoticeWriterMapper {
     int deleteArticleByIndex(@Param(value = "index")int index);
 
     NoticeWriterArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
+
+    int updateArticleContent(NoticeWriterArticleEntity noticeWriterArticle);
 }

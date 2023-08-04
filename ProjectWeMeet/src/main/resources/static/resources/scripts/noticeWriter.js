@@ -1,5 +1,6 @@
 const noticeWriteForm = document.getElementById('notice-writer');
 
+
 ClassicEditor.create(noticeWriteForm['content'], {
     simpleUpload: {
         uploadUrl: '/uploadImage'
@@ -30,4 +31,5 @@ noticeWriteForm.onsubmit = e => {
         return false;
     }
 }
+
 

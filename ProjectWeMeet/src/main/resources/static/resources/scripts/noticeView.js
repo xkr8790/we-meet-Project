@@ -1,11 +1,11 @@
 const noticeViewForm = document.getElementById('noticeView');
-const deleteButton = noticeViewForm.querySelectorAll('[rel="delete"]');
-const patchButton = noticeViewForm.querySelector('[name="patch"]');
+const noticeDeleteButton = noticeViewForm.querySelector('[rel="delete"]');
+const noticePatchButton = noticeViewForm.querySelector('[rel="patch"]');
 
-deleteButton.forEach(deleteButton => {
-    deleteButton.addEventListener('click', (e) => {
+// deleteButton.forEach(deleteButton => {
+    noticeDeleteButton.addEventListener('click', e => {
         e.preventDefault();
-        const index = deleteButton.dataset.index;
+        const index = noticeDeleteButton.dataset.index;
         const xhr = new XMLHttpRequest();
         xhr.open('DELETE', `delete?index=${index}`); // 수정된 경로를 사용
         xhr.onreadystatechange = () => {
@@ -24,37 +24,37 @@ deleteButton.forEach(deleteButton => {
                         return;
                     }
                 } else {
-                    alert('서버와 통신하지 못하였습니다.\n\n잠시 후 다시 시도해 주세요.');
+                    alert('관리자만 삭제할수 있습니다.');
                 }
             }
         };
         xhr.send();
     });
-});
+// });
 
-patchButton.forEach(patchButton => {
-    patchButton.addEventListener('click', e => {
+// patchButton.forEach(patchButton => {
+noticePatchButton.addEventListener('click', e => {
         e.preventDefault();
 
-        const index = patchButton.dataset.index;
+        const indexs = noticePatchButton.dataset.index;
 
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `./patch?index=${index}`);
+        xhr.open('GET', `/noticeView/patch?index=${indexs}`);
         xhr.onreadystatechange = () => {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     const confirmResult = confirm('수정을 하시겠습니까?');
                     if (confirmResult === true) {
-                        location.href = `noticeWrite/patch?index=${index}`
+                        location.href = `/noticeView/patch?index=${indexs}`
                     } else if (confirmResult === false) {
                         alert('수정을 취소합니다');
                         return;
                     }
                 } else {
-                    alert('알수 없는 이유로 수정이 불가능 합니다.');
+                    alert('관리자만 수정할수 있습니다.');
                 }
             }
         };
         xhr.send();
     }); //공지사항 수정
-});
+// });
