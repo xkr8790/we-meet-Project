@@ -98,7 +98,7 @@ public interface ArticleMapper {
     ParticipantsEntity[] selectParticipantsProfile(@Param(value = "index") int index);
     // 참여인원 중복되있는지 select
 
-    ParticipantsEntity[] selectArticleParticipantsProfile();
+    ProfileEntity[] selectParticipantsProfiless(@Param(value = "ArticleIndex") int ArticleIndex);
     // 참여인원 중복되있는지 select
 
 

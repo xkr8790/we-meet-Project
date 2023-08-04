@@ -305,6 +305,7 @@
         WHERE `article`.`index` = #{index}
         LIMIT 1 ;
     </select>
+
     <select  id="selectParticipantProfileByIndexTwo"
              resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `article`.`index`         AS `index`,
@@ -335,21 +336,6 @@
         WHERE `article`.`index` = #{index}
         LIMIT 1 ;
     </select>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- 게시물 수정 찾기 -->
     <select id="selectArticleByPatchIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">
@@ -792,6 +778,21 @@
         WHERE `ArticleIndex` = #{index}
     </select>
     <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsProfiless"
+            resultType="com.bsh.projectwemeet.entities.ProfileEntity">
+        SELECT `Participant`.`index`    AS `index`,
+               `Participant`.`email`    AS `email`,
+               `Participant`.`ArticleIndex`    AS `ArticleIndex`,
+               `mypage`.`email`     AS `email`,
+               `mypage`.`nickname`  AS `nickname`
+        FROM `wemeet_project`.`mypages` AS `mypage`
+                 LEFT JOIN `wemeet_project`.`Participants` AS `Participant` ON `Participant`.`email` = `mypage`.`email`
+        WHERE `Participant`.`ArticleIndex` = #{ArticleIndex}
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
 
     <!-- 참여인원 중복되있는지 select -->
     <select id="selectArticleParticipantsProfile"

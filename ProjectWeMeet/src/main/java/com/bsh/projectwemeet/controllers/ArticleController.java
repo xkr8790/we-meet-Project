@@ -112,7 +112,7 @@ public class ArticleController {
         // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
         ProfileEntity profile = this.articleService.profileBulletin(index);
         //게시판 인덱스를 통해 게시판의 작성자가 프로필 테이블에 사진이 있다면 가져오고
-        ParticipantsEntity[] participantsArray = this.articleService.selectParticipantsProfile(index);
+        ProfileEntity[] participantsArray = this.articleService.selectParticipantsProfile(index);
         //참가자의 참여부를 따지기
         ProfileEntity[] profiles = this.articleService.ParticipateProfile(index, email);
 

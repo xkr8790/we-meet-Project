@@ -144,8 +144,9 @@
                     <p>함께 할 멤버!</p>
                     <div class="profile">
                      <span th:each="participantsArray : ${participantsArray}">
-                         <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
-                         <p></p>
+                            <a th:href="@{'/profile/?nickname='+ ${participantsArray.getNickname()}}">
+                              <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
+                            </a>
                      </span>
                     </div>
 

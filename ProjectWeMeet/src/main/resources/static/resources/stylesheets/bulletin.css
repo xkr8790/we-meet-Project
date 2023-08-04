@@ -369,7 +369,7 @@ allContainer > .header > .login > a {
     /*border: 1px solid blue;*/
 }
 
-.announcement > .participant > .participantContainer > .login-after-human > .profile > span > img {
+.announcement > .participant > .participantContainer > .login-after-human > .profile > span > a > img {
     object-fit: cover;
     width: 5rem;
     height: 5rem;

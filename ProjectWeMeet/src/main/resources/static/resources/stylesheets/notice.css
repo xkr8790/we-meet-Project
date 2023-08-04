@@ -33,6 +33,8 @@ body{
     background-color: #FB6161;
     align-items: center;
     display: flex;
+    width: 99%;
+
     flex-direction: row;
     justify-content: space-between;
     padding: 0.5rem;
@@ -126,9 +128,17 @@ body{
     color: black;
     font-size: 1.3rem;
 }
-#main > .notice-main > div  > .box > a > span {
+
+#main > .notice-main > div  > .box > a > .title {
     color: #bdbdbd;
-    margin-top: 1rem;
+    margin: 0.5rem 0 0.5rem 0;
+    font-size: 1rem;
+}
+
+#main > .notice-main > div  > .box > a > .day {
+    color: #bdbdbd;
+    margin: 0.5rem 0 0.5rem 0;
+
     font-size: 1rem;
 }
 

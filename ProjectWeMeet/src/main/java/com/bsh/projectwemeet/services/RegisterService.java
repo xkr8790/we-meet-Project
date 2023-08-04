@@ -120,7 +120,8 @@ public class RegisterService {
                     .setCreatedAt(new Date())
                     .setProfileThumbnail(defaultProfileImageBytes)
                     .setProfileThumbnailMime("image/png")
-                    .setIntroduceText("마이페이지에서 수정해주세요");// 이미지의 MIME 타입을 설정해야 합니다.
+                    .setIntroduceText("마이페이지에서 수정해주세요")
+                    .setNickname(user.getNickname());// 이미지의 MIME 타입을 설정해야 합니다.
 
         } catch (IOException e) {
 
