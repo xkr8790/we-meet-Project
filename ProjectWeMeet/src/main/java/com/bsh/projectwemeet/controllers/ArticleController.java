@@ -54,6 +54,7 @@ public class ArticleController {
         this.reviewService = reviewService;
     }
 
+
     @RequestMapping(value = "article",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
@@ -111,6 +112,7 @@ public class ArticleController {
         ParticipantsEntity[] participantsArray = this.articleService.selectParticipantsProfile(index);
         //참가자의 참여부를 따지기
         ProfileEntity[] profiles = this.articleService.ParticipateProfile(index, email);
+
 
 
 

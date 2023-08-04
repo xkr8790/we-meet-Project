@@ -748,6 +748,26 @@ body {
     float: right;
 }
 
+#popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-box > ._object-input {
+    margin-bottom: 0.4rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-button {
+    width: 100%;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-button > .change {
+    float: right;
+}
+
+
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object {
     align-items: start;
     display: flex;

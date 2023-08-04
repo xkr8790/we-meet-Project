@@ -57,7 +57,21 @@
                `address_secondary` AS `addressSecondary`,
                `password` AS `password`
         FROM `wemeet_project`.`users`
-        WHERE BINARY `email` = #{email}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectNickName"
+            resultType="com.bsh.projectwemeet.entities.UserEntity">
+        SELECT `email`             AS `email`,
+               `nickname`          AS `nickname`,
+               `contact`           AS `contact`,
+               `address_postal`    AS `addressPostal`,
+               `address_primary`   AS `addressPrimary`,
+               `address_secondary` AS `addressSecondary`,
+               `password` AS `password`
+        FROM `wemeet_project`.`users`
+        WHERE  `nickname` = #{nickname}
         LIMIT 1
     </select>
 
@@ -125,22 +139,36 @@
 
     <select id="selectCountCategoryByPage"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">#결과값 메모엔터티 값으로 돌려준다
+    SELECT `index`                                                    AS `index`,
+           `email`                                                    AS `email`,
+           `title`                                                    AS `title`,
+           `content`                                                  AS `content`,
+           `category`                                                 AS `category`,
+           `address`                                                  AS `address`,
+           `thumbnail`                                                AS `thumbnail`,
+           `thumbnail_mime`                                           AS `thumbnailMime`,
+           `limit`                                                    AS `limit`,
+           `like_count`                                               AS `likeCount`,
+           `report`                                                   AS `report`,
+           `participation`                                            AS `participation`,
+           SUBSTRING_INDEX(SUBSTRING_INDEX(hashtag, ',', 1), ',', -1) AS `hashtag`,
+           `day`                                                      AS `appointmentStartDate`,
+           `time`                                                     AS `appointmentStartTime`,
+           `finished_flag`                                            AS `isFinished`
+    FROM `wemeet_project`.`articles`
+    WHERE `email` = #{email}
+    ORDER BY `index` DESC
+    LIMIT 9
+    </select>
+
+    <select id="selectThumbnailLink"
+    resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index` AS `index`,
-        `title` AS `title`,
-        `content` AS `content`,
-        `category` AS `category`,
-        `address` AS `address`,
-        `limit` AS `limit`,
-        `like_count` AS `likeCount`,
-        `report` AS `report`,
-        `participation` AS `participation`,
-        SUBSTRING_INDEX(SUBSTRING_INDEX(hashtag, ',', 1), ',', -1) AS `hashtag`,
-        `day` AS `appointmentStartDate`,
-        `time` AS `appointmentStartTime`,
-        `finished_flag` AS `isFinished`
+               `thumbnail` AS `thumbnail`,
+               `thumbnail_mime` AS `thumbnailMime`
         FROM `wemeet_project`.`articles`
-        ORDER BY `index` DESC
-        LIMIT 9
+        WHERE `index` = #{index}
+        LIMIT 1
     </select>
 
     <update id="updateUser"
@@ -178,6 +206,14 @@
     parameterType="com.bsh.projectwemeet.entities.UserEntity">
         UPDATE `wemeet_project`.`users`
         SET `password` = #{password}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
+    <update id="updateContent"
+            parameterType="com.bsh.projectwemeet.entities.ProfileEntity">
+        UPDATE `wemeet_project`.`mypages`
+        SET `introduce_text` = #{introduceText}
         WHERE `email` = #{email}
         LIMIT 1
     </update>

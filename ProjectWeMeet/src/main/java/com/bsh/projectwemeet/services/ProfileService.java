@@ -5,19 +5,15 @@ import com.bsh.projectwemeet.entities.ProfileEntity;
 import com.bsh.projectwemeet.entities.RegisterContactCodeEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
 import com.bsh.projectwemeet.enums.*;
-import com.bsh.projectwemeet.mappers.LoginMapper;
 import com.bsh.projectwemeet.mappers.ProfileMapper;
 import com.bsh.projectwemeet.utils.CryptoUtil;
 import com.bsh.projectwemeet.utils.NCloudUtil;
-import org.apache.catalina.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
@@ -37,11 +33,23 @@ public class ProfileService {
         return this.profileMapper.selectAll(user.getEmail());
     }
 
-    public ArticleEntity getCountCategoryByPage(HttpSession session) {
+    public UserEntity getUserByNickName(String nickname) {
+        return profileMapper.selectNickName(nickname);
+    }
 
-        ArticleEntity article = (ArticleEntity) session.getAttribute("article");
 
-        return this.profileMapper.selectCountCategoryByPage(article.getIndex());
+    public ArticleEntity[] getCountCategoryByPage(HttpSession session) {
+
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        System.out.println(user.getEmail());
+
+        return this.profileMapper.selectCountCategoryByPage(user.getEmail());
+    }
+
+    public ArticleEntity getArticleImage(int index) {
+        ArticleEntity article = this.profileMapper.selectThumbnailLink(index);
+
+        return article;
     }
 
     public ProfileEntity getThumbnail(HttpSession session) {
@@ -214,6 +222,12 @@ public class ProfileService {
         user.setContact(contact);
         return this.profileMapper.updateContact(user) > 0
                 ? ModifyPasswordResult.SUCCESS : ModifyPasswordResult.FAILURE;
+    }
+
+    //소개글 변경
+    public boolean resetContent(ProfileEntity profile, String content) {
+        profile.setIntroduceText(content);
+        return this.profileMapper.updateContent(profile) > 0;
     }
 
     // 주소 변경

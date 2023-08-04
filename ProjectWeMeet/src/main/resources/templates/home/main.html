@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
 <div class="logo-container" id="logo-container">
     <div class="container">
         <div class="logo">
@@ -36,7 +35,7 @@
         </ul>
         <ul class="menu right" th:if="${session.user != null}">
             <li class="item">
-                <a href="/profile/profile" class="icon-text-button">
+                <a th:href="${'profile/'+ session.user.getNickname()}" class="icon-text-button" id="myButton">
                     <span class="text">나의 프로필</span>
                 </a>
             </li>

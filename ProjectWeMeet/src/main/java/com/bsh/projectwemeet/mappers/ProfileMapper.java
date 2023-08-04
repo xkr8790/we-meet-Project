@@ -15,6 +15,8 @@ public interface ProfileMapper {
 
     UserEntity selectAll(@Param(value = "email") String email);
 
+    UserEntity selectNickName(@Param(value = "nickname") String nickname);
+
     UserEntity selectUserByContact(@Param(value = "contact") String contact);
 
     RegisterContactCodeEntity selectContactCodeByContactCodeSalt(RegisterContactCodeEntity registerContactCode);
@@ -23,7 +25,10 @@ public interface ProfileMapper {
 
     ProfileEntity selectThumbnail(@Param(value = "email") String email);
 
-    ArticleEntity selectCountCategoryByPage(@Param(value = "index") int index);
+    ArticleEntity[] selectCountCategoryByPage(@Param(value = "email") String email);
+
+    ArticleEntity selectThumbnailLink(@Param(value = "index") int index);
+
 
     int getArticleIndexCountByEmail(@Param(value = "email")String email);
 
@@ -32,6 +37,8 @@ public interface ProfileMapper {
     int updateContactCode(RegisterContactCodeEntity registerContactCode);
 
     int updateContact(UserEntity user);
+
+    int updateContent(ProfileEntity profile);
 
     int updateNickname(UserEntity user);
 
