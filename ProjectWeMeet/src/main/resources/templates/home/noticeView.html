@@ -28,7 +28,6 @@
         <div class="option">
             <div class="day" th:text="${#dates.format(article.getCreatedAt(), 'yyyy-MM-dd HH:mm:ss')}"></div>
             <div class="option-button" >
-                <div th:text="${article.getIndex()}"></div>
                 <button class="modify" rel="patch" th:data-index="${article.getIndex()}">수정</button>
                 <button class="delete" rel="delete" th:data-index="${article.getIndex()}">삭제</button>
             </div>
