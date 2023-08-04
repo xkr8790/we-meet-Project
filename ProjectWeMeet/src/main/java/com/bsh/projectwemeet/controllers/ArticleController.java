@@ -65,16 +65,10 @@ public class ArticleController {
                                    @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery,
                                    HttpSession session) {
 
-        ModelAndView modelAndView;
+        ModelAndView modelAndView = new ModelAndView("home/article");
 
         int searchResultCount = this.articleService.getCountCategory(searchCriterion, searchQuery, category);
 
-        if (searchResultCount > 0) {
-            modelAndView = new ModelAndView("home/article"); //index.html 연결
-        } else {
-            modelAndView = new ModelAndView("home/articleNone"); // 검색 결과가 없으면 "home/articleNone" 뷰를 사용합니다.
-
-        } //검색결과 존재 안할시
 
         PagingModel pagingCategory = new PagingModel(
                 ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근

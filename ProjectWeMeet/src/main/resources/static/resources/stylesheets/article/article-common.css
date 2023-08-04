@@ -1,3 +1,59 @@
+.article-searchResult {
+    width: 28rem;
+    height: 16rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 0.5rem;
+    padding: 1rem 0rem 1rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
+}
+
+.search-box {
+    margin: 0 auto;
+}
+
+.search-box > .search {
+    margin: 1rem;
+}
+
+.search-box > .search > .select {
+    width: 100px;
+    height: 33px;
+    border-radius: 0.2rem;
+}
+
+.search-box > .search > .input {
+    width: 180px;
+    height: 28px;
+    border:1px solid #ddd;
+    padding: 0.2rem;
+    border-radius: 0.3rem;
+}
+
+.search-box > .search > .input::placeholder {
+    color: #999; /* 원하는 색상으로 변경해주세요 */
+}
+
+.search-box > .search > .button {
+    background-color: #FB6161;
+    border: none;
+    width: 56px;
+    height: 33px;
+    border-radius: 0.2rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.search-box > .search > .button:hover {
+    cursor: pointer;
+}
+
+
 
 #footer {
     max-width: 900px;

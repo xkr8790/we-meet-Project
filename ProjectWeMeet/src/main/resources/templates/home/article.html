@@ -8,19 +8,16 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-common.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article.css}" media="screen and (min-width: 1050px)">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-1050px.css}" media="screen and (max-width: 1050px)">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-750px.css}" media="screen and (max-width: 950px)">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-500px.css}" media="screen and (max-width: 520px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-950px.css}" media="screen and (max-width: 950px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-520px.css}" media="screen and (max-width: 520px)">
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
     <script defer th:src="@{/resources/scripts/article.js}"></script>
-
-
 </head>
 <body>
 
 <form id="Article">
     <div  id="headerContainer">
         <header class="_content header">
-
             <ul class="menu left">
                 <li class="item main-menu">
                     <label class="icon-text-button">
@@ -157,7 +154,9 @@
 
    <div class="article-box">
     <div class="article-box-grid">
-                        <div class="article-list"  th:if="${!article.getCategory().equals('완료')}" th:each="article : ${articleCategory}">
+
+       <div class="article-list"  th:if="${!article.getCategory().equals('완료')}" th:each="article : ${articleCategory}">
+
                             <a class="article-link" th:href="@{${article.getCategory().equals('완료') ? 'article/review' : 'article/read'} (index = ${article.getIndex()})}">
                                 <div class="article-thumbnail">
                                     <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="Thumbnail">
@@ -204,8 +203,16 @@
                                 </div>
                             </a>
                         </div>
-                    </div>
-      <ul class="pageContainer">
+      </div>
+       <div class="article-searchResult" th:if="${(category!= ''  && searchResultCount == 0 )||
+       ((searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')
+         && category == '' &&  searchResultCount == 0 )}">
+       <span th:if="${category!= ''  && searchResultCount == 0 }">카테고리 결과가 존재하지 않습니다.</span>
+           <span th:if="${(searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')
+           && category == '' &&  searchResultCount == 0 }">
+                                    검색 결과가 존재하지 않습니다.</span>
+       </div>
+      <ul class="pageContainer" th:if="${searchResultCount>0}">
         <li class="page" th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
                             <a class="link" th:href="@{'/article' (p = ${page},category=${category},c = ${searchCriterion}, q = ${searchQuery})}"
                                th:text="${page}"></a>

@@ -13,8 +13,6 @@
     }
 
 
-
-
     html {
         scroll-behavior: smooth;
         font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
@@ -176,9 +174,6 @@
         margin-bottom: 0.9rem;
     }
 
-
-
-
     .category{
         display: none;
     }
@@ -286,7 +281,7 @@
 
     .article-list > .article-link {
         /*border: 1px solid red;*/
-        width: 25rem;
+        width: 24rem;
         height: 13rem;
         align-items: center;
         display: flex;
@@ -401,8 +396,8 @@
     .article-human > .Profile {
         object-fit: cover;
         border-radius: 100%;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.8rem;
+        height: 1.8rem;
         margin: -0.15rem;
         border: 0.2rem solid white;
     }
