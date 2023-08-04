@@ -7,15 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>프로필</title>
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"/>
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile.css}" media="screen and (min-width:1501px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-1500px.css}" media="screen and (max-width: 1500px) and (min-width: 1350px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-1300px.css}" media="screen and (max-width:1349px) and (min-width: 1080px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-950px.css}" media="screen and (max-width:1079px) and (min-width: 800px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-750px.css}" media="screen and (max-width: 799px)">
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer th:src="@{/resources/scripts/profile.js}"></script>
     <script defer th:src="@{/resources/scripts/common.js}"></script>
 </head>
 <body>
-<a class="main" href="/">
-    <img class="logo" src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
-</a>
+<div class="main">
+    <a href="/"><img class="logo" src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고"></a>
+</div>
 
 <div id="dialogCoverP"></div>
 <div class="__body" data-mz-step="address" id="addressLayerP">
@@ -27,19 +31,17 @@
         <label class="item">
             <input id="_object-input" class="_object-input input" maxlength="50" name="1checkPassword"
                    placeholder="**********" type="password">
+            <span class="check">
+                <input id="checkPassword" name="checkPasswordButton" class="checkPassword" type="button" value="확인">
+                <input class="checkPassword" type="button" value="취소" name="cancelButton">
+            </span>
         </label>
-        <label class="cancel">
-            <input type="button" value="취소" name="cancelButton">
-        </label>
-        <div class="check">
-            <input id="checkPassword" name="checkPasswordButton" class="checkPassword" type="button" value="확인">
-        </div>
     </div>
     <div class="popup-content step-2" id="popup-content_step-2">
         <h3 class="title">개인 정보 수정</h3>
         <div class="profileImage">
             <img class="profile" rel="profileF" th:name="profile"
-                 th:src="@{/profile/Thumbnail}" alt="">
+                 th:src="@{/profile/Thumbnail(nickname=${profile?.getNickname()})}" alt="">
         </div>
         <label class="profile_file" rel="profilePreview">
             <label for="change_profile" class="change">프로필 바꾸기</label>
@@ -199,7 +201,6 @@
         </div>
         <span class="cNotification" rel="cNotification"></span>
     </div>
-    </div>
 </form>
 <form class="main-container" id="mainContainer">
     <div class="left-profile">
@@ -231,11 +232,10 @@
             <span class="posts">참여한 게시물</span>
          </span>
     </span>
-
     <div class="article-box-grid">
         <div class="article-list" th:each="article : ${article}" >
             <a class="myArticleLink" th:href="@{/article/read(index=${article.getIndex()})}">
-                <h2 th:text="${article.getTitle()}"></h2>
+                <span th:text="${article.getTitle()}"></span>
                 <div class="article-thumbnail">
                     <img class="thumbnail" th:src="@{article/image(index=${article.getIndex()})}" alt="">
                 </div>
@@ -249,34 +249,12 @@
                 </span>
                 <span class="HashTag">
                      <span th:text="${article.getCategory()}"></span>
-                    <span th:text="${article.getHashtag()}"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="article-box-grid">
-        <div class="article-list">
-            <a class="myArticleLink">
-                <h2>안녕하세요</h2>
-                <div class="article-thumbnail">
-                    <img class="thumbnail" th:src="@{/resources/images/profileImages/개새끼.jpg}" alt="">
-                </div>
-            </a>
-            <div class="likeAndReport">
-                <span class="likeImage">
-                    <img class="Like" th:src="@{/resources/images/bulletinImags/like.png}">
-                    <span>5</span>
-                    <img class="Report" th:src="@{/resources/images/bulletinImags/_report.png}">
-                    <span>5</span>
-                </span>
-                <span class="HashTag">
-                     <span>식사</span>
-                     <span>#안녕하세요</span>
+                    <span th:if="${article.getHashtag() != null}" th:text="${article.getHashtag()}"></span>
                 </span>
             </div>
         </div>
     </div>
 </div>
-</div>
+
 </body>
 </html>

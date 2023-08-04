@@ -29,6 +29,8 @@
         margin: 0 auto;
     }
 
+@media screen and (max-width: 520px) {
+
     ._container {
         margin-bottom: 3rem;
         margin-top: 3rem;
@@ -106,6 +108,7 @@
         width: 40px;
         height: 40px;
     }
+
     #headerContainer > .header > .menu > .item > a > .profile > img {
         border-radius: 10rem;
         width: 100%;
@@ -125,8 +128,8 @@
         justify-content: flex-start;
     }
 
-    .text{
-        color:black;
+    .text {
+        color: black;
         font-weight: 500;
         white-space: nowrap;
     }
@@ -156,7 +159,7 @@
         justify-content: center;
     }
 
-    .notice-title{
+    .notice-title {
         font-size: 1rem;
         font-weight: bold;
         color: #FB6161;
@@ -164,22 +167,31 @@
         margin-bottom: 1rem;
     }
 
-    .notice-text{
+    .notice-text {
         font-weight: 550;
         font-size: 1.2rem;
         margin: 0.5rem;
     }
 
-    .margin{
+    .margin {
         margin-bottom: 0.9rem;
     }
 
-    .category{
+    .category {
         display: none;
     }
 
+    .article-category {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 80%;
+        margin: 0 auto;
+    }
 
-    .category-750px{
+
+    .category-750px {
         align-items: center;
         display: flex;
         flex-direction: column;
@@ -223,40 +235,39 @@
     }
 
 
-
-    .underline{
+    .underline {
         border-bottom-color: rgba(0, 0, 0, 1); /* 밑줄 색상 설정 */
         border-bottom-width: 3px; /* 밑줄 두께 설정 */
         border-bottom-style: solid; /* 밑줄 스타일 설정 */
         transition: border-bottom-color 0.3s, border-bottom-width 0.3s, margin-top 0.3s ease;
     }
 
-        .introduce_article > .category > .menu:hover {
-            cursor: pointer;
-        }
+    .introduce_article > .category > .menu:hover {
+        cursor: pointer;
+    }
 
-        .search-box > .search > .select {
-            padding: 0.3rem;
-            border-radius: 0.2rem;
-        }
+    .search-box > .search > .select {
+        padding: 0.3rem;
+        border-radius: 0.2rem;
+    }
 
-        .search-box > .search > .input {
-            padding: 0.3rem;
-            border-radius: 0.2rem;
-        }
+    .search-box > .search > .input {
+        padding: 0.3rem;
+        border-radius: 0.2rem;
+    }
 
-        .search-box > .search > .button {
-            background-color: #FB6161;
-            border: none;
-            padding: 0.3rem;
-            border-radius: 0.2rem;
-            color: white;
-            font-weight: 500;
-        }
+    .search-box > .search > .button {
+        background-color: #FB6161;
+        border: none;
+        padding: 0.3rem;
+        border-radius: 0.2rem;
+        color: white;
+        font-weight: 500;
+    }
 
-        .search-box > .search > .button:hover {
-            cursor: pointer;
-        }
+    .search-box > .search > .button:hover {
+        cursor: pointer;
+    }
 
 
     .article-box {
@@ -267,10 +278,10 @@
         background-color: #f4f3f1;
     }
 
-    .article-box-grid{
+    .article-box-grid {
         display: grid;
         margin: 1rem;
-        grid-template-columns: repeat(1 , 1fr);
+        grid-template-columns: repeat(1, 1fr);
         align-items: center; /* 수직 정렬 */
         justify-items: center;
         grid-gap: 1rem;
@@ -474,3 +485,4 @@
         padding: 0 0.75rem;
         text-decoration: none;
     }
+}

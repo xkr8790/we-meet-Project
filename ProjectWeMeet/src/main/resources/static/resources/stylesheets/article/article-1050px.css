@@ -31,6 +31,7 @@ body{
     margin: 0 auto;
 }
 
+@media screen and (min-width: 951px) and (max-width: 1050px) {
     ._container {
         margin-bottom: 3rem;
         margin-top: 3rem;
@@ -87,6 +88,7 @@ body{
         height: 100%;
         margin: 0 auto;
     }
+
     #headerContainer > .header {
         align-items: center;
         display: flex;
@@ -118,6 +120,7 @@ body{
         width: 40px;
         height: 40px;
     }
+
     #headerContainer > .header > .menu > .item > a > .profile > img {
         border-radius: 10rem;
         width: 100%;
@@ -137,8 +140,8 @@ body{
         justify-content: flex-start;
     }
 
-    .text{
-        color:black;
+    .text {
+        color: black;
         font-weight: 500;
         white-space: nowrap;
     }
@@ -161,7 +164,7 @@ body{
     }
 
     /*카테고리*/
-    .article-category{
+    .article-category {
         align-items: center;
         display: flex;
         flex-direction: column;
@@ -170,7 +173,7 @@ body{
         margin: 0 auto;
     }
 
-    .category-750px{
+    .category-750px {
         display: none;
     }
 
@@ -182,7 +185,7 @@ body{
         justify-content: center;
     }
 
-    .notice-title{
+    .notice-title {
         font-size: 1rem;
         font-weight: bold;
         color: #FB6161;
@@ -190,17 +193,17 @@ body{
         margin-bottom: 1rem;
     }
 
-    .notice-text{
+    .notice-text {
         font-weight: 550;
         font-size: 1.2rem;
         margin: 0.5rem;
     }
 
-    .margin{
+    .margin {
         margin-bottom: 0.9rem;
     }
 
-    .article-category> .category {
+    .article-category > .category {
         white-space: nowrap;
         padding: 3rem 0 0 0;
         font-weight: 600;
@@ -213,7 +216,7 @@ body{
         margin: 3rem 0 3rem 0;
     }
 
-   .articleLink{
+    .articleLink {
         text-decoration: none;
         padding-bottom: 5px; /* 원하는 여백 크기 설정 */
         cursor: pointer;
@@ -226,14 +229,14 @@ body{
         border-bottom: 3px solid rgba(0, 0, 0, 0); /* 초기에 투명도 0으로 설정 */
     }
 
-   .category-img{
+    .category-img {
         width: 20px;
         height: 20px;
         margin-right: 0.5rem;
         object-fit: cover;
     }
 
-    .underline{
+    .underline {
         /* 다른 border 속성들 (선택사항) */
         border-bottom-color: rgba(0, 0, 0, 1); /* 밑줄 색상 설정 */
         border-bottom-width: 3px; /* 밑줄 두께 설정 */
@@ -246,38 +249,38 @@ body{
     }
 
 
-.search-box {
-    display: flex;
-    justify-content: flex-end; /* 오른쪽으로 정렬 */
-}
+    .search-box {
+        display: flex;
+        justify-content: flex-end; /* 오른쪽으로 정렬 */
+    }
 
-.search-box > .search{
-    margin: 1rem;
-}
+    .search-box > .search {
+        margin: 1rem;
+    }
 
 
-.search-box > .search > .select {
-    padding: 0.3rem;
-    border-radius: 0.2rem;
-}
+    .search-box > .search > .select {
+        padding: 0.3rem;
+        border-radius: 0.2rem;
+    }
 
-.search-box > .search > .input {
-    padding: 0.3rem;
-    border-radius: 0.2rem;
-}
+    .search-box > .search > .input {
+        padding: 0.3rem;
+        border-radius: 0.2rem;
+    }
 
-.search-box > .search > .button {
-    background-color: #FB6161;
-    border: none;
-    padding: 0.3rem;
-    border-radius: 0.2rem;
-    color: white;
-    font-weight: 500;
-}
+    .search-box > .search > .button {
+        background-color: #FB6161;
+        border: none;
+        padding: 0.3rem;
+        border-radius: 0.2rem;
+        color: white;
+        font-weight: 500;
+    }
 
-.search-box > .search > .button:hover {
-    cursor: pointer;
-}
+    .search-box > .search > .button:hover {
+        cursor: pointer;
+    }
 
 
     .article-box {
@@ -288,10 +291,10 @@ body{
         background-color: #f4f3f1;
     }
 
-    .article-box-grid{
+    .article-box-grid {
         display: grid;
         margin: 1rem;
-        grid-template-columns: repeat(2 , 1fr);
+        grid-template-columns: repeat(2, 1fr);
         align-items: center; /* 수직 정렬 */
         justify-items: center;
         grid-gap: 1rem;
@@ -495,3 +498,4 @@ body{
         padding: 0 0.75rem;
         text-decoration: none;
     }
+}

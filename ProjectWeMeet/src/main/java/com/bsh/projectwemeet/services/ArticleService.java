@@ -432,9 +432,9 @@ public class ArticleService {
 
 
 
-    public ParticipantsEntity[] selectParticipantsProfile(int index){
-        return articleMapper.selectParticipantsProfile(index);
-    } //참여한 인원수만큼 배열 반환 -> 배열로 해야지 반복문을 사용해 참가자 수만큼 나타낼수 있음
+    public ProfileEntity[] selectParticipantsProfile(int index){
+        return articleMapper.selectParticipantsProfiless(index);
+    }
 
 
     public ProfileEntity[] ParticipateProfile(int index, String email) {

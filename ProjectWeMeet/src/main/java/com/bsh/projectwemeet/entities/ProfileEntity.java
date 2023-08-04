@@ -10,6 +10,16 @@ public class ProfileEntity {
     private String profileThumbnailMime;
     private Date createdAt;
     private String introduceText;
+    private String nickname;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public ProfileEntity setNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
 
     public String getIntroduceText() {
         return introduceText;
