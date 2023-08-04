@@ -151,6 +151,15 @@
             margin: 0 3rem;
         }
 
+        .article-category {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+
 
         .introduce_article {
             align-items: center;

@@ -8,9 +8,9 @@
     font-style: normal;
 }
 
-    html {
-        font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-    }
+html {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
 @media screen and (max-width: 570px) {
 
     a {
@@ -318,7 +318,7 @@
         font-size: 0.9rem;
         font-weight: bold;
         margin: 1rem 0 0.5rem;
-        width: 180px;
+        width: 110px;
     }
 
     .article-content-box > .article-map {
@@ -419,5 +419,4 @@
         font-size: 1.2rem;
     }
 }
-    /*-----------------------------------------------------------------------------------------------------*/
-
+/*-----------------------------------------------------------------------------------------------------*/
