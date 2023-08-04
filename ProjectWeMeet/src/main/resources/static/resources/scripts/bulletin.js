@@ -67,11 +67,15 @@ bindEvents();
 
 
 
+
+
+
+
+
+
+
 // 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트// 댓글파트//
 
-
-
-//
 function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     refreshCommentAfter ??= true;
     const articleIndex = bulletinForm['articleIndex'].value;
@@ -118,6 +122,8 @@ function postComment(content, commentIndex, toFocus, refreshCommentAfter) {
     xhr.send(formData);
 }
 
+// 댓글의 시간수정
+
 function refreshComment() {
     const articleIndex = bulletinForm['articleIndex'].value;
     const xhr = new XMLHttpRequest();
@@ -143,12 +149,13 @@ function refreshComment() {
 
                     const headDiv = document.createElement('div');
                     headDiv.classList.add('comment-head');
+                    headDiv.innerText = comment['createdAt'];
+
 
                     const bodyDiv = document.createElement('div');
                     bodyDiv.classList.add('comment-body');
 
-                    const formattedDate = formatDate(comment['createdAt']);
-                    headDiv.innerText = formattedDate;
+
 
                     const deleteButton = document.createElement('button');
                     deleteButton.classList.add('delete-button');
@@ -219,19 +226,8 @@ function refreshComment() {
     xhr.send();
 }
 
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    const options = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-        hourCycle: 'h12',
-    };
-    return date.toLocaleString('en-US', options);
-}
+
+
 
 
 

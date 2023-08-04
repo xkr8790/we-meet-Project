@@ -1,0 +1,175 @@
+    <!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>소소한 일상의 변화. WeMeet!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/articleNone/articleNone.css}">
+    <script defer th:src="@{/resources/scripts/logout.js}"></script>
+    <script defer th:src="@{/resources/scripts/articleNone.js}"></script>
+
+
+</head>
+<body>
+
+<form id="Article">
+    <div class="_container" id="headerContainer">
+        <header class="_content header">
+            <ul class="menu left">
+                <li class="item main-menu">
+                    <label class="icon-text-button">
+                        <a class="icon-box" href="/">
+                            <img th:src="@{/resources/images/logoImages/logo-224x80.png}" class="icon">
+                        </a>
+                    </label>
+                </li>
+            </ul>
+            <ul class="menu right" th:if="${session.user == null}">
+                <li class="item">
+                    <a class="icon-text-button" href="/login">
+                        <span class="text">로그인</span>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="#" class="icon-text-button">
+                        <span class="text">회원가입</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul class="menu right" th:if="${session.user != null}">
+                <li class="item">
+                    <a href="/profile/profile" class="icon-text-button">
+                        <div class="profile">
+                            <img th:src="@{/article/profile}">
+                        </div>
+                    </a>
+                </li>
+                <li class="item">
+                    <button>
+                        <a href="/write">
+                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        </a>
+                    </button>
+                </li>
+                <li class="item">
+                            <i class="fa-solid fa-bell"></i>
+                </li>
+                <li class="item">
+                    <button data-action="logout">
+                        <a href="">
+                            <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                        </a>
+                    </button>
+                </li>
+
+            </ul>
+        </header>
+    </div>
+
+    <section class="article-category">
+        <div class="introduce_article">
+            <div class="notice-title margin">게시판</div>
+            <div class="notice-text margin">새로운 변화로 바뀌는</div>
+            <div class="notice-text margin">새로운 일상을</div>
+            <div class="notice-miniText margin">누구나 즐겨요</div>
+            <div class="notice-miniText margin">We-Meet</div>
+            <ul class="category">
+
+                <li class="category-item">
+                    <a class="articleLink" th:href="@{'/article' (p=1, category='')}">
+                        전체
+                    </a>
+                </li>
+
+                <li class="category-item">
+                    <a class="articleLink" th:href="@{'/article' (p=1, category='영화')}">
+                        <img class="category-img" th:src="@{/resources/images/category/activity.png}">
+                        영화
+                    </a>
+                </li>
+
+                <li class="category-item">
+                    <a class="articleLink" th:href="@{'/article' (p=1, category='게임')}">
+                        <img class="category-img" th:src="@{/resources/images/category/art.png}">
+                        게임
+                    </a>
+                </li>
+
+                <li class="category-item">
+                    <a class="articleLink" th:href="@{'/article' (p=1, category='운동')}">
+                        <img class="category-img" th:src="@{/resources/images/category/trip.png}">
+                        운동
+                    </a>
+                </li>
+
+                <li class="category-item">
+                    <a class="articleLink" th:href="@{'/article' (p=1, category='산책')}">
+                        <img class="category-img" th:src="@{/resources/images/category/study.png}">
+                        산책
+                    </a>
+                </li>
+
+                <li class="category-item">
+                    <a class="articleLink" th:href="@{'/article' (p=1, category='식사')}">
+                        <img class="category-img" th:src="@{/resources/images/category/eat.png}">
+                        식사
+                    </a>
+                </li>
+
+                <li class="category-item">
+                    <a class="articleLink" th:href="@{'/article' (p=1, category='만남')}">
+                        <img class="category-img" th:src="@{/resources/images/category/hobby.png}">
+                        만남
+                    </a>
+                </li>
+
+                <li class="category-item">
+                    <a class="articleLink" th:href="@{'/complete' (p=1, category='완료')}">
+                        <img class="category-img" th:src="@{/resources/images/category/all.png}">
+                        완료
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+
+    <section class="search-box">
+            <div class="search">
+                <select class="select" name="c" id="lang">
+                    <option value="all">전체</option>
+                    <option value="title">제목</option>
+                    <option value="address">지역</option>
+                </select>
+                <input type="hidden" name="category" >
+                <input class="input"  name="q" placeholder="검색어를 입력해주세요" type="text">
+                <input class="button" type="submit" value="검색">
+            </div>
+    </section>
+
+
+    <section class="article-container">
+                <div class="article-box collapsed">
+                        <div class="article-list">
+                            <div class="article-searchResult">
+
+                                <span th:if="${category!= ''  && searchResultCount == 0 }">
+                                    카테고리 결과가 존재하지 않습니다.</span>
+
+                                <span th:if="${(searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address') && category == '' &&  searchResultCount == 0 }">
+                                    검색 결과가 존재하지 않습니다.</span>
+
+                            </div>
+                        </div>
+                </div>
+    </section>
+
+</form>
+
+
+</body>
+</html>
+

@@ -40,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping(value = "/")
@@ -64,16 +65,23 @@ public class ArticleController {
                                    @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery,
                                    HttpSession session) {
 
-        ModelAndView modelAndView = new ModelAndView("home/article"); //index.html 연결
+        ModelAndView modelAndView;
 
+        int searchResultCount = this.articleService.getCountCategory(searchCriterion, searchQuery, category);
 
+        if (searchResultCount > 0) {
+            modelAndView = new ModelAndView("home/article"); //index.html 연결
+        } else {
+            modelAndView = new ModelAndView("home/articleNone"); // 검색 결과가 없으면 "home/articleNone" 뷰를 사용합니다.
+
+        } //검색결과 존재 안할시
 
         PagingModel pagingCategory = new PagingModel(
                 ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
-                this.articleService.getCountCategory(searchCriterion,searchQuery, category),
+                this.articleService.getCountCategory(searchCriterion, searchQuery, category),
                 requestPage); //객체화
 
-        ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage( pagingCategory, searchCriterion,searchQuery,category);
+        ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage(pagingCategory, searchCriterion, searchQuery, category);
         //페이징하면서 카테고리 관련 게시물 나타내기
 
 
@@ -82,6 +90,8 @@ public class ArticleController {
         modelAndView.addObject("category", category);
         modelAndView.addObject("searchCriterion", searchCriterion);
         modelAndView.addObject("searchQuery", searchQuery);
+        modelAndView.addObject("searchResultCount",searchResultCount);
+        modelAndView.addObject("requestPage",requestPage);
         return modelAndView;
 
     } //각 게시판 카테고리 별 //
@@ -96,7 +106,6 @@ public class ArticleController {
 
         ArticleEntity article = this.articleService.readArticle(index);
         ArticleEntity[] articles = this.articleService.getMiniArticle();
-        ParticipantsEntity[] getMini = this.articleService.getMini();
         UserEntity user = this.articleService.userEmail(session);
         UserEntity articleUser = this.articleService.IntroduceUser(index);
         ProfileEntity profileUser = this.articleService.IntroduceText(index);
@@ -129,7 +138,6 @@ public class ArticleController {
         modelAndView.addObject("profile",profile);
         modelAndView.addObject("participantsArray",participantsArray);
         modelAndView.addObject("profiles",profiles);
-        modelAndView.addObject("getMini",getMini);
         return modelAndView;
     }//bulletin 게시판 나타내기
 
@@ -675,13 +683,20 @@ public class ArticleController {
 
     @RequestMapping(value = "comment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail,@RequestParam("nickname")String nickname) {
-        CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail,nickname);
+    public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail, @RequestParam("nickname") String nickname) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+        Date created = sdf.parse(String.valueOf(new Date()));
+        comment.setCreatedAt(created);
+
+
+        CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail, nickname);
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
         return responseObject.toString();
     }
+
 
 
     @RequestMapping(value = "comment",

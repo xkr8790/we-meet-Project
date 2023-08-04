@@ -31,7 +31,7 @@ public class WriteService {
                 .setClientIp(request.getRemoteAddr())
                 .setClientUa(request.getHeader("User-Agent"))
                 .setDeleted(false)
-                .setParticipation(1)
+                .setParticipation(0)
                 .setFinished(false);
 
         return this.articleMapper.insertArticle(article)>0;
