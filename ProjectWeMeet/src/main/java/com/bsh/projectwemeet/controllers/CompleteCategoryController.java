@@ -71,8 +71,8 @@ public class CompleteCategoryController {
         public ResponseEntity<byte[]> getThumbnail ( @RequestParam(value = "index") int index){
 
             ArticleEntity article = this.completeService.readArticle(index);
-
             ResponseEntity<byte[]> response;
+
             if (article == null) {
                 response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
@@ -81,6 +81,9 @@ public class CompleteCategoryController {
                 headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
                 response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
             }
+
+
+
             return response;
         }
 

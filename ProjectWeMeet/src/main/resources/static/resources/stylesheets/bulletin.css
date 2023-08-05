@@ -690,7 +690,12 @@ allContainer > .header > .login > a {
 
 @media screen and (max-width: 650px){
     .allContainer{
-        width: 98%;
+        width: 95%;
+    }
+}
+@media screen and (max-width: 680px){
+    .allContainer > .header > .login > button {
+        margin: 0;
     }
 }
 @media screen and (max-width: 500px){

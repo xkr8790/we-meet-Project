@@ -34,6 +34,9 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -46,36 +49,41 @@ body {
     display: block;
 }
 
-.allContainer > .header > .login > a:hover {
-    color: #ef5350;
+.allContainer > .header > .list{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
 }
-
-.allContainer > .header > .login > button {
-    border: none;
-    background-color: white;
-    margin-right: 0.3rem;
+.allContainer > .header > .list > .write {
+    margin-right: 0.5rem;
 }
-
-.allContainer > .header > .login > .write > i {
-    font-size: 1.5rem;
+.allContainer > .header > .list > .write > i {
+    font-size: 1.2rem;
 }
-
-.allContainer > .header > .login > .write > i:hover {
+.allContainer > .header > .list > .write > .tooltip{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.allContainer > .header > .list > .write > i:hover {
     color: #FB6161;
-    border: none;
-    background-color: white;
-    cursor: pointer;
-}
 
-.allContainer > .header > .login > button:hover .tooltip {
+}
+.allContainer > .header > .list > .write:hover .tooltip{
     opacity: 1;
     visibility: visible;
-    font-size: 1rem;
+    font-size: 0.8rem;
 }
 
-.allContainer > .header > .login > button > div {
-
+.allContainer > .header > .list > button:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    font-size: 0.8rem;
 }
+
 
 .allContainer > .main-template {
     width: 100%;
@@ -485,6 +493,7 @@ body {
 @media screen and (max-width: 310px) {
     .allContainer > .header > .login > a {
         font-size: 5vw;
+
     }
 
     .allContainer > .main-template > .img-profile-title > .profile-title > .profile-img > p {

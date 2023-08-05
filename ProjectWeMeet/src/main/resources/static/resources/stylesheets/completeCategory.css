@@ -37,11 +37,11 @@ form > .header > .menu > .item {
     margin-left: 0.25rem;
 }
 
-form > .header > .menu > .item > .write:hover{
+form > .header > .menu > .item > .write>i:hover{
     color: #ef5350;
 }
 
-form > .header > .menu > .item > .logout:hover{
+form > .header > .menu > .item > .logout>i:hover{
     color: #ef5350;
 }
 form > .header > .menu > .item > .write:hover .tooltip{
@@ -72,6 +72,9 @@ form > .header > .menu > .item > a {
     text-decoration: none;
     cursor:pointer;
     color: black;
+}
+form > .header > .menu > .item > a > .text{
+    font-family: 'Humanbumsuk', sans-serif;
 }
 form > .header > .menu > .item > a > img{
     width: 60px;

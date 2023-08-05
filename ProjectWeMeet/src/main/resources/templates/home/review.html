@@ -25,16 +25,16 @@
             <a href="/login">로그인</a>
             <a href="/register/">회원가입</a>
         </div>
-        <div class="login" th:if="${session.user != null}">
-            <button class="write" name="write">
+        <ul class="list" th:if="${session.user != null}">
+            <li class="write" name="write">
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
                 <div class="tooltip">글작성</div>
-            </button>
-            <button class="write" name="logout"  data-action="logout">
+            </li>
+            <li class="write" name="logout"  data-action="logout">
                 <i class="fa-solid fa-right-from-bracket fa-lg"></i>
                 <div class="tooltip">로그아웃</div>
-            </button>
-        </div>
+            </li>
+        </ul>
     </div>
 
     <div class="main-template">

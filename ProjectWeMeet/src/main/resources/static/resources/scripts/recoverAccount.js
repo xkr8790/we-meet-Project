@@ -192,6 +192,7 @@ recoverForm['contactSend'].onclick = e => {
         recoverForm['eContactCode'].focus();
         return false;
     }
+
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('name', recoverForm['eName'].value)
