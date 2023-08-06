@@ -259,7 +259,7 @@ body {
 }
 
 .showHide .clickIcon {
-    position: absolute;
+
 
 
     width: 20px; /* 이미지의 크기를 조절하세요 */
@@ -269,8 +269,15 @@ body {
 }
 
 
-.eyesBox {
-    position: relative;
+.form_item > .showHide {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* 이미지와 버튼 사이의 간격 조정 (원하는 만큼 조정) */
+.showHide .img {
+    margin-right: 5px;
 }
 
 /* Chrome, Safari, and Opera */
@@ -385,7 +392,7 @@ a.link:visited {
 
 
 /*step-1*/
-@media (max-width: 610px) {
+@media (max-width: 680px) {
     html {
         font-size: 10px;
     }
@@ -473,4 +480,71 @@ a.link:visited {
 
 /*step-2*/
 
+@media (max-width: 878px) {
+    /* Placeholder의 글꼴 크기 조정 */
+    ::placeholder {
+        font-size: 7px; /* 원하는 글꼴 크기로 설정 */
+    }
 
+    #registerForm > .inner > .step-2 > .sign > .button-container > .complete{
+        max-width: 350px;
+    }
+
+    #registerForm > .inner > .step-2 > .sign > .form_list{
+        max-width: 350px;
+    }
+
+    .input {
+        font-size: 7px;
+    }
+
+    #registerForm > .inner > .step-2 > .sign > .button-container > .complete {
+
+        font-size: 14px;
+
+    }
+
+    .form_item > label {
+        font-size: 10px;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
+
+}
+
+
+@media (max-width: 620px) {
+    /* Placeholder의 글꼴 크기 조정 */
+    ::placeholder {
+        font-size: 5px; /* 원하는 글꼴 크기로 설정 */
+    }
+
+    #registerForm > .inner > .step-2 > .sign > .button-container > .complete{
+        max-width: 300px;
+    }
+
+    #registerForm > .inner > .step-2 > .sign > .form_list{
+        max-width: 300px;
+    }
+
+    .input {
+        font-size: 5px;
+    }
+
+    #registerForm > .inner > .step-2 > .sign > .button-container > .complete {
+
+        font-size: 12px;
+
+    }
+
+    .form_item > label {
+        font-size: 8px;
+    }
+
+    .btn {
+        font-size: 9px;
+    }
+
+}
