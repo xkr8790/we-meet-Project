@@ -105,7 +105,7 @@ public class HomeController {
 
         ResponseEntity<byte[]> response;
         if (loginProfiles == null) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            response = new ResponseEntity<>(HttpStatus.OK);
         } else {
             try {
                 // 원본 이미지를 BufferedImage로 변환

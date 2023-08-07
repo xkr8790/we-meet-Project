@@ -76,7 +76,6 @@ function postReview(content, toFocus, refreshCommentAfter) {
 
 reviewForm.onsubmit = e => {
     e.preventDefault();
-
     if (reviewForm['content'].value === '') {
         alert('댓글을 입력해 주세요');
         reviewForm['content'].focus();
@@ -85,23 +84,9 @@ reviewForm.onsubmit = e => {
     postReview(reviewForm['content'].value);
 };
 
+const writerButton = reviewForm.querySelector('[name="write"]');
 
-// submitForm = reviewForm.querySelector('[name="submit"]')
-//
-// submitForm.addEventListener('click', e=>{
-//     e.preventDefault();
-//     if (reviewForm['content'].value === '') {
-//         alert('댓글을 입력해 주세요');
-//         reviewForm['content'].focus();
-//         return;
-//     }
-//
-//     postReview(reviewForm['content'].value);
-// })
-
-const writeButton = reviewForm.querySelector('[name="write"]');
-
-writeButton.addEventListener('click', e => {
+writerButton.addEventListener('click', e => {
     e.preventDefault();
     window.location.href ="/write";
 })

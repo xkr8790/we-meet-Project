@@ -39,8 +39,8 @@ public class CompleteCategoryController {
 
     @RequestMapping(value = "complete", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getComplete(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
-                                    @RequestParam(value = "category", defaultValue = "완료", required = false) String category,
-                                    @RequestParam(value = "c", defaultValue = "complete", required = false) String searchCriterion,
+                                    @RequestParam(value = "category", defaultValue = "", required = false) String category,
+                                    @RequestParam(value = "c", defaultValue = "", required = false) String searchCriterion,
                                     @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery) {
 
         int searchResultCount = this.completeService.getCountCategory(searchCriterion, searchQuery, category);
