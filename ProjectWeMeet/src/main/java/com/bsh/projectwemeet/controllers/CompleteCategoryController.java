@@ -39,16 +39,20 @@ public class CompleteCategoryController {
 
     @RequestMapping(value = "complete", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getComplete(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
-                                    @RequestParam(value = "category", defaultValue = "완료", required = false) String category,
-                                    @RequestParam(value = "c", defaultValue = "complete", required = false) String searchCriterion,
+                                    @RequestParam(value = "category", defaultValue = "", required = false) String category,
+                                    @RequestParam(value = "c", defaultValue = "", required = false) String searchCriterion,
                                     @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery) {
 
         int searchResultCount = this.completeService.getCountCategory(searchCriterion, searchQuery, category);
+        System.out.println("searchCriterion : " + searchCriterion);
+        System.out.println("searchQuery : " + searchQuery);
+        System.out.println("category : " + category);
 
         ModelAndView modelAndView = new ModelAndView("home/completeCategory"); //index.html 연결
+
         PagingModel pagingCategory = new PagingModel(
                 ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
-                this.completeService.getCountCategory(searchCriterion, searchQuery, category),
+                searchResultCount,
                 requestPage); //객체화
 
         ArticleEntity[] articleCategory = this.completeService.getCountCategoryByPage(pagingCategory, searchCriterion, searchQuery, category);

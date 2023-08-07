@@ -11,12 +11,12 @@
         FROM `wemeet_project`.`articles`
         <where>
             <if test='searchCriterion.equals("complete")'>
-                AND `category` LIKE CONCAT('%', #{searchQuery}, '%')
+                AND `category` LIKE CONCAT ('%', #{searchQuery}, '%')
                 OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `hashtag` LIKE CONCAT('%', #{searchQuery}, '%')
             </if>
-            AND `category` LIKE CONCAT('%', #{category}, '%')
+
         </where>
     </select>
     <!-- 카테고리 관련 레코드 조회-->
@@ -38,12 +38,11 @@
         FROM `wemeet_project`.`articles`
         <where>
             <if test='searchCriterion.equals("complete")'>
-                AND `category` LIKE CONCAT('%', #{searchQuery}, '%')
+                AND `category` LIKE CONCAT ('%', #{searchQuery}, '%')
                 OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `hashtag` LIKE CONCAT('%', #{searchQuery}, '%')
             </if>
-            AND `category` LIKE CONCAT('%', #{category}, '%')
         </where>
         ORDER BY `index` DESC
         LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
