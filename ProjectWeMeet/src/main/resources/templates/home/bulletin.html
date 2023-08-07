@@ -11,7 +11,6 @@
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
     <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
-    <script defer th:src="@{/resources/scripts/bulltinScript/proplie.js}"></script>
     <script defer th:if="${session.user != null}"
             th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
     <script defer th:if="${session.user != null && LikeResult == null}"
@@ -27,16 +26,16 @@
     <script defer th:if="${session.user!=null && ParticipantsResult.equals('success')}"
             th:src="@{/resources/scripts/bulltinScript/DeleteParticipate.js}"></script>
     <script defer th:src="@{/resources/scripts/bulletinMap.js}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
 
 </head>
 <body>
 <form id="bulletinForm" class="allContainer">
+    <input type="hidden" name="index" th:value="${article.getIndex()}" )>
     <div class="header">
         <a href="/">
-            <img src="/resources/images/logoImages/bulletinLogo-244x48.png" alt="로고">
+            <img src="/resources/images/logoImages/bulletinLogo.png" alt="로고">
         </a>
 
         <div class="login" th:if="${session.user == null}">
@@ -69,9 +68,7 @@
             <img class="image" th:src="@{/article/read/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
-                    <a th:href="@{'/profile/?nickname='+${articleUser.getNickname()}}">
-                        <img class="profile" th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
-                    </a>
+                    <img class="profile" th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                     <p class="nickname" th:text="${articleUser.getNickname()}">닉네임</p>
                 </div>
                 <div class="bulletin-title" th:text="${article.getTitle()}">
@@ -83,14 +80,12 @@
     <!-- 로그인한 유저가 없을때   -->
     <div class="likeAndReport" th:if="${session.user == null}">
         <div class="likeAndReport" th:if="${session.user == null}">
-            <img class="like" th:data-index="${article.getIndex()}"
-                 th:src="@{/resources/images/bulletinImags/like.png}">
+            <img class="notUserLike" th:src="@{/resources/images/bulletinImags/like.png}">
             <span class="like" th:text="${article.getLikeCount()}"></span>
         </div>
 
         <div class="likeAndReport" th:if="${session.user == null}">
-            <img class="report" th:data-index="${article.getIndex()}"
-                 th:src="@{/resources/images/bulletinImags/_report.png}">
+            <img class="notUserReport" th:src="@{/resources/images/bulletinImags/_report.png}">
             <span class="report" th:text="${article.getReport()}"></span>
         </div>
     </div>
@@ -98,11 +93,14 @@
 
     <!-- 로그인한 유저가 있을때   -->
     <div class="likeAndReport" th:if="${session.user != null}">
+
         <div class="likeAndReport" th:if="${session.user != null && LikeResult == null}">
             <img class="like" th:data-index="${article.getIndex()}"
                  th:src="@{/resources/images/bulletinImags/like.png}">
             <span class="like" th:text="${article.getLikeCount()}"></span>
         </div>
+
+
         <div class="likeAndReport" th:if="${session.user != null && LikeResult != null}">
             <img class="deleteLike" th:data-index="${article.getIndex()}"
                  th:src="@{/resources/images/bulletinImags/like.png}">
@@ -132,7 +130,7 @@
             <p class="member">멤버소개</p>
             <p class="subTitle">오늘 처음이세요?</p>
             <div class="my">
-                <a class="myImages" th:href="@{'/profile/?nickname='+${articleUser.getNickname()}}">
+                <a class="myImages">
                     <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                 </a>
                 <div class="myIntroduction">
@@ -143,15 +141,21 @@
         </div>
         <div class="participant">
             <div class="participantContainer">
-                <div class="login-after-human">
+
+                <div class="login-before-human" th:if="${session.user == null}">
+                    <p>로그인하고 이용해주세요!</p>
+                    <a class="loginLink" href="/login">로그인</a>
+                </div>
+
+                <div class="login-after-human" th:if="${session.user != null}">
                     <p>함께 할 멤버!</p>
                     <div class="profile">
                      <span th:each="participantsArray : ${participantsArray}">
-                         <a th:href="@{'/profile/?nickname='+ ${user.getNickname()}}">
-                         <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
-                         </a>
-                         <p></p>
+                            <a th:href="@{'/profile/?nickname='+ ${participantsArray.getNickname()}}">
+                              <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
+                            </a>
                      </span>
+
                     </div>
 
                     <!--  자신의 게시판일때   -->
@@ -183,10 +187,6 @@
                     </div>
                     <!-- 참여취소 클릭시 참여하기로 변경 -->
 
-                </div>
-
-                <div class="login-before-human" th:if="${session.user == null}">
-                    <p>로그인 후 확인해 주세요</p>
                 </div>
 
             </div>
@@ -253,18 +253,22 @@
                         <div class="human">
                             <img class="human-image" th:src="@{/article/read/profile(index=${articles.getIndex()})}"
                                  alt="">
-                            <img class="human-image" rel="thumbnail">
-                            <img class="human-image" rel="thumbnail">
+                            <img class="human-image" onerror="this.style.display='none'"
+                                 th:src="@{/article/profile/participant1(index=${articles.getIndex()})}">
+                            <img class="human-image" onerror="this.style.display='none'"
+                                 th:src="@{/article/profile/participant2(index=${articles.getIndex()})}">
+                            <i class="fa-solid fa-user-group"></i>
+                            <div class="number" th:text="${articles.getParticipation()}">인원</div>
+                            <div class="number">/</div>
+                            <div class="number" th:text="${articles.getLimitPeople()}">인원</div>
                         </div>
-                        <i class="fa-solid fa-user-group"></i>
-                        <div class="number" th:text="${articles.getParticipation()}">인원</div>
-                        <div class="number">/</div>
-                        <div class="number" th:text="${articles.getLimitPeople()}">인원</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 </form>
 
 

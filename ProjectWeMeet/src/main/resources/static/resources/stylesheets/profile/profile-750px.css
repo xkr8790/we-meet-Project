@@ -30,7 +30,15 @@ html {
 }
 
 body {
-    width: 60%;
+    margin: 0 auto;
+}
+
+a{
+    color: black;
+}
+
+.main{
+    width: 65%;
     margin: 0 auto;
 }
 
@@ -193,10 +201,16 @@ body {
     margin: 2rem;
 }
 
+#postContainer {
+    width: 60%;
+    margin: 0 auto;
+}
+
 /*---- 게시물 표시---------*/
 #postContainer > .article-box-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    padding: 1rem;
+    grid-template-columns: repeat(1, 1fr);
     justify-items: center;
     background-color: #f4f3f1;
     border-radius: 0.3rem;
@@ -213,7 +227,7 @@ body {
 
 #postContainer > span > .article-post {
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 
@@ -228,6 +242,8 @@ body {
 
 
 #postContainer > .article-box-grid > .article-list {
+    width: 12rem;
+    height: 16rem;
     margin-bottom: 1rem;
     margin-top: 2rem;
     border-radius: 0.7rem;
@@ -246,12 +262,13 @@ body {
 }
 
 
-#postContainer > .article-box-grid > .article-list > .myArticleLink > h2 {
-    width: 15rem;
+#postContainer > .article-box-grid > .article-list > .myArticleLink > span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
     margin-bottom: 1rem;
 }
 
@@ -259,8 +276,8 @@ body {
 
 
 #postContainer > .article-box-grid > .article-list > .myArticleLink > .article-thumbnail {
-    width: 15rem;
-    height: 15rem;
+    width: 12rem;
+    height: 12rem;
 }
 
 #postContainer > .article-box-grid > .article-list > .myArticleLink > .article-thumbnail > .thumbnail {
@@ -283,7 +300,7 @@ body {
 }
 
 #postContainer > .article-box-grid > .article-list > .likeAndReport > .likeImage > span {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     margin: 0.09rem;
 }
 
@@ -295,40 +312,13 @@ body {
 #postContainer > .article-box-grid > .article-list > .likeAndReport > .HashTag > span {
     border-radius: 1rem;
     padding: 0.3rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: white;
     font-weight: 500;
     background-color: #ff7257;
 }
 
 
-/*#popup {*/
-/*    top: 0;*/
-/*    left: -2rem;*/
-/*    width: 24rem;*/
-/*    height: 100vh;*/
-/*    background-color: #f0f0f0;*/
-/*    box-shadow: 0 0 1rem 0.0625rem #00000010;*/
-/*    opacity: 0;*/
-/*    overflow: hidden auto;*/
-/*    pointer-events: none;*/
-/*    position: fixed;*/
-/*    transition-duration: 250ms;*/
-/*    transition-property: left, opacity;*/
-/*    transition-timing-function: ease;*/
-/*    z-index: 9;*/
-
-/*    align-items: stretch;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: flex-start;*/
-/*}*/
-
-/*#popup.visible {*/
-/*    left: 0;*/
-/*    opacity: 1;*/
-/*    pointer-events: all;*/
-/*}*/
 
 #popup.visible {
     opacity: 1;
@@ -383,10 +373,9 @@ body {
 
 #popup.step-1 > .popup-content.step-1 > .item {
     background-color: white;
-
     align-items: center;
     display: flex;
-    flex-direction: revert;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -394,37 +383,36 @@ body {
     width: 80%;
     height: 1.5rem;
     border-radius: 0.5rem;
-
     margin-top: 1rem;
     font-style: inherit;
 }
 
-#popup.step-1 > .popup-content.step-1 > .check {
+#popup.step-1 > .popup-content.step-1 >.item> .check {
+    align-self: flex-end;
+    margin-right: 1.5rem;
     background-color: white;
-
-    align-items: flex-end;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
 }
 
-#popup.step-1 > .popup-content.step-1 > .check > .checkPassword {
-    background-color: #9da3d6;
-    color: black;
+#popup.step-1 > .popup-content.step-1 >.item > .check > .checkPassword {
+    background-color: #FB6161;
+    border-radius: 0.3rem;
+    color: white;
     font-style: inherit;
+    border: none;
     margin-top: 2rem;
     padding: 0.625rem;
-    border: 1px solid #9da3d6;
     opacity: 0.8;
 }
 
-#popup.step-1 > .popup-content.step-1 > .check > .checkPassword:hover {
+#popup.step-1 > .popup-content.step-1 >.item > .check > input[name="checkPasswordButton"]:hover  {
     opacity: 1;
+    cursor: pointer;
 }
 
-#popup > .popup-content.step-1 > .check > .checkPassword:active {
-    background-color: #9da3d6;
-    color: #959595;
+#popup.step-1 > .popup-content.step-1 >.item > .check > input[name="cancelButton"]:hover {
+    opacity: 1;
+    cursor: pointer;
+
 }
 
 
@@ -920,3 +908,4 @@ body {
     max-height: 3rem;
     padding-top: 0.5rem;
 }
+

@@ -9,7 +9,15 @@
             resultType="int">
         SELECT COUNT(0) AS `count`
         FROM `wemeet_project`.`articles`
-        WHERE  `category` LIKE CONCAT('%', #{category}, '%')
+        <where>
+            <if test='searchCriterion.equals("complete")'>
+                AND `category` LIKE CONCAT ('%', #{searchQuery}, '%')
+                OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `hashtag` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+
+        </where>
     </select>
     <!-- 카테고리 관련 레코드 조회-->
 
@@ -24,16 +32,22 @@
         `limit` AS `limit`,
         `like_count` AS `likeCount`,
         `participation` AS `participation`,
-        SUBSTRING(hashtag, 1, 11) AS `hashtag`,
+        SUBSTRING_INDEX(SUBSTRING_INDEX(hashtag, ',', 1), ',', -1) AS `hashtag`,
         `day` AS `appointmentStartDate`,
         `time` AS `appointmentStartTime`
         FROM `wemeet_project`.`articles`
-        WHERE  `category` LIKE CONCAT('%', #{category}, '%')
+        <where>
+            <if test='searchCriterion.equals("complete")'>
+                AND `category` LIKE CONCAT ('%', #{searchQuery}, '%')
+                OR `title` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
+                OR `hashtag` LIKE CONCAT('%', #{searchQuery}, '%')
+            </if>
+        </where>
         ORDER BY `index` DESC
         LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
     </select>
     <!-- 카테고리별 페이징 -->
-
 
     <!-- 필요한 게시물 조회  -->
     <select id="selectArticleByIndex"
@@ -70,5 +84,44 @@
         LIMIT 1
     </update>
     <!-- 조회수 업데이트 -->
+
+
+
+    <select id="selectProfile"
+            resultType="com.bsh.projectwemeet.entities.ProfileEntity">
+        SELECT `email`                  AS `email`,
+               `profile_thumbnail`      AS `profileThumbnail`,
+               `profile_thumbnail_mime` AS `profileThumbnailMime`,
+               `introduce_text`         AS `introduceText`
+        FROM `wemeet_project`.`mypages`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectParticipantsArticle1"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`,
+               `created_at`   AS `createdAt`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+        ORDER BY `index` DESC
+        LIMIT 1
+    </select>
+    <!-- 참여인원 중복되있는지 select -->
+
+    <!-- 참여인원 중복되있는지 select -->
+    <select id="selectParticipantsArticle2"
+            resultType="com.bsh.projectwemeet.entities.ParticipantsEntity">
+        SELECT `index`        AS `index`,
+               `email`        AS `email`,
+               `ArticleIndex` AS `ArticleIndex`,
+               `created_at`   AS `createdAt`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` = #{ArticleIndex}
+        ORDER BY `index`
+        LIMIT 1
+    </select>
 
 </mapper>

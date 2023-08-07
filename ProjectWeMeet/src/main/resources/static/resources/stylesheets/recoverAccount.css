@@ -156,6 +156,7 @@ body {
     color: #ef5350;
     font-size: 0.9rem;
     margin: unset;
+    opacity: 0;
     overflow: hidden;
     padding-top: 0;
     transition-duration: 500ms;
@@ -164,6 +165,7 @@ body {
 }
 
 #recoverForm > .warning.visible {
+    opacity: 1;
     max-height: 3rem;
     padding-top: 0.5rem;
 }
@@ -176,10 +178,12 @@ body {
     padding-top: 0;
     transition-duration: 500ms;
     transition-property: max-height, padding-top;
+    opacity: 1;
     transition-timing-function: ease;
 }
 
 #recoverForm > .cNotification.visible {
+    opacity: 1;
     max-height: 3rem;
     padding-top: 0.5rem;
 }

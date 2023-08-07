@@ -147,13 +147,21 @@ body {
 
 #loginForm >.passwordBox > i{
     position: absolute;
-    padding-left: 0.2rem;
+    margin-left: 0.2rem;
+}
+#loginForm >.passwordBox > img{
+    position: absolute;
+    margin-left: 0.35rem;
+    width: 28px;
+    height: 28px;
 }
 #loginForm >.passwordBox > #showIcon{
     display: none;
+
 }
 #loginForm >.passwordBox > #hideIcon{
     display: block;
+
 }
 
 #loginForm > .login-button{

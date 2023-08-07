@@ -19,22 +19,22 @@
 <form class="allContainer" id="reviewForm" method="get">
     <div class="header">
         <a href="/">
-            <img th:src="@{/resources/images/logoImages/bulletinLogo-244x48.png}" alt="로고">
+            <img th:src="@{/resources/images/logoImages/bulletinLogo.png}" alt="로고">
         </a>
         <div class="login" th:if="${session.user == null}">
             <a href="/login">로그인</a>
             <a href="/register/">회원가입</a>
         </div>
-        <div class="login" th:if="${session.user != null}">
-            <button class="write" name="write">
+        <ul class="list" th:if="${session.user != null}">
+            <li class="write" name="write">
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
                 <div class="tooltip">글작성</div>
-            </button>
-            <button class="write" name="logout"  data-action="logout">
+            </li>
+            <li class="write" name="logout"  data-action="logout">
                 <i class="fa-solid fa-right-from-bracket fa-lg"></i>
                 <div class="tooltip">로그아웃</div>
-            </button>
-        </div>
+            </li>
+        </ul>
     </div>
 
     <div class="main-template">
@@ -46,7 +46,7 @@
                     <a href="">
                         <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="몰루">
                     </a>
-                    <p>쵸단</p>
+                    <p th:text="${articleUser.getNickname()}"></p>
                 </div>
                 <div class="bulletin-title" th:utext="${article.getTitle()}"></div>
             </div>
@@ -67,8 +67,8 @@
                     <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                 </a>
                 <div class="myIntroduction">
-                    <p class="nickname">닉네임</p>
-                    <p class="text">자신 소개글</p>
+                    <p class="nickname" th:text="${articleUser.getNickname()}">닉네임</p>
+                    <p class="text" th:text="${profileUser.getIntroduceText()}">자신 소개글</p>
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
                         <div class="estimate" th:text="${review.getContent()}"></div>
                         <div class="writer">
                             <span class="profile">
-                                <img src="/resources/images/bulletinImags/쵸단.png" alt="이미지">
+                                <img th:src="@{/article/review/profiles(index=${article.getIndex()})}" alt="이미지">
                             </span>
                             <div class="user">
                                 <span class="email" th:text="${review.getNickname()}"></span>

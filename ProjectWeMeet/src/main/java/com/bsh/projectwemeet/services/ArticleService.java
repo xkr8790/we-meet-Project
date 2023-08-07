@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ArticleService {
@@ -47,9 +52,6 @@ public class ArticleService {
         return this.articleMapper.selectDifferentArticle();
     }
 
-    public ParticipantsEntity[] getMini(){
-        return this.articleMapper.selectDifferent();
-    }
 
 
     public ArticleEntity readArticle(int index) {
@@ -71,6 +73,40 @@ public class ArticleService {
         //결과적으로 삭제되지않거나
 
     } //게시판 나타내기
+
+
+    public ArticleEntity readProfile(int index) {
+        ArticleEntity article = this.articleMapper.selectArticleProfileByIndex(index);
+        return article;
+    }
+
+
+    public ArticleEntity readParticipantProfile(int index) {
+        ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
+      return article.getThumbnail() != null ? article : null;
+    }
+
+    public ArticleEntity readParticipantProfileTwo(int index) {
+        ArticleEntity articleTwo = this.articleMapper.selectParticipantProfileByIndexTwo(index);
+
+
+        return articleTwo.getThumbnail() != null ? articleTwo : null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public ArticleEntity[] selectArticleByLimitPeople(int index){
         return this.articleMapper.selectArticleBylimitPeople(index);
@@ -368,8 +404,6 @@ public class ArticleService {
     public ProfileEntity profile1(int index){
         ParticipantsEntity participants = articleMapper.selectParticipantsArticle1(index);
 
-        System.out.println(participants.getEmail());
-
         if(participants == null){
             return null;
         }
@@ -383,7 +417,9 @@ public class ArticleService {
         ParticipantsEntity participants1 = articleMapper.selectParticipantsArticle1(index);
         ParticipantsEntity participants2 = articleMapper.selectParticipantsArticle2(index);
 
-
+        if(participants1 == null){
+            return null;
+        }
 
         if(Objects.equals(participants1.getEmail(), participants2.getEmail())){
             return null;
@@ -396,9 +432,9 @@ public class ArticleService {
 
 
 
-    public ParticipantsEntity[] selectParticipantsProfile(int index){
-        return articleMapper.selectParticipantsProfile(index);
-    } //참여한 인원수만큼 배열 반환 -> 배열로 해야지 반복문을 사용해 참가자 수만큼 나타낼수 있음
+    public ProfileEntity[] selectParticipantsProfile(int index){
+        return articleMapper.selectParticipantsProfiless(index);
+    }
 
 
     public ProfileEntity[] ParticipateProfile(int index, String email) {
@@ -499,12 +535,16 @@ public class ArticleService {
             return CreateCommentResult.FAILURE_NOT_LOGIN; // 로그인 상태가 아닐 때
         }
 
+
+
         comment.setEmail(loginUser.getEmail())
                 .setDeleted(false)
                 .setCreatedAt(new Date())
                 .setClientIp(request.getRemoteAddr())
                 .setClientUa(request.getHeader("User-Agent"))
                 .setNickname(loginUser.getNickname());
+
+
 
         // 게시글 작성자와 댓글 작성자가 동일한지 확인
         if (articleEmail != null && loginUser.getEmail().equals(articleEmail)) {

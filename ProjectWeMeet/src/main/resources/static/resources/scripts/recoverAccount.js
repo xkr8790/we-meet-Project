@@ -25,7 +25,8 @@ emailOption.addEventListener('change', function () {
         passwordContainer.style.display = 'none';
         contactSend.style.display = 'block';
         emailSend.style.display = 'none';
-
+        recoverForm.cNotification.hide();
+        recoverForm.warning.hide();
     }
 });
 
@@ -35,20 +36,10 @@ passwordOption.addEventListener('change', function () {
         passwordContainer.style.display = 'block';
         contactSend.style.display = 'none';
         emailSend.style.display = 'block';
+        recoverForm.warning.hide();
+        recoverForm.cNotification.hide();
     }
 });
-
-//
-// recoverform.warning = recoverform.querySelector('[rel="warning"]');
-// recoverform.warning.show = (text) => {
-//     recoverform.warning.innerText = text;
-//     recoverform.warning.classList.add('visible');
-// };
-// recoverform.warning.hide = () => recoverform.warning.classList.remove('visible');
-
-
-
-
 
 //  입력값들이(연락처, 인증번호, 이메일) 이상할때 나타내기 위한 코드작업
 recoverForm.warning = recoverForm.querySelector('[rel="contactWarning"]');
@@ -56,17 +47,18 @@ recoverForm.warning.show = (text) => {
     recoverForm.warning.innerText = text;
     recoverForm.warning.classList.add('visible');
 };
-recoverForm.warning.hide = () => recoverForm.warning.classList.remove('visible');
-
+recoverForm.warning.hide = () => {
+    recoverForm.warning.classList.remove('visible');
+}
 recoverForm.cNotification = recoverForm.querySelector('[rel="cNotification"]');
+
 recoverForm.cNotification.show = (text) => {
     recoverForm.cNotification.innerText = text;
     recoverForm.cNotification.classList.add('visible');
 };
-recoverForm.cNotification.hide = () => recoverForm.cNotification.classList.remove('visible');
-
-
-
+recoverForm.cNotification.hide = () => {
+    recoverForm.cNotification.classList.remove('visible');
+}
 
 
 //  아이디 찾기 과정에서 연락처 인증버튼을 누르면 인증버튼은 더이상 클릭하지 못하고 클릭하지 못하는 인증번호 인증 버튼이 클릭할수 있게 되는코드
@@ -185,6 +177,7 @@ recoverForm['contactSend'].onclick = e => {
         recoverForm['eContactCode'].focus();
         return false;
     }
+
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('name', recoverForm['eName'].value)
@@ -214,7 +207,6 @@ recoverForm['contactSend'].onclick = e => {
 
 recoverForm.onsubmit = function (e) {
     e.preventDefault();
-
 }
 
 

@@ -33,14 +33,12 @@ public class LoginService {
         if (existingUser == null) {
             return LoginResult.FAILURE;
         }
-
 //        로그인 화면에서 입력한 비밀번호와 데이터베이스 안 비밀번호가 같지 않는 경우를 뜻한다.
         user.setPassword(CryptoUtil.hashSha512(user.getPassword())); // 비밀번호에 hash됨
 
         if (!user.getPassword().equals(existingUser.getPassword())) {
             return LoginResult.FAILURE;
         }
-
 //        아래의 코드로 인해 로그인상태(쿠키)를 유지힌다.
         user.setName(existingUser.getName())
                 .setNickname(existingUser.getNickname())
@@ -52,9 +50,7 @@ public class LoginService {
                 .setAddressPrimary(existingUser.getAddressPrimary())
                 .setAddressSecondary(existingUser.getAddressSecondary())
                 .setGender(existingUser.getGender());
-
 //        위의 조건이 아닌 이상 나머지는 성공했다고 생각해서 return값을 반환한다.
-
         return LoginResult.SUCCESS;
     }
 }

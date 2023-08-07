@@ -102,12 +102,37 @@ body{
 }
 #logo-container > .container > ul > li {
     margin-left: 0.5rem;
-    margin-right: 0.5rem;
+
 }
 
+#logo-container > .container > ul > li > a > img{
+    border-radius: 50%;
+}
 #logo-container > .container > ul > li > a > span{
     font-family: 'Humanbumsuk', sans-serif;
     font-size: 1.5rem;
+}
+
+#logo-container > .container > ul > li > button{
+border-style: none;
+    padding: 0;
+}
+#logo-container > .container > ul > li > button > a > i{
+    font-size: 2rem;
+}
+#logo-container > .container > ul > li > button > a > i:hover{
+    color: #FB6161;
+}
+#logo-container > .container > ul > li > button > a:hover .tooltip{
+    opacity: 1;
+    visibility: visible;
+    font-size: 1.2rem;
+}
+#logo-container > .container > ul > li > button > a> .tooltip{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition:opacity 0.3s ease-in-out;
 }
 
 #topMenuContainer > .top-menu {
@@ -448,7 +473,7 @@ object-fit: cover;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
     margin-top: 2rem;
-    margin-bottom: 5rem;
+    /*margin-bottom: 5rem;*/
     align-items: center; /* 수직 정렬 */
     justify-items: start;
 }
@@ -456,12 +481,12 @@ object-fit: cover;
 .article-container > .article-box > .article-list {
     width: 35rem;
     height: 16rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: start;
-    border: 0.125rem solid rgb(244, 244, 244);
+    border: 0.125rem solid lightgray;
     border-radius: 15px;
     gap: 1rem;
     padding: 1rem 1rem 1rem 0;
@@ -478,7 +503,7 @@ object-fit: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     border-radius: 0.3rem;
     padding-left: 0.8rem;
     padding-right: 0.8rem;
@@ -486,7 +511,7 @@ object-fit: cover;
 
 .article-container > .article-box > .article-list >
 .article-thumbnail > .thumbnail {
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     border-radius: 15px;
     width: 14rem;
     height: 14rem;
@@ -503,21 +528,21 @@ object-fit: cover;
     justify-content: center;
     margin-right: 2rem;
     margin-top: 2rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     border-radius: 0.3rem;
 }
 .article-container > .article-box > .article-list >
-.article-content-box > .article-content{
+.article-content-box > .article-title{
     width: 17rem;
     text-overflow: ellipsis;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 }
 
 .article-container  > .article-box > .article-list >
-.article-content-box > .article-content > .article-content-title {
+.article-content-box > .article-title > .article-content-title {
     /*background-color: white;*/
     width: 17rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 
 }
 
@@ -526,7 +551,7 @@ object-fit: cover;
     display: block;
     width: 17rem;
     margin-bottom: 1.5rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     /*background-color: gray;*/
 }
 
@@ -544,24 +569,24 @@ object-fit: cover;
     background-color: #ff7257;
 }
 
-.article-content {
+.article-title {
     width: 19rem;
     white-space: nowrap;
     overflow: hidden;
     margin-bottom: 1rem;
-    background-color: white;
+    background-color: lightgray;
 }
 
 .article-map {
     font-weight: 800;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 }
 
 .article-map > .article-location {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     margin-bottom: 0.3rem;
     line-height: 25px;
 }
@@ -569,13 +594,13 @@ object-fit: cover;
 .article-map > .article-location > .location, .day-img, .time-img {
     width: 1.35rem;
     height: 1.35rem;
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
     margin-right: 0.3rem;
 }
 
 
 .map-item {
-    background-color: rgb(244, 244, 244);
+    background-color: lightgray;
 
 }
 
@@ -587,59 +612,50 @@ h2 {
 }
 
 .article-human {
+    width: auto;
+    height: 3.75rem;
+    align-items: start;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    background-color: lightgray;
+    /*margin-left: -0.5rem;*/
+}
+.article-human > .Profile-Picture{
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: rgb(244, 244, 244);
-    margin-left: -0.5rem;
+    background-color: lightgray;
+}
+.article-human > .Profile-Picture > .profile{
+    border-radius: 50%;
+}
+.article-human > .number{
+    margin-left: 0.5rem;
+    height: 3.75rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: lightgray;
 }
 
-.Profile-Picture {
-    margin-bottom:0.3rem;
-    margin-right: -0.4rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    object-fit: cover;
-    border-radius: 10rem;
-    border: 3px white solid;
-    position: relative;
-}
-
-.Profile {
-    object-fit: cover;
-    border-radius: 100%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.Profile {
-    object-fit: cover;
-    border-radius: 100%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
 
 .limit-image {
     width: 2.5rem;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
-    background-color: rgb(244, 244, 244);
+    margin-bottom: 0.5rem;
+    background-color: lightgray;
 
 }
 
-.number {
-    margin-bottom: 0rem;
-    white-space: nowrap;
-    background-color: rgb(244, 244, 244);
+/*.number {*/
+/*    margin-bottom: 0rem;*/
+/*    white-space: nowrap;*/
+/*    background-color: rgb(244, 244, 244);*/
 
 
-}
+/*}*/
 
 .cover {
     width: 2.5rem;
@@ -656,9 +672,33 @@ a {
     color: black;
 }
 
+.more-button{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.more-button> a{
+    border: 1px solid rgb(244, 244, 244);
+    border-radius: 68px;
+    width: 15rem;
+    height: 6rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(244, 244, 244);
+}
+.more-button> a> p{
+    background: rgb(244, 244, 244);
+    font-size: 1.5rem;
+}
+
+
 
 #footer {
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -706,3 +746,4 @@ a {
 #footer > .wrap > .grid-twin > .about-info > .last-a-tag {
     color: black;
 }
+
