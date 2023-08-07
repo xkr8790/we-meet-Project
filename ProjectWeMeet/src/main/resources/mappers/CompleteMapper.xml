@@ -50,7 +50,6 @@
     </select>
     <!-- 카테고리별 페이징 -->
 
-
     <!-- 필요한 게시물 조회  -->
     <select id="selectArticleByIndex"
             resultType="com.bsh.projectwemeet.entities.ArticleEntity">

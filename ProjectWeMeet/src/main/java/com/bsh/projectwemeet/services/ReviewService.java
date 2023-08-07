@@ -26,9 +26,11 @@ public class ReviewService {
         this.articleMapper = articleMapper;
     }
 
-
+// 리뷰 insert
     public ReviewResult reviewWrite(HttpServletRequest request, ReviewEntity reviewEntity, HttpSession session) {
+
         UserEntity loginUser = (UserEntity) session.getAttribute("user");
+//       게시물의 작성자 & 참여자가 아닐경우
         if (1 != reviewMapper.selectParticipant(reviewEntity.getArticleIndex(), loginUser.getEmail()) &&
                 1 != reviewMapper.selectArticleWriter(reviewEntity.getArticleIndex(), loginUser.getEmail())) {
             return ReviewResult.FAILURE_EXCEPTION;
@@ -41,20 +43,12 @@ public class ReviewService {
                 : ReviewResult.FAILURE;
     }
 
-
+// 데이터 베이스의 리뷰 select
     public ReviewEntity[] getAll() {
         return this.reviewMapper.selectAll();
     }
 
-    public ReviewEntity[] selectAll(int articleIndex) {
-        return this.reviewMapper.selectArticleIndex(articleIndex);
-    }
-
-
-    public boolean deleteByIndex(int index) {
-        return this.reviewMapper.deleteByReview(index) > 0;
-    }
-
+    // 리뷰 평점 계산
     public Double avgStar(int articleIndex) {
         Double averageScore = reviewMapper.avgStar(articleIndex);
         if (averageScore != null) {
@@ -63,13 +57,22 @@ public class ReviewService {
         return null;
     }
 
+    //    리뷰 작성자 프로필 select
     public ProfileEntity readReviewProfile(int index) {
         ReviewEntity reviews = this.reviewMapper.selectEmail(index);
         ProfileEntity article = this.reviewMapper.selectProfileImage(reviews.getEmail());
         return article;
     }
 
+    // 리뷰 삭제
+    public boolean deleteByIndex(int index) {
+        return this.reviewMapper.deleteByReview(index) > 0;
+    }
 
+
+//    public ReviewEntity[] selectAll(int articleIndex) {
+//        return this.reviewMapper.selectArticleIndex(articleIndex);
+//    }
 
 
 

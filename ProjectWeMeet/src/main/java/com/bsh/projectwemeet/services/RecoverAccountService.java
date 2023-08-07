@@ -26,7 +26,6 @@ public class RecoverAccountService {
 
     // 연락처 입력후 인증번호 보내기 클릭할때를 위한 코드
     public SendRecoverContactCodeResult sendRecoverContactCode(RecoverContactCodeEntity recoverContactCode) {
-
 //        웹페이지에서 입력한 연락처와 이름의 값들이 조건식에 부합한지 안하는지에 대한 코드이다.
         if (recoverContactCode == null ||
                 recoverContactCode.getContact() == null ||
@@ -92,11 +91,10 @@ public class RecoverAccountService {
                 : VeryfiRecoverContactCodeResult.FAILURE;
     }
 
-//    데이터 베이스의 값중 연락처와 이름을 조회한후 있는지 없는지에 대한 코드이다.
+    //    데이터 베이스의 값중 연락처와 이름을 조회한후 있는지 없는지에 대한 코드이다.
     public UserEntity getUserByContactName(String contact, String name) {
         return this.recoverAccountMapper.selectUserByContactName(contact, name);
     }
-
 
 
 }

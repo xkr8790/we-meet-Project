@@ -16,19 +16,18 @@ public class NoticeSeeService {
         this.noticeSeeMapper = noticeSeeMapper;
     }
 
-    public UserEntity CheckUser(HttpSession session){
+    // 로그인의 여부
+    public UserEntity CheckUser(HttpSession session) {
         UserEntity user = (UserEntity) session.getAttribute("user");
-
-        if(user == null){
+        if (user == null) {
             return null;
         }
-
         UserEntity check = noticeSeeMapper.selectCheckUser(user.getEmail());
-
         return check;
     }
 
-    public NoticeWriterArticleEntity[] getCountArticle(){
+    //    작성된 내용들 select
+    public NoticeWriterArticleEntity[] getCountArticle() {
         return this.noticeSeeMapper.selectCountArticle();
     }
 }

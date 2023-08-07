@@ -64,9 +64,6 @@ public class HomeController {
         return modelAndView;
     } //메인 홈 주소
 
-
-
-
     @RequestMapping(value = "/image",
             method = RequestMethod.GET)
     public ResponseEntity<byte[]> getThumbnail(@RequestParam(value = "index")int index){
@@ -103,7 +100,6 @@ public class HomeController {
 
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getParticipantProfileThumbnail(HttpSession session) {
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
         ProfileEntity loginProfiles = this.homeService.selectLoginProfile(session);
 

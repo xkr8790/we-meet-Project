@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.mail.MessagingException;
 
 @Controller
-@RequestMapping(value="/recoverAccount")
+@RequestMapping(value = "/recoverAccount")
 public class RecoverAccountController {
 
     private final RecoverAccountService recoverAccountService;
@@ -26,7 +26,7 @@ public class RecoverAccountController {
 
 
     @Autowired
-    public RecoverAccountController(RecoverAccountService recoverAccountService, CheckService checkService){
+    public RecoverAccountController(RecoverAccountService recoverAccountService, CheckService checkService) {
         this.recoverAccountService = recoverAccountService;
         this.checkService = checkService;
     }
@@ -44,7 +44,7 @@ public class RecoverAccountController {
     @ResponseBody
     public String getContactCodeRec(RecoverContactCodeEntity recoverContactCode) {
 //        JS객체문법으로 구조화된 데이터를 표현하기 위한 문자 기반 표준 포맷이다.
-//        JSON은 문자열 형태로 존재한다. 그래서 네트어크를 통해 전송할때 유용하다.
+//        JSON은 문자열 형태로 존재한다. 그래서 네트워크를 통해 전송할때 유용하다.
 //        put을 이용해 result키에 SendRecoverContactCodeResult의 타입의 값을 문자열을 가진다.
         SendRecoverContactCodeResult result = this.recoverAccountService.sendRecoverContactCode(recoverContactCode);
         JSONObject responseObject = new JSONObject() {{
@@ -66,7 +66,6 @@ public class RecoverAccountController {
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
-
 //        여기서 데이터 베이스의 contact와 이름의 값이 값으니 UserEntity안의 email과 name을 꺼낸다는 의미이다.
         if (result == VeryfiRecoverContactCodeResult.SUCCESS) {
             UserEntity user = this.recoverAccountService.getUserByContactName(recoverContactCode.getContact(), recoverContactCode.getName());
@@ -76,7 +75,7 @@ public class RecoverAccountController {
         return responseObject.toString();
     }
 
-//    위의 코드와 똑같지만 요청 방식이 다르다. 위의 코드느 인증번호를 확인하기 위한 코드이고 아래의 코드는 위에서 비교하고 보낸값들을 get으로 요청하기 위한 코드이다.
+    //    위의 코드와 똑같지만 요청 방식이 다르다. 위의 코드느 인증번호를 확인하기 위한 코드이고 아래의 코드는 위에서 비교하고 보낸값들을 get으로 요청하기 위한 코드이다.
     @RequestMapping(value = "/confirmEmail", method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView getConfirmEmail(RecoverContactCodeEntity recoverContactCode) {
@@ -126,7 +125,6 @@ public class RecoverAccountController {
         return modelAndView;
     } //위의 링크에 대해서 읽은 다음 결과값에 따라 _recoverEmail을 반환한다.
 
-
     @RequestMapping(value = "emailCodeRec",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -153,10 +151,10 @@ public class RecoverAccountController {
 
     //HTTP 프로토콜 종류
     //GET: 리소스의 조회를 요청하는 메소드입니다. 서버로부터 정보를 요청하고 응답으로 해당 리소스를 받아옵니다.
-        // 데이터의 변경이나 부수적인 효과가 없는 "읽기 전용" 작업에 사용됩니다.
+    // 데이터의 변경이나 부수적인 효과가 없는 "읽기 전용" 작업에 사용됩니다.
 
     //POST: 리소스의 생성 또는 데이터의 제출을 요청하는 메소드입니다. 서버에 새로운 리소스를 생성하거나
-        // 데이터를 제출할 때 사용됩니다. 주로 폼 데이터나 파일 업로드 등에 사용됩니다. 서버는 이 요청에 대한 처리 결과를 응답으로 전송합니다.
+    // 데이터를 제출할 때 사용됩니다. 주로 폼 데이터나 파일 업로드 등에 사용됩니다. 서버는 이 요청에 대한 처리 결과를 응답으로 전송합니다.
 
     //PUT: 리소스의 전체적인 수정을 요청하는 메소드입니다. 클라이언트가 요청한 리소스의 전체 내용을 요청 본문에 담아 서버에 보내고, 해당 리소스를 요청된 내용으로 교체합니다. 즉, 리소스의 대체(갱신) 작업을 수행합니다.
 

@@ -10,8 +10,8 @@
             keyColumn="index"
             parameterType="com.bsh.projectwemeet.entities.NoticeWriterArticleEntity">
         INSERT INTO `wemeet_project`.`notice_articles`
-        (title, content,  created_at, client_ip, client_ua)
-        VALUES (#{title}, #{content},  #{createdAt}, #{clientIp}, #{clientUa})
+            (title, content, created_at, client_ip, client_ua)
+        VALUES (#{title}, #{content}, #{createdAt}, #{clientIp}, #{clientUa})
     </insert>
 
     <insert id="insertImage"
@@ -19,37 +19,43 @@
             keyColumn="index"
             keyProperty="index"
             parameterType="com.bsh.projectwemeet.entities.NoticeWriterImagesEntity">
-        INSERT INTO `wemeet_project`.`notice_images`( `name`, `size`, `content_type`, `data`, `created_at`, `client_ip`, `client_ua`)
-        VALUES (
-                   #{name},
-                   #{size},
-                   #{contentType},
-                   #{data},
-                   IFNULL(#{createdAt}, DEFAULT(`created_at`)),
-                   #{clientIp},
-                   #{clientUa})
+        INSERT INTO `wemeet_project`.`notice_images`(`name`, `size`, `content_type`, `data`, `created_at`, `client_ip`,
+                                                     `client_ua`)
+        VALUES (#{name},
+                #{size},
+                #{contentType},
+                #{data},
+                IFNULL(#{createdAt}, DEFAULT(`created_at`)),
+                #{clientIp},
+                #{clientUa})
     </insert>
-
-
 
 
     <select id="selectArticleByIndex"
             resultType="com.bsh.projectwemeet.entities.NoticeWriterArticleEntity">
-        SELECT `index` AS `index`,
-               `title` AS `title`,
-               `content` AS `content`,
+        SELECT `index`      AS `index`,
+               `title`      AS `title`,
+               `content`    AS `content`,
                `created_at` AS `createdAt`,
-               `client_ip` AS clientIp,
-               `client_ua` AS clientUa
+               `client_ip`  AS clientIp,
+               `client_ua`  AS clientUa
         FROM `wemeet_project`.`notice_articles`
         WHERE `index` = #{index}
         LIMIT 1
     </select>
 
-
-
-
-
+    <select id="selectArticleByPatchIndex"
+            resultType="com.bsh.projectwemeet.entities.NoticeWriterArticleEntity">
+        SELECT `index`      AS `index`,
+               `title`      AS `title`,
+               `content`    AS `content`,
+               `created_at` AS `createdAt`,
+               `client_ip`  AS clientIp,
+               `client_ua`  AS clientUa
+        FROM `wemeet_project`.`notice_articles`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
 
     <select id="selectImage"
             resultType="com.bsh.projectwemeet.entities.NoticeWriterImagesEntity">
@@ -57,10 +63,10 @@
                `name`         AS `name`,
                `size`         AS `size`,
                `content_type` AS `contentType`,
-               `data` AS `data`,
-               `created_at` AS `createdAt`,
+               `data`         AS `data`,
+               `created_at`   AS `createdAt`,
                `client_ip`    AS `clientIp`,
-               `client_ua` AS `clientUa`
+               `client_ua`    AS `clientUa`
         FROM `wemeet_project`.`notice_images`
         WHERE `index` = #{index}
         ORDER BY `index`
@@ -73,31 +79,17 @@
         LIMIT 1
     </delete>
 
-    <select id="selectArticleByPatchIndex"
-            resultType="com.bsh.projectwemeet.entities.NoticeWriterArticleEntity">
-        SELECT `index` AS `index`,
-               `title` AS `title`,
-               `content` AS `content`,
-               `created_at` AS `createdAt`,
-               `client_ip` AS clientIp,
-               `client_ua` AS clientUa
-        FROM `wemeet_project`.`notice_articles`
-        WHERE `index` = #{index}
-        LIMIT 1
-    </select>
 
     <update id="updateArticleContent"
             parameterType="com.bsh.projectwemeet.entities.NoticeWriterArticleEntity">
         UPDATE `wemeet_project`.`notice_articles`
-        SET
-           `title` = #{title},
-            `content` = #{content},
+        SET `title`      = #{title},
+            `content`    = #{content},
             `created_at` = #{createdAt},
-            `client_ip` = #{clientIp},
-            `client_ua` = #{clientUa}
+            `client_ip`  = #{clientIp},
+            `client_ua`  = #{clientUa}
         WHERE `index` = #{index}
     </update>
-
 
 
 </mapper>

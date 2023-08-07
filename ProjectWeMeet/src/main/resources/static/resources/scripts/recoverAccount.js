@@ -41,18 +41,6 @@ passwordOption.addEventListener('change', function () {
     }
 });
 
-//
-// recoverform.warning = recoverform.querySelector('[rel="warning"]');
-// recoverform.warning.show = (text) => {
-//     recoverform.warning.innerText = text;
-//     recoverform.warning.classList.add('visible');
-// };
-// recoverform.warning.hide = () => recoverform.warning.classList.remove('visible');
-
-
-
-
-
 //  입력값들이(연락처, 인증번호, 이메일) 이상할때 나타내기 위한 코드작업
 recoverForm.warning = recoverForm.querySelector('[rel="contactWarning"]');
 recoverForm.warning.show = (text) => {
@@ -71,9 +59,6 @@ recoverForm.cNotification.show = (text) => {
 recoverForm.cNotification.hide = () => {
     recoverForm.cNotification.classList.remove('visible');
 }
-
-
-
 
 
 //  아이디 찾기 과정에서 연락처 인증버튼을 누르면 인증버튼은 더이상 클릭하지 못하고 클릭하지 못하는 인증번호 인증 버튼이 클릭할수 있게 되는코드
@@ -222,7 +207,6 @@ recoverForm['contactSend'].onclick = e => {
 
 recoverForm.onsubmit = function (e) {
     e.preventDefault();
-
 }
 
 

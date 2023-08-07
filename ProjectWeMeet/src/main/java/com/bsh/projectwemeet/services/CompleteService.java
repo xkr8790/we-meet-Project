@@ -23,27 +23,23 @@ public class CompleteService {
         this.completeMapper = completeMapper;
     }
 
+
     public int getCountCategory(String searchCriterion, String searchQuery,String category){
         return this.completeMapper.selectCountCategory(searchCriterion, searchQuery, category);
     }
 
     public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String searchCriterion, String searchQuery, String category){
-
         return this.completeMapper.selectCountCategoryByPage(pagingModel,searchCriterion, searchQuery, category);
     }
 
 
     public ArticleEntity readArticle(int index) {
-
         ArticleEntity article = this.completeMapper.selectArticleByIndex(index);
         // 주어진 index를 사용하여 articleMapper에서 해당 index에 해당하는 게시글을 조회합니다.
-
         if (article != null && !article.isDeleted()) {
             // 게시글이 존재하고 삭제되지 않은 경우에만 처리합니다.
-
             article.setView(article.getView() + 1);
             // 게시글의 조회수(view)를 1 증가시킵니다.
-
             this.completeMapper.updateArticle(article);
             // 조회수를 업데이트합니다.
         }
@@ -61,37 +57,27 @@ public class CompleteService {
         if(Objects.equals(article.getEmail(), profile.getEmail())){
             return completeMapper.selectProfile(article.getEmail());
         }
-
         return null;
     }
 
 
     public ProfileEntity profile1(int index){
         ParticipantsEntity participants = completeMapper.selectParticipantsArticle1(index);
-
         System.out.println(participants.getEmail());
-
         if(participants == null){
             return null;
         }
-
         ProfileEntity profile = completeMapper.selectProfile(participants.getEmail());
-
         return profile;
     }
 
     public ProfileEntity profile2(int index){
         ParticipantsEntity participants1 = completeMapper.selectParticipantsArticle1(index);
         ParticipantsEntity participants2 = completeMapper.selectParticipantsArticle2(index);
-
-
-
         if(Objects.equals(participants1.getEmail(), participants2.getEmail())){
             return null;
         }
-
         ProfileEntity profile = completeMapper.selectProfile(participants2.getEmail());
-
         return profile;
     }
 

@@ -4,22 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bsh.projectwemeet.mappers.ReviewMapper">
 
-
-    <select id="articleAll"
-            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
-        SELECT `index`                AS `index`,
-               `title`                AS `title`,
-               `content`              AS `content`,
-               `category`             AS `category`,
-               `address`              AS `address`,
-               `limit`                AS `limit`,
-               SUBSTRING(hashtag,1, 11) AS `hashtag`,
-               `day`                  AS `appointmentStartDate`,
-               `time`                 AS `appointmentStartTime`
-        FROM `wemeet_project`.`articles`
-        ORDER BY `index` DESC
-    </select>
-
     <insert id="insertReview"
             useGeneratedKeys="true"
             keyProperty="index"
@@ -37,7 +21,31 @@
                    #{email})
     </insert>
 
+    <select id="avgStar" resultType="java.lang.Double">
+        SELECT AVG(reviewStar)
+        FROM `wemeet_project`.`reviews`
+        WHERE `article_index` = #{articleIndex}
+        GROUP BY `article_index`
+    </select>
 
+    <select id="selectArticleWriter"
+            resultType="int">
+        SELECT COUNT(0) > 0 AS `writer`
+        FROM `wemeet_project`.`articles`
+        WHERE `index` = #{index}
+          AND `email` = #{email}
+        LIMIT 1;
+    </select>
+
+
+    <select id="selectParticipant"
+            resultType="int">
+        SELECT COUNT(0) > 0 AS `participant`
+        FROM `wemeet_project`.`Participants`
+        WHERE `ArticleIndex` =#{ArticleIndex}
+          AND      `email` = #{email}
+        LIMIT 1;
+    </select>
 
     <select id="selectAll"
             resultType="com.bsh.projectwemeet.entities.ReviewEntity">
@@ -55,115 +63,6 @@
 
     </select>
 
-
-    <select id="selectArticleIndex"
-            resultType="com.bsh.projectwemeet.entities.ReviewEntity">
-        SELECT `index` AS `index`,
-               `content` AS `content`,
-               `created_at` AS `createdAt`,
-               `reviewStar` AS `reviewStar`,
-               (SELECT COUNT(0)
-                FROM `wemeet_project`.`articles` AS `article`
-                WHERE `reviews`.`article_index` = `article`.`index`) AS `articleIndex`,
-               `client_ip` AS `clientIp`,
-               `client_ua` AS `clientUa`,
-               `nickname` AS `nickname`,
-               `email` AS `email`
-        FROM `wemeet_project`.`reviews`
-        WHERE `article_index` = #{articleIndex}
-
-    </select>
-
-
-
-
-    <select id="selectReviewByIndex"
-            resultType="com.bsh.projectwemeet.entities.ReviewEntity">
-        SELECT `index` AS `index`,
-               `content` AS `content`,
-               `created_at` AS `createdAt`,
-               `reviewStar` AS `reviewStar`,
-               `article_index` AS `articleIndex`,
-               `client_ip` AS `clientIp`,
-               `client_ua` AS `clientUa`,
-               `nickname` AS `nickname`,
-               `email` AS `email`
-        FROM `wemeet_project`.`reviews`
-        WHERE `index` = #{index}
-
-    </select>
-
-
-    <delete id="deleteByReview"
-            parameterType="com.bsh.projectwemeet.entities.ReviewEntity">
-        DELETE
-        FROM `wemeet_project`.`reviews`
-        WHERE `index` = #{index}
-        LIMIT 1
-    </delete>
-
-
-
-    <select id="avgStar" resultType="java.lang.Double">
-        SELECT AVG(reviewStar)
-        FROM `wemeet_project`.`reviews`
-        WHERE `article_index` = #{articleIndex}
-        GROUP BY `article_index`
-    </select>
-
-
-
-<!--    <select id="selectArticleWriter"-->
-<!--            resultType="com.bsh.projectwemeet.entities.ArticleEntity">-->
-<!--        SELECT `index`          AS `index`,-->
-<!--               `title`          AS `title`,-->
-<!--               `category`       AS `category`,-->
-<!--               `content`        AS `content`,-->
-<!--               `place`          AS `place`,-->
-<!--               `address`        AS `address`,-->
-<!--               `thumbnail`      AS `thumbnail`,-->
-<!--               `thumbnail_mime` AS `thumbnailMime`,-->
-<!--               `view` AS `view`,-->
-<!--               `created_at` AS `createdAt`,-->
-<!--               `day` AS `day`,-->
-<!--               `time`           AS `appointmentStartTime`,-->
-<!--               `limit`          AS `limit`,-->
-<!--               `participation` AS `participation`,-->
-<!--               `like_count` AS `likeCount`,-->
-<!--               `report` AS `report`,-->
-<!--               `deleted_flag` AS `isDeleted`,-->
-<!--               `finished_flag` AS `isFinished`,-->
-<!--               `latitude`       AS `latitude`,-->
-<!--               `longitude`      AS `longitude`,-->
-<!--               `hashtag`        AS `hashtag`,-->
-<!--               `client_ip` AS `clientIp`,-->
-<!--               `client_ua` AS `clientUa`-->
-<!--        FROM `wemeet_project`.`articles`-->
-<!--        WHERE `index` = #{index}-->
-<!--        AND `email` = #{email}-->
-<!--        LIMIT 1-->
-<!--    </select>-->
-
-
-    <select id="selectArticleWriter"
-            resultType="int">
-        SELECT COUNT(0) > 0 AS `writer`
-        FROM `wemeet_project`.`articles`
-        WHERE `index` = #{index}
-          AND `email` = #{email}
-        LIMIT 1;
-    </select>
-
-    <select id="selectParticipant"
-    resultType="int">
-        SELECT COUNT(0) > 0 AS `participant`
-        FROM `wemeet_project`.`Participants`
-        WHERE `ArticleIndex` =#{ArticleIndex}
-     AND      `email` = #{email}
-        LIMIT 1;
-    </select>
-
-
     <select id="selectEmail"
             resultType="com.bsh.projectwemeet.entities.ReviewEntity">
         SELECT `index`,
@@ -180,7 +79,6 @@
         LIMIT 1
     </select>
 
-
     <select id="selectProfileImage"
     resultType="com.bsh.projectwemeet.entities.ProfileEntity">
         SELECT `index` AS `index`,
@@ -192,6 +90,63 @@
         WHERE `email` = #{email}
         LIMIT 1
     </select>
+
+    <delete id="deleteByReview"
+            parameterType="com.bsh.projectwemeet.entities.ReviewEntity">
+        DELETE
+        FROM `wemeet_project`.`reviews`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </delete>
+
+
+
+<!--    <select id="selectArticleIndex"-->
+<!--            resultType="com.bsh.projectwemeet.entities.ReviewEntity">-->
+<!--        SELECT `index` AS `index`,-->
+<!--               `content` AS `content`,-->
+<!--               `created_at` AS `createdAt`,-->
+<!--               `reviewStar` AS `reviewStar`,-->
+<!--               (SELECT COUNT(0)-->
+<!--                FROM `wemeet_project`.`articles` AS `article`-->
+<!--                WHERE `reviews`.`article_index` = `article`.`index`) AS `articleIndex`,-->
+<!--               `client_ip` AS `clientIp`,-->
+<!--               `client_ua` AS `clientUa`,-->
+<!--               `nickname` AS `nickname`,-->
+<!--               `email` AS `email`-->
+<!--        FROM `wemeet_project`.`reviews`-->
+<!--        WHERE `article_index` = #{articleIndex}-->
+<!--    </select>-->
+
+<!--    <select id="selectReviewByIndex"-->
+<!--            resultType="com.bsh.projectwemeet.entities.ReviewEntity">-->
+<!--        SELECT `index` AS `index`,-->
+<!--               `content` AS `content`,-->
+<!--               `created_at` AS `createdAt`,-->
+<!--               `reviewStar` AS `reviewStar`,-->
+<!--               `article_index` AS `articleIndex`,-->
+<!--               `client_ip` AS `clientIp`,-->
+<!--               `client_ua` AS `clientUa`,-->
+<!--               `nickname` AS `nickname`,-->
+<!--               `email` AS `email`-->
+<!--        FROM `wemeet_project`.`reviews`-->
+<!--        WHERE `index` = #{index}-->
+<!--    </select>-->
+
+<!--    <select id="articleAll"-->
+<!--            resultType="com.bsh.projectwemeet.entities.ArticleEntity">-->
+<!--        SELECT `index`                AS `index`,-->
+<!--               `title`                AS `title`,-->
+<!--               `content`              AS `content`,-->
+<!--               `category`             AS `category`,-->
+<!--               `address`              AS `address`,-->
+<!--               `limit`                AS `limit`,-->
+<!--               SUBSTRING(hashtag,1, 11) AS `hashtag`,-->
+<!--               `day`                  AS `appointmentStartDate`,-->
+<!--               `time`                 AS `appointmentStartTime`-->
+<!--        FROM `wemeet_project`.`articles`-->
+<!--        ORDER BY `index` DESC-->
+<!--    </select>-->
 
 
 

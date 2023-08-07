@@ -45,67 +45,63 @@ public class CompleteCategoryController {
 
         int searchResultCount = this.completeService.getCountCategory(searchCriterion, searchQuery, category);
 
-            ModelAndView modelAndView = new ModelAndView("home/completeCategory"); //index.html 연결
-            PagingModel pagingCategory = new PagingModel(
-                    ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
-                    this.completeService.getCountCategory(searchCriterion, searchQuery,category),
-                    requestPage); //객체화
+        ModelAndView modelAndView = new ModelAndView("home/completeCategory"); //index.html 연결
+        PagingModel pagingCategory = new PagingModel(
+                ArticleService.PAGE_COUNT, //메모서비스의 읽기 전용 변수 접근
+                this.completeService.getCountCategory(searchCriterion, searchQuery, category),
+                requestPage); //객체화
 
-            ArticleEntity[] articleCategory = this.completeService.getCountCategoryByPage(pagingCategory, searchCriterion, searchQuery, category);
-            //페이징하면서 카테고리 관련 게시물 나타내기
+        ArticleEntity[] articleCategory = this.completeService.getCountCategoryByPage(pagingCategory, searchCriterion, searchQuery, category);
+        //페이징하면서 카테고리 관련 게시물 나타내기
+
+        modelAndView.addObject("articleCategory", articleCategory);
+        modelAndView.addObject("pagingCategory", pagingCategory);
+        modelAndView.addObject("category", category);
+        modelAndView.addObject("searchCriterion", searchCriterion);
+        modelAndView.addObject("searchQuery", searchQuery);
+        modelAndView.addObject("searchResultCount", searchResultCount);
+        return modelAndView;
+
+    }
 
 
-            modelAndView.addObject("articleCategory", articleCategory);
-            modelAndView.addObject("pagingCategory", pagingCategory);
-            modelAndView.addObject("category", category);
-            modelAndView.addObject("searchCriterion", searchCriterion);
-            modelAndView.addObject("searchQuery", searchQuery);
-            modelAndView.addObject("searchResultCount",searchResultCount);
-            return modelAndView;
+    //        게시글 불러오기
+    @RequestMapping(value = "complete/image",
+            method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getThumbnail(@RequestParam(value = "index") int index) {
 
+        ArticleEntity article = this.completeService.readArticle(index);
+        ResponseEntity<byte[]> response;
+        if (article == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
         }
+        return response;
+    }
 
 
-        @RequestMapping(value = "complete/image",
-                method = RequestMethod.GET)
-        public ResponseEntity<byte[]> getThumbnail ( @RequestParam(value = "index") int index){
+    @RequestMapping(value = "complete/category/image",
+            method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getCategoryThumbnail(@RequestParam(value = "index") int index) {
 
-            ArticleEntity article = this.completeService.readArticle(index);
-            ResponseEntity<byte[]> response;
-
-            if (article == null) {
-                response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            } else {
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(article.getThumbnail().length);
-                headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
-                response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
-            }
-
-
-
-            return response;
+        ArticleEntity article = this.completeService.readArticle(index);
+        ResponseEntity<byte[]> response;
+        if (article == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
         }
+        return response;
+    }
 
-
-        @RequestMapping(value = "complete/category/image",
-                method = RequestMethod.GET)
-        public ResponseEntity<byte[]> getCategoryThumbnail ( @RequestParam(value = "index") int index){
-
-            ArticleEntity article = this.completeService.readArticle(index);
-
-            ResponseEntity<byte[]> response;
-            if (article == null) {
-                response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            } else {
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(article.getThumbnail().length);
-                headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
-                response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
-            }
-            return response;
-        }
-
+    //       작성자 프로필 나타내기
     @RequestMapping(value = "complete/read/profile", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getProfile(@RequestParam(value = "index") int index) {
 
@@ -153,9 +149,9 @@ public class CompleteCategoryController {
     }
 
 
-
+    // 참가자1 프로필 나타내기
     @RequestMapping(value = "complete/profile/participant1", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> ParticpantProfile1(@RequestParam(value = "index")int index){
+    public ResponseEntity<byte[]> ParticpantProfile1(@RequestParam(value = "index") int index) {
         ProfileEntity profile = this.completeService.profile1(index);
 
         ResponseEntity<byte[]> response;
@@ -198,9 +194,9 @@ public class CompleteCategoryController {
         return response;
     }
 
-
+    // 참가자2 프로필 나타내기
     @RequestMapping(value = "complete/profile/participant2", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> ParticpantProfile2(@RequestParam(value = "index")int index){
+    public ResponseEntity<byte[]> ParticpantProfile2(@RequestParam(value = "index") int index) {
         ProfileEntity profile = this.completeService.profile2(index);
 
         ResponseEntity<byte[]> response;
@@ -244,9 +240,4 @@ public class CompleteCategoryController {
     }
 
 
-
-
-
-
-
-    }
+}

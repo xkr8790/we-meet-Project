@@ -27,15 +27,14 @@ public interface CompleteMapper {
 
     int updateArticle(ArticleEntity article);
     //조회수 수정
-    ProfileEntity selectProfile(@Param(value = "email")String email);
 
+    ProfileEntity selectProfile(@Param(value = "email") String email);
+    //    게시글 작성자 사진
     ParticipantsEntity selectParticipantsArticle1(@Param(value = "ArticleIndex") int ArticleIndex);
     // 프로필사진을 위해 참여인원 구하기
 
     ParticipantsEntity selectParticipantsArticle2(@Param(value = "ArticleIndex") int ArticleIndex);
     // 프로필사진을 위해 참여인원 구하기
-
-
 
 
 }
