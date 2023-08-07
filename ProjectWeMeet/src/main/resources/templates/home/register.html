@@ -308,7 +308,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                     </div>
                     <div class="form_item">
                         <div class="input-wrapper">
-                            <input type="text" class="input" placeholder="별명(2글자 이상 10글자 이하 영어 대소문자,한글)" maxlength="10"
+                            <input type="text" class="input nickname" placeholder="별명(2글자 이상 10글자 이하 영어 대소문자,한글)" maxlength="10"
                                    name="nickname">
                             <img th:src="@{/resources/images/registerImags/nickname.png}" alt="x" class="img">
                         </div>
@@ -344,11 +344,11 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                         <input type="button" class="addressFind btn" name="addressFind" value="우편번호 찾기">
                     </div>
                     <div class="form_item addressSecond">
-                        <input readonly class="input" maxlength="100" name="addressPrimary"
+                        <input readonly class="input addressPrimary" maxlength="100" name="addressPrimary"
                                placeholder="'우편번호 찾기' 버튼을 클릭하여 주소를 지정해 주세요." type="text">
                     </div>
                     <div class="form_item addressThird">
-                        <input class="input" maxlength="100" name="addressSecondary"
+                        <input class="input addressSecondary" maxlength="100" name="addressSecondary"
                                placeholder="상세 주소를 입력해 주세요. (건물 이름 및 동, 호 등)" type="text">
                     </div>
                 </div>
@@ -358,7 +358,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
 
                 <div class="form_list">
                     <div class="form_item contactOne">
-                        <input type="text" class="input" maxlength="12" name="contact" placeholder="연락처 ('-' 없이 입력)">
+                        <input type="text" class="input contact" maxlength="12" name="contact" placeholder="연락처 ('-' 없이 입력)">
                         <input type="button" class="contactSend btn" name="contactSend" value="인증번호 전송">
                     </div>
                     <div class="form_item contactVerifyTwo">
