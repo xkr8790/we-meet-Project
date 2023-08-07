@@ -25,11 +25,13 @@ public class CompleteService {
 
 
     public int getCountCategory(String searchCriterion, String searchQuery,String category){
-        return this.completeMapper.selectCountCategory(searchCriterion, searchQuery, category);
+
+        return  this.completeMapper.selectCountCategory(searchCriterion, searchQuery, category);
     }
 
     public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String searchCriterion, String searchQuery, String category){
-        return this.completeMapper.selectCountCategoryByPage(pagingModel,searchCriterion, searchQuery, category);
+
+        return  this.completeMapper.selectCountCategoryByPage(pagingModel,searchCriterion, searchQuery, category);
     }
 
 
