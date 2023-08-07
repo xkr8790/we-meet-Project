@@ -3,9 +3,7 @@ package com.bsh.projectwemeet.controllers;
 import com.bsh.projectwemeet.entities.ProfileEntity;
 import com.bsh.projectwemeet.entities.RegisterContactCodeEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
-import com.bsh.projectwemeet.enums.RegisterResult;
-import com.bsh.projectwemeet.enums.SendRegisterContactCodeResult;
-import com.bsh.projectwemeet.enums.VerifyRegisterContactCodeResult;
+import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.services.RegisterService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +60,31 @@ public class RegisterController {
     }
 
 
+    @RequestMapping(value = "emailCount",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getEmailCount(@RequestParam(value = "email") String email) {
+        CheckEmailResult result = this.registerService.checkEmailResult(email);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+
+    @RequestMapping(value = "nicknameCount",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getNicknameCount(@RequestParam(value = "nickname") String nickname) {
+        CheckNicknameResult result = this.registerService.checkNicknameResult(nickname);
+        JSONObject responseObject = new JSONObject() {{
+            put("result", result.name().toLowerCase());
+        }};
+        return responseObject.toString();
+    }
+
+
     @RequestMapping(value = "contactCode",
     method = RequestMethod.PATCH,
     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -95,5 +118,7 @@ public class RegisterController {
         }};
         return responseObject.toString();
     }
+
+
 
 }

@@ -1,13 +1,11 @@
 package com.bsh.projectwemeet.services;
 
 import com.bsh.projectwemeet.entities.ProfileEntity;
+import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.mappers.ProfileMapper;
 import com.bsh.projectwemeet.mappers.RegisterMapper;
 import com.bsh.projectwemeet.entities.RegisterContactCodeEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
-import com.bsh.projectwemeet.enums.RegisterResult;
-import com.bsh.projectwemeet.enums.SendRegisterContactCodeResult;
-import com.bsh.projectwemeet.enums.VerifyRegisterContactCodeResult;
 import com.bsh.projectwemeet.utils.CryptoUtil;
 import com.bsh.projectwemeet.utils.NCloudUtil;
 
@@ -131,5 +129,16 @@ public class RegisterService {
     }
 
 
+    public CheckEmailResult checkEmailResult(String email) {
+        return this.registerMapper.selectUserByEmail(email) == null
+                ? CheckEmailResult.OKAY
+                : CheckEmailResult.DUPLICATE;
+    }
+
+    public CheckNicknameResult checkNicknameResult(String nickname) {
+        return this.registerMapper.selectUserByNickname(nickname) == null
+                ? CheckNicknameResult.OKAY
+                : CheckNicknameResult.DUPLICATE;
+    }
 
 }
