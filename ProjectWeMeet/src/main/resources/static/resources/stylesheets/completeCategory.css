@@ -497,7 +497,6 @@ a {
     }
     .article-category > .category-list {
         flex-direction: column;
-        border: 1px solid red;
     }
     .article-category > .category-list > .category{
 width: 100%;

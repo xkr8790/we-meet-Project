@@ -76,6 +76,9 @@ public class CompleteService {
     public ProfileEntity profile2(int index){
         ParticipantsEntity participants1 = completeMapper.selectParticipantsArticle1(index);
         ParticipantsEntity participants2 = completeMapper.selectParticipantsArticle2(index);
+        if(participants2 == null){
+            return null;
+        }
         if(Objects.equals(participants1.getEmail(), participants2.getEmail())){
             return null;
         }

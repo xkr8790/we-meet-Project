@@ -121,7 +121,7 @@
                `created_at`   AS `createdAt`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{ArticleIndex}
-        ORDER BY `index`
+        ORDER BY `index` ASC
         LIMIT 1
     </select>
 
