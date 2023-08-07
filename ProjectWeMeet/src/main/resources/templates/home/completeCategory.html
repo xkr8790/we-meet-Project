@@ -180,8 +180,16 @@
 
 
                     </div>
-                    <div class="article-searchResult">
-                        <span th:if="${searchCriterion=='complete'&& searchQuery!=null &&  searchResultCount == 0 }">
+<!--                    <div class="article-searchResult">-->
+<!--                        <span th:if="${searchCriterion=='complete'&& searchQuery!=null &&  searchResultCount == 0 }">-->
+<!--                                    검색 결과가 존재하지 않습니다.</span>-->
+<!--                    </div>-->
+                    <div class="article-searchResult" th:if="${(category!= ''  && searchResultCount == 0 )||
+       ((searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')
+         && category == '' &&  searchResultCount == 0 )}">
+                        <span th:if="${category!= ''  && searchResultCount == 0 }">카테고리 결과가 존재하지 않습니다.</span>
+                        <span th:if="${(searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')
+           && category == '' &&  searchResultCount == 0 }">
                                     검색 결과가 존재하지 않습니다.</span>
                     </div>
                     <ul class="pageContainer" th:if="${searchResultCount > 0}">

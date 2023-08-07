@@ -350,6 +350,11 @@ a {
     color: black;
 }
 
+.article-searchResult > span{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
 
 .pageContainer {
     list-style-type: none;

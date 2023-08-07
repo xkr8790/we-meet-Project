@@ -64,26 +64,33 @@ public class CompleteService {
 
 
     public ProfileEntity profile1(int index){
-        ParticipantsEntity participants = completeMapper.selectParticipantsArticle1(index);
-        System.out.println(participants.getEmail());
-        if(participants == null){
+        ParticipantsEntity participants1 = completeMapper.selectParticipantsArticle1(index);
+        ParticipantsEntity participants2 = completeMapper.selectParticipantsArticle2(index);
+
+        if(participants1 == null){
             return null;
         }
-        ProfileEntity profile = completeMapper.selectProfile(participants.getEmail());
-        return profile;
+        if(Objects.equals(participants1.getEmail(), participants2.getEmail())) {
+            return null;
+        }else {
+            ProfileEntity profile = completeMapper.selectProfile(participants1.getEmail());
+            return profile;
+        }
     }
 
     public ProfileEntity profile2(int index){
         ParticipantsEntity participants1 = completeMapper.selectParticipantsArticle1(index);
         ParticipantsEntity participants2 = completeMapper.selectParticipantsArticle2(index);
+
         if(participants2 == null){
             return null;
         }
         if(Objects.equals(participants1.getEmail(), participants2.getEmail())){
             return null;
+        }else {
+            ProfileEntity profile = completeMapper.selectProfile(participants2.getEmail());
+            return profile;
         }
-        ProfileEntity profile = completeMapper.selectProfile(participants2.getEmail());
-        return profile;
     }
 
 }
