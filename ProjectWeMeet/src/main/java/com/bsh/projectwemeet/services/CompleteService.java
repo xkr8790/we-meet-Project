@@ -25,13 +25,12 @@ public class CompleteService {
 
 
     public int getCountCategory(String searchCriterion, String searchQuery,String category){
-
         return  this.completeMapper.selectCountCategory(searchCriterion, searchQuery, category);
     }
 
     public ArticleEntity[] getCountCategoryByPage(PagingModel pagingModel,String searchCriterion, String searchQuery, String category){
 
-        return  this.completeMapper.selectCountCategoryByPage(pagingModel,searchCriterion, searchQuery, category);
+        return this.completeMapper.selectCountCategoryByPage(pagingModel,searchCriterion, searchQuery, category);
     }
 
 
@@ -46,7 +45,6 @@ public class CompleteService {
             // 조회수를 업데이트합니다.
         }
         return article;
-        //결과적으로 삭제되지않거나
         //결과적으로 삭제되지않거나
     } //게시판 나타내기
 
