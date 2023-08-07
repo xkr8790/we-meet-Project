@@ -531,154 +531,6 @@ a{
 }
 
 
-#popup.step-2 > .popup-content.step-2 > .passwordReset {
-    background-color: white;
-
-    margin-bottom: 1rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .passwordReset > .title {
-    background-color: white;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.625rem;
-
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#popup.step-2 > .popup-content.step-2 > .passwordReset > .password {
-    background-color: white;
-    color: #959595;
-    margin-bottom: 0.625rem;
-    font-size: 1rem;
-    width: 75%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .passwordReset > .passwordRe {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 75%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .passwordReset > .resetButton {
-    background-color: #9da3d6;
-    color: black;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    opacity: 0.8;
-}
-
-#popup.step-2 > .popup-content.step-2 > .nicknameReset {
-    background-color: white;
-
-    margin-bottom: 1rem;
-}
-
-
-#popup.step-2 > .popup-content.step-2 > .nicknameReset > .title {
-    background-color: white;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.625rem;
-
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#popup.step-2 > .popup-content.step-2 > .nicknameReset > .nickname {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 75%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .nicknameReset > .resetButton {
-    background-color: #9da3d6;
-    color: black;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    opacity: 0.8;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset {
-    background-color: white;
-
-    margin-bottom: 1rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .title {
-    background-color: white;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.625rem;
-
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressFirst {
-    background-color: white;
-    margin-bottom: 0.625rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressFirst > .address {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 70%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressFirst > .findButton {
-    background-color: #9da3d6;
-    color: black;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    opacity: 0.8;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressSecond {
-    background-color: white;
-    margin-bottom: 0.625rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressSecond > .address {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 95%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressThird {
-    background-color: white;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressThird > .address {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 95%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
 #popup.step-2 > .popup-content.step-2 > .die {
     background-color: white;
     margin-bottom: 0.625rem;
@@ -695,7 +547,7 @@ a{
 ._object-box {
     align-items: flex-start;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-start;
 }
 
@@ -713,7 +565,7 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .box {
-    align-items: stretch;
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -732,7 +584,7 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .box > .object {
-    align-items: start;
+    /*align-items: center;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -750,19 +602,42 @@ a{
     color: #ef5350;
 }
 
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object {
+    display: flex;
+    justify-content: center;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 #popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-box > ._object-input {
     margin-bottom: 0.4rem;
+
+    border-radius: 0.25rem;
     height: 1.2rem;
     padding-left: 0.3rem;
-    width: 17rem;
+    width: 15rem;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button {
-    width: 100%;
-}
 
 #popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button > .change {
+    background-color: #FB6161;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
     float: right;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button > .change:hover{
+    opacity: 1;
+    cursor: pointer;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object {
@@ -773,6 +648,10 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-box > ._object-input {
+    width: 15rem;
+    padding-left: 0.3rem;
+    height: auto;
+    border-radius: 0.25rem;
     margin-bottom: 0.4rem;
 }
 
@@ -781,7 +660,19 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-button > .change {
+    background-color: #FB6161;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
     float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-button > .change:hover{
+    opacity: 1;
+    cursor: pointer;
 }
 
 
@@ -793,15 +684,31 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-box > ._object-input {
+    width: 15rem;
+    padding-left: 0.3rem;
+    height: auto;
+    border-radius: 0.25rem;
     margin-bottom: 0.4rem;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button {
+#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button{
     width: 100%;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button > .change {
+    background-color: #FB6161;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
     float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button > .change:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > .message-box {
@@ -816,11 +723,19 @@ a{
     justify-content: start;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > ._object-box {
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > ._object-box{
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > ._object-box > ._object-input {
+    width: 15rem;
+    padding-left: 0.3rem;
+    height: auto;
+    border-radius: 0.25rem;
+    margin-bottom: 0.4rem;
 }
 
 
@@ -831,11 +746,63 @@ a{
     justify-content: start;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button {
-    align-items: end;
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-box {
+    align-items: center;
     display: flex;
-    /*flex-direction: ;*/
-    justify-content: end;
+    flex-direction: row;
+    justify-content: start;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-box > ._object-input {
+    width: 15rem;
+    padding-left: 0.3rem;
+    height: auto;
+    border-radius: 0.25rem;
+    margin-bottom: 0.4rem;
+}
+
+
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-button {
+    background-color: #9da3d6;
+    margin-left: 0.625rem;
+    margin-bottom: 0.4rem;
+    border-radius: 0.15rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.15rem;
+    opacity: 0.8;
+    float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button > .change {
+    background-color: #FB6161;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
+    float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button > .change:hover{
+    opacity: 1;
+    cursor: pointer;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .subTitle {
