@@ -12,12 +12,9 @@ const thumbnail1 = document.querySelector('.thumbnail1');
 
 ClassicEditor.create(articleForm['content'], {}); //파일 업로드
 
-
-
 const ArticleTag = document.querySelector('.article-tag'); //tag를 담을 부모
 const explainTag = document.querySelector('.explainTag'); //설명
 const Tags = document.querySelector('.tags');
-
 
 ArticleTag.addEventListener('click', function () {
 
@@ -49,17 +46,17 @@ ArticleTag.addEventListener('click', function () {
     const Tag = document.createElement('input');
 
     Tag.setAttribute('type', 'text');
-    Tag.name = "hashTag"
+    Tag.name = "hashTag" // 태그의 이름
     Tag.value = '#'; // 처음 생성시 # 추가
     TagContainer.classList.add('tag-container');
     TagWarning.classList.add('tag-warning');
     Tag.classList.add('tag'); // 처음 생성시 tag 클래스 추가
-    Tag.maxLength = 7;
-    Tag.style.width = "120px";
+    Tag.maxLength = 7; //최대글자 7글자
+    Tag.style.width = "120px"; //태그 크기 120px
     Tag.autocomplete = "off"; //자동완성 기능 Off
 
-    Tags.appendChild(TagContainer);
-    TagContainer.appendChild(TagWarning);
+    Tags.appendChild(TagContainer); // 자식으로 태그를 담는 div 넣음
+    TagContainer.appendChild(TagWarning); //태그 7글자 적을시 경구문
     TagContainer.appendChild(Tag);
 
     TagWarning.show = () => {
@@ -113,10 +110,13 @@ ArticleTag.addEventListener('click', function () {
         const previousTag = tags[tags.length - 1];
         previousTag.disabled = true;
     }
+
     tags.push(Tag);
     tagCounter++; // 태그 생성 횟수 증가
     Tag.focus(); //태그 생성시 자동으로 포커스되게
 });
+
+
 
 
 thumbnailChange.addEventListener('change', function (event) {
@@ -210,63 +210,46 @@ articleForm.onsubmit = e => {
         return;
     }//썸네일 업로드 안했을시
 
-    // if(articleForm['title'].value === ''){
-    //     alert('제목을 입력해주세요');
-    //     return;
-    // } //제목이 비어있을때
-    // //
-    // if (!new RegExp('^([가-힣]{2,10})$').test(articleForm['title'].value)) {
-    //     alert('제목을 제대로 입력해주세요');
-    //     articleForm['title'].value ='';
-    //     articleForm['title'].focus();
-    //     articleForm['title'].select();
-    //     return;
-    // }//제목 정규식
-    //
-    // if (abuse.some(x => articleForm['title'].value.indexOf(x) > -1)) {
-    //     alert('제목에 욕설이 포함되있습니다 다시 입력해주세요');
-    //     articleForm['title'].value ='';
-    //     articleForm['title'].focus();
-    //     articleForm['title'].select();
-    //     return;
-    // }//제목 욕설포함
-    //
-    //
-    // if(articleForm['content'].value === ''){
-    //     alert('내용을 입력해주세요');
-    //     return;
-    // } //게시판 내용이 비어있을때
-    //
-    // //
-    // // if (!new RegExp('^([가-힣]{2,})$').test(articleForm['content'].value)) {
-    // //     alert('내용을 제대로 입력해주세요');
-    // //     return;
-    // // }
-    //
-    // if (abuse.some(x => articleForm['content'].value.indexOf(x) > -1)) {
-    //     alert('내용에 욕설이 포함되있습니다 다시 입력해주세요');
-    //     return;
-    // }//게시판 욕설
-    //
-    //
-    //
-    //
-    // for(let i=0; i<5; i++){
-    //     if (!new RegExp('^#([가-힣]{2,7})$').test(articleForm['hashTag'][i].value)) {
-    //         alert('태그를 제대로 입력해주세요');
-    //         return;
-    //     }
-    // } //해쉬태그 정규식
-    //
-    //
-    // for(let i=0; i<5; i++){
-    //     if(abuse.some(x =>articleForm['hashTag'][i].value.indexOf(x) > -1)){
-    //         articleForm['hashTag'].remove();
-    //         alert('태그에 욕설이 포함되있습니다 다시 입력해주세요');
-    //         return;
-    //     }
-    // } //해쉬태그 욕설
+    if(articleForm['title'].value === ''){
+        alert('제목을 입력해주세요');
+        return;
+    } //제목이 비어있을때
 
+    if (!/^[가-힣a-zA-Z]+$/.test(articleForm['title'].value)) {
+        alert('제목을 제대로 입력해주세요');
+        articleForm['title'].value = '';
+        articleForm['title'].focus();
+        articleForm['title'].select();
+        return;
+    }
+
+    if (abuse.some(x => articleForm['title'].value.indexOf(x) > -1)) {
+        alert('제목에 욕설이 포함되있습니다 다시 입력해주세요');
+        articleForm['title'].value ='';
+        articleForm['title'].focus();
+        articleForm['title'].select();
+        return;
+    }//제목 욕설포함
+
+
+    if(articleForm['content'].value === ''){
+        alert('내용을 입력해주세요');
+        return;
+    } //게시판 내용이 비어있을때
+
+
+    if (!/^[가-힣a-zA-Z]+$/.test(articleForm['content'].value)) {
+        alert('내용을 제대로 입력해주세요');
+        articleForm['content'].value = '';
+        articleForm['content'].focus();
+        articleForm['content'].select();
+        return;
+    }
+
+    if (abuse.some(x => articleForm['content'].value.indexOf(x) > -1)) {
+        alert('내용에 욕설이 포함되있습니다 다시 입력해주세요');
+        return;
+    }//게시판 욕설
 
     //폼데이터 추가될떄 무조건 문자열로 처리해주기 떄문에 requestParam으로 처리해줘야됨
 

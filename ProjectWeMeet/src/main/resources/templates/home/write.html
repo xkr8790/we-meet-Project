@@ -16,7 +16,7 @@
     <script defer th:src="@{/resources/scripts/Article-Write.js}"></script>
     <script th:if="${session.user == null}">
         alert('로그인하고 이용해주세요');
-        window.location.href="/";
+        window.location.href="/login";
     </script>
 
 </head>

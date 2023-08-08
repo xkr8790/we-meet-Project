@@ -41,15 +41,22 @@
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
                 <div class="tooltip">글작성</div>
             </button>
-            <button name="patch" th:data-index="${article.getIndex()}">
+            <button data-action="logout" name="logout">
+                <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                <div class="tooltip">로그아웃</div>
+            </button>
+            <button name="patch" th:if="${session.user.getEmail() == article.getEmail()}"
+                    th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
                 <div class="tooltip">글수정</div>
             </button>
-            <button name="delete" th:data-index="${article.getIndex()}">
+            <button name="delete" th:if="${session.user.getEmail() == article.getEmail()}"
+                    th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
                 <div class="tooltip">글삭제</div>
             </button>
-            <button name="finish" th:data-index="${article.getIndex()}">
+            <button name="finish" th:if="${session.user.getEmail() == article.getEmail()}"
+                    th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-circle-check fa-lg"></i>
                 <div class="tooltip">완료</div>
             </button>

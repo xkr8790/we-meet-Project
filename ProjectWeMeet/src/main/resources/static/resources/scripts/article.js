@@ -26,7 +26,7 @@ if (!categoryParam) { //전체
 }
 
 
-if(window.location.width <= 750) {
+if(window.location.width <= 951) {
     if (!categoryParam) { //전체
         articleLink750px[0].classList.add('underline');
     } else if (categoryParam === '영화') {

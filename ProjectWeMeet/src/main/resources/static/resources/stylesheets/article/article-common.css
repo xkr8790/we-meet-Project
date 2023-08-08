@@ -100,18 +100,18 @@
         padding: 1rem;
         font-weight: bold;
         font-size: 12px;
+        margin-left: 5rem;
     }
 
     #footer > .wrap {
         padding-top: 1rem;
-        max-width: 1189px;
+        max-width: 1180px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
     }
 
     #footer > .wrap > .grid-twin {
         line-height: 20px;
-        margin-left: 3rem;
         color: #666;
     }
 
@@ -131,9 +131,6 @@
         line-height: 1.43;
     }
 
-    #footer > .wrap > .grid-twin.big {
-        grid-column: 3 / span 2;
-    }
 }
 
 @media screen and (max-width: 950px) {
