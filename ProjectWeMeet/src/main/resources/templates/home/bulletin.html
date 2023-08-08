@@ -45,17 +45,17 @@
                 <i class="fa-solid fa-right-from-bracket fa-lg"></i>
                 <div class="tooltip">로그아웃</div>
             </button>
-            <button name="patch" th:if="${session.user.getEmail() == article.getEmail()}"
+            <button name="patch" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
                 <div class="tooltip">글수정</div>
             </button>
-            <button name="delete" th:if="${session.user.getEmail() == article.getEmail()}"
+            <button name="delete" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
                 <div class="tooltip">글삭제</div>
             </button>
-            <button name="finish" th:if="${session.user.getEmail() == article.getEmail()}"
+            <button name="finish" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-circle-check fa-lg"></i>
                 <div class="tooltip">완료</div>

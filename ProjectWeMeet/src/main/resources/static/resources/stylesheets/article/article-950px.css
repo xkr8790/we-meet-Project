@@ -194,7 +194,7 @@ body{
     }
 
 
-    .category-750px {
+    .article-category > .category-750px {
         align-items: center;
         display: flex;
         flex-direction: column;
@@ -202,7 +202,7 @@ body{
         white-space: nowrap;
     }
 
-    .category-750px > ul {
+    .article-category > .category-750px > ul {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         align-items: center; /* 수직 정렬 */
@@ -212,19 +212,6 @@ body{
         font-weight: 600;
         font-size: 1.2rem;
         cursor: default;
-    }
-
-    .category-750px > ul > .articleLink750px {
-        text-decoration: none;
-        padding-bottom: 5px; /* 원하는 여백 크기 설정 */
-        cursor: pointer;
-        margin: 1rem;
-        align-items: center;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        transition: transform 0.3s;
-        border-bottom: 1px solid rgba(0, 0, 0, 0); /* 초기에 투명도 0으로 설정 */
     }
 
     .category-750px > ul > a {
@@ -238,8 +225,23 @@ body{
         object-fit: cover;
     }
 
+    .article-category > .category-750px > ul > .articleLink750px {
+        text-decoration: none;
+        padding-bottom: 5px; /* 원하는 여백 크기 설정 */
+        cursor: pointer;
+        margin: 1rem;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        transition: transform 0.3s;
+        border-bottom: 1px solid rgba(0, 0, 0, 0); /* 초기에 투명도 0으로 설정 */
+    }
 
-    .underline {
+
+
+
+    .under {
         border-bottom-color: rgba(0, 0, 0, 1); /* 밑줄 색상 설정 */
         border-bottom-width: 3px; /* 밑줄 두께 설정 */
         border-bottom-style: solid; /* 밑줄 스타일 설정 */
