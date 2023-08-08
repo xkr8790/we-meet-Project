@@ -16,14 +16,14 @@
                 OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `hashtag` LIKE CONCAT('%', #{searchQuery}, '%')
             </if>
-
+            AND `category` LIKE CONCAT('%', #{category}, '%')
         </where>
     </select>
     <!-- 카테고리 관련 레코드 조회-->
 
     <!-- 카테고리별 페이징 -->
     <select id="selectCountCategoryByPage"
-            resultType="com.bsh.projectwemeet.entities.ArticleEntity">#결과값 메모엔터티 값으로 돌려준다
+            resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `index` AS `index`,
         `title` AS `title`,
         `content` AS `content`,
@@ -43,6 +43,7 @@
                 OR `address` LIKE CONCAT('%', #{searchQuery}, '%')
                 OR `hashtag` LIKE CONCAT('%', #{searchQuery}, '%')
             </if>
+            AND `category` LIKE CONCAT('%', #{category}, '%')
         </where>
         ORDER BY `index` DESC
         LIMIT #{pagingModel.pageCount} OFFSET #{pagingModel.offset}<!--value의 이름과 같아야된다-->
@@ -120,7 +121,7 @@
                `created_at`   AS `createdAt`
         FROM `wemeet_project`.`Participants`
         WHERE `ArticleIndex` = #{ArticleIndex}
-        ORDER BY `index`
+        ORDER BY `index` ASC
         LIMIT 1
     </select>
 

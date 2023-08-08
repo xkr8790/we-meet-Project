@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>소소한 일상의 변화. WeMeet!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/main/mainMenu.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/main/mainStyle.css}">
@@ -10,9 +11,8 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/main/mainStyle-770px.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/main/mainStyle-570px.css}">
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
-    <script defer src="/resources/scripts/slide.js"></script>
+    <script defer th:src="@{/resources/scripts/slide.js}"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
-    <script defer th:src="@{/resources/scripts/main.js}"></script>
 </head>
 
 <body>
@@ -51,7 +51,9 @@
                 <button name="write">
                     <a href="/write">
                         <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                        <div class="tooltip">글작성</div>
+                        <span>
+                            <div class="tooltip">글작성</div>
+                        </span>
                     </a>
                 </button>
             </li>
@@ -59,7 +61,9 @@
                 <button data-action="logout" name="logout">
                     <a href="">
                         <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+                       <span>
                         <div class="tooltip">로그아웃</div>
+                       </span>
                     </a>
                 </button>
             </li>

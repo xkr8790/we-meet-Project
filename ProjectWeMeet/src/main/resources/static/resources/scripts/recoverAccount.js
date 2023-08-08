@@ -212,8 +212,6 @@ recoverForm.onsubmit = function (e) {
 
 recoverForm['emailSend'].onclick = e =>{
     e.preventDefault();
-
-    let coverText = document.getElementsByClassName('cover-text');
     const link = document.querySelector('.cover-button');
         if (!new RegExp('^(?=.{10,50}$)([\\da-zA-Z\\-_\\.]{5,25})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2})?$').test(recoverForm['pEmail'].value)) {
             dialogCover.show();

@@ -401,6 +401,15 @@ public class ArticleService {
         return null;
     }
 
+    public ParticipantsEntity profileAs(int index){
+        ParticipantsEntity participants = articleMapper.selectParticipantsArticle1(index);
+
+        return participants != null
+                ? participants
+                : null;
+    }
+
+
     public ProfileEntity profile1(int index){
         ParticipantsEntity participants = articleMapper.selectParticipantsArticle1(index);
 

@@ -180,15 +180,50 @@
 
 
                     </div>
-                    <div class="article-searchResult">
-                        <span th:if="${searchCriterion=='complete'&& searchQuery!=null &&  searchResultCount == 0 }">
+<!--                    <div class="article-searchResult" th:if="${(category!= ''  && searchResultCount == 0 )||-->
+<!--       ((searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')-->
+<!--         && category == '' &&  searchResultCount == 0 )}">-->
+<!--                        <span th:if="${category!= ''  && searchResultCount == 0 }">카테고리 결과가 존재하지 않습니다.</span>-->
+<!--                        <span th:if="${(searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')-->
+<!--           && category == '' &&  searchResultCount == 0 }">-->
+<!--                                    검색 결과가 존재하지 않습니다.</span>-->
+<!--                    </div>-->
+<!--                    <ul class="pageContainer" th:if="${searchResultCount > 0}">-->
+<!--                        <li class="page"-->
+<!--                            th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">-->
+<!--                            <a class="link" th:href="@{'/complete' (p = ${page},category=${category})}"-->
+<!--                               th:text="${page}"></a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+                    <div class="article-searchResult" th:if="${(category!= ''  && searchResultCount == 0 )||
+       ((searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')
+         && category == '' &&  searchResultCount == 0 )}">
+                        <span th:if="${category!= ''  && searchResultCount == 0 }">카테고리 결과가 존재하지 않습니다.</span>
+                        <span th:if="${(searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')
+           && category == '' &&  searchResultCount == 0 }">
                                     검색 결과가 존재하지 않습니다.</span>
                     </div>
-                    <ul class="pageContainer" th:if="${searchResultCount > 0}">
-                        <li class="page"
-                            th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
-                            <a class="link" th:href="@{'/complete' (p = ${page},category=${category})}"
+                    <ul class="pageContainer" th:if="${searchResultCount>0}">
+                        <li class="page" th:if="${pagingCategory.requestPage > 1}">
+                            <a class="link" th:href="@{'/article' (p = ${1},category=${category},c = ${searchCriterion}, q = ${searchQuery})}">처음</a>
+                        </li>
+                        <li class="page" th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
+                            <a class="link"
+                               th:href="@{'/article' (p = ${page},category=${category},c = ${searchCriterion}, q = ${searchQuery})}"
                                th:text="${page}"></a>
+                        </li>
+                        <li class="page" th:if="${pagingCategory.requestPage > 1}">
+                            <a class="link"
+                               th:href="@{'/article' (p = ${pagingCategory.requestPage - 1}, category=${category},c = ${searchCriterion}, q = ${searchQuery})}">이전</a>
+                        </li>
+
+                        <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
+                            <a class="link"
+                               th:href="@{'/article' (p = ${pagingCategory.requestPage + 1}, category=${category},c = ${searchCriterion}, q = ${searchQuery})}">다음</a>
+                        </li>
+                        <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
+                            <a class="link"
+                               th:href="@{'/article' (p = ${pagingCategory.maxPage},category=${category},c = ${searchCriterion}, q = ${searchQuery})}">마지막</a>
                         </li>
                     </ul>
                     <section class="search-box">
