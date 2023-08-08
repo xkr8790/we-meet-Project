@@ -23,7 +23,7 @@
 <body th:if="${session.user != null}">
 <div class="inner" >
     <h2 class="logo_we_meet">
-        <a href="http://localhost:6795/" class="link">
+        <a href="/" class="link">
             <img th:src="@{/resources/images/logoImages/logo-224x48.png}" class="logo"/>
         </a>
     </h2>
@@ -44,7 +44,7 @@
                             <input type="time" class="time" name="time">
                         </div>
                         <div class="sub_title">참여인원과 카테고리를 설정해주세요</div>
-                        <div class="etc">
+
                             <div class="box_one">
                                 <span class="text">제한인원</span>
                                 <input type="number" class="limit" name="limit" min="2">
@@ -61,7 +61,7 @@
                                     <option value="만남">만남</option>
                                 </select>
                             </div>
-                        </div>
+
                         <input readonly name="lat"  maxlength="50" placeholder="경도" class="latitude">
                         <input readonly name="lng"  maxlength="50" placeholder="위도" class="longitude">
 

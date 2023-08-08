@@ -144,6 +144,11 @@ registerForm['addressFind'].onclick = () => {
     dialogCover.show();
     addressLayer.show();
 };
+// dialogCover 클릭시 돌아오기
+dialogCover.addEventListener('click',function () {
+    dialogCover.hide();
+    addressLayer.hide();
+});
 
 //1페이지 넘기기
 nextButton.addEventListener('click', function() {
@@ -308,7 +313,10 @@ registerForm.nameWarning.show = (text) => {
     registerForm.nameWarning.innerText = text;
     registerForm.nameWarning.classList.add('visible');
 };
-registerForm.nameWarning.hide = () => registerForm.nameWarning.classList.remove('visible');
+registerForm.nameWarning.hide = () => {
+    registerForm.nameWarning.classList.remove('visible');
+    registerForm.nameWarning.innerText = ''; // 추가: 경고 메시지 초기화
+};
 
 // birthWarning
 registerForm.birthWarning = registerForm.querySelector('[rel="birthWarning"]');
@@ -471,7 +479,114 @@ registerForm['contactVerify'].addEventListener('click', () => {
 });
 
 
+registerForm['name'].addEventListener('focusout',() =>{
+    registerForm.nameWarning.hide();
+    if (registerForm['name'].value===''){
+        registerForm.nameWarning.show('이름을 입력해 주세요');
+        return;
+    }
+});
+
+registerForm['birth'].addEventListener('focusout', () => {
+    registerForm.birthWarning.hide();
+    if (registerForm['birth'].value === '') {
+        registerForm.birthWarning.show('생년월일을 입력해 주세요.');
+        return;
+    }
+});
+registerForm['email'].addEventListener('focusout', () => {
+    registerForm.emailWarning.hide();
+    if (registerForm['email'].value === '') {
+        registerForm.emailWarning.show('이메일을 입력해 주세요.');
+        return;
+    }
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `/register/emailCount?email=${registerForm['email'].value}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'duplicate':
+                        registerForm.emailWarning.show('해당 이메일은 이미 사용 중입니다.');
+                        break;
+                    case 'okay':
+                        registerForm.emailWarning.show('해당 이메일은 사용할 수 있습니다.');
+                        break;
+                    default:
+                        registerForm.emailWarning.show('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                registerForm.emailWarning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send();
+});
+
+registerForm['nickname'].addEventListener('focusout', () => {
+    registerForm.nicknameWarning.hide();
+    if (registerForm['nickname'].value === '') {
+        registerForm.nicknameWarning.show('별명을 입력해 주세요.');
+        return;
+    }
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `/register/nicknameCount?nickname=${registerForm['nickname'].value}`);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                const responseObject = JSON.parse(xhr.responseText);
+                switch (responseObject.result) {
+                    case 'duplicate':
+                        registerForm.nicknameWarning.show('해당 별명은 이미 사용 중입니다.');
+                        break;
+                    case 'okay':
+                        registerForm.nicknameWarning.show('해당 별명은 사용할 수 있습니다.');
+                        break;
+                    default:
+                        registerForm.nicknameWarning.show('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');
+                }
+            } else {
+                registerForm.nicknameWarning.show('서버와 통신하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
+            }
+        }
+    };
+    xhr.send();
+});
+['password', 'passwordCheck'].forEach(name => {
+    registerForm[name].addEventListener('focusout', () => {
+        registerForm.passwordWarning.hide();
+        if (registerForm['password'].value === '') {
+            registerForm.passwordWarning.show('비밀번호를 입력해 주세요.');
+            return;
+        }
+        if (registerForm['passwordCheck'].value === '') {
+            registerForm.passwordWarning.show('비밀번호를 다시 한번 더 입력해 주세요.');
+            return;
+        }
+        if (registerForm['password'].value !== registerForm['passwordCheck'].value) {
+            registerForm.passwordWarning.show('비밀번호가 서로 일치하지 않습니다.');
+            return;
+        }
+    });
+});
 
 
 
+
+registerForm['addressPostal'].addEventListener('focusout', () => {
+    registerForm.addressWarning.hide();
+    if (registerForm['addressPostal'].value === '') {
+        registerForm.addressWarning.show('우편번호를 찾아주세요.');
+        return;
+    }
+});
+
+registerForm['addressSecondary'].addEventListener('focusout', () => {
+    registerForm.addressWarning.hide();
+    if (registerForm['addressSecondary'].value === '') {
+        registerForm.addressWarning.show('상세주소를 입력해 주세요.');
+        return;
+    }
+});
 

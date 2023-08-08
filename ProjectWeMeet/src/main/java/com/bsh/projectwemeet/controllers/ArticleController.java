@@ -785,15 +785,13 @@ public class ArticleController {
     @ResponseBody
     public String postComment(HttpServletRequest request, CommentEntity comment, HttpSession session, @RequestParam("articleEmail") String articleEmail, @RequestParam("nickname") String nickname) throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
-        Date created = sdf.parse(String.valueOf(new Date()));
-        comment.setCreatedAt(created);
-
 
         CreateCommentResult result = articleService.putComment(request, comment, session, articleEmail, nickname);
+
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
+
         return responseObject.toString();
     }
 

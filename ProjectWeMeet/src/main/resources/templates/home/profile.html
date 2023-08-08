@@ -63,7 +63,7 @@
                 <div class="object">
                     <label class="_object-box">
                         <input disabled readonly class="_object-input" type="email" spellcheck="false"
-                               th:value="${profile?.getEmail()}">
+                               th:value="${profile.getEmail()}">
                     </label>
                     <div class="message-box">이메일 주소는 변경할 수 없습니다.</div>
                 </div>
@@ -97,7 +97,7 @@
                     <span class="_object-warning"></span>
                     <label class="_object-box">
                         <input type="password" class="_object-input" maxlength="50" name="infoPasswordCheck"
-                               placeholder="새로운 비밀번호를 한 번 더 입력해주세요.">
+                               placeholder="비밀번호를 한 번 더 입력해주세요.">
                     </label>
                     <input hidden name="infoContactSalt" type="hidden">
                     <label class="_object-button">
@@ -129,7 +129,7 @@
                 <div class="object">
                     <label class="_object-box">
                         <input type="tel" disabled readonly class="_object-input" name="infoCurrentContact"
-                               spellcheck="false">
+                               spellcheck="false" th:value="${profile.getContact()}">
                     </label>
                     <div class="new-contact-container">
                         <div class="multi-container">
@@ -137,7 +137,7 @@
                                 <input type="tel" class="_object-input" maxlength="12" name="infoContact"
                                        placeholder="연락처 ('-' 없이)" spellcheck="false">
                             </label>
-                            <input type="button" class="_object-button" name="infoContactSend" value="인증번호 전송">
+                            <input type="button" class="_object-button" name="infoContactSend" value="전송">
                         </div>
                         <div class="multi-container">
                             <label class="_object-box">
@@ -145,10 +145,7 @@
                                        placeholder="인증번호" spellcheck="false">
                             </label>
                             <input disabled type="button" class="_object-button" name="infoContactVerify"
-                                   value="인증번호 확인">
-                        </div>
-                        <div>
-                            <input type="text" placeholder="새로 등록할 연락처를 입력해 주세요">
+                                   value="확인">
                         </div>
                         <label class="_object-button">
                             <input disabled type="button" name="changeContact" class="change" value="변경">

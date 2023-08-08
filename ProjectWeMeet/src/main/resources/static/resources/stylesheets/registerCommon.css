@@ -4,6 +4,8 @@
 
 *{
     /*border: 1px red solid;*/
+    box-sizing: border-box;
+    outline: none;
 }
 
 body,html{
@@ -43,15 +45,15 @@ button {
 }
 
 ._object-button._blue {
-    background-color: #3498db;
+    background-color: #ef5350;
 }
 
 ._object-button._blue:hover {
-    background-color: #2e86c1;
+    background-color: #DA4F4A;
 }
 
 ._object-button._blue:active {
-    background-color: #2874a6;
+    background-color: #C64743;
 }
 
 ._object-button:disabled {
@@ -104,9 +106,9 @@ h1 {
 }
 
 ._object-check > input[type=checkbox]:checked + ._checker {
-    background-color: #3498db;
+    background-color: #ef5350;
     background-image: url("../images/registerImags/_check.png");
-    border: 0.0625rem solid #3498db;
+    border: 0.0625rem solid #ef5350;
 }
 
 /*warning*/

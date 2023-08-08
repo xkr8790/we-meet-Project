@@ -1,13 +1,11 @@
 package com.bsh.projectwemeet.services;
 
 import com.bsh.projectwemeet.entities.ProfileEntity;
+import com.bsh.projectwemeet.enums.*;
 import com.bsh.projectwemeet.mappers.ProfileMapper;
 import com.bsh.projectwemeet.mappers.RegisterMapper;
 import com.bsh.projectwemeet.entities.RegisterContactCodeEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
-import com.bsh.projectwemeet.enums.RegisterResult;
-import com.bsh.projectwemeet.enums.SendRegisterContactCodeResult;
-import com.bsh.projectwemeet.enums.VerifyRegisterContactCodeResult;
 import com.bsh.projectwemeet.utils.CryptoUtil;
 import com.bsh.projectwemeet.utils.NCloudUtil;
 
@@ -19,11 +17,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -130,5 +126,17 @@ public class RegisterService {
         return this.registerMapper.insertUser(user) > 0 && profileMapper.insertProfile(profile) > 0
                 ? RegisterResult.SUCCESS
                 : RegisterResult.FAILURE;
+    }
+
+    public CheckEmailResult checkEmailResult(String email) {
+        return this.registerMapper.selectUserByEmail(email) == null
+                ? CheckEmailResult.OKAY
+                : CheckEmailResult.DUPLICATE;
+    }
+
+    public CheckNicknameResult checkNicknameResult(String nickname) {
+        return this.registerMapper.selectUserByNickname(nickname) == null
+                ? CheckNicknameResult.OKAY
+                : CheckNicknameResult.DUPLICATE;
     }
 }
