@@ -6,7 +6,8 @@
     <link crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
           rel="stylesheet">
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/Article-Write.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/Article-Write/Article-Write.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/Article-Write/Article-Write-800px.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/write.css}">
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
@@ -95,9 +96,10 @@
 </div>
 
 <form id="Article-Form" style="display: none">
-    <img class="logo" th:src="@{/resources/images/logoImages/logo-224x48.png}">
+    <div class="logo-form">
+        <a href="/"><img class="logo" th:src="@{/resources/images/logoImages/bulletinLogo.png}"></a>
+    </div>
     <section>
-
         <div class="thumbnail-place">
             <img class="thumbnail1" th:src="@{/resources/images/articleImages/thumbnail.png}" alt="x">
             <label for="photo-upload" class="thumbnail-title">썸네일을 등록해주세요</label>
@@ -106,7 +108,7 @@
         </div>
         <div id="Article-Write">
             <input autocomplete="off" name="title" autofocus class="title" type="text"
-                   placeholder="제목을 입력하세요">
+                   placeholder="제목을 입력하세요" maxlength="15">
             <textarea name="content" placeholder="내용을 입력해주세요"></textarea>
             <div class="article-tag">
                 <div class="explainTag">태그를 입력해주세요</div>

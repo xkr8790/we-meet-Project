@@ -1,6 +1,5 @@
-const verifyCode = document.getElementById('verifyCode');
+const recoverPassword = document.getElementById('verifyCode');
 const passwordReset = document.getElementById('passwordReset');
-const passwordCover = document.getElementById('PasswordCover');
 const passwordInput = document.querySelector('input[name="password"]');
 const openEye = document.querySelector('.openEye');
 const closeEye = document.querySelector('.closeEye');
@@ -8,22 +7,18 @@ const closeEye = document.querySelector('.closeEye');
 let code;
 
 window.onload = function() {
-    verifyCode.style.transitionDuration = '300ms'; // 애니메이션 지속 시간 설정
-    verifyCode.style.transitionTimingFunction = 'ease'; // 타이밍 함수 설정
-    verifyCode.style.transitionProperty = 'opacity'; // 타이밍 함수 설정
-    verifyCode.style.opacity = '1';
+    recoverPassword.style.transitionDuration = '300ms'; // 애니메이션 지속 시간 설정
+    recoverPassword.style.transitionTimingFunction = 'ease'; // 타이밍 함수 설정
+    recoverPassword.style.transitionProperty = 'opacity'; // 타이밍 함수 설정
+    recoverPassword.style.opacity = '1';
 }
 
-verifyCode.hide = () =>{
-    verifyCode.classList.add('visible');
+recoverPassword.hide = () =>{
+    recoverPassword.classList.add('visible');
 }
 
 passwordReset.show = () => {
     passwordReset.classList.add('visible');
-}
-
-passwordCover.show = () => {
-    passwordCover.classList.add('visible');
 }
 
 openEye.addEventListener("click", function () {
@@ -31,14 +26,14 @@ openEye.addEventListener("click", function () {
     closeEye.style.display = "block";
     passwordInput.type = 'password';
 });
+
 closeEye.addEventListener("click", function () {
     closeEye.style.display = "none";
     openEye.style.display = "block";
     passwordInput.type = 'text';
 });
-verifyCode.warning = verifyCode.querySelector('[rel="codeWarning"]');
+recoverPassword.warning = recoverPassword.querySelector('[rel="codeWarning"]');
 passwordReset.warning = passwordReset.querySelector('[rel="passwordWarning"]');
-passwordReset.Againwarning = passwordReset.querySelector('[rel="passwordAgainWarning"]');
 
 function showWarning(element, text) {
     element.innerText = text;
@@ -50,15 +45,15 @@ function hideElement(element) {
 } //warning text 삭제
 
 
-verifyCode.onsubmit = e => {
+recoverPassword.onsubmit = e => {
     e.preventDefault();
-    if(verifyCode['EmailCode'].value === ''){
-        showWarning(verifyCode.warning, "인증번호가 비어있습니다");
-        verifyCode['EmailCode'].classList.add('_invalid');
-        verifyCode['EmailCode'].focus();
-        verifyCode['EmailCode'].select();
+    if(recoverPassword['EmailCode'].value === ''){
+        showWarning(recoverPassword.warning, "인증번호가 비어있습니다");
+        recoverPassword['EmailCode'].classList.add('_invalid');
+        recoverPassword['EmailCode'].focus();
+        recoverPassword['EmailCode'].select();
         setTimeout(() => {
-            hideElement(verifyCode.warning);
+            hideElement(recoverPassword.warning);
         }, 1000);
         return;
     }
@@ -66,9 +61,9 @@ verifyCode.onsubmit = e => {
     let emailCode = document.getElementById("verifyCode").elements["EmailCode"].value;
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    formData.append('email', verifyCode['email'].value);
-    formData.append('code', verifyCode['EmailCode'].value);
-    formData.append('salt', verifyCode['salt'].value);
+    formData.append('email', recoverPassword['email'].value);
+    formData.append('code', recoverPassword['EmailCode'].value);
+    formData.append('salt', recoverPassword['salt'].value);
     xhr.open('POST', '/recoverAccount/emailCodeRec');
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -76,26 +71,20 @@ verifyCode.onsubmit = e => {
                 const responseObject = JSON.parse(xhr.responseText);
                 switch (responseObject.result) {
                     case 'failure':
-                        showWarning(verifyCode.warning, "인증 코드가 올바르지 않습니다. 코드를 다시 확인해 주세요.");
-                        verifyCode['EmailCode'].classList.add('_invalid');
-                        verifyCode['EmailCode'].focus();
-                        verifyCode['EmailCode'].select();
-                        setTimeout(() => {
-                            hideElement(verifyCode.warning);
-                        }, 1000);
+                        showWarning(recoverPassword.warning, "인증 코드가 올바르지 않습니다. 코드를 다시 확인해 주세요.");
+                        recoverPassword['EmailCode'].classList.add('_invalid');
+                        recoverPassword['EmailCode'].focus();
+                        recoverPassword['EmailCode'].select();
                         break;
                     case 'failure_expired':
-                        showWarning(verifyCode.warning, "인증 코드가 만료되었습니다. 이메일 인증을 새로 해주세요.");
-                        verifyCode['EmailCode'].classList.add('_invalid');
-                        verifyCode['EmailCode'].focus();
-                        verifyCode['EmailCode'].select();
-                        setTimeout(() => {
-                            hideElement(verifyCode.warning);
-                        }, 1000);
+                        showWarning(recoverPassword.warning, "인증 코드가 만료되었습니다. 이메일 인증을 새로 해주세요.");
+                        recoverPassword['EmailCode'].classList.add('_invalid');
+                        recoverPassword['EmailCode'].focus();
+                        recoverPassword['EmailCode'].select();
                         break;
                     case 'success':
-                        passwordReset['code'].value = verifyCode['EmailCode'].value;
-                        verifyCode.style.display = 'none';
+                        passwordReset['code'].value = recoverPassword['EmailCode'].value;
+                        recoverPassword.style.display = 'none';
                         passwordReset.show();
                         break;
                     default:
@@ -117,6 +106,7 @@ passwordReset.onsubmit = e => {
 
     if (passwordReset['password'].value === '') {
         showWarning(passwordReset.warning, "비밀번호가 비어있습니다");
+        passwordReset['passwordAgain'].classList.remove('_invalid');
         passwordReset['password'].classList.add('_invalid');
         passwordReset['password'].focus();
         passwordReset['password'].select();
@@ -125,6 +115,7 @@ passwordReset.onsubmit = e => {
 
     else if (!new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]};:\'",<.>/?]{8,50})$').test(passwordReset['password'].value)) {
         showWarning(passwordReset.warning,"비밀번호가 규칙에 맞지않습니다");
+        passwordReset['passwordAgain'].classList.remove('_invalid');
         passwordReset['password'].classList.add('_invalid');
         passwordReset['password'].focus();
         passwordReset['password'].select();
@@ -132,8 +123,7 @@ passwordReset.onsubmit = e => {
     }
 
     else if (passwordReset['passwordAgain'].value === '') {
-        hideElement(passwordReset.warning);
-        showWarning(passwordReset.Againwarning,"비밀번호 재입력이 비어있습니다");
+        showWarning(passwordReset.warning,"비밀번호 재입력이 비어있습니다");
         passwordReset['password'].classList.remove('_invalid');
         passwordReset['passwordAgain'].classList.add('_invalid');
         passwordReset['passwordAgain'].focus();
@@ -142,7 +132,8 @@ passwordReset.onsubmit = e => {
     }
 
     else if (passwordReset['passwordAgain'].value !== passwordReset['password'].value) {
-        showWarning(passwordReset.Againwarning,"비밀번호가 일치하지 않습니다");
+        showWarning(passwordReset.warning,"비밀번호가 일치하지 않습니다");
+        passwordReset['password'].classList.remove('_invalid');
         passwordReset['passwordAgain'].classList.add('_invalid');
         passwordReset['passwordAgain'].focus();
         passwordReset['passwordAgain'].select();
@@ -162,10 +153,29 @@ passwordReset.onsubmit = e => {
                 const responseObject = JSON.parse(xhr.responseText);
                 switch (responseObject.result) {
                     case 'failure':
-                       alert('실패');
+                        dialogCover.show();
+                        dialogLayer.show({
+                            title: 'We-Meet',
+                            content: '다시 시도해주세요',
+                            onConfirm: e => {
+                                e.preventDefault();
+                                dialogCover.hide();
+                                dialogLayer.hide();
+                            }
+                        });
                         break;
                     case 'success':
-                        passwordCover.show();
+                        dialogCover.show();
+                        dialogLayer.show({
+                            title: 'We-Meet',
+                            content: '비밀번호가 변경되었습니다',
+                            onConfirm: e => {
+                                location.href = '/'
+                                e.preventDefault();
+                                dialogCover.hide();
+                                dialogLayer.hide();
+                            }
+                        });
                         break;
                     default:
                         alert('서버가 알 수 없는 응답을 반환하였습니다. 잠시 후 다시 시도해 주세요.');

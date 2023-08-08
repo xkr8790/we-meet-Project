@@ -30,15 +30,12 @@
 <main id="main">
     <div class="notice-main">
         <h1>공지사항</h1>
-
         <div>
             <a class="button" href="/noticeWriter" th:if="${user != null && user.isAdmin() == true}">작성</a>
-            <div class="box" th:each="articles: ${article}">
-            <a class="article-notice" th:href="@{noticeView(index=${articles.getIndex()})}">
+            <a class="article-notice" th:each="articles: ${article}" th:href="@{noticeView(index=${articles.getIndex()})}">
                 <span class="title" th:text="${articles.getTitle}"></span>
-                <span class="day"th:text="${#dates.format(articles.getCreatedAt(), 'yyyy-MM-dd')}"></span>
+                <span class="day" th:text="${#dates.format(articles.getCreatedAt(), 'yyyy-MM-dd')}"></span>
             </a>
-            </div>
         </div>
     </div>
 </main>
@@ -66,7 +63,7 @@
             <p class="about-info"><a class="last-a-tag" href="/TermsOfService">이용약관</a> | <a class="last-a-tag"
                                                                                              href="/Privacy-Policy">개인정보처리방침</a>
                 | <a class="last-a-tag"
-                href="/">We-Meet</a>
+                     href="/">We-Meet</a>
         </div>
     </div>
 </footer>

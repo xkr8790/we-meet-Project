@@ -263,6 +263,7 @@ a{
 
 
 #postContainer > .article-box-grid > .article-list > .myArticleLink > span {
+    width: 11rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
