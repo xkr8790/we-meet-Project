@@ -11,20 +11,13 @@
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/bulletin.css}">
     <script defer th:src="@{/resources/scripts/bulletin.js}"></script>
-    <script defer th:if="${session.user != null}"
-            th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
-    <script defer th:if="${session.user != null && LikeResult == null}"
-            th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
-    <script defer th:if="${session.user != null && ReportResult == null}"
-            th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
-    <script defer th:if="${session.user != null && LikeResult != null}"
-            th:src="@{/resources/scripts/bulltinScript/DeleteLike.js}"></script>
-    <script defer th:if="${session.user != null && ReportResult != null}"
-            th:src="@{/resources/scripts/bulltinScript/DeleteReport.js}"></script>
-    <script defer th:if="${session.user!=null && ParticipantsResult.equals('failure')}"
-            th:src="@{/resources/scripts/bulltinScript/InsertParticipate.js}"></script>
-    <script defer th:if="${session.user!=null && ParticipantsResult.equals('success')}"
-            th:src="@{/resources/scripts/bulltinScript/DeleteParticipate.js}"></script>
+    <script defer th:if="${session.user != null}" th:src="@{/resources/scripts/bulltinScript/bulletinlogin.js}"></script>
+    <script defer th:if="${session.user != null && LikeResult == null}" th:src="@{/resources/scripts/bulltinScript/like.js}"></script>
+    <script defer th:if="${session.user != null && ReportResult == null}" th:src="@{/resources/scripts/bulltinScript/report.js}"></script>
+    <script defer th:if="${session.user != null && LikeResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteLike.js}"></script>
+    <script defer th:if="${session.user != null && ReportResult != null}" th:src="@{/resources/scripts/bulltinScript/DeleteReport.js}"></script>
+    <script defer th:if="${session.user!=null && ParticipantsResult.equals('failure')}" th:src="@{/resources/scripts/bulltinScript/InsertParticipate.js}"></script>
+    <script defer th:if="${session.user!=null && ParticipantsResult.equals('success')}" th:src="@{/resources/scripts/bulltinScript/DeleteParticipate.js}"></script>
     <script defer th:src="@{/resources/scripts/bulletinMap.js}"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ecdfc98a188ee7f356932f3bc0506125&libraries=services"></script>
@@ -68,8 +61,8 @@
             <img class="image" th:src="@{/article/read/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
-                    <img class="profile" th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
-                    <p class="nickname" th:text="${articleUser.getNickname()}">닉네임</p>
+                        <img class="profile" th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
+                        <p class="nickname" th:text="${articleUser.getNickname()}">닉네임</p>
                 </div>
                 <div class="bulletin-title" th:text="${article.getTitle()}">
                 </div>
@@ -150,12 +143,12 @@
                 <div class="login-after-human" th:if="${session.user != null}">
                     <p>함께 할 멤버!</p>
                     <div class="profile">
+                     <span th:if="${profile1 == null}">아직 참여한 인원이 없습니다!!</span>
                      <span th:each="participantsArray : ${participantsArray}">
                             <a th:href="@{'/profile/?nickname='+ ${participantsArray.getNickname()}}">
                               <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
                             </a>
                      </span>
-
                     </div>
 
                     <!--  자신의 게시판일때   -->
@@ -164,14 +157,13 @@
                     <!--  참여하기 클릭시 인원 1명증가하고 참여취소 버튼으로 바뀜    -->
 
                     <!--  자신의 게시판일때   -->
-                    <div class="participating-button"
-                         th:if="${session.user!=null && ParticipantsResult.equals('failure_mine')}">
+                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure_mine')}">
+                        <span>자기게시판은 참여할수 없습니다 !!</span>
                     </div>
                     <!--  참여하기 클릭시 인원 1명증가하고 참여취소 버튼으로 바뀜    -->
 
                     <!--  참가안했을때    -->
-                    <div class="participating-button"
-                         th:if="${session.user!=null && ParticipantsResult.equals('failure')}">
+                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure')}">
                         <button name="Participate" th:data-index="${article.getIndex()}">
                             참여하기
                         </button>
@@ -179,8 +171,7 @@
                     <!--  참여하기 클릭시 인원 1명증가하고 참여취소 버튼으로 바뀜    -->
 
                     <!-- 참여되었을때 -->
-                    <div class="participating-button"
-                         th:if="${session.user!=null && ParticipantsResult.equals('success')}">
+                    <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('success')}">
                         <button name="ParticipateDelete" th:data-index="${article.getIndex()}">
                             참여취소
                         </button>
@@ -238,8 +229,7 @@
         <div class="subtitle">이런 만남은 어때요?</div>
         <div class="container">
             <!--            여기서 부터 list-->
-            <div class="previewContainer" th:if="${!articles.getCategory().equals('완료')}"
-                 th:each="articles : ${articles}">
+            <div class="previewContainer" th:if="${!articles.getCategory().equals('완료')}" th:each="articles : ${articles}">
 
                 <a class="img" th:href="@{./read(index=${articles.getIndex()})}">
                     <img th:src="@{./image(index=${articles.getIndex()})}" alt="">
@@ -251,12 +241,9 @@
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
                         <div class="human">
-                            <img class="human-image" th:src="@{/article/read/profile(index=${articles.getIndex()})}"
-                                 alt="">
-                            <img class="human-image" onerror="this.style.display='none'"
-                                 th:src="@{/article/profile/participant1(index=${articles.getIndex()})}">
-                            <img class="human-image" onerror="this.style.display='none'"
-                                 th:src="@{/article/profile/participant2(index=${articles.getIndex()})}">
+                            <img class="human-image" th:src="@{/article/read/profile(index=${articles.getIndex()})}" alt="">
+                            <img class="human-image" onerror="this.style.display='none'" th:src="@{/article/profile/participant1(index=${articles.getIndex()})}">
+                            <img class="human-image" onerror="this.style.display='none'" th:src="@{/article/profile/participant2(index=${articles.getIndex()})}">
                             <i class="fa-solid fa-user-group"></i>
                             <div class="number" th:text="${articles.getParticipation()}">인원</div>
                             <div class="number">/</div>

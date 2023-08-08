@@ -45,26 +45,9 @@ public interface ArticleMapper {
 
     ArticleEntity selectArticleProfileByIndex(@Param(value = "index") int index);
 
-
-
-
-
-
-
-
     ArticleEntity selectParticipantProfileByIndex(@Param(value = "index") int index);
+
     ArticleEntity selectParticipantProfileByIndexTwo(@Param(value = "index") int index);
-
-
-
-
-
-
-
-
-
-
-
 
     ArticleEntity selectArticleByPatchIndex(@Param(value = "index") int index);
     //게시물 수정 인덱스 찾기

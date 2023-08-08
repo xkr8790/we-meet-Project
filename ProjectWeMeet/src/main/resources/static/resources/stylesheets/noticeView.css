@@ -61,6 +61,7 @@ form > .content {
     width: 100%;
     margin-left: 0.4rem;
     height: auto;
+    line-height: 40px;
 }
 
 

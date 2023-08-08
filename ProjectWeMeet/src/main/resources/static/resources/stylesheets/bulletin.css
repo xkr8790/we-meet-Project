@@ -353,7 +353,7 @@ allContainer > .header > .login > a {
 
 .announcement > .participant > .participantContainer > .login-after-human > .profile{
     width: 90%;
-    height: auto;
+    height: 300px;
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -379,7 +379,7 @@ allContainer > .header > .login > a {
 
 .announcement > .participant > .participantContainer > .login-after-human > .participating-button {
     margin: 0.5rem;
-    width: 10rem;
+    width: 15rem;
     height: 2rem;
     align-items: center;
     display: flex;

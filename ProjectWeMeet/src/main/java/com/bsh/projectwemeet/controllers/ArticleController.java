@@ -62,8 +62,7 @@ public class ArticleController {
     public ModelAndView getArticle(@RequestParam(value = "p", defaultValue = "1", required = false) int requestPage,
                                    @RequestParam(value = "category", required = false) String category,
                                    @RequestParam(value = "c", defaultValue = "", required = false) String searchCriterion,
-                                   @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery,
-                                   HttpSession session) {
+                                   @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery) {
 
         ModelAndView modelAndView = new ModelAndView("home/article");
 
@@ -115,6 +114,8 @@ public class ArticleController {
         ProfileEntity[] participantsArray = this.articleService.selectParticipantsProfile(index);
         //참가자의 참여부를 따지기
         ProfileEntity[] profiles = this.articleService.ParticipateProfile(index, email);
+        ParticipantsEntity profile1 = this.articleService.profileAs(index);
+
 
 
 
@@ -132,6 +133,7 @@ public class ArticleController {
         modelAndView.addObject("profile",profile);
         modelAndView.addObject("participantsArray",participantsArray);
         modelAndView.addObject("profiles",profiles);
+        modelAndView.addObject("profile1",profile1);
         return modelAndView;
     }//bulletin 게시판 나타내기
 
@@ -474,11 +476,6 @@ public class ArticleController {
         }
         return response;
     }
-
-
-
-
-
 
 
 
