@@ -271,7 +271,7 @@ header > a > img {
     }
 
     .notice-writer-body > .item > .textInput > input {
-        width: 96%;
+        width: 100%;
     }
 
     .notice-writer-body > .item > .client-voice {
@@ -279,9 +279,9 @@ header > a > img {
         width: 100%;
     }
 
-    .notice-writer-body > .item > .client-voice > .content {
-        width: 95%;
-    }
+    /*.notice-writer-body > .item > .client-voice > textarea {*/
+    /*    width: 95%;*/
+    /*}*/
 
     .notice-writer-body > .send {
         width: 96%;
