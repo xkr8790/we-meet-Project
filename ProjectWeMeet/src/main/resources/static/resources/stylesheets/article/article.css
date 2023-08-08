@@ -6,7 +6,6 @@ html {
 }
 
 * {
-    /*border: 1px solid red;*/
     text-decoration: none;
     margin: 0;
     padding: 0;
@@ -38,7 +37,7 @@ body{
         background-color: var(--concept-color-light);
         overflow: hidden;
         z-index: 100;
-        width: 70%;
+        width: 80%;
         height: 100%;
         margin: 0 auto;
     }
@@ -60,10 +59,11 @@ body{
         margin-block: unset;
         margin-inline: unset;
         padding-inline: unset;
+        width: 10rem;
     }
 
-    #headerContainer > .header > .menu > .item + .item {
-        margin-left: 0.75rem;
+    #headerContainer > .header > .menu > .item{
+        margin-right: 1rem;
     }
 
     #headerContainer > .header > .menu > .item > a > .profile {
@@ -116,6 +116,37 @@ body{
         margin: 0 3rem;
     }
 
+    #headerContainer > .header > .menu > .item > a > i:hover{
+        color: #FB6161;
+    }
+    #headerContainer > .header > .menu > .item > a > .tooltip{
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    #headerContainer > .header > .menu > .item:hover .tooltip{
+        opacity: 1;
+        visibility: visible;
+        font-size: 0.8rem;
+    }
+    #headerContainer > .header > .menu > .item > button > a >i{
+        font-size: 1.2rem;
+    }
+    #headerContainer > .header > .menu > .item > button > a >i:hover{
+        color: #FB6161;
+    }
+    #headerContainer > .header > .menu > .item > button > a >.tooltip{
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    #headerContainer > .header > .menu > .item > button:hover .tooltip{
+        opacity: 1;
+        visibility: visible;
+        font-size: 0.8rem;
+    }
     /*----------------------------------------------------------------------------------------------------*/
     .category-750px {
         display: none;
