@@ -127,4 +127,16 @@ public class RegisterService {
                 ? RegisterResult.SUCCESS
                 : RegisterResult.FAILURE;
     }
+
+    public CheckEmailResult checkEmailResult(String email) {
+        return this.registerMapper.selectUserByEmail(email) == null
+                ? CheckEmailResult.OKAY
+                : CheckEmailResult.DUPLICATE;
+    }
+
+    public CheckNicknameResult checkNicknameResult(String nickname) {
+        return this.registerMapper.selectUserByNickname(nickname) == null
+                ? CheckNicknameResult.OKAY
+                : CheckNicknameResult.DUPLICATE;
+    }
 }
