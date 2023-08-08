@@ -60,6 +60,8 @@ public class ProfileService {
                 : profile;
     }
 
+
+
     public DeleteUserResult deleteThumbnailResult(HttpSession session, ProfileEntity profile) {
         UserEntity user = (UserEntity) session.getAttribute("user");
         if (user == null) {
