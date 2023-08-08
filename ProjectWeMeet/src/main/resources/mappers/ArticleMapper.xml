@@ -269,11 +269,6 @@
     </select>
 
 
-
-
-
-
-
     <select  id="selectParticipantProfileByIndex"
              resultType="com.bsh.projectwemeet.entities.ArticleEntity">
         SELECT `article`.`index`         AS `index`,

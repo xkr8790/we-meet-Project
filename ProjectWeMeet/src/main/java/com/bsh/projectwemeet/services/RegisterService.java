@@ -119,9 +119,9 @@ public class RegisterService {
             profile.setEmail(user.getEmail())
                     .setCreatedAt(new Date())
                     .setProfileThumbnail(defaultProfileImageBytes)
-                    .setProfileThumbnailMime("image/png")
+                    .setProfileThumbnailMime("image/png")// 이미지의 MIME 타입을 설정해야 합니다.
                     .setIntroduceText("마이페이지에서 수정해주세요")
-                    .setNickname(user.getNickname());// 이미지의 MIME 타입을 설정해야 합니다.
+                    .setNickname(user.getNickname());
 
         } catch (IOException e) {
 

@@ -1,3 +1,40 @@
+
+/*페이지 및 검색 버튼 및 footer 크게 반응형이 필요하지 않아서 common으로 나눔*/
+/*--------------------------------------------------------------------------------------------------------------*/
+.pageContainer {
+    list-style-type: none;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.pageContainer > .page {
+    user-select: none;
+}
+
+.pageContainer > .page > .link {
+    height: 2.25rem;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 0.75rem;
+    text-decoration: none;
+    background-color: #FB6161;
+    color: white;
+    margin: 0.1rem;
+    border-radius: 0.3rem;
+    font-weight: 450;
+}
+
+.pageContainer > .page > .link:hover {
+    filter: grayscale(20%); /* 회색 필터 적용 */
+}
+
+/*--------------------------------------------------------------------------------------------------------------*/
 .article-searchResult {
     width: 28rem;
     height: 16rem;
@@ -18,7 +55,7 @@
 }
 
 .search-box > .search {
-    margin: 1rem;
+    margin: 1rem 0 2rem 0;
 }
 
 .search-box > .search > .select {
@@ -30,7 +67,7 @@
 .search-box > .search > .input {
     width: 180px;
     height: 28px;
-    border:1px solid #ddd;
+    border: 1px solid #ddd;
     padding: 0.2rem;
     border-radius: 0.3rem;
 }
@@ -53,56 +90,139 @@
     cursor: pointer;
 }
 
+/*--------------------------------------------------------------------------------------------------------------*/
 
+@media screen and (min-width: 951px) {
+    #footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        font-weight: bold;
+        font-size: 12px;
+    }
 
-#footer {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    #footer > .wrap {
+        padding-top: 1rem;
+        max-width: 1189px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #footer > .wrap > .grid-twin {
+        line-height: 20px;
+        margin-left: 3rem;
+        color: #666;
+    }
+
+    #footer > .wrap > .grid-twin > p {
+        margin-bottom: 0.5rem;
+    }
+
+    #footer > .wrap > .grid-twin > .about-a-tag {
+        color: #666
+    }
+
+    #footer > .wrap > .grid-twin > p > a {
+        text-decoration: none;
+        color: black;
+        font-size: 0.875rem;
+        font-weight: 700;
+        line-height: 1.43;
+    }
+
+    #footer > .wrap > .grid-twin.big {
+        grid-column: 3 / span 2;
+    }
 }
 
-#footer > .wrap {
-    padding-top: 2rem;
-    width: 75rem;
-    height: 10rem; /* Adjust the height according to your needs */
-    /*background-color: aqua;*/
-    display: grid;
-    row-gap: 3rem;
-    column-gap: 3rem;
-    grid-template-columns: repeat(4, 1fr);
-    margin-bottom: 11.375rem;
+@media screen and (max-width: 950px) {
+    #footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    #footer > .wrap {
+        max-width: 500px;
+        padding-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #footer > .wrap > .grid-twin {
+        line-height: 20px;
+        margin-left: 3rem;
+        color: #666;
+    }
+
+    #footer > .wrap > .grid-twin > p {
+        margin-bottom: 0.5rem;
+    }
+
+    #footer > .wrap > .grid-twin > .about-a-tag {
+        color: #666
+    }
+
+    #footer > .wrap > .grid-twin > p > a {
+        text-decoration: none;
+        color: black;
+        font-size: 0.875rem;
+        font-weight: 700;
+        line-height: 1.43;
+    }
+
+    #footer > .wrap > .grid-twin.big {
+        margin-top: 1.5rem;
+        grid-column: 1 / span 2;
+    }
+}
+@media screen and (max-width: 620px) {
+    #footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    #footer > .wrap {
+        max-width: 500px;
+        padding-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #footer > .wrap > .grid-twin {
+        line-height: 20px;
+        color: #666;
+    }
+
+    #footer > .wrap > .grid-twin > p {
+        margin-bottom: 0.5rem;
+    }
+
+    #footer > .wrap > .grid-twin > .about-a-tag {
+        color: #666
+    }
+
+    #footer > .wrap > .grid-twin > p > a {
+        text-decoration: none;
+        color: black;
+        font-size: 0.875rem;
+        font-weight: 700;
+        line-height: 1.43;
+    }
+
+    #footer > .wrap > .grid-twin.big {
+        margin-top: 1.5rem;
+        grid-column: 1 / span 2;
+    }
 }
 
-#footer > .wrap > .grid-twin {
-    /*background-color: #f0a0a0;*/
-    color: #666;
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 1.43;
-}
-
-#footer > .wrap > .grid-twin > .about-info > .about-a-tag {
-    color: black;
-}
-
-#footer > .wrap > .grid-twin > .small-info {
-    font-size: 0.75rem;
-    margin-bottom: 3rem;
-}
-
-#footer > .wrap > .grid-twin.big {
-    grid-column-start: 3;
-    grid-column-end: 5;
-}
-
-#footer > .wrap > .grid-twin > .about-info > .secone-info {
-    padding-left: -2rem;
-}
-
-#footer > .wrap > .grid-twin > .about-info > .last-a-tag {
-    color: black;
-}
 
 

@@ -6,9 +6,22 @@
     <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverEmail.css}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/recoverPassword.css}">
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}" type="image/x-icon">
-    <script defer th:src="@{/resources/scripts/verifyCode.js}"></script>
+    <script defer th:src="@{/resources/scripts/recoverPassword.js}"></script>
+    <script defer th:src="@{/resources/scripts/commonDialog.js}"></script>
+
 </head>
 <body>
+<div id="dialogCover"></div>
+<div id="dialogLayer">
+    <span class="title" rel="title"></span>
+    <span class="content" rel="content"></span>
+
+    <div class="button-container">
+        <a class="button cancel" href="#" rel="cancel">취소</a>
+        <a class="button confirm" href="#" rel="confirm">확인</a>
+    </div>
+</div>
+
 
 <form id="verifyCode">
     <img class="Logo" src="/resources/images/logoImages/logo-224x80.png">
@@ -41,24 +54,14 @@
             </span>
 
         </div>
-
-        <span class="warning password" rel="passwordWarning"></span>
         <input autocomplete="off" class="input" maxlength="50" name="passwordAgain" placeholder="변경 비밀번호 확인"
                type="password">
-        <span class="warning password" rel="passwordAgainWarning"></span>
+        <span class="warning password" rel="passwordWarning"></span>
         <div class="button-container">
             <input class="submit _color-concept" name="send" type="submit" value="재설정">
         </div>
     </div>
 </form>
-
-<form id="PasswordCover">
-    <div class="cover">
-        <div class="cover-text">비밀번호가 변경되었습니다</div>
-        <a class="link" href="/">확인</a>
-    </div>
-</form>
-
 
 </body>
 </html>

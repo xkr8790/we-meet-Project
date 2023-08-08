@@ -6,17 +6,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-common.css}">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article.css}" media="screen and (min-width: 1050px)">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-1050px.css}" media="screen and (max-width: 1050px)">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-950px.css}" media="screen and (max-width: 950px)">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-520px.css}" media="screen and (max-width: 520px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-1050px.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-950px.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/article/article-520px.css}">
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
     <script defer th:src="@{/resources/scripts/article.js}"></script>
 </head>
 <body>
 
 <form id="Article">
-    <div  id="headerContainer">
+    <div id="headerContainer">
         <header class="_content header">
             <ul class="menu left">
                 <li class="item main-menu">
@@ -45,16 +45,14 @@
                 <li class="item">
                     <a href="/profile/profile" class="icon-text-button">
                         <div class="profile">
-                            <img  th:src="@{/article/profile}">
+                            <img th:src="@{/article/profile}">
                         </div>
                     </a>
                 </li>
                 <li class="item">
-                    <button>
-                        <a href="/write">
-                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                        </a>
-                    </button>
+                    <a class="write" href="/write">
+                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                    </a>
                 </li>
                 <li class="item">
                     <button data-action="logout">
@@ -148,13 +146,8 @@
             </ul>
     </section>
 
-
-
-
-
    <div class="article-box">
     <div class="article-box-grid">
-
        <div class="article-list"  th:if="${!article.getCategory().equals('완료')}" th:each="article : ${articleCategory}">
 
                             <a class="article-link" th:href="@{${article.getCategory().equals('완료') ? 'article/review' : 'article/read'} (index = ${article.getIndex()})}">
@@ -212,12 +205,29 @@
            && category == '' &&  searchResultCount == 0 }">
                                     검색 결과가 존재하지 않습니다.</span>
        </div>
-      <ul class="pageContainer" th:if="${searchResultCount>0}">
-        <li class="page" th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
-                            <a class="link" th:href="@{'/article' (p = ${page},category=${category},c = ${searchCriterion}, q = ${searchQuery})}"
-                               th:text="${page}"></a>
-                        </li>
-     </ul>
+       <ul class="pageContainer" th:if="${searchResultCount>0}">
+           <li class="page" th:if="${pagingCategory.requestPage > 1}">
+               <a class="link" th:href="@{'/article' (p = ${1},category=${category},c = ${searchCriterion}, q = ${searchQuery})}">처음</a>
+           </li>
+           <li class="page" th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
+               <a class="link"
+                  th:href="@{'/article' (p = ${page},category=${category},c = ${searchCriterion}, q = ${searchQuery})}"
+                  th:text="${page}"></a>
+           </li>
+           <li class="page" th:if="${pagingCategory.requestPage > 1}">
+               <a class="link"
+                  th:href="@{'/article' (p = ${pagingCategory.requestPage - 1}, category=${category},c = ${searchCriterion}, q = ${searchQuery})}">이전</a>
+           </li>
+
+           <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
+               <a class="link"
+                  th:href="@{'/article' (p = ${pagingCategory.requestPage + 1}, category=${category},c = ${searchCriterion}, q = ${searchQuery})}">다음</a>
+           </li>
+           <li class="page" th:if="${pagingCategory.requestPage < pagingCategory.maxPage}">
+               <a class="link"
+                  th:href="@{'/article' (p = ${pagingCategory.maxPage},category=${category},c = ${searchCriterion}, q = ${searchQuery})}">마지막</a>
+           </li>
+       </ul>
        <section class="search-box">
            <div class="search">
                <select class="select" name="c" id="lang">

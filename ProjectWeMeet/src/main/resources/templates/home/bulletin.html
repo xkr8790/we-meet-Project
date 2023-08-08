@@ -143,6 +143,7 @@
                 <div class="login-after-human" th:if="${session.user != null}">
                     <p>함께 할 멤버!</p>
                     <div class="profile">
+                     <span th:if="${profile1 == null}">아직 참여한 인원이 없습니다!!</span>
                      <span th:each="participantsArray : ${participantsArray}">
                             <a th:href="@{'/profile/?nickname='+ ${participantsArray.getNickname()}}">
                               <img th:src="@{/article/Participate/profile(index=${article.getIndex()},email=${participantsArray.getEmail()})}">
@@ -157,6 +158,7 @@
 
                     <!--  자신의 게시판일때   -->
                     <div class="participating-button" th:if="${session.user!=null && ParticipantsResult.equals('failure_mine')}">
+                        <span>자기게시판은 참여할수 없습니다 !!</span>
                     </div>
                     <!--  참여하기 클릭시 인원 1명증가하고 참여취소 버튼으로 바뀜    -->
 

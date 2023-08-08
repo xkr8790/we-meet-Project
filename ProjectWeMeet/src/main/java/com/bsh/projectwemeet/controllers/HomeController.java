@@ -103,48 +103,17 @@ public class HomeController {
 
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getParticipantProfileThumbnail(HttpSession session) {
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
 
         ProfileEntity loginProfiles = this.homeService.selectLoginProfile(session);
 
         ResponseEntity<byte[]> response;
-        if (loginProfiles == null) {
+        if (loginProfiles == null){
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(loginProfiles.getProfileThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "jpg", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                // HTTP 응답 헤더 설정
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        }else{
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(loginProfiles.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(loginProfiles.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(loginProfiles.getProfileThumbnail(),headers,HttpStatus.OK);
         }
         return response;
     }
