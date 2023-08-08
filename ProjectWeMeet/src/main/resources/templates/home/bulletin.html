@@ -240,15 +240,16 @@
                     <div class="title" th:text="${articles.getTitle()}">모여라~~ 영웅을 기다린다</div>
                     <div class="time" th:text="${#dates.format(articles.getAppointmentStartDate(), 'MM월 dd일')}"></div>
                     <div class="participant">
+                        <input name="index" hidden th:value="${articles.getIndex()}">
                         <div class="human">
                             <img class="human-image" th:src="@{/article/read/profile(index=${articles.getIndex()})}" alt="">
-                            <img class="human-image" onerror="this.style.display='none'" th:src="@{/article/profile/participant1(index=${articles.getIndex()})}">
-                            <img class="human-image" onerror="this.style.display='none'" th:src="@{/article/profile/participant2(index=${articles.getIndex()})}">
-                            <i class="fa-solid fa-user-group"></i>
-                            <div class="number" th:text="${articles.getParticipation()}">인원</div>
-                            <div class="number">/</div>
-                            <div class="number" th:text="${articles.getLimitPeople()}">인원</div>
+                            <img class="human-image" rel="thumbnail">
+                            <img class="human-image" rel="thumbnail">
                         </div>
+                        <i class="fa-solid fa-user-group"></i>
+                        <div class="number" th:text="${articles.getParticipation()}">인원</div>
+                        <div class="number">/</div>
+                        <div class="number" th:text="${articles.getLimitPeople()}">인원</div>
                     </div>
                 </div>
             </div>
