@@ -590,3 +590,35 @@ registerForm['addressSecondary'].addEventListener('focusout', () => {
     }
 });
 
+//창의 크기(620기준)에 따른 placeholder의 내용 변경
+
+const nicknameInput = document.querySelector('.nickname');
+const addressPrimaryInput = document.querySelector('.addressPrimary');
+const addressSecondaryInput = document.querySelector('.addressSecondary');
+const contactInput = document.querySelector('.contact');
+
+if (window.innerWidth <= 620) {
+    nicknameInput.placeholder="별명";
+    addressPrimaryInput.placeholder = "'우편번호 찾기 클릭'";
+    addressSecondaryInput.placeholder="상세 주소";
+    contactInput.placeholder="연락처";
+} else {
+    nicknameInput.placeholder="별명(2글자 이상 10글자 이하 영어 대소문자,한글)";
+    addressPrimaryInput.placeholder = "'우편번호 찾기' 버튼을 클릭하여 주소를 지정해 주세요.";
+    addressSecondaryInput.placeholder="상세 주소를 입력해 주세요. (건물 이름 및 동, 호 등)";
+    contactInput.placeholder="연락처 ('-' 없이 입력)";
+}
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 620) {
+        nicknameInput.placeholder="별명";
+        addressPrimaryInput.placeholder = "'우편번호 찾기 클릭'";
+        addressSecondaryInput.placeholder="상세 주소";
+        contactInput.placeholder="연락처";
+    } else {
+        nicknameInput.placeholder="별명(2글자 이상 10글자 이하 영어 대소문자,한글)";
+        addressPrimaryInput.placeholder = "'우편번호 찾기' 버튼을 클릭하여 주소를 지정해 주세요.";
+        addressSecondaryInput.placeholder="상세 주소를 입력해 주세요. (건물 이름 및 동, 호 등)";
+        contactInput.placeholder="연락처 ('-' 없이 입력)";
+    }
+});

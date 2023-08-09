@@ -550,18 +550,6 @@ a.link:visited {
         height: 40px;
     }
 
-    .addressPrimary::placeholder {
-        content: "'우편번호 찾기 클릭'";
-    }
-    .addressSecondary::placeholder{
-        content: "상세 주소";
-    }
-    .nickname::placeholder{
-        content: "별명";
-    }
-    .contact::placeholder{
-        content: "연락처";
-    }
 }
 
 /*step-3*/
