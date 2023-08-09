@@ -309,6 +309,26 @@ nextButton.addEventListener("click", function(event) {
     articleForm.style.display='block';
 });
 
+
+//창 크기에 따른 placeholder 수정
+
+
+
+if (window.innerWidth <= 805) {
+    placeInput.placeholder="장소";
+} else {
+    placeInput.placeholder="장소(지도에서 장소를 검색해 주세요)";
+}
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 805) {
+        placeInput.placeholder="장소";
+    } else {
+        placeInput.placeholder="장소(지도에서 장소를 검색해 주세요)";
+    }
+});
+
+
 function goBack(){
     window.history.back();
 }
