@@ -426,8 +426,8 @@ a{
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 1rem 2rem 2rem 2rem;
-    width: 25rem;
+    padding: 1rem 1rem 1rem 2rem;
+    width: 27.5rem;
     height: 70%;
     list-style-type: none;
     z-index: 7;
@@ -462,13 +462,13 @@ a{
     position: relative;
     box-shadow: 1px 1px 2px 0 #888;
     background-size: cover;
-    font-size: 0.75rem;
 }
 
 #popup.step-2 > .popup-content.step-2 > .profile_file {
     background-color: white;
     margin-top: 0.625rem;
     margin-right: 0.625rem;
+    margin-left: 0.725rem;
 
     align-items: center;
     display: flex;
@@ -476,12 +476,45 @@ a{
     justify-content: center;
 }
 
+
 #popup.step-2 > .popup-content.step-2 > .profile_file > .change {
     background-color: white;
-    font-size: inherit;
+    font-size: 1rem;
     text-decoration: underline;
     cursor: pointer;
     margin-right: 1rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profile_file > .profileDelete {
+    background-color: white;
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+    border: none;
+}
+
+#popup.step-2 > .popup-content.step-2 > ._object-button {
+    margin-top: 1rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#popup.step-2 > .popup-content.step-2 > ._object-button > .change {
+    background-color: #5F5F5F;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
+}
+
+#popup.step-2 > .popup-content.step-2 > ._object-button > .change:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 
@@ -496,161 +529,6 @@ a{
     border: 0;
 }
 
-#popup.step-2 > .popup-content.step-2 > .profile_file > .delete > .profileDelete {
-    background-color: white;
-    font-size: inherit;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-
-#popup.step-2 > .popup-content.step-2 > .passwordReset {
-    background-color: white;
-
-    margin-bottom: 1rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .passwordReset > .title {
-    background-color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 0.625rem;
-
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#popup.step-2 > .popup-content.step-2 > .passwordReset > .password {
-    background-color: white;
-    color: #959595;
-    margin-bottom: 0.625rem;
-    font-size: 1rem;
-    width: 60%;
-    height: 10rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .passwordReset > .passwordRe {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 75%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .passwordReset > .resetButton {
-    background-color: #9da3d6;
-    color: black;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    opacity: 0.8;
-}
-
-#popup.step-2 > .popup-content.step-2 > .nicknameReset {
-    background-color: white;
-
-    margin-bottom: 1rem;
-}
-
-
-#popup.step-2 > .popup-content.step-2 > .nicknameReset > .title {
-    background-color: white;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.625rem;
-
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#popup.step-2 > .popup-content.step-2 > .nicknameReset > .nickname {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 75%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .nicknameReset > .resetButton {
-    background-color: #9da3d6;
-    color: black;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    opacity: 0.8;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset {
-    background-color: white;
-
-    margin-bottom: 1rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .title {
-    background-color: white;
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.625rem;
-
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressFirst {
-    background-color: white;
-    margin-bottom: 0.625rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressFirst > .address {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 70%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressFirst > .findButton {
-    background-color: #9da3d6;
-    color: black;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    opacity: 0.8;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressSecond {
-    background-color: white;
-    margin-bottom: 0.625rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressSecond > .address {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 95%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressThird {
-    background-color: white;
-}
-
-#popup.step-2 > .popup-content.step-2 > .addressReset > .addressThird > .address {
-    background-color: white;
-    color: #959595;
-    font-size: 1rem;
-    width: 95%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-}
 
 #popup.step-2 > .popup-content.step-2 > .die {
     background-color: white;
@@ -668,7 +546,7 @@ a{
 ._object-box {
     align-items: flex-start;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-start;
 }
 
@@ -686,7 +564,7 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .box {
-    align-items: stretch;
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -694,7 +572,6 @@ a{
     height: auto;
     padding: 0.5rem 0;
     border: 1px solid black;
-    border-radius: 0.5rem;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .box > .subTitle {
@@ -706,7 +583,7 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .box > .object {
-    align-items: start;
+    /*align-items: center;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -724,19 +601,42 @@ a{
     color: #ef5350;
 }
 
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object {
+    display: flex;
+    justify-content: center;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 #popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-box > ._object-input {
     margin-bottom: 0.4rem;
+
+    border-radius: 0.25rem;
     height: 1.2rem;
     padding-left: 0.3rem;
-    width: 125%;
+    width: 15rem;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button {
-    width: 131%;
-}
 
 #popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button > .change {
+    background-color: #5F5F5F;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
     float: right;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button > .change:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object {
@@ -747,6 +647,10 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-box > ._object-input {
+    width: 15rem;
+    padding-left: 0.3rem;
+    height: 1.2rem;
+    border-radius: 0.25rem;
     margin-bottom: 0.4rem;
 }
 
@@ -755,7 +659,19 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-button > .change {
+    background-color: #5F5F5F;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
     float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-button > .change:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 
@@ -767,6 +683,10 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-box > ._object-input {
+    width: 15rem;
+    padding-left: 0.3rem;
+    height: 1.2rem;
+    border-radius: 0.25rem;
     margin-bottom: 0.4rem;
 }
 
@@ -775,7 +695,19 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button > .change {
+    background-color: #5F5F5F;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
     float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button > .change:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > .message-box {
@@ -797,6 +729,14 @@ a{
     justify-content: start;
 }
 
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > ._object-box > ._object-input {
+    width: 10rem;
+    padding-left: 0.3rem;
+    height: 1.2rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.4rem;
+}
+
 
 #popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container {
     align-items: center;
@@ -805,11 +745,61 @@ a{
     justify-content: start;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button {
-    align-items: end;
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-box {
+    align-items: center;
     display: flex;
-    /*flex-direction: ;*/
-    justify-content: end;
+    flex-direction: row;
+    justify-content: start;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-box > ._object-input {
+    width: 10rem;
+    padding-left: 0.3rem;
+    height: 1.2rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.4rem;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-button {
+    background-color: #dddddd;
+    margin-left: 0.625rem;
+    margin-bottom: 0.4rem;
+    border-radius: 0.15rem;
+    color: black;
+    font-style: inherit;
+    border: none;
+    padding: 0.2rem;
+    opacity: 0.8;
+    float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button > .change {
+    background-color: #5F5F5F;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
+    float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button > .change:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .subTitle {
@@ -824,20 +814,90 @@ a{
     width: 100%;
 }
 
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container > ._object-label {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container > ._object-label > ._object-input {
+    width: 12rem;
+    padding-left: 0.3rem;
+    height: 1.2rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.4rem;
+}
+
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box {
-    width: 83%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container > ._object-button {
+    background-color: #dddddd;
+    border-radius: 0.3rem;
+    color: black;
+    font-style: inherit;
+    font-size: 0.5rem;
+    border: none;
+    padding: 0.3rem 0.15rem 0.3rem 0.15rem;
+    margin-bottom: 0.4rem;
+    margin-left: 0.1rem;
+    opacity: 0.8;
+    float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container > ._object-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box > ._object-input {
-    width: 100%;
+    width: 12rem;
+    padding-left: 0.3rem;
+    height: 1.2rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.4rem;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button {
-    align-items: end;
-    display: flex;
-    justify-content: end;
-    width: 85%;
+    width: 100%;
 }
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button > .change {
+    background-color: #5F5F5F;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    margin-right: 4.5rem;
+    opacity: 0.8;
+    float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button > .change:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
 
 #popup.step-2 > .popup-content.step-2 > .__body > .option-container {
     align-items: start;
@@ -849,8 +909,34 @@ a{
     width: 100%;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .option-container > * > input {
-    height: 2rem;
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container > .die > .link {
+    background-color: #FB6161;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container > .die > .link:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container > .finish > .close {
+    background-color: #FB6161;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container > .finish > .close:hover {
+    cursor: pointer;
+    opacity: 1;
 }
 
 /*dialog 배경화면 어둡게-주소찾기 클릭시 사용*/

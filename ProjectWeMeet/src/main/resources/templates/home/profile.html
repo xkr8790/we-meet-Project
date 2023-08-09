@@ -7,11 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>프로필</title>
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"/>
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile.css}" media="screen and (min-width:1501px)">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-1500px.css}" media="screen and (max-width: 1500px) and (min-width: 1350px)">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-1300px.css}" media="screen and (max-width:1349px) and (min-width: 1080px)">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-950px.css}" media="screen and (max-width:1079px) and (min-width: 800px)">
-    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-750px.css}" media="screen and (max-width: 799px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile.css}"
+          media="screen and (min-width:1501px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-1500px.css}"
+          media="screen and (max-width: 1500px) and (min-width: 1350px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-1300px.css}"
+          media="screen and (max-width:1349px) and (min-width: 1080px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-950px.css}"
+          media="screen and (max-width:1079px) and (min-width: 800px)">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-750px.css}"
+          media="screen and (max-width: 799px)">
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer th:src="@{/resources/scripts/profile.js}"></script>
     <script defer th:src="@{/resources/scripts/common.js}"></script>
@@ -44,15 +49,13 @@
                  th:src="@{/profile/Thumbnail(nickname=${profile?.getNickname()})}" alt="">
         </div>
         <label class="profile_file" rel="profilePreview">
-            <label for="change_profile" class="change">프로필 바꾸기</label>
+            <label for="change_profile" class="change">바꾸기</label>
             <!--                    <input hidden="hidden" type="file" id="profile" accept="image/*" name="profile">-->
             <input type="file" id="change_profile" class="change_profile" accept="image/*" name="change_profile">
-            <label class="_object-button">
-                <input type="button" name="saveProfile" class="change" value="저장">
-            </label>
-            <label class="delete" rel="profileDelete">
-                <input type="button" name="deleteThumbnail" class="profileDelete" value="삭제">
-            </label>
+            <input type="button" name="deleteThumbnail" class="profileDelete" value="삭제">
+        </label>
+        <label class="_object-button">
+            <input type="button" name="saveProfile" class="change" value="변경">
         </label>
         <div class="__body" data-mz-step="info">
 
@@ -230,7 +233,7 @@
          </span>
     </span>
     <div class="article-box-grid">
-        <div class="article-list" th:each="article : ${article}" >
+        <div class="article-list" th:each="article : ${article}">
             <a class="myArticleLink" th:href="@{/article/read(index=${article.getIndex()})}">
                 <span th:text="${article.getTitle()}"></span>
                 <div class="article-thumbnail">
