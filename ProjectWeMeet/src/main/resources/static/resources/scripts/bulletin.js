@@ -6,7 +6,6 @@ const bulletinForm = document.getElementById('bulletinForm');
 const commentContainer = document.getElementById('commentContainer');
 const commentButton = bulletinForm.querySelector('[name="commentButton"]');
 
-
 let startX = 0;
 let nowX = 0;
 let endX = 0;
