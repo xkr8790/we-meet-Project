@@ -117,9 +117,6 @@ body{
     }
 
     /*----------------------------------------------------------------------------------------------------*/
-    .category-750px {
-        display: none;
-    }
 
     /*카테고리*/
     .article-category {
@@ -131,6 +128,17 @@ body{
         margin: 0 auto;
     }
 
+    .category-750px {
+        display: none;
+    }
+
+
+    .introduce_article {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
     .notice-title {
         font-size: 1.5rem;
@@ -146,12 +154,6 @@ body{
         margin: 0.5rem;
     }
 
-    .notice-miniText {
-        margin-top: 1rem;
-        font-size: 2rem;
-        font-weight: 550;
-    }
-
     .margin {
         margin-bottom: 0.9rem;
     }
@@ -160,27 +162,24 @@ body{
         white-space: nowrap;
         padding: 3rem 0 0 0;
         font-weight: 600;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         cursor: default;
         align-items: center;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        margin-top: 3rem;
-        margin-bottom: 3rem;
+        margin: 3rem 0 3rem 0;
     }
-
 
     .articleLink {
         text-decoration: none;
         padding-bottom: 5px; /* 원하는 여백 크기 설정 */
         cursor: pointer;
-        margin: 0rem 2rem 0rem 2rem;
+        margin: 0rem 1.3rem 0rem 1.3rem;
         align-items: center;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        transition: transform 0.3s;
         border-bottom: 3px solid rgba(0, 0, 0, 0); /* 초기에 투명도 0으로 설정 */
     }
 
@@ -192,11 +191,9 @@ body{
     }
 
     .underline {
-        /* 다른 border 속성들 (선택사항) */
         border-bottom-color: rgba(0, 0, 0, 1); /* 밑줄 색상 설정 */
         border-bottom-width: 3px; /* 밑줄 두께 설정 */
         border-bottom-style: solid; /* 밑줄 스타일 설정 */
-        transition: border-bottom-color 0.3s, border-bottom-width 0.3s, margin-top 0.3s ease;
     }
 
     .introduce_article > .category > .menu:hover {
