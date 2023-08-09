@@ -355,52 +355,6 @@ a {
     font-weight: bold;
 }
 
-
-/*.pageContainer {*/
-/*    list-style-type: none;*/
-/*    align-items: center;*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: center;*/
-/*    margin: 1rem;*/
-/*}*/
-
-/*.pageContainer:hover {*/
-/*    box-shadow: 0 0 1rem 0.0625rem #00000010;*/
-/*}*/
-
-/*.pageContainer > .page {*/
-/*    background-color: #eaecee;*/
-/*    user-select: none;*/
-/*}*/
-
-/*.pageContainer > .page:hover {*/
-/*    background-color: #d5d8dc;*/
-/*}*/
-
-
-/*.pageContainer > .page.selected {*/
-/*    background-color: #d5d8dc;*/
-/*    color: black;*/
-/*    pointer-events: none;*/
-/*}*/
-
-/*.pageContainer > .page:hover {*/
-/*    background-color: #d5d8dc;*/
-/*}*/
-
-/*.pageContainer > .page > .link {*/
-/*    height: 2.25rem;*/
-/*    align-items: center;*/
-/*    box-sizing: border-box;*/
-/*    color: inherit;*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: center;*/
-/*    padding: 0 0.75rem;*/
-/*    text-decoration: none;*/
-/*}*/
-
 .pageContainer {
     list-style-type: none;
     align-items: center;

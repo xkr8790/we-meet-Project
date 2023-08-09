@@ -267,25 +267,21 @@ header > a > img {
 
     .notice-writer-body > .item > .textInput {
         width: 100%;
-        border: 1px solid red;
     }
 
     .notice-writer-body > .item > .textInput > input {
-        width: 100%;
+        width: 99.5%;
     }
 
     .notice-writer-body > .item > .client-voice {
-        border: 1px solid red;
         width: 100%;
     }
 
-    /*.notice-writer-body > .item > .client-voice > textarea {*/
-    /*    width: 95%;*/
-    /*}*/
-
+    .notice-writer-body > .item > .client-voice > textarea {
+        width: 95%;
+    }
     .notice-writer-body > .send {
         width: 96%;
-        border: 1px solid red;
     }
 
 
