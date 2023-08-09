@@ -162,7 +162,7 @@ body{
         margin-bottom: 0.5rem;
     }
 
-    #footer > .wrap > .grid-twin > .about-a-tag {
+    #footer > .wrap > .grid-twin.big{
         color: #666
     }
 

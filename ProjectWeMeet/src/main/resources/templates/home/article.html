@@ -43,7 +43,7 @@
 
             <ul class="menu right" th:if="${session.user != null}">
                 <li class="item">
-                    <a href="/profile/profile" class="icon-text-button">
+                    <a th:href="@{'profile/?nickname='+ ${session.user.getNickname()}}" class="icon-text-button">
                         <div class="profile">
                             <img th:src="@{/article/profile}">
                         </div>
@@ -74,78 +74,43 @@
             <div class="notice-text">새로운 일상을</div>
             <div class="notice-text">누구나 즐겨요</div>
             <div class="notice-text">We-Meet</div>
-            <ul class="category">
+        <ul class="category">
                 <a class="articleLink" th:href="@{'/article' (p=1, category='')}">
                     <img class="category-img" th:src="@{/resources/images/category/everything.png}">
                     전체
                 </a>
-                <a class="articleLink" th:href="@{'/article' (p=1, category='영화')}">
-                    <img class="category-img" th:src="@{/resources/images/category/activity.png}">
-                    영화
-                </a>
-                <a class="articleLink" th:href="@{'/article' (p=1, category='게임')}">
-                    <img class="category-img" th:src="@{/resources/images/category/art.png}">
-                    게임
-                </a>
                 <a class="articleLink" th:href="@{'/article' (p=1, category='운동')}">
-                    <img class="category-img" th:src="@{/resources/images/category/trip.png}">
-                    운동
+                    <img class="category-img" th:src="@{/resources/images/category/activity.png}">
+                    액티비티
                 </a>
-                <a class="articleLink" th:href="@{'/article' (p=1, category='산책')}">
-                    <img class="category-img" th:src="@{/resources/images/category/study.png}">
-                    산책
-                </a>
-                <a class="articleLink" th:href="@{'/article' (p=1, category='식사')}">
+                <a class="articleLink" th:href="@{'/article' (p=1, category='푸드')}">
                     <img class="category-img" th:src="@{/resources/images/category/eat.png}">
+
                     식사
                 </a>
-                <a class="articleLink" th:href="@{'/article' (p=1, category='만남')}">
+                <a class="articleLink" th:href="@{'/article' (p=1, category='문화')}">
+                    <img class="category-img" th:src="@{/resources/images/category/art.png}">
+
+                    문화예술
+                </a>
+                <a class="articleLink" th:href="@{'/article' (p=1, category='취미')}">
+                    <img class="category-img" th:src="@{/resources/images/category/study.png}">
+                    자기개발
+                </a>
+                <a class="articleLink" th:href="@{'/article' (p=1, category='온라인')}">
                     <img class="category-img" th:src="@{/resources/images/category/hobby.png}">
-                    만남
+                    온라인
+                </a>
+                <a class="articleLink" th:href="@{'/article' (p=1, category='여행')}">
+                    <img class="category-img" th:src="@{/resources/images/category/trip.png}">
+                    여행
                 </a>
                 <a class="articleLink" th:href="@{'/complete' (p=1, category='완료')}">
                     <img class="category-img" th:src="@{/resources/images/category/all.png}">
                     완료
                 </a>
+        </ul>
 
-            </ul>
-
-            <ul class="category-750px">
-                <ul>
-                    <a class="articleLink750px" th:href="@{'/article' (p=1, category='')}">
-                        <img class="category-img" th:src="@{/resources/images/category/everything.png}">
-                        전체
-                    </a>
-                    <a class="articleLink750px" th:href="@{'/article' (p=1, category='영화')}">
-                        <img class="category-img" th:src="@{/resources/images/category/activity.png}">
-                        영화
-                    </a>
-                    <a class="articleLink750px" th:href="@{'/article' (p=1, category='게임')}">
-                        <img class="category-img" th:src="@{/resources/images/category/art.png}">
-                        게임
-                    </a>
-                    <a class="articleLink750px" th:href="@{'/article' (p=1, category='운동')}">
-                        <img class="category-img" th:src="@{/resources/images/category/trip.png}">
-                        운동
-                    </a>
-                    <a class="articleLink750px" th:href="@{'/article' (p=1, category='산책')}">
-                        <img class="category-img" th:src="@{/resources/images/category/study.png}">
-                        산책
-                    </a>
-                    <a class="articleLink750px" th:href="@{'/article' (p=1, category='식사')}">
-                        <img class="category-img" th:src="@{/resources/images/category/eat.png}">
-                        식사
-                    </a>
-                    <a class="articleLink750px" th:href="@{'/article' (p=1, category='만남')}">
-                        <img class="category-img" th:src="@{/resources/images/category/hobby.png}">
-                        만남
-                    </a>
-                    <a class="articleLink750px" th:href="@{'/complete' (p=1, category='완료')}">
-                        <img class="category-img" th:src="@{/resources/images/category/all.png}">
-                        완료
-                    </a>
-                </ul>
-            </ul>
     </section>
 
    <div class="article-box">

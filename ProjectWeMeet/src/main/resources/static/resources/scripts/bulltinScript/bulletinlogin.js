@@ -2,6 +2,7 @@ const deleteButton = bulletinForm.querySelector('[name="delete"]');
 const patchButton = bulletinForm.querySelector('[name="patch"]');
 const writeButton = bulletinForm.querySelector('[name="write"]');
 const finishButton = bulletinForm.querySelector('[name="finish"]');
+const Logout = bulletinForm.querySelector('[name="logout"]');
 
 
 writeButton.onclick = function(e) {
@@ -12,6 +13,17 @@ writeButton.onclick = function(e) {
     }
     return;
 }
+
+Logout.addEventListener('click', e => {
+    const action = Logout.dataset.action;
+    switch (action) {
+        case 'logout':
+            e.preventDefault();
+            location.href = '/logout';
+            break;
+    }
+});
+
 
 //게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//게시글 수정 및 삭제 참여 리뷰파트//
 deleteButton.addEventListener('click', e => {
@@ -72,12 +84,6 @@ patchButton.addEventListener('click', e => {
 }); //게시판 수정
 
 
-
-
-
-
-
-
 //게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//
 
 finishButton.addEventListener('click', e => {
@@ -124,6 +130,4 @@ finishButton.addEventListener('click', e => {
         return;
     }
 })
-
-
 //게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//게시글 수정 리뷰파트//

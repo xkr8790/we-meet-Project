@@ -77,7 +77,6 @@ public class ArticleController {
         ArticleEntity[] articleCategory = this.articleService.getCountCategoryByPage(pagingCategory, searchCriterion, searchQuery, category);
         //페이징하면서 카테고리 관련 게시물 나타내기
 
-
         modelAndView.addObject("articleCategory", articleCategory);
         modelAndView.addObject("pagingCategory", pagingCategory);
         modelAndView.addObject("category", category);
@@ -118,8 +117,6 @@ public class ArticleController {
 
 
 
-
-
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
         modelAndView.addObject("article", article);
         modelAndView.addObject("articles", articles);
@@ -147,39 +144,10 @@ public class ArticleController {
         if (article == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(article.getThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 256;
-                int newHeight = 256;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "jpg", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                // HTTP 응답 헤더 설정
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }
@@ -192,38 +160,10 @@ public class ArticleController {
         if (profile == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, originalImage.getType());
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "png", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_PNG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }
@@ -236,38 +176,10 @@ public class ArticleController {
         if (profile == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, originalImage.getType());
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "png", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_PNG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }
@@ -280,38 +192,10 @@ public class ArticleController {
         if (profile == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, originalImage.getType());
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "png", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_PNG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }
@@ -326,39 +210,10 @@ public class ArticleController {
         if (article == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(article.getThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "jpg", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                // HTTP 응답 헤더 설정
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }
@@ -373,40 +228,10 @@ public class ArticleController {
         if (article == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(article.getThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "jpg", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                // HTTP 응답 헤더 설정
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }
@@ -420,40 +245,10 @@ public class ArticleController {
         if (article == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(article.getThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "jpg", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                // HTTP 응답 헤더 설정
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }
@@ -488,39 +283,10 @@ public class ArticleController {
         if (article == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(article.getThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 640;
-                int newHeight = 640;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "jpg", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                // HTTP 응답 헤더 설정
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(article.getThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }
@@ -692,39 +458,10 @@ public class ArticleController {
         if (profile == null) {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            try {
-                // 원본 이미지를 BufferedImage로 변환
-                BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(profile.getProfileThumbnail()));
-
-                // 새로운 크기로 이미지 조정
-                int newWidth = 60;
-                int newHeight = 60;
-                Image resizedImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-
-                // BufferedImage 생성
-                BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-
-                // Graphics2D를 사용하여 이미지 그리기
-                Graphics2D graphics = outputImage.createGraphics();
-                graphics.drawImage(resizedImage, 0, 0, null);
-                graphics.dispose();
-
-                // 조정된 이미지를 바이트 배열로 변환
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(outputImage, "jpg", baos);
-                byte[] resizedImageBytes = baos.toByteArray();
-
-                // HTTP 응답 헤더 설정
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(resizedImageBytes.length);
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                response = new ResponseEntity<>(resizedImageBytes, headers, HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }

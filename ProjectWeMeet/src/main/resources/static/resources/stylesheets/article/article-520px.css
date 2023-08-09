@@ -168,69 +168,59 @@
             justify-content: center;
         }
 
-        .notice-title {
-            font-size: 1.2rem;
+        .article-category {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+
+        .article-category > .notice-title {
+            font-size: 1.5rem;
             font-weight: bold;
             color: #FB6161;
             margin-top: 3rem;
             margin-bottom: 1rem;
         }
 
-        .notice-text {
+        .article-category > .notice-text {
             font-weight: 550;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin: 0.5rem;
         }
 
-        .margin {
-            margin-bottom: 0.9rem;
-        }
-
-
-        .category {
-            display: none;
-        }
-
-
-        .category-750px {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            white-space: nowrap;
-        }
-
-        .category-750px > ul {
+        .article-category > .category {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             align-items: center; /* 수직 정렬 */
             justify-items: center;
-            margin-top: 3rem;
-            margin-bottom: 3rem;
+            white-space: nowrap;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: default;
         }
 
-        .category-750px > ul > .articleLink750px {
+
+        .articleLink {
             text-decoration: none;
-            padding-bottom: 5px; /* 원하는 여백 크기 설정 */
             cursor: pointer;
+            padding: 0.2rem;
+            margin: 1rem;
             align-items: center;
             display: flex;
-            margin: 0.5rem;
             flex-direction: row;
             justify-content: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0); /* 초기에 투명도 0으로 설정 */
-        }
-
-        .category-750px > ul > a {
-            padding: 1rem;
+            border-bottom: 3px solid rgba(0, 0, 0, 0); /* 초기에 투명도 0으로 설정 */
         }
 
         .category-img {
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 25px;
             margin-right: 0.5rem;
             object-fit: cover;
         }
@@ -410,7 +400,8 @@
             border-radius: 100%;
             width: 1.8rem;
             height: 1.8rem;
-            margin: -0.4rem;
+            margin: -0.2rem;
+            border: 3px solid white;
         }
 
 
