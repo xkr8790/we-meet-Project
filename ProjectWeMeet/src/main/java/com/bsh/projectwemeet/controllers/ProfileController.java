@@ -256,12 +256,11 @@ public class ProfileController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String deleteThumbnail(HttpSession session, ProfileEntity profile) {
-        DeleteUserResult result = this.profileService.deleteThumbnailResult((HttpSession) profile, (ProfileEntity) session);
+        DeleteUserResult result = this.profileService.deleteThumbnailResult(session, profile);
 
         JSONObject responseObject = new JSONObject() {{
             put("result", result.name().toLowerCase());
         }};
-
         return responseObject.toString();
     }
 
