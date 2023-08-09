@@ -44,9 +44,6 @@ public class CompleteCategoryController {
                                     @RequestParam(value = "q", defaultValue = "", required = false) String searchQuery) {
 
         int searchResultCount = this.completeService.getCountCategory(searchCriterion, searchQuery, category);
-        System.out.println("searchCriterion : " + searchCriterion);
-        System.out.println("searchQuery : " + searchQuery);
-        System.out.println("category : " + category);
 
         ModelAndView modelAndView = new ModelAndView("home/completeCategory"); //index.html 연결
 

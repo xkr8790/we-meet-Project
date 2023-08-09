@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>소소한 일상의 변화. WeMeet!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
+    <link rel="icon" th:href="@{/resources/images/favicon/favicon.png}">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/completeCategory.css}">
     <script defer th:src="@{/resources/scripts/completeCategory.js}"></script>
     <script defer th:src="@{/resources/scripts/logout.js}"></script>
@@ -58,60 +58,42 @@
             <div class="notice-miniText">당신도 함께해요</div>
             <div class="notice-miniText">We-Meet</div>
         </div>
-        <div class="category-list">
-            <ul class="category">
-                <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='')}">
-                        <img class="category-img" th:src="@{/resources/images/category/everything.png}">
-                        전체
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='영화')}">
-                        <img class="category-img" th:src="@{/resources/images/category/activity.png}">
-                        영화
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='게임')}">
-                        <img class="category-img" th:src="@{/resources/images/category/art.png}">
-                        게임
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='운동')}">
-                        <img class="category-img" th:src="@{/resources/images/category/trip.png}">
-                        운동
-                    </a>
-                </li>
-            </ul>
-            <ul class="category">
-                <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='산책')}">
-                        <img class="category-img" th:src="@{/resources/images/category/study.png}">
-                        산책
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='식사')}">
-                        <img class="category-img" th:src="@{/resources/images/category/eat.png}">
-                        식사
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a class="articleLink" th:href="@{'/article' (p=1, category='만남')}">
-                        <img class="category-img" th:src="@{/resources/images/category/hobby.png}">
-                        만남
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a class="articleLink" th:href="@{'/complete' (p=1, category='완료')}">
-                        <img class="category-img" th:src="@{/resources/images/category/all.png}">
-                        완료
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <ul class="category">
+            <a class="articleLink" th:href="@{'/article' (p=1, category='')}">
+                <img class="category-img" th:src="@{/resources/images/category/everything.png}">
+                전체
+            </a>
+            <a class="articleLink" th:href="@{'/article' (p=1, category='운동')}">
+                <img class="category-img" th:src="@{/resources/images/category/activity.png}">
+                액티비티
+            </a>
+            <a class="articleLink" th:href="@{'/article' (p=1, category='푸드')}">
+                <img class="category-img" th:src="@{/resources/images/category/eat.png}">
+
+                식사
+            </a>
+            <a class="articleLink" th:href="@{'/article' (p=1, category='문화')}">
+                <img class="category-img" th:src="@{/resources/images/category/art.png}">
+
+                문화예술
+            </a>
+            <a class="articleLink" th:href="@{'/article' (p=1, category='취미')}">
+                <img class="category-img" th:src="@{/resources/images/category/study.png}">
+                자기개발
+            </a>
+            <a class="articleLink" th:href="@{'/article' (p=1, category='온라인')}">
+                <img class="category-img" th:src="@{/resources/images/category/hobby.png}">
+                온라인
+            </a>
+            <a class="articleLink" th:href="@{'/article' (p=1, category='여행')}">
+                <img class="category-img" th:src="@{/resources/images/category/trip.png}">
+                여행
+            </a>
+            <a class="articleLink complete" th:href="@{'/complete' (p=1, category='완료')}">
+                <img class="category-img" th:src="@{/resources/images/category/all.png}">
+                완료
+            </a>
+        </ul>
     </section>
 
 
@@ -180,21 +162,21 @@
 
 
                     </div>
-<!--                    <div class="article-searchResult" th:if="${(category!= ''  && searchResultCount == 0 )||-->
-<!--       ((searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')-->
-<!--         && category == '' &&  searchResultCount == 0 )}">-->
-<!--                        <span th:if="${category!= ''  && searchResultCount == 0 }">카테고리 결과가 존재하지 않습니다.</span>-->
-<!--                        <span th:if="${(searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')-->
-<!--           && category == '' &&  searchResultCount == 0 }">-->
-<!--                                    검색 결과가 존재하지 않습니다.</span>-->
-<!--                    </div>-->
-<!--                    <ul class="pageContainer" th:if="${searchResultCount > 0}">-->
-<!--                        <li class="page"-->
-<!--                            th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">-->
-<!--                            <a class="link" th:href="@{'/complete' (p = ${page},category=${category})}"-->
-<!--                               th:text="${page}"></a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
+                    <!--                    <div class="article-searchResult" th:if="${(category!= ''  && searchResultCount == 0 )||-->
+                    <!--       ((searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')-->
+                    <!--         && category == '' &&  searchResultCount == 0 )}">-->
+                    <!--                        <span th:if="${category!= ''  && searchResultCount == 0 }">카테고리 결과가 존재하지 않습니다.</span>-->
+                    <!--                        <span th:if="${(searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')-->
+                    <!--           && category == '' &&  searchResultCount == 0 }">-->
+                    <!--                                    검색 결과가 존재하지 않습니다.</span>-->
+                    <!--                    </div>-->
+                    <!--                    <ul class="pageContainer" th:if="${searchResultCount > 0}">-->
+                    <!--                        <li class="page"-->
+                    <!--                            th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">-->
+                    <!--                            <a class="link" th:href="@{'/complete' (p = ${page},category=${category})}"-->
+                    <!--                               th:text="${page}"></a>-->
+                    <!--                        </li>-->
+                    <!--                    </ul>-->
                     <div class="article-searchResult" th:if="${(category!= ''  && searchResultCount == 0 )||
        ((searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')
          && category == '' &&  searchResultCount == 0 )}">
@@ -205,9 +187,11 @@
                     </div>
                     <ul class="pageContainer" th:if="${searchResultCount>0}">
                         <li class="page" th:if="${pagingCategory.requestPage > 1}">
-                            <a class="link" th:href="@{'/article' (p = ${1},category=${category},c = ${searchCriterion}, q = ${searchQuery})}">처음</a>
+                            <a class="link"
+                               th:href="@{'/article' (p = ${1},category=${category},c = ${searchCriterion}, q = ${searchQuery})}">처음</a>
                         </li>
-                        <li class="page" th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
+                        <li class="page"
+                            th:each="page : ${#numbers.sequence(pagingCategory.displayStartPage, pagingCategory.displayEndPage)}">
                             <a class="link"
                                th:href="@{'/article' (p = ${page},category=${category},c = ${searchCriterion}, q = ${searchQuery})}"
                                th:text="${page}"></a>
