@@ -247,7 +247,7 @@ articleForm.onsubmit = e => {
     }
 
     if (abuse.some(x => articleForm['content'].value.indexOf(x) > -1)) {
-        alert('내용에 욕설이 포함되있습니다 다시 입력해주세요');
+        alert('내용에 부적절한 단어가 포함되있습니다 다시 입력해주세요');
         return;
     }//게시판 욕설
 
