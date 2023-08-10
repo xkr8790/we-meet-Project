@@ -269,6 +269,9 @@ registerForm.onsubmit = e =>{
                         case 'failure':
                             registerForm.contactWarning.show('알 수 없는 이유로 가입하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
                             break;
+                        case 'failure_abuse':
+                            alert('닉네임에 욕설이 포함되어있습니다 수정해 주세요');
+                            break;
                         case 'failure_duplicate_email':
                             registerForm.emailWarning.show('해당 이메일은 이미 사용 중입니다.');
                             registerForm['email'].focus();
@@ -537,6 +540,9 @@ registerForm['nickname'].addEventListener('focusout', () => {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const responseObject = JSON.parse(xhr.responseText);
                 switch (responseObject.result) {
+                    case 'abuse':
+                        registerForm.nicknameWarning.show('닉네임에 욕설이 포함되어있습니다. 수정 해주세요');
+                        break;
                     case 'duplicate':
                         registerForm.nicknameWarning.show('해당 별명은 이미 사용 중입니다.');
                         break;
