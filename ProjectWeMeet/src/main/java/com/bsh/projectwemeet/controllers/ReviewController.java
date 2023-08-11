@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "article")
@@ -51,22 +55,49 @@ public class ReviewController {
     }
 
     //    리뷰 작성자 프로필 select
+//    @RequestMapping(value = "/review/profiles", method = RequestMethod.GET)
+//    public ResponseEntity<byte[]> getParticipantProfileThumbnail(@RequestParam(value = "index") int index, ProfileEntity article) {
+//        ProfileEntity[] articles = this.reviewService.readReviewProfile(index);
+//        ResponseEntity<byte[]> response;
+//            if (articles == null) {
+//                response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//            } else {
+//                HttpHeaders headers = new HttpHeaders();
+//                headers.setContentLength(articles.getProfileThumbnail().length);
+//                headers.setContentType(MediaType.parseMediaType(articles.getProfileThumbnailMime()));
+//                response = new ResponseEntity<>(articles.getProfileThumbnail(), headers, HttpStatus.OK);
+//
+//        }
+//            return response;
+//    }
+
     @RequestMapping(value = "/review/profiles", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> getParticipantProfileThumbnail(@RequestParam(value = "index") int index) {
-        ProfileEntity article = this.reviewService.readReviewProfile(index);
+    public ResponseEntity<byte[]> getParticipantProfileThumbnails(@RequestParam(value = "index") int index) {
+        ProfileEntity[] articles = this.reviewService.readReviewProfile(index);
         ResponseEntity<byte[]> response;
-            if (article == null) {
-                response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            } else {
+
+        if (articles == null || articles.length == 0) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            try {
+                ByteArrayOutputStream combinedThumbnails = new ByteArrayOutputStream();
+                for (ProfileEntity profile : articles) {
+                    combinedThumbnails.write(profile.getProfileThumbnail());
+                }
+
+                byte[] combinedThumbnailsArray = combinedThumbnails.toByteArray();
+
                 HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(article.getProfileThumbnail().length);
-                headers.setContentType(MediaType.parseMediaType(article.getProfileThumbnailMime()));
-                response = new ResponseEntity<>(article.getProfileThumbnail(), headers, HttpStatus.OK);
+                headers.setContentLength(combinedThumbnailsArray.length);
+                headers.setContentType(MediaType.parseMediaType(articles[0].getProfileThumbnailMime()));
 
+                response = new ResponseEntity<>(combinedThumbnailsArray, headers, HttpStatus.OK);
+            } catch (IOException e) {
+                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
-            return response;
+
+        return response;
     }
-
-
 
 }

@@ -63,6 +63,12 @@
 
     </select>
 
+
+
+
+
+
+
     <select id="selectEmail"
             resultType="com.bsh.projectwemeet.entities.ReviewEntity">
         SELECT `index`,
@@ -76,7 +82,7 @@
                `email` AS `email`
         FROM `wemeet_project`.`reviews`
         WHERE `article_index` = #{index}
-        LIMIT 1
+        LIMIT 3;
     </select>
 
     <select id="selectProfileImage"
@@ -88,8 +94,17 @@
                `introduce_text` AS `introduceText`
         FROM `wemeet_project`.`mypages`
         WHERE `email` = #{email}
-        LIMIT 1
     </select>
+
+
+
+
+
+
+
+
+
+
 
     <delete id="deleteByReview"
             parameterType="com.bsh.projectwemeet.entities.ReviewEntity">

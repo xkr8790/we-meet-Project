@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -58,13 +60,27 @@ public class ReviewService {
     }
 
     //    리뷰 작성자 프로필 select
-    public ProfileEntity readReviewProfile(int index) {
-        ReviewEntity reviews = this.reviewMapper.selectEmail(index);
-        ProfileEntity article = this.reviewMapper.selectProfileImage(reviews.getEmail());
-        return article;
+//    public ProfileEntity readReviewProfile(int index,ProfileEntity article) {
+//        ReviewEntity[] reviews = this.reviewMapper.selectEmail(index);
+//        for(ReviewEntity review : reviews){
+//            article = this.reviewMapper.selectProfileImage(review.getEmail());
+//        }
+//        return article;
+//    }
+
+    public ProfileEntity[] readReviewProfile(int index) {
+        ReviewEntity[] reviews = this.reviewMapper.selectEmail(index);
+        List<ProfileEntity> profileList = new ArrayList<>();
+
+        for (ReviewEntity review : reviews) {
+            ProfileEntity profile = this.reviewMapper.selectProfileImage(review.getEmail());
+            if (profile != null) {
+                profileList.add(profile);
+            }
+        }
+
+        return profileList.toArray(new ProfileEntity[0]);
     }
-
-
 
 
 

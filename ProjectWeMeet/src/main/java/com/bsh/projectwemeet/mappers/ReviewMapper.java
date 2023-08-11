@@ -21,9 +21,21 @@ public interface ReviewMapper {
 
     ReviewEntity[] selectAll();
 
-    ReviewEntity selectEmail(@Param(value="index")int index);
 
+
+
+
+
+
+    ReviewEntity[] selectEmail(@Param(value="index")int index);
     ProfileEntity selectProfileImage (@Param(value="email")String email);
+
+
+
+
+
+
+
 
     int deleteByReview(@Param(value = "index") int index);
 
