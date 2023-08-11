@@ -11,10 +11,14 @@ import com.bsh.projectwemeet.utils.NCloudUtil;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 
 @Service
@@ -60,39 +64,36 @@ public class ProfileService {
                 : profile;
     }
 
+
     public DeleteUserResult deleteThumbnailResult(HttpSession session, ProfileEntity profile) {
         UserEntity user = (UserEntity) session.getAttribute("user");
         if (user == null) {
             return DeleteUserResult.FAILURE;
         }
 
-        profile.setProfileThumbnail(null)
-                .setProfileThumbnailMime(null);
+        ClassPathResource resource = new ClassPathResource("profile.png");
+        byte[] defaultProfileImageBytes = null;
 
+        try (InputStream inputStream = resource.getInputStream()) {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            defaultProfileImageBytes = outputStream.toByteArray();
+
+            profile.setProfileThumbnail(defaultProfileImageBytes)
+                    .setProfileThumbnailMime("image/png");// 이미지의 MIME 타입을 설정해야 합니다.
+
+        } catch (IOException e) {
+
+        } //회원가입시 같이 프로필 추가되게
         return this.profileMapper.deleteThumbnail(profile) > 0
                 ? DeleteUserResult.SUCCESS
                 : DeleteUserResult.FAILURE;
     }
 
-    //비밀번호 확인
-//    public LoginResult checkPassword(UserEntity user) {
-//        if (user.getPassword() == null) {
-//            System.out.println("1");
-//            return LoginResult.FAILURE;
-//        }
-//
-//        UserEntity existingUser = this.profileMapper.selectPasswordByEmail(user.getEmail());
-//
-//        user.setPassword(CryptoUtil.hashSha512(user.getPassword()));
-//
-//        if (!user.getPassword().equals(existingUser.getPassword())) {
-//            System.out.println(user.getPassword());
-//            System.out.println(existingUser.getPassword());
-//            return LoginResult.FAILURE;
-//        }
-//
-//        return LoginResult.SUCCESS;
-//    }
 
     public LoginResult checkPassword(UserEntity user) {
         if (user.getPassword() == null) {
@@ -110,7 +111,6 @@ public class ProfileService {
             return LoginResult.FAILURE; // 비밀번호 불일치로 인증 실패
         }
     }
-
 
 
     @Transactional

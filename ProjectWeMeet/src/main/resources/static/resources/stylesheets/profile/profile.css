@@ -33,11 +33,11 @@ body {
     margin: 0 auto;
 }
 
-a{
+a {
     color: black;
 }
 
-.main{
+.main {
     width: 65%;
     margin: 0 auto;
 }
@@ -416,13 +416,13 @@ a{
     font-style: inherit;
 }
 
-#popup.step-1 > .popup-content.step-1 >.item> .check {
+#popup.step-1 > .popup-content.step-1 > .item > .check {
     align-self: flex-end;
     margin-right: 1.5rem;
     background-color: white;
 }
 
-#popup.step-1 > .popup-content.step-1 >.item > .check > .checkPassword {
+#popup.step-1 > .popup-content.step-1 > .item > .check > .checkPassword {
     background-color: #FB6161;
     border-radius: 0.3rem;
     color: white;
@@ -433,12 +433,12 @@ a{
     opacity: 0.8;
 }
 
-#popup.step-1 > .popup-content.step-1 >.item > .check > input[name="checkPasswordButton"]:hover  {
+#popup.step-1 > .popup-content.step-1 > .item > .check > input[name="checkPasswordButton"]:hover {
     opacity: 1;
     cursor: pointer;
 }
 
-#popup.step-1 > .popup-content.step-1 >.item > .check > input[name="cancelButton"]:hover {
+#popup.step-1 > .popup-content.step-1 > .item > .check > input[name="cancelButton"]:hover {
     opacity: 1;
     cursor: pointer;
 
@@ -496,6 +496,7 @@ a{
     background-color: white;
     margin-top: 0.625rem;
     margin-right: 0.625rem;
+    margin-left: 0.725rem;
 
     align-items: center;
     display: flex;
@@ -503,12 +504,45 @@ a{
     justify-content: center;
 }
 
+
 #popup.step-2 > .popup-content.step-2 > .profile_file > .change {
     background-color: white;
     font-size: 1rem;
     text-decoration: underline;
     cursor: pointer;
     margin-right: 1rem;
+}
+
+#popup.step-2 > .popup-content.step-2 > .profile_file > .profileDelete {
+    background-color: white;
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+    border: none;
+}
+
+#popup.step-2 > .popup-content.step-2 > ._object-button {
+    margin-top: 1rem;
+
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#popup.step-2 > .popup-content.step-2 > ._object-button > .change {
+    background-color: #5F5F5F;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
+}
+
+#popup.step-2 > .popup-content.step-2 > ._object-button > .change:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 
@@ -521,13 +555,6 @@ a{
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-}
-
-#popup.step-2 > .popup-content.step-2 > .profile_file > .delete > .profileDelete {
-    background-color: white;
-    font-size: 1rem;
-    text-decoration: underline;
-    cursor: pointer;
 }
 
 
@@ -624,7 +651,7 @@ a{
 
 
 #popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button > .change {
-    background-color: #FB6161;
+    background-color: #5F5F5F;
     border-radius: 0.3rem;
     color: white;
     font-style: inherit;
@@ -635,7 +662,7 @@ a{
 }
 
 
-#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button > .change:hover{
+#popup.step-2 > .popup-content.step-2 > .__body > .new-password-container > .object > ._object-button > .change:hover {
     opacity: 1;
     cursor: pointer;
 }
@@ -650,7 +677,7 @@ a{
 #popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-box > ._object-input {
     width: 15rem;
     padding-left: 0.3rem;
-    height: auto;
+    height: 1.2rem;
     border-radius: 0.25rem;
     margin-bottom: 0.4rem;
 }
@@ -660,7 +687,7 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-button > .change {
-    background-color: #FB6161;
+    background-color: #5F5F5F;
     border-radius: 0.3rem;
     color: white;
     font-style: inherit;
@@ -670,7 +697,7 @@ a{
     float: right;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-button > .change:hover{
+#popup.step-2 > .popup-content.step-2 > .__body > .content-container > .object > ._object-button > .change:hover {
     opacity: 1;
     cursor: pointer;
 }
@@ -686,17 +713,17 @@ a{
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-box > ._object-input {
     width: 15rem;
     padding-left: 0.3rem;
-    height: auto;
+    height: 1.2rem;
     border-radius: 0.25rem;
     margin-bottom: 0.4rem;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button{
+#popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button {
     width: 100%;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .nickname-container > .object > ._object-button > .change {
-    background-color: #FB6161;
+    background-color: #5F5F5F;
     border-radius: 0.3rem;
     color: white;
     font-style: inherit;
@@ -723,7 +750,7 @@ a{
     justify-content: start;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > ._object-box{
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > ._object-box {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -733,7 +760,7 @@ a{
 #popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > ._object-box > ._object-input {
     width: 15rem;
     padding-left: 0.3rem;
-    height: auto;
+    height: 1.2rem;
     border-radius: 0.25rem;
     margin-bottom: 0.4rem;
 }
@@ -757,22 +784,21 @@ a{
 #popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-box > ._object-input {
     width: 15rem;
     padding-left: 0.3rem;
-    height: auto;
+    height: 1.2rem;
     border-radius: 0.25rem;
     margin-bottom: 0.4rem;
 }
 
 
-
 #popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > .multi-container > ._object-button {
-    background-color: #9da3d6;
+    background-color: #dddddd;
     margin-left: 0.625rem;
     margin-bottom: 0.4rem;
     border-radius: 0.15rem;
-    color: white;
+    color: black;
     font-style: inherit;
     border: none;
-    padding: 0.15rem;
+    padding: 0.2rem;
     opacity: 0.8;
     float: right;
 }
@@ -783,24 +809,24 @@ a{
 }
 
 
-
 #popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button {
     margin-top: 1rem;
     width: 100%;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button > .change {
-    background-color: #FB6161;
+    background-color: #5F5F5F;
     border-radius: 0.3rem;
     color: white;
     font-style: inherit;
     border: none;
     padding: 0.625rem;
+    margin-right: 2.6rem;
     opacity: 0.8;
     float: right;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button > .change:hover{
+#popup.step-2 > .popup-content.step-2 > .__body > .contact-container > .object > .new-contact-container > ._object-button > .change:hover {
     opacity: 1;
     cursor: pointer;
 }
@@ -817,20 +843,90 @@ a{
     width: 100%;
 }
 
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container > ._object-label {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container > ._object-label > ._object-input {
+    width: 15rem;
+    padding-left: 0.3rem;
+    height: 1.2rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.4rem;
+}
+
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box {
-    width: 83%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container > ._object-button {
+    background-color: #dddddd;
+    border-radius: 0.3rem;
+    color: black;
+    font-style: inherit;
+    font-size: 0.5rem;
+    border: none;
+    padding: 0.3rem 0.15rem 0.3rem 0.15rem;
+    margin-bottom: 0.4rem;
+    margin-left: 0.1rem;
+    opacity: 0.8;
+    float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > .multi-container > ._object-button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-box > ._object-input {
-    width: 100%;
+    width: 15rem;
+    padding-left: 0.3rem;
+    height: 1.2rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.4rem;
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button {
-    align-items: end;
-    display: flex;
-    justify-content: end;
-    width: 85%;
+    width: 100%;
 }
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button > .change {
+    background-color: #5F5F5F;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    margin-right: 4.5rem;
+    opacity: 0.8;
+    float: right;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .address-container > .object > ._object-button > .change:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
 
 #popup.step-2 > .popup-content.step-2 > .__body > .option-container {
     align-items: start;
@@ -842,8 +938,34 @@ a{
     width: 100%;
 }
 
-#popup.step-2 > .popup-content.step-2 > .__body > .option-container > * > input {
-    height: 2rem;
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container > .die > .link {
+    background-color: #FB6161;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container > .die > .link:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container > .finish > .close {
+    background-color: #FB6161;
+    border-radius: 0.3rem;
+    color: white;
+    font-style: inherit;
+    border: none;
+    padding: 0.625rem;
+    opacity: 0.8;
+}
+
+#popup.step-2 > .popup-content.step-2 > .__body > .option-container > .finish > .close:hover {
+    cursor: pointer;
+    opacity: 1;
 }
 
 /*dialog 배경화면 어둡게-주소찾기 클릭시 사용*/

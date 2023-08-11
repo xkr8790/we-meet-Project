@@ -30,7 +30,7 @@ popup['close'].addEventListener('click', () => {
     if (r == true) {
         popup.classList.remove('step-2');
         popup.style.display = 'none';
-        location.href += '';
+        window.location.href = '/profile/?nickname='+popup['infoNickname'].value;
     } else {
         alert("수정 페이지로 돌아갑니다!");
     }
@@ -66,13 +66,23 @@ HTMLInputElement.prototype.focusAndSelect = function () {
 
 
 //step-1 인증
-popup['checkPasswordButton'].onclick = e => {
-    e.preventDefault();
+
+popup['1checkPassword'].addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        checkPassword(); // 이 코드 블록을 호출하거나 함수로 묶은 뒤 호출하세요.
+    }
+});
+
+popup['checkPasswordButton'].onclick = checkPassword;
+
+function checkPassword() {
     if (popup['1checkPassword'].value === '') {
         alert('비밀번호를 입력해 주세요.');
         popup['1checkPassword'].focus();
         return;
     }
+
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('checkPassword', popup['1checkPassword'].value);
@@ -101,9 +111,11 @@ popup['checkPasswordButton'].onclick = e => {
         }
     };
     xhr.send(formData);
-};
+}
 
-//취소 버튼
+
+
+
 
 
 //프로필 사진 변경
@@ -126,17 +138,7 @@ changeProfile.addEventListener('change', function (event) {
     alert('프로필 사진이 변경되었습니다.');
 });
 
-const profileDelete = popup.querySelector('[rel="profileDelete"]');
 
-//프로필 사진 삭제
-profileDelete.addEventListener('click', function (event) {
-    event.preventDefault();
-
-    profileF.style.backgroundImage = `none`;
-    profileF.src = '/resources/images/profileImages/icons8-male-user-96.png';
-
-    alert('프로필 사진이 삭제되었습니다.');
-});
 
 //인증번호 전송
 popup.cNotification = popup.querySelector('[rel="cNotification"]');
@@ -418,7 +420,7 @@ popup['changePassword'].onclick = e => {
 
 popup['deleteUser'].onclick = e => {
     e.preventDefault();
-    if (!confirm("정말로 삭제하시겠습니까?")) {
+    if (!confirm("정말로 탈퇴하시겠습니까?")) {
         alert('취소하였습니다.');
     } else {
         const xhr = new XMLHttpRequest();
@@ -502,13 +504,25 @@ popup['changeContent'].onclick = e => {
 }
 
 
-popup['deleteThumbnail'].onsubmit = e => {
+// //프로필 사진 삭제
+// const profileDelete = popup.querySelector('[rel="profileDelete"]');
+//
+// profileDelete.addEventListener('click', function (event) {
+//     event.preventDefault();
+//
+//     profileF.style.backgroundImage = `none`;
+//     profileF.src = '/resources/images/profileImages/icons8-male-user-96.png';
+//
+//     alert('프로필 사진이 삭제되었습니다.');
+// });
+
+popup['deleteThumbnail'].onclick = e => {
     e.preventDefault();
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('deleteThumbnail', popup['deleteThumbnail'].value)
-    xhr.open('PATCH', `/deleteThumbnail`);
+    xhr.open('PATCH', `./deleteThumbnail`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
@@ -519,6 +533,8 @@ popup['deleteThumbnail'].onsubmit = e => {
                         break;
                     case 'success':
                         alert('프로필 이미지를 삭제했습니다.');
+                        profileF.style.backgroundImage = `none`;
+                        profileF.src = '/resources/images/profileImages/icons8-male-user-96.png';
                         break;
                     default:
                         alert('서버가 알 수 없는 응답을 가져왔습니다. 잠시 후 다시 시도해 주세요.');
@@ -530,3 +546,4 @@ popup['deleteThumbnail'].onsubmit = e => {
     };
     xhr.send(formData);
 }
+

@@ -37,7 +37,7 @@ header > a > img {
     flex-direction: column;
     justify-content: center;
     margin-bottom: 1rem;
-    width: 48.2rem;
+    /*width: 48.2rem;*/
 }
 
 .notice-writer-body > .item {

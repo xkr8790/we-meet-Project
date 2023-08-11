@@ -138,6 +138,8 @@ body {
 
 .allContainer > .main-template > .img-profile-title > .profile-title > .profile-img > a > img {
     border-radius: 50%;
+    width: 60px;
+    height: 60px;
 }
 
 .allContainer > .main-template > .img-profile-title > .profile-title > .bulletin-title {
@@ -202,6 +204,8 @@ body {
 }
 
 .announcement > .introduction > .my > .myImages > img {
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
 }
 
