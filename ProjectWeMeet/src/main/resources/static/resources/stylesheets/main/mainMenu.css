@@ -125,29 +125,31 @@
     padding-bottom: 1rem;
 }
 
-/*--------------------------------------------------------------------------------------*/
 #headerContainer > .header > .menu.right{
     margin-right: 0.5rem;
 }
 
 #headerContainer > .header > .menu > .item  > a:hover{
-   cursor: pointer;
+    cursor: pointer;
 }
 
 #headerContainer > .header > .menu > .item  > a > i {
     font-size: 1.3rem;
 }
 
- #headerContainer > .header > .menu > .item  > a > i:hover {
+#headerContainer > .header > .menu > .item  > a > i:hover {
     color: #FB6161;
 }
 
- #headerContainer > .header > .menu > .item  > a >span{
+#headerContainer > .header > .menu > .item  > a >span{
     position: relative;
     align-items: center;
     display: flex;
     flex-direction: column;
 }
+
+/*--------------------------------------------------------------------------------------*/
+
 
 @media screen and (max-width: 700px) {
 

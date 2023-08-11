@@ -39,7 +39,7 @@ deleteButton.addEventListener('click', e => {
                     const responseText = xhr.responseText;
                     if (responseText === 'true') {
                         alert('삭제되었습니다');
-                        location.href = 'http://localhost:6795/article?p=1&category=';
+                        location.href = '/article?p=1&category=';
                         return;
                     } else {
                         alert('작성한 사용자가 아니므로 삭제하지 못합니다');

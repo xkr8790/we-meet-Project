@@ -78,10 +78,10 @@ loginForm.onsubmit = e => {
                     if (loginForm['remember'].checked) {
                         localStorage.setItem('email', loginForm['email'].value);
                     }
-                    if(document.referrer&&document.referrer.indexOf("localhost:6795/") !== -1){
+                    if (document.referrer && document.referrer.indexOf("/") !== -1) {
                         history.back();
-                        location.href=document.referrer;
-                    }else{
+                        location.href = document.referrer;
+                    } else {
                         location.href = '/';
                     }
                     break;

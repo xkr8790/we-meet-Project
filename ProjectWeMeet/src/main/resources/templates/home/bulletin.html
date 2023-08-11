@@ -67,7 +67,7 @@
         <div class="img-profile-title">
             <img class="image" th:src="@{/article/read/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
-                <a class="profile-img" th:href="@{'/profile/?nickname='+ ${session.user.getNickname()}}">
+                <a class="profile-img" th:href="@{'/profile/?nickname='+ ${articleUser.getNickname()}}">
                         <img class="profile" th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                         <p class="nickname" th:text="${articleUser.getNickname()}">닉네임</p>
                 </a>
@@ -130,7 +130,7 @@
             <p class="member">멤버소개</p>
             <p class="subTitle">오늘 처음이세요?</p>
             <div class="my">
-                <a class="myImages" th:href="@{'/profile/?nickname='+ ${session.user.getNickname()}}">
+                <a class="myImages" th:href="@{'/profile/?nickname='+ ${articleUser.getNickname()}}">
                     <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                 </a>
                 <div class="myIntroduction">
