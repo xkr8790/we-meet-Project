@@ -555,11 +555,10 @@ public class ArticleController {
     public ModelAndView getUpdateCategory(@RequestParam(value="index")int index, String category){
         ModelAndView modelAndView = new ModelAndView("home/review");
         ArticleEntity article = this.articleService.getUpdateCategoryByIndex(index);
-        ReviewEntity[] reviewEntities = this.reviewService.getAll();
+        ReviewEntity[] reviewEntities = this.reviewService.getAll(index);
         Double reviewAvgStar = reviewService.avgStar(index);
         UserEntity articleUser = this.articleService.IntroduceUser(index);
         ProfileEntity profileUser = this.articleService.IntroduceText(index);
-
 
         modelAndView.addObject("avgStar", reviewAvgStar);
         modelAndView.addObject("article", article);

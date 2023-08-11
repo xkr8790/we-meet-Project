@@ -59,17 +59,11 @@
                `nickname` AS `nickname`,
                `email` AS `email`
         FROM `wemeet_project`.`reviews`
-        ORDER BY `index` ASC
+        WHERE article_index = #{ArticleIndex}
 
     </select>
 
-
-
-
-
-
-
-    <select id="selectEmail"
+    <select id="selectIndexByEmail"
             resultType="com.bsh.projectwemeet.entities.ReviewEntity">
         SELECT `content` AS `content`,
                `created_at` AS `createdAt`,
@@ -80,8 +74,8 @@
                `nickname` AS `nickname`,
                `email` AS `email`
         FROM `wemeet_project`.`reviews`
-        WHERE `article_index` = #{index}
-        LIMIT 3;
+        WHERE `article_index` = #{ArticleIndex} AND `email` = #{email}
+        LIMIT 1
     </select>
 
     <select id="selectProfileImage"
@@ -93,17 +87,8 @@
                `introduce_text` AS `introduceText`
         FROM `wemeet_project`.`mypages`
         WHERE `email` = #{email}
+        LIMIT 1
     </select>
-
-
-
-
-
-
-
-
-
-
 
     <delete id="deleteByReview"
             parameterType="com.bsh.projectwemeet.entities.ReviewEntity">

@@ -1,9 +1,6 @@
 package com.bsh.projectwemeet.services;
 
-import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.entities.ProfileEntity;
-import com.bsh.projectwemeet.entities.ReviewEntity;
-import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.enums.ReviewResult;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import com.bsh.projectwemeet.mappers.ReviewMapper;
@@ -12,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -46,8 +41,8 @@ public class ReviewService {
     }
 
 // 데이터 베이스의 리뷰 select
-    public ReviewEntity[] getAll() {
-        return this.reviewMapper.selectAll();
+    public ReviewEntity[] getAll(int index) {
+        return this.reviewMapper.selectAll(index);
     }
 
     // 리뷰 평점 계산
@@ -59,33 +54,24 @@ public class ReviewService {
         return null;
     }
 
+
     //    리뷰 작성자 프로필 select
-//    public ProfileEntity readReviewProfile(int index,ProfileEntity article) {
-//        ReviewEntity[] reviews = this.reviewMapper.selectEmail(index);
-//        for(ReviewEntity review : reviews){
-//            article = this.reviewMapper.selectProfileImage(review.getEmail());
-//        }
-//        return article;
-//    }
+    public ProfileEntity[] readReviewProfile(int index,String email) {
+        ReviewEntity[] reviews = this.reviewMapper.selectIndexByEmail(index,email);
+        // 프로필들을 저장할 비어있는 ArrayList 생성
+        ProfileEntity[] profileList = new ProfileEntity[reviews.length];
 
-    public ProfileEntity[] readReviewProfile(int index) {
-        ReviewEntity[] reviews = this.reviewMapper.selectEmail(index);
-        List<ProfileEntity> profileList = new ArrayList<>();
-
-        for (ReviewEntity review : reviews) {
-            ProfileEntity profile = this.reviewMapper.selectProfileImage(review.getEmail());
-            if (profile != null) {
-                profileList.add(profile);
-            }
+        // participants 배열을 순회하면서 각 참여자의 프로필을 가져와서 profileList에 추가
+        for (int i = 0; i < reviews.length; i++) {
+            ReviewEntity participant = reviews[i];
+            ProfileEntity profile = articleMapper.selectProfile(participant.getEmail());
+            // 프로필을 profileList에 추가
+            profileList[i] = profile;
         }
 
-        return profileList.toArray(new ProfileEntity[0]);
-    }
-
-
-
-
-
+        // 프로필 배열 반환
+        return profileList;
+    } //이미지 추가
 
     // 리뷰 삭제
     public boolean deleteByIndex(int index) {

@@ -1,5 +1,6 @@
 package com.bsh.projectwemeet.controllers;
 
+import com.bsh.projectwemeet.entities.ArticleEntity;
 import com.bsh.projectwemeet.entities.ProfileEntity;
 import com.bsh.projectwemeet.entities.ReviewEntity;
 import com.bsh.projectwemeet.entities.UserEntity;
@@ -7,19 +8,22 @@ import com.bsh.projectwemeet.enums.ReviewResult;
 import com.bsh.projectwemeet.services.ReviewService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "article")
@@ -32,7 +36,7 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    //    리뷰 insert
+//    리뷰 insert
     @RequestMapping(value = "review/index", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postReview(@SessionAttribute(value = "user") UserEntity user,
@@ -46,7 +50,7 @@ public class ReviewController {
         return responseObject.toString();
     }
 
-    // 리뷰 delete
+// 리뷰 delete
     @RequestMapping(value = "review/delete", method = RequestMethod.DELETE)
     @ResponseBody
     public String deleteReview(@RequestParam(value = "index") int index) {
@@ -54,50 +58,23 @@ public class ReviewController {
         return String.valueOf(result);
     }
 
-    //    리뷰 작성자 프로필 select
-//    @RequestMapping(value = "/review/profiles", method = RequestMethod.GET)
-//    public ResponseEntity<byte[]> getParticipantProfileThumbnail(@RequestParam(value = "index") int index, ProfileEntity article) {
-//        ProfileEntity[] articles = this.reviewService.readReviewProfile(index);
-//        ResponseEntity<byte[]> response;
-//            if (articles == null) {
-//                response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//            } else {
-//                HttpHeaders headers = new HttpHeaders();
-//                headers.setContentLength(articles.getProfileThumbnail().length);
-//                headers.setContentType(MediaType.parseMediaType(articles.getProfileThumbnailMime()));
-//                response = new ResponseEntity<>(articles.getProfileThumbnail(), headers, HttpStatus.OK);
-//
-//        }
-//            return response;
-//    }
+//    리뷰 작성자 프로필 select
+    @RequestMapping(value = "review/profiles", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getParticipantProfileThumbnail(@RequestParam(value = "index") int index,
+                                                                 @RequestParam(value = "email")String email) {
+        ProfileEntity[] profiles = this.reviewService.readReviewProfile(index,email);
+        ResponseEntity<byte[]> response = null;
 
-    @RequestMapping(value = "/review/profiles", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> getParticipantProfileThumbnails(@RequestParam(value = "index") int index) {
-        ProfileEntity[] articles = this.reviewService.readReviewProfile(index);
-        ResponseEntity<byte[]> response;
-
-        if (articles == null || articles.length == 0) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            try {
-                ByteArrayOutputStream combinedThumbnails = new ByteArrayOutputStream();
-                for (ProfileEntity profile : articles) {
-                    combinedThumbnails.write(profile.getProfileThumbnail());
-                }
-
-                byte[] combinedThumbnailsArray = combinedThumbnails.toByteArray();
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentLength(combinedThumbnailsArray.length);
-                headers.setContentType(MediaType.parseMediaType(articles[0].getProfileThumbnailMime()));
-
-                response = new ResponseEntity<>(combinedThumbnailsArray, headers, HttpStatus.OK);
-            } catch (IOException e) {
-                response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        for (ProfileEntity profile : profiles) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
         }
-
         return response;
     }
+
+
+
 
 }

@@ -264,7 +264,6 @@ body{
         border-radius: 0.5rem;
         padding: 0.8rem;
         margin: 0.5rem;
-
         gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
     }
 
@@ -386,17 +385,6 @@ body{
     .article-human > .number {
         white-space: nowrap;
         margin-top: 0.3rem;
-    }
-
-    .cover {
-        width: 2.5rem;
-        height: 2.5rem;
-        object-fit: cover;
-        border-radius: 100%;
-        position: absolute;
-        z-index: 1;
-        opacity: 0.5; /* 이미지 투명도 50%*/
-        flex-shrink: 1;
     }
 
     a {
