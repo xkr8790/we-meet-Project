@@ -93,7 +93,7 @@
                         <div class="estimate" th:text="${review.getContent()}"></div>
                         <div class="writer">
                             <span class="profile">
-                                <img th:src="@{/article/review/profiles(index=${article.getIndex()})}" alt="이미지">
+                                <img  th:src="@{/article/review/profiles(index=${article.getIndex()})}" alt="이미지">
                             </span>
                             <div class="user">
                                 <span class="email" th:text="${review.getNickname()}"></span>

@@ -591,6 +591,7 @@
         WHERE `email` =#{email}
         LIMIT 1
     </select>
+    <select id="participantProfile"></select>
 
     <!-- 싫어요 업데이트 -->
     <update id="updateReport"
@@ -745,6 +746,7 @@
         WHERE `index` = #{index}
         LIMIT 1
     </select>
+
 
     <update id="updateFinished"
             parameterType="com.bsh.projectwemeet.entities.ArticleEntity">

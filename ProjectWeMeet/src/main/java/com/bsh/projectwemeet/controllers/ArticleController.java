@@ -559,6 +559,8 @@ public class ArticleController {
         Double reviewAvgStar = reviewService.avgStar(index);
         UserEntity articleUser = this.articleService.IntroduceUser(index);
         ProfileEntity profileUser = this.articleService.IntroduceText(index);
+
+
         modelAndView.addObject("avgStar", reviewAvgStar);
         modelAndView.addObject("article", article);
         modelAndView.addObject("profileUser", profileUser);

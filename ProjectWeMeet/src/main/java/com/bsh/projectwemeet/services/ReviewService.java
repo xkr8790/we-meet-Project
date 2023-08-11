@@ -64,15 +64,17 @@ public class ReviewService {
         return article;
     }
 
+
+
+
+
+
+
+
     // 리뷰 삭제
     public boolean deleteByIndex(int index) {
         return this.reviewMapper.deleteByReview(index) > 0;
     }
-
-
-//    public ReviewEntity[] selectAll(int articleIndex) {
-//        return this.reviewMapper.selectArticleIndex(articleIndex);
-//    }
 
 
 

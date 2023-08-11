@@ -43,6 +43,7 @@ public interface ArticleMapper {
     ArticleEntity selectArticleByIndex(@Param(value = "index") int index);
     //클릭시 해당게시물을 가기위해 index값으로 찾기위해 사용되는 매퍼
 
+
     ArticleEntity selectArticleProfileByIndex(@Param(value = "index") int index);
 
     ArticleEntity selectParticipantProfileByIndex(@Param(value = "index") int index);
@@ -145,6 +146,7 @@ public interface ArticleMapper {
     int updateCategory(ArticleEntity article);
     ArticleEntity[] selectCategory(@Param(value = "category") String category);
     ArticleEntity selectUpdateCategoryByIndex(@Param(value="index")int index);
+
 
 
     ArticleEntity selectasd(@Param(value="email")String email);

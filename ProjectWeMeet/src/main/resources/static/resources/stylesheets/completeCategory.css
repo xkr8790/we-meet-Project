@@ -234,9 +234,6 @@ form > .header > .menu > .item > a > img{
     display: block;
     margin-bottom: 1.5rem;
 }
-.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box> h2{
-    margin-bottom: 1rem;
-}
 
 .article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box > .article-tag > .tag {
     border-radius: 0.5rem;
