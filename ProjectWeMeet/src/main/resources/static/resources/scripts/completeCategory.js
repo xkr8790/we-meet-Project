@@ -24,7 +24,6 @@ if(!categoriesParam){ //전체
     articleLinks[7].classList.add('underline');
 }
 
-
 const boardLists = document.getElementsByClassName("article-list");
 
 const board = Array.from(boardLists);

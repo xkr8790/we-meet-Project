@@ -206,7 +206,10 @@ a {
     margin: 0 auto;
 }
 
-/*---- 게시물 표시---------*/
+
+
+
+
 #postContainer > .article-box-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -216,6 +219,8 @@ a {
     background-color: #f4f3f1;
     border-radius: 0.3rem;
 }
+
+
 
 #postContainer > span {
     align-items: center;
@@ -506,9 +511,11 @@ a {
 
 
 #popup.step-2 > .popup-content.step-2 > .profile_file > .change {
-    background-color: white;
     font-size: 1rem;
-    text-decoration: underline;
+    background-color: #FB6161;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.2rem;
     cursor: pointer;
     margin-right: 1rem;
 }
@@ -516,7 +523,6 @@ a {
 #popup.step-2 > .popup-content.step-2 > .profile_file > .profileDelete {
     background-color: white;
     font-size: 1rem;
-    text-decoration: underline;
     cursor: pointer;
     border: none;
 }

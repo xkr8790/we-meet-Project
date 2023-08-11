@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>프로필</title>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"/>
     <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile.css}"
           media="screen and (min-width:1501px)">
@@ -17,7 +18,7 @@
           media="screen and (max-width:1079px) and (min-width: 800px)">
     <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profile-750px.css}"
           media="screen and (max-width: 799px)">
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/profile/profileCommon.css}">
     <script defer th:src="@{/resources/scripts/profile.js}"></script>
     <script defer th:src="@{/resources/scripts/common.js}"></script>
 </head>
@@ -225,14 +226,22 @@
 
 </form>
 
+<div class="post-container" id="not-post" th:if="${#lists.isEmpty(article)}">
+    <div class="not-article" th:if="${#lists.isEmpty(article)}">
+        <div class="not-list" >
+            게시물을 작성해주세요
+        </div>
+    </div>
+</div>
 
-<div class="post-container" id="postContainer">
+
+<div class="post-container" id="postContainer" th:if="${not #lists.isEmpty(article)}">
     <span>
         <span class="article-post">
             <span class="posts">참여한 게시물</span>
          </span>
     </span>
-    <div class="article-box-grid">
+    <div class="article-box-grid"  >
         <div class="article-list" th:each="article : ${article}">
             <a class="myArticleLink" th:href="@{/article/read(index=${article.getIndex()})}">
                 <span th:text="${article.getTitle()}"></span>

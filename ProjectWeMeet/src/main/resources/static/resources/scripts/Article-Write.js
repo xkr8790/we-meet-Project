@@ -215,11 +215,11 @@ articleForm.onsubmit = e => {
         return;
     } //제목이 비어있을때
 
-    if (!/^[가-힣a-zA-Z]+$/.test(articleForm['title'].value)) {
+    if (!/^[가-힣a-zA-Z\s\d\W]+$/.test(articleForm['title'].value)) {
         alert('제목을 제대로 입력해주세요');
-        articleForm['title'].value = '';
-        articleForm['title'].focus();
-        articleForm['title'].select();
+        articleForm['content'].value = '';
+        articleForm['content'].focus();
+        articleForm['content'].select();
         return;
     }
 
@@ -238,13 +238,15 @@ articleForm.onsubmit = e => {
     } //게시판 내용이 비어있을때
 
 
-    if (!/^[가-힣a-zA-Z]+$/.test(articleForm['content'].value)) {
+    if (!/^[가-힣a-zA-Z\s\d\W]+$/.test(articleForm['content'].value)) {
         alert('내용을 제대로 입력해주세요');
         articleForm['content'].value = '';
         articleForm['content'].focus();
         articleForm['content'].select();
         return;
     }
+
+
 
     if (abuse.some(x => articleForm['content'].value.indexOf(x) > -1)) {
         alert('내용에 부적절한 단어가 포함되있습니다 다시 입력해주세요');
@@ -273,8 +275,6 @@ articleForm.onsubmit = e => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status >= 200 && xhr.status < 300) {
-                alert('게시판 작성에 성공했습니다');
-
                 try {
                     const response = JSON.parse(xhr.responseText);
                     const index = response.index;

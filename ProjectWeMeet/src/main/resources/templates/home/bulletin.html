@@ -48,12 +48,12 @@
             <button name="patch" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
-                <span><div class="tooltip">글삭제</div></span>
+                <span><div class="tooltip">글수정</div></span>
             </button>
             <button name="delete" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
-                <span><div class="tooltip">글수정</div></span>
+                <span><div class="tooltip">글삭제</div></span>
             </button>
             <button name="finish" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">

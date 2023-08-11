@@ -56,7 +56,7 @@ public class CheckService {
                 .setCreatedAt(new Date()) // 현재시간
                 .setExpiresAt(DateUtils.addHours(recoverEmailCode.getCreatedAt(), 1))
                 .setExpired(false); //아직 인증을 거치지않았기에 false값
-        String url = String.format("https://wemeet.sample.com/recoverAccount/recoverPassword?email=%s&salt=%s",
+        String url = String.format("https://wemeet.minbumkim.com/recoverAccount/recoverPassword?email=%s&salt=%s",
                 recoverEmailCode.getEmail(),
                 recoverEmailCode.getSalt());
         // 현재시간을 설정해서 현재시간에서 1시간 제한을 둔다.
