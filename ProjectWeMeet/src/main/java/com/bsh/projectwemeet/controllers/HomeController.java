@@ -1,10 +1,7 @@
 package com.bsh.projectwemeet.controllers;
 
 import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.entities.ParticipantsEntity;
 import com.bsh.projectwemeet.entities.ProfileEntity;
-import com.bsh.projectwemeet.entities.UserEntity;
-import com.bsh.projectwemeet.enums.selectParticipateProfile;
 import com.bsh.projectwemeet.services.ArticleService;
 import com.bsh.projectwemeet.services.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 
 @Controller
 @RequestMapping(value="/")
@@ -63,8 +55,6 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("home/Privacy-Policy/Terms-of-Service");
         return modelAndView;
     } //메인 홈 주소
-
-
 
 
     @RequestMapping(value = "/image",

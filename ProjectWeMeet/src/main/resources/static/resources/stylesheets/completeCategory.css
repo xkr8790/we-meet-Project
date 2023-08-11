@@ -24,10 +24,12 @@ form > .header {
     justify-content: space-between;
     width: 70rem;
 }
+
 form > .header > .logo-box > img{
     width: 9rem;
     height: 3.1875rem;
 }
+
 form > .header > .menu {
     list-style: none;
     align-items: center;
@@ -71,14 +73,16 @@ form > .header > .menu > .item > .logout> div{
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
+
 form > .header > .menu > .item > a {
     text-decoration: none;
     cursor:pointer;
     color: black;
 }
+
 form > .header > .menu > .item > a > .text{
-    font-family: 'Humanbumsuk', sans-serif;
 }
+
 form > .header > .menu > .item > a > img{
     width: 40px;
     height: 40px;
@@ -110,7 +114,7 @@ form > .header > .menu > .item > a > img{
 
 .article-category > .advertisement > .notice-text {
     font-weight: 550;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin: 0.5rem;
 }
 
@@ -149,6 +153,7 @@ form > .header > .menu > .item > a > img{
     border-bottom-width: 3px; /* 밑줄 두께 설정 */
     border-bottom-style: solid;
 }
+
 .category-img {
     width: 30px;
     height: 30px;
@@ -156,30 +161,19 @@ form > .header > .menu > .item > a > img{
     object-fit: cover;
 }
 
-.article-container {
+.article-container{
     width: 100%;
+}
+
+.article-box {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-color: #f4f3f1;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
 }
 
-
-.article-container > .slider {
-    width: 70%;
-
-}
-
-.article-container > .slider > .slide > .article-box {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.article-container > .slider > .slide > .article-box > .article-box-grid {
+.article-box-grid {
     display: grid;
     margin: 2rem;
     grid-template-columns: repeat(2, 1fr);
@@ -190,55 +184,55 @@ form > .header > .menu > .item > a > img{
 }
 
 
-.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link {
+.article-list > .article-link {
+    /*border: 1px solid red;*/
     width: 30rem;
     height: 15rem;
     align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     background-color: white;
     border-radius: 0.5rem;
     padding: 0.8rem;
     margin: 0.5rem;
 
-    text-decoration: none;
     gap: 1rem; /* 이미지와 텍스트 사이의 간격 */
 }
 
-.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-thumbnail {
+
+.article-list > .article-link > .article-thumbnail {
     width: 13rem;
     height: 13rem;
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     border-radius: 0.3rem;
+
 }
 
-.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-thumbnail > .thumbnail {
+.article-list > .article-link > .article-thumbnail > .thumbnail {
     width: 13rem;
     height: 13rem;
     border-radius: 15px;
 }
 
-.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box {
+.article-content-box {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-right: 2rem;
+    margin-top: 2rem;
 }
 
-.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box > .article-tag {
+.article-tag {
     display: block;
     margin-bottom: 1.5rem;
 }
-.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box> h2{
-    margin-bottom: 1rem;
-}
 
-.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box > .article-tag > .tag {
+.tag {
     border-radius: 0.5rem;
     margin: 0rem 0.8rem 0rem 0;
     background-color: #eaeaea;
@@ -248,18 +242,10 @@ form > .header > .menu > .item > a > img{
     font-size: 1.1rem;
 }
 
-.comment {
-    border-radius: 0.5rem;
-    margin: 0rem 0.8rem 0rem 0;
+.tag.comment {
     color: white;
     font-weight: 500;
     background-color: #ff7257;
-    padding: 0.6rem;
-    font-size: 1.1rem;
-}
-
-.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box > .article-content {
-    font-size: 1.3rem;
 }
 
 .article-title {
@@ -281,7 +267,7 @@ form > .header > .menu > .item > a > img{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     font-size: 1rem;
     width: 200px;
 }
@@ -310,12 +296,12 @@ h2 {
     align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    /*justify-content: center;*/
 }
 
-.article-human > .Profile-Picture > .Profile {
+.article-human > .Profile {
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 100%;
     width: 2rem;
     height: 2rem;
     margin: -0.15rem;
@@ -323,7 +309,7 @@ h2 {
 }
 
 
-.article-human > .number > .limit-image {
+.article-human > .limit-image {
     width: 2rem;
     margin-left: 1rem;
     margin-bottom: 0.5rem;
@@ -332,26 +318,19 @@ h2 {
 .article-human > .number {
     white-space: nowrap;
     margin-top: 0.3rem;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.cover {
-    width: 2.5rem;
-    height: 2.5rem;
-    object-fit: cover;
-    border-radius: 100%;
-    position: absolute;
-    z-index: 1;
-    opacity: 0.5; /* 이미지 투명도 50%*/
-    flex-shrink: 1;
 }
 
 a {
     color: black;
+    text-decoration: none;
 }
+
+
+
+
+
+
+
 
 .article-searchResult > span{
     font-size: 1.2rem;
@@ -436,19 +415,25 @@ a {
 
 
 #footer {
-    width: 48.125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 5rem;
 }
 
 #footer > .wrap {
-    align-items: start;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     padding-top: 1rem;
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 #footer > .wrap > .grid-twin {
-    width: 20rem;
+    line-height: 20px;
+    color: #666;
 }
 
 #footer > .wrap > .grid-twin > p {
@@ -510,22 +495,10 @@ a {
         flex-direction: column;
     }
     .article-category > .category-list > .category{
-width: 100%;
- font-size: 1rem;
+        width: 100%;
+        font-size: 1rem;
         justify-content: space-between;
     }
-    /*#footer {*/
-    /*    width: 95%;*/
-    /*}*/
-
-    /*#footer > .wrap {*/
-    /*    display: flex;*/
-    /*    flex-direction: column;*/
-    /*}*/
-
-    /*#footer > .wrap > .grid-twin {*/
-    /*    width: 100%;*/
-    /*}*/
     #footer {
         display: flex;
         justify-content: center;
