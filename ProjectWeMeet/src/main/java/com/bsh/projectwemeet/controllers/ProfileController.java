@@ -28,15 +28,14 @@ public class ProfileController {
     @RequestMapping(value = "/",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getProfile(HttpSession session, @RequestParam(value = "nickname") String nickName) {
+    public ModelAndView getProfile(@RequestParam(value = "nickname") String nickName) {
         ModelAndView modelAndView = new ModelAndView("home/profile");
 
         UserEntity user = this.profileService.getUserByNickName(nickName);
-        modelAndView.addObject("profile", user);
-
-
         ArticleEntity[] article = this.profileService.getCountCategoryByPage(nickName);
         ProfileEntity profile = this.profileService.getThumbnail(nickName);
+
+        modelAndView.addObject("profile", user);
         modelAndView.addObject("article", article);
         modelAndView.addObject("content", profile);
         return modelAndView;

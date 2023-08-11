@@ -39,26 +39,26 @@
         <div class="login" th:if="${session.user != null}">
             <button name="write">
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                <div class="tooltip">글작성</div>
+                <span><div class="tooltip">글작성</div></span>
             </button>
             <button data-action="logout" name="logout">
                 <i class="fa-solid fa-right-from-bracket fa-lg"></i>
-                <div class="tooltip">로그아웃</div>
+                <span><div class="tooltip">로그아웃</div></span>
             </button>
             <button name="patch" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
-                <div class="tooltip">글수정</div>
+                <span><div class="tooltip">글수정</div></span>
             </button>
             <button name="delete" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
-                <div class="tooltip">글삭제</div>
+                <span><div class="tooltip">글삭제</div></span>
             </button>
             <button name="finish" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-circle-check fa-lg"></i>
-                <div class="tooltip">완료</div>
+                <span><div class="tooltip">완료</div></span>
             </button>
         </div>
     </div>
@@ -67,7 +67,7 @@
         <div class="img-profile-title">
             <img class="image" th:src="@{/article/read/image(index=${article.getIndex()})}" alt="Thumbnail">
             <div class="profile-title">
-                <a class="profile-img" th:href="@{'/profile/?nickname='+ ${session.user.getNickname()}}">
+                <a class="profile-img" th:href="@{'/profile/?nickname='+ ${articleUser.getNickname()}}">
                         <img class="profile" th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                         <p class="nickname" th:text="${articleUser.getNickname()}">닉네임</p>
                 </a>
@@ -130,7 +130,7 @@
             <p class="member">멤버소개</p>
             <p class="subTitle">오늘 처음이세요?</p>
             <div class="my">
-                <a class="myImages" th:href="@{'/profile/?nickname='+ ${session.user.getNickname()}}">
+                <a class="myImages" th:href="@{'/profile/?nickname='+ ${articleUser.getNickname()}}">
                     <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                 </a>
                 <div class="myIntroduction">

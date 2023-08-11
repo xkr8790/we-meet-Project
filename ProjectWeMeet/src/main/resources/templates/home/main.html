@@ -17,8 +17,8 @@
 
 <body>
 
-<div  id="headerContainer">
-    <header class="_content header">
+<div id="headerContainer">
+    <header class="header">
         <ul class="menu left">
             <li class="item main-menu">
                 <label class="icon-text-button">
@@ -41,31 +41,26 @@
                 </a>
             </li>
         </ul>
+
         <ul class="menu right" th:if="${session.user != null}">
             <li class="item">
                 <a th:href="@{'profile/?nickname='+ ${session.user.getNickname()}}"  class="icon-text-button">
                     <img class="profile" th:src="@{/profiles}" alt="프로필">
                 </a>
             </li>
+
             <li class="item">
-                <button name="write">
-                    <a href="/write">
+                    <a  name="write" href="/write">
                         <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                        <span>
-                            <div class="tooltip">글작성</div>
-                        </span>
+                        <span><div class="tooltip">글작성</div></span>
                     </a>
-                </button>
             </li>
+
             <li class="item">
-                <button data-action="logout" name="logout">
-                    <a href="">
+               <a data-action="logout" name="logout">
                         <i class="fa-solid fa-right-from-bracket fa-lg"></i>
-                       <span>
-                        <div class="tooltip">로그아웃</div>
-                       </span>
-                    </a>
-                </button>
+                       <span><div class="tooltip">로그아웃</div></span>
+               </a>
             </li>
         </ul>
     </header>

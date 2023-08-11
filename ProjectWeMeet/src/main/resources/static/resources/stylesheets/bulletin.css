@@ -10,7 +10,10 @@ html {
     margin: 0;
     padding: 0;
 }
-
+a{
+    text-decoration: none;
+    color: black;
+}
 
 .a.disabled{
     pointer-events: none;
@@ -46,9 +49,6 @@ body {
 
 }
 
-allContainer > .header > .login > a {
-
-}
 
 .allContainer > .header > .login > a {
     font-family: 'Humanbumsuk', sans-serif;
@@ -73,22 +73,34 @@ a{
     cursor: pointer;
     margin-left: 0.2rem;
 }
+
 .allContainer > .header > .login > button:hover .tooltip{
     opacity: 1;
     visibility: visible;
 }
-.allContainer > .header > .login > button > .tooltip{
+
+.allContainer > .header > .login > button > span{
+    position: relative;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.allContainer > .header > .login > button >span > .tooltip{
+    white-space: nowrap;
     position: absolute;
     visibility: hidden;
+    font-size: 0.9rem;
     opacity: 0;
-    transition:opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
+
 .allContainer > .header > .login > button > i{
     font-size: 1.2rem;
 }
+
 .allContainer > .header > .login > button > i:hover {
     color: #FB6161;
-
 }
 
 .allContainer > .main-template {

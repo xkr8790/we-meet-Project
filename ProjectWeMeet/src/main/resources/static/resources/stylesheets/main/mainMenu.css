@@ -124,6 +124,138 @@
     color: black;
     padding-bottom: 1rem;
 }
+@media screen and (max-width: 701px) {
+    #headerContainer > .header > .menu.right {
+        margin-right: 0.5rem;
+    }
+
+    #headerContainer > .header > .menu > .item > a:hover {
+        cursor: pointer;
+    }
+
+    #headerContainer > .header > .menu > .item > a > i {
+        font-size: 1.3rem;
+    }
+
+    #headerContainer > .header > .menu > .item > a > i:hover {
+        color: #FB6161;
+    }
+
+    #headerContainer > .header > .menu > .item > a > span {
+        position: relative;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+}
 
 /*--------------------------------------------------------------------------------------*/
+@media screen and (min-width: 1181px) and (max-width: 2000px)  {
+
+    #headerContainer > .header > .menu > .item > a > span > .tooltip {
+        white-space: nowrap;
+        position: absolute;
+        visibility: hidden;
+        font-size: 1rem;
+        margin-top: 0.3rem;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    #headerContainer > .header > .menu > .item > a:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    #headerContainer > .header > .menu.right {
+        margin-right: 0.5rem;
+    }
+
+    #headerContainer > .header > .menu > .item > a:hover {
+        cursor: pointer;
+    }
+
+    #headerContainer > .header > .menu > .item > a > i {
+        font-size: 1.3rem;
+    }
+
+    #headerContainer > .header > .menu > .item > a > i:hover {
+        color: #FB6161;
+    }
+
+    #headerContainer > .header > .menu > .item > a > span {
+        position: relative;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #headerContainer > .header > .menu > .item > a > span > .tooltip {
+        white-space: nowrap;
+        position: absolute;
+        visibility: hidden;
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+}
+
+
+
+@media screen and (max-width: 1180px) {
+
+    #headerContainer > .header > .menu > .item > a > span > .tooltip {
+        white-space: nowrap;
+        position: absolute;
+        visibility: hidden;
+        font-size: 0.9rem;
+        margin-top: 0.3rem;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    #headerContainer > .header > .menu > .item > a:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    #headerContainer > .header > .menu.right {
+        margin-right: 0.5rem;
+    }
+
+    #headerContainer > .header > .menu > .item > a:hover {
+        cursor: pointer;
+    }
+
+    #headerContainer > .header > .menu > .item > a > i {
+        font-size: 1.1rem;
+    }
+
+    #headerContainer > .header > .menu > .item > a > i:hover {
+        color: #FB6161;
+    }
+
+    #headerContainer > .header > .menu > .item > a > span {
+        position: relative;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #headerContainer > .header > .menu > .item > a > span > .tooltip {
+        white-space: nowrap;
+        position: absolute;
+        visibility: hidden;
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+}
+
+
+
 

@@ -33,7 +33,36 @@
 .pageContainer > .page > .link:hover {
     filter: grayscale(20%); /* 회색 필터 적용 */
 }
+/*----------------------------------------------------------------------------*/
+#Article > #headerContainer > .header > .menu > .item  > a > i {
+    font-size: 1.1rem;
+}
 
+#Article > #headerContainer > .header > .menu > .item  > a > i:hover {
+    color: #FB6161;
+}
+
+#Article > #headerContainer > .header > .menu > .item  > a >span{
+    position: relative;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#Article > #headerContainer > .header > .menu > .item  > a > span > .tooltip{
+    white-space: nowrap;
+    position: absolute;
+    visibility: hidden;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#Article > #headerContainer > .header > .menu > .item > a:hover .tooltip{
+    opacity: 1;
+    visibility: visible;
+}
 /*--------------------------------------------------------------------------------------------------------------*/
 .article-searchResult {
     width: 28rem;
@@ -89,7 +118,6 @@
 .search-box > .search > .button:hover {
     cursor: pointer;
 }
-
 /*--------------------------------------------------------------------------------------------------------------*/
 
 @media screen and (min-width: 951px) {

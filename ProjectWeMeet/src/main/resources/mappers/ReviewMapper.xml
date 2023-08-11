@@ -71,8 +71,7 @@
 
     <select id="selectEmail"
             resultType="com.bsh.projectwemeet.entities.ReviewEntity">
-        SELECT `index`,
-               `content` AS `content`,
+        SELECT `content` AS `content`,
                `created_at` AS `createdAt`,
                `reviewStar` AS `reviewStar`,
                `article_index` AS `articleIndex`,

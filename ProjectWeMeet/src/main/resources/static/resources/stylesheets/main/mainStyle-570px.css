@@ -11,7 +11,7 @@
 html {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
-@media screen and (max-width: 570px) {
+@media screen and  (max-width: 570px) {
 
     a {
         color: black;
@@ -103,35 +103,7 @@ html {
         margin: 0 3rem;
     }
 
-    button:hover .tooltip{
-        opacity: 1;
-        visibility: visible;
-    }
-
-    button > a > span{
-        position: relative;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-    }
-
-    button > a > span > .tooltip {
-        white-space: nowrap;
-        position: absolute;
-        visibility: hidden;
-        font-size: 0.9rem;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-    }
-    .fa-lg{
-        font-size: 1.2rem;
-    }
-    i:hover {
-        color: #FB6161;
-
-    }
-
-    /*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
 
     .slider-container {
         width: 27rem;
