@@ -24,7 +24,10 @@ form > .header {
     justify-content: space-between;
     width: 70rem;
 }
-
+form > .header > .logo-box > img{
+    width: 9rem;
+    height: 3.1875rem;
+}
 form > .header > .menu {
     list-style: none;
     align-items: center;
@@ -77,8 +80,8 @@ form > .header > .menu > .item > a > .text{
     font-family: 'Humanbumsuk', sans-serif;
 }
 form > .header > .menu > .item > a > img{
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 .article-category {
@@ -231,7 +234,9 @@ form > .header > .menu > .item > a > img{
     display: block;
     margin-bottom: 1.5rem;
 }
-
+.article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box> h2{
+    margin-bottom: 1rem;
+}
 
 .article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box > .article-tag > .tag {
     border-radius: 0.5rem;
@@ -276,7 +281,7 @@ form > .header > .menu > .item > a > img{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
     font-size: 1rem;
     width: 200px;
 }

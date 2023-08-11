@@ -119,9 +119,10 @@
                                         <span class="tag" th:text="${article.getCategory()}">태그</span>
                                     </div>
                                     <h2 class="article-content"
-                                        th:text="${#strings.abbreviate(article.getTitle(), 15)}"></h2>
-                                    <span class="article-map">
+                                        th:text="${#strings.abbreviate(article.getTitle(), 15)}">
 
+                                    </h2>
+                                    <span class="article-map">
                                  <div class="article-location">
                                      <img class="location" th:src="@{/resources/images/articleImages/location.png}">
                                      <span th:text="${article.getAddress()}">위치</span>
