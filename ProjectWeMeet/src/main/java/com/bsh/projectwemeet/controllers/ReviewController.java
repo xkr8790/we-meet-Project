@@ -8,6 +8,7 @@ import com.bsh.projectwemeet.enums.ReviewResult;
 import com.bsh.projectwemeet.services.ReviewService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -59,16 +60,16 @@ public class ReviewController {
 
 //    리뷰 작성자 프로필 select
     @RequestMapping(value = "review/profiles", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> getParticipantProfileThumbnail(@RequestParam(value = "index") int index) {
-        ProfileEntity article = this.reviewService.readReviewProfile(index);
-        ResponseEntity<byte[]> response;
-        if (article == null) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
+    public ResponseEntity<byte[]> getParticipantProfileThumbnail(@RequestParam(value = "index") int index,
+                                                                 @RequestParam(value = "email")String email) {
+        ProfileEntity[] profiles = this.reviewService.readReviewProfile(index,email);
+        ResponseEntity<byte[]> response = null;
+
+        for (ProfileEntity profile : profiles) {
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentLength(article.getProfileThumbnail().length);
-            headers.setContentType(MediaType.parseMediaType(article.getProfileThumbnailMime()));
-            response = new ResponseEntity<>(article.getProfileThumbnail(), headers, HttpStatus.OK);
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
         }
         return response;
     }

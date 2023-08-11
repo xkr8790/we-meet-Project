@@ -19,15 +19,17 @@ public interface ReviewMapper {
     int selectParticipant(@Param(value = "ArticleIndex") int ArticleIndex,
                           @Param(value = "email") String email);
 
-    ReviewEntity[] selectAll();
+    ReviewEntity[] selectAll(@Param(value = "ArticleIndex")int ArticleIndex);
+    //변경
 
-    ReviewEntity selectEmail(@Param(value="index")int index);
+    ReviewEntity[] selectIndexByEmail(@Param(value="ArticleIndex")int ArticleIndex, @Param(value = "email")String email);
 
     ProfileEntity selectProfileImage (@Param(value="email")String email);
 
     int deleteByReview(@Param(value = "index") int index);
 
-    ReviewEntity[] selectArticleIndex(@Param(value = "articleIndex") int articleIndex);
+    ReviewEntity[] selectArticleIndex(@Param(value = "articleIndex") int articleIndex,
+                                      @Param(value = "email")String email);
 
     ReviewEntity selectParticipantsEmail(@Param(value = "email") String email);
     //    참여자의 데이터 베이스에서 이메일과 게시글번호와 같은지에 대한 정보가 필요하다.

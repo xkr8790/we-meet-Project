@@ -85,7 +85,7 @@
             <div class="reviewContainer">
                 <div class="reviewTitle">당신의 추억을 남겨주세요</div>
                 <div class="reviewContent" id="reviewContent">
-                    <div class="reviewBox" th:if="${article.getIndex() == review.getArticleIndex()}"  th:each="review : ${reviews}">
+                    <div class="reviewBox" th:each="review : ${reviews}">
                         <div class="core">
                             <span th:each="star : ${#numbers.sequence(1, review.getReviewStar())}">★</span>
                         </div>
@@ -93,7 +93,7 @@
                         <div class="estimate" th:text="${review.getContent()}"></div>
                         <div class="writer">
                             <span class="profile">
-                                <img th:src="@{/article/review/profiles(index=${article.getIndex()})}" alt="이미지">
+                                <img th:src="@{/article/review/profiles(index=${article.getIndex()},email=${review.getEmail()})}" alt="이미지">
                             </span>
                             <div class="user">
                                 <span class="email" th:text="${review.getNickname()}"></span>

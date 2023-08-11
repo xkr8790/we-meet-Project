@@ -1,9 +1,6 @@
 package com.bsh.projectwemeet.services;
 
-import com.bsh.projectwemeet.entities.ArticleEntity;
-import com.bsh.projectwemeet.entities.ProfileEntity;
-import com.bsh.projectwemeet.entities.ReviewEntity;
-import com.bsh.projectwemeet.entities.UserEntity;
+import com.bsh.projectwemeet.entities.*;
 import com.bsh.projectwemeet.enums.ReviewResult;
 import com.bsh.projectwemeet.mappers.ArticleMapper;
 import com.bsh.projectwemeet.mappers.ReviewMapper;
@@ -44,8 +41,8 @@ public class ReviewService {
     }
 
 // 데이터 베이스의 리뷰 select
-    public ReviewEntity[] getAll() {
-        return this.reviewMapper.selectAll();
+    public ReviewEntity[] getAll(int index) {
+        return this.reviewMapper.selectAll(index);
     }
 
     // 리뷰 평점 계산
@@ -57,22 +54,29 @@ public class ReviewService {
         return null;
     }
 
+
     //    리뷰 작성자 프로필 select
-    public ProfileEntity readReviewProfile(int index) {
-        ReviewEntity reviews = this.reviewMapper.selectEmail(index);
-        ProfileEntity article = this.reviewMapper.selectProfileImage(reviews.getEmail());
-        return article;
-    }
+    public ProfileEntity[] readReviewProfile(int index,String email) {
+        ReviewEntity[] reviews = this.reviewMapper.selectIndexByEmail(index,email);
+        // 프로필들을 저장할 비어있는 ArrayList 생성
+        ProfileEntity[] profileList = new ProfileEntity[reviews.length];
+
+        // participants 배열을 순회하면서 각 참여자의 프로필을 가져와서 profileList에 추가
+        for (int i = 0; i < reviews.length; i++) {
+            ReviewEntity participant = reviews[i];
+            ProfileEntity profile = articleMapper.selectProfile(participant.getEmail());
+            // 프로필을 profileList에 추가
+            profileList[i] = profile;
+        }
+
+        // 프로필 배열 반환
+        return profileList;
+    } //이미지 추가
 
     // 리뷰 삭제
     public boolean deleteByIndex(int index) {
         return this.reviewMapper.deleteByReview(index) > 0;
     }
-
-
-//    public ReviewEntity[] selectAll(int articleIndex) {
-//        return this.reviewMapper.selectArticleIndex(articleIndex);
-//    }
 
 
 
