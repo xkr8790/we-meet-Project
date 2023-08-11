@@ -39,26 +39,26 @@
         <div class="login" th:if="${session.user != null}">
             <button name="write">
                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                <div class="tooltip">글작성</div>
+                <span><div class="tooltip">글작성</div></span>
             </button>
             <button data-action="logout" name="logout">
                 <i class="fa-solid fa-right-from-bracket fa-lg"></i>
-                <div class="tooltip">로그아웃</div>
+                <span><div class="tooltip">로그아웃</div></span>
             </button>
             <button name="patch" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-eraser fa-lg"></i>
-                <div class="tooltip">글수정</div>
+                <span><div class="tooltip">글삭제</div></span>
             </button>
             <button name="delete" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-trash fa-lg"></i>
-                <div class="tooltip">글삭제</div>
+                <span><div class="tooltip">글수정</div></span>
             </button>
             <button name="finish" th:if="${session.user.getEmail() == article.getEmail() || session.user.isAdmin() == true}"
                     th:data-index="${article.getIndex()}">
                 <i class="fa-solid fa-circle-check fa-lg"></i>
-                <div class="tooltip">완료</div>
+                <span><div class="tooltip">완료</div></span>
             </button>
         </div>
     </div>

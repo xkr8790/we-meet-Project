@@ -103,35 +103,7 @@ html {
         margin: 0 3rem;
     }
 
-    button:hover .tooltip{
-        opacity: 1;
-        visibility: visible;
-    }
-
-    button > a > span{
-        position: relative;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-    }
-
-    button > a > span > .tooltip {
-        white-space: nowrap;
-        position: absolute;
-        visibility: hidden;
-        font-size: 0.9rem;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-    }
-    .fa-lg{
-        font-size: 1.2rem;
-    }
-    i:hover {
-        color: #FB6161;
-
-    }
-
-    /*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
 
     .slider-container {
         width: 27rem;
