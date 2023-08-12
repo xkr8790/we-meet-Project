@@ -141,7 +141,7 @@ body{
         color: #bdbdbd;
         font-size: 1rem;
     }
-/*--------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------*/
     #footer {
         width: 100%;
         border-top: 1px solid #666;
@@ -284,49 +284,48 @@ body{
     }
 }
 
-    @media screen and (max-width: 849px){
-        #footer {
-            width: 93%;
-            border-top: 1px solid #666;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        #footer > .wrap {
-            max-width: 500px;
-            padding-top: 1rem;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        #footer > .wrap > .grid-twin {
-            line-height: 20px;
-            color: #666;
-        }
-
-        #footer > .wrap > .grid-twin > p {
-            margin-bottom: 0.5rem;
-        }
-
-        #footer > .wrap > .grid-twin > .about-a-tag {
-            color: #666
-        }
-
-        #footer > .wrap > .grid-twin > p > a {
-            text-decoration: none;
-            color: black;
-            font-size: 0.875rem;
-            font-weight: 700;
-            line-height: 1.43;
-        }
-
-        #footer > .wrap > .grid-twin.big {
-            margin-top: 1.5rem;
-            grid-column: 1 / span 2;
-        }
+@media screen and (max-width: 849px){
+    #footer {
+        width: 93%;
+        border-top: 1px solid #666;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        font-weight: bold;
+        font-size: 12px;
     }
 
+    #footer > .wrap {
+        max-width: 500px;
+        padding-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #footer > .wrap > .grid-twin {
+        line-height: 20px;
+        color: #666;
+    }
+
+    #footer > .wrap > .grid-twin > p {
+        margin-bottom: 0.5rem;
+    }
+
+    #footer > .wrap > .grid-twin > .about-a-tag {
+        color: #666
+    }
+
+    #footer > .wrap > .grid-twin > p > a {
+        text-decoration: none;
+        color: black;
+        font-size: 0.875rem;
+        font-weight: 700;
+        line-height: 1.43;
+    }
+
+    #footer > .wrap > .grid-twin.big {
+        margin-top: 1.5rem;
+        grid-column: 1 / span 2;
+    }
+}

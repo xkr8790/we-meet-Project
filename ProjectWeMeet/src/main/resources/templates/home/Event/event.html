@@ -28,7 +28,7 @@
     <div class="notice-main">
         <h1>이벤트</h1>
         <div>
-            <a class="button" href="/EventWriter" th:if="${user != null && user.isAdmin() == true}">작성</a>
+            <a class="button" href="/eventWriter" th:if="${user != null && user.isAdmin() == true}">작성</a>
             <a class="article-notice" th:each="eventArticle: ${eventArticle}" th:href="@{eventView(index=${eventArticle.getIndex()})}">
                 <span class="title" th:text="${eventArticle.getTitle}"></span>
                 <span class="day" th:text="${#dates.format(eventArticle.getCreatedAt(), 'yyyy-MM-dd')}"></span>

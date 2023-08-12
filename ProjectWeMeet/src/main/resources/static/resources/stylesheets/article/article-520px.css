@@ -71,7 +71,8 @@ body {
         background-color: var(--concept-color-light);
         overflow: hidden;
         z-index: 100;
-        width: 80%;
+        padding: 0.5rem;
+        width: 90%;
         height: 100%;
         margin: 0 auto;
     }
@@ -168,7 +169,7 @@ body {
 
 
     .article-category > .notice-title {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: bold;
         color: #FB6161;
         margin-top: 3rem;
@@ -177,7 +178,7 @@ body {
 
     .article-category > .notice-text {
         font-weight: 550;
-        font-size: 1.5rem;
+        font-size: 1rem;
         margin: 0.5rem;
     }
 
@@ -313,6 +314,7 @@ body {
     }
 
     .article-tag {
+        width: 170px;
         display: block;
         margin-bottom: 1.5rem;
     }
@@ -389,7 +391,8 @@ body {
         border-radius: 100%;
         width: 1.8rem;
         height: 1.8rem;
-        margin: -0.4rem;
+        margin: -0.2rem;
+        border: 1px solid black;
     }
 
 

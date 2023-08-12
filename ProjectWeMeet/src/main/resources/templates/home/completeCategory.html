@@ -55,8 +55,8 @@
             <div class="notice-title">게시판</div>
             <div class="notice-text ">새로운 변화로 바뀌는</div>
             <div class="notice-text ">새로운 일상을</div>
-            <div class="notice-text">당신도 함께해요</div>
-            <div class="notice-text">We-Meet</div>
+            <div class="notice-miniText">당신도 함께해요</div>
+            <div class="notice-miniText">We-Meet</div>
         </div>
         <ul class="category">
             <a class="articleLink" th:href="@{'/article' (p=1, category='')}">
@@ -98,8 +98,11 @@
 
 
     <section class="article-container">
+        <div class="slider">
+            <div class="slide">
                 <div class="article-box">
                     <div class="article-box-grid">
+
                         <div class="article-list" th:if="${article.getCategory().equals('완료')}"
                              th:each="article : ${articleCategory}">
                             <a class="article-link" th:href="@{${'article/review'} (index = ${article.getIndex()})}">
@@ -109,13 +112,15 @@
                                 </div>
                                 <div class="article-content-box">
                                     <div class="article-tag">
-                                        <span class="tag comment" th:if="${article.getHashtag() != null}"
+                                        <span class=" comment" th:if="${article.getHashtag() != null}"
                                               th:text="${article.getHashtag()}">
                                            좋아요!!
                                         </span>
                                         <span class="tag" th:text="${article.getCategory()}">태그</span>
                                     </div>
-                                    <h2 class="article-title" th:text="${#strings.abbreviate(article.getTitle(), 15)}">
+                                    <h2 class="article-content"
+                                        th:text="${#strings.abbreviate(article.getTitle(), 15)}">
+
                                     </h2>
                                     <span class="article-map">
                                  <div class="article-location">
@@ -135,14 +140,16 @@
                                 </div>
 
                                     <span class="article-human">
+              <span class="Profile-Picture">
                  <img class="Profile" th:src="@{/complete/read/profile(index=${article.getIndex()})}">
                   <img class="Profile" onerror="this.style.display='none'"
                        th:src="@{/complete/profile/participant1(index=${article.getIndex()})}">
                                     <img class="Profile" onerror="this.style.display='none'"
                                          th:src="@{/complete/profile/participant2(index=${article.getIndex()})}">
+              </span>
 
-              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
               <span class="number">
+              <img class="limit-image" th:src="@{/resources/images/category/human.png}">
                 <span th:text="${article.getParticipation()}"></span>
                 <span>/</span>
                 <span th:text="${article.getLimitPeople()}"></span>
@@ -153,6 +160,8 @@
                                 </div>
                             </a>
                         </div>
+
+
                     </div>
                     <div class="article-searchResult" th:if="${(category!= ''  && searchResultCount == 0 )||
        ((searchCriterion=='all' || searchCriterion=='title' || searchCriterion == 'address')
@@ -197,7 +206,11 @@
                             <input class="button" type="submit" value="검색">
                         </div>
                     </section>
+
                 </div>
+            </div>  <!--전체-->
+
+        </div>
     </section>
 
     <footer id="footer">
@@ -235,4 +248,3 @@
 
 </body>
 </html>
-

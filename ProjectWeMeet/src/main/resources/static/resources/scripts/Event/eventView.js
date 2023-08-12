@@ -14,7 +14,7 @@ noticeDeleteButton.addEventListener('click', e => {
                 const confirmResult = confirm('삭제 하시겠습니까?');
                 if (confirmResult === true) {
                     if (responseText === 'true') {
-                        window.location.replace('/Event');
+                        window.location.replace('/event');
                     } else {
                         alert('알 수 없는 이유로 삭제하지 못하였습니다.\n\n이미 삭제된 공지사항일 수도 있습니다.');
                     }
