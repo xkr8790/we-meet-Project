@@ -2,7 +2,6 @@ const noticeViewForm = document.getElementById('noticeView');
 const noticeDeleteButton = noticeViewForm.querySelector('[rel="delete"]');
 const noticePatchButton = noticeViewForm.querySelector('[rel="patch"]');
 
-// deleteButton.forEach(deleteButton => {
     noticeDeleteButton.addEventListener('click', e => {
         e.preventDefault();
         const index = noticeDeleteButton.dataset.index;
@@ -30,9 +29,7 @@ const noticePatchButton = noticeViewForm.querySelector('[rel="patch"]');
         };
         xhr.send();
     });
-// });
 
-// patchButton.forEach(patchButton => {
 noticePatchButton.addEventListener('click', e => {
         e.preventDefault();
 

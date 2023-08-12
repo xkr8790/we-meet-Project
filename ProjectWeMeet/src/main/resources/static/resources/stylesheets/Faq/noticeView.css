@@ -99,22 +99,21 @@ form > .content {
 }
 
 
-    @media screen and (max-width: 830px) {
+@media screen and (max-width: 830px) {
 
-        form {
-            width: 95%;
-        }
-
-        #footer {
-            width: 95%;
-        }
-        #footer > .wrap{
-            display: flex;
-            flex-direction: column;
-        }
-        #footer > .wrap > .grid-twin{
-            width: 100%;
-        }
+    form {
+        width: 95%;
     }
 
+    #footer {
+        width: 95%;
+    }
+    #footer > .wrap{
+        display: flex;
+        flex-direction: column;
+    }
+    #footer > .wrap > .grid-twin{
+        width: 100%;
+    }
+}
 

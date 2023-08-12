@@ -513,8 +513,8 @@ a {
         flex-direction: column;
     }
     .article-category > .category-list > .category{
-width: 100%;
- font-size: 1rem;
+        width: 100%;
+        font-size: 1rem;
         justify-content: space-between;
     }
     /*#footer {*/

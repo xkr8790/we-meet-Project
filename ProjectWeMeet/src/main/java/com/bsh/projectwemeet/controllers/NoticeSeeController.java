@@ -26,7 +26,7 @@ public class NoticeSeeController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getNotice(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView("home/Privacy-Policy/notice");
+        ModelAndView modelAndView = new ModelAndView("home/Notice/notice");
         UserEntity user = this.noticeSeeService.CheckUser(session);
         NoticeWriterArticleEntity[] articleEntities = this.noticeSeeService.getCountArticle();
         modelAndView.addObject("user", user);
