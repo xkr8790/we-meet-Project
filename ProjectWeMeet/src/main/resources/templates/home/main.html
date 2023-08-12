@@ -166,17 +166,17 @@
                                   th:text="${article.getHashtag()}"></span>
                             <span class="article-category" th:text="${article.getCategory()}"></span>
                         </div>
-                        <h2 class="article-title" th:text="${article.getTitle()}">장문복이랑 놀러갈 사람?</h2>
+                        <h2 class="article-title" th:text="${article.getTitle()}"></h2>
 
                 <div class="article-map">
                     <div class="article-location">
                         <img class="location" th:src="@{/resources/images/articleImages/location.png}">
-                        <span class="map-item" th:text="${article.getAddress()}">위치</span>
+                        <span class="map-item" th:text="${article.getAddress()}"></span>
                     </div>
                     <div class="article-location">
                         <img class="day-img" th:src="@{/resources/images/articleImages/day.png}">
                         <span class="map-item"
-                              th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}">날짜</span>
+                              th:text="${#dates.format(article.getAppointmentStartDate(), 'yyyy년 MM월 dd일')}"></span>
                     </div>
                     <div class="article-location">
                         <img class="time-img" th:src="@{/resources/images/articleImages/limit-time.png}">

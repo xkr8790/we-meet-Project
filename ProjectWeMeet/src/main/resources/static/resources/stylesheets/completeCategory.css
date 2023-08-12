@@ -22,7 +22,7 @@ form > .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 70rem;
+    width: 80%;
 }
 form > .header > .logo-box > img{
     width: 9rem;
@@ -257,6 +257,7 @@ form > .header > .menu > .item > a > img{
 
 .article-container > .slider > .slide > .article-box > .article-box-grid > .article-list > .article-link > .article-content-box > .article-content {
     font-size: 1.3rem;
+    margin-bottom: 0.5rem;
 }
 
 .article-title {
@@ -307,9 +308,14 @@ h2 {
     align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: center;
 }
-
+.article-human > .Profile-Picture{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .article-human > .Profile-Picture > .Profile {
     object-fit: cover;
     border-radius: 50%;
@@ -328,7 +334,7 @@ h2 {
 
 .article-human > .number {
     white-space: nowrap;
-    margin-top: 0.3rem;
+    /*margin-top: 0.3rem;*/
     align-items: center;
     display: flex;
     flex-direction: row;

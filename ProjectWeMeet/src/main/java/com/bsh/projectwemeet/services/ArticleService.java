@@ -82,18 +82,33 @@ public class ArticleService {
         return article;
     }
 
+public ArticleEntity readParticipant(int index){
+    ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
+    System.out.println("7");
+    return article.getThumbnail() != null ? article : null;
+}
 
-    public ArticleEntity readParticipantProfile(int index) {
-        ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
-      return article.getThumbnail() != null ? article : null;
-    }
-
-    public ArticleEntity readParticipantProfileTwo(int index) {
+    public ArticleEntity readParticipantTwo(int index) {
         ArticleEntity articleTwo = this.articleMapper.selectParticipantProfileByIndexTwo(index);
 
+        System.out.println("8");
 
         return articleTwo.getThumbnail() != null ? articleTwo : null;
     }
+
+//    public ArticleEntity readParticipantProfile(int index) {
+//        ArticleEntity article = this.articleMapper.selectParticipantProfileByIndex(index);
+//        System.out.println("7");
+//      return article.getThumbnail() != null ? article : null;
+//    }
+
+//    public ArticleEntity readParticipantProfileTwo(int index) {
+//        ArticleEntity articleTwo = this.articleMapper.selectParticipantProfileByIndexTwo(index);
+//
+//        System.out.println("8");
+//
+//        return articleTwo.getThumbnail() != null ? articleTwo : null;
+//    }
 
 
 

@@ -219,39 +219,46 @@ public class ArticleController {
     }
 
 
-    @RequestMapping(value = "article/participant/profiles", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> getParticipantProfileThumbnail(@RequestParam(value = "index") int index) {
 
-        ArticleEntity article = this.articleService.readParticipantProfile(index);
-
-        ResponseEntity<byte[]> response;
-        if (article == null) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentLength(article.getThumbnail().length);
-            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
-            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
-        }
-        return response;
-    }
-
-    @RequestMapping(value = "article/participant/profiless", method = RequestMethod.GET)
-    public ResponseEntity<byte[]> getParticipantProfileThumbnailTwo(@RequestParam(value = "index") int index) {
-
-        ArticleEntity article = this.articleService.readParticipantProfileTwo(index);
-
-        ResponseEntity<byte[]> response;
-        if (article == null) {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentLength(article.getThumbnail().length);
-            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
-            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
-        }
-        return response;
-    }
+//    @RequestMapping(value = "article/participant/profiles", method = RequestMethod.GET)
+//    public ResponseEntity<byte[]> getParticipantProfileThumbnail(@RequestParam(value = "index") int index) {
+//
+//        ArticleEntity article = this.articleService.readParticipant(index);
+//        System.out.println("1");
+//
+//        ResponseEntity<byte[]> response;
+//        if (article == null) {
+//            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//            System.out.println("2");
+//
+//        } else {
+//            System.out.println("3");
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentLength(article.getThumbnail().length);
+//            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+//            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
+//        }
+//        return response;
+//    }
+//
+//    @RequestMapping(value = "article/participant/profiless", method = RequestMethod.GET)
+//    public ResponseEntity<byte[]> getParticipantProfileThumbnailTwo(@RequestParam(value = "index") int index) {
+//
+//        ArticleEntity article = this.articleService.readParticipantTwo(index);
+//        System.out.println("4");
+//        ResponseEntity<byte[]> response;
+//        if (article == null) {
+//            System.out.println("5");
+//            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        } else {
+//            System.out.println("6");
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentLength(article.getThumbnail().length);
+//            headers.setContentType(MediaType.parseMediaType(article.getThumbnailMime()));
+//            response = new ResponseEntity<>(article.getThumbnail(), headers, HttpStatus.OK);
+//        }
+//        return response;
+//    }
 
 
     @RequestMapping(value = "article/category/image",

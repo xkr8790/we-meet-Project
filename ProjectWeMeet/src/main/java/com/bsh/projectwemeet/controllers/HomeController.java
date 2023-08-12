@@ -120,5 +120,37 @@ public class HomeController {
     }
 
 
+    @RequestMapping(value = "article/participant/profiles", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> ParticpantProfile1(@RequestParam(value = "index")int index){
+        ProfileEntity profile = this.articleService.profile1(index);
+
+        ResponseEntity<byte[]> response;
+        if (profile == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
+        }
+        return response;
+    }
+
+    @RequestMapping(value = "article/participant/profiless", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> ParticpantProfile2(@RequestParam(value = "index")int index){
+        ProfileEntity profile = this.articleService.profile2(index);
+
+        ResponseEntity<byte[]> response;
+        if (profile == null) {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentLength(profile.getProfileThumbnail().length);
+            headers.setContentType(MediaType.parseMediaType(profile.getProfileThumbnailMime()));
+            response = new ResponseEntity<>(profile.getProfileThumbnail(), headers, HttpStatus.OK);
+        }
+        return response;
+    }
+
 
 }
