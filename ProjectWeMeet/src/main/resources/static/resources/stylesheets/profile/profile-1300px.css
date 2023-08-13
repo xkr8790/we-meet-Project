@@ -938,7 +938,7 @@ a{
 }
 
 #popup.step-2 > .popup-content.step-2 > .__body > .option-container > .die > .link {
-    background-color: #FB6161;
+    background-color: lightslategray;
     border-radius: 0.3rem;
     color: white;
     font-style: inherit;
