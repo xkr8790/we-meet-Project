@@ -47,32 +47,29 @@ public class HomeController {
     } //메인 홈 주소
 
 
-
+// 개인정보처리방침
     @RequestMapping(value = "/Privacy-Policy",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getPrivacyPolicy(){
         ModelAndView modelAndView = new ModelAndView("home/Privacy-Policy/Privacy-Policy");
         return modelAndView;
-    } //메인 홈 주소
+    }
 
+// 이용약관
     @RequestMapping(value = "TermsOfService",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getTermsOfService(){
         ModelAndView modelAndView = new ModelAndView("home/Privacy-Policy/Terms-of-Service");
         return modelAndView;
-    } //메인 홈 주소
+    }
 
-
-
-
+//     게시글의 이미지 나타내기
     @RequestMapping(value = "/image",
             method = RequestMethod.GET)
     public ResponseEntity<byte[]> getThumbnail(@RequestParam(value = "index")int index){
-
         ArticleEntity article = this.articleService.readArticle(index);
-
         ResponseEntity<byte[]> response;
         if (article == null){
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -85,26 +82,22 @@ public class HomeController {
         return response;
     }
 
+//    게시글의 내용들 가져오기
     @RequestMapping(value = "/read",
             method = RequestMethod.GET,
             produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getRead(@RequestParam(value = "index") int index) {
         ModelAndView modelAndView = new ModelAndView("home/bulletin");
-
         // articleService를 통해 index에 해당하는 게시글을 가져옵니다.
         ArticleEntity article = this.articleService.readArticle(index);
-
         // ModelAndView에 "article"이라는 이름으로 가져온 게시글을 추가합니다.
         modelAndView.addObject("article", article);
-
         return modelAndView;
     }
 
-
+// 로그인한 user의 프로필 나타내기
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getParticipantProfileThumbnail(HttpSession session) {
-//        UserEntity loginUser = (UserEntity) session.getAttribute("user");
-
         ProfileEntity loginProfiles = this.homeService.selectLoginProfile(session);
 
         ResponseEntity<byte[]> response;
@@ -119,7 +112,7 @@ public class HomeController {
         return response;
     }
 
-
+// main 게시글 참여자 프로필 나타내기
     @RequestMapping(value = "article/participant/profiles", method = RequestMethod.GET)
     public ResponseEntity<byte[]> ParticpantProfile1(@RequestParam(value = "index")int index){
         ProfileEntity profile = this.articleService.profile1(index);

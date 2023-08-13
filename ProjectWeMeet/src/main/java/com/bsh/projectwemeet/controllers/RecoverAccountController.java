@@ -107,7 +107,7 @@ public class RecoverAccountController {
             put("result", result.name().toLowerCase());
         }};
         if (result == SendRecoverEmailCodeResult.SUCCESS) {
-            responseObject.put("redirect", String.format("http://wemeet.sunghyunback.com/recoverAccount/recoverPassword?email=%s&salt=%s",
+            responseObject.put("redirect", String.format("http://localhost:6795//recoverAccount/recoverPassword?email=%s&salt=%s",
                     recoverEmailCode.getEmail(),
                     recoverEmailCode.getSalt()));
         }

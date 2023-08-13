@@ -43,7 +43,7 @@
                  alt="Thumbnail">
             <div class="profile-title">
                 <div class="profile-img">
-                    <a href="">
+                    <a th:href="@{'/profile/?nickname='+ ${articleUser.getNickname()}}">
                         <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="몰루">
                     </a>
                     <p th:text="${articleUser.getNickname()}"></p>
@@ -63,7 +63,7 @@
             <p class="member">멤버소개</p>
             <p class="subTitle">오늘 처음이세요?</p>
             <div class="my">
-                <a class="myImages">
+                <a class="myImages" th:href="@{'/profile/?nickname='+ ${articleUser.getNickname()}}">
                     <img th:src="@{/article/read/profile(index=${article.getIndex()})}" alt="">
                 </a>
                 <div class="myIntroduction">

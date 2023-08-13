@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface HomeMapper {
+
     ProfileEntity selectLoginProfile(@Param(value="email")String email);
 
 }

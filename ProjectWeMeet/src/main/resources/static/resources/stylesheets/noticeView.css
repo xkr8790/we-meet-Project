@@ -54,7 +54,15 @@ form > .title > .option {
     flex-direction: row;
     justify-content: space-between;
 }
+form > .title > .option > .option-button{
+    background-color: white;
+}
 
+form > .title > .option > .option-button > button{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
 
 form > .content {
     padding: 1rem 0;
