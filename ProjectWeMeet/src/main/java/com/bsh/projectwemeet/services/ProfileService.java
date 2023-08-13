@@ -65,7 +65,7 @@ public class ProfileService {
     }
 
 
-    public DeleteUserResult deleteThumbnailResult(HttpSession session, ProfileEntity profile) {
+    public DeleteUserResult deleteThumbnailResult(HttpSession session) {
         UserEntity user = (UserEntity) session.getAttribute("user");
         if (user == null) {
             return DeleteUserResult.FAILURE;
@@ -82,17 +82,49 @@ public class ProfileService {
                 outputStream.write(buffer, 0, bytesRead);
             }
             defaultProfileImageBytes = outputStream.toByteArray();
-
-            profile.setProfileThumbnail(defaultProfileImageBytes)
-                    .setProfileThumbnailMime("image/png");// 이미지의 MIME 타입을 설정해야 합니다.
-
         } catch (IOException e) {
+            // 처리할 예외 내용
+        }
 
-        } //회원가입시 같이 프로필 추가되게
+        ProfileEntity profile = new ProfileEntity();
+        profile.setEmail(user.getEmail())
+                .setProfileThumbnail(defaultProfileImageBytes)
+                .setProfileThumbnailMime("image/png");
+
         return this.profileMapper.deleteThumbnail(profile) > 0
                 ? DeleteUserResult.SUCCESS
                 : DeleteUserResult.FAILURE;
     }
+
+
+//    public DeleteUserResult deleteThumbnailResult(HttpSession session, ProfileEntity profile) {
+//        UserEntity user = (UserEntity) session.getAttribute("user");
+//        if (user == null) {
+//            return DeleteUserResult.FAILURE;
+//        }
+//
+//        ClassPathResource resource = new ClassPathResource("profile.png");
+//        byte[] defaultProfileImageBytes = null;
+//
+//        try (InputStream inputStream = resource.getInputStream()) {
+//            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//            byte[] buffer = new byte[4096];
+//            int bytesRead;
+//            while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                outputStream.write(buffer, 0, bytesRead);
+//            }
+//            defaultProfileImageBytes = outputStream.toByteArray();
+//
+//            profile.setProfileThumbnail(defaultProfileImageBytes)
+//                    .setProfileThumbnailMime("image/png");// 이미지의 MIME 타입을 설정해야 합니다.
+//
+//        } catch (IOException e) {
+//
+//        } //회원가입시 같이 프로필 추가되게
+//        return this.profileMapper.deleteThumbnail(profile) > 0
+//                ? DeleteUserResult.SUCCESS
+//                : DeleteUserResult.FAILURE;
+//    }
 
 
     public LoginResult checkPassword(UserEntity user) {
