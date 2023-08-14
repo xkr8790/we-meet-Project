@@ -1,5 +1,4 @@
 *{
-    /*border: 1px solid red;*/
     padding: 0;
     margin: 0;
 }
@@ -16,7 +15,7 @@ main{
 }
 
 main > .container {
-    width: 60%;
+    width: 35rem;
     height: 40%;
     align-items: center;
     display: flex;
@@ -91,3 +90,22 @@ main >  .container >   .linkBox > a{
 
 }
 
+@media screen and (max-width: 590px) {
+    main > .container{
+        width: 96%;
+    }
+    main > .container > .content{
+        font-size: 3vw;
+    }
+    main > .container > .content> .name{
+        font-size: 3vw;
+
+    }
+    main > .container > .content > .email{
+        font-size: 3vw;
+
+    }
+    main >  .container >   .linkBox > a > p{
+        font-size: 3vw;
+    }
+}
