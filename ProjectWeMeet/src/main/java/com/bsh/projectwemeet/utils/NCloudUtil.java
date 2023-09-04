@@ -16,10 +16,10 @@ import java.util.Base64;
 import java.util.Date;
 
 public class NCloudUtil {
-    private static final String URL_PREFIX = ;
-    private static final String ACCESS_KEY = ;
-    private static final String SECRET_KEY = ;
-    private static final String SERVICE_ID = ;
+    private static final String URL_PREFIX = "";
+    private static final String ACCESS_KEY = "";
+    private static final String SECRET_KEY = "";
+    private static final String SERVICE_ID = "";
 
     private static String generateSignature(String requestMethod, String requestUrl, long timestamp) {
         String signature = String.format("%s %s\n%d\n%s",
