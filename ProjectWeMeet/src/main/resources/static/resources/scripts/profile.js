@@ -1,8 +1,6 @@
 const settingButton = document.getElementById('setting');
 const popup = document.getElementById('popup');
 const step1 = document.querySelector('.step-1');
-const saveButton = document.querySelector('.save');
-const passwordInputStep1 = step1.querySelector('._object-input');
 const addressLayer = document.getElementById('addressLayerP');
 const dialogCover = document.getElementById('dialogCoverP');
 
@@ -60,6 +58,7 @@ settingButton.addEventListener('click', () => {
     popup['_object-input'].focus();
 });
 
+// 팝업 창 없애기
 popup['cancelButton'].onclick = e => {
     e.preventDefault();
     alert('취소되었습니다.');
@@ -67,6 +66,7 @@ popup['cancelButton'].onclick = e => {
     popup.style.display = 'none';
 }
 
+//팝업 창 나가기
 popup['close'].addEventListener('click', () => {
     var r = confirm("나가시겠습니까?");
     if (r == true) {
@@ -82,13 +82,13 @@ popup['close'].addEventListener('click', () => {
     }
 });
 
-//??
+
 
 //??
-HTMLInputElement.prototype.focusAndSelect = function () {
-    this.focus();
-    this.select();
-};
+// HTMLInputElement.prototype.focusAndSelect = function () {
+//     this.focus();
+//     this.select();
+// };
 
 // const Dialog = {
 //     createButton: function (text, onclick) {
@@ -112,7 +112,6 @@ HTMLInputElement.prototype.focusAndSelect = function () {
 
 
 //step-1 인증
-
 popup['1checkPassword'].addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
@@ -281,7 +280,7 @@ popup['infoContactVerify'].onclick = () => {
 }
 
 
-
+// 연락처 변경
 popup['changeContact'].onclick = e => {
     e.preventDefault();
     const xhr = new XMLHttpRequest();
@@ -326,6 +325,8 @@ popup['changeContact'].onclick = e => {
 //     }).embed(popup.querySelector('[data-mz-step="address"]'));
 //     popup.setAttribute('data-mz-step', 'address');
 // }
+
+
 addressLayer.show = () => {
     new daum.Postcode({
         oncomplete: (data) => {
@@ -340,12 +341,14 @@ addressLayer.show = () => {
     addressLayer.classList.add('visible');
 };
 addressLayer.hide = () => addressLayer.classList.remove('visible');
-//우편찾기
+//우편 찾기
 popup['infoAddressFind'].onclick = () => {
     dialogCover.show();
     addressLayer.show();
 };
 
+
+// 주소 변경
 popup['changeAddress'].onclick = e => {
     e.preventDefault();
     const xhr = new XMLHttpRequest();
@@ -380,6 +383,8 @@ popup['changeAddress'].onclick = e => {
     xhr.send(formData);
 }
 
+
+//별명 변경
 popup['changeNickname'].onclick = e => {
     e.preventDefault();
 
@@ -430,6 +435,8 @@ popup['changeNickname'].onclick = e => {
     xhr.send(formData);
 }
 
+
+// 비밀번호 변경
 popup['changePassword'].onclick = e => {
     e.preventDefault();
 
@@ -479,6 +486,8 @@ popup['changePassword'].onclick = e => {
     xhr.send(formData);
 }
 
+
+// 회원 탈퇴
 popup['deleteUser'].onclick = e => {
     e.preventDefault();
     if (!confirm("정말로 탈퇴하시겠습니까?")) {
@@ -510,6 +519,8 @@ popup['deleteUser'].onclick = e => {
     }
 }
 
+
+//프로필 사진 저장
 popup['saveProfile'].onclick = e => {
     e.preventDefault();
 
@@ -538,6 +549,7 @@ popup['saveProfile'].onclick = e => {
 };
 
 
+// 소개글 변경
 popup['changeContent'].onclick = e => {
     e.preventDefault();
 
@@ -574,18 +586,8 @@ popup['changeContent'].onclick = e => {
 }
 
 
-// //프로필 사진 삭제
-// const profileDelete = popup.querySelector('[rel="profileDelete"]');
-//
-// profileDelete.addEventListener('click', function (event) {
-//     event.preventDefault();
-//
-//     profileF.style.backgroundImage = `none`;
-//     profileF.src = '/resources/images/profileImages/icons8-male-user-96.png';
-//
-//     alert('프로필 사진이 삭제되었습니다.');
-// });
 
+// 프로필 사진 삭제
 popup['deleteThumbnail'].onclick = e => {
     e.preventDefault();
 

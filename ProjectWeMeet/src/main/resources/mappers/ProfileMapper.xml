@@ -215,7 +215,6 @@
         UPDATE `wemeet_project`.`mypages`
         SET `introduce_text` = #{introduceText}
         WHERE `email` = #{email}
-        LIMIT 1
     </update>
 
     <update id="updateNickname"
